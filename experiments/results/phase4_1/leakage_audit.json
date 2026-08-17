@@ -1,0 +1,35 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "store_contains_only_train_split",
+      "passed": true,
+      "detail": "0 non-train rows in store"
+    },
+    {
+      "name": "store_contains_only_is_failure_true_rows",
+      "passed": true,
+      "detail": "0 non-failure rows in store"
+    },
+    {
+      "name": "decision_time_query_excludes_ground_truth_and_outcome_fields",
+      "passed": true,
+      "detail": "overlap=[]"
+    },
+    {
+      "name": "store_content_hash_is_deterministic",
+      "passed": true,
+      "detail": "17654bc5de51 vs 17654bc5de51"
+    },
+    {
+      "name": "no_validation_or_test_event_id_present_in_store",
+      "passed": true,
+      "detail": "0 overlapping ids"
+    },
+    {
+      "name": "retrieval_on_empty_store_returns_empty_not_error",
+      "passed": true,
+      "detail": "ok"
+    }
+  ]
+}

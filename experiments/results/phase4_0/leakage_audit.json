@@ -1,0 +1,40 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "generation_is_deterministic",
+      "passed": true,
+      "detail": "n_steps=960 vs 960"
+    },
+    {
+      "name": "no_duplicate_rows_within_or_across_combos",
+      "passed": true,
+      "detail": "0 duplicate rows"
+    },
+    {
+      "name": "novel_combos_absent_from_train_and_validation",
+      "passed": true,
+      "detail": "0 novel-combo rows found in train/validation"
+    },
+    {
+      "name": "novel_and_known_combo_sets_are_disjoint",
+      "passed": true,
+      "detail": "overlap=[]"
+    },
+    {
+      "name": "split_boundary_matches_protocol_rule",
+      "passed": true,
+      "detail": "0 mismatches"
+    },
+    {
+      "name": "chronological_no_future_leakage_within_combo",
+      "passed": true,
+      "detail": "0 violations"
+    },
+    {
+      "name": "no_regime_0_1_2_row_ever_emitted",
+      "passed": true,
+      "detail": "0 overlapping rows"
+    }
+  ]
+}

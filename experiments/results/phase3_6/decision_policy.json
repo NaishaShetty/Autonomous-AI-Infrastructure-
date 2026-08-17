@@ -1,0 +1,2952 @@
+{
+  "meta": {
+    "protocol": {
+      "_frozen": true,
+      "_note": "This file is the single source of truth for the Phase 3.1 evaluation protocol. It was written and committed BEFORE any Phase 3.1 result was produced. Do not edit values in this file to chase a better-looking result -- see docs/PHASE3_1_EVALUATION_PROTOCOL.md section 'Core Scientific Principle'.",
+      "regime_sizes": [
+        3000,
+        1500,
+        1500,
+        1500,
+        1500
+      ],
+      "_regime_sizes_note": "Unchanged from Phase 2 (src/pipeline_builder.DEFAULT_REGIME_SIZES). Regime 0 = train workload model, regime 1 = calibration/validation, regime 2 = failure-memory fit/validation, regimes 3+4 = untouched test.",
+      "n_clusters": 3,
+      "_n_clusters_note": "Unchanged from Phase 2 default. Not tuned in Phase 3.1.",
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        42
+      ],
+      "_seeds_note": "Predetermined before any Phase 3.1 run. 1-5 are a plain sequential convention; 42 is retained for continuity with the original Phase 2 single-seed result. No seed has been added or removed after inspecting results.",
+      "primary_seed": 42,
+      "_primary_seed_note": "The seed used for the bootstrap-CI (within-seed sampling uncertainty) analysis, chosen because it is the original Phase 2 seed, not because it produces the most favorable numbers.",
+      "coverage_operating_points": [
+        0.05,
+        0.1,
+        0.2,
+        0.5
+      ],
+      "_coverage_operating_points_note": "Fixed fractions of the test set flagged as 'high risk', decided a priori. Precision/recall are reported at these coverage levels rather than at a score threshold chosen to maximize any test-set metric.",
+      "aurc_coverage_grid": "5%-100% in 5-point steps, inherited unchanged from benchmarks/risk_coverage.py (Phase 2, not modified in Phase 3.1)",
+      "calibration_bins": 10,
+      "bootstrap": {
+        "n_resamples": 2000,
+        "confidence_level": 0.95,
+        "seed": 0,
+        "method": "nonparametric percentile bootstrap, resampling (y_true, y_score) rows with replacement"
+      },
+      "cross_seed_confidence_interval": {
+        "method": "Student-t interval over per-seed point estimates (n=6 seeds, too few for a normal approximation)",
+        "confidence_level": 0.95
+      },
+      "failure_definition": "workload_model.predict(x).predicted_label != true_label, evaluated on regimes 3+4 (the held-out test stream) using the frozen (regime-0-trained) workload model",
+      "baselines": {
+        "A_no_signal": "constant score equal to the empirical failure prevalence measured on the regime-2 logging set (train-side data, never test)",
+        "B_calibrated_confidence": "1 - ConfidenceCalibrator.predict(...).calibrated_confidence, i.e. calibrated P(failure)",
+        "C_failure_memory": "FailureMemory.risk(context, confidence), Phase 2's unmodified KMeans/Gaussian-kernel similarity score"
+      }
+    },
+    "cost_model_base": {
+      "answer_correct": 0.0,
+      "answer_incorrect": 5.0,
+      "review_correct": 0.2,
+      "review_incorrect": 5.2,
+      "abstain_would_have_been_correct": 1.0,
+      "abstain_would_have_been_incorrect": 0.3
+    },
+    "sensitivity_ratios": [
+      2.0,
+      5.0,
+      10.0
+    ]
+  },
+  "per_seed": [
+    {
+      "seed": 1,
+      "n_test_samples": 3000,
+      "policy_results": {
+        "B_calibrated_confidence": {
+          "thresholds": {
+            "t_50": 0.33333333333333337,
+            "t_80": 0.41836734693877553,
+            "t_95": 0.41836734693877553
+          },
+          "tier_counts": {
+            "CRITICAL": 719,
+            "LOW": 1486,
+            "MEDIUM": 795
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1486,
+              "n_review": 795,
+              "n_abstain": 719,
+              "unsafe_action_rate": 0.3007452871547567,
+              "accepted_task_success_rate": 0.6992547128452433,
+              "abstention_rate": 0.23966666666666667,
+              "review_rate": 0.265,
+              "false_abstention_rate": 0.5257301808066759,
+              "failure_recall_among_abstained": 0.3320350535540409,
+              "expected_decision_cost": 0.6704333333333333,
+              "utility_retention": 0.7603333333333333
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1486,
+              "n_review": 795,
+              "n_abstain": 719,
+              "unsafe_action_rate": 0.3007452871547567,
+              "accepted_task_success_rate": 0.6992547128452433,
+              "abstention_rate": 0.23966666666666667,
+              "review_rate": 0.265,
+              "false_abstention_rate": 0.5257301808066759,
+              "failure_recall_among_abstained": 0.3320350535540409,
+              "expected_decision_cost": 1.3564333333333334,
+              "utility_retention": 0.7603333333333333
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1486,
+              "n_review": 795,
+              "n_abstain": 719,
+              "unsafe_action_rate": 0.3007452871547567,
+              "accepted_task_success_rate": 0.6992547128452433,
+              "abstention_rate": 0.23966666666666667,
+              "review_rate": 0.265,
+              "false_abstention_rate": 0.5257301808066759,
+              "failure_recall_among_abstained": 0.3320350535540409,
+              "expected_decision_cost": 2.499766666666667,
+              "utility_retention": 0.7603333333333333
+            }
+          }
+        },
+        "F_supervised_failure_risk": {
+          "thresholds": {
+            "t_50": 0.2638709130512873,
+            "t_80": 0.3543980000246765,
+            "t_95": 0.3884072017005362
+          },
+          "tier_counts": {
+            "CRITICAL": 131,
+            "LOW": 1530,
+            "MEDIUM": 873,
+            "HIGH": 466
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1530,
+              "n_review": 873,
+              "n_abstain": 597,
+              "unsafe_action_rate": 0.30711610486891383,
+              "accepted_task_success_rate": 0.6928838951310862,
+              "abstention_rate": 0.199,
+              "review_rate": 0.291,
+              "false_abstention_rate": 0.5159128978224455,
+              "failure_recall_among_abstained": 0.28140214216163584,
+              "expected_decision_cost": 0.6817666666666666,
+              "utility_retention": 0.801
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1530,
+              "n_review": 873,
+              "n_abstain": 597,
+              "unsafe_action_rate": 0.30711610486891383,
+              "accepted_task_success_rate": 0.6928838951310862,
+              "abstention_rate": 0.199,
+              "review_rate": 0.291,
+              "false_abstention_rate": 0.5159128978224455,
+              "failure_recall_among_abstained": 0.28140214216163584,
+              "expected_decision_cost": 1.4197666666666666,
+              "utility_retention": 0.801
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1530,
+              "n_review": 873,
+              "n_abstain": 597,
+              "unsafe_action_rate": 0.30711610486891383,
+              "accepted_task_success_rate": 0.6928838951310862,
+              "abstention_rate": 0.199,
+              "review_rate": 0.291,
+              "false_abstention_rate": 0.5159128978224455,
+              "failure_recall_among_abstained": 0.28140214216163584,
+              "expected_decision_cost": 2.649766666666667,
+              "utility_retention": 0.801
+            }
+          }
+        },
+        "BF_combined": {
+          "thresholds": {
+            "t_50": 0.26835613774389794,
+            "t_80": 0.3532601717364467,
+            "t_95": 0.3705307643684422
+          },
+          "tier_counts": {
+            "CRITICAL": 133,
+            "LOW": 1528,
+            "MEDIUM": 878,
+            "HIGH": 461
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1528,
+              "n_review": 878,
+              "n_abstain": 594,
+              "unsafe_action_rate": 0.30631753948462176,
+              "accepted_task_success_rate": 0.6936824605153782,
+              "abstention_rate": 0.198,
+              "review_rate": 0.2926666666666667,
+              "false_abstention_rate": 0.5117845117845118,
+              "failure_recall_among_abstained": 0.28237585199610515,
+              "expected_decision_cost": 0.6801999999999999,
+              "utility_retention": 0.802
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1528,
+              "n_review": 878,
+              "n_abstain": 594,
+              "unsafe_action_rate": 0.30631753948462176,
+              "accepted_task_success_rate": 0.6936824605153782,
+              "abstention_rate": 0.198,
+              "review_rate": 0.2926666666666667,
+              "false_abstention_rate": 0.5117845117845118,
+              "failure_recall_among_abstained": 0.28237585199610515,
+              "expected_decision_cost": 1.4171999999999998,
+              "utility_retention": 0.802
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1528,
+              "n_review": 878,
+              "n_abstain": 594,
+              "unsafe_action_rate": 0.30631753948462176,
+              "accepted_task_success_rate": 0.6936824605153782,
+              "abstention_rate": 0.198,
+              "review_rate": 0.2926666666666667,
+              "false_abstention_rate": 0.5117845117845118,
+              "failure_recall_among_abstained": 0.28237585199610515,
+              "expected_decision_cost": 2.6455333333333333,
+              "utility_retention": 0.802
+            }
+          }
+        },
+        "no_risk_policy": {
+          "thresholds": null,
+          "tier_counts": null,
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.3423333333333333,
+              "accepted_task_success_rate": 0.6576666666666666,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 0.6846666666666666,
+              "utility_retention": 1.0
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.3423333333333333,
+              "accepted_task_success_rate": 0.6576666666666666,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 1.7116666666666667,
+              "utility_retention": 1.0
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.3423333333333333,
+              "accepted_task_success_rate": 0.6576666666666666,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 3.4233333333333333,
+              "utility_retention": 1.0
+            }
+          }
+        }
+      },
+      "abstention": {
+        "B_calibrated_confidence": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 74,
+            "precision": 0.49333333333333335,
+            "recall": 0.07205452775073028
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 144,
+            "precision": 0.48,
+            "recall": 0.14021421616358326
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 285,
+            "precision": 0.475,
+            "recall": 0.2775073028237585
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 644,
+            "precision": 0.42933333333333334,
+            "recall": 0.6270691333982473
+          }
+        ],
+        "F_supervised_failure_risk": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 78,
+            "precision": 0.52,
+            "recall": 0.0759493670886076
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 144,
+            "precision": 0.48,
+            "recall": 0.14021421616358326
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 291,
+            "precision": 0.485,
+            "recall": 0.28334956183057447
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 644,
+            "precision": 0.42933333333333334,
+            "recall": 0.6270691333982473
+          }
+        ],
+        "BF_combined": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 82,
+            "precision": 0.5466666666666666,
+            "recall": 0.0798442064264849
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 145,
+            "precision": 0.48333333333333334,
+            "recall": 0.14118792599805258
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 291,
+            "precision": 0.485,
+            "recall": 0.28334956183057447
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 1027,
+            "true_positives_in_flagged": 647,
+            "precision": 0.43133333333333335,
+            "recall": 0.6299902629016553
+          }
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "n_test_samples": 3000,
+      "policy_results": {
+        "B_calibrated_confidence": {
+          "thresholds": {
+            "t_50": 0.19999999999999996,
+            "t_80": 0.4044943820224719,
+            "t_95": 0.4044943820224719
+          },
+          "tier_counts": {
+            "CRITICAL": 708,
+            "LOW": 1435,
+            "MEDIUM": 857
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1435,
+              "n_review": 857,
+              "n_abstain": 708,
+              "unsafe_action_rate": 0.20026178010471204,
+              "accepted_task_success_rate": 0.7997382198952879,
+              "abstention_rate": 0.236,
+              "review_rate": 0.2856666666666667,
+              "false_abstention_rate": 0.5918079096045198,
+              "failure_recall_among_abstained": 0.38636363636363635,
+              "expected_decision_cost": 0.5317,
+              "utility_retention": 0.764
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1435,
+              "n_review": 857,
+              "n_abstain": 708,
+              "unsafe_action_rate": 0.20026178010471204,
+              "accepted_task_success_rate": 0.7997382198952879,
+              "abstention_rate": 0.236,
+              "review_rate": 0.2856666666666667,
+              "false_abstention_rate": 0.5918079096045198,
+              "failure_recall_among_abstained": 0.38636363636363635,
+              "expected_decision_cost": 0.9907,
+              "utility_retention": 0.764
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1435,
+              "n_review": 857,
+              "n_abstain": 708,
+              "unsafe_action_rate": 0.20026178010471204,
+              "accepted_task_success_rate": 0.7997382198952879,
+              "abstention_rate": 0.236,
+              "review_rate": 0.2856666666666667,
+              "false_abstention_rate": 0.5918079096045198,
+              "failure_recall_among_abstained": 0.38636363636363635,
+              "expected_decision_cost": 1.7557,
+              "utility_retention": 0.764
+            }
+          }
+        },
+        "F_supervised_failure_risk": {
+          "thresholds": {
+            "t_50": 0.14499917635710471,
+            "t_80": 0.3269611508153945,
+            "t_95": 0.35544652784758574
+          },
+          "tier_counts": {
+            "CRITICAL": 127,
+            "LOW": 1493,
+            "MEDIUM": 964,
+            "HIGH": 416
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1493,
+              "n_review": 964,
+              "n_abstain": 543,
+              "unsafe_action_rate": 0.2096052096052096,
+              "accepted_task_success_rate": 0.7903947903947904,
+              "abstention_rate": 0.181,
+              "review_rate": 0.32133333333333336,
+              "false_abstention_rate": 0.570902394106814,
+              "failure_recall_among_abstained": 0.3114973262032086,
+              "expected_decision_cost": 0.5342333333333333,
+              "utility_retention": 0.819
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1493,
+              "n_review": 964,
+              "n_abstain": 543,
+              "unsafe_action_rate": 0.2096052096052096,
+              "accepted_task_success_rate": 0.7903947903947904,
+              "abstention_rate": 0.181,
+              "review_rate": 0.32133333333333336,
+              "false_abstention_rate": 0.570902394106814,
+              "failure_recall_among_abstained": 0.3114973262032086,
+              "expected_decision_cost": 1.0492333333333332,
+              "utility_retention": 0.819
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1493,
+              "n_review": 964,
+              "n_abstain": 543,
+              "unsafe_action_rate": 0.2096052096052096,
+              "accepted_task_success_rate": 0.7903947903947904,
+              "abstention_rate": 0.181,
+              "review_rate": 0.32133333333333336,
+              "false_abstention_rate": 0.570902394106814,
+              "failure_recall_among_abstained": 0.3114973262032086,
+              "expected_decision_cost": 1.9075666666666666,
+              "utility_retention": 0.819
+            }
+          }
+        },
+        "BF_combined": {
+          "thresholds": {
+            "t_50": 0.13895899402142203,
+            "t_80": 0.3171627948481021,
+            "t_95": 0.336907844607274
+          },
+          "tier_counts": {
+            "CRITICAL": 113,
+            "LOW": 1511,
+            "MEDIUM": 953,
+            "HIGH": 423
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1511,
+              "n_review": 953,
+              "n_abstain": 536,
+              "unsafe_action_rate": 0.2106331168831169,
+              "accepted_task_success_rate": 0.7893668831168831,
+              "abstention_rate": 0.17866666666666667,
+              "review_rate": 0.31766666666666665,
+              "false_abstention_rate": 0.5727611940298507,
+              "failure_recall_among_abstained": 0.30614973262032086,
+              "expected_decision_cost": 0.5347666666666667,
+              "utility_retention": 0.8213333333333334
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1511,
+              "n_review": 953,
+              "n_abstain": 536,
+              "unsafe_action_rate": 0.2106331168831169,
+              "accepted_task_success_rate": 0.7893668831168831,
+              "abstention_rate": 0.17866666666666667,
+              "review_rate": 0.31766666666666665,
+              "false_abstention_rate": 0.5727611940298507,
+              "failure_recall_among_abstained": 0.30614973262032086,
+              "expected_decision_cost": 1.0537666666666667,
+              "utility_retention": 0.8213333333333334
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1511,
+              "n_review": 953,
+              "n_abstain": 536,
+              "unsafe_action_rate": 0.2106331168831169,
+              "accepted_task_success_rate": 0.7893668831168831,
+              "abstention_rate": 0.17866666666666667,
+              "review_rate": 0.31766666666666665,
+              "false_abstention_rate": 0.5727611940298507,
+              "failure_recall_among_abstained": 0.30614973262032086,
+              "expected_decision_cost": 1.9187666666666665,
+              "utility_retention": 0.8213333333333334
+            }
+          }
+        },
+        "no_risk_policy": {
+          "thresholds": null,
+          "tier_counts": null,
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.24933333333333332,
+              "accepted_task_success_rate": 0.7506666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 0.49866666666666665,
+              "utility_retention": 1.0
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.24933333333333332,
+              "accepted_task_success_rate": 0.7506666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 1.2466666666666666,
+              "utility_retention": 1.0
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.24933333333333332,
+              "accepted_task_success_rate": 0.7506666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 2.493333333333333,
+              "utility_retention": 1.0
+            }
+          }
+        }
+      },
+      "abstention": {
+        "B_calibrated_confidence": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 57,
+            "precision": 0.38,
+            "recall": 0.07620320855614973
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 125,
+            "precision": 0.4166666666666667,
+            "recall": 0.16711229946524064
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 239,
+            "precision": 0.3983333333333333,
+            "recall": 0.3195187165775401
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 554,
+            "precision": 0.36933333333333335,
+            "recall": 0.7406417112299465
+          }
+        ],
+        "F_supervised_failure_risk": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 65,
+            "precision": 0.43333333333333335,
+            "recall": 0.08689839572192513
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 131,
+            "precision": 0.43666666666666665,
+            "recall": 0.1751336898395722
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 255,
+            "precision": 0.425,
+            "recall": 0.3409090909090909
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 548,
+            "precision": 0.36533333333333334,
+            "recall": 0.732620320855615
+          }
+        ],
+        "BF_combined": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 61,
+            "precision": 0.4066666666666667,
+            "recall": 0.08155080213903744
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 133,
+            "precision": 0.44333333333333336,
+            "recall": 0.17780748663101603
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 256,
+            "precision": 0.4266666666666667,
+            "recall": 0.3422459893048128
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 748,
+            "true_positives_in_flagged": 555,
+            "precision": 0.37,
+            "recall": 0.7419786096256684
+          }
+        ]
+      }
+    },
+    {
+      "seed": 3,
+      "n_test_samples": 3000,
+      "policy_results": {
+        "B_calibrated_confidence": {
+          "thresholds": {
+            "t_50": 0.16666666666666663,
+            "t_80": 0.23076923076923073,
+            "t_95": 0.47058823529411764
+          },
+          "tier_counts": {
+            "CRITICAL": 197,
+            "LOW": 1509,
+            "MEDIUM": 543,
+            "HIGH": 751
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1509,
+              "n_review": 543,
+              "n_abstain": 948,
+              "unsafe_action_rate": 0.1301169590643275,
+              "accepted_task_success_rate": 0.8698830409356725,
+              "abstention_rate": 0.316,
+              "review_rate": 0.181,
+              "false_abstention_rate": 0.6455696202531646,
+              "failure_recall_among_abstained": 0.5572139303482587,
+              "expected_decision_cost": 0.45180000000000003,
+              "utility_retention": 0.684
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1509,
+              "n_review": 543,
+              "n_abstain": 948,
+              "unsafe_action_rate": 0.1301169590643275,
+              "accepted_task_success_rate": 0.8698830409356725,
+              "abstention_rate": 0.316,
+              "review_rate": 0.181,
+              "false_abstention_rate": 0.6455696202531646,
+              "failure_recall_among_abstained": 0.5572139303482587,
+              "expected_decision_cost": 0.7187999999999999,
+              "utility_retention": 0.684
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1509,
+              "n_review": 543,
+              "n_abstain": 948,
+              "unsafe_action_rate": 0.1301169590643275,
+              "accepted_task_success_rate": 0.8698830409356725,
+              "abstention_rate": 0.316,
+              "review_rate": 0.181,
+              "false_abstention_rate": 0.6455696202531646,
+              "failure_recall_among_abstained": 0.5572139303482587,
+              "expected_decision_cost": 1.1638,
+              "utility_retention": 0.684
+            }
+          }
+        },
+        "F_supervised_failure_risk": {
+          "thresholds": {
+            "t_50": 0.20446576491862029,
+            "t_80": 0.2963147486501906,
+            "t_95": 0.5383022818967813
+          },
+          "tier_counts": {
+            "CRITICAL": 121,
+            "LOW": 1569,
+            "MEDIUM": 868,
+            "HIGH": 442
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1569,
+              "n_review": 868,
+              "n_abstain": 563,
+              "unsafe_action_rate": 0.16044316782929832,
+              "accepted_task_success_rate": 0.8395568321707017,
+              "abstention_rate": 0.18766666666666668,
+              "review_rate": 0.28933333333333333,
+              "false_abstention_rate": 0.6234458259325044,
+              "failure_recall_among_abstained": 0.351575456053068,
+              "expected_decision_cost": 0.4567333333333333,
+              "utility_retention": 0.8123333333333334
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1569,
+              "n_review": 868,
+              "n_abstain": 563,
+              "unsafe_action_rate": 0.16044316782929832,
+              "accepted_task_success_rate": 0.8395568321707017,
+              "abstention_rate": 0.18766666666666668,
+              "review_rate": 0.28933333333333333,
+              "false_abstention_rate": 0.6234458259325044,
+              "failure_recall_among_abstained": 0.351575456053068,
+              "expected_decision_cost": 0.8477333333333332,
+              "utility_retention": 0.8123333333333334
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1569,
+              "n_review": 868,
+              "n_abstain": 563,
+              "unsafe_action_rate": 0.16044316782929832,
+              "accepted_task_success_rate": 0.8395568321707017,
+              "abstention_rate": 0.18766666666666668,
+              "review_rate": 0.28933333333333333,
+              "false_abstention_rate": 0.6234458259325044,
+              "failure_recall_among_abstained": 0.351575456053068,
+              "expected_decision_cost": 1.4993999999999996,
+              "utility_retention": 0.8123333333333334
+            }
+          }
+        },
+        "BF_combined": {
+          "thresholds": {
+            "t_50": 0.2085003923041029,
+            "t_80": 0.27116777081255167,
+            "t_95": 0.5147600390464004
+          },
+          "tier_counts": {
+            "CRITICAL": 130,
+            "LOW": 1557,
+            "MEDIUM": 875,
+            "HIGH": 438
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1557,
+              "n_review": 875,
+              "n_abstain": 568,
+              "unsafe_action_rate": 0.16077302631578946,
+              "accepted_task_success_rate": 0.8392269736842105,
+              "abstention_rate": 0.18933333333333333,
+              "review_rate": 0.2916666666666667,
+              "false_abstention_rate": 0.6267605633802817,
+              "failure_recall_among_abstained": 0.351575456053068,
+              "expected_decision_cost": 0.45886666666666664,
+              "utility_retention": 0.8106666666666666
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1557,
+              "n_review": 875,
+              "n_abstain": 568,
+              "unsafe_action_rate": 0.16077302631578946,
+              "accepted_task_success_rate": 0.8392269736842105,
+              "abstention_rate": 0.18933333333333333,
+              "review_rate": 0.2916666666666667,
+              "false_abstention_rate": 0.6267605633802817,
+              "failure_recall_among_abstained": 0.351575456053068,
+              "expected_decision_cost": 0.8498666666666667,
+              "utility_retention": 0.8106666666666666
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1557,
+              "n_review": 875,
+              "n_abstain": 568,
+              "unsafe_action_rate": 0.16077302631578946,
+              "accepted_task_success_rate": 0.8392269736842105,
+              "abstention_rate": 0.18933333333333333,
+              "review_rate": 0.2916666666666667,
+              "false_abstention_rate": 0.6267605633802817,
+              "failure_recall_among_abstained": 0.351575456053068,
+              "expected_decision_cost": 1.5015333333333334,
+              "utility_retention": 0.8106666666666666
+            }
+          }
+        },
+        "no_risk_policy": {
+          "thresholds": null,
+          "tier_counts": null,
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.201,
+              "accepted_task_success_rate": 0.7989999999999999,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 0.402,
+              "utility_retention": 1.0
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.201,
+              "accepted_task_success_rate": 0.7989999999999999,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 1.005,
+              "utility_retention": 1.0
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.201,
+              "accepted_task_success_rate": 0.7989999999999999,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 2.01,
+              "utility_retention": 1.0
+            }
+          }
+        }
+      },
+      "abstention": {
+        "B_calibrated_confidence": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 58,
+            "precision": 0.38666666666666666,
+            "recall": 0.09618573797678276
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 128,
+            "precision": 0.4266666666666667,
+            "recall": 0.21227197346600332
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 219,
+            "precision": 0.365,
+            "recall": 0.36318407960199006
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 473,
+            "precision": 0.31533333333333335,
+            "recall": 0.7844112769485904
+          }
+        ],
+        "F_supervised_failure_risk": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 71,
+            "precision": 0.47333333333333333,
+            "recall": 0.11774461028192372
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 125,
+            "precision": 0.4166666666666667,
+            "recall": 0.20729684908789386
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 224,
+            "precision": 0.37333333333333335,
+            "recall": 0.3714759535655058
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 468,
+            "precision": 0.312,
+            "recall": 0.7761194029850746
+          }
+        ],
+        "BF_combined": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 73,
+            "precision": 0.4866666666666667,
+            "recall": 0.12106135986733002
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 129,
+            "precision": 0.43,
+            "recall": 0.21393034825870647
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 224,
+            "precision": 0.37333333333333335,
+            "recall": 0.3714759535655058
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 603,
+            "true_positives_in_flagged": 474,
+            "precision": 0.316,
+            "recall": 0.7860696517412935
+          }
+        ]
+      }
+    },
+    {
+      "seed": 4,
+      "n_test_samples": 3000,
+      "policy_results": {
+        "B_calibrated_confidence": {
+          "thresholds": {
+            "t_50": 0.15625,
+            "t_80": 0.360655737704918,
+            "t_95": 0.41171658408718076
+          },
+          "tier_counts": {
+            "CRITICAL": 135,
+            "LOW": 1409,
+            "MEDIUM": 731,
+            "HIGH": 725
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1409,
+              "n_review": 731,
+              "n_abstain": 860,
+              "unsafe_action_rate": 0.2841121495327103,
+              "accepted_task_success_rate": 0.7158878504672896,
+              "abstention_rate": 0.2866666666666667,
+              "review_rate": 0.24366666666666667,
+              "false_abstention_rate": 0.5453488372093023,
+              "failure_recall_among_abstained": 0.3913913913913914,
+              "expected_decision_cost": 0.6495,
+              "utility_retention": 0.7133333333333334
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1409,
+              "n_review": 731,
+              "n_abstain": 860,
+              "unsafe_action_rate": 0.2841121495327103,
+              "accepted_task_success_rate": 0.7158878504672896,
+              "abstention_rate": 0.2866666666666667,
+              "review_rate": 0.24366666666666667,
+              "false_abstention_rate": 0.5453488372093023,
+              "failure_recall_among_abstained": 0.3913913913913914,
+              "expected_decision_cost": 1.2574999999999998,
+              "utility_retention": 0.7133333333333334
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1409,
+              "n_review": 731,
+              "n_abstain": 860,
+              "unsafe_action_rate": 0.2841121495327103,
+              "accepted_task_success_rate": 0.7158878504672896,
+              "abstention_rate": 0.2866666666666667,
+              "review_rate": 0.24366666666666667,
+              "false_abstention_rate": 0.5453488372093023,
+              "failure_recall_among_abstained": 0.3913913913913914,
+              "expected_decision_cost": 2.2708333333333335,
+              "utility_retention": 0.7133333333333334
+            }
+          }
+        },
+        "F_supervised_failure_risk": {
+          "thresholds": {
+            "t_50": 0.16228432253927294,
+            "t_80": 0.39675033011451505,
+            "t_95": 0.42925515619954385
+          },
+          "tier_counts": {
+            "CRITICAL": 129,
+            "LOW": 1501,
+            "MEDIUM": 940,
+            "HIGH": 430
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1501,
+              "n_review": 940,
+              "n_abstain": 559,
+              "unsafe_action_rate": 0.3109381401065137,
+              "accepted_task_success_rate": 0.6890618598934863,
+              "abstention_rate": 0.18633333333333332,
+              "review_rate": 0.31333333333333335,
+              "false_abstention_rate": 0.5706618962432916,
+              "failure_recall_among_abstained": 0.24024024024024024,
+              "expected_decision_cost": 0.699,
+              "utility_retention": 0.8136666666666666
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1501,
+              "n_review": 940,
+              "n_abstain": 559,
+              "unsafe_action_rate": 0.3109381401065137,
+              "accepted_task_success_rate": 0.6890618598934863,
+              "abstention_rate": 0.18633333333333332,
+              "review_rate": 0.31333333333333335,
+              "false_abstention_rate": 0.5706618962432916,
+              "failure_recall_among_abstained": 0.24024024024024024,
+              "expected_decision_cost": 1.458,
+              "utility_retention": 0.8136666666666666
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1501,
+              "n_review": 940,
+              "n_abstain": 559,
+              "unsafe_action_rate": 0.3109381401065137,
+              "accepted_task_success_rate": 0.6890618598934863,
+              "abstention_rate": 0.18633333333333332,
+              "review_rate": 0.31333333333333335,
+              "false_abstention_rate": 0.5706618962432916,
+              "failure_recall_among_abstained": 0.24024024024024024,
+              "expected_decision_cost": 2.723,
+              "utility_retention": 0.8136666666666666
+            }
+          }
+        },
+        "BF_combined": {
+          "thresholds": {
+            "t_50": 0.1613661362778525,
+            "t_80": 0.37519325926538105,
+            "t_95": 0.4660053474900319
+          },
+          "tier_counts": {
+            "CRITICAL": 135,
+            "LOW": 1508,
+            "MEDIUM": 924,
+            "HIGH": 433
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1508,
+              "n_review": 924,
+              "n_abstain": 568,
+              "unsafe_action_rate": 0.30838815789473684,
+              "accepted_task_success_rate": 0.6916118421052632,
+              "abstention_rate": 0.18933333333333333,
+              "review_rate": 0.308,
+              "false_abstention_rate": 0.5616197183098591,
+              "failure_recall_among_abstained": 0.24924924924924924,
+              "expected_decision_cost": 0.6928333333333333,
+              "utility_retention": 0.8106666666666666
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1508,
+              "n_review": 924,
+              "n_abstain": 568,
+              "unsafe_action_rate": 0.30838815789473684,
+              "accepted_task_success_rate": 0.6916118421052632,
+              "abstention_rate": 0.18933333333333333,
+              "review_rate": 0.308,
+              "false_abstention_rate": 0.5616197183098591,
+              "failure_recall_among_abstained": 0.24924924924924924,
+              "expected_decision_cost": 1.4428333333333334,
+              "utility_retention": 0.8106666666666666
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1508,
+              "n_review": 924,
+              "n_abstain": 568,
+              "unsafe_action_rate": 0.30838815789473684,
+              "accepted_task_success_rate": 0.6916118421052632,
+              "abstention_rate": 0.18933333333333333,
+              "review_rate": 0.308,
+              "false_abstention_rate": 0.5616197183098591,
+              "failure_recall_among_abstained": 0.24924924924924924,
+              "expected_decision_cost": 2.692833333333333,
+              "utility_retention": 0.8106666666666666
+            }
+          }
+        },
+        "no_risk_policy": {
+          "thresholds": null,
+          "tier_counts": null,
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.333,
+              "accepted_task_success_rate": 0.667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 0.666,
+              "utility_retention": 1.0
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.333,
+              "accepted_task_success_rate": 0.667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 1.665,
+              "utility_retention": 1.0
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.333,
+              "accepted_task_success_rate": 0.667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 3.33,
+              "utility_retention": 1.0
+            }
+          }
+        }
+      },
+      "abstention": {
+        "B_calibrated_confidence": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 71,
+            "precision": 0.47333333333333333,
+            "recall": 0.07107107107107107
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 138,
+            "precision": 0.46,
+            "recall": 0.13813813813813813
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 271,
+            "precision": 0.45166666666666666,
+            "recall": 0.27127127127127126
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 637,
+            "precision": 0.4246666666666667,
+            "recall": 0.6376376376376376
+          }
+        ],
+        "F_supervised_failure_risk": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 66,
+            "precision": 0.44,
+            "recall": 0.06606606606606606
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 136,
+            "precision": 0.4533333333333333,
+            "recall": 0.13613613613613615
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 263,
+            "precision": 0.43833333333333335,
+            "recall": 0.26326326326326327
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 634,
+            "precision": 0.4226666666666667,
+            "recall": 0.6346346346346347
+          }
+        ],
+        "BF_combined": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 70,
+            "precision": 0.4666666666666667,
+            "recall": 0.07007007007007007
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 138,
+            "precision": 0.46,
+            "recall": 0.13813813813813813
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 263,
+            "precision": 0.43833333333333335,
+            "recall": 0.26326326326326327
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 999,
+            "true_positives_in_flagged": 636,
+            "precision": 0.424,
+            "recall": 0.6366366366366366
+          }
+        ]
+      }
+    },
+    {
+      "seed": 5,
+      "n_test_samples": 3000,
+      "policy_results": {
+        "B_calibrated_confidence": {
+          "thresholds": {
+            "t_50": 0.17543859649122806,
+            "t_80": 0.36036036036036034,
+            "t_95": 0.3678160919540229
+          },
+          "tier_counts": {
+            "CRITICAL": 510,
+            "LOW": 1420,
+            "MEDIUM": 404,
+            "HIGH": 666
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1420,
+              "n_review": 404,
+              "n_abstain": 1176,
+              "unsafe_action_rate": 0.15076754385964913,
+              "accepted_task_success_rate": 0.8492324561403508,
+              "abstention_rate": 0.392,
+              "review_rate": 0.13466666666666666,
+              "false_abstention_rate": 0.6615646258503401,
+              "failure_recall_among_abstained": 0.5913818722139673,
+              "expected_decision_cost": 0.5094,
+              "utility_retention": 0.608
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1420,
+              "n_review": 404,
+              "n_abstain": 1176,
+              "unsafe_action_rate": 0.15076754385964913,
+              "accepted_task_success_rate": 0.8492324561403508,
+              "abstention_rate": 0.392,
+              "review_rate": 0.13466666666666666,
+              "false_abstention_rate": 0.6615646258503401,
+              "failure_recall_among_abstained": 0.5913818722139673,
+              "expected_decision_cost": 0.7844,
+              "utility_retention": 0.608
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1420,
+              "n_review": 404,
+              "n_abstain": 1176,
+              "unsafe_action_rate": 0.15076754385964913,
+              "accepted_task_success_rate": 0.8492324561403508,
+              "abstention_rate": 0.392,
+              "review_rate": 0.13466666666666666,
+              "false_abstention_rate": 0.6615646258503401,
+              "failure_recall_among_abstained": 0.5913818722139673,
+              "expected_decision_cost": 1.2427333333333332,
+              "utility_retention": 0.608
+            }
+          }
+        },
+        "F_supervised_failure_risk": {
+          "thresholds": {
+            "t_50": 0.20297332893909364,
+            "t_80": 0.38293232093451157,
+            "t_95": 0.4096466774946096
+          },
+          "tier_counts": {
+            "CRITICAL": 145,
+            "LOW": 1527,
+            "MEDIUM": 839,
+            "HIGH": 489
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1527,
+              "n_review": 839,
+              "n_abstain": 634,
+              "unsafe_action_rate": 0.194843617920541,
+              "accepted_task_success_rate": 0.8051563820794589,
+              "abstention_rate": 0.21133333333333335,
+              "review_rate": 0.2796666666666667,
+              "false_abstention_rate": 0.6656151419558359,
+              "failure_recall_among_abstained": 0.3150074294205052,
+              "expected_decision_cost": 0.5251333333333333,
+              "utility_retention": 0.7886666666666666
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1527,
+              "n_review": 839,
+              "n_abstain": 634,
+              "unsafe_action_rate": 0.194843617920541,
+              "accepted_task_success_rate": 0.8051563820794589,
+              "abstention_rate": 0.21133333333333335,
+              "review_rate": 0.2796666666666667,
+              "false_abstention_rate": 0.6656151419558359,
+              "failure_recall_among_abstained": 0.3150074294205052,
+              "expected_decision_cost": 0.9861333333333334,
+              "utility_retention": 0.7886666666666666
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1527,
+              "n_review": 839,
+              "n_abstain": 634,
+              "unsafe_action_rate": 0.194843617920541,
+              "accepted_task_success_rate": 0.8051563820794589,
+              "abstention_rate": 0.21133333333333335,
+              "review_rate": 0.2796666666666667,
+              "false_abstention_rate": 0.6656151419558359,
+              "failure_recall_among_abstained": 0.3150074294205052,
+              "expected_decision_cost": 1.7544666666666666,
+              "utility_retention": 0.7886666666666666
+            }
+          }
+        },
+        "BF_combined": {
+          "thresholds": {
+            "t_50": 0.20583354219721595,
+            "t_80": 0.37561836033164314,
+            "t_95": 0.3885983739296999
+          },
+          "tier_counts": {
+            "CRITICAL": 155,
+            "LOW": 1539,
+            "MEDIUM": 828,
+            "HIGH": 478
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1539,
+              "n_review": 828,
+              "n_abstain": 633,
+              "unsafe_action_rate": 0.19476130122517954,
+              "accepted_task_success_rate": 0.8052386987748205,
+              "abstention_rate": 0.211,
+              "review_rate": 0.276,
+              "false_abstention_rate": 0.665086887835703,
+              "failure_recall_among_abstained": 0.3150074294205052,
+              "expected_decision_cost": 0.5240666666666668,
+              "utility_retention": 0.789
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1539,
+              "n_review": 828,
+              "n_abstain": 633,
+              "unsafe_action_rate": 0.19476130122517954,
+              "accepted_task_success_rate": 0.8052386987748205,
+              "abstention_rate": 0.211,
+              "review_rate": 0.276,
+              "false_abstention_rate": 0.665086887835703,
+              "failure_recall_among_abstained": 0.3150074294205052,
+              "expected_decision_cost": 0.9850666666666666,
+              "utility_retention": 0.789
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1539,
+              "n_review": 828,
+              "n_abstain": 633,
+              "unsafe_action_rate": 0.19476130122517954,
+              "accepted_task_success_rate": 0.8052386987748205,
+              "abstention_rate": 0.211,
+              "review_rate": 0.276,
+              "false_abstention_rate": 0.665086887835703,
+              "failure_recall_among_abstained": 0.3150074294205052,
+              "expected_decision_cost": 1.7533999999999996,
+              "utility_retention": 0.789
+            }
+          }
+        },
+        "no_risk_policy": {
+          "thresholds": null,
+          "tier_counts": null,
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.22433333333333333,
+              "accepted_task_success_rate": 0.7756666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 0.44866666666666666,
+              "utility_retention": 1.0
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.22433333333333333,
+              "accepted_task_success_rate": 0.7756666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 1.1216666666666666,
+              "utility_retention": 1.0
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.22433333333333333,
+              "accepted_task_success_rate": 0.7756666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 2.243333333333333,
+              "utility_retention": 1.0
+            }
+          }
+        }
+      },
+      "abstention": {
+        "B_calibrated_confidence": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 61,
+            "precision": 0.4066666666666667,
+            "recall": 0.09063893016344725
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 117,
+            "precision": 0.39,
+            "recall": 0.1738484398216939
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 208,
+            "precision": 0.3466666666666667,
+            "recall": 0.30906389301634474
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 458,
+            "precision": 0.30533333333333335,
+            "recall": 0.6805349182763745
+          }
+        ],
+        "F_supervised_failure_risk": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 46,
+            "precision": 0.30666666666666664,
+            "recall": 0.06835066864784546
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 104,
+            "precision": 0.3466666666666667,
+            "recall": 0.15453194650817237
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 199,
+            "precision": 0.33166666666666667,
+            "recall": 0.29569093610698366
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 462,
+            "precision": 0.308,
+            "recall": 0.6864784546805349
+          }
+        ],
+        "BF_combined": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 50,
+            "precision": 0.3333333333333333,
+            "recall": 0.07429420505200594
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 103,
+            "precision": 0.3433333333333333,
+            "recall": 0.15304606240713226
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 203,
+            "precision": 0.3383333333333333,
+            "recall": 0.3016344725111441
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 673,
+            "true_positives_in_flagged": 459,
+            "precision": 0.306,
+            "recall": 0.6820208023774146
+          }
+        ]
+      }
+    },
+    {
+      "seed": 42,
+      "n_test_samples": 3000,
+      "policy_results": {
+        "B_calibrated_confidence": {
+          "thresholds": {
+            "t_50": 0.24561403508771928,
+            "t_80": 0.36170212765957444,
+            "t_95": 0.5
+          },
+          "tier_counts": {
+            "CRITICAL": 204,
+            "LOW": 1418,
+            "MEDIUM": 641,
+            "HIGH": 737
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1418,
+              "n_review": 641,
+              "n_abstain": 941,
+              "unsafe_action_rate": 0.2889752306945119,
+              "accepted_task_success_rate": 0.7110247693054881,
+              "abstention_rate": 0.31366666666666665,
+              "review_rate": 0.21366666666666667,
+              "false_abstention_rate": 0.5696068012752391,
+              "failure_recall_among_abstained": 0.405,
+              "expected_decision_cost": 0.6585666666666666,
+              "utility_retention": 0.6863333333333334
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1418,
+              "n_review": 641,
+              "n_abstain": 941,
+              "unsafe_action_rate": 0.2889752306945119,
+              "accepted_task_success_rate": 0.7110247693054881,
+              "abstention_rate": 0.31366666666666665,
+              "review_rate": 0.21366666666666667,
+              "false_abstention_rate": 0.5696068012752391,
+              "failure_recall_among_abstained": 0.405,
+              "expected_decision_cost": 1.2535666666666665,
+              "utility_retention": 0.6863333333333334
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1418,
+              "n_review": 641,
+              "n_abstain": 941,
+              "unsafe_action_rate": 0.2889752306945119,
+              "accepted_task_success_rate": 0.7110247693054881,
+              "abstention_rate": 0.31366666666666665,
+              "review_rate": 0.21366666666666667,
+              "false_abstention_rate": 0.5696068012752391,
+              "failure_recall_among_abstained": 0.405,
+              "expected_decision_cost": 2.245233333333333,
+              "utility_retention": 0.6863333333333334
+            }
+          }
+        },
+        "F_supervised_failure_risk": {
+          "thresholds": {
+            "t_50": 0.23908891666683024,
+            "t_80": 0.4528158500897791,
+            "t_95": 0.5364821343776989
+          },
+          "tier_counts": {
+            "CRITICAL": 160,
+            "LOW": 1484,
+            "MEDIUM": 907,
+            "HIGH": 449
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1484,
+              "n_review": 907,
+              "n_abstain": 609,
+              "unsafe_action_rate": 0.3057298201589293,
+              "accepted_task_success_rate": 0.6942701798410706,
+              "abstention_rate": 0.203,
+              "review_rate": 0.30233333333333334,
+              "false_abstention_rate": 0.5582922824302134,
+              "failure_recall_among_abstained": 0.269,
+              "expected_decision_cost": 0.6880333333333335,
+              "utility_retention": 0.797
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1484,
+              "n_review": 907,
+              "n_abstain": 609,
+              "unsafe_action_rate": 0.3057298201589293,
+              "accepted_task_success_rate": 0.6942701798410706,
+              "abstention_rate": 0.203,
+              "review_rate": 0.30233333333333334,
+              "false_abstention_rate": 0.5582922824302134,
+              "failure_recall_among_abstained": 0.269,
+              "expected_decision_cost": 1.4190333333333334,
+              "utility_retention": 0.797
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1484,
+              "n_review": 907,
+              "n_abstain": 609,
+              "unsafe_action_rate": 0.3057298201589293,
+              "accepted_task_success_rate": 0.6942701798410706,
+              "abstention_rate": 0.203,
+              "review_rate": 0.30233333333333334,
+              "false_abstention_rate": 0.5582922824302134,
+              "failure_recall_among_abstained": 0.269,
+              "expected_decision_cost": 2.6373666666666664,
+              "utility_retention": 0.797
+            }
+          }
+        },
+        "BF_combined": {
+          "thresholds": {
+            "t_50": 0.2297351678266331,
+            "t_80": 0.44054175872293333,
+            "t_95": 0.6290639833479208
+          },
+          "tier_counts": {
+            "CRITICAL": 164,
+            "LOW": 1476,
+            "MEDIUM": 909,
+            "HIGH": 451
+          },
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 1476,
+              "n_review": 909,
+              "n_abstain": 615,
+              "unsafe_action_rate": 0.30440251572327043,
+              "accepted_task_success_rate": 0.6955974842767296,
+              "abstention_rate": 0.205,
+              "review_rate": 0.303,
+              "false_abstention_rate": 0.5544715447154471,
+              "failure_recall_among_abstained": 0.274,
+              "expected_decision_cost": 0.6856666666666666,
+              "utility_retention": 0.795
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 1476,
+              "n_review": 909,
+              "n_abstain": 615,
+              "unsafe_action_rate": 0.30440251572327043,
+              "accepted_task_success_rate": 0.6955974842767296,
+              "abstention_rate": 0.205,
+              "review_rate": 0.303,
+              "false_abstention_rate": 0.5544715447154471,
+              "failure_recall_among_abstained": 0.274,
+              "expected_decision_cost": 1.4116666666666666,
+              "utility_retention": 0.795
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 1476,
+              "n_review": 909,
+              "n_abstain": 615,
+              "unsafe_action_rate": 0.30440251572327043,
+              "accepted_task_success_rate": 0.6955974842767296,
+              "abstention_rate": 0.205,
+              "review_rate": 0.303,
+              "false_abstention_rate": 0.5544715447154471,
+              "failure_recall_among_abstained": 0.274,
+              "expected_decision_cost": 2.6216666666666666,
+              "utility_retention": 0.795
+            }
+          }
+        },
+        "no_risk_policy": {
+          "thresholds": null,
+          "tier_counts": null,
+          "metrics_by_cost_ratio": {
+            "2.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.3333333333333333,
+              "accepted_task_success_rate": 0.6666666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 0.6666666666666666,
+              "utility_retention": 1.0
+            },
+            "5.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.3333333333333333,
+              "accepted_task_success_rate": 0.6666666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 1.6666666666666667,
+              "utility_retention": 1.0
+            },
+            "10.0": {
+              "n_total": 3000,
+              "n_answer": 3000,
+              "n_review": 0,
+              "n_abstain": 0,
+              "unsafe_action_rate": 0.3333333333333333,
+              "accepted_task_success_rate": 0.6666666666666667,
+              "abstention_rate": 0.0,
+              "review_rate": 0.0,
+              "false_abstention_rate": null,
+              "failure_recall_among_abstained": 0.0,
+              "expected_decision_cost": 3.3333333333333335,
+              "utility_retention": 1.0
+            }
+          }
+        }
+      },
+      "abstention": {
+        "B_calibrated_confidence": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 71,
+            "precision": 0.47333333333333333,
+            "recall": 0.071
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 140,
+            "precision": 0.4666666666666667,
+            "recall": 0.14
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 274,
+            "precision": 0.45666666666666667,
+            "recall": 0.274
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 639,
+            "precision": 0.426,
+            "recall": 0.639
+          }
+        ],
+        "F_supervised_failure_risk": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 68,
+            "precision": 0.4533333333333333,
+            "recall": 0.068
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 128,
+            "precision": 0.4266666666666667,
+            "recall": 0.128
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 266,
+            "precision": 0.44333333333333336,
+            "recall": 0.266
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 635,
+            "precision": 0.42333333333333334,
+            "recall": 0.635
+          }
+        ],
+        "BF_combined": [
+          {
+            "coverage": 0.05,
+            "n_flagged": 150,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 75,
+            "precision": 0.5,
+            "recall": 0.075
+          },
+          {
+            "coverage": 0.1,
+            "n_flagged": 300,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 128,
+            "precision": 0.4266666666666667,
+            "recall": 0.128
+          },
+          {
+            "coverage": 0.2,
+            "n_flagged": 600,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 266,
+            "precision": 0.44333333333333336,
+            "recall": 0.266
+          },
+          {
+            "coverage": 0.5,
+            "n_flagged": 1500,
+            "n_positive_total": 1000,
+            "true_positives_in_flagged": 637,
+            "precision": 0.4246666666666667,
+            "recall": 0.637
+          }
+        ]
+      }
+    }
+  ],
+  "aggregate": {
+    "policies": {
+      "no_risk_policy": {
+        "2.0": {
+          "unsafe_action_rate": {
+            "mean": 0.2805555555555555,
+            "std": 0.06295595167934363,
+            "ci_low": 0.21448733611968285,
+            "ci_high": 0.34662377499142816,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7194444444444446,
+            "std": 0.06295595167934363,
+            "ci_low": 0.6533762250085718,
+            "ci_high": 0.7855126638803173,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 0.561111111111111,
+            "std": 0.12591190335868727,
+            "ci_low": 0.4289746722393657,
+            "ci_high": 0.6932475499828563,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 1.0,
+            "std": 0.0,
+            "ci_low": 1.0,
+            "ci_high": 1.0,
+            "n": 6
+          }
+        },
+        "5.0": {
+          "unsafe_action_rate": {
+            "mean": 0.2805555555555555,
+            "std": 0.06295595167934363,
+            "ci_low": 0.21448733611968285,
+            "ci_high": 0.34662377499142816,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7194444444444446,
+            "std": 0.06295595167934363,
+            "ci_low": 0.6533762250085718,
+            "ci_high": 0.7855126638803173,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 1.4027777777777777,
+            "std": 0.3147797583967183,
+            "ci_low": 1.0724366805984142,
+            "ci_high": 1.7331188749571411,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 1.0,
+            "std": 0.0,
+            "ci_low": 1.0,
+            "ci_high": 1.0,
+            "n": 6
+          }
+        },
+        "10.0": {
+          "unsafe_action_rate": {
+            "mean": 0.2805555555555555,
+            "std": 0.06295595167934363,
+            "ci_low": 0.21448733611968285,
+            "ci_high": 0.34662377499142816,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7194444444444446,
+            "std": 0.06295595167934363,
+            "ci_low": 0.6533762250085718,
+            "ci_high": 0.7855126638803173,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 2.8055555555555554,
+            "std": 0.6295595167934366,
+            "ci_low": 2.1448733611968285,
+            "ci_high": 3.4662377499142822,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 1.0,
+            "std": 0.0,
+            "ci_low": 1.0,
+            "ci_high": 1.0,
+            "n": 6
+          }
+        }
+      },
+      "B_calibrated_confidence": {
+        "2.0": {
+          "unsafe_action_rate": {
+            "mean": 0.22582982506844462,
+            "std": 0.07542615164318275,
+            "ci_low": 0.14667493335388954,
+            "ci_high": 0.3049847167829997,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7741701749315554,
+            "std": 0.07542615164318274,
+            "ci_low": 0.6950152832170003,
+            "ci_high": 0.8533250666461104,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.2973333333333334,
+            "std": 0.057927540945564064,
+            "ci_low": 0.23654210733352452,
+            "ci_high": 0.35812455933314224,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.22061111111111112,
+            "std": 0.056103244773133006,
+            "ci_low": 0.16173436653237722,
+            "ci_high": 0.279487855689845,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5899379958332069,
+            "std": 0.05431931956523307,
+            "ci_low": 0.532933365946552,
+            "ci_high": 0.6469426257198618,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.4438976473118825,
+            "std": 0.1045806031454795,
+            "ci_low": 0.3341470351291982,
+            "ci_high": 0.5536482594945669,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 0.5785666666666667,
+            "std": 0.09265130568127167,
+            "ci_low": 0.48133508440184286,
+            "ci_high": 0.6757982489314904,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.7026666666666667,
+            "std": 0.05792754094556405,
+            "ci_low": 0.6418754406668578,
+            "ci_high": 0.7634578926664756,
+            "n": 6
+          }
+        },
+        "5.0": {
+          "unsafe_action_rate": {
+            "mean": 0.22582982506844462,
+            "std": 0.07542615164318275,
+            "ci_low": 0.14667493335388954,
+            "ci_high": 0.3049847167829997,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7741701749315554,
+            "std": 0.07542615164318274,
+            "ci_low": 0.6950152832170003,
+            "ci_high": 0.8533250666461104,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.2973333333333334,
+            "std": 0.057927540945564064,
+            "ci_low": 0.23654210733352452,
+            "ci_high": 0.35812455933314224,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.22061111111111112,
+            "std": 0.056103244773133006,
+            "ci_low": 0.16173436653237722,
+            "ci_high": 0.279487855689845,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5899379958332069,
+            "std": 0.05431931956523307,
+            "ci_low": 0.532933365946552,
+            "ci_high": 0.6469426257198618,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.4438976473118825,
+            "std": 0.1045806031454795,
+            "ci_low": 0.3341470351291982,
+            "ci_high": 0.5536482594945669,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 1.0602333333333334,
+            "std": 0.26889477082639185,
+            "ci_low": 0.7780455774464548,
+            "ci_high": 1.342421089220212,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.7026666666666667,
+            "std": 0.05792754094556405,
+            "ci_low": 0.6418754406668578,
+            "ci_high": 0.7634578926664756,
+            "n": 6
+          }
+        },
+        "10.0": {
+          "unsafe_action_rate": {
+            "mean": 0.22582982506844462,
+            "std": 0.07542615164318275,
+            "ci_low": 0.14667493335388954,
+            "ci_high": 0.3049847167829997,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7741701749315554,
+            "std": 0.07542615164318274,
+            "ci_low": 0.6950152832170003,
+            "ci_high": 0.8533250666461104,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.2973333333333334,
+            "std": 0.057927540945564064,
+            "ci_low": 0.23654210733352452,
+            "ci_high": 0.35812455933314224,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.22061111111111112,
+            "std": 0.056103244773133006,
+            "ci_low": 0.16173436653237722,
+            "ci_high": 0.279487855689845,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5899379958332069,
+            "std": 0.05431931956523307,
+            "ci_low": 0.532933365946552,
+            "ci_high": 0.6469426257198618,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.4438976473118825,
+            "std": 0.1045806031454795,
+            "ci_low": 0.3341470351291982,
+            "ci_high": 0.5536482594945669,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 1.8630111111111114,
+            "std": 0.5662202404901655,
+            "ci_low": 1.2687994107102563,
+            "ci_high": 2.4572228115119668,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.7026666666666667,
+            "std": 0.05792754094556405,
+            "ci_low": 0.6418754406668578,
+            "ci_high": 0.7634578926664756,
+            "n": 6
+          }
+        }
+      },
+      "F_supervised_failure_risk": {
+        "2.0": {
+          "unsafe_action_rate": {
+            "mean": 0.2481126767482343,
+            "std": 0.0674604166000034,
+            "ci_low": 0.17731731128596004,
+            "ci_high": 0.3189080422105086,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7518873232517658,
+            "std": 0.06746041660000339,
+            "ci_low": 0.6810919577894915,
+            "ci_high": 0.82268268871404,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.19472222222222224,
+            "std": 0.011586230652837053,
+            "ci_low": 0.18256321884307972,
+            "ci_high": 0.20688122560136477,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.29950000000000004,
+            "std": 0.01578008590316008,
+            "ci_low": 0.28293981545260366,
+            "ci_high": 0.31606018454739643,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5841384064151841,
+            "std": 0.05265564007681741,
+            "ci_low": 0.5288797010770365,
+            "ci_high": 0.6393971117533317,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.2947870990131096,
+            "std": 0.03932557004607015,
+            "ci_low": 0.25351744424753764,
+            "ci_high": 0.3360567537786816,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 0.5974833333333334,
+            "std": 0.1045507186860893,
+            "ci_low": 0.48776408296741214,
+            "ci_high": 0.7072025836992546,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.8052777777777776,
+            "std": 0.011586230652837034,
+            "ci_low": 0.7931187743986351,
+            "ci_high": 0.8174367811569202,
+            "n": 6
+          }
+        },
+        "5.0": {
+          "unsafe_action_rate": {
+            "mean": 0.2481126767482343,
+            "std": 0.0674604166000034,
+            "ci_low": 0.17731731128596004,
+            "ci_high": 0.3189080422105086,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7518873232517658,
+            "std": 0.06746041660000339,
+            "ci_low": 0.6810919577894915,
+            "ci_high": 0.82268268871404,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.19472222222222224,
+            "std": 0.011586230652837053,
+            "ci_low": 0.18256321884307972,
+            "ci_high": 0.20688122560136477,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.29950000000000004,
+            "std": 0.01578008590316008,
+            "ci_low": 0.28293981545260366,
+            "ci_high": 0.31606018454739643,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5841384064151841,
+            "std": 0.05265564007681741,
+            "ci_low": 0.5288797010770365,
+            "ci_high": 0.6393971117533317,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.2947870990131096,
+            "std": 0.03932557004607015,
+            "ci_low": 0.25351744424753764,
+            "ci_high": 0.3360567537786816,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 1.1966499999999998,
+            "std": 0.266582443991431,
+            "ci_low": 0.9168888823048169,
+            "ci_high": 1.4764111176951826,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.8052777777777776,
+            "std": 0.011586230652837034,
+            "ci_low": 0.7931187743986351,
+            "ci_high": 0.8174367811569202,
+            "n": 6
+          }
+        },
+        "10.0": {
+          "unsafe_action_rate": {
+            "mean": 0.2481126767482343,
+            "std": 0.0674604166000034,
+            "ci_low": 0.17731731128596004,
+            "ci_high": 0.3189080422105086,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7518873232517658,
+            "std": 0.06746041660000339,
+            "ci_low": 0.6810919577894915,
+            "ci_high": 0.82268268871404,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.19472222222222224,
+            "std": 0.011586230652837053,
+            "ci_low": 0.18256321884307972,
+            "ci_high": 0.20688122560136477,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.29950000000000004,
+            "std": 0.01578008590316008,
+            "ci_low": 0.28293981545260366,
+            "ci_high": 0.31606018454739643,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5841384064151841,
+            "std": 0.05265564007681741,
+            "ci_low": 0.5288797010770365,
+            "ci_high": 0.6393971117533317,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.2947870990131096,
+            "std": 0.03932557004607015,
+            "ci_low": 0.25351744424753764,
+            "ci_high": 0.3360567537786816,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 2.195261111111111,
+            "std": 0.5369974820618257,
+            "ci_low": 1.6317168149010262,
+            "ci_high": 2.7588054073211956,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.8052777777777776,
+            "std": 0.011586230652837034,
+            "ci_low": 0.7931187743986351,
+            "ci_high": 0.8174367811569202,
+            "n": 6
+          }
+        }
+      },
+      "BF_combined": {
+        "2.0": {
+          "unsafe_action_rate": {
+            "mean": 0.24754594292111917,
+            "std": 0.06643321418929148,
+            "ci_low": 0.17782856027803307,
+            "ci_high": 0.3172633255642053,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7524540570788808,
+            "std": 0.06643321418929148,
+            "ci_low": 0.6827366744357947,
+            "ci_high": 0.8221714397219669,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.1952222222222222,
+            "std": 0.011795793349357247,
+            "ci_low": 0.1828432962805587,
+            "ci_high": 0.20760114816388572,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.2981666666666667,
+            "std": 0.014588808496012719,
+            "ci_low": 0.2828566510873336,
+            "ci_high": 0.3134766822459998,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5820807366759423,
+            "std": 0.05494659572183596,
+            "ci_low": 0.5244178208344914,
+            "ci_high": 0.6397436525173932,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.2963929532232081,
+            "std": 0.03579735853976676,
+            "ci_low": 0.258825929357442,
+            "ci_high": 0.3339599770889742,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 0.5960666666666666,
+            "std": 0.10221144315149407,
+            "ci_low": 0.4888023354182864,
+            "ci_high": 0.7033309979150468,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.8047777777777778,
+            "std": 0.011795793349357236,
+            "ci_low": 0.7923988518361142,
+            "ci_high": 0.8171567037194414,
+            "n": 6
+          }
+        },
+        "5.0": {
+          "unsafe_action_rate": {
+            "mean": 0.24754594292111917,
+            "std": 0.06643321418929148,
+            "ci_low": 0.17782856027803307,
+            "ci_high": 0.3172633255642053,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7524540570788808,
+            "std": 0.06643321418929148,
+            "ci_low": 0.6827366744357947,
+            "ci_high": 0.8221714397219669,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.1952222222222222,
+            "std": 0.011795793349357247,
+            "ci_low": 0.1828432962805587,
+            "ci_high": 0.20760114816388572,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.2981666666666667,
+            "std": 0.014588808496012719,
+            "ci_low": 0.2828566510873336,
+            "ci_high": 0.3134766822459998,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5820807366759423,
+            "std": 0.05494659572183596,
+            "ci_low": 0.5244178208344914,
+            "ci_high": 0.6397436525173932,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.2963929532232081,
+            "std": 0.03579735853976676,
+            "ci_low": 0.258825929357442,
+            "ci_high": 0.3339599770889742,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 1.1933999999999998,
+            "std": 0.2610973620020785,
+            "ci_low": 0.919395122832195,
+            "ci_high": 1.4674048771678045,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.8047777777777778,
+            "std": 0.011795793349357236,
+            "ci_low": 0.7923988518361142,
+            "ci_high": 0.8171567037194414,
+            "n": 6
+          }
+        },
+        "10.0": {
+          "unsafe_action_rate": {
+            "mean": 0.24754594292111917,
+            "std": 0.06643321418929148,
+            "ci_low": 0.17782856027803307,
+            "ci_high": 0.3172633255642053,
+            "n": 6
+          },
+          "accepted_task_success_rate": {
+            "mean": 0.7524540570788808,
+            "std": 0.06643321418929148,
+            "ci_low": 0.6827366744357947,
+            "ci_high": 0.8221714397219669,
+            "n": 6
+          },
+          "abstention_rate": {
+            "mean": 0.1952222222222222,
+            "std": 0.011795793349357247,
+            "ci_low": 0.1828432962805587,
+            "ci_high": 0.20760114816388572,
+            "n": 6
+          },
+          "review_rate": {
+            "mean": 0.2981666666666667,
+            "std": 0.014588808496012719,
+            "ci_low": 0.2828566510873336,
+            "ci_high": 0.3134766822459998,
+            "n": 6
+          },
+          "false_abstention_rate": {
+            "mean": 0.5820807366759423,
+            "std": 0.05494659572183596,
+            "ci_low": 0.5244178208344914,
+            "ci_high": 0.6397436525173932,
+            "n": 6
+          },
+          "failure_recall_among_abstained": {
+            "mean": 0.2963929532232081,
+            "std": 0.03579735853976676,
+            "ci_low": 0.258825929357442,
+            "ci_high": 0.3339599770889742,
+            "n": 6
+          },
+          "expected_decision_cost": {
+            "mean": 2.1889555555555553,
+            "std": 0.5262803391799921,
+            "ci_low": 1.6366582110435246,
+            "ci_high": 2.741252900067586,
+            "n": 6
+          },
+          "utility_retention": {
+            "mean": 0.8047777777777778,
+            "std": 0.011795793349357236,
+            "ci_low": 0.7923988518361142,
+            "ci_high": 0.8171567037194414,
+            "n": 6
+          }
+        }
+      }
+    },
+    "abstention": {
+      "B_calibrated_confidence": [
+        {
+          "coverage": 0.05,
+          "precision": {
+            "mean": 0.43555555555555553,
+            "std": 0.050007406858791834,
+            "ci_low": 0.38307600053916047,
+            "ci_high": 0.4880351105719506,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.07952557925303018,
+            "std": 0.011064234496382629,
+            "ci_low": 0.06791437724435964,
+            "ci_high": 0.09113678126170072,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.1,
+          "precision": {
+            "mean": 0.44,
+            "std": 0.03444802848737016,
+            "ci_low": 0.4038490111812016,
+            "ci_high": 0.4761509888187984,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.16193084450910986,
+            "std": 0.029057778931595155,
+            "ci_low": 0.13143657568207523,
+            "ci_high": 0.19242511333614448,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.2,
+          "precision": {
+            "mean": 0.4155555555555555,
+            "std": 0.05315247111080711,
+            "ci_low": 0.35977545802333283,
+            "ci_high": 0.4713356530877782,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.3024242105484841,
+            "std": 0.03585348760867593,
+            "ci_low": 0.26479828283737056,
+            "ci_high": 0.3400501382595977,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.5,
+          "precision": {
+            "mean": 0.37833333333333335,
+            "std": 0.057269344136088876,
+            "ci_low": 0.3182328425234536,
+            "ci_high": 0.43843382414321314,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.6848824462484661,
+            "std": 0.06436401902990758,
+            "ci_low": 0.6173365507515377,
+            "ci_high": 0.7524283417453944,
+            "n": 6
+          }
+        }
+      ],
+      "F_supervised_failure_risk": [
+        {
+          "coverage": 0.05,
+          "precision": {
+            "mean": 0.43777777777777777,
+            "std": 0.07138834846315117,
+            "ci_low": 0.3628603006272332,
+            "ci_high": 0.5126952549283224,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.08050151796772799,
+            "std": 0.019804057210830485,
+            "ci_low": 0.059718434516143414,
+            "ci_high": 0.10128460141931256,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.1,
+          "precision": {
+            "mean": 0.4266666666666667,
+            "std": 0.045067850083081507,
+            "ci_low": 0.37937085857599173,
+            "ci_high": 0.47396247475734166,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.15688547295589297,
+            "std": 0.029741148865087434,
+            "ci_low": 0.1256740513654182,
+            "ci_high": 0.18809689454636774,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.2,
+          "precision": {
+            "mean": 0.4161111111111111,
+            "std": 0.054809434170351314,
+            "ci_low": 0.3585921374902116,
+            "ci_high": 0.47363008473201057,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.3034481342792364,
+            "std": 0.043617475456502505,
+            "ci_low": 0.2576744010128943,
+            "ci_high": 0.3492218675455785,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.5,
+          "precision": {
+            "mean": 0.3767777777777778,
+            "std": 0.056732380198286796,
+            "ci_low": 0.3172407960615664,
+            "ci_high": 0.43631475949398923,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.6819869910923511,
+            "std": 0.06149928842603291,
+            "ci_low": 0.6174474459898295,
+            "ci_high": 0.7465265361948726,
+            "n": 6
+          }
+        }
+      ],
+      "BF_combined": [
+        {
+          "coverage": 0.05,
+          "precision": {
+            "mean": 0.4566666666666667,
+            "std": 0.07574812062208393,
+            "ci_low": 0.3771738892307118,
+            "ci_high": 0.5361594441026216,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.0836367739258214,
+            "std": 0.018789717347224993,
+            "ci_low": 0.06391817487807167,
+            "ci_high": 0.10335537297357114,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.1,
+          "precision": {
+            "mean": 0.43111111111111117,
+            "std": 0.0478268481860075,
+            "ci_low": 0.38091991208082027,
+            "ci_high": 0.48130231014140207,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.15868499357217425,
+            "std": 0.03199814360976341,
+            "ci_low": 0.12510500125757856,
+            "ci_high": 0.19226498588676993,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.2,
+          "precision": {
+            "mean": 0.4175,
+            "std": 0.05283885354967919,
+            "ci_low": 0.3620490239137222,
+            "ci_high": 0.4729509760862778,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.30466154007921675,
+            "std": 0.04370046277253293,
+            "ci_low": 0.258800716965773,
+            "ci_high": 0.3505223631926605,
+            "n": 6
+          }
+        },
+        {
+          "coverage": 0.5,
+          "precision": {
+            "mean": 0.37866666666666665,
+            "std": 0.056969387491100094,
+            "ci_low": 0.3188809610504617,
+            "ci_high": 0.4384523722828716,
+            "n": 6
+          },
+          "recall": {
+            "mean": 0.6856159938804446,
+            "std": 0.06501895335536606,
+            "ci_low": 0.6173827869605888,
+            "ci_high": 0.7538492008003004,
+            "n": 6
+          }
+        }
+      ]
+    }
+  }
+}

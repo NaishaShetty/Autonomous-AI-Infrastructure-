@@ -1,0 +1,118 @@
+{
+  "protocol_name": "aiops_extraction_protocol",
+  "version": "1.0.0",
+  "frozen_date": "2026-08-13",
+  "status": "FROZEN_NOT_EXECUTED",
+  "rationale_document": "docs/PHASE3_REAL_DATA_AIOPS_PROTOCOL.md",
+  "source_dataset": {
+    "name": "CCF AIOps Challenge 2020, preliminary round",
+    "raw_file": "data/raw/aiops_kpi/AIOps挑战赛2020预赛数据.zip",
+    "raw_file_sha256": "0b50d8a68101af534ee5e3be1730abaef6f04b059f0e9e0904b10fee95162dce"
+  },
+  "fault_onset_resolution_rule": {
+    "description": "Resolve each of the 81 fault-log rows to a single onset datetime.",
+    "rule": "fault_onset = start_time if start_time is non-empty, else log_time",
+    "applies_to_index_range": {
+      "start_time_rule": "index 100-169 (70 events)",
+      "log_time_rule": "index 1-11 (11 events)"
+    },
+    "confidence": "well-supported by 3 independent lines of evidence (block<->locked-day date correspondence, preserved time-of-day, index-1-11 dates matching the already-extracted unlocked day) -- not organizer-confirmed",
+    "unresolved_details": [
+      "block=8 spans two different start_time calendar dates (2020-05-29 and 2020-05-30)",
+      "a consistent +6:00 time-of-day shift appears for log_block in {4,5}, cause not determined",
+      "whether index 1-11 were part of the scored evaluation or an unscored preview batch is not certain"
+    ]
+  },
+  "temporal_windows": {
+    "pre_failure": {
+      "definition": "[fault_onset - 20min, fault_onset)",
+      "minutes": 20,
+      "justification": "observed global minimum gap between consecutive fault onsets is 25.0 minutes (0/80 gaps below 25min); 20min leaves a 5-minute safety margin, contamination-free for the full event population at this window size",
+      "contamination_risk": "none at this window size"
+    },
+    "during_failure": {
+      "definition": "[fault_onset, fault_onset + 5min)",
+      "minutes": 5,
+      "justification": "fixed by the dataset's own documented `duration` field, constant 5min for all 81 events -- not a design choice"
+    },
+    "post_failure": {
+      "definition": "not defined in this protocol version",
+      "note": "no post-failure window is frozen yet; any future diagnosis-only extension must freeze its own window and overlap rule before use"
+    },
+    "extended_context_window_60min": {
+      "status": "NOT ADOPTED as a default",
+      "reason": "only contamination-free for ~51/81 (63%) of events at 60 minutes; would require either restricting to that eligible subset or per-event truncation, neither of which is decided here"
+    }
+  },
+  "usage_rule": {
+    "prediction_tasks": "may use PRE-FAILURE telemetry only",
+    "diagnosis_tasks": "may use PRE-FAILURE, DURING-FAILURE, and (once defined) POST-FAILURE telemetry, but must be labeled as diagnosis, never mixed into a prediction feature set"
+  },
+  "entity_scope": {
+    "filtering": "none -- extract all cmdb_id entities present in a given telemetry day, not restricted to the 16 fault-targeted entities, to preserve a comparison/negative population for future use",
+    "total_named_entities": 61,
+    "fault_eligible_entities": 43,
+    "fault_targeted_entities_in_log": 16
+  },
+  "data_type_scope": {
+    "platform_infrastructure_metrics": {"included": true, "files": ["os_linux.csv", "db_oracle_11g.csv", "mw_redis.csv", "dcos_container.csv", "dcos_docker.csv"], "prediction_usable": true, "diagnosis_usable": true},
+    "business_metrics": {"included": true, "files": ["esb.csv"], "prediction_usable": true, "diagnosis_usable": true},
+    "call_traces_structural_fields": {"included": true, "files": ["trace_csf.csv", "trace_osb.csv", "trace_remote_process.csv", "trace_fly_remote.csv", "trace_jdbc.csv", "trace_local.csv"], "fields": ["callType", "traceId", "id", "pid", "cmdb_id", "dsName", "serviceName", "startTime"], "prediction_usable": true, "diagnosis_usable": true},
+    "call_traces_outcome_fields": {"included": true, "fields": ["success", "elapsedTime"], "prediction_usable_as_same_call_input": false, "prediction_usable_as_aggregated_past_feature": true, "diagnosis_usable": true, "note": "usable as an input feature only when aggregated over PAST calls within the PRE-FAILURE window, never as a feature describing the same call being predicted"},
+    "fault_log_descriptive_fields": {"included": true, "fields": ["object", "fault_desrcibtion", "kpi", "name", "container"], "prediction_usable": false, "diagnosis_usable": true, "role": "label / ground truth only"},
+    "fault_log_timing_fields": {"included": true, "fields": ["log_time", "start_time", "log_block", "block"], "prediction_usable_as_feature": false, "role": "define the T0 cutoff, not an input feature"}
+  },
+  "extraction_dates": {
+    "already_extracted": ["2020_04_11"],
+    "remaining_not_extracted": [
+      "2020_04_20", "2020_04_21", "2020_04_22", "2020_04_23",
+      "2020_05_22", "2020_05_23", "2020_05_24", "2020_05_25", "2020_05_26",
+      "2020_05_27", "2020_05_28", "2020_05_29", "2020_05_30", "2020_05_31"
+    ],
+    "note": "verified directly against the raw zip's own file listing this pass (15 daily zips total, 2020_04_11 already extracted, 14 remaining); the 10 dates 2020_05_22 through 2020_05_31 are password-locked (inner _lock.zip, per sha256sum.txt/unzip_all.sh) and require the documented archive password before extraction",
+    "extraction_authorized": false
+  },
+  "currently_eligible_events_for_prediction": {
+    "count": 11,
+    "index_range": "1-11",
+    "reason": "only these events' full PRE-FAILURE window falls within the one already-extracted telemetry day (2020-04-11)"
+  },
+  "independence_structure": {
+    "raw_event_count": 81,
+    "distinct_entities": 16,
+    "entities_with_multiple_events": 15,
+    "recommended_clustering_variable": "name (entity id)",
+    "effective_n_range": [16, 81],
+    "per_fault_category_counts": {
+      "network delay": 31,
+      "CPU fault": 19,
+      "network loss": 19,
+      "db connection limit": 7,
+      "db  close": 5
+    },
+    "per_object_type_counts": {
+      "docker": 49,
+      "os": 20,
+      "db": 12
+    }
+  },
+  "missing_telemetry_handling": "record explicit MISSING / count=0, never impute",
+  "overlapping_events_handling": "none exist at the frozen 20-minute window; no overlap-resolution rule needed at this window size",
+  "timestamp_conversion": {
+    "source_format": "Unix epoch milliseconds",
+    "target_display_format": "UTC+8 (Asia/Shanghai)",
+    "preserve_original": true
+  },
+  "provenance_fields_required_per_extracted_row": [
+    "source_dataset", "source_file", "cmdb_id", "timestamp_epoch_ms",
+    "timestamp_utc8", "fault_log_index_if_applicable"
+  ],
+  "determinism": "pure filter (entity membership + time-window membership), no randomness, fully reproducible from this frozen file plus the raw zip checksum",
+  "power_assessment_summary": {
+    "binary_fault_vs_no_fault_detection": "UNDERPOWERED / EXPLORATORY -- no negative-window population defined yet",
+    "5class_fault_category_classification": "UNDERPOWERED / INCONCLUSIVE-PRONE for rare classes (n=5, n=7)",
+    "3class_object_type_classification": "EXPLORATORY",
+    "entity_level_generalization": "UNDERPOWERED (16 entities total)",
+    "cross_dataset_comparison_with_alibaba": "qualitative only, never a joint statistical test"
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "meta": {
+    "classes": [
+      "clean",
+      "feature_noise",
+      "feature_dropout"
+    ],
+    "protocol35_attack_matrix": [
+      {
+        "id": "feature_noise_mild",
+        "kind": "covariate_shift_attack",
+        "mechanism": "feature_noise",
+        "parameters": {
+          "std": 0.5
+        },
+        "severity": "mild",
+        "seen_or_unseen": "unseen",
+        "attack_ordinal": 1,
+        "rationale": "Additive N(0, 0.5^2) noise on every one of the 5 raw features (which are themselves N(0,1) by construction -- see src/data/synthetic.py), applied only to regime-3/4 context dicts AFTER generation. std=0.5 is half the native feature scale, chosen a priori as the 'mild' anchor before any evaluation was run. Represents corrupted/noisy telemetry reaching the deployed system: the true label-generating relationship (base_w, drift) is untouched, only what every candidate OBSERVES changes -- a covariate-shift attack, not concept drift."
+      },
+      {
+        "id": "feature_noise_severe",
+        "kind": "covariate_shift_attack",
+        "mechanism": "feature_noise",
+        "parameters": {
+          "std": 1.5
+        },
+        "severity": "severe",
+        "seen_or_unseen": "unseen",
+        "attack_ordinal": 2,
+        "rationale": "Same mechanism as feature_noise_mild, std=1.5 (1.5x native feature scale), chosen a priori as the 'severe' anchor -- fixed before evaluation, not tuned to any outcome. Provides a dose-response comparison against feature_noise_mild."
+      },
+      {
+        "id": "feature_dropout",
+        "kind": "covariate_shift_attack",
+        "mechanism": "feature_dropout",
+        "parameters": {
+          "dropped_features": [
+            "f2",
+            "f4"
+          ]
+        },
+        "severity": "n/a -- binary corruption, not a graded severity",
+        "seen_or_unseen": "unseen",
+        "attack_ordinal": 3,
+        "rationale": "Zeroes features f2 and f4 (the 2nd and 4th of 5 features by the fixed FEATURE_NAMES order -- a systematic 'every other feature starting at index 1' rule stated here before evaluation, not chosen after inspecting which features matter most) for every regime-3/4 sample. Simulates a sensor/telemetry field going dark or being stripped -- a qualitatively different corruption (structural, not magnitude-graded) from the noise attacks. Fully deterministic, no RNG needed."
+      }
+    ],
+    "diagnosis_rule": "deterministic, see src/evaluation/diagnosis.py"
+  },
+  "per_seed": [
+    {
+      "seed": 1,
+      "n_failures": 4876,
+      "accuracy": 0.7108285479901558,
+      "macro_f1": 0.7201170780827844,
+      "per_class": {
+        "clean": {
+          "precision": 0.41648495420846054,
+          "recall": 0.9298928919182083,
+          "f1": 0.5753012048192772,
+          "support": 1027
+        },
+        "feature_noise": {
+          "precision": 0.9324577861163227,
+          "recall": 0.4262435677530017,
+          "f1": 0.5850500294290758,
+          "support": 2332
+        },
+        "feature_dropout": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1517
+        }
+      },
+      "confusion_matrix": {
+        "clean": {
+          "clean": 955,
+          "feature_noise": 72,
+          "feature_dropout": 0
+        },
+        "feature_noise": {
+          "clean": 1338,
+          "feature_noise": 994,
+          "feature_dropout": 0
+        },
+        "feature_dropout": {
+          "clean": 0,
+          "feature_noise": 0,
+          "feature_dropout": 1517
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "n_failures": 3841,
+      "accuracy": 0.693569382973184,
+      "macro_f1": 0.708304244808109,
+      "per_class": {
+        "clean": {
+          "precision": 0.38220757825370677,
+          "recall": 0.93048128342246,
+          "f1": 0.5418450759050214,
+          "support": 748
+        },
+        "feature_noise": {
+          "precision": 0.9405714285714286,
+          "recall": 0.4224845995893224,
+          "f1": 0.5830676585193058,
+          "support": 1948
+        },
+        "feature_dropout": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1145
+        }
+      },
+      "confusion_matrix": {
+        "clean": {
+          "clean": 696,
+          "feature_noise": 52,
+          "feature_dropout": 0
+        },
+        "feature_noise": {
+          "clean": 1125,
+          "feature_noise": 823,
+          "feature_dropout": 0
+        },
+        "feature_dropout": {
+          "clean": 0,
+          "feature_noise": 0,
+          "feature_dropout": 1145
+        }
+      }
+    },
+    {
+      "seed": 3,
+      "n_failures": 3250,
+      "accuracy": 0.6793846153846154,
+      "macro_f1": 0.7033252064919263,
+      "per_class": {
+        "clean": {
+          "precision": 0.35737491877842753,
+          "recall": 0.912106135986733,
+          "f1": 0.5135387488328664,
+          "support": 603
+        },
+        "feature_noise": {
+          "precision": 0.9356014580801945,
+          "recall": 0.43774872086412736,
+          "f1": 0.5964368706429125,
+          "support": 1759
+        },
+        "feature_dropout": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 888
+        }
+      },
+      "confusion_matrix": {
+        "clean": {
+          "clean": 550,
+          "feature_noise": 53,
+          "feature_dropout": 0
+        },
+        "feature_noise": {
+          "clean": 989,
+          "feature_noise": 770,
+          "feature_dropout": 0
+        },
+        "feature_dropout": {
+          "clean": 0,
+          "feature_noise": 0,
+          "feature_dropout": 888
+        }
+      }
+    },
+    {
+      "seed": 4,
+      "n_failures": 4379,
+      "accuracy": 0.6818908426581411,
+      "macro_f1": 0.7217705975643405,
+      "per_class": {
+        "clean": {
+          "precision": 0.4134446397188049,
+          "recall": 0.9419419419419419,
+          "f1": 0.5746564885496183,
+          "support": 999
+        },
+        "feature_noise": {
+          "precision": 0.9454374412041392,
+          "recall": 0.42948717948717946,
+          "f1": 0.590655304143403,
+          "support": 2340
+        },
+        "feature_dropout": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1040
+        }
+      },
+      "confusion_matrix": {
+        "clean": {
+          "clean": 941,
+          "feature_noise": 58,
+          "feature_dropout": 0
+        },
+        "feature_noise": {
+          "clean": 1335,
+          "feature_noise": 1005,
+          "feature_dropout": 0
+        },
+        "feature_dropout": {
+          "clean": 0,
+          "feature_noise": 0,
+          "feature_dropout": 1040
+        }
+      }
+    },
+    {
+      "seed": 5,
+      "n_failures": 3300,
+      "accuracy": 0.6503030303030303,
+      "macro_f1": 0.7042154159087798,
+      "per_class": {
+        "clean": {
+          "precision": 0.3600930773705643,
+          "recall": 0.9197622585438335,
+          "f1": 0.5175585284280936,
+          "support": 673
+        },
+        "feature_noise": {
+          "precision": 0.9401330376940134,
+          "recall": 0.4353182751540041,
+          "f1": 0.5950877192982457,
+          "support": 1948
+        },
+        "feature_dropout": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 679
+        }
+      },
+      "confusion_matrix": {
+        "clean": {
+          "clean": 619,
+          "feature_noise": 54,
+          "feature_dropout": 0
+        },
+        "feature_noise": {
+          "clean": 1100,
+          "feature_noise": 848,
+          "feature_dropout": 0
+        },
+        "feature_dropout": {
+          "clean": 0,
+          "feature_noise": 0,
+          "feature_dropout": 679
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "n_failures": 4352,
+      "accuracy": 0.6732536764705882,
+      "macro_f1": 0.709015059015059,
+      "per_class": {
+        "clean": {
+          "precision": 0.4072934973637961,
+          "recall": 0.927,
+          "f1": 0.5659340659340659,
+          "support": 1000
+        },
+        "feature_noise": {
+          "precision": 0.9256619144602851,
+          "recall": 0.40256864481842336,
+          "f1": 0.5611111111111111,
+          "support": 2258
+        },
+        "feature_dropout": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1094
+        }
+      },
+      "confusion_matrix": {
+        "clean": {
+          "clean": 927,
+          "feature_noise": 73,
+          "feature_dropout": 0
+        },
+        "feature_noise": {
+          "clean": 1349,
+          "feature_noise": 909,
+          "feature_dropout": 0
+        },
+        "feature_dropout": {
+          "clean": 0,
+          "feature_noise": 0,
+          "feature_dropout": 1094
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "accuracy": {
+      "mean": 0.681538349296619,
+      "std": 0.02025687680089287,
+      "ci_low": 0.6602800608287799,
+      "ci_high": 0.7027966377644582,
+      "n": 6
+    },
+    "macro_f1": {
+      "mean": 0.7111246003118331,
+      "std": 0.007939444019388566,
+      "ci_low": 0.7027926647969277,
+      "ci_high": 0.7194565358267385,
+      "n": 6
+    }
+  },
+  "pooled_across_all_seeds": {
+    "n_failures": 23998,
+    "accuracy": 0.6833902825235436,
+    "macro_f1": 0.712364063511867,
+    "per_class": {
+      "clean": {
+        "precision": 0.39315665883931566,
+        "recall": 0.9283168316831684,
+        "f1": 0.5523742193943678,
+        "support": 5050
+      },
+      "feature_noise": {
+        "precision": 0.9366135527928559,
+        "recall": 0.42502979737783075,
+        "f1": 0.5847179711412331,
+        "support": 12585
+      },
+      "feature_dropout": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6363
+      }
+    },
+    "confusion_matrix": {
+      "clean": {
+        "clean": 4688,
+        "feature_noise": 362,
+        "feature_dropout": 0
+      },
+      "feature_noise": {
+        "clean": 7236,
+        "feature_noise": 5349,
+        "feature_dropout": 0
+      },
+      "feature_dropout": {
+        "clean": 0,
+        "feature_noise": 0,
+        "feature_dropout": 6363
+      }
+    }
+  }
+}

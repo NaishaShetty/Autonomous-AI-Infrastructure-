@@ -1,0 +1,43 @@
+{
+  "_frozen": true,
+  "_note": "This file is the single source of truth for the Phase 3.1 evaluation protocol. It was written and committed BEFORE any Phase 3.1 result was produced. Do not edit values in this file to chase a better-looking result -- see docs/PHASE3_1_EVALUATION_PROTOCOL.md section 'Core Scientific Principle'.",
+
+  "regime_sizes": [3000, 1500, 1500, 1500, 1500],
+  "_regime_sizes_note": "Unchanged from Phase 2 (src/pipeline_builder.DEFAULT_REGIME_SIZES). Regime 0 = train workload model, regime 1 = calibration/validation, regime 2 = failure-memory fit/validation, regimes 3+4 = untouched test.",
+
+  "n_clusters": 3,
+  "_n_clusters_note": "Unchanged from Phase 2 default. Not tuned in Phase 3.1.",
+
+  "seeds": [1, 2, 3, 4, 5, 42],
+  "_seeds_note": "Predetermined before any Phase 3.1 run. 1-5 are a plain sequential convention; 42 is retained for continuity with the original Phase 2 single-seed result. No seed has been added or removed after inspecting results.",
+
+  "primary_seed": 42,
+  "_primary_seed_note": "The seed used for the bootstrap-CI (within-seed sampling uncertainty) analysis, chosen because it is the original Phase 2 seed, not because it produces the most favorable numbers.",
+
+  "coverage_operating_points": [0.05, 0.10, 0.20, 0.50],
+  "_coverage_operating_points_note": "Fixed fractions of the test set flagged as 'high risk', decided a priori. Precision/recall are reported at these coverage levels rather than at a score threshold chosen to maximize any test-set metric.",
+
+  "aurc_coverage_grid": "5%-100% in 5-point steps, inherited unchanged from benchmarks/risk_coverage.py (Phase 2, not modified in Phase 3.1)",
+
+  "calibration_bins": 10,
+
+  "bootstrap": {
+    "n_resamples": 2000,
+    "confidence_level": 0.95,
+    "seed": 0,
+    "method": "nonparametric percentile bootstrap, resampling (y_true, y_score) rows with replacement"
+  },
+
+  "cross_seed_confidence_interval": {
+    "method": "Student-t interval over per-seed point estimates (n=6 seeds, too few for a normal approximation)",
+    "confidence_level": 0.95
+  },
+
+  "failure_definition": "workload_model.predict(x).predicted_label != true_label, evaluated on regimes 3+4 (the held-out test stream) using the frozen (regime-0-trained) workload model",
+
+  "baselines": {
+    "A_no_signal": "constant score equal to the empirical failure prevalence measured on the regime-2 logging set (train-side data, never test)",
+    "B_calibrated_confidence": "1 - ConfidenceCalibrator.predict(...).calibrated_confidence, i.e. calibrated P(failure)",
+    "C_failure_memory": "FailureMemory.risk(context, confidence), Phase 2's unmodified KMeans/Gaussian-kernel similarity score"
+  }
+}

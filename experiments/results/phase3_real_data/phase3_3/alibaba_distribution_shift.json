@@ -1,0 +1,184 @@
+{
+  "phase": "3.3-RD",
+  "protocol_version": "1.0",
+  "dataset": "alibaba_gpu2020",
+  "analysis": "train(Q1-Q3)_vs_test(Q4)_covariate_distribution_shift_descriptive_only",
+  "_note": "Descriptive only -- no model fit, no test-label-driven feature selection or transformation. n_train and n_test match the frozen temporal split exactly.",
+  "n_train": 6177,
+  "n_test": 2499,
+  "already_disclosed_label_shift_reference": {
+    "train_failed_rate": 0.20106847984458476,
+    "test_failed_rate": 0.4341736694677871,
+    "source": "identical to Phase 3.1-RD sec 11 / Phase 3.2-RD sec 11 -- not recomputed differently here"
+  },
+  "numeric_feature_shift": {
+    "job_start_time": {
+      "train_mean": 3446770.518536506,
+      "test_mean": 5888809.218887555,
+      "train_median": 3455867.0,
+      "test_median": 5802273.0,
+      "train_std": 1279722.114454215,
+      "test_std": 262292.7457179354,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "n_tasks": {
+      "train_mean": 1.194754735308402,
+      "test_mean": 1.1248499399759904,
+      "train_median": 1.0,
+      "test_median": 1.0,
+      "train_std": 0.43202253089333265,
+      "test_std": 0.3662322054566574,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "n_distinct_task_names": {
+      "train_mean": 1.194754735308402,
+      "test_mean": 1.1248499399759904,
+      "train_median": 1.0,
+      "test_median": 1.0,
+      "train_std": 0.43202253089333265,
+      "test_std": 0.3662322054566574,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "sum_inst_num": {
+      "train_mean": 6.28525174032702,
+      "test_mean": 4.328531412565026,
+      "train_median": 1.0,
+      "test_median": 1.0,
+      "train_std": 19.718039112858268,
+      "test_std": 17.221154572675037,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "mean_plan_cpu": {
+      "train_mean": 691.8191948626626,
+      "test_mean": 465.8694811257837,
+      "train_median": 600.0,
+      "test_median": 600.0,
+      "train_std": 611.3713229952346,
+      "test_std": 511.94898117248056,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "max_plan_cpu": {
+      "train_mean": 708.5834547514975,
+      "test_mean": 478.5602240896359,
+      "train_median": 600.0,
+      "test_median": 600.0,
+      "train_std": 610.5756318481605,
+      "test_std": 517.2399652190516,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "mean_plan_mem": {
+      "train_mean": 29.59334637946212,
+      "test_mean": 29.590491665416167,
+      "train_median": 29.296875,
+      "test_median": 29.296875,
+      "train_std": 18.602262991823483,
+      "test_std": 15.320377004780951,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "max_plan_mem": {
+      "train_mean": 30.358589734347174,
+      "test_mean": 30.118976496848738,
+      "train_median": 29.296875,
+      "test_median": 29.296875,
+      "train_std": 18.695758229225213,
+      "test_std": 15.397002125299984,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "mean_plan_gpu": {
+      "train_mean": 70.54300363876943,
+      "test_mean": 56.42017828200972,
+      "train_median": 50.0,
+      "test_median": 25.0,
+      "train_std": 68.60349907887351,
+      "test_std": 62.08591166838243,
+      "train_missing_rate": 0.021207706006151853,
+      "test_missing_rate": 0.012404961984793917
+    },
+    "max_plan_gpu": {
+      "train_mean": 70.60089315249752,
+      "test_mean": 56.42017828200972,
+      "train_median": 50.0,
+      "test_median": 25.0,
+      "train_std": 68.79986193070111,
+      "test_std": 62.08591166838243,
+      "train_missing_rate": 0.021207706006151853,
+      "test_missing_rate": 0.012404961984793917
+    },
+    "n_distinct_gpu_types": {
+      "train_mean": 0.9818682208191679,
+      "test_mean": 0.9883953581432573,
+      "train_median": 1.0,
+      "test_median": 1.0,
+      "train_std": 0.1526796703058398,
+      "test_std": 0.11434966913781311,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "n_instances": {
+      "train_mean": 6.573741298364902,
+      "test_mean": 4.635454181672669,
+      "train_median": 1.0,
+      "test_median": 1.0,
+      "train_std": 20.621349813747987,
+      "test_std": 18.214130864642566,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "n_distinct_machines": {
+      "train_mean": 4.705358588311478,
+      "test_mean": 3.4141656662665065,
+      "train_median": 1.0,
+      "test_median": 1.0,
+      "train_std": 14.32478418029291,
+      "test_std": 11.614889579420002,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    },
+    "mean_instance_start_time": {
+      "train_mean": 3447274.3477887805,
+      "test_mean": 5888989.2654662775,
+      "train_median": 3455878.2139303484,
+      "test_median": 5802561.0,
+      "train_std": 1279642.6902377382,
+      "test_std": 262348.45060067344,
+      "train_missing_rate": 0.0,
+      "test_missing_rate": 0.0
+    }
+  },
+  "categorical_feature_shift": {
+    "dominant_gpu_type": {
+      "MISC": {
+        "train_proportion": 0.6210134369435001,
+        "test_proportion": 0.8087234893957583
+      },
+      "P100": {
+        "train_proportion": 0.0718795531811559,
+        "test_proportion": 0.040416166466586634
+      },
+      "T4": {
+        "train_proportion": 0.23571312935081754,
+        "test_proportion": 0.1212484993997599
+      },
+      "UNKNOWN": {
+        "train_proportion": 0.020883924235065566,
+        "test_proportion": 0.012404961984793917
+      },
+      "V100": {
+        "train_proportion": 0.0305973773676542,
+        "test_proportion": 0.012404961984793917
+      },
+      "V100M32": {
+        "train_proportion": 0.0199125789218067,
+        "test_proportion": 0.004801920768307323
+      }
+    }
+  }
+}

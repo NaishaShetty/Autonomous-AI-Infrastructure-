@@ -1,0 +1,268 @@
+{
+  "_frozen": true,
+  "_status": "FROZEN_NOT_EXECUTED",
+  "_note": "This file is the single source of truth for the Phase 3 Real-Data Replication protocol (Phase 3.1-RD), companion to docs/PHASE3_REAL_DATA_PROTOCOL.md. It was written and committed BEFORE any real-data evaluation was run. Do not edit values in this file to chase a better-looking result. This file does NOT modify, inherit values into, or override configs/phase3_1_protocol.json, configs/phase3_5_attack_protocol.json, or configs/phase3_6_decision_recovery_protocol.json -- those remain frozen artifacts of the original synthetic-data Phase 3.",
+  "protocol_version": "1.0",
+  "frozen_date": "2026-08-13",
+  "rationale_document": "docs/PHASE3_REAL_DATA_PROTOCOL.md",
+
+  "relationship_to_original_phase3": {
+    "original_phase3_status": "FROZEN, read-only, not modified by this protocol",
+    "original_phase3_configs": [
+      "configs/phase3_1_protocol.json",
+      "configs/phase3_5_attack_protocol.json",
+      "configs/phase3_6_decision_recovery_protocol.json"
+    ],
+    "original_phase3_results": "experiments/results/phase3_1/ through experiments/results/phase3_6/, unmodified",
+    "this_track_results_dir": "experiments/results/phase3_real_data/",
+    "_note": "This results directory does not exist yet. It is created only when Phase 3.1-RD is executed under separate authorization -- see execution_gate below."
+  },
+
+  "execution_gate": {
+    "authorized_to_run": false,
+    "_note": "DO NOT RUN. This protocol is frozen for design purposes only. Explicit separate authorization is required before any evaluation script under this protocol executes."
+  },
+
+  "datasets": {
+    "alibaba_gpu2020": {
+      "domain": "ML training job scheduling/failure",
+      "independent_unit": "job (job_name)",
+      "raw_scale": {"jobs": 1055501, "instances": 7522002},
+      "eligible_population": 988910,
+      "eligible_population_definition": "terminal jobs only, status in {Terminated, Failed}; Running/Waiting excluded as right-censored, never imputed",
+      "sampled_tiers": {"pilot": 2000, "main": 10000, "robustness": 50000},
+      "tier_used_for_this_protocol": "main",
+      "_tier_used_note": "Robustness tier (50000) is reserved for a future robustness check, not part of Phase 3.1-RD. Main tier is not swapped for a different tier after seeing results.",
+      "confirmatory_capable": true,
+      "machine_count": 1737,
+      "_machine_count_note": "Machine-level generalization claims are bounded by this count, not by job or row count."
+    },
+    "aiops_2020": {
+      "domain": "Microservice fault detection",
+      "independent_unit": "fault entity (cmdb_id)",
+      "positive_windows": 81,
+      "negative_windows": 145,
+      "total_windows": 226,
+      "total_entities": 43,
+      "positive_entities": 16,
+      "negative_only_entities": 27,
+      "confirmatory_capable": false,
+      "status": "EXPLORATORY",
+      "_status_note": "Explicit for every hypothesis regardless of point estimate or p-value. See power_analysis below."
+    },
+    "agentrx_magentic": {
+      "domain": "LLM agent trajectory failure/diagnosis",
+      "independent_unit": "trajectory (trajectory_id)",
+      "n_trajectories": 44,
+      "confirmatory_capable": false,
+      "status": "EXPLORATORY",
+      "has_timestamps": false,
+      "origin": "benchmark-harness evaluation environment, not organic production traffic, not fault-injected either"
+    },
+    "agentrx_tau_retail": {
+      "domain": "LLM agent trajectory failure/diagnosis",
+      "independent_unit": "trajectory (trajectory_id)",
+      "n_trajectories": 29,
+      "confirmatory_capable": false,
+      "status": "EXPLORATORY",
+      "has_timestamps": false,
+      "origin": "benchmark-harness evaluation environment, not organic production traffic, not fault-injected either"
+    },
+    "_pooling_rule": "These four datasets are never pooled into a single joint experiment. AgentRx Magentic and tau-Retail are kept as two separate domains, never merged to reach n=73."
+  },
+
+  "hypothesis_dataset_mapping": {
+    "_legend": "CONFIRMATORY_CAPABLE | EXPLORATORY | NOT_EVALUABLE",
+    "H1_supervised_risk_signal_exists": {"alibaba_gpu2020": "CONFIRMATORY_CAPABLE", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "EXPLORATORY", "agentrx_tau_retail": "EXPLORATORY"},
+    "H2_mechanism_is_supervision_not_representation": {"alibaba_gpu2020": "CONFIRMATORY_CAPABLE", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "NOT_EVALUABLE", "agentrx_tau_retail": "NOT_EVALUABLE"},
+    "H3_concept_drift_generalization": {"alibaba_gpu2020": "EXPLORATORY", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "NOT_EVALUABLE", "agentrx_tau_retail": "NOT_EVALUABLE"},
+    "H4_covariate_shift_attack_generalization": {"alibaba_gpu2020": "EXPLORATORY", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "NOT_EVALUABLE", "agentrx_tau_retail": "NOT_EVALUABLE"},
+    "H5a_complementarity": {"alibaba_gpu2020": "CONFIRMATORY_CAPABLE", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "NOT_EVALUABLE", "agentrx_tau_retail": "NOT_EVALUABLE"},
+    "H5b_decision_cost_policy": {"alibaba_gpu2020": "EXPLORATORY", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "NOT_EVALUABLE", "agentrx_tau_retail": "NOT_EVALUABLE"},
+    "H6_diagnosis": {"alibaba_gpu2020": "NOT_EVALUABLE", "aiops_2020": "EXPLORATORY", "agentrx_magentic": "CONFIRMATORY_CAPABLE", "agentrx_tau_retail": "CONFIRMATORY_CAPABLE"},
+    "H7_recovery": {"alibaba_gpu2020": "NOT_EVALUABLE", "aiops_2020": "NOT_EVALUABLE", "agentrx_magentic": "NOT_EVALUABLE", "agentrx_tau_retail": "NOT_EVALUABLE"},
+    "_H7_note": "No dataset currently held records a recovery action/outcome. This is reported as a structural limitation, never approximated or inferred."
+  },
+
+  "alibaba_sampling": {
+    "_note": "Reused verbatim from data/audit/alibaba_gpu2020/. Not re-sampled by this protocol.",
+    "sampling_unit": "job",
+    "seed": 42,
+    "strata": ["outcome_status", "dominant_gpu_type", "relative_time_quartile"],
+    "allocation": "proportional",
+    "selection_method": "lexicographic sort of job_name, then random.Random(seed).sample",
+    "source_files": [
+      "data/audit/alibaba_gpu2020/sampling_frame.json",
+      "data/audit/alibaba_gpu2020/sampling_report.json"
+    ]
+  },
+
+  "alibaba_leakage_exclusions": {
+    "excluded_tables": ["pai_sensor_table", "pai_machine_metric"],
+    "excluded_fields": ["max_mem", "max_gpu_wrk_mem"],
+    "_exclusion_reason": "Official documentation confirms these are full-instance-lifetime aggregates/maxima computed over the span of the instance whose outcome is being predicted -- post-outcome leakage.",
+    "allowed_predictive_fields": {
+      "pai_job_table": ["user", "start_time"],
+      "pai_task_table": ["task_name", "inst_num", "plan_cpu", "plan_mem", "plan_gpu", "gpu_type", "start_time"],
+      "pai_instance_table": ["machine", "start_time"],
+      "pai_group_tag_table": ["gpu_type_spec", "group", "workload"],
+      "pai_machine_spec": ["all fields -- static, never leaking"]
+    },
+    "_consequence_note": "Alibaba real-data representation/failure-prediction experiments are necessarily based on request/scheduling-time information, not runtime telemetry. This is stated explicitly in every H1/H2 write-up on this dataset."
+  },
+
+  "alibaba_splits": {
+    "random_stratified": {
+      "ratios": {"train": 0.70, "validation": 0.15, "test": 0.15},
+      "stratified_on": ["outcome_status", "dominant_gpu_type"],
+      "observed_failed_rate": {"train": 0.2595, "validation": 0.2597, "test": 0.2588},
+      "source_file": "data/audit/alibaba_gpu2020/splits_random_stratified.json"
+    },
+    "temporal": {
+      "train_validation": "relative-time Q1-Q3",
+      "test": "relative-time Q4 (strict future holdout)",
+      "observed_failed_rate": {"train_validation_q1_q3": 0.201, "test_q4": 0.434},
+      "_shift_note": "Confirmed real distribution shift discovered before evaluation. Reported alongside every metric on this split, never corrected by rebalancing or reweighting.",
+      "source_file": "data/audit/alibaba_gpu2020/splits_temporal.json"
+    },
+    "machine_disjoint_split": {
+      "built": false,
+      "_reason": "job-to-machine relationship is many-to-many; not solved by this protocol. Documented as a limitation, not silently skipped."
+    }
+  },
+
+  "aiops_window_protocol": {
+    "_note": "Reused verbatim from docs/PHASE3_REAL_DATA_AIOPS_PROTOCOL.md. Not altered after seeing evaluation results.",
+    "pre_failure_window_minutes": 20,
+    "pre_failure_window_definition": "[fault_onset - 20min, fault_onset)",
+    "during_failure_window_definition": "[fault_onset, fault_onset + 5min)",
+    "post_failure_window_definition": "everything after fault_onset + 5min",
+    "prediction_vs_diagnosis_rule": "PRE-FAILURE window only for predictive features; DURING/POST usable only for diagnosis, never mixed into prediction",
+    "fault_onset_definition": "start_time if non-empty, else log_time",
+    "negative_window_construction": {
+      "eligible_entities": "same 43 fault-eligible entities as positive pool",
+      "window_length_minutes": 20,
+      "exclusion_window_around_own_fault": "[w_start - 60min, w_start + 20min + 60min]",
+      "per_entity_candidate_cap": 20,
+      "candidate_pool_ceiling": 860,
+      "seed": 42,
+      "selection_method": "lexicographic sort by (date, block_start), then random.Random(seed).sample"
+    },
+    "known_unresolved_issues": [
+      "block=8 spans two calendar dates (2020-05-29 and 2020-05-30), unexplained",
+      "+6-hour shift between log_time and start_time for log_block in {4,5} (11 of 70 index>=100 rows), cause not determined",
+      "whether fault-log index 1-11 were part of the scored evaluation or an unscored preview batch is uncertain",
+      "27 of 43 fault-eligible entities never appear in the fault log -- genuine normalcy vs unrelated exclusion reason is an open question"
+    ],
+    "_do_not_fix_note": "These irregularities remain documented and are not silently corrected, imputed around, or excluded without being reported as a limitation."
+  },
+
+  "aiops_population": {
+    "positive_windows": 81,
+    "negative_windows": 145,
+    "total_windows": 226,
+    "total_entities": 43,
+    "positive_entities": 16,
+    "negative_only_entities": 27,
+    "positive_events_per_entity": {"min": 1, "median": 5, "max": 10},
+    "negative_windows_per_entity": {"min": 2, "median": 3, "max": 7}
+  },
+
+  "agentrx_domains": {
+    "magentic": {"n_trajectories": 44, "pooled_with_tau_retail": false},
+    "tau_retail": {"n_trajectories": 29, "pooled_with_tau_retail": false},
+    "_pooling_rule": "Never pooled to inflate N. Kept as two separate domains throughout."
+  },
+
+  "statistics": {
+    "bootstrap": {
+      "n_resamples": 2000,
+      "confidence_level": 0.95,
+      "seed": 0,
+      "method": "nonparametric percentile bootstrap"
+    },
+    "alibaba_bootstrap_unit": "job (test-set rows)",
+    "aiops_bootstrap_unit": "entity (cluster bootstrap over the 43 entities, not over windows)",
+    "agentrx_bootstrap_unit": "trajectory",
+    "cross_dataset_comparison": "qualitative consistency check only (same-direction/different-direction, overlapping/non-overlapping CIs) -- never a single pooled statistical test across datasets",
+    "_p_value_rule": "P-values, where computed, are always reported alongside effect size and confidence interval, never alone."
+  },
+
+  "power_analysis": {
+    "alibaba_main_tier": {
+      "method": "Hanley-McNeil (1982) approximate AUROC variance at observed 25.94% base rate",
+      "n_for_0.02_auroc_precision": "3500-4300",
+      "n_for_0.03_auroc_diff_at_power_0.80": "7700-8100",
+      "main_tier_n": 10000,
+      "conclusion": "confirmatory-capable"
+    },
+    "aiops": {
+      "n_windows": 226,
+      "ci_half_width_by_assumed_auroc": {
+        "0.55": 0.079,
+        "0.60": 0.078,
+        "0.65": 0.076,
+        "0.70": 0.074,
+        "0.75": 0.069,
+        "0.80": 0.064
+      },
+      "conclusion": "exploratory, not confirmatory"
+    },
+    "agentrx": {
+      "n_magentic": 44,
+      "n_tau_retail": 29,
+      "conclusion": "exploratory, wide CIs expected, no stable-AUROC threshold met"
+    },
+    "_timing_note": "All power analyses were performed before sampling (Alibaba) and before window extraction (AIOps), per docs/PHASE3_REAL_DATA_CLEANING_REPORT.md section 15 and docs/PHASE3_REAL_DATA_AIOPS_PREPARATION_COMPLETE.md section 6. No tier or window count is changed after seeing evaluation results."
+  },
+
+  "split_rules": {
+    "test_set_touch_policy": "touched exactly once, for final evaluation, after all modeling decisions are frozen",
+    "validation_use_policy": "legitimate model-selection/tuning only, per this protocol",
+    "aiops_validation": "no separate validation carved from 226 windows; model-selection choices reused from Alibaba validation or fixed a priori from original Phase 3 candidate definitions (src/evaluation/representations.py), never tuned on AIOps data",
+    "agentrx_validation": "no separate validation carved from 44 or 29 trajectories; same reuse rule as AIOps"
+  },
+
+  "reproducibility": {
+    "seed": 42,
+    "raw_data_policy": "no file under data/raw/ is modified by any Phase 3.1-RD script",
+    "derived_artifact_dirs": ["data/processed/", "data/audit/", "experiments/results/phase3_real_data/"],
+    "result_meta_block_requirements": ["protocol_version", "resolved_config", "dataset_source_provenance", "split_membership", "seeds_used", "utc_timestamp"]
+  },
+
+  "prohibited_actions": [
+    "tuning on the test set",
+    "selecting or dropping a dataset after seeing its evaluation result",
+    "removing difficult test cases",
+    "rebalancing a test set after evaluation",
+    "changing sampling seeds after evaluation",
+    "altering AIOps window definitions after evaluation",
+    "selecting representation/model based on test performance",
+    "cherry-picking datasets or metrics",
+    "fabricating labels",
+    "inferring unavailable recovery outcomes",
+    "treating missing information as negative evidence",
+    "inflating sample size via correlated child rows/windows",
+    "hiding inconclusive or negative findings",
+    "modifying original Phase 3 frozen results, configs, scripts, or reports"
+  ],
+
+  "comparison_with_original_phase3": {
+    "output_document": "docs/PHASE3_REAL_DATA_COMPARISON.md (created only when comparison is produced; does not overwrite docs/PHASE3_4_COMPARISON.md)",
+    "fields_per_hypothesis": ["hypothesis", "original_phase3_result", "real_data_results_by_dataset", "direction_of_agreement", "confidence_uncertainty", "dataset_limitations", "interpretation"],
+    "_disagreement_rule": "Disagreement between original and real-data results is not automatically treated as evidence the original result was wrong; both are reported with reasons divergence might occur (feature availability, domain, N, leakage constraints)."
+  },
+
+  "unified_benchmark_preserved_fields": [
+    "source_dataset",
+    "source_record_id",
+    "entity_id",
+    "workload_id",
+    "timestamp",
+    "label_provenance",
+    "processing_version",
+    "split_membership",
+    "data_quality_flags"
+  ],
+  "_unified_benchmark_note": "No common schema is forced across datasets at this stage. A field is only populated where it genuinely exists in the source data; never fabricated. See docs/PHASE3_REAL_DATA_PROTOCOL.md section 25."
+}

@@ -1,0 +1,165 @@
+{
+  "seed": 42,
+  "regime_sizes": [
+    3000,
+    1500,
+    1500,
+    1500,
+    1500
+  ],
+  "checks": [
+    {
+      "check": "temporal_and_fit_isolation",
+      "regime_split_is_disjoint_partition": true,
+      "failure_memory_events_regimes_observed": [
+        2
+      ],
+      "failure_memory_fit_only_on_regime_2": true,
+      "test_stream_size": 3000,
+      "test_stream_regimes": [
+        3,
+        4
+      ],
+      "passed": true
+    },
+    {
+      "check": "label_leakage_in_features",
+      "context_keys_seen": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "expected_keys": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "label_or_regime_found_in_context": false,
+      "passed": true
+    },
+    {
+      "check": "preprocessing_fit_scope",
+      "failure_memory_n_failures": 407,
+      "independently_recomputed_n_logged_failures": 407,
+      "counts_match": true,
+      "passed": true
+    },
+    {
+      "check": "duplicate_samples_across_splits",
+      "split_sizes": {
+        "train": 3000,
+        "calibration": 1500,
+        "logging": 1500,
+        "test": 3000
+      },
+      "overlaps_found": {},
+      "passed": true
+    },
+    {
+      "check": "regime_identifiability_from_features",
+      "per_regime_feature_stats": {
+        "0": {
+          "mean": [
+            -0.0329,
+            0.0014,
+            -0.0264,
+            0.0016,
+            0.0095
+          ],
+          "std": [
+            1.0107,
+            1.0164,
+            0.98,
+            1.0147,
+            0.9966
+          ]
+        },
+        "1": {
+          "mean": [
+            0.0422,
+            0.0375,
+            -0.0029,
+            0.0294,
+            0.0484
+          ],
+          "std": [
+            0.9978,
+            0.9811,
+            1.0011,
+            1.0023,
+            1.005
+          ]
+        },
+        "2": {
+          "mean": [
+            -0.0145,
+            -0.0349,
+            0.028,
+            0.0249,
+            -0.0036
+          ],
+          "std": [
+            1.0034,
+            1.0105,
+            0.9976,
+            1.0031,
+            1.0179
+          ]
+        },
+        "3": {
+          "mean": [
+            -0.0498,
+            -0.0303,
+            0.0046,
+            0.018,
+            -0.0731
+          ],
+          "std": [
+            0.9985,
+            0.9743,
+            0.9843,
+            1.0308,
+            1.0372
+          ]
+        },
+        "4": {
+          "mean": [
+            0.013,
+            -0.0036,
+            -0.0392,
+            -0.0256,
+            -0.031
+          ],
+          "std": [
+            1.0048,
+            0.9693,
+            0.9909,
+            1.0219,
+            0.9864
+          ]
+        }
+      },
+      "max_abs_deviation_of_regime_means_from_grand_mean": 0.06314,
+      "interpretation": "Feature marginals are ~N(0,1) in every regime by construction; only the feature->label relationship (weight vector) drifts, not the feature distribution itself. A small max deviation here confirms regime id is not trivially recoverable from features alone -- but it also means failure-memory cannot use feature-space location alone to distinguish 'pre-drift' from 'post-drift' regions, which is relevant context for interpreting Baseline C's performance, not a leakage finding.",
+      "passed": true
+    },
+    {
+      "check": "synthetic_generation_triviality",
+      "label_prevalence": 0.49877777777777776,
+      "per_feature_correlation_with_label": [
+        0.16285851225899553,
+        -0.3433925171631708,
+        0.2067058899613755,
+        0.13228750989069601,
+        -0.3422078924137733
+      ],
+      "max_single_feature_correlation": 0.3433925171631708,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}

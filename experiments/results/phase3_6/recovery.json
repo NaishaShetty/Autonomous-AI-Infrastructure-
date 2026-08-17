@@ -1,0 +1,931 @@
+{
+  "meta": {
+    "variants": [
+      "no_recovery",
+      "retry_only",
+      "diagnosis_gated"
+    ],
+    "candidates": [
+      "B_calibrated_confidence",
+      "F_supervised_failure_risk",
+      "BF_combined"
+    ],
+    "note": "Only CRITICAL-tier (top-5%) samples are recovery-eligible, per the frozen protocol."
+  },
+  "per_seed_record_counts": [
+    {
+      "seed": 1,
+      "n_records": 14058
+    },
+    {
+      "seed": 2,
+      "n_records": 12138
+    },
+    {
+      "seed": 3,
+      "n_records": 6906
+    },
+    {
+      "seed": 4,
+      "n_records": 4098
+    },
+    {
+      "seed": 5,
+      "n_records": 11424
+    },
+    {
+      "seed": 42,
+      "n_records": 7569
+    }
+  ],
+  "aggregate": {
+    "B_calibrated_confidence": {
+      "no_recovery": {
+        "per_seed": [
+          {
+            "n_critical": 3106,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 3100,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 973,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 461,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 2472,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 988,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "recovery_failure_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          }
+        }
+      },
+      "retry_only": {
+        "per_seed": [
+          {
+            "n_critical": 3106,
+            "recovery_attempt_rate": 0.15132002575660014,
+            "recovery_success_rate": 0.5404255319148936,
+            "recovery_failure_rate": 0.4595744680851064,
+            "unsafe_recovery_rate": 0.4595744680851064,
+            "no_recovery_rollback_rate": 0.8486799742433999,
+            "unnecessary_recovery_rate": 0.574468085106383,
+            "utility_retention_after_recovery": 0.15132002575660014,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 3100,
+            "recovery_attempt_rate": 0.09935483870967741,
+            "recovery_success_rate": 0.5811688311688312,
+            "recovery_failure_rate": 0.41883116883116883,
+            "unsafe_recovery_rate": 0.41883116883116883,
+            "no_recovery_rollback_rate": 0.9006451612903226,
+            "unnecessary_recovery_rate": 0.564935064935065,
+            "utility_retention_after_recovery": 0.09935483870967741,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 973,
+            "recovery_attempt_rate": 0.15827338129496402,
+            "recovery_success_rate": 0.5844155844155844,
+            "recovery_failure_rate": 0.4155844155844156,
+            "unsafe_recovery_rate": 0.4155844155844156,
+            "no_recovery_rollback_rate": 0.841726618705036,
+            "unnecessary_recovery_rate": 0.5909090909090909,
+            "utility_retention_after_recovery": 0.15827338129496402,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 461,
+            "recovery_attempt_rate": 0.1648590021691974,
+            "recovery_success_rate": 0.5,
+            "recovery_failure_rate": 0.5,
+            "unsafe_recovery_rate": 0.5,
+            "no_recovery_rollback_rate": 0.8351409978308026,
+            "unnecessary_recovery_rate": 0.4868421052631579,
+            "utility_retention_after_recovery": 0.1648590021691974,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 2472,
+            "recovery_attempt_rate": 0.10072815533980582,
+            "recovery_success_rate": 0.5502008032128514,
+            "recovery_failure_rate": 0.4497991967871486,
+            "unsafe_recovery_rate": 0.4497991967871486,
+            "no_recovery_rollback_rate": 0.8992718446601942,
+            "unnecessary_recovery_rate": 0.5421686746987951,
+            "utility_retention_after_recovery": 0.10072815533980582,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 988,
+            "recovery_attempt_rate": 0.1659919028340081,
+            "recovery_success_rate": 0.524390243902439,
+            "recovery_failure_rate": 0.47560975609756095,
+            "unsafe_recovery_rate": 0.47560975609756095,
+            "no_recovery_rollback_rate": 0.8340080971659919,
+            "unnecessary_recovery_rate": 0.524390243902439,
+            "utility_retention_after_recovery": 0.1659919028340081,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.14008788435070882,
+            "std": 0.03146384918041044,
+            "ci_low": 0.10706859965247403,
+            "ci_high": 0.1731071690489436,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": 0.5467668324357665,
+            "std": 0.032682651730012446,
+            "ci_low": 0.5124684929039833,
+            "ci_high": 0.5810651719675497,
+            "n": 6
+          },
+          "recovery_failure_rate": {
+            "mean": 0.4532331675642334,
+            "std": 0.03268265173001244,
+            "ci_low": 0.4189348280324502,
+            "ci_high": 0.48753150709601656,
+            "n": 6
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.14008788435070882,
+            "std": 0.03146384918041044,
+            "ci_low": 0.10706859965247403,
+            "ci_high": 0.1731071690489436,
+            "n": 6
+          }
+        }
+      },
+      "diagnosis_gated": {
+        "per_seed": [
+          {
+            "n_critical": 3106,
+            "recovery_attempt_rate": 0.15132002575660014,
+            "recovery_success_rate": 0.5404255319148936,
+            "recovery_failure_rate": 0.4595744680851064,
+            "unsafe_recovery_rate": 0.4595744680851064,
+            "no_recovery_rollback_rate": 0.8486799742433999,
+            "unnecessary_recovery_rate": 0.574468085106383,
+            "utility_retention_after_recovery": 0.15132002575660014,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 3100,
+            "recovery_attempt_rate": 0.09935483870967741,
+            "recovery_success_rate": 0.5811688311688312,
+            "recovery_failure_rate": 0.41883116883116883,
+            "unsafe_recovery_rate": 0.41883116883116883,
+            "no_recovery_rollback_rate": 0.9006451612903226,
+            "unnecessary_recovery_rate": 0.564935064935065,
+            "utility_retention_after_recovery": 0.09935483870967741,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 973,
+            "recovery_attempt_rate": 0.15827338129496402,
+            "recovery_success_rate": 0.5844155844155844,
+            "recovery_failure_rate": 0.4155844155844156,
+            "unsafe_recovery_rate": 0.4155844155844156,
+            "no_recovery_rollback_rate": 0.841726618705036,
+            "unnecessary_recovery_rate": 0.5909090909090909,
+            "utility_retention_after_recovery": 0.15827338129496402,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 461,
+            "recovery_attempt_rate": 0.1648590021691974,
+            "recovery_success_rate": 0.5,
+            "recovery_failure_rate": 0.5,
+            "unsafe_recovery_rate": 0.5,
+            "no_recovery_rollback_rate": 0.8351409978308026,
+            "unnecessary_recovery_rate": 0.4868421052631579,
+            "utility_retention_after_recovery": 0.1648590021691974,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 2472,
+            "recovery_attempt_rate": 0.10072815533980582,
+            "recovery_success_rate": 0.5502008032128514,
+            "recovery_failure_rate": 0.4497991967871486,
+            "unsafe_recovery_rate": 0.4497991967871486,
+            "no_recovery_rollback_rate": 0.8992718446601942,
+            "unnecessary_recovery_rate": 0.5421686746987951,
+            "utility_retention_after_recovery": 0.10072815533980582,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 988,
+            "recovery_attempt_rate": 0.1659919028340081,
+            "recovery_success_rate": 0.524390243902439,
+            "recovery_failure_rate": 0.47560975609756095,
+            "unsafe_recovery_rate": 0.47560975609756095,
+            "no_recovery_rollback_rate": 0.8340080971659919,
+            "unnecessary_recovery_rate": 0.524390243902439,
+            "utility_retention_after_recovery": 0.1659919028340081,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.14008788435070882,
+            "std": 0.03146384918041044,
+            "ci_low": 0.10706859965247403,
+            "ci_high": 0.1731071690489436,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": 0.5467668324357665,
+            "std": 0.032682651730012446,
+            "ci_low": 0.5124684929039833,
+            "ci_high": 0.5810651719675497,
+            "n": 6
+          },
+          "recovery_failure_rate": {
+            "mean": 0.4532331675642334,
+            "std": 0.03268265173001244,
+            "ci_low": 0.4189348280324502,
+            "ci_high": 0.48753150709601656,
+            "n": 6
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.14008788435070882,
+            "std": 0.03146384918041044,
+            "ci_low": 0.10706859965247403,
+            "ci_high": 0.1731071690489436,
+            "n": 6
+          }
+        }
+      }
+    },
+    "F_supervised_failure_risk": {
+      "no_recovery": {
+        "per_seed": [
+          {
+            "n_critical": 704,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 422,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 622,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 444,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 651,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 794,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "recovery_failure_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          }
+        }
+      },
+      "retry_only": {
+        "per_seed": [
+          {
+            "n_critical": 704,
+            "recovery_attempt_rate": 0.2840909090909091,
+            "recovery_success_rate": 0.52,
+            "recovery_failure_rate": 0.48,
+            "unsafe_recovery_rate": 0.48,
+            "no_recovery_rollback_rate": 0.7159090909090909,
+            "unnecessary_recovery_rate": 0.57,
+            "utility_retention_after_recovery": 0.2840909090909091,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 422,
+            "recovery_attempt_rate": 0.2914691943127962,
+            "recovery_success_rate": 0.6016260162601627,
+            "recovery_failure_rate": 0.3983739837398374,
+            "unsafe_recovery_rate": 0.3983739837398374,
+            "no_recovery_rollback_rate": 0.7085308056872038,
+            "unnecessary_recovery_rate": 0.6178861788617886,
+            "utility_retention_after_recovery": 0.2914691943127962,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 622,
+            "recovery_attempt_rate": 0.15112540192926044,
+            "recovery_success_rate": 0.574468085106383,
+            "recovery_failure_rate": 0.425531914893617,
+            "unsafe_recovery_rate": 0.425531914893617,
+            "no_recovery_rollback_rate": 0.8488745980707395,
+            "unnecessary_recovery_rate": 0.574468085106383,
+            "utility_retention_after_recovery": 0.15112540192926044,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 444,
+            "recovery_attempt_rate": 0.21396396396396397,
+            "recovery_success_rate": 0.5578947368421052,
+            "recovery_failure_rate": 0.4421052631578947,
+            "unsafe_recovery_rate": 0.4421052631578947,
+            "no_recovery_rollback_rate": 0.786036036036036,
+            "unnecessary_recovery_rate": 0.5684210526315789,
+            "utility_retention_after_recovery": 0.21396396396396397,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 651,
+            "recovery_attempt_rate": 0.2626728110599078,
+            "recovery_success_rate": 0.6140350877192983,
+            "recovery_failure_rate": 0.38596491228070173,
+            "unsafe_recovery_rate": 0.38596491228070173,
+            "no_recovery_rollback_rate": 0.7373271889400922,
+            "unnecessary_recovery_rate": 0.5847953216374269,
+            "utility_retention_after_recovery": 0.2626728110599078,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 794,
+            "recovery_attempt_rate": 0.20151133501259447,
+            "recovery_success_rate": 0.475,
+            "recovery_failure_rate": 0.525,
+            "unsafe_recovery_rate": 0.525,
+            "no_recovery_rollback_rate": 0.7984886649874056,
+            "unnecessary_recovery_rate": 0.50625,
+            "utility_retention_after_recovery": 0.20151133501259447,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.23413893589490534,
+            "std": 0.05469730677388659,
+            "ci_low": 0.17673763276006468,
+            "ci_high": 0.29154023902974596,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": 0.5571706543213248,
+            "std": 0.05223646690257007,
+            "ci_low": 0.5023518442515208,
+            "ci_high": 0.6119894643911289,
+            "n": 6
+          },
+          "recovery_failure_rate": {
+            "mean": 0.44282934567867516,
+            "std": 0.05223646690257006,
+            "ci_low": 0.3880105356088711,
+            "ci_high": 0.4976481557484792,
+            "n": 6
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.23413893589490534,
+            "std": 0.05469730677388659,
+            "ci_low": 0.17673763276006468,
+            "ci_high": 0.29154023902974596,
+            "n": 6
+          }
+        }
+      },
+      "diagnosis_gated": {
+        "per_seed": [
+          {
+            "n_critical": 704,
+            "recovery_attempt_rate": 0.2840909090909091,
+            "recovery_success_rate": 0.52,
+            "recovery_failure_rate": 0.48,
+            "unsafe_recovery_rate": 0.48,
+            "no_recovery_rollback_rate": 0.7159090909090909,
+            "unnecessary_recovery_rate": 0.57,
+            "utility_retention_after_recovery": 0.2840909090909091,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 422,
+            "recovery_attempt_rate": 0.2914691943127962,
+            "recovery_success_rate": 0.6016260162601627,
+            "recovery_failure_rate": 0.3983739837398374,
+            "unsafe_recovery_rate": 0.3983739837398374,
+            "no_recovery_rollback_rate": 0.7085308056872038,
+            "unnecessary_recovery_rate": 0.6178861788617886,
+            "utility_retention_after_recovery": 0.2914691943127962,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 622,
+            "recovery_attempt_rate": 0.15112540192926044,
+            "recovery_success_rate": 0.574468085106383,
+            "recovery_failure_rate": 0.425531914893617,
+            "unsafe_recovery_rate": 0.425531914893617,
+            "no_recovery_rollback_rate": 0.8488745980707395,
+            "unnecessary_recovery_rate": 0.574468085106383,
+            "utility_retention_after_recovery": 0.15112540192926044,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 444,
+            "recovery_attempt_rate": 0.21396396396396397,
+            "recovery_success_rate": 0.5578947368421052,
+            "recovery_failure_rate": 0.4421052631578947,
+            "unsafe_recovery_rate": 0.4421052631578947,
+            "no_recovery_rollback_rate": 0.786036036036036,
+            "unnecessary_recovery_rate": 0.5684210526315789,
+            "utility_retention_after_recovery": 0.21396396396396397,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 651,
+            "recovery_attempt_rate": 0.2626728110599078,
+            "recovery_success_rate": 0.6140350877192983,
+            "recovery_failure_rate": 0.38596491228070173,
+            "unsafe_recovery_rate": 0.38596491228070173,
+            "no_recovery_rollback_rate": 0.7373271889400922,
+            "unnecessary_recovery_rate": 0.5847953216374269,
+            "utility_retention_after_recovery": 0.2626728110599078,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 794,
+            "recovery_attempt_rate": 0.20151133501259447,
+            "recovery_success_rate": 0.475,
+            "recovery_failure_rate": 0.525,
+            "unsafe_recovery_rate": 0.525,
+            "no_recovery_rollback_rate": 0.7984886649874056,
+            "unnecessary_recovery_rate": 0.50625,
+            "utility_retention_after_recovery": 0.20151133501259447,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.23413893589490534,
+            "std": 0.05469730677388659,
+            "ci_low": 0.17673763276006468,
+            "ci_high": 0.29154023902974596,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": 0.5571706543213248,
+            "std": 0.05223646690257007,
+            "ci_low": 0.5023518442515208,
+            "ci_high": 0.6119894643911289,
+            "n": 6
+          },
+          "recovery_failure_rate": {
+            "mean": 0.44282934567867516,
+            "std": 0.05223646690257006,
+            "ci_low": 0.3880105356088711,
+            "ci_high": 0.4976481557484792,
+            "n": 6
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.23413893589490534,
+            "std": 0.05469730677388659,
+            "ci_low": 0.17673763276006468,
+            "ci_high": 0.29154023902974596,
+            "n": 6
+          }
+        }
+      }
+    },
+    "BF_combined": {
+      "no_recovery": {
+        "per_seed": [
+          {
+            "n_critical": 876,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 524,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 707,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 461,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 685,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 741,
+            "recovery_attempt_rate": 0.0,
+            "recovery_success_rate": null,
+            "recovery_failure_rate": null,
+            "unsafe_recovery_rate": null,
+            "no_recovery_rollback_rate": 1.0,
+            "unnecessary_recovery_rate": null,
+            "utility_retention_after_recovery": 0.0,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "recovery_failure_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci_low": 0.0,
+            "ci_high": 0.0,
+            "n": 6
+          }
+        }
+      },
+      "retry_only": {
+        "per_seed": [
+          {
+            "n_critical": 876,
+            "recovery_attempt_rate": 0.3242009132420091,
+            "recovery_success_rate": 0.5070422535211268,
+            "recovery_failure_rate": 0.49295774647887325,
+            "unsafe_recovery_rate": 0.49295774647887325,
+            "no_recovery_rollback_rate": 0.6757990867579908,
+            "unnecessary_recovery_rate": 0.573943661971831,
+            "utility_retention_after_recovery": 0.3242009132420091,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 524,
+            "recovery_attempt_rate": 0.32251908396946566,
+            "recovery_success_rate": 0.6094674556213018,
+            "recovery_failure_rate": 0.3905325443786982,
+            "unsafe_recovery_rate": 0.3905325443786982,
+            "no_recovery_rollback_rate": 0.6774809160305344,
+            "unnecessary_recovery_rate": 0.5976331360946746,
+            "utility_retention_after_recovery": 0.32251908396946566,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 707,
+            "recovery_attempt_rate": 0.2050919377652051,
+            "recovery_success_rate": 0.6137931034482759,
+            "recovery_failure_rate": 0.38620689655172413,
+            "unsafe_recovery_rate": 0.38620689655172413,
+            "no_recovery_rollback_rate": 0.7949080622347949,
+            "unnecessary_recovery_rate": 0.6137931034482759,
+            "utility_retention_after_recovery": 0.2050919377652051,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 461,
+            "recovery_attempt_rate": 0.18872017353579176,
+            "recovery_success_rate": 0.4827586206896552,
+            "recovery_failure_rate": 0.5172413793103449,
+            "unsafe_recovery_rate": 0.5172413793103449,
+            "no_recovery_rollback_rate": 0.8112798264642083,
+            "unnecessary_recovery_rate": 0.47126436781609193,
+            "utility_retention_after_recovery": 0.18872017353579176,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 685,
+            "recovery_attempt_rate": 0.26277372262773724,
+            "recovery_success_rate": 0.6,
+            "recovery_failure_rate": 0.4,
+            "unsafe_recovery_rate": 0.4,
+            "no_recovery_rollback_rate": 0.7372262773722628,
+            "unnecessary_recovery_rate": 0.5888888888888889,
+            "utility_retention_after_recovery": 0.26277372262773724,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 741,
+            "recovery_attempt_rate": 0.16059379217273953,
+            "recovery_success_rate": 0.48739495798319327,
+            "recovery_failure_rate": 0.5126050420168067,
+            "unsafe_recovery_rate": 0.5126050420168067,
+            "no_recovery_rollback_rate": 0.8394062078272605,
+            "unnecessary_recovery_rate": 0.5294117647058824,
+            "utility_retention_after_recovery": 0.16059379217273953,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.2439832705521581,
+            "std": 0.06996595749250738,
+            "ci_low": 0.17055850118007337,
+            "ci_high": 0.3174080399242428,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": 0.5500760652105922,
+            "std": 0.06386245527720226,
+            "ci_low": 0.4830565285914327,
+            "ci_high": 0.6170956018297516,
+            "n": 6
+          },
+          "recovery_failure_rate": {
+            "mean": 0.4499239347894078,
+            "std": 0.06386245527720226,
+            "ci_low": 0.38290439817024835,
+            "ci_high": 0.5169434714085672,
+            "n": 6
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.2439832705521581,
+            "std": 0.06996595749250738,
+            "ci_low": 0.17055850118007337,
+            "ci_high": 0.3174080399242428,
+            "n": 6
+          }
+        }
+      },
+      "diagnosis_gated": {
+        "per_seed": [
+          {
+            "n_critical": 876,
+            "recovery_attempt_rate": 0.3242009132420091,
+            "recovery_success_rate": 0.5070422535211268,
+            "recovery_failure_rate": 0.49295774647887325,
+            "unsafe_recovery_rate": 0.49295774647887325,
+            "no_recovery_rollback_rate": 0.6757990867579908,
+            "unnecessary_recovery_rate": 0.573943661971831,
+            "utility_retention_after_recovery": 0.3242009132420091,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 524,
+            "recovery_attempt_rate": 0.32251908396946566,
+            "recovery_success_rate": 0.6094674556213018,
+            "recovery_failure_rate": 0.3905325443786982,
+            "unsafe_recovery_rate": 0.3905325443786982,
+            "no_recovery_rollback_rate": 0.6774809160305344,
+            "unnecessary_recovery_rate": 0.5976331360946746,
+            "utility_retention_after_recovery": 0.32251908396946566,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 707,
+            "recovery_attempt_rate": 0.2050919377652051,
+            "recovery_success_rate": 0.6137931034482759,
+            "recovery_failure_rate": 0.38620689655172413,
+            "unsafe_recovery_rate": 0.38620689655172413,
+            "no_recovery_rollback_rate": 0.7949080622347949,
+            "unnecessary_recovery_rate": 0.6137931034482759,
+            "utility_retention_after_recovery": 0.2050919377652051,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 461,
+            "recovery_attempt_rate": 0.18872017353579176,
+            "recovery_success_rate": 0.4827586206896552,
+            "recovery_failure_rate": 0.5172413793103449,
+            "unsafe_recovery_rate": 0.5172413793103449,
+            "no_recovery_rollback_rate": 0.8112798264642083,
+            "unnecessary_recovery_rate": 0.47126436781609193,
+            "utility_retention_after_recovery": 0.18872017353579176,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 685,
+            "recovery_attempt_rate": 0.26277372262773724,
+            "recovery_success_rate": 0.6,
+            "recovery_failure_rate": 0.4,
+            "unsafe_recovery_rate": 0.4,
+            "no_recovery_rollback_rate": 0.7372262773722628,
+            "unnecessary_recovery_rate": 0.5888888888888889,
+            "utility_retention_after_recovery": 0.26277372262773724,
+            "baseline_utility_retention_no_recovery": 0.0
+          },
+          {
+            "n_critical": 741,
+            "recovery_attempt_rate": 0.16059379217273953,
+            "recovery_success_rate": 0.48739495798319327,
+            "recovery_failure_rate": 0.5126050420168067,
+            "unsafe_recovery_rate": 0.5126050420168067,
+            "no_recovery_rollback_rate": 0.8394062078272605,
+            "unnecessary_recovery_rate": 0.5294117647058824,
+            "utility_retention_after_recovery": 0.16059379217273953,
+            "baseline_utility_retention_no_recovery": 0.0
+          }
+        ],
+        "aggregate": {
+          "recovery_attempt_rate": {
+            "mean": 0.2439832705521581,
+            "std": 0.06996595749250738,
+            "ci_low": 0.17055850118007337,
+            "ci_high": 0.3174080399242428,
+            "n": 6
+          },
+          "recovery_success_rate": {
+            "mean": 0.5500760652105922,
+            "std": 0.06386245527720226,
+            "ci_low": 0.4830565285914327,
+            "ci_high": 0.6170956018297516,
+            "n": 6
+          },
+          "recovery_failure_rate": {
+            "mean": 0.4499239347894078,
+            "std": 0.06386245527720226,
+            "ci_low": 0.38290439817024835,
+            "ci_high": 0.5169434714085672,
+            "n": 6
+          },
+          "utility_retention_after_recovery": {
+            "mean": 0.2439832705521581,
+            "std": 0.06996595749250738,
+            "ci_low": 0.17055850118007337,
+            "ci_high": 0.3174080399242428,
+            "n": 6
+          }
+        }
+      }
+    }
+  }
+}

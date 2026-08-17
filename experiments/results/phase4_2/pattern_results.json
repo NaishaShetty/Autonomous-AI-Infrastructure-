@@ -1,0 +1,575 @@
+{
+  "protocol_version": "phase4_0_episodic_protocol.json",
+  "dataset_content_hash": "c69a87ee877ed6090ed7e8d648d9da24fb8090fbb667b070724fe5d983f2057a",
+  "n_candidates": 6,
+  "candidates": [
+    {
+      "workload_id": "workload_1",
+      "diagnosed_cause": "clean",
+      "n_train": 2,
+      "mode_condition_train": "clean",
+      "purity_train": 1.0,
+      "n_validation": 0,
+      "purity_validation": null,
+      "tier": "INFERRED"
+    },
+    {
+      "workload_id": "workload_2",
+      "diagnosed_cause": "clean",
+      "n_train": 4,
+      "mode_condition_train": "clean",
+      "purity_train": 0.75,
+      "n_validation": 1,
+      "purity_validation": 0.0,
+      "tier": "INFERRED"
+    },
+    {
+      "workload_id": "workload_2",
+      "diagnosed_cause": "feature_noise",
+      "n_train": 2,
+      "mode_condition_train": "feature_noise_severe",
+      "purity_train": 1.0,
+      "n_validation": 1,
+      "purity_validation": 1.0,
+      "tier": "INFERRED"
+    },
+    {
+      "workload_id": "workload_3",
+      "diagnosed_cause": "clean",
+      "n_train": 5,
+      "mode_condition_train": "clean",
+      "purity_train": 0.6,
+      "n_validation": 0,
+      "purity_validation": null,
+      "tier": "INFERRED"
+    },
+    {
+      "workload_id": "workload_3",
+      "diagnosed_cause": "feature_dropout",
+      "n_train": 7,
+      "mode_condition_train": "feature_dropout",
+      "purity_train": 1.0,
+      "n_validation": 1,
+      "purity_validation": 1.0,
+      "tier": "CONFIRMED"
+    },
+    {
+      "workload_id": "workload_4",
+      "diagnosed_cause": "clean",
+      "n_train": 4,
+      "mode_condition_train": "clean",
+      "purity_train": 1.0,
+      "n_validation": 1,
+      "purity_validation": 1.0,
+      "tier": "INFERRED"
+    }
+  ],
+  "method_results": {
+    "A_no_pattern_learning": {
+      "n_total_test_rows": 14,
+      "n_covered": 7,
+      "coverage_rate": 0.5,
+      "n_flagged": 0,
+      "n_true_structure": 2,
+      "precision": null,
+      "recall": 0.0,
+      "rows": [
+        {
+          "workload_id": "workload_2",
+          "diagnosed_cause": "feature_noise",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_severe",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": false
+        }
+      ]
+    },
+    "B_naive_frequency_flagging": {
+      "n_total_test_rows": 14,
+      "n_covered": 7,
+      "coverage_rate": 0.5,
+      "n_flagged": 6,
+      "n_true_structure": 2,
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "rows": [
+        {
+          "workload_id": "workload_2",
+          "diagnosed_cause": "feature_noise",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": false
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_severe",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        }
+      ]
+    },
+    "C1_tiered_pattern_learning_proposed": {
+      "n_total_test_rows": 14,
+      "n_covered": 7,
+      "coverage_rate": 0.5,
+      "n_flagged": 7,
+      "n_true_structure": 2,
+      "precision": 0.2857142857142857,
+      "recall": 1.0,
+      "rows": [
+        {
+          "workload_id": "workload_2",
+          "diagnosed_cause": "feature_noise",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_severe",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        }
+      ]
+    },
+    "C2_ablation_no_tiering": {
+      "n_total_test_rows": 14,
+      "n_covered": 7,
+      "coverage_rate": 0.5,
+      "n_flagged": 7,
+      "n_true_structure": 2,
+      "precision": 0.2857142857142857,
+      "recall": 1.0,
+      "rows": [
+        {
+          "workload_id": "workload_2",
+          "diagnosed_cause": "feature_noise",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_3",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "clean",
+          "tier": "INFERRED",
+          "is_true_structure": true,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_mild",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        },
+        {
+          "workload_id": "workload_4",
+          "diagnosed_cause": "clean",
+          "condition_id": "feature_noise_severe",
+          "tier": "INFERRED",
+          "is_true_structure": false,
+          "flagged": true
+        }
+      ]
+    }
+  },
+  "tier_calibration": {
+    "OBSERVED": {
+      "n": 0,
+      "true_structure_rate": null
+    },
+    "INFERRED": {
+      "n": 7,
+      "true_structure_rate": 0.2857142857142857
+    },
+    "CONFIRMED": {
+      "n": 0,
+      "true_structure_rate": null
+    },
+    "UNCERTAIN": {
+      "n": 0,
+      "true_structure_rate": null
+    }
+  },
+  "temporal_clustering": {
+    "workload_1|clean": {
+      "occurrence_steps": [
+        14,
+        194,
+        374,
+        554,
+        734
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_1|feature_noise_mild": {
+      "occurrence_steps": [
+        29,
+        209,
+        389,
+        569,
+        749
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_1|feature_noise_severe": {
+      "occurrence_steps": [
+        44,
+        224,
+        404,
+        584,
+        764
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_2|clean": {
+      "occurrence_steps": [
+        59,
+        239,
+        419,
+        599,
+        779
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_2|feature_dropout": {
+      "occurrence_steps": [
+        74,
+        254,
+        434,
+        614,
+        794
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_2|feature_noise_mild": {
+      "occurrence_steps": [
+        89,
+        269,
+        449,
+        629,
+        809
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_2|feature_noise_severe": {
+      "occurrence_steps": [
+        104,
+        284,
+        464,
+        644,
+        824
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_3|clean": {
+      "occurrence_steps": [
+        119,
+        299,
+        479,
+        659,
+        839
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_3|feature_dropout": {
+      "occurrence_steps": [
+        134,
+        314,
+        494,
+        674,
+        854
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_3|feature_noise_mild": {
+      "occurrence_steps": [
+        149,
+        329,
+        509,
+        689,
+        869
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_3|feature_noise_severe": {
+      "occurrence_steps": [
+        164,
+        344,
+        524,
+        704,
+        884
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    },
+    "workload_4|clean": {
+      "occurrence_steps": [
+        179,
+        359,
+        539,
+        719,
+        899
+      ],
+      "gaps": [
+        180,
+        180,
+        180,
+        180
+      ],
+      "gap_variance": 0.0
+    }
+  },
+  "cause_outcome": {
+    "clean": {
+      "n_attempts": 29,
+      "n_recovered": 0,
+      "n_rolled_back": 29,
+      "n_recovered_correct": 0,
+      "n_recovered_incorrect": 0
+    },
+    "feature_dropout": {
+      "n_attempts": 11,
+      "n_recovered": 0,
+      "n_rolled_back": 11,
+      "n_recovered_correct": 0,
+      "n_recovered_incorrect": 0
+    },
+    "feature_noise": {
+      "n_attempts": 10,
+      "n_recovered": 3,
+      "n_rolled_back": 7,
+      "n_recovered_correct": 2,
+      "n_recovered_incorrect": 1
+    }
+  },
+  "n_covered_test_rows": 7,
+  "minimum_evaluable_n": 10,
+  "evidence_sufficient": false
+}

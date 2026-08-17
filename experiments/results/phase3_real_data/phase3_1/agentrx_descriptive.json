@@ -1,0 +1,49 @@
+{
+  "protocol_version": "1.0",
+  "dataset": "agentrx",
+  "status": "H1_NOT_EXECUTABLE_DESCRIPTIVE_ONLY",
+  "reason": "Within the frozen 44-trajectory (magentic) / 29-trajectory (tau_retail) sample boundary, every annotated trajectory has num_failures >= 1 -- a degenerate 100%-positive label with no negative class. A binary failure-risk classifier (H1) cannot be trained/evaluated without adding non-annotated trajectories to manufacture negatives, which is prohibited (do not add records, do not change the frozen sample). Discovered during Phase 3.1-RD implementation; reported per protocol as a not-evaluable finding rather than worked around.",
+  "domains": {
+    "magentic": {
+      "n_total_trajectories_in_source_file": 58,
+      "n_annotated_frozen_sample": 44,
+      "n_annotated_with_zero_failures": 0,
+      "num_failures_min": 1,
+      "num_failures_max": 55,
+      "num_failures_mean": 6.704545454545454,
+      "num_steps_min": 5,
+      "num_steps_max": 130,
+      "num_steps_mean": 50.02272727272727,
+      "failure_category_counts": {
+        "Instruction/Plan Adherence Failure": 25,
+        "Guardrails Triggered": 23,
+        "Misinterpretation of Tool Output": 17,
+        "Intent not supported": 5,
+        "Invention of new information": 5,
+        "Intent Plan Misalignment": 7,
+        "Invalid Invocation": 1,
+        "System Failure": 1
+      }
+    },
+    "tau_retail": {
+      "n_total_trajectories_in_source_file": 29,
+      "n_annotated_frozen_sample": 29,
+      "n_annotated_with_zero_failures": 0,
+      "num_failures_min": 1,
+      "num_failures_max": 4,
+      "num_failures_mean": 1.3448275862068966,
+      "num_steps_min": 20,
+      "num_steps_max": 62,
+      "num_steps_mean": 36.689655172413794,
+      "failure_category_counts": {
+        "Instruction Adherence Failure": 6,
+        "Misinterpretation of Tool Output": 7,
+        "Invalid Invocation": 2,
+        "Underspecified User Intent": 10,
+        "Intent Plan Misalignment": 8,
+        "Intent Not Supported": 2,
+        "System Failure": 1
+      }
+    }
+  }
+}

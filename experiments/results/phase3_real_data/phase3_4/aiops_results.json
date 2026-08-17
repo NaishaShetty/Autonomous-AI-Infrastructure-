@@ -1,0 +1,85 @@
+{
+  "phase": "3.4-RD",
+  "protocol_version": "1.0",
+  "dataset": "aiops_2020",
+  "status": "EXPLORATORY",
+  "comparison_matrix_source": "configs/phase3_4_rd_comparison_matrix.json",
+  "n_windows_evaluated": 226,
+  "n_entities": 43,
+  "verification_mismatches_within_tolerance": [
+    {
+      "component": "R0_raw_scaled",
+      "frozen": 0.6455824250651649,
+      "recomputed": 0.6466581524052787
+    },
+    {
+      "component": "R1_log_transformed",
+      "frozen": 0.6298188826038852,
+      "recomputed": 0.6313324819071945
+    },
+    {
+      "component": "R2_pca_reduced",
+      "frozen": 0.604726045935509,
+      "recomputed": 0.6040868454661558
+    }
+  ],
+  "bootstrap": {
+    "n_resamples": 2000,
+    "seed": 0,
+    "confidence_level": 0.95,
+    "unit": "entity (paired cluster resampling)"
+  },
+  "results": {
+    "baseline_auroc": 0.5,
+    "candidates": {
+      "R0_raw_scaled": {
+        "auroc_point": 0.6466581524052787,
+        "auprc_point": 0.5734084444475609,
+        "paired_auroc_diff_vs_baseline": {
+          "mean_diff": 0.1455824250651649,
+          "ci_lo": 0.03559899684511495,
+          "ci_hi": 0.26015010351966866,
+          "n_valid_resamples": 2000
+        },
+        "paired_auprc_diff_vs_baseline": {
+          "mean_diff": 0.2223533667244057,
+          "ci_lo": 0.12510318462374276,
+          "ci_hi": 0.3284446976172533,
+          "n_valid_resamples": 2000
+        }
+      },
+      "R1_log_transformed": {
+        "auroc_point": 0.6313324819071945,
+        "auprc_point": 0.5734953873031217,
+        "paired_auroc_diff_vs_baseline": {
+          "mean_diff": 0.1298188826038851,
+          "ci_lo": 0.005873814342095504,
+          "ci_hi": 0.24944246151199767,
+          "n_valid_resamples": 2000
+        },
+        "paired_auprc_diff_vs_baseline": {
+          "mean_diff": 0.22136247356105998,
+          "ci_lo": 0.12044728212255851,
+          "ci_hi": 0.33271765381648566,
+          "n_valid_resamples": 2000
+        }
+      },
+      "R2_pca_reduced": {
+        "auroc_point": 0.6040868454661558,
+        "auprc_point": 0.5156900124144124,
+        "paired_auroc_diff_vs_baseline": {
+          "mean_diff": 0.10472604593550905,
+          "ci_lo": -0.022569257456503695,
+          "ci_hi": 0.22794922286597652,
+          "n_valid_resamples": 2000
+        },
+        "paired_auprc_diff_vs_baseline": {
+          "mean_diff": 0.17175124625351282,
+          "ci_lo": 0.0799872685152649,
+          "ci_hi": 0.2839544005711226,
+          "n_valid_resamples": 2000
+        }
+      }
+    }
+  }
+}

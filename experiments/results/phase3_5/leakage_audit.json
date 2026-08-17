@@ -1,0 +1,48 @@
+{
+  "seed": 42,
+  "checks": [
+    {
+      "check": "training_evaluation_disjointness",
+      "n_test_samples": 3000,
+      "n_regime2_samples": 1500,
+      "overlap_count": 0,
+      "passed": true
+    },
+    {
+      "check": "attack_transforms_preserve_ground_truth",
+      "feature_noise_labels_regimes_unchanged": true,
+      "feature_dropout_labels_regimes_unchanged": true,
+      "passed": true
+    },
+    {
+      "check": "attack_transforms_actually_corrupt_context",
+      "feature_noise_changed_values": true,
+      "feature_dropout_zeroed_target_features": true,
+      "feature_dropout_left_other_features_unchanged": true,
+      "passed": true
+    },
+    {
+      "check": "attack_determinism",
+      "same_seed_same_ordinal_reproducible": true,
+      "different_ordinal_gives_different_noise": true,
+      "passed": true
+    },
+    {
+      "check": "no_fit_calls_during_attack_scoring",
+      "no_fit_call_inside_condition_loop": true,
+      "passed": true
+    },
+    {
+      "check": "attack_protocol_matches_frozen_file",
+      "matches": true,
+      "passed": true
+    },
+    {
+      "check": "duplicate_samples_across_attack_conditions",
+      "same_length": true,
+      "same_row_order_by_label": true,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}

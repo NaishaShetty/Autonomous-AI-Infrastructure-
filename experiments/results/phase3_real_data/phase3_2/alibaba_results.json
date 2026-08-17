@@ -1,0 +1,126 @@
+{
+  "phase": "3.2-RD",
+  "protocol_version": "1.0",
+  "dataset": "alibaba_gpu2020",
+  "sample_tier": "main",
+  "n_sampled_jobs": 10000,
+  "representation_matrix_source": "configs/phase3_2_rd_representation_matrix.json",
+  "excluded_tables": [
+    "pai_machine_metric",
+    "pai_sensor_table"
+  ],
+  "excluded_fields": [
+    "max_gpu_wrk_mem",
+    "max_mem"
+  ],
+  "bootstrap": {
+    "n_resamples": 2000,
+    "seed": 0,
+    "confidence_level": 0.95,
+    "unit": "job (test-set rows)"
+  },
+  "results": {
+    "random_stratified": {
+      "split": "random_stratified",
+      "n_train": 6999,
+      "n_test": 1503,
+      "train_failed_rate": 0.2594656379482783,
+      "test_failed_rate": 0.2588157019294744,
+      "representations": {
+        "R0_raw_scaled": {
+          "auroc": {
+            "point": 0.7348398689698409,
+            "ci_lo": 0.703043115223911,
+            "ci_hi": 0.7661499299727741,
+            "n_valid_resamples": 2000
+          },
+          "auprc": {
+            "point": 0.5400435785914834,
+            "ci_lo": 0.48701749502788,
+            "ci_hi": 0.5963844198177376,
+            "n_valid_resamples": 2000
+          }
+        },
+        "R1_log_transformed": {
+          "auroc": {
+            "point": 0.736155712673808,
+            "ci_lo": 0.7045218472609425,
+            "ci_hi": 0.7665300932402127,
+            "n_valid_resamples": 2000
+          },
+          "auprc": {
+            "point": 0.5110560945557973,
+            "ci_lo": 0.46074575953521224,
+            "ci_hi": 0.5668494512317515,
+            "n_valid_resamples": 2000
+          }
+        },
+        "R2_pca_reduced": {
+          "auroc": {
+            "point": 0.7201813499724302,
+            "ci_lo": 0.6877428730113954,
+            "ci_hi": 0.7510640042054344,
+            "n_valid_resamples": 2000
+          },
+          "auprc": {
+            "point": 0.49456706942882067,
+            "ci_lo": 0.44485227327706717,
+            "ci_hi": 0.547481500416659,
+            "n_valid_resamples": 2000
+          }
+        }
+      }
+    },
+    "temporal": {
+      "split": "temporal",
+      "n_train": 6177,
+      "n_test": 2499,
+      "train_failed_rate": 0.20106847984458476,
+      "test_failed_rate": 0.4341736694677871,
+      "representations": {
+        "R0_raw_scaled": {
+          "auroc": {
+            "point": 0.7931707840566771,
+            "ci_lo": 0.7744643369834504,
+            "ci_hi": 0.8122725438707067,
+            "n_valid_resamples": 2000
+          },
+          "auprc": {
+            "point": 0.6364043202271055,
+            "ci_lo": 0.6076922721261356,
+            "ci_hi": 0.6669622522649366,
+            "n_valid_resamples": 2000
+          }
+        },
+        "R1_log_transformed": {
+          "auroc": {
+            "point": 0.8433965882788796,
+            "ci_lo": 0.8259343944317503,
+            "ci_hi": 0.8606679507885175,
+            "n_valid_resamples": 2000
+          },
+          "auprc": {
+            "point": 0.736000818169027,
+            "ci_lo": 0.7051206955367803,
+            "ci_hi": 0.7687464180515589,
+            "n_valid_resamples": 2000
+          }
+        },
+        "R2_pca_reduced": {
+          "auroc": {
+            "point": 0.39450623763274134,
+            "ci_lo": 0.37060341592137913,
+            "ci_hi": 0.41813933309368995,
+            "n_valid_resamples": 2000
+          },
+          "auprc": {
+            "point": 0.3564346061541131,
+            "ci_lo": 0.3371333027813617,
+            "ci_hi": 0.3772978349800352,
+            "n_valid_resamples": 2000
+          }
+        }
+      }
+    }
+  }
+}

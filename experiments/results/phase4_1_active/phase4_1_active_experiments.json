@@ -1,0 +1,204 @@
+{
+  "experiment_a_completeness": {
+    "total_normalized_records_across_sources": 961,
+    "total_successfully_represented": 961,
+    "total_invalid": 0,
+    "note": "0 errors observed in this run because source adapters produce schema-conformant NormalizedRecords by construction; the error path itself (missing/invalid fields) is exercised directly by tests/unit/test_failure_experience_ingest.py, not fabricated here as a positive result.",
+    "per_source": {
+      "phase4_0_synthetic_episodic": {
+        "input_records": 307,
+        "successfully_represented": 307,
+        "errors": 0,
+        "error_reasons": [],
+        "raw_counts": {
+          "total_episode_records": 960,
+          "failure_records_only": 307
+        }
+      },
+      "agentrx": {
+        "input_records": 73,
+        "successfully_represented": 73,
+        "errors": 0,
+        "error_reasons": [],
+        "raw_counts": {
+          "total_trajectory_records": 87,
+          "failure_annotated_records": 73
+        }
+      },
+      "alibaba_gpu2020": {
+        "input_records": 500,
+        "successfully_represented": 500,
+        "errors": 0,
+        "error_reasons": [],
+        "raw_counts": {
+          "failed_task_rows_available": 2594,
+          "sampled": 500,
+          "sample_report": {
+            "available_failed_rows": 2594,
+            "sampled": 500,
+            "seed": 42
+          }
+        }
+      },
+      "aiops_kpi_2020": {
+        "input_records": 81,
+        "successfully_represented": 81,
+        "errors": 0,
+        "error_reasons": [],
+        "raw_counts": {
+          "positive_fault_windows": 81,
+          "normalized": 81
+        }
+      }
+    }
+  },
+  "experiment_b_information_preservation": {
+    "per_source": {
+      "phase4_0_synthetic_episodic": {
+        "records_checked": 307,
+        "records_fully_passed_all_checks": 307,
+        "all_checks_passed_rate": 1.0,
+        "per_check_pass_count": {
+          "failure_identity": 307,
+          "observations": 307,
+          "diagnosis": 307,
+          "recovery_action": 307,
+          "outcome": 307,
+          "timestamps": 307,
+          "provenance": 307
+        },
+        "per_check_total": 307
+      },
+      "agentrx": {
+        "records_checked": 73,
+        "records_fully_passed_all_checks": 73,
+        "all_checks_passed_rate": 1.0,
+        "per_check_pass_count": {
+          "failure_identity": 73,
+          "observations": 73,
+          "diagnosis": 73,
+          "recovery_action": 73,
+          "outcome": 73,
+          "timestamps": 73,
+          "provenance": 73
+        },
+        "per_check_total": 73
+      },
+      "alibaba_gpu2020": {
+        "records_checked": 500,
+        "records_fully_passed_all_checks": 500,
+        "all_checks_passed_rate": 1.0,
+        "per_check_pass_count": {
+          "failure_identity": 500,
+          "observations": 500,
+          "diagnosis": 500,
+          "recovery_action": 500,
+          "outcome": 500,
+          "timestamps": 500,
+          "provenance": 500
+        },
+        "per_check_total": 500
+      },
+      "aiops_kpi_2020": {
+        "records_checked": 81,
+        "records_fully_passed_all_checks": 81,
+        "all_checks_passed_rate": 1.0,
+        "per_check_pass_count": {
+          "failure_identity": 81,
+          "observations": 81,
+          "diagnosis": 81,
+          "recovery_action": 81,
+          "outcome": 81,
+          "timestamps": 81,
+          "provenance": 81
+        },
+        "per_check_total": 81
+      }
+    }
+  },
+  "experiment_c_outcome_fidelity": {
+    "final_status_distribution_per_source": {
+      "phase4_0_synthetic_episodic": {
+        "abstained": 78,
+        "failure": 184,
+        "unknown": 42,
+        "success": 3
+      },
+      "agentrx": {
+        "failure": 73
+      },
+      "alibaba_gpu2020": {
+        "failure": 500
+      },
+      "aiops_kpi_2020": {
+        "failure": 81
+      }
+    },
+    "synthetic_action_to_outcome_crosstab": {
+      "none": {
+        "abstained": 78,
+        "failure": 183
+      },
+      "none_clean": {
+        "unknown": 23
+      },
+      "retry": {
+        "success": 3,
+        "failure": 1,
+        "unknown": 6
+      },
+      "reconfigure": {
+        "unknown": 12
+      },
+      "misdiagnosed_no_ordinal": {
+        "unknown": 1
+      }
+    },
+    "actions_with_multiple_distinct_outcomes": {
+      "none": {
+        "abstained": 78,
+        "failure": 183
+      },
+      "retry": {
+        "success": 3,
+        "failure": 1,
+        "unknown": 6
+      }
+    },
+    "interpretation": "Non-empty 'actions_with_multiple_distinct_outcomes' demonstrates the same recovery action produces different final outcomes depending on context (Task 4's 'Failure A + restart -> success, Failure B + restart -> failure' requirement) -- the schema represents this, it does not collapse action into a proxy for outcome."
+  },
+  "experiment_d_temporal_integrity": {
+    "total_experiences": 961,
+    "lineage_monotonicity_violations": 0,
+    "cutoff_timestamp": "2020-03-06T20:25:31+00:00",
+    "available_before_cutoff": 481,
+    "available_after_cutoff": 480,
+    "partition_sums_to_total": true,
+    "partition_is_disjoint": true,
+    "interpretation": "The system can partition its full experience set into 'available strictly before T' vs. 'after T' with zero overlap and full coverage -- the property required to prevent future information leaking into an earlier evaluation boundary."
+  },
+  "experiment_e_provenance_integrity": {
+    "per_source": {
+      "phase4_0_synthetic_episodic": {
+        "sample_checked": 50,
+        "traceable_to_raw_record_ref": 50,
+        "dataset_content_hash_present": 50
+      },
+      "agentrx": {
+        "sample_checked": 50,
+        "traceable_to_raw_record_ref": 50,
+        "dataset_content_hash_present": 50
+      },
+      "alibaba_gpu2020": {
+        "sample_checked": 50,
+        "traceable_to_raw_record_ref": 50,
+        "dataset_content_hash_present": 50
+      },
+      "aiops_kpi_2020": {
+        "sample_checked": 50,
+        "traceable_to_raw_record_ref": 50,
+        "dataset_content_hash_present": 50
+      }
+    }
+  }
+}

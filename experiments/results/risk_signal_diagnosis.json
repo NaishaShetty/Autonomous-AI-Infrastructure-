@@ -1,0 +1,55 @@
+{
+  "seed": 42,
+  "n_test_samples": 3000,
+  "signal_quality": {
+    "confidence_mean": 0.7710490349019704,
+    "confidence_std": 0.15780094837443973,
+    "confidence_correlation_with_correct": 0.2003663689927758,
+    "failure_risk_mean": 0.4276678095544083,
+    "failure_risk_std": 0.23902071657981977,
+    "failure_risk_correlation_with_incorrect": 0.031046337709341888
+  },
+  "risk_weight_sensitivity": [
+    {
+      "risk_weight": 0.0,
+      "selective_risk_at_cov_0.2": 0.16666666666666663,
+      "selective_risk_at_cov_0.5": 0.242,
+      "selective_risk_at_cov_0.8": 0.3029166666666666
+    },
+    {
+      "risk_weight": 0.1,
+      "selective_risk_at_cov_0.2": 0.18166666666666664,
+      "selective_risk_at_cov_0.5": 0.24,
+      "selective_risk_at_cov_0.8": 0.3070833333333334
+    },
+    {
+      "risk_weight": 0.25,
+      "selective_risk_at_cov_0.2": 0.18666666666666665,
+      "selective_risk_at_cov_0.5": 0.2486666666666667,
+      "selective_risk_at_cov_0.8": 0.3041666666666667
+    },
+    {
+      "risk_weight": 0.5,
+      "selective_risk_at_cov_0.2": 0.20833333333333337,
+      "selective_risk_at_cov_0.5": 0.2686666666666667,
+      "selective_risk_at_cov_0.8": 0.3029166666666666
+    },
+    {
+      "risk_weight": 0.75,
+      "selective_risk_at_cov_0.2": 0.21499999999999997,
+      "selective_risk_at_cov_0.5": 0.2806666666666666,
+      "selective_risk_at_cov_0.8": 0.30500000000000005
+    },
+    {
+      "risk_weight": 1.0,
+      "selective_risk_at_cov_0.2": 0.235,
+      "selective_risk_at_cov_0.5": 0.2853333333333333,
+      "selective_risk_at_cov_0.8": 0.3079166666666666
+    }
+  ],
+  "matched_coverages_evaluated": [
+    0.2,
+    0.5,
+    0.8
+  ]
+}

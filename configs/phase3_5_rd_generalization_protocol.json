@@ -1,0 +1,63 @@
+{
+  "_frozen": true,
+  "_note": "Phase 3.5-RD generalization protocol. Written and committed BEFORE any Phase 3.5-RD evaluation result was produced or inspected. Defines the exact unseen-workload/condition generalization matrix. Do not edit after evaluation to add, drop, or retune a condition.",
+  "phase": "3.5-RD",
+  "protocol_version_inherited_from": "configs/phase3_real_data_protocol.json (1.0)",
+  "pre_registration_date": "2026-08-13",
+
+  "objective": "Does the observed real-data failure-risk signal remain useful when evaluated on workloads/conditions that were NOT represented in the corresponding training population? This is a distinct axis from Phase 3.3-RD's temporal distribution-shift characterization (which held the training/test boundary fixed in time and characterized what changed) -- here the train/test boundary itself is drawn along a pre-existing categorical workload dimension, and the held-out category is entirely absent from training.",
+
+  "relationship_to_original_phase_3_5": {
+    "original_mechanism": "Post-hoc deterministic feature perturbations (additive Gaussian noise, feature zeroing) applied to already-generated held-out synthetic samples, invented specifically because the synthetic generator (src/data/synthetic.py) exposed no other axis for a genuinely different covariate-shift condition (drift_scale was already Phase 3.3's axis; seed was already the frozen cross-seed variability axis).",
+    "real_data_applicability": "NOT REPRODUCIBLE AS SPECIFIED. Injecting synthetic Gaussian noise or zeroing real Alibaba/AIOps feature values would be fabricating perturbed data, which this authorization and the frozen research-integrity rules explicitly prohibit (no synthetic attacks, no data augmentation) -- there is no 'already existing real-data attack input' corresponding to the original's synthetic corruption mechanism. The literal attack-matrix replication is therefore marked NOT EVALUABLE.",
+    "reframing_used_instead": "The authorizing instruction explicitly reframes Phase 3.5-RD's objective away from 'attack generalization' toward 'unseen workload/condition generalization', and explicitly permits pre-existing categorical workload structure (e.g. GPU/workload categories) as a legitimate axis. This protocol uses that explicitly permitted, real, non-synthetic axis instead: leave-one-workload-category-out generalization, using categorical fields that already exist in the frozen processed data (Alibaba's dominant_gpu_type, AIOps's entity object-family) -- no value is fabricated, corrupted, or added; only the train/test partition boundary is redrawn along an existing categorical field."
+  },
+
+  "category_selection_rule": "For every dataset with an eligible categorical workload field, the held-out category is the LARGEST category that is NOT the single dominant/majority category -- chosen because (a) holding out the dominant category would leave too little data to train a meaningful model, and (b) a larger held-out category gives a more statistically stable test-set estimate than a small one. This rule is applied identically and mechanically to both datasets, fixed here before any evaluation, and was not chosen by inspecting which category produces the most favorable or dramatic result.",
+
+  "alibaba": {
+    "categorical_field": "dominant_gpu_type",
+    "field_provenance": "Already used for random-split stratification since Phase 3.1-RD's upstream sampling; not a category invented for this phase.",
+    "category_distribution_full_main_tier": {"MISC": 6691, "T4": 2062, "P100": 641, "V100": 258, "UNKNOWN": 190, "V100M32": 158},
+    "dominant_category_excluded_from_holdout": "MISC (66.9% of the main tier -- holding it out would leave only 33.1% of the sample for training)",
+    "held_out_category": "T4",
+    "held_out_category_rationale": "Largest non-dominant category (20.6% of the main tier, n=2062) -- gives a statistically stable held-out test population per the category_selection_rule above.",
+    "train_population": "all 10,000-job main-tier jobs with dominant_gpu_type != 'T4' (n=7,938)",
+    "test_population": "all 10,000-job main-tier jobs with dominant_gpu_type == 'T4' (n=2,062) -- entirely unseen category, zero T4 jobs in the training population",
+    "note_on_feature_use": "dominant_gpu_type is itself one of the model's input features (one-hot encoded). Because T4 never appears in the training data, the fitted OneHotEncoder has no learned column for it -- T4 test rows receive an all-zero encoding for that block at test time (handle_unknown='ignore'), which is the correct, expected behavior for a genuine unseen-category test: the model cannot rely on any T4-specific learned weight and must generalize from the remaining features only."
+  },
+
+  "aiops": {
+    "categorical_field": "entity object-family (docker / db / os, derived from the cmdb_id prefix)",
+    "field_provenance": "Already used to route entities to their platform-telemetry source files since Phase 3.1-RD's window feature extraction; not a category invented for this phase.",
+    "family_entity_counts": {"docker": 8, "db": 13, "os": 22},
+    "family_window_counts": {"docker": {"positive": 49, "negative": 37}, "db": {"positive": 12, "negative": 44}, "os": {"positive": 20, "negative": 64}},
+    "dominant_category_excluded_from_holdout": "os (22 of 43 entities, ~51% -- the largest family)",
+    "held_out_category": "db",
+    "held_out_category_rationale": "Largest non-dominant family (13 of 43 entities, ~30%) -- applies the identical category_selection_rule used for Alibaba.",
+    "train_population": "all docker + os entities' windows (30 entities; 69 positive windows, 101 negative windows; 170 total)",
+    "test_population": "all db entities' windows (13 entities: 2 positive-bearing, 11 negative-only; 12 positive windows, 44 negative windows; 56 total) -- entirely unseen family, zero db windows in the training population",
+    "cv_method": "single fit on the full train population (docker+os), scored once on the held-out db test population -- NOT leave-one-entity-out, since the generalization question here is category-level, not entity-level (LOEO already answers the entity-level question in Phase 3.1-RD/3.2-RD/3.4-RD)",
+    "note_on_feature_use": "object (docker/db/os) is itself a model input feature (one-hot encoded). Because db never appears in training, the fitted OneHotEncoder has no learned column for it -- db test rows receive an all-zero encoding for that block, identical rationale to the Alibaba note above."
+  },
+
+  "agentrx": {
+    "status": "NOT_EVALUABLE",
+    "reason": "No legitimate additional generalization axis exists beyond the H1 blocker already established in every prior phase: both frozen samples (44 Magentic, 29 tau-Retail annotated trajectories) contain zero trajectories with num_failures=0, so no binary classifier exists whose generalization to an unseen condition could be tested. No unannotated trajectory is added; the two domains are not pooled; no substitute non-binary task was pre-specified before this phase, so none is invented now."
+  },
+
+  "excluded_axes": {
+    "synthetic_feature_perturbation": "Excluded -- would require fabricating corrupted real-data records, prohibited by this authorization's research-integrity rules and by the absence of any pre-existing real-data analogue of the original's noise/dropout attack inputs.",
+    "additional_gpu_type_or_object_family_conditions": "Excluded -- a single, pre-registered condition per dataset was chosen to keep the matrix small, per the authorization's explicit instruction not to multiply comparisons; P100 (Alibaba) and os-holdout (AIOps) were considered as viable alternative conditions under the same selection rule but are not evaluated in this phase to avoid diluting the primary comparison. Noted as a possible future analysis, not run here."
+  },
+
+  "representations": "R0_raw_scaled, R1_log_transformed, R2_pca_reduced -- identical, unmodified, frozen in Phase 3.2-RD (configs/phase3_2_rd_representation_matrix.json). No new representation, no retuning.",
+  "baseline": "Baseline A (no-signal), frozen in Phase 3.1-RD -- constant score equal to the TRAIN population's empirical failure/positive prevalence for each respective generalization condition (consistent with how Baseline A has always been defined: a fixed constant computed from the training population, applied unchanged to the test population).",
+
+  "statistics": {
+    "bootstrap": {"n_resamples": 2000, "seed": 0, "confidence_level": 0.95},
+    "alibaba_unit": "job",
+    "aiops_unit": "entity (cluster bootstrap over the 13 held-out db entities)",
+    "agentrx_unit": "not applicable"
+  }
+}

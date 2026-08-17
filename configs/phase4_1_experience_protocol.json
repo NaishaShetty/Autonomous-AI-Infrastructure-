@@ -1,0 +1,52 @@
+{
+  "_frozen": true,
+  "_note": "Phase 4.1 failure-experience retrieval protocol. Written and committed BEFORE any Phase 4.1 result was computed. Do not edit values in this file to chase a better-looking result -- same discipline as configs/phase3_*.json and configs/phase4_0_episodic_protocol.json.",
+
+  "hypothesis": "H1: a structured, indexed experience store built on ReliabilityEvent + episode outcome data can retrieve relevant past incidents for a new failure with better-than-chance similarity ranking, without becoming an unstructured log.",
+
+  "data_source": "experiments/results/phase4_0/episodes.json (Phase 4.0, frozen once generated -- see docs/PHASE4_0_EPISODIC_DATA.md). Store population uses ONLY split == 'train' AND is_failure == true rows. Query sets use split == 'validation' (development) and split == 'test' (final reported evaluation), both restricted to is_failure == true rows -- retrieval for a new FAILURE is the stated task, matching src.failure_memory.memory.FailureMemory's existing store-only-failures convention.",
+
+  "excluded_from_store": "All split == 'validation' and split == 'test' rows, and all is_failure == false rows, are never added to the ExperienceStore under any circumstance. Enforced by build_store_from_episode_records's split filter (src/experience/store.py) and checked directly by the Phase 4.1 leakage audit.",
+
+  "relevance_definition": "A stored experience is relevant to a query if experience.provenance.condition_id == query's ground-truth condition_id (Phase 4.0's own generator label). Evaluation-only: never passed into a DecisionTimeQuery or any retrieve_* call.",
+
+  "retrieval_methods": {
+    "A_no_memory_random": "ExperienceStore.retrieve_random(query, k, seed) -- ignores query, deterministic given seed.",
+    "B_recency_only": "ExperienceStore.retrieve_recency(query, k) -- k most recent stored experiences by provenance.step, ignores query content.",
+    "C_similarity_proposed": "ExperienceStore.retrieve_similarity(query, k, decay_lambda=0.0) -- k-nearest by embedding distance (context + confidence via the frozen FailureEmbedder), NO recency weighting in the primary reported result (decay_lambda=0.0)."
+  },
+  "_no_other_baselines_added_or_removed": "Exactly baselines A and B (as specified by the Phase 4.1 authorization) plus proposed method C are evaluated. No baseline was added or removed after seeing any result.",
+
+  "k_values": [1, 3, 5],
+  "_k_values_note": "Fixed before evaluation. All three are reported for every method/group -- no k is selected after the fact because it produces a more favorable number.",
+
+  "random_baseline_seed": 42,
+
+  "decay_ablation": {
+    "performed_on": "validation split only, never test",
+    "decay_lambda_values": [0.0, 0.01, 0.05, 0.1],
+    "purpose": "Phase 4.1.9: recency handling is evaluated only AFTER the plain-similarity mechanism (decay_lambda=0.0) is established, and only on validation -- if a nonzero decay_lambda measurably improves validation precision@k, that finding is reported, but the PRIMARY reported test-split result for method C always uses decay_lambda=0.0 (the frozen, pre-registered default) unless this ablation is later promoted through an explicit protocol revision, not a silent substitution."
+  },
+
+  "query_groups": {
+    "all_test": "every is_failure==true row in split=='test'",
+    "known_combo_test": "is_failure==true rows in split=='test' where is_novel_combo==false (the chronologically-last, held-out occurrence of an otherwise-recurring combo)",
+    "novel_combo_test": "is_failure==true rows in split=='test' where is_novel_combo==true (a combo with ZERO occurrences in the store by construction -- see docs/PHASE4_0_EPISODIC_DATA.md section 3)"
+  },
+  "_query_groups_rationale": "Reported separately, not only pooled: the novel_combo_test group is a genuinely different retrieval difficulty (the store contains zero same-workload-and-condition matches for these queries by construction; it can only ever find cross-workload same-condition matches, if any). Pooling would hide this a priori-expected difference, not reveal it.",
+
+  "bootstrap": {
+    "n_resamples": 1000,
+    "seed": 0,
+    "confidence_level": 0.95,
+    "method": "percentile bootstrap over per-query metric values (resample query indices with replacement) -- a new, small utility (not src.evaluation.bootstrap.bootstrap_ci, whose signature is metric_fn(y_true, y_score) and does not fit a per-query-array use case) -- see benchmarks/phase4_1_retrieval_evaluate.py::_bootstrap_mean_ci."
+  },
+
+  "acceptance_criteria": {
+    "H1_supported": "Method C's mean precision@k (any k in k_values) on the all_test group has a 95% bootstrap CI lower bound strictly greater than BOTH baseline A's and baseline B's mean precision@k point estimates, on the SAME query group and k.",
+    "H1_partially_supported": "Method C beats both baselines by the criterion above on SOME but not all k values, or on known_combo_test but not novel_combo_test (or vice versa).",
+    "H1_unsupported": "Method C's CI does not clear both baselines at any tested k on any group.",
+    "H1_inconclusive": "Sample size in a group is too small for the bootstrap CI to be informative (informative threshold: at least 10 queries in the group), or results are contradictory across k/groups in a way the above categories cannot resolve.",
+    "_fixed_before_evaluation": true
+  }
+}

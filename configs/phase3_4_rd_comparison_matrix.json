@@ -1,0 +1,49 @@
+{
+  "_frozen": true,
+  "_note": "Phase 3.4-RD comparison matrix. Written and committed BEFORE any Phase 3.4-RD computation was performed or inspected. Defines the exact baseline and candidate set consolidated in this phase, per the original Phase 3.4 design (docs/PHASE3_4_COMPARISON.md): no new model fitting, no new candidate, pure consolidation of already-frozen Phase 3.1-RD/3.2-RD/3.3-RD results under one comparison, plus a paired-bootstrap difference statistic where the same test-set rows/entities support pairing.",
+  "phase": "3.4-RD",
+  "protocol_version_inherited_from": "configs/phase3_real_data_protocol.json (1.0)",
+  "pre_registration_date": "2026-08-13",
+
+  "objective": "Do the candidate representations (R0/R1/R2, frozen in Phase 3.2-RD) actually improve over the same frozen baseline (Baseline A, no-signal, frozen in Phase 3.1-RD) when evaluated under identical data/splits/metrics/statistical procedure? Consolidation only -- no new model, no new representation, no re-tuning.",
+
+  "original_phase3_4_lineage_note": "The original (synthetic) Phase 3.4 identified calibrated confidence (Baseline B) as the strongest existing reference and asked whether the selected candidate (F) beat it. NO analogue of calibrated confidence exists in the real-data track (documented in docs/PHASE3_REAL_DATA_3_1_REPORT.md section 15: no dataset has a pre-existing upstream classifier whose confidence output could be measured). Therefore Phase 3.4-RD's baseline is necessarily Baseline A (no-signal) -- the only baseline that exists uniformly across all three evaluated real datasets. This is a documented, structural difference in available baselines between the original and real-data tracks, not a substitution chosen for convenience.",
+
+  "exact_baseline": {
+    "id": "Baseline_A_no_signal",
+    "definition": "Constant score. Alibaba: fixed at the train-split empirical failure prevalence (frozen in Phase 3.1-RD). AIOps: fixed at the overall 226-window pool prevalence (frozen in Phase 3.1-RD, corrected version -- see docs/PHASE3_REAL_DATA_3_1_REPORT.md section 12 for the documented baseline-definition fix).",
+    "source_phase": "Phase 3.1-RD",
+    "frozen_values": {
+      "alibaba_random": 0.5,
+      "alibaba_temporal": 0.5,
+      "aiops_loeo": 0.5
+    }
+  },
+
+  "exact_candidates": {
+    "R0_raw_scaled": {"source_phase": "Phase 3.2-RD", "description": "Reference representation -- identical to Phase 3.1-RD's Candidate F. Numeric: median-impute + StandardScaler. Categorical: one-hot."},
+    "R1_log_transformed": {"source_phase": "Phase 3.2-RD", "description": "Same feature columns as R0, log1p-transformed heavy-tailed count/resource fields."},
+    "R2_pca_reduced": {"source_phase": "Phase 3.2-RD", "description": "Numeric block reduced to PCA(2), fit on training data only, concatenated with unchanged categorical one-hot columns."}
+  },
+
+  "no_new_candidate_rule": "No candidate beyond Baseline A / R0 / R1 / R2 is introduced in Phase 3.4-RD. No candidate is dropped regardless of performance. Identical to the original Phase 3.4's closed candidate set (docs/PHASE3_4_COMPARISON.md section 3).",
+
+  "datasets_and_splits_evaluated": {
+    "alibaba_random_stratified": {"n_train": 6999, "n_test": 1503, "frozen_source": "data/audit/alibaba_gpu2020/splits_random_stratified.json"},
+    "alibaba_temporal": {"n_train": 6177, "n_test": 2499, "frozen_source": "data/audit/alibaba_gpu2020/splits_temporal.json", "note": "compound distribution shift documented in Phase 3.3-RD -- restated, not re-litigated, here"},
+    "aiops_loeo": {"n_windows": 226, "n_entities": 43, "cv": "leave-one-entity-out, frozen in Phase 3.1-RD/3.2-RD"},
+    "agentrx": {"status": "NOT_EVALUABLE", "reason": "no negative class in either frozen sample (44 Magentic, 29 tau-Retail annotated trajectories) -- established Phase 3.1-RD, reconfirmed every phase since"}
+  },
+
+  "methodological_addition_in_this_phase": {
+    "description": "Row/entity-level scores for Baseline A and R0/R1/R2 are re-derived by re-running the exact same deterministic pipelines already used in Phase 3.1-RD/3.2-RD (same seeds, same train data, same test data) -- NOT a new model, NOT a new fit configuration. This is done ONLY to obtain the underlying score arrays needed for a properly PAIRED bootstrap difference test (resampling the same job/entity indices jointly across baseline and candidate scores), which the aggregate-only JSON artifacts from Phase 3.1-RD/3.2-RD did not retain. Before use, every re-derived aggregate AUROC is checked byte-for-byte against the frozen Phase 3.1-RD/3.2-RD result files; any mismatch halts execution (integrity check, not a silent recovery).",
+    "precedent": "Mirrors the original Phase 3.4's own design: benchmarks/phase3_4_compare.py independently recomputes each aggregate from per-seed values and raises ProtocolDiscrepancyError on any mismatch with the stored files (docs/PHASE3_4_COMPARISON.md section 2)."
+  },
+
+  "statistics": {
+    "bootstrap": {"n_resamples": 2000, "seed": 0, "confidence_level": 0.95},
+    "alibaba_unit": "job (paired resampling of the same test-set job rows across baseline and each candidate)",
+    "aiops_unit": "entity (paired cluster resampling of the same 43 entities across baseline and each candidate)",
+    "agentrx_unit": "not applicable -- NOT_EVALUABLE"
+  }
+}

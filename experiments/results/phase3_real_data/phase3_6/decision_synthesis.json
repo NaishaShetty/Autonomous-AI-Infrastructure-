@@ -1,0 +1,110 @@
+{
+  "_frozen": true,
+  "_note": "Phase 3.6-RD final decision artifact. Synthesizes Phase 3.1-RD through 3.5-RD frozen evidence only. No new evaluation was performed to produce this file. Do not edit to change a status after the fact -- if new evidence later warrants a status change, that belongs in a new, separately authorized phase, not an edit here.",
+  "phase": "3.6-RD",
+  "protocol_version": "1.0",
+  "decision_date": "2026-08-13",
+  "decision_labels_used": ["SUPPORTED", "PARTIALLY SUPPORTED", "NOT SUPPORTED", "INCONCLUSIVE", "NOT EVALUABLE"],
+
+  "hypotheses": {
+    "H1_supervised_risk_signal_exists": {
+      "original_phase3_finding": "Candidate F beats no-signal 6/6 seeds, AUROC 0.6548 [0.6159,0.6938] on synthetic data.",
+      "real_data_evidence": {
+        "alibaba_random": {"auroc": 0.7348398689698409, "ci": [0.703043115223911, 0.7661499299727741], "n": 1503, "unit": "job"},
+        "alibaba_temporal": {"auroc": 0.7931707840566771, "ci": [0.7744643369834504, 0.8122725438707067], "n": 2499, "unit": "job", "caveat": "43.4% Q4 base rate vs 20.1% train -- see H3"},
+        "aiops_loeo": {"auroc": 0.6455824250651649, "ci": [0.5355989968451149, 0.7601501035196687], "n_windows": 226, "n_entities": 43, "unit": "entity"},
+        "agentrx": "NOT_EVALUABLE -- no negative class in either frozen sample (44 Magentic, 29 tau-Retail)"
+      },
+      "evidence_type": {"alibaba": "CONFIRMATORY_CAPABLE", "aiops": "EXPLORATORY", "agentrx": "NOT_EVALUABLE"},
+      "final_status": "SUPPORTED (Alibaba, confirmatory-capable precision); PARTIALLY SUPPORTED / exploratory-only (AIOps); NOT EVALUABLE (AgentRx)",
+      "key_limitation": "No calibrated-confidence baseline exists in the real-data track, so H1 here answers 'beats no-signal', a narrower question than the original's framing."
+    },
+
+    "H2_mechanism_is_supervision_not_representation": {
+      "original_phase3_finding": "Phase 3.2C isolated supervised learning, not representation richness, as the operative mechanism.",
+      "real_data_evidence": {
+        "alibaba_random": {"R0": 0.7348398689698409, "R1": 0.736155712673808, "R2": 0.7201813499724302, "interpretation": "representation choice makes little difference -- consistent with original"},
+        "alibaba_temporal": {"R0": 0.7931707840566771, "R1": 0.8433965882788796, "R2": 0.39450623763274134, "interpretation": "representation choice dominates under distribution shift -- a boundary condition the original never tested"},
+        "aiops_loeo": {"R0": 0.6455824250651649, "R1": 0.6298188826038852, "R2": 0.604726045935509, "interpretation": "overlapping, wide CIs -- inconclusive"},
+        "agentrx": "NOT_EVALUABLE"
+      },
+      "evidence_type": {"alibaba_random": "CONFIRMATORY_CAPABLE", "alibaba_temporal": "CONFIRMATORY_CAPABLE", "aiops": "EXPLORATORY", "agentrx": "NOT_EVALUABLE"},
+      "final_status": "PARTIALLY SUPPORTED (holds on Alibaba random split; does NOT hold under Alibaba temporal shift -- representation sensitivity is real and substantial there); INCONCLUSIVE (AIOps); NOT EVALUABLE (AgentRx)",
+      "key_limitation": "Only 3 pre-registered representations tested; PCA tested only at n_components=2."
+    },
+
+    "H3_concept_drift_generalization": {
+      "original_phase3_finding": "Candidate F generalized across synthetic concept-only drift (fixed covariates, drift_scale varied), AUROC 0.602-0.698 across conditions.",
+      "real_data_evidence": {
+        "alibaba_temporal_shift_characterization": {
+          "label_shift": {"train_failed_rate": 0.20106847984458476, "test_failed_rate": 0.4341736694677871},
+          "covariate_shift_examples": {
+            "mean_plan_gpu": {"train": 70.54300363876943, "test": 56.42017828200972},
+            "dominant_gpu_type_MISC_share": {"train": 0.6210134369435001, "test": 0.8087234893957583}
+          },
+          "conclusion": "Q1-Q3 to Q4 is a COMPOUND shift (label rate + covariates), not a concept-only shift like the original."
+        }
+      },
+      "evidence_type": "descriptive characterization, not a hypothesis test in the original sense",
+      "final_status": "NOT DIRECTLY COMPARABLE -- different shift type (concept-only vs. compound concept+covariate); AIOps/AgentRx not evaluable for this specific axis",
+      "key_limitation": "Exactly one real train/test temporal partition exists; no repeated-shift design possible on real data as it was on synthetic data via drift_scale."
+    },
+
+    "H4_covariate_shift_attack_generalization": {
+      "original_phase3_finding": "Candidate F remained competitive with (not superior to) calibrated confidence under synthetic feature-noise/dropout attacks; GENERALIZATION SUPPORTED, narrow scope.",
+      "real_data_evidence": {
+        "literal_mechanism": "NOT EVALUABLE -- no real-data analogue of synthetic feature corruption exists; fabricating one is prohibited",
+        "reframed_real_axis_unseen_workload_category": {
+          "alibaba_T4_holdout": {"R0": 0.5713042648550111, "R1": 0.5496322526690406, "R2": 0.5091810726097739, "n_test": 2062, "paired_vs_baseline": {"R0": [0.0322163578003416, 0.10923924787827564], "R1": [0.012488615963903287, 0.08722021980018874], "R2": [-0.031265016596133934, 0.050130893757083045]}},
+          "aiops_db_holdout": {"R0": 0.7479422969071564, "R1": 0.7253206750076785, "R2": 0.44575961571317685, "n_test_windows": 56, "n_test_entities": 13, "paired_vs_baseline": {"R0": [0.09581881533101044, 0.43333333333333324], "R1": [0.06510007292763971, 0.4095238095238095], "R2": [-0.30952380952380953, 0.13414634146341464]}}
+        }
+      },
+      "evidence_type": {"alibaba": "CONFIRMATORY_CAPABLE for the paired test itself, though effect sizes are small", "aiops": "EXPLORATORY, very wide CIs"},
+      "final_status": "PARTIALLY SUPPORTED (R0/R1 retain a small but statistically real margin over no-signal on both datasets' unseen-category test; R2 does not) -- NOT DIRECTLY COMPARABLE to the original's synthetic-attack mechanism specifically; AgentRx NOT EVALUABLE",
+      "key_limitation": "Single held-out category per dataset (T4, db); not a sweep over possible unseen conditions."
+    },
+
+    "H5a_complementarity": {
+      "original_phase3_finding": "F alone 0.6548, B alone 0.6599, combined BF 0.6593 -- F adds no measurable incremental value beyond calibrated confidence.",
+      "real_data_evidence": "NOT RUN -- no calibrated-confidence baseline exists in the real-data track, so there is nothing to test complementarity against. Not attempted in any Phase 3.1-RD-3.5-RD phase.",
+      "evidence_type": "NOT EVALUABLE",
+      "final_status": "NOT EVALUABLE",
+      "key_limitation": "Structural: the real-data track has never had a second independent risk signal to combine with a representation-based candidate."
+    },
+
+    "H5b_decision_cost_policy": {
+      "original_phase3_finding": "At base cost ratio, all risk-based policies cost less than doing nothing; at a stricter ratio, every risk policy cost MORE than doing nothing.",
+      "real_data_evidence": "NOT RUN -- would require a disclosed, real deployment-relevant cost model for Alibaba/AIOps/AgentRx, which does not exist and was not fabricated in any Phase 3.1-RD-3.5-RD phase.",
+      "evidence_type": "NOT EVALUABLE",
+      "final_status": "NOT EVALUABLE",
+      "key_limitation": "No real cost model was in scope for any authorized real-data phase."
+    },
+
+    "H6_diagnosis": {
+      "original_phase3_finding": "Deterministic diagnosis rule achieved pooled accuracy 0.683, macro F1 0.712 on synthetic attack-condition labels.",
+      "real_data_evidence": "NOT RUN in any Phase 3.1-RD-3.5-RD phase. AIOps fault categories exist (injected, not organic) and AgentRx has organic root_cause_failure_id/root_cause_reason fields identified as the strongest candidate diagnosis dataset in the original protocol design (docs/PHASE3_REAL_DATA_PROTOCOL.md section 3) -- but no diagnosis experiment was authorized or executed in Phase 3.1-RD through 3.5-RD.",
+      "evidence_type": "NOT EVALUABLE (not attempted, not due to a structural data blocker)",
+      "final_status": "NOT EVALUABLE -- awaiting a future authorized phase",
+      "key_limitation": "Not a data-availability gap like H5a/H7 -- AgentRx's root-cause fields exist and were preserved for exactly this purpose, but this authorization's scope (protocol design + 3.1-RD-3.6-RD synthesis) never included running it."
+    },
+
+    "H7_recovery": {
+      "original_phase3_finding": "Zero feature_dropout CRITICAL-tier samples ever recovered by reconfiguration; INCONCLUSIVE, autonomous decision authority not justified.",
+      "real_data_evidence": "No dataset (Alibaba, AIOps, AgentRx) records a recovery action or outcome field.",
+      "evidence_type": "NOT EVALUABLE",
+      "final_status": "NOT EVALUABLE / STRUCTURAL GAP",
+      "key_limitation": "This is a data-acquisition gap, not an execution gap -- no future phase can evaluate H7 under the currently held datasets without new data."
+    }
+  },
+
+  "cross_cutting_negative_findings": [
+    "R2 (PCA(2)) AUROC collapses to 0.395 (below no-signal) on the Alibaba temporal split, a statistically significant HARM (paired diff -0.105, CI [-0.129,-0.082]) -- Phase 3.2-RD/3.4-RD.",
+    "R2 shows no statistically distinguishable improvement over no-signal under either unseen-workload-category test (Alibaba T4, AIOps db) -- Phase 3.5-RD.",
+    "The failure-risk signal's magnitude drops substantially under genuine unseen-workload-category generalization (Alibaba AUROC 0.57 vs 0.72-0.84 in-distribution) -- Phase 3.5-RD.",
+    "No calibrated-confidence-equivalent baseline exists anywhere in the real-data track -- structural, present since Phase 3.1-RD.",
+    "AgentRx's binary failure-risk task is not executable on either frozen sample -- structural, present since Phase 3.1-RD."
+  ],
+
+  "structural_gaps": ["H5a (complementarity)", "H5b (decision-cost policy)", "H7 (recovery)", "AgentRx binary risk task (H1-H4 on AgentRx)"],
+  "not_attempted_but_potentially_evaluable": ["H6 (diagnosis) -- AgentRx root-cause fields and AIOps injected-fault categories exist but were never used in an authorized phase"]
+}

@@ -1,0 +1,171 @@
+{
+  "_frozen": true,
+  "_note": "Phase 3.6 decision/recovery protocol. Written and committed BEFORE any Phase 3.6 result was produced. Do not edit values in this file to chase a better-looking result. Inherits, and does not override, configs/phase3_1_protocol.json's seeds, primary_seed, coverage_operating_points, calibration_bins, and bootstrap settings.",
+
+  "inherits_from": ["configs/phase3_1_protocol.json", "configs/phase3_5_attack_protocol.json"],
+  "seeds": [1, 2, 3, 4, 5, 42],
+  "primary_seed": 42,
+
+  "candidate_systems": {
+    "B_calibrated_confidence": "Phase 3.1 baseline B, unchanged. failure_risk_score = 1 - calibrated_confidence.",
+    "F_supervised_failure_risk": "Phase 3.2C Experiment B / Phase 3.3 frozen candidate, unchanged. failure_risk_score = Phase2RepresentationSupervisedRisk.risk(context, confidence).",
+    "BF_combined": "NEW for Phase 3.6.1: a 2-input logistic regression, LogisticRegression(max_iter=1000, random_state=seed), fit on X=[[1-confidence, F.risk(...)] for each regime-2 sample], y=[regime2_is_failure]. Fit ONCE per seed on regime-2 data ONLY, exactly analogous to F's own fitting convention (Phase2RepresentationSupervisedRisk fits its classifier on all of regime 2). No hyperparameter search, no additional features, no regularization tuning."
+  },
+
+  "train_validation_test_separation": {
+    "regime_0": "workload model training (unchanged from every prior phase)",
+    "regime_1": "confidence calibrator fitting (unchanged)",
+    "regime_2": "failure-memory / F / BF_combined fitting AND decision-threshold derivation AND diagnosis-rule parameter derivation. Never regimes 3/4.",
+    "regimes_3_4": "held-out test stream. Used ONLY for final scoring of already-frozen candidates/thresholds/policies. Never used to fit, threshold, or tune anything."
+  },
+
+  "complementarity_experiment": {
+    "id": "3.6.1",
+    "inputs": ["1 - calibrated_confidence", "F.risk(context, confidence)"],
+    "model": "sklearn.linear_model.LogisticRegression(max_iter=1000, random_state=seed)",
+    "fitting_data": "regime-2 samples (ALL of regime 2, not just failures), one row per sample: [b_score, f_score], label = is_failure. Identical training-data convention to Phase2RepresentationSupervisedRisk and the Phase 3.2C Experiment C/B classifiers.",
+    "no_hyperparameter_search": true,
+    "metrics": ["auroc", "auprc", "aurc", "ece", "precision_recall_at_coverage"],
+    "coverage_points": [0.05, 0.10, 0.20, 0.50]
+  },
+
+  "decision_tiers": {
+    "id": "3.6.2",
+    "_rationale": "4 named risk tiers, derived from each candidate's OWN score distribution on regime-2 data (never test), using cut points at the ALREADY-FROZEN Phase 3.1 coverage_operating_points (0.05, 0.20, 0.50) so no new percentile is invented for this phase. Reuses the existing src.schema.events.Decision enum (ANSWER/REVIEW/ABSTAIN) for the underlying action -- no new action type is added to that frozen schema.",
+    "tier_definitions": [
+      {"tier": "LOW", "risk_score_percentile_range": "[0, 50)", "action": "ANSWER", "recovery_eligible": false},
+      {"tier": "MEDIUM", "risk_score_percentile_range": "[50, 80)", "action": "REVIEW", "recovery_eligible": false},
+      {"tier": "HIGH", "risk_score_percentile_range": "[80, 95)", "action": "ABSTAIN", "recovery_eligible": false},
+      {"tier": "CRITICAL", "risk_score_percentile_range": "[95, 100]", "action": "ABSTAIN", "recovery_eligible": true}
+    ],
+    "threshold_derivation": "Per candidate, per seed: compute the candidate's failure-risk score on every regime-2 sample. t_50, t_80, t_95 = the 50th/80th/95th percentile of that score distribution (numpy.percentile, linear interpolation). A test-time sample with score < t_50 -> LOW; [t_50, t_80) -> MEDIUM; [t_80, t_95) -> HIGH; >= t_95 -> CRITICAL. Thresholds are computed once per (candidate, seed) on regime-2 and frozen before any regime-3/4 sample is scored.",
+    "no_signal_baseline": "A_no_signal / 'no-risk-policy': every sample -> ANSWER, unconditionally. Included as the zero-intervention reference."
+  },
+
+  "cost_model": {
+    "id": "3.6.2 cost model",
+    "_disclaimer": "This is a TRANSPARENT SYNTHETIC RESEARCH ASSUMPTION, not a measurement of any real system's costs. It exists to give 'expected decision cost' a concrete, reproducible definition, not to claim real-world cost figures.",
+    "base_costs": {
+      "answer_correct": 0.0,
+      "answer_incorrect": 5.0,
+      "review_correct": 0.2,
+      "review_incorrect": 5.2,
+      "abstain_would_have_been_correct": 1.0,
+      "abstain_would_have_been_incorrect": 0.3
+    },
+    "_rationale": "answer_incorrect (missing/allowing a real failure to proceed unmitigated) is set highest, reflecting a safety-first assumption that undetected failures are worse than any form of caution. abstain_would_have_been_incorrect (correctly catching a real failure via abstention) is set lowest among the 'costly' categories because it is the intended protective outcome, though it still is not free (task not completed). abstain_would_have_been_correct (needless abstention on a task that would have succeeded) sits between the two, reflecting pure utility loss without any safety benefit. review_* mirrors answer_* plus a small fixed overhead (0.2), since a REVIEW decision is modeled as the task still being attempted but flagged. This ordering (abstain_would_have_been_incorrect < abstain_would_have_been_correct < answer_incorrect) is fixed before evaluation and not chosen to favor any candidate.",
+    "sensitivity_analysis_ratios": [2.0, 5.0, 10.0],
+    "sensitivity_analysis_definition": "Re-run expected-cost computation with answer_incorrect set to ratio * abstain_would_have_been_correct (ratio in sensitivity_analysis_ratios; base_costs uses ratio=5.0), all other costs unchanged. Reports whether the RANKING of policies by expected cost changes across ratios -- not chosen after seeing which ratio favors any candidate."
+  },
+
+  "diagnosis_taxonomy": {
+    "id": "3.6.3",
+    "_scope_note": "This is CONDITION ATTRIBUTION, not deep causal inference: the taxonomy is grounded in the actual, known Phase 3.5 attack mechanisms (ground truth we ourselves generated), not fabricated failure categories. It answers 'which known corruption mechanism (if any) produced this failure', not 'why did the model err in a mechanistic sense'.",
+    "classes": ["clean", "feature_noise", "feature_dropout"],
+    "class_definitions": {
+      "clean": "Failure occurred under the unperturbed benchmark condition (ordinary model error near the decision boundary, no injected corruption).",
+      "feature_noise": "Failure occurred under Phase 3.5's feature_noise_mild OR feature_noise_severe attack (pooled into one class -- both differ only in the noise magnitude of the same mechanism).",
+      "feature_dropout": "Failure occurred under Phase 3.5's feature_dropout attack."
+    },
+    "evaluated_population": "Failure samples only (is_failure == 1), pooled across the clean condition and all three Phase 3.5 attack conditions, per seed.",
+    "method": "DETERMINISTIC, ZERO-FITTING rule-based classifier (src/evaluation/diagnosis.py:diagnose) -- not a trained model. Chosen specifically because the frozen protocol never generates attacked regime-2 data (attacks are applied only to the held-out regimes 3/4, by Phase 3.5 design, to avoid leaking attack identity into any fitting step); a trained diagnosis classifier would therefore require either creating new attacked training data (out of scope, not attempted) or reusing regime-3/4 attack labels for both fitting and evaluation (leakage). A deterministic rule requires no fitting at all and carries zero risk of this leakage.",
+    "rule_definition": {
+      "step_1": "If 2 or more of the 5 features are exactly 0.0 -> diagnose 'feature_dropout'.",
+      "step_2": "Else, compute mean_sq = mean(context[f]**2 for f in FEATURE_NAMES). If mean_sq > 2.0 -> diagnose 'feature_noise'.",
+      "step_3": "Else -> diagnose 'clean'.",
+      "threshold_rationale": "Raw features are N(0,1) by construction (E[X^2]=1 per feature). Under feature_noise_mild (std=0.5, independent of the clean signal), E[(X+noise)^2] = 1 + 0.25 = 1.25. Under feature_noise_severe (std=1.5), E[(X+noise)^2] = 1 + 2.25 = 3.25. The mean_sq > 2.0 cutoff is the arithmetic midpoint-ish anchor between the mild (1.25) and severe (3.25) expected values, fixed from this algebra BEFORE any diagnosis result was computed -- not tuned on outcomes. It is expected, and reported honestly, that this rule will reliably catch severe noise and dropout but will often fail to distinguish mild noise from clean (1.25 vs 1.0 expected mean_sq, heavily overlapping for 5-dimensional draws) -- see docs/PHASE3_6_DIAGNOSIS_ABSTENTION_RECOVERY.md section 15/19."
+    },
+    "abstention_on_uncertain_diagnosis": "Not implemented as a separate mechanism in Phase 3.6 -- the rule always outputs one of the 3 classes (no internal confidence score to threshold on). Documented as a limitation, not fabricated."
+  },
+
+  "recovery_policy": {
+    "id": "3.6.5",
+    "_scope_note": "Every action below is a DETERMINISTIC, PRE-SPECIFIED, BOUNDED function of already-existing benchmark mechanisms -- no new model is trained, no unbounded loop is possible, and no LLM/agent invents an action at runtime.",
+    "eligibility": "Only CRITICAL-tier samples (top 5% risk per the acting candidate's own regime-2-derived thresholds) are eligible for recovery. HIGH-tier samples abstain with no recovery attempt (a deliberate scope boundary, not an oversight).",
+    "max_retries": 1,
+    "timeout": "Not applicable -- this is an offline synthetic benchmark with no wall-clock execution; a fabricated timeout value is not reported.",
+    "actions": {
+      "retry": {
+        "trigger": "diagnosed cause == 'feature_noise' (rule-based diagnosis, section diagnosis_taxonomy)",
+        "precondition": "current condition is a feature_noise attack (mild or severe) -- retry is a re-roll of a NEW, independently-drawn noise realization for the SAME underlying sample, modeling a transient corruption source (e.g. a noisy sensor). Derived deterministically via src.evaluation.attacks.apply_feature_noise with attack_ordinal = original_ordinal + 100 (documented, reproducible offset, distinct from every ordinal used anywhere else in this project).",
+        "action": "Re-score the sample with the SAME frozen candidate (B, F, or BF_combined, whichever is acting) against the re-rolled context. Re-derive its risk tier using the SAME regime-2 thresholds (no re-fitting).",
+        "expected_outcome": "The new tier may fall to LOW/MEDIUM (recovered -> ANSWER/REVIEW) or remain HIGH/CRITICAL (not recovered -> proceed to rollback).",
+        "max_retries": 1,
+        "rollback_condition": "Retry does not bring the tier below HIGH.",
+        "failure_condition": "Retried decision is ANSWER/REVIEW but the (unchanged) true label shows the workload model's prediction on the retried context was still wrong -- counted explicitly as a recovery failure, not hidden.",
+        "safe_fallback": "rollback (abstain)"
+      },
+      "reconfigure": {
+        "trigger": "diagnosed cause == 'feature_dropout'",
+        "precondition": "current condition is the feature_dropout attack -- retrying cannot help (the dropped features are deterministically zeroed every time, not randomized; verified in the Phase 3.5 leakage audit's determinism check applies equally here since apply_feature_dropout has no RNG at all).",
+        "action": "Fall back to scoring the sample with B (calibrated confidence) ALONE, ignoring F/BF_combined for this decision -- modeling a policy that distrusts a risk signal known to depend on a now-corrupted representation, and falls back to the simpler, less representation-dependent signal. Re-derive the tier using B's OWN regime-2 thresholds.",
+        "expected_outcome": "The B-alone tier may fall to LOW/MEDIUM (recovered) or remain HIGH/CRITICAL (not recovered -> rollback).",
+        "max_retries": 0,
+        "rollback_condition": "B-alone tier is still HIGH or CRITICAL.",
+        "failure_condition": "Recovered decision is ANSWER/REVIEW but the true label shows the workload model's prediction was still wrong.",
+        "safe_fallback": "rollback (abstain)"
+      },
+      "rollback": {
+        "trigger": "diagnosed cause == 'clean' (no corruption detected -- retry/reconfigure are not applicable since the model+input are deterministic and there is no fallback representation to switch to), OR retry/reconfigure did not reduce the tier below HIGH",
+        "precondition": "none -- this is the universal safe fallback",
+        "action": "ABSTAIN (revert to the known-safe default of not acting)",
+        "expected_outcome": "No new failure is possible (the task is not attempted); utility for this sample is forfeited.",
+        "max_retries": 0,
+        "rollback_condition": "n/a -- this IS the rollback",
+        "failure_condition": "n/a -- abstaining cannot fail in the sense of producing a wrong answer",
+        "safe_fallback": "n/a -- this is the safe fallback itself"
+      }
+    },
+    "explicit_non_action": "For diagnosed cause == 'clean', NO retry is attempted, because the workload model and its input are both deterministic given the (unattacked) sample -- retrying with identical inputs against a deterministic, frozen model is provably a no-op. This is stated as a structural finding, not silently skipped."
+  },
+
+  "baselines_for_recovery_comparison": [
+    "no_recovery (CRITICAL tier always rolls back to ABSTAIN, no retry/reconfigure attempted)",
+    "retry_only (retry is attempted for ALL CRITICAL samples regardless of diagnosis, ignoring the reconfigure branch; ignored if diagnosis is 'clean' or 'feature_dropout', a naive baseline that does not gate on diagnosis)",
+    "diagnosis_gated_recovery (the full policy above: retry for feature_noise, reconfigure for feature_dropout, rollback for clean)"
+  ],
+
+  "evaluation_metrics": {
+    "prediction": ["auroc", "auprc", "aurc", "ece_where_meaningful", "precision_at_5_10_20_50pct", "recall_at_5_10_20_50pct"],
+    "decision": [
+      "unsafe_action_rate = (# ANSWER or REVIEW decisions where is_failure==1) / (# ANSWER or REVIEW decisions) -- fraction of attempted tasks that were actually failures; lower is better",
+      "abstention_rate = (# ABSTAIN decisions) / N -- higher is not automatically better, see safety/utility tradeoff",
+      "review_rate = (# REVIEW decisions) / N",
+      "accepted_task_success_rate = 1 - unsafe_action_rate",
+      "false_abstention_rate = (# ABSTAIN decisions where is_failure==0) / (# ABSTAIN decisions) -- fraction of abstentions that were unnecessary; lower is better",
+      "failure_recall_among_abstained = (# ABSTAIN decisions where is_failure==1) / (total # is_failure==1) -- fraction of all true failures actually caught by abstention; higher is better",
+      "expected_decision_cost = mean over samples of cost_model[action, would_be_correctness]; lower is better",
+      "utility_retention = (# ANSWER + # REVIEW decisions) / N -- fraction of the workload actually completed; higher is better (but must be read jointly with unsafe_action_rate, not alone)"
+    ],
+    "diagnosis": ["accuracy", "macro_f1", "per_class_precision", "per_class_recall", "confusion_matrix"],
+    "recovery": [
+      "recovery_attempt_rate = (# CRITICAL samples where retry or reconfigure was attempted) / (# CRITICAL samples)",
+      "recovery_success_rate = (# recovered AND actually correct) / (# recovery attempts)",
+      "recovery_failure_rate = (# recovered AND actually incorrect) / (# recovery attempts) -- a 'bad recovery' that let a real failure through",
+      "no_recovery_rollback_rate = (# CRITICAL samples that rolled back to ABSTAIN) / (# CRITICAL samples)",
+      "unnecessary_recovery_rate = (# recovery attempts where the sample was NOT actually a failure to begin with, i.e. recovery was attempted on a false-positive risk flag) / (# recovery attempts)",
+      "utility_retention_after_recovery = (# CRITICAL samples ending in ANSWER/REVIEW after the full policy, including recovery) / (# CRITICAL samples)",
+      "unsafe_recovery_rate = recovery_failure_rate (an accepted-after-recovery sample that is actually a failure IS the unsafe-recovery event in this benchmark; reported under both names for section 18/20 of the report)"
+    ]
+  },
+
+  "confidence_intervals": {
+    "cross_seed": "Student-t 95% interval over the six per-seed point estimates, via benchmarks.phase3_1_evaluate._t_interval, reused unmodified.",
+    "within_seed_bootstrap": {
+      "n_resamples": 2000,
+      "method": "percentile",
+      "seed": 0,
+      "confidence_level": 0.95,
+      "primary_seed_only": 42
+    },
+    "no_significance_testing_at_n6": true
+  },
+
+  "acceptance_criteria": {
+    "complementarity": "BF_combined's cross-seed AUROC mean and 95% CI relative to B alone determines the Phase 3.6.1 interpretation (Case A/B/C per docs/PHASE3_6_DIAGNOSIS_ABSTENTION_RECOVERY.md section 4) -- fixed BEFORE evaluation, not chosen after seeing the result.",
+    "decision_policy": "A policy is preferred only if it achieves both a lower or equal expected_decision_cost AND a non-collapsing utility_retention (utility_retention > 0.5, i.e. the policy still attempts the majority of the workload) relative to the no-risk-policy baseline, at the base cost ratio. Preference must hold across at least 2 of the 3 sensitivity ratios to be reported as a not-cost-ratio-dependent finding.",
+    "diagnosis": "Reported honestly regardless of macro-F1 value; no accuracy floor is required for reporting -- a poor diagnosis result is itself the finding.",
+    "recovery": "A recovery action is reported as net-beneficial only if recovery_success_rate exceeds recovery_failure_rate AND utility_retention_after_recovery exceeds the no_recovery baseline's utility_retention for the same CRITICAL-tier population.",
+    "autonomous_authority": "Phase 3.6 cannot, by itself, grant autonomous authority regardless of results -- see docs/PHASE3_6_DIAGNOSIS_ABSTENTION_RECOVERY.md section 24."
+  }
+}

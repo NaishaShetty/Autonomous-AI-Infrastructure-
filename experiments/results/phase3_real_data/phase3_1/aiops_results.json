@@ -1,0 +1,52 @@
+{
+  "protocol_version": "1.0",
+  "dataset": "aiops_2020",
+  "status": "EXPLORATORY",
+  "n_windows_total": 226,
+  "n_windows_with_telemetry": 226,
+  "n_windows_dropped_no_telemetry_in_window": 0,
+  "n_windows_evaluated_loeo": 226,
+  "n_entities_total": 43,
+  "n_entities_positive": 16,
+  "n_entities_negative_only": 27,
+  "n_positive_windows": 81,
+  "n_negative_windows": 145,
+  "feature_source": "platform telemetry only (dcos_docker, dcos_container, db_oracle_11g, os_linux); business/trace telemetry not included in this minimal baseline",
+  "cv_method": "leave-one-entity-out (LOEO), no hyperparameter tuning",
+  "bootstrap": {
+    "n_resamples": 2000,
+    "seed": 0,
+    "confidence_level": 0.95,
+    "unit": "entity (cluster bootstrap over entities, not windows)"
+  },
+  "results": {
+    "baseline_A_no_signal_global_prevalence": {
+      "auroc": {
+        "point": 0.5,
+        "ci_lo": 0.5,
+        "ci_hi": 0.5,
+        "n_valid_resamples": 2000
+      },
+      "auprc": {
+        "point": 0.3531042305654648,
+        "ci_lo": 0.25407347770851196,
+        "ci_hi": 0.43775764213880314,
+        "n_valid_resamples": 2000
+      }
+    },
+    "candidate_F_supervised_risk_loeo": {
+      "auroc": {
+        "point": 0.6455824250651649,
+        "ci_lo": 0.5355989968451149,
+        "ci_hi": 0.7601501035196687,
+        "n_valid_resamples": 2000
+      },
+      "auprc": {
+        "point": 0.5754575972898704,
+        "ci_lo": 0.44698671726730493,
+        "ci_hi": 0.6661790068964963,
+        "n_valid_resamples": 2000
+      }
+    }
+  }
+}

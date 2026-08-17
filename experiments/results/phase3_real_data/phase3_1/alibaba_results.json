@@ -1,0 +1,116 @@
+{
+  "protocol_version": "1.0",
+  "dataset": "alibaba_gpu2020",
+  "sample_tier": "main",
+  "n_sampled_jobs": 10000,
+  "feature_columns_used": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "excluded_tables": [
+    "pai_machine_metric",
+    "pai_sensor_table"
+  ],
+  "excluded_fields": [
+    "max_gpu_wrk_mem",
+    "max_mem"
+  ],
+  "features_unavailable_not_used": [
+    "pai_group_tag_table.*",
+    "pai_machine_spec.*",
+    "job_table.user"
+  ],
+  "bootstrap": {
+    "n_resamples": 2000,
+    "seed": 0,
+    "confidence_level": 0.95,
+    "unit": "job (test-set rows)"
+  },
+  "results": {
+    "random_stratified": {
+      "split": "random_stratified",
+      "n_train": 6999,
+      "n_val": 1498,
+      "n_test": 1503,
+      "train_failed_rate": 0.2594656379482783,
+      "test_failed_rate": 0.2588157019294744,
+      "baseline_A_no_signal": {
+        "auroc": {
+          "point": 0.5,
+          "ci_lo": 0.5,
+          "ci_hi": 0.5,
+          "n_valid_resamples": 2000
+        },
+        "auprc": {
+          "point": 0.25892581503659345,
+          "ci_lo": 0.2368596141051231,
+          "ci_hi": 0.281437125748503,
+          "n_valid_resamples": 2000
+        }
+      },
+      "candidate_F_supervised_risk": {
+        "auroc": {
+          "point": 0.7348398689698409,
+          "ci_lo": 0.703043115223911,
+          "ci_hi": 0.7661499299727741,
+          "n_valid_resamples": 2000
+        },
+        "auprc": {
+          "point": 0.5400435785914834,
+          "ci_lo": 0.48701749502788,
+          "ci_hi": 0.5963844198177376,
+          "n_valid_resamples": 2000
+        }
+      }
+    },
+    "temporal": {
+      "split": "temporal",
+      "n_train": 6177,
+      "n_val": 1324,
+      "n_test": 2499,
+      "train_failed_rate": 0.20106847984458476,
+      "test_failed_rate": 0.4341736694677871,
+      "baseline_A_no_signal": {
+        "auroc": {
+          "point": 0.5,
+          "ci_lo": 0.5,
+          "ci_hi": 0.5,
+          "n_valid_resamples": 2000
+        },
+        "auprc": {
+          "point": 0.4341506602641057,
+          "ci_lo": 0.41456582633053224,
+          "ci_hi": 0.453781512605042,
+          "n_valid_resamples": 2000
+        }
+      },
+      "candidate_F_supervised_risk": {
+        "auroc": {
+          "point": 0.7931707840566771,
+          "ci_lo": 0.7744643369834504,
+          "ci_hi": 0.8122725438707067,
+          "n_valid_resamples": 2000
+        },
+        "auprc": {
+          "point": 0.6364043202271055,
+          "ci_lo": 0.6076922721261356,
+          "ci_hi": 0.6669622522649366,
+          "n_valid_resamples": 2000
+        }
+      }
+    }
+  }
+}

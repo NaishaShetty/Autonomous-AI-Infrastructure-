@@ -1,0 +1,359 @@
+{
+  "results": {
+    "Calibrator only (A)": {
+      "curve": [
+        {
+          "coverage": 0.05,
+          "selective_risk": 0.15333333333333332,
+          "n_accepted": 150
+        },
+        {
+          "coverage": 0.1,
+          "selective_risk": 0.14,
+          "n_accepted": 300
+        },
+        {
+          "coverage": 0.15,
+          "selective_risk": 0.1577777777777778,
+          "n_accepted": 450
+        },
+        {
+          "coverage": 0.2,
+          "selective_risk": 0.16666666666666663,
+          "n_accepted": 600
+        },
+        {
+          "coverage": 0.25,
+          "selective_risk": 0.18933333333333335,
+          "n_accepted": 750
+        },
+        {
+          "coverage": 0.3,
+          "selective_risk": 0.20777777777777773,
+          "n_accepted": 900
+        },
+        {
+          "coverage": 0.35,
+          "selective_risk": 0.20857142857142852,
+          "n_accepted": 1050
+        },
+        {
+          "coverage": 0.4,
+          "selective_risk": 0.21999999999999997,
+          "n_accepted": 1200
+        },
+        {
+          "coverage": 0.45,
+          "selective_risk": 0.23185185185185186,
+          "n_accepted": 1350
+        },
+        {
+          "coverage": 0.5,
+          "selective_risk": 0.242,
+          "n_accepted": 1500
+        },
+        {
+          "coverage": 0.55,
+          "selective_risk": 0.2581818181818182,
+          "n_accepted": 1650
+        },
+        {
+          "coverage": 0.6,
+          "selective_risk": 0.2694444444444445,
+          "n_accepted": 1800
+        },
+        {
+          "coverage": 0.65,
+          "selective_risk": 0.28205128205128205,
+          "n_accepted": 1950
+        },
+        {
+          "coverage": 0.7,
+          "selective_risk": 0.29047619047619044,
+          "n_accepted": 2100
+        },
+        {
+          "coverage": 0.75,
+          "selective_risk": 0.29555555555555557,
+          "n_accepted": 2250
+        },
+        {
+          "coverage": 0.8,
+          "selective_risk": 0.3029166666666666,
+          "n_accepted": 2400
+        },
+        {
+          "coverage": 0.85,
+          "selective_risk": 0.3109803921568628,
+          "n_accepted": 2550
+        },
+        {
+          "coverage": 0.9,
+          "selective_risk": 0.3177777777777778,
+          "n_accepted": 2700
+        },
+        {
+          "coverage": 0.95,
+          "selective_risk": 0.3259649122807018,
+          "n_accepted": 2850
+        },
+        {
+          "coverage": 1.0,
+          "selective_risk": 0.33333333333333337,
+          "n_accepted": 3000
+        }
+      ],
+      "operating_point": {
+        "coverage": 0.6343333333333333,
+        "selective_risk": 0.278507619548082,
+        "abstention_rate": 0.36566666666666664,
+        "accuracy_on_answered": 0.721492380451918,
+        "n_total": 3000,
+        "n_answered": 1903
+      }
+    },
+    "Failure Memory only (B)": {
+      "curve": [
+        {
+          "coverage": 0.05,
+          "selective_risk": 0.32666666666666666,
+          "n_accepted": 150
+        },
+        {
+          "coverage": 0.1,
+          "selective_risk": 0.36,
+          "n_accepted": 300
+        },
+        {
+          "coverage": 0.15,
+          "selective_risk": 0.3555555555555555,
+          "n_accepted": 450
+        },
+        {
+          "coverage": 0.2,
+          "selective_risk": 0.32166666666666666,
+          "n_accepted": 600
+        },
+        {
+          "coverage": 0.25,
+          "selective_risk": 0.32133333333333336,
+          "n_accepted": 750
+        },
+        {
+          "coverage": 0.3,
+          "selective_risk": 0.3277777777777777,
+          "n_accepted": 900
+        },
+        {
+          "coverage": 0.35,
+          "selective_risk": 0.3085714285714286,
+          "n_accepted": 1050
+        },
+        {
+          "coverage": 0.4,
+          "selective_risk": 0.3158333333333333,
+          "n_accepted": 1200
+        },
+        {
+          "coverage": 0.45,
+          "selective_risk": 0.31999999999999995,
+          "n_accepted": 1350
+        },
+        {
+          "coverage": 0.5,
+          "selective_risk": 0.31999999999999995,
+          "n_accepted": 1500
+        },
+        {
+          "coverage": 0.55,
+          "selective_risk": 0.3175757575757576,
+          "n_accepted": 1650
+        },
+        {
+          "coverage": 0.6,
+          "selective_risk": 0.31833333333333336,
+          "n_accepted": 1800
+        },
+        {
+          "coverage": 0.65,
+          "selective_risk": 0.321025641025641,
+          "n_accepted": 1950
+        },
+        {
+          "coverage": 0.7,
+          "selective_risk": 0.32333333333333336,
+          "n_accepted": 2100
+        },
+        {
+          "coverage": 0.75,
+          "selective_risk": 0.3248888888888889,
+          "n_accepted": 2250
+        },
+        {
+          "coverage": 0.8,
+          "selective_risk": 0.3275,
+          "n_accepted": 2400
+        },
+        {
+          "coverage": 0.85,
+          "selective_risk": 0.32862745098039214,
+          "n_accepted": 2550
+        },
+        {
+          "coverage": 0.9,
+          "selective_risk": 0.32925925925925925,
+          "n_accepted": 2700
+        },
+        {
+          "coverage": 0.95,
+          "selective_risk": 0.3308771929824561,
+          "n_accepted": 2850
+        },
+        {
+          "coverage": 1.0,
+          "selective_risk": 0.33333333333333337,
+          "n_accepted": 3000
+        }
+      ],
+      "operating_point": {
+        "coverage": 0.335,
+        "selective_risk": 0.3174129353233831,
+        "abstention_rate": 0.665,
+        "accuracy_on_answered": 0.6825870646766169,
+        "n_total": 3000,
+        "n_answered": 1005
+      }
+    },
+    "Combined (C)": {
+      "curve": [
+        {
+          "coverage": 0.05,
+          "selective_risk": 0.2466666666666667,
+          "n_accepted": 150
+        },
+        {
+          "coverage": 0.1,
+          "selective_risk": 0.21333333333333337,
+          "n_accepted": 300
+        },
+        {
+          "coverage": 0.15,
+          "selective_risk": 0.18666666666666665,
+          "n_accepted": 450
+        },
+        {
+          "coverage": 0.2,
+          "selective_risk": 0.20833333333333337,
+          "n_accepted": 600
+        },
+        {
+          "coverage": 0.25,
+          "selective_risk": 0.21466666666666667,
+          "n_accepted": 750
+        },
+        {
+          "coverage": 0.3,
+          "selective_risk": 0.22666666666666668,
+          "n_accepted": 900
+        },
+        {
+          "coverage": 0.35,
+          "selective_risk": 0.23333333333333328,
+          "n_accepted": 1050
+        },
+        {
+          "coverage": 0.4,
+          "selective_risk": 0.24750000000000005,
+          "n_accepted": 1200
+        },
+        {
+          "coverage": 0.45,
+          "selective_risk": 0.2577777777777778,
+          "n_accepted": 1350
+        },
+        {
+          "coverage": 0.5,
+          "selective_risk": 0.2686666666666667,
+          "n_accepted": 1500
+        },
+        {
+          "coverage": 0.55,
+          "selective_risk": 0.2793939393939394,
+          "n_accepted": 1650
+        },
+        {
+          "coverage": 0.6,
+          "selective_risk": 0.28555555555555556,
+          "n_accepted": 1800
+        },
+        {
+          "coverage": 0.65,
+          "selective_risk": 0.2892307692307692,
+          "n_accepted": 1950
+        },
+        {
+          "coverage": 0.7,
+          "selective_risk": 0.2961904761904762,
+          "n_accepted": 2100
+        },
+        {
+          "coverage": 0.75,
+          "selective_risk": 0.29733333333333334,
+          "n_accepted": 2250
+        },
+        {
+          "coverage": 0.8,
+          "selective_risk": 0.3029166666666666,
+          "n_accepted": 2400
+        },
+        {
+          "coverage": 0.85,
+          "selective_risk": 0.312156862745098,
+          "n_accepted": 2550
+        },
+        {
+          "coverage": 0.9,
+          "selective_risk": 0.32185185185185183,
+          "n_accepted": 2700
+        },
+        {
+          "coverage": 0.95,
+          "selective_risk": 0.32947368421052636,
+          "n_accepted": 2850
+        },
+        {
+          "coverage": 1.0,
+          "selective_risk": 0.33333333333333337,
+          "n_accepted": 3000
+        }
+      ],
+      "operating_point": {
+        "coverage": 0.2763333333333333,
+        "selective_risk": 0.2207478890229192,
+        "abstention_rate": 0.7236666666666667,
+        "accuracy_on_answered": 0.7792521109770808,
+        "n_total": 3000,
+        "n_answered": 829
+      }
+    }
+  },
+  "baseline_error": 0.33333333333333337,
+  "n_test_samples": 3000,
+  "n_logged_failures": 407,
+  "failure_memory_fitted": true,
+  "config": {
+    "regime_sizes": [
+      3000,
+      1500,
+      1500,
+      1500,
+      1500
+    ],
+    "seed": 42,
+    "policy": {
+      "answer_threshold": 0.7,
+      "abstain_threshold": 0.4,
+      "risk_weight": 0.5
+    }
+  }
+}

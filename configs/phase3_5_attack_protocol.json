@@ -1,0 +1,83 @@
+{
+  "_frozen": true,
+  "_note": "Phase 3.5 attack-generalization protocol. Written and committed BEFORE any Phase 3.5 result was produced. Do not edit values in this file to chase a better-looking result -- see docs/PHASE3_5_ATTACK_GENERALIZATION.md section 'Scientific integrity'. Inherits, and does NOT override, configs/phase3_1_protocol.json's regime_sizes, n_clusters, seeds, primary_seed, coverage_operating_points, calibration_bins, bootstrap, and cross_seed_confidence_interval -- those are read directly from that file by benchmarks/phase3_5_attack_generalization.py, not duplicated here.",
+
+  "inherits_from": "configs/phase3_1_protocol.json",
+
+  "seeds": [1, 2, 3, 4, 5, 42],
+  "_seeds_note": "Identical to the frozen Phase 3.1 seed list. No seed added or removed for Phase 3.5.",
+  "primary_seed": 42,
+
+  "candidates": {
+    "A_no_signal": "Phase 3.1 baseline A, unchanged: constant score = empirical failure prevalence on regime 2 (train-side).",
+    "B_calibrated_confidence": "Phase 3.1 baseline B, unchanged: 1 - ConfidenceCalibrator.predict(...).calibrated_confidence.",
+    "C_original_failure_memory": "Phase 3.1 baseline C / Phase 3.2 control, unchanged: FailureMemory.risk(context, confidence), the unmodified Phase 2 KMeans/Gaussian-kernel similarity score.",
+    "D_supervised_failure_risk": "Referred to as 'F' in Phase 3.4's naming. The exact Phase 3.2C Experiment B / Phase 3.3 frozen candidate: Phase2RepresentationSupervisedRisk (old Phase 2 PCA representation + logistic regression), fit once per seed on regime-2 clean data and reused unmodified across every condition."
+  },
+  "_candidates_note": "Internal key names in this file and in benchmarks/phase3_5_attack_generalization.py match benchmarks/phase3_3_generalization.py's BASELINES list verbatim (that module's functions are reused directly, not reimplemented). D_supervised_failure_risk is Phase 3.4's 'F'; the report and JSON output use the display label 'F' for continuity with Phase 3.4.",
+
+  "primary_comparison": ["D_supervised_failure_risk", "B_calibrated_confidence", "C_original_failure_memory", "A_no_signal"],
+  "_primary_comparison_note": "Calibrated confidence (B) is a co-equal baseline, not an already-surpassed one (Phase 3.4 status: INCONCLUSIVE). F is a candidate under investigation. D/E (Phase 3.2 raw-features / failure-history candidates) are NOT re-evaluated in Phase 3.5 -- out of scope per the brief's instruction to avoid unnecessary expansion.",
+
+  "training_condition": "Exactly build_system(regime_sizes, n_clusters, seed) at the generator's default drift_scale=0.35 -- regimes 0/1/2 CLEAN and unmodified, identical to Phase 3.1/3.2/3.2C/3.3. F is fit exactly once per seed via the unmodified Phase2RepresentationSupervisedRisk.fit() on regime-2 clean data (src.evaluation.representations, reused, not modified), reusing benchmarks.phase3_3_generalization's _reconstruct_regime2_with_confidences and _fit_frozen_candidate helpers verbatim. No attack condition is ever used for fitting.",
+
+  "clean_reference_condition": {
+    "id": "clean",
+    "kind": "in_distribution_reference",
+    "description": "system.test_stream verbatim (regimes 3+4, drift_scale=0.35) -- byte-identical to Phase 3.1/3.2/3.2C/3.3's 'original_benchmark' condition. Not regenerated or modified."
+  },
+
+  "attack_matrix": [
+    {
+      "id": "feature_noise_mild",
+      "kind": "covariate_shift_attack",
+      "mechanism": "feature_noise",
+      "parameters": {"std": 0.5},
+      "severity": "mild",
+      "seen_or_unseen": "unseen",
+      "attack_ordinal": 1,
+      "rationale": "Additive N(0, 0.5^2) noise on every one of the 5 raw features (which are themselves N(0,1) by construction -- see src/data/synthetic.py), applied only to regime-3/4 context dicts AFTER generation. std=0.5 is half the native feature scale, chosen a priori as the 'mild' anchor before any evaluation was run. Represents corrupted/noisy telemetry reaching the deployed system: the true label-generating relationship (base_w, drift) is untouched, only what every candidate OBSERVES changes -- a covariate-shift attack, not concept drift."
+    },
+    {
+      "id": "feature_noise_severe",
+      "kind": "covariate_shift_attack",
+      "mechanism": "feature_noise",
+      "parameters": {"std": 1.5},
+      "severity": "severe",
+      "seen_or_unseen": "unseen",
+      "attack_ordinal": 2,
+      "rationale": "Same mechanism as feature_noise_mild, std=1.5 (1.5x native feature scale), chosen a priori as the 'severe' anchor -- fixed before evaluation, not tuned to any outcome. Provides a dose-response comparison against feature_noise_mild."
+    },
+    {
+      "id": "feature_dropout",
+      "kind": "covariate_shift_attack",
+      "mechanism": "feature_dropout",
+      "parameters": {"dropped_features": ["f2", "f4"]},
+      "severity": "n/a -- binary corruption, not a graded severity",
+      "seen_or_unseen": "unseen",
+      "attack_ordinal": 3,
+      "rationale": "Zeroes features f2 and f4 (the 2nd and 4th of 5 features by the fixed FEATURE_NAMES order -- a systematic 'every other feature starting at index 1' rule stated here before evaluation, not chosen after inspecting which features matter most) for every regime-3/4 sample. Simulates a sensor/telemetry field going dark or being stripped -- a qualitatively different corruption (structural, not magnitude-graded) from the noise attacks. Fully deterministic, no RNG needed."
+    }
+  ],
+
+  "excluded_axes": {
+    "concept_drift_boundary_rotation": "Already covered by Phase 3.3's drift_scale sweep (weaker/stronger multiples of the training drift_scale); not repeated here to avoid re-running the same axis under a new name.",
+    "label_boundary_manipulation": "Would require either modifying src/data/synthetic.py's generate_regime_stream (the frozen shared generator used by every prior phase) or reimplementing its base_w/rng construction externally (risking a subtly inconsistent, undocumented reimplementation of the label-generating process). Neither is done in Phase 3.5. This is an explicit, documented limitation, not a fabricated attack.",
+    "failure_rate_shift": "The generator does not expose an independent failure-rate/prevalence control -- prevalence is an emergent property of X, base_w, and drift_scale. Cannot be varied in isolation without changing the meaning of the task or re-deriving the generator's internals; not attempted."
+  },
+
+  "fitting_rule": "Every candidate is fit EXACTLY once per seed, on regime-0/1/2 CLEAN data, before any condition (clean or attacked) is scored. The fitted objects (workload_model, calibrator, failure_memory, the Phase2RepresentationSupervisedRisk candidate) are then reused UNMODIFIED to score the clean reference condition and every attack condition in turn. No .fit() call occurs anywhere in the attack-scoring path. No attack parameter, attack severity, or attack result is ever used to select, tune, retrain, or threshold any candidate.",
+
+  "robustness_metric": {
+    "name": "excess_auroc_retention_ratio",
+    "definition": "(attack_auroc - 0.5) / (clean_auroc - 0.5), computed per seed then aggregated across seeds via the same Student-t interval used for every other cross-seed metric. Defined here, before any Phase 3.5 result was computed, specifically for AUROC, whose uninformative floor (0.5, random ranking) makes a raw ratio (attack_auroc / clean_auroc) misleading. Undefined (reported as null, not fabricated) when clean_auroc == 0.5 (no informative signal to retain in the first place, applies to A_no_signal by construction).",
+    "also_reported": "Absolute AUROC/AUPRC/AURC/precision@coverage/recall@coverage degradation (clean metric - attack metric) for every candidate and condition -- no ratio needed for these, reported directly."
+  },
+
+  "no_new_hyperparameter_tuning": "No candidate's hyperparameters, feature representation, calibration, PCA dimensionality, KMeans configuration, or fitting procedure is changed in Phase 3.5 relative to Phase 3.2C Experiment B / Phase 3.3. If a candidate performs poorly under an attack condition, that is reported as a result, not corrected.",
+
+  "complementarity_subexperiment": {
+    "performed": false,
+    "reason": "Out of Phase 3.5's core objective (attack generalization). Documented per the brief as a REQUIRED FOLLOW-UP GATE before any autonomous integration of Failure Risk -- not attempted here, to avoid silently redefining Phase 3.5's scope."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "_frozen": true,
+  "_note": "Phase 3.2-RD representation matrix. Written and committed BEFORE any Phase 3.2-RD test-set result was produced or inspected. Do not edit after evaluation to add, drop, or retune a representation. Companion to docs/PHASE3_REAL_DATA_3_2_REPORT.md.",
+  "phase": "3.2-RD",
+  "protocol_version_inherited_from": "configs/phase3_real_data_protocol.json (1.0)",
+  "pre_registration_date": "2026-08-13",
+
+  "objective": "Test whether the real-data failure-risk signal established in Phase 3.1-RD is robust to a small set of pre-registered feature-representation choices, holding the supervised-learning mechanism (LogisticRegression, same hyperparameters as Phase 3.1-RD's Candidate F) fixed throughout -- consistent with the original Phase 3.2C finding that supervision, not representation, was the operative mechanism. This is a robustness check, not a search for the best-performing representation.",
+
+  "fixed_across_all_representations": {
+    "classifier": "sklearn.linear_model.LogisticRegression(max_iter=2000, random_state=42)",
+    "_classifier_note": "Identical to Phase 3.1-RD's Candidate F. Only the feature representation varies between R0/R1/R2 -- the learning mechanism is held constant by design.",
+    "datasets": "identical to Phase 3.1-RD -- same sampled records, same splits, same LOEO structure",
+    "leakage_exclusions": ["pai_sensor_table", "pai_machine_metric", "max_mem", "max_gpu_wrk_mem"],
+    "raw_feature_columns": {
+      "alibaba": ["job_start_time", "n_tasks", "n_distinct_task_names", "sum_inst_num", "mean_plan_cpu", "max_plan_cpu", "mean_plan_mem", "max_plan_mem", "mean_plan_gpu", "max_plan_gpu", "n_distinct_gpu_types", "dominant_gpu_type", "n_instances", "n_distinct_machines", "mean_instance_start_time"],
+      "aiops": ["n_observations", "n_distinct_metrics", "mean_value", "std_value", "min_value", "max_value", "object"]
+    }
+  },
+
+  "representation_matrix": {
+    "R0_raw_scaled": {
+      "description": "Reference representation -- identical to Phase 3.1-RD's Candidate F. Numeric columns: median-impute + StandardScaler. Categorical columns: constant-impute + one-hot. No transformation beyond standardization.",
+      "role": "anchor / reference point for comparison, not a new candidate"
+    },
+    "R1_log_transformed": {
+      "description": "Same feature columns as R0, but non-negative, heavy-tailed count/resource fields are log1p-transformed before standardization, to test sensitivity to the known right-skew of resource-request and count fields (plan_cpu/mem/gpu, instance/task counts).",
+      "alibaba_log1p_columns": ["n_tasks", "n_distinct_task_names", "sum_inst_num", "mean_plan_cpu", "max_plan_cpu", "mean_plan_mem", "max_plan_mem", "mean_plan_gpu", "max_plan_gpu", "n_instances", "n_distinct_machines"],
+      "aiops_log1p_columns": ["n_observations", "n_distinct_metrics"],
+      "_exclusion_rationale": "job_start_time / mean_instance_start_time (Alibaba) and mean_value/std_value/min_value/max_value (AIOps) are excluded from log1p: the time fields are coordinates, not skewed counts, so log-transforming them would not be a natural representation choice; the AIOps value statistics can be negative (telemetry deltas), where log1p is undefined without an arbitrary shift, which would not be a leakage-safe, dataset-agnostic transform to pre-register. These columns remain on the R0 (raw, scaled) path within R1."
+    },
+    "R2_pca_reduced": {
+      "description": "The numeric feature block (after standardization) is reduced to its first 2 principal components via PCA(n_components=2), fit on the training fold only (train split for Alibaba; the LOEO training fold for AIOps) and applied unchanged to validation/test/held-out data. Categorical one-hot columns are concatenated unchanged alongside the 2 PCA components. n_components=2 is chosen to match the PCA(2) representation used throughout the original (synthetic) Phase 2/3 methodology (src/failure_memory), not tuned for real-data performance.",
+      "fit_boundary": "PCA is refit inside each evaluation context's own training data only -- train split (Alibaba) or LOEO training fold (AIOps) -- never on validation or test data."
+    }
+  },
+
+  "explicitly_not_included": {
+    "additional_representations": "None. The matrix is deliberately limited to 3 candidates (1 reference + 2 variants) and is not expanded after seeing results, regardless of how any candidate performs.",
+    "alternative_classifiers": "Not evaluated in Phase 3.2-RD -- varying the learning algorithm is a different question (already partially answered by the original Phase 3.2C ablation) and is out of scope for a representation-robustness check.",
+    "unavailable_alibaba_tables": "pai_group_tag_table, pai_machine_spec -- still unavailable in processed form (unchanged since Phase 3.1-RD); not added.",
+    "aiops_business_trace_telemetry": "Not added -- Phase 3.1-RD's platform-telemetry-only feature source is reused unchanged.",
+    "agentrx": "No representation experiment is defined for AgentRx. The frozen protocol's hypothesis-dataset mapping (configs/phase3_real_data_protocol.json, hypothesis_dataset_mapping.H2_mechanism_is_supervision_not_representation) already marks both agentrx_magentic and agentrx_tau_retail as NOT_EVALUABLE, decided before Phase 3.1-RD ran. This is unchanged and is not reopened here."
+  },
+
+  "reporting_rule": "All three representations (R0, R1, R2) are evaluated on every applicable dataset/split and every result is reported in docs/PHASE3_REAL_DATA_3_2_REPORT.md, regardless of relative performance. No representation is dropped, hidden, or retained as a 'winner' -- the deliverable is a robustness table, not a selection."
+}

@@ -1,0 +1,73 @@
+{
+  "_frozen": true,
+  "_note": "Phase 4.0 episodic/incident data generation protocol. Written and committed BEFORE any Phase 4.0 output was generated or any Phase 4.1+ experiment was run against it. Do not edit values in this file to chase a better-looking downstream result -- see docs/PHASE4_PLAN.md section 3 and docs/PHASE4_0_EPISODIC_DATA.md.",
+
+  "purpose": "Phase 3's benchmark (src/data/synthetic.py) produces i.i.d. classification samples with no notion of a recurring workload experiencing repeated incidents over simulated time. Phase 4.1 (failure memory), 4.2 (pattern learning), 4.3 (recovery strategy learning), 4.6 (continual learning), and 4.7 (generalization) all require episodic, temporally-ordered incident data with repeatable workload/condition identity and known ground truth for recurrence and novelty. This protocol defines that generator's parameters before any Phase 4 result is computed.",
+
+  "reused_frozen_components": {
+    "src.pipeline_builder.build_system": "one call per workload (distinct seed) -- unmodified, produces a distinct trained workload_model+calibrator+failure_memory per workload identity",
+    "src.data.synthetic.generate_regime_stream": "reused (read-only) to reconstruct regime-2 confidences for B-score threshold derivation, exactly as benchmarks/phase3_3_generalization.py's _reconstruct_regime2_with_confidences does",
+    "src.evaluation.attacks.apply_feature_noise / apply_feature_dropout": "unmodified, define the 'condition' transforms",
+    "src.evaluation.decision_policy.TierThresholds / assign_tier / RiskTier": "unmodified, tiering logic",
+    "src.evaluation.diagnosis.diagnose": "unmodified, condition-attribution rule",
+    "src.evaluation.recovery.attempt_recovery": "unmodified, CRITICAL-tier recovery policy",
+    "configs/phase3_5_attack_protocol.json": "condition parameters (std, dropped_features) read from this file, not duplicated as new magic numbers"
+  },
+  "acting_candidate": "B_calibrated_confidence only. Phase 3.6 (frozen) established B alone is the strongest, cheapest, and most cost-efficient signal at every tested axis; F/BF add no measured value (see docs/PHASE3_6_DIAGNOSIS_ABSTENTION_RECOVERY.md section 22). Using B alone to drive tiering/decision/recovery in the episodic generator is therefore the research-justified minimal choice, not an arbitrary simplification. F/BF-driven episode variants are explicitly deferred, not silently dropped -- see docs/PHASE4_0_EPISODIC_DATA.md limitations.",
+
+  "workloads": [
+    {"workload_id": "workload_1", "seed": 101},
+    {"workload_id": "workload_2", "seed": 102},
+    {"workload_id": "workload_3", "seed": 103},
+    {"workload_id": "workload_4", "seed": 104}
+  ],
+  "_workload_seed_note": "Seeds 101-104 are deliberately disjoint from Phase 3's frozen seed list [1,2,3,4,5,42] (configs/phase3_1_protocol.json) -- Phase 4.0 workloads are a new experimental role (distinct trained systems standing in for distinct deployed workload identities), not a reuse of Phase 3's cross-seed reproducibility sample. Each seed produces a structurally different base_w decision boundary in generate_regime_stream, so each workload is a genuinely different classification task, not a relabeling of the same one.",
+
+  "regime_sizes": [3000, 1500, 1500, 1500, 1500],
+  "n_clusters": 3,
+  "_regime_sizes_note": "Identical to src.pipeline_builder.DEFAULT_REGIME_SIZES -- every workload is built the same way Phase 3 built its single system, just once per workload seed.",
+
+  "conditions": [
+    {"condition_id": "clean", "mechanism": null, "parameters": {}},
+    {"condition_id": "feature_noise_mild", "mechanism": "feature_noise", "parameters": {"std": 0.5}, "attack_ordinal": 1},
+    {"condition_id": "feature_noise_severe", "mechanism": "feature_noise", "parameters": {"std": 1.5}, "attack_ordinal": 2},
+    {"condition_id": "feature_dropout", "mechanism": "feature_dropout", "parameters": {"dropped_features": ["f2", "f4"]}, "attack_ordinal": 3}
+  ],
+  "_conditions_note": "Verbatim parameters from configs/phase3_5_attack_protocol.json's attack_matrix + clean_reference_condition -- not re-derived. Retry recovery re-rolls feature_noise conditions using attack_ordinal + occurrence_ordinal * RETRY_ORDINAL_STRIDE (see generation_rules), analogous to src.evaluation.recovery's RETRY_ORDINAL_OFFSET=100 convention but extended to remain distinct across occurrences.",
+
+  "novel_combos": [
+    {"workload_id": "workload_4", "condition_id": "feature_noise_mild"},
+    {"workload_id": "workload_4", "condition_id": "feature_noise_severe"},
+    {"workload_id": "workload_4", "condition_id": "feature_dropout"},
+    {"workload_id": "workload_1", "condition_id": "feature_dropout"}
+  ],
+  "_novel_combos_rationale": "Fixed BEFORE generation, not selected after inspecting any result. workload_4 x {feature_noise_mild, feature_noise_severe, feature_dropout} represents a workload with only 'clean' history at train/validation time, facing every attack condition for the first time only in the frozen test split (tests generalization to a genuinely novel workload under known condition families). workload_1 x feature_dropout represents the opposite axis: a workload with substantial known history (clean + both noise conditions), but never having encountered dropout specifically before the frozen test split (tests generalization to a novel condition on a well-known workload). All 12 remaining (workload, condition) pairs are 'known' combos and recur across train/validation/test per the split rule below.",
+
+  "recurrence": {
+    "known_combo_occurrences": 5,
+    "novel_combo_occurrences": 1,
+    "batch_size": 15,
+    "_batch_size_note": "Samples per occurrence, drawn as a contiguous, non-overlapping chunk of the owning workload's held-out test_stream (regimes 3+4, already excluded from that workload's training by build_system): chunk index = occurrence_ordinal (0-based) for that specific (workload, condition) combo, so no two occurrences of the same combo ever share a sample. 5 occurrences x 15 = 75 rows per known combo, far below each workload's 3000-row test_stream capacity (regime_sizes[3]+regime_sizes[4])."
+  },
+
+  "split_rule": {
+    "known_combo": "occurrence_ordinal 0,1,2 -> train; occurrence_ordinal 3 -> validation; occurrence_ordinal 4 (the final, chronologically last occurrence) -> test",
+    "novel_combo": "its single occurrence (ordinal 0) -> test, always",
+    "_rationale": "Per docs/PHASE4_PLAN.md section 3: train/validation are drawn from known-combo occurrences chronologically earlier than the single frozen test occurrence of that same combo (no future information leaks backward), and the frozen test split additionally contains combos with zero occurrences in train/validation at all (the novel combos), giving genuine held-out generalization coverage, not just held-out time."
+  },
+
+  "scheduling": {
+    "known_combo_time_rule": "Global step index for a known combo's occurrence_ordinal o (0-based) = o * n_known_combos + combo_rank, where combo_rank is the combo's fixed position (0-based) in the deterministically sorted list of known (workload_id, condition_id) pairs (sorted by workload_id then condition_id). This interleaves all 12 known combos' occurrences round-robin through simulated time, so recurrence is spread out rather than bunched, and no combo's occurrences are all adjacent.",
+    "novel_combo_time_rule": "Global step index = (known_combo_occurrences * n_known_combos) + novel_rank, where novel_rank is the combo's 0-based position in the sorted novel_combos list. Every novel-combo occurrence is scheduled strictly after every known-combo occurrence, consistent with the frozen test split representing the end of the observed timeline, not samples interleaved into the middle of it."
+  },
+
+  "seeds": [1, 2, 3, 4, 5, 42],
+  "_seeds_note": "Reused verbatim from configs/phase3_1_protocol.json for the top-level generation seed used by generation_rules' deterministic tie-breaks (none of the per-workload trained-system randomness is affected -- that is fully determined by each workload's own seed in `workloads` above). primary_seed = 42, matching every prior phase's convention.",
+  "primary_seed": 42,
+
+  "generation_rules": {
+    "retry_ordinal_stride": 1000,
+    "_retry_ordinal_stride_note": "When a CRITICAL-tier sample under a feature_noise condition triggers recovery's retry action, the re-rolled attack_ordinal = condition.attack_ordinal + 100 + occurrence_ordinal * retry_ordinal_stride, guaranteeing every retry across every occurrence of every combo draws a distinct, deterministic, reproducible noise realization (extends, does not modify, src.evaluation.recovery.RETRY_ORDINAL_OFFSET=100's convention to remain unique across occurrences, which the original Phase 3.6 single-occurrence setting never needed to handle).",
+    "b_thresholds_source": "Each workload's OWN regime-2 B-score distribution (1 - calibrated confidence on that workload's regime-2 samples), t_50/t_80/t_95, computed once per workload before any occurrence of any condition is scored -- identical methodology to Phase 3.6's threshold_derivation, applied per-workload instead of Phase 3.6's single shared system."
+  }
+}

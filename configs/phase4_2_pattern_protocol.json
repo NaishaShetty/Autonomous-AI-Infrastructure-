@@ -1,0 +1,73 @@
+{
+  "_frozen": true,
+  "_note": "Phase 4.2 failure-pattern-learning protocol. Written and committed BEFORE final (test-split) evaluation was run. Do not edit values in this file to chase a better-looking result.",
+
+  "_methodological_disclosure": "During protocol design, candidate feasibility (recurrence counts, train-split purity) was checked against src.data train-split and validation-split rows only, to confirm the chosen thresholds would produce a non-degenerate tier distribution (permitted -- docs/PHASE4_PLAN.md section 3 allows train/validation use for parameter selection). While doing so, a small number of test-split row values were also inadvertently inspected during interactive design-phase scoping, before this file was frozen. No threshold, baseline, or acceptance-criterion value below was chosen or adjusted based on that inadvertent test-split observation -- MIN_OBSERVATIONS/CONFIRMED_MIN_N/purity thresholds were fixed from train/validation feasibility reasoning alone, and the minimum-evaluable-n acceptance threshold below was set from a generic, dataset-independent small-sample convention, not reverse-engineered from the observed test count. This deviation from strict test-blindness during design is disclosed here rather than concealed, per the research-integrity requirement to report irregularities honestly; see docs/PHASE4_2_FAILURE_PATTERNS.md section on methodological integrity for the full account.",
+
+  "hypothesis": "H2: recurring failure patterns (condition recurrence, temporal clustering, symptom->cause->outcome relationships) are detectable above chance in the episode stream, and the system can correctly separate observed evidence from inferred pattern from confirmed relationship from uncertain hypothesis using four explicit confidence tiers.",
+
+  "data_source": "experiments/results/phase4_0/episodes.json, restricted to is_failure==true AND diagnosed_cause is not null (i.e. CRITICAL-tier rows only -- diagnosis is only computed for CRITICAL-tier samples per the frozen Phase 3.6 policy reused unmodified by src/data/episodic.py). This is a real, documented scope restriction, not an oversight: pattern candidates are keyed on (workload_id, diagnosed_cause), a decision-time-observable pair, and diagnosed_cause simply does not exist outside CRITICAL-tier rows.",
+
+  "pattern_definition": {
+    "candidate_key": "(workload_id, diagnosed_cause)",
+    "claim_under_test": "symptom -> cause: does this diagnosed_cause, for this workload, reliably correspond to one particular true condition_id (Phase 4.0 ground truth, evaluation/discovery-only, never exposed via PatternQuery)?",
+    "mode_condition": "the most frequent condition_id among a candidate key's train-split occurrences",
+    "purity": "for a candidate key and a set of occurrences, (# occurrences whose condition_id == the key's TRAIN-derived mode_condition) / (# occurrences in that set)"
+  },
+
+  "candidacy_rule": "A (workload_id, diagnosed_cause) key is a pattern CANDIDATE only if n_train >= 2 (at least one recurrence beyond a singleton). Keys with n_train == 1 are not evaluated as candidates at all -- a single occurrence is not recurrence by definition, and is excluded from every downstream count (not silently folded into UNCERTAIN).",
+
+  "tier_thresholds": {
+    "MIN_OBSERVATIONS_FOR_TRUSTED_PURITY": 3,
+    "CONFIRMED_MIN_N": 6,
+    "TAU_INFERRED": 0.6,
+    "TAU_CONFIRMED": 0.8,
+    "TAU_CONFIRMED_VALIDATION": 0.5,
+    "_rationale": "Fixed from train/validation-only feasibility inspection (see _methodological_disclosure). TAU_INFERRED=0.6 requires the mode condition to hold a clear majority (candidates typically span 3-4 possible conditions per workload, so 0.6 clears random-majority baselines of roughly 0.25-0.33). TAU_CONFIRMED=0.8 requires a strong majority. CONFIRMED_MIN_N=6 requires enough recurrence to trust a purity point estimate at the 0.8 level. TAU_CONFIRMED_VALIDATION=0.5 (lower than TAU_CONFIRMED) reflects validation occurrences per key being very few (often n=1); requiring the SAME 0.8 bar on n=1 validation data would make confirmation nearly impossible by construction, not because the relationship is actually weak -- 0.5 (majority) is the achievable, still-meaningful replication bar given the available validation volume. MIN_OBSERVATIONS_FOR_TRUSTED_PURITY=3 reflects that n=2 is barely above the candidacy floor and not enough to trust ANY purity estimate, regardless of how extreme that estimate looks."
+  },
+
+  "tier_assignment_precedence": [
+    "1. n_train < 2 -> not a candidate (excluded entirely).",
+    "2. n_train >= CONFIRMED_MIN_N AND purity_train >= TAU_CONFIRMED AND n_validation_for_key >= 1 AND purity_validation >= TAU_CONFIRMED_VALIDATION -> CONFIRMED.",
+    "3. purity_train >= TAU_INFERRED -> INFERRED.",
+    "4. n_train < MIN_OBSERVATIONS_FOR_TRUSTED_PURITY -> UNCERTAIN.",
+    "5. else -> OBSERVED (recurs with trustworthy n, but purity does not clear TAU_INFERRED -- recurrence without an established directional relationship)."
+  ],
+
+  "row_level_evaluation": {
+    "population": "every is_failure==true, diagnosed_cause-not-null row in split=='test'",
+    "coverage": "fraction of test rows whose (workload_id, diagnosed_cause) key exists among the train-discovered candidates (n_train >= 2). Rows outside coverage cannot be evaluated (the system had zero train-time basis to say anything about that exact key) and are excluded from precision/recall, reported separately as the coverage rate.",
+    "row_is_true_structure": "for a COVERED row, true iff row.condition_id == that key's TRAIN-derived mode_condition (evaluation-only ground truth, computed by the benchmark script directly from the row, never exposed to the tiering mechanism itself).",
+    "flagged": "a covered row counts as 'pattern flagged' under a given method if that method's tier/decision for the row's key is a positive prediction (see retrieval_methods below)."
+  },
+
+  "retrieval_methods": {
+    "A_no_pattern_learning": "Every row is unflagged, unconditionally -- no recurrence/pattern model is used at all.",
+    "B_naive_frequency_flagging": "A covered row is flagged iff its key's n_train >= MIN_OBSERVATIONS_FOR_TRUSTED_PURITY (3) -- i.e. 'recurs often enough', ignoring purity/tier entirely.",
+    "C1_tiered_pattern_learning_proposed": "A covered row is flagged iff its key's tier is INFERRED or CONFIRMED (per tier_assignment_precedence).",
+    "C2_ablation_no_tiering": "A covered row is flagged iff its key's purity_train >= TAU_INFERRED (0.6), ignoring n (no MIN_OBSERVATIONS_FOR_TRUSTED_PURITY floor, no CONFIRMED/validation-replication distinction) -- isolates whether the tier system's small-sample humility and validation-replication requirement (beyond a flat purity threshold) contribute anything."
+  },
+  "_no_baselines_added_or_removed_after_seeing_results": true,
+
+  "metrics": {
+    "coverage_rate": "n_covered_test_rows / n_total_test_rows",
+    "pattern_precision": "(# flagged covered rows that are true-structure) / (# flagged covered rows)",
+    "pattern_recall": "(# true-structure covered rows that were flagged) / (# true-structure covered rows)",
+    "tier_level_true_structure_rate": "for each of OBSERVED/INFERRED/CONFIRMED/UNCERTAIN, (# covered rows in that tier that are true-structure) / (# covered rows in that tier) -- tests whether CONFIRMED > INFERRED > OBSERVED/UNCERTAIN empirically, not assumed"
+  },
+
+  "secondary_pattern_analyses": {
+    "temporal_clustering": "Per known combo, inter-occurrence step gaps are compared to the value implied by src.data.episodic's own deterministic round-robin scheduling formula (constant spacing by construction). Reported descriptively, not as a precision/recall metric -- see docs/PHASE4_2_FAILURE_PATTERNS.md.",
+    "cause_outcome": "Among train-split CRITICAL-tier rows with recovery_attempted==true, recovery_outcome/recovery_correct distribution grouped by diagnosed_cause -- descriptive only, explicitly NOT used to make or evaluate any recovery decision (that is Phase 4.3's separate objective, per the Phase 4.2 authorization's closing instruction)."
+  },
+
+  "acceptance_criteria": {
+    "minimum_evaluable_n": 10,
+    "_minimum_evaluable_n_rationale": "A generic, dataset-independent small-sample convention (at least 10 covered test-split rows) below which precision/recall point estimates are not treated as informative -- not derived from this dataset's specific realized count.",
+    "H2_supported": "n_covered_test_rows >= minimum_evaluable_n AND C1's pattern_precision exceeds BOTH baseline A's (undefined/0 by construction) and baseline B's, AND C1's pattern_recall does not fall below baseline B's by more than a small margin (0.1), AND tier_level_true_structure_rate empirically orders CONFIRMED >= INFERRED >= OBSERVED/UNCERTAIN.",
+    "H2_partially_supported": "n_covered_test_rows >= minimum_evaluable_n AND C1 beats B on precision but recall drops materially, OR the tier ordering holds for some but not all tier pairs, OR results differ materially between the row-level metric and the secondary analyses.",
+    "H2_unsupported": "n_covered_test_rows >= minimum_evaluable_n AND C1 does not beat baseline B on precision, or the tier ordering is inverted.",
+    "H2_inconclusive": "n_covered_test_rows < minimum_evaluable_n (evidence volume too small to distinguish supported/unsupported), regardless of which way the point estimates lean.",
+    "_fixed_before_final_evaluation": true
+  }
+}

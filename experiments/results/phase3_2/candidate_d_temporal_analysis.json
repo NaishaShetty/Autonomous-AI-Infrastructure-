@@ -1,0 +1,7 @@
+{
+  "executed": false,
+  "has_timestamp_field": false,
+  "generation_is_vectorized_per_regime_not_sequential": true,
+  "conclusion": "Temporal representation cannot be validly evaluated under the current benchmark.",
+  "reasoning": "StreamSample carries no timestamp; the only ordering available is array index within a regime, which src/data/synthetic.py::generate_regime_stream produces via vectorized per-regime rng calls with no sequential dependence between consecutive samples. Treating row index as elapsed time would fabricate a temporal semantics the generator does not provide, which the Phase 3.2 brief explicitly prohibits. A controlled temporal extension (e.g. samples with real timestamps and drift that evolves continuously rather than only at fixed regime boundaries) would be required before recency/decay features could be validly tested -- this is a benchmark-design requirement for a future phase, not something Phase 3.2 should silently add."
+}

@@ -1,0 +1,5 @@
+{
+  "answer_threshold": 0.70,
+  "abstain_threshold": 0.40,
+  "risk_weight": 0.50
+}

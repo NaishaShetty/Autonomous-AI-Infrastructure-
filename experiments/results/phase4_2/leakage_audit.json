@@ -1,0 +1,30 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "pattern_query_excludes_ground_truth_and_outcome_fields",
+      "passed": true,
+      "detail": "overlap=[]"
+    },
+    {
+      "name": "no_candidate_derived_only_from_test_split",
+      "passed": true,
+      "detail": "violating keys=[]"
+    },
+    {
+      "name": "candidacy_rule_excludes_n_train_below_2",
+      "passed": true,
+      "detail": "0 violations"
+    },
+    {
+      "name": "discovery_is_deterministic",
+      "passed": true,
+      "detail": "6 candidates, stable=True"
+    },
+    {
+      "name": "empty_candidate_or_row_set_handled_gracefully",
+      "passed": true,
+      "detail": "ok"
+    }
+  ]
+}

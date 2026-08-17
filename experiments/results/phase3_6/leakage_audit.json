@@ -1,0 +1,73 @@
+{
+  "seed": 42,
+  "checks": [
+    {
+      "check": "threshold_and_complementarity_fit_only_on_regime2",
+      "n_regime2_samples": 1500,
+      "regime2_score_array_lengths_match": true,
+      "regime2_test_row_overlap": 0,
+      "passed": true
+    },
+    {
+      "check": "cost_model_matches_frozen_protocol",
+      "matches": true,
+      "passed": true
+    },
+    {
+      "check": "tier_assignment_does_not_use_ground_truth",
+      "assign_tier_signature": "(score: 'float', thresholds: 'TierThresholds') -> 'RiskTier'",
+      "decide_all_signature": "(scores: 'np.ndarray', thresholds: 'TierThresholds') -> 'tuple[list[RiskTier], list[Decision]]'",
+      "offending_params": [],
+      "passed": true
+    },
+    {
+      "check": "diagnosis_is_deterministic_and_unfit",
+      "no_fit_call_in_module": true,
+      "repeated_call_deterministic": true,
+      "passed": true
+    },
+    {
+      "check": "recovery_policy_no_fit_calls",
+      "no_fit_call_in_module": true,
+      "passed": true
+    },
+    {
+      "check": "diagnosis_precedes_outcome_check_in_recovery",
+      "diagnose_call_offset": 859,
+      "label_reference_offsets": [
+        2306,
+        2801
+      ],
+      "all_label_references_after_diagnose_call": true,
+      "passed": true
+    },
+    {
+      "check": "seeds_unchanged",
+      "phase3_1_seeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        42
+      ],
+      "phase3_6_seeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        42
+      ],
+      "passed": true
+    },
+    {
+      "check": "duplicate_samples_regime2_vs_test",
+      "duplicate_rows_within_regime2": 0,
+      "duplicate_rows_within_test": 0,
+      "cross_split_overlap": 0,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}
