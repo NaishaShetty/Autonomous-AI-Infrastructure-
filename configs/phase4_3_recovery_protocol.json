@@ -1,0 +1,147 @@
+{
+  "protocol_version": "phase4_3_protocol_v1",
+  "milestone": "ACTIVE_PHASE_4_3_RECOVERY_LEARNING_AND_EVALUATION",
+  "status": "FROZEN",
+  "frozen_before": ["dataset_generation", "policy_evaluation", "test_split_access"],
+  "evidence_type": "CONTROLLED",
+  "evidence_type_note": "Every episode this protocol governs is synthetic/controlled (src.recovery.schema.SourceType.CONTROLLED). Never observational real-world recovery evidence.",
+
+  "research_question": "Given a controlled, frozen set of failure-scenario -> recovery-action -> validated-outcome episodes spanning scenario families analogous to those already represented (descriptively) in FailureExperience, can a context-aware recovery-selection mechanism choose actions that achieve a higher validated-recovery-success rate than fixed-policy baselines on held-out frozen test episodes, without exceeding a pre-registered unsafe-action-rate threshold?",
+
+  "hypotheses": {
+    "H3": "The proposed context-aware recovery-selection mechanism (EmpiricalRecoveryPolicy) achieves a higher validated recovery success rate than the best-performing fixed-policy baseline (FixedPriorityPolicy) on the frozen test split, at or above the pre-registered minimum effect size (0.15).",
+    "H3_SAFETY": "The proposed mechanism's unsafe-action rate on the frozen test split does not exceed the pre-registered threshold (0.00 -- zero tolerance, since the mechanism structurally masks unsafe actions).",
+    "H3_UTILITY": "The proposed mechanism achieves recovery utility (src.recovery.utility.recovery_utility) greater than or equal to the best fixed-policy baseline's utility on the frozen test split.",
+    "status": "NOT_YET_TESTED -- frozen before any test-split evaluation"
+  },
+
+  "unit_of_analysis": {
+    "unit": "recovery episode (one scenario -> one selected action -> one validated outcome)",
+    "numerator_example": "count of test episodes with transition.outcome == SUCCESS",
+    "denominator": "count of test episodes evaluated for that policy in that scenario family (or overall)",
+    "aggregation": "reported per-family and pooled-overall; pooled-overall is NOT a weighted average across datasets of differing quality (unlike the cross-dataset pooling explicitly rejected in the post-4.2 reassessment) -- it is a pool across scenario families of the SAME controlled generator and SAME validation rules, which is methodologically sound",
+    "repeated_episodes": "none -- disjoint seed ranges per split (src.recovery.splits) make each episode unique by construction",
+    "multiple_valid_actions": "scored individually per episode; a policy's single selected_action is what is evaluated, oracle_best_action is a reference bound only, never a competitor"
+  },
+
+  "scenario_taxonomy": {
+    "version": "phase4_3_taxonomy_v1",
+    "module": "src.recovery.taxonomy",
+    "families": ["resource_exhaustion", "transient_failure", "configuration_failure", "dependency_failure"],
+    "families_considered_and_excluded": ["infrastructure_failure", "model_runtime_failure", "task_termination (subsumed by resource_exhaustion)"],
+    "exclusion_reason": "would not add a materially different recovery-action profile from the four included families; see docs/PHASE4_3_RECOVERY_LEARNING.md"
+  },
+
+  "action_vocabulary": {
+    "version": "phase4_3_actions_v1",
+    "module": "src.recovery.actions",
+    "actions": ["retry", "restart", "rollback", "reconfigure", "escalate_to_human", "abstain", "force_restart"],
+    "unsafe_actions": ["force_restart"],
+    "actions_considered_and_excluded": ["reschedule (no meaningful distinct semantics from restart in a single-decision environment)", "no_action (redundant with abstain)"]
+  },
+
+  "validation_model": {
+    "version": "phase4_3_validation_v1",
+    "module": "src.recovery.validation",
+    "outcome_labels": ["success", "partial_success", "failure", "unsafe", "timeout", "unrecoverable"],
+    "validation_window_seconds": 120.0,
+    "unrecoverable_note": "reserved in the enum for completeness; does not occur under this frozen ground-truth table -- see limitations in the final report, not backfilled to fake coverage"
+  },
+
+  "decision_time_boundary": {
+    "allowed_inputs": ["scenario_id", "episode_id", "family", "symptom_pattern (noisy)", "severity (noisy)", "workload_type", "candidate_actions"],
+    "forbidden_inputs": ["hidden_cause", "transition/outcome of the CURRENT episode", "validation_result of the CURRENT episode", "oracle_best_action of the CURRENT episode"],
+    "enforced_by": "src.recovery.schema.DecisionContext (extra='forbid', no hidden_cause field) + benchmarks/phase4_3_recovery_leakage_audit.py"
+  },
+
+  "split_methodology": {
+    "version": "phase4_3_splits_v1",
+    "module": "src.recovery.splits",
+    "grouping_unit": "scenario (1:1 with episode)",
+    "method": "disjoint seed ranges per (family, split), fixed before generation",
+    "counts_per_family": {"train": 300, "validation": 100, "test": 180},
+    "counts_total": {"train": 1200, "validation": 400, "test": 720}
+  },
+
+  "sample_size_methodology": {
+    "module": "src.recovery.sample_size",
+    "method": "two-proportion two-sided z-test power calculation (conservative floor; actual analysis uses a more powerful paired McNemar test)",
+    "assumptions": {"p1_expected": 0.55, "p2_expected": 0.40, "alpha": 0.05, "power": 0.80},
+    "minimum_n_test_total": 173,
+    "actual_n_test_total": 720,
+    "headroom_ratio": 4.16
+  },
+
+  "baselines": {
+    "baseline_A": "FixedPriorityPolicy -- fixed rule-based priority order per family, frozen before evaluation",
+    "baseline_B": "RandomValidPolicy -- uniform-random among safe candidate actions",
+    "oracle_reference_bound": "oracle_best_action() -- uses hidden_cause directly; upper/reference bound only, never a competitor"
+  },
+
+  "proposed_mechanism": {
+    "policy_id": "proposed_empirical_recovery",
+    "module": "src.recovery.policy.EmpiricalRecoveryPolicy",
+    "description": "experience-based empirical success-rate lookup with a 3-level symptom-bucket backoff hierarchy, Laplace-smoothed, evidence-count-gated abstention",
+    "hyperparameter": "min_evidence -- selected on VALIDATION split only, swept over {2, 3, 5, 8, 12, 20}, never on TEST"
+  },
+
+  "abstention": {
+    "confidence_definition": "supporting TRAIN example count (n) in the most specific non-empty retrieval bucket, normalized by min_evidence",
+    "abstention_rule": "abstain (or escalate_to_human if abstain is not a candidate) when n < min_evidence for the best-estimated action",
+    "unsafe_action_definition": "src.recovery.actions.is_unsafe -- action_id in a family's frozen unsafe_actions set (taxonomy.py)"
+  },
+
+  "recovery_utility": {
+    "version": "phase4_3_utility_v1",
+    "module": "src.recovery.utility",
+    "formula": "outcome_value(outcome) - 0.02*recovery_cost - 0.001*recovery_latency_seconds",
+    "outcome_values": {"success": 1.0, "partial_success": 0.5, "failure": 0.0, "timeout": 0.0, "unrecoverable": 0.0, "unsafe": -5.0}
+  },
+
+  "primary_metrics": [
+    {"name": "validated_recovery_success_rate", "formula": "count(outcome==success) / n_episodes", "primary": true},
+    {"name": "unsafe_action_rate", "formula": "count(unsafe_action_taken) / n_episodes", "primary": true},
+    {"name": "recovery_utility_mean", "formula": "mean(recovery_utility(outcome, cost, latency))", "primary": true}
+  ],
+  "secondary_metrics": [
+    {"name": "abstention_rate", "formula": "count(abstained) / n_episodes"},
+    {"name": "partial_recovery_rate", "formula": "count(outcome==partial_success) / n_episodes"},
+    {"name": "recovery_latency_mean_seconds", "formula": "mean(recovery_latency_seconds)"},
+    {"name": "recovery_cost_mean", "formula": "mean(recovery_cost)"},
+    {"name": "regret_vs_oracle", "formula": "mean(oracle_p_success - policy_p_success) using ground truth, evaluation-only, never a policy input"}
+  ],
+
+  "statistical_methodology": {
+    "primary_comparison": "paired McNemar exact test (proposed vs. baseline_A success/failure, same test episodes) for validated_recovery_success_rate",
+    "confidence_intervals": "95% Wilson score interval on each policy's success rate; bootstrap (n=2000 resamples) 95% CI on the success-rate DIFFERENCE",
+    "multiple_comparisons": "Holm-Bonferroni correction across the 3 primary metrics per policy-pair comparison",
+    "significance_level": 0.05
+  },
+
+  "ablations": [
+    {"key": "A_no_memory_vs_memory", "compares": ["baseline_fixed_priority", "baseline_random_valid", "proposed_empirical_recovery"]},
+    {"key": "B_frequency_only_vs_outcome_aware", "compares": ["ablation_frequency_only", "proposed_empirical_recovery"]},
+    {"key": "C_no_abstention_vs_abstention", "compares": ["proposed_empirical_recovery_no_abstention", "proposed_empirical_recovery"]},
+    {"key": "D_no_context_vs_context", "compares": ["proposed_empirical_recovery_family_only", "proposed_empirical_recovery"]},
+    {"key": "E_safety_masking", "compares": ["ablation_unmasked_utility", "proposed_empirical_recovery"], "metric": "unsafe_action_rate only"}
+  ],
+
+  "leakage_audit_requirements": [
+    "hidden_cause never reaches policy.select_action",
+    "transition/outcome of the episode being decided never reaches policy.select_action",
+    "test scenarios never used in TRAIN fit() or VALIDATION hyperparameter sweep",
+    "min_evidence selected on VALIDATION only, frozen before TEST is touched",
+    "oracle_best_action never used as a policy input",
+    "provenance.source_type is always CONTROLLED, never silently omitted",
+    "non-vacuous contamination check: injecting a hidden_cause-correlated field into DecisionContext must be structurally impossible (pydantic extra='forbid')"
+  ],
+
+  "research_integrity_constraints": [
+    "no lowering of minimum_n_test_total after generation",
+    "no change to action vocabulary, taxonomy, or validation rules after TEST is evaluated",
+    "min_evidence and any other hyperparameter frozen on VALIDATION before TEST is touched, exactly once",
+    "TEST split evaluated exactly once per frozen configuration",
+    "failed/unsuccessful episodes are retained in the dataset, never discarded",
+    "old Phase 4.1/4.2 and revised real-data Phase 3 artifacts are not modified by this protocol"
+  ]
+}

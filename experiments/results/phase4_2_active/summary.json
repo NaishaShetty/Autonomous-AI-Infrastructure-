@@ -1,0 +1,54 @@
+{
+  "alibaba_primary_temporal": {
+    "n_evaluable_test_candidates": 21,
+    "minimum_evaluable_n": 50,
+    "minimum_evaluable_n_met": false,
+    "tier_counts": {
+      "OBSERVED": 17,
+      "INFERRED": 0,
+      "CONFIRMED": 6,
+      "UNCERTAIN": 8
+    },
+    "method_C_metrics": {
+      "n_flagged": 6,
+      "n_flagged_evaluable_on_test": 6,
+      "n_flagged_true_elevated_on_test": 2,
+      "precision": 0.3333333333333333,
+      "false_pattern_rate": 0.6666666666666667,
+      "n_true_elevated_test_candidates": 3,
+      "n_true_elevated_flagged": 2,
+      "recall": 0.6666666666666666
+    },
+    "baseline_B_metrics": {
+      "n_flagged": 23,
+      "n_flagged_evaluable_on_test": 21,
+      "n_flagged_true_elevated_on_test": 3,
+      "precision": 0.14285714285714285,
+      "false_pattern_rate": 0.8571428571428572,
+      "n_true_elevated_test_candidates": 3,
+      "n_true_elevated_flagged": 3,
+      "recall": 1.0
+    }
+  },
+  "alibaba_random_stratified_sensitivity": {
+    "n_evaluable_test_candidates": 20,
+    "method_C_metrics": {
+      "n_flagged": 6,
+      "n_flagged_evaluable_on_test": 6,
+      "n_flagged_true_elevated_on_test": 5,
+      "precision": 0.8333333333333334,
+      "false_pattern_rate": 0.16666666666666663,
+      "n_true_elevated_test_candidates": 6,
+      "n_true_elevated_flagged": 5,
+      "recall": 0.8333333333333334
+    }
+  },
+  "aiops_n_recurring_candidates": 24,
+  "agentrx_n_domains": 2,
+  "synthetic_validation_tier_counts": {
+    "OBSERVED": 10,
+    "INFERRED": 2,
+    "CONFIRMED": 0,
+    "UNCERTAIN": 0
+  }
+}

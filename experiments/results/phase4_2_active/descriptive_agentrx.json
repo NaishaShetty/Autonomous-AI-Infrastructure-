@@ -1,0 +1,146 @@
+{
+  "n_experiences_ingested": 73,
+  "n_ingestion_errors": 0,
+  "domains": {
+    "tau_bench_retail": 29,
+    "magentic_one_web_file_agent": 44
+  },
+  "categories_per_domain": {
+    "tau_bench_retail": {
+      "Instruction Adherence Failure": 6,
+      "Misinterpretation of Tool Output": 7,
+      "Invalid Invocation": 2,
+      "Underspecified User Intent": 10,
+      "Intent Plan Misalignment": 8,
+      "Intent Not Supported": 2,
+      "System Failure": 1
+    },
+    "magentic_one_web_file_agent": {
+      "Instruction/Plan Adherence Failure": 25,
+      "Guardrails Triggered": 23,
+      "Misinterpretation of Tool Output": 17,
+      "Intent not supported": 5,
+      "Invention of new information": 5,
+      "Intent Plan Misalignment": 7,
+      "Invalid Invocation": 1,
+      "System Failure": 1
+    }
+  },
+  "single_label_recurring_associations": [
+    {
+      "domain": "magentic_one_web_file_agent",
+      "primary_failure_category": "Guardrails Triggered",
+      "count": 23
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "primary_failure_category": "Instruction/Plan Adherence Failure",
+      "count": 13
+    },
+    {
+      "domain": "tau_bench_retail",
+      "primary_failure_category": "Intent Plan Misalignment",
+      "count": 8
+    },
+    {
+      "domain": "tau_bench_retail",
+      "primary_failure_category": "Instruction Adherence Failure",
+      "count": 6
+    },
+    {
+      "domain": "tau_bench_retail",
+      "primary_failure_category": "Underspecified User Intent",
+      "count": 6
+    },
+    {
+      "domain": "tau_bench_retail",
+      "primary_failure_category": "Misinterpretation of Tool Output",
+      "count": 4
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "primary_failure_category": "Misinterpretation of Tool Output",
+      "count": 3
+    },
+    {
+      "domain": "tau_bench_retail",
+      "primary_failure_category": "Invalid Invocation",
+      "count": 2
+    },
+    {
+      "domain": "tau_bench_retail",
+      "primary_failure_category": "Intent Not Supported",
+      "count": 2
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "primary_failure_category": "Intent Plan Misalignment",
+      "count": 2
+    }
+  ],
+  "multi_label_recurring_associations": [
+    {
+      "domain": "magentic_one_web_file_agent",
+      "failure_category": "Instruction/Plan Adherence Failure",
+      "count": 25
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "failure_category": "Guardrails Triggered",
+      "count": 23
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "failure_category": "Misinterpretation of Tool Output",
+      "count": 17
+    },
+    {
+      "domain": "tau_bench_retail",
+      "failure_category": "Underspecified User Intent",
+      "count": 10
+    },
+    {
+      "domain": "tau_bench_retail",
+      "failure_category": "Intent Plan Misalignment",
+      "count": 8
+    },
+    {
+      "domain": "tau_bench_retail",
+      "failure_category": "Misinterpretation of Tool Output",
+      "count": 7
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "failure_category": "Intent Plan Misalignment",
+      "count": 7
+    },
+    {
+      "domain": "tau_bench_retail",
+      "failure_category": "Instruction Adherence Failure",
+      "count": 6
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "failure_category": "Intent not supported",
+      "count": 5
+    },
+    {
+      "domain": "magentic_one_web_file_agent",
+      "failure_category": "Invention of new information",
+      "count": 5
+    },
+    {
+      "domain": "tau_bench_retail",
+      "failure_category": "Invalid Invocation",
+      "count": 2
+    },
+    {
+      "domain": "tau_bench_retail",
+      "failure_category": "Intent Not Supported",
+      "count": 2
+    }
+  ],
+  "temporal_clustering": "NOT_CURRENTLY_EVALUABLE",
+  "temporal_clustering_reason": "AgentRx has no real wall-clock timestamp -- the raw joined data's `timestamp` field is literally 'MISSING' for every record; only a synthetic anchor timestamp exists (src/failure_experience/sources/_util.py), which is not meaningful for ordering and is explicitly excluded from this analysis per the frozen protocol.",
+  "label": "DESCRIPTIVE / EXPLORATORY -- behavioral/agent failure-mode recurrence, NOT infrastructure failure patterns (AgentRx has no telemetry). No frozen split exists; no precision/recall claim is made."
+}

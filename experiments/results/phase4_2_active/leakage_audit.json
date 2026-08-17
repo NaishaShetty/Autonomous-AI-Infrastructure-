@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "check": "test_labels_cannot_enter_discovery",
+      "passed": true,
+      "detail": "discover() raised AssertionError when given a test-split row, as required"
+    },
+    {
+      "check": "validation_cannot_leak_into_train_discovery",
+      "passed": true,
+      "detail": "confirm() raised AssertionError when given a test-split row, as required"
+    },
+    {
+      "check": "pattern_query_structurally_excludes_outcome_fields",
+      "passed": true,
+      "detail": "PatternQuery fields = ['gpu_type', 'task_name']; forbidden-term matches = []"
+    },
+    {
+      "check": "contamination_test_is_non_vacuous",
+      "passed": true,
+      "detail": "Injecting 40 synthetic Failed rows for the smallest OBSERVED-tier context ('xComputeWorker', '') (original n_train=20) into train changed its discovered tier from OBSERVED to INFERRED -- proves discovery output is sensitive to train-split contents (a real, non-vacuous check), and by construction demonstrates why discover()/confirm()'s split assertions (checks 1-2) are load-bearing, not decorative."
+    },
+    {
+      "check": "temporal_split_boundary_respected",
+      "passed": true,
+      "detail": "every job_name in the frozen temporal manifest belongs to exactly one split"
+    },
+    {
+      "check": "historical_frozen_artifacts_unmodified",
+      "passed": true,
+      "detail": "all historical files byte-identical to the recorded baseline"
+    },
+    {
+      "check": "no_post_test_tuning",
+      "passed": true,
+      "detail": "protocol hash at test-evaluation time = 630d27e7a0847acac22733608044dd195da0d4b049887fa49bc4af757f2875cf; protocol hash now = 630d27e7a0847acac22733608044dd195da0d4b049887fa49bc4af757f2875cf"
+    }
+  ],
+  "all_passed": true
+}

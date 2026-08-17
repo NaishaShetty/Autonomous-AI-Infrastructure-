@@ -1,0 +1,189 @@
+{
+  "_frozen": true,
+  "_note": "ACTIVE Phase 4.2 failure-pattern-learning protocol (H2-Alibaba, primary). Written and committed BEFORE any discovery code was run against real train/validation/test data. Do not edit values in this file to chase a better-looking result. This is a SEPARATE, NEW protocol from the frozen historical configs/phase4_2_pattern_protocol.json, which is untouched.",
+  "role": "Freezes the H2-Alibaba experimental protocol per docs/PROJECT_HISTORY.md's 'ACTIVE PHASE 4.2 -- Failure Pattern Learning: Reassessment & Implementation Plan' section 17 step 1 and section 8. AIOps and AgentRx are governed by the descriptive-only rules in section 14/15 of this file, not by a train/test protocol (no frozen split exists for either -- see docs/PROJECT_HISTORY.md ACTIVE PHASE 4.2 PLAN section 8).",
+
+  "relationship_to_historical_phase4_2": "The historical (frozen, INCONCLUSIVE) protocol is configs/phase4_2_pattern_protocol.json, evaluated on synthetic data with candidate key (workload_id, diagnosed_cause) and a symptom->cause purity claim. This protocol is NEW RESEARCH on a structurally different pattern type (context->failure-rate elevation) and a different dataset (real Alibaba GPU 2020 trace). It does not modify, reinterpret, or supersede the historical result.",
+
+  "hypothesis": {
+    "id": "H2-Alibaba",
+    "statement": "Certain (task_name, gpu_type) context combinations in the Alibaba GPU 2020 cluster trace exhibit a failure-rate elevation over the population baseline that is discoverable on training data and replicates on held-out validation/test data at a rate better than a naive frequency-count baseline."
+  },
+
+  "pattern_definition": {
+    "candidate_key": "(task_name, gpu_type)",
+    "claim_under_test": "context -> elevated failure rate: does this (task_name, gpu_type) combination's observed Failed/Terminated/Running outcome distribution show a failure rate meaningfully above the population baseline failure rate, and does that elevation hold on data the discovery step never saw?",
+    "unit_of_analysis": "one (task_name, gpu_type) candidate context key",
+    "population": "ALL rows for the split in question (status in {Failed, Terminated, Running}), not only Failed rows -- required so a per-context failure RATE (failures / total occurrences of that context) can be computed and compared against the population base rate. This is a directly observed outcome (the dataset's own `status` field), not an inferred proxy."
+  },
+
+  "dataset": {
+    "name": "alibaba_gpu2020",
+    "file": "data/processed/alibaba_gpu2020/task_table.main_sample.csv",
+    "row_count": 11750,
+    "status_breakdown": {"Terminated": 8905, "Failed": 2594, "Running": 251},
+    "content_hash_source": "sha256 of the CSV file, first 16 hex chars, computed identically to src.failure_experience.sources.real_alibaba._content_hash"
+  },
+
+  "data_access_decision": {
+    "summary": "discovery_alibaba.py reads data/processed/alibaba_gpu2020/task_table.main_sample.csv directly (via the same DATA_PATH/SPLITS_PATH constants and split-lookup/content-hash helpers already defined in src.failure_experience.sources.real_alibaba -- imported, not re-implemented), rather than sourcing exclusively through src.failure_experience.retrieval.",
+    "why_this_is_not_a_second_parallel_ingestion_architecture": "The active Phase 4.1 FailureExperience store is, by design, a store of FAILURE incidents -- src.failure_experience.sources.real_alibaba.load_failed_rows() filters to status=='Failed' before any FailureExperience is ever constructed, and further downsamples to a fixed 300/500-row sample of the ~2594 failed rows (see ALIBABA_SAMPLE_SIZE in that module and benchmarks/phase4_1_active_experiments.py). A Terminated or Running row is not a failure event and was, by the Phase 4.1 schema's own design, never intended to become a FailureExperience record. Pattern Type 1 (context -> failure-RATE elevation, per the approved plan section 5) structurally requires the full per-context denominator (Failed + Terminated + Running), which no amount of querying FailureExperience/retrieval can supply, because that denominator was never ingested into FailureExperience in the first place -- this is a structural fact about what FailureExperience models, not a code gap. The approved plan's own section 12 anticipates exactly this: 'H2-Alibaba's Pattern Type 1 uses raw resource-plan fields (plan_cpu/gpu_type) and the observed Failed/Terminated label directly, not a fitted risk score.'",
+    "what_is_reused_rather_than_reimplemented": "DATA_PATH, SPLITS_PATH, _load_split_lookup, _content_hash, _float_or_none are imported directly from src.failure_experience.sources.real_alibaba -- the exact same frozen file paths, split manifest, and hashing logic active Phase 4.1's own Alibaba adapter uses. No new raw file is read; no new adapter/ingestion pipeline is built.",
+    "failure_experience_integration_point": "An integration test (tests/integration/test_phase4_2_active_integration.py) ingests Alibaba FailureExperience records via src.failure_experience.sources.real_alibaba.load_normalized() + src.failure_experience.ingest.ingest_batch(), retrieves them via src.failure_experience.retrieval.retrieve(), and cross-checks that every retrieved failure's (affected_component, observations.system_state['gpu_type']) pair is a valid (task_name, gpu_type) context key produced by this protocol's discovery module on the same underlying CSV -- proving the two representations describe the same underlying data, even though FailureExperience itself cannot supply the population denominator."
+  },
+
+  "splits": {
+    "primary": {
+      "name": "temporal",
+      "file": "data/audit/alibaba_gpu2020/splits_temporal.json",
+      "unit": "job_name",
+      "counts_rows": {"train": 7380, "val": 1559, "test": 2811},
+      "why_primary": "Per the approved plan section 8: a rate-elevation claim is more exposed to leakage under random splitting (near-duplicate jobs from the same submission burst could land in both train and test) than a strictly temporal split guards against. Mirrors the primary/secondary distinction Phase 3's real-data H3 experiment already used for this same dataset."
+    },
+    "secondary_sensitivity_check": {
+      "name": "random_stratified",
+      "file": "data/audit/alibaba_gpu2020/splits_random_stratified.json",
+      "unit": "job_name",
+      "counts_rows": {"train": 6999, "val": 1498, "test": 1503},
+      "role": "Sensitivity check only. If this split produces a materially better result than the primary temporal split, the temporal-split result is still what is reported as the primary finding -- the random split is never substituted in because it looks better (approved plan section 6 of the task instructions: 'Do not replace the temporal split with the random split because it produces better results.')."
+    },
+    "leakage_note": "job_name does not recur among failed rows in this dataset (0 of 2594 failed rows share a job_name; confirmed on the full unsampled population too, 7/256755). The leakage risk this split protocol guards is (task_name, gpu_type) TUPLES recurring across the split boundary -- which is expected and is exactly what discovery -> replication is designed to measure, not a leak."
+  },
+
+  "candidate_definition": {
+    "key": "(task_name, gpu_type)",
+    "computed_from": "every row (any status) in the split being examined",
+    "gpu_type_empty_string_handling": "the empty-string gpu_type value (1761/11750 rows, present in the raw dataset for CPU-only tasks) is kept as its own literal category, not dropped or imputed -- it is a real, meaningful value (no GPU allocated), consistent with how src.failure_experience.sources.real_alibaba stores it (`system_state.gpu_type` = None only when the CSV field itself is empty; here it is retained as an explicit '' key)."
+  },
+
+  "minimum_evidence_thresholds": {
+    "N_MIN_CANDIDATE": 5,
+    "N_MIN_CANDIDATE_rationale": "A context must occur at least 5 times in the train split to be considered a candidate at all -- below this, no rate estimate (of any kind) is meaningfully distinguishable from single-digit-sample noise. Mirrors the old Phase 4.2 protocol's 'not a singleton' floor (n_train>=2), scaled up modestly because a RATE (two-outcome proportion) needs more evidence than a single-label purity/mode computation to be non-degenerate.",
+    "N_MIN_TRUSTED": 20,
+    "N_MIN_TRUSTED_rationale": "Standard small-sample statistics convention for trusting a proportion estimate under a normal approximation (n*p>=5 and n*(1-p)>=5 at the observed ~17% population base rate implies n>=~30 at the boundary; n>=20 is the more conservative, commonly-cited rule-of-thumb floor for 'large enough to compute a rate at all', e.g. Wilson-interval practical guidance). A context below this floor may be a CANDIDATE (OBSERVED-eligible) but its rate is not treated as trustworthy for elevation/tier decisions."
+  },
+
+  "rate_elevation_criterion": {
+    "definition": "context_failure_rate - split_baseline_failure_rate >= MARGIN, where split_baseline_failure_rate is computed over the SAME split's full row population (all contexts pooled).",
+    "MARGIN_TRAIN": 0.10,
+    "MARGIN_TRAIN_rationale": "A pre-registered, dataset-independent absolute effect size: at least 10 percentage points above the population base rate. Chosen as a round, practically-meaningful threshold before any train-split rate was computed (the population base rate ~16.8% was known from the approved plan's section 4.3 descriptive audit, computed on the FULL pooled train+val+test population, not train-only -- the plan explicitly disclosed this and required train-only figures to be recomputed fresh at implementation time, which this protocol does; the 0.10 absolute margin itself does not depend on the exact recomputed baseline value).",
+    "MARGIN_VALIDATION": 0.05,
+    "MARGIN_VALIDATION_rationale": "Half of MARGIN_TRAIN, mirroring the historical protocol's asymmetric train/validation bar: validation-split occurrences per candidate key are necessarily far fewer than train (a single split-fold's worth), so requiring the full 0.10 replication bar on a small validation slice would make CONFIRMED nearly unreachable by construction, not because the underlying relationship is weak. 0.05 is the achievable, still-meaningful replication bar given the available validation volume.",
+    "N_MIN_VALIDATION": 5,
+    "N_MIN_VALIDATION_rationale": "A candidate needs at least 5 validation-split occurrences of its exact (task_name, gpu_type) key before a validation-replication check is attempted at all; below this, validation is not evaluated and the candidate cannot reach CONFIRMED (falls back to INFERRED if its train evidence alone qualifies)."
+  },
+
+  "evidence_tiers": {
+    "concept": "OBSERVED = recurrence exists; INFERRED = recurrence + train-split rate elevation clears MARGIN_TRAIN; CONFIRMED = INFERRED AND the same elevation independently replicates on validation-split occurrences of the identical key; UNCERTAIN = recurs but n_train too small to trust any rate estimate.",
+    "assignment_precedence": [
+      "1. n_train < N_MIN_CANDIDATE -> not a candidate at all (excluded from every downstream count, not folded into UNCERTAIN).",
+      "2. n_train >= N_MIN_CANDIDATE AND n_train < N_MIN_TRUSTED -> UNCERTAIN.",
+      "3. n_train >= N_MIN_TRUSTED AND (train_rate - train_baseline_rate) >= MARGIN_TRAIN AND n_validation_for_key >= N_MIN_VALIDATION AND (validation_rate_for_key - validation_baseline_rate) >= MARGIN_VALIDATION -> CONFIRMED.",
+      "4. n_train >= N_MIN_TRUSTED AND (train_rate - train_baseline_rate) >= MARGIN_TRAIN -> INFERRED.",
+      "5. else (n_train >= N_MIN_TRUSTED, elevation does not clear MARGIN_TRAIN) -> OBSERVED."
+    ]
+  },
+
+  "evaluation_sequence": {
+    "step_1_discovery": "TRAIN split only. Count (task_name, gpu_type) occurrences, compute train failure rate per context and the train baseline rate, apply N_MIN_CANDIDATE/N_MIN_TRUSTED/MARGIN_TRAIN to assign a provisional tier (OBSERVED/INFERRED/UNCERTAIN; CONFIRMED requires step 2).",
+    "step_2_validation_confirmation": "VALIDATION split only. For every train-discovered candidate with provisional tier INFERRED, check whether it also clears MARGIN_VALIDATION on validation-split occurrences of the identical key (N_MIN_VALIDATION floor). If yes, upgrade to CONFIRMED; if no (insufficient n or elevation not replicated), remains INFERRED. OBSERVED/UNCERTAIN candidates are not eligible for CONFIRMED (precedence rule 3 requires INFERRED-level train evidence first).",
+    "step_3_freeze": "After step 2, every candidate's final tier is frozen. No further changes to candidate membership, tier, threshold, or baseline are made based on anything observed after this point.",
+    "step_4_test_evaluation": "TEST split, touched exactly once. For each frozen candidate, check whether its test-split occurrences of the identical key ALSO show elevation >= MARGIN_TRAIN over the test-split baseline rate (same criterion as train, for symmetry). Compute rate-elevation precision/recall/false-pattern-rate/tier-calibration against this test-split ground truth."
+  },
+
+  "baselines": {
+    "A_no_pattern_learning": "Every candidate context is unflagged, unconditionally -- no recurrence/rate model used at all.",
+    "B_naive_frequency_flagging": "A candidate is flagged iff n_train >= N_MIN_TRUSTED (20), ignoring rate/elevation entirely.",
+    "C_proposed_tiered_rate_elevation": "A candidate is flagged iff its frozen tier is INFERRED or CONFIRMED.",
+    "C_prime_ablation_flat_threshold_no_n_floor": "A candidate is flagged iff (train_rate - train_baseline_rate) >= MARGIN_TRAIN, using ONLY the N_MIN_CANDIDATE floor (5), ignoring N_MIN_TRUSTED (20) -- isolates whether the higher trusted-sample-size floor contributes anything beyond a bare elevation check on any recurring candidate.",
+    "C_double_prime_ablation_confirmed_only": "A candidate is flagged iff its frozen tier is CONFIRMED (validation-replication required) -- isolates whether requiring independent validation-split replication improves precision over the more permissive C (INFERRED-or-CONFIRMED), at whatever recall cost that implies.",
+    "D_embedding_based_grouping": "NOT IMPLEMENTED in this milestone. Optional per the approved plan (section 7/11/15) -- 'not the primary method', 'only implement if conditions make it feasible'. Deprioritized given the primary hypothesis (H2-Alibaba, baselines A/B/C/C'/C'') is the required deliverable and the plan explicitly warns against introducing complexity that is not load-bearing for the research question. Reported as NOT CURRENTLY EVALUABLE within this milestone's scope, not silently omitted."
+  },
+
+  "metrics": {
+    "rate_elevation_precision": {
+      "formula": "n_flagged_test_candidates_with_test_elevation / n_flagged_test_candidates",
+      "numerator": "flagged candidates (per baseline/method) whose TEST-split occurrences also show (test_rate - test_baseline_rate) >= MARGIN_TRAIN",
+      "denominator": "all candidates flagged by that baseline/method that are also present (n_test >= N_MIN_CANDIDATE) in the test split",
+      "unit_of_analysis": "one (task_name, gpu_type) candidate",
+      "interpretation": "of the contexts a method claims are elevated-risk, what fraction actually are, on data the method never saw",
+      "limitations": "undefined (reported as null, not zero) if the denominator is 0"
+    },
+    "rate_elevation_recall": {
+      "formula": "n_flagged_test_candidates_with_test_elevation / n_test_candidates_with_test_elevation",
+      "numerator": "same as precision's numerator",
+      "denominator": "all test-split candidates (n_test >= N_MIN_CANDIDATE) whose test-split rate is actually elevated (test_rate - test_baseline_rate >= MARGIN_TRAIN), regardless of whether train discovery flagged them",
+      "unit_of_analysis": "one (task_name, gpu_type) candidate",
+      "interpretation": "of the contexts that are actually elevated-risk on test data, what fraction did train discovery catch",
+      "limitations": "undefined (reported as null) if the denominator is 0"
+    },
+    "false_pattern_rate": {
+      "formula": "1 - rate_elevation_precision",
+      "numerator": "flagged candidates whose test-split rate is NOT elevated",
+      "denominator": "same as precision's denominator",
+      "unit_of_analysis": "one (task_name, gpu_type) candidate",
+      "interpretation": "fraction of flagged candidates that are false alarms",
+      "limitations": "same as precision"
+    },
+    "tier_calibration": {
+      "formula": "test-split elevation rate, computed separately within each of {OBSERVED, INFERRED, CONFIRMED, UNCERTAIN} (using only candidates present in that tier AND present in test with n_test>=N_MIN_CANDIDATE)",
+      "unit_of_analysis": "one tier group",
+      "interpretation": "whether empirical test-split reliability increases across CONFIRMED > INFERRED > OBSERVED/UNCERTAIN -- measured, not assumed",
+      "limitations": "any tier with zero test-eligible candidates reports null, not a fabricated rate"
+    },
+    "pattern_stability": {
+      "formula": "for each train-discovered candidate, whether its tier assignment is unchanged when train is split into two temporally-contiguous halves and discovery is independently re-run on each half",
+      "unit_of_analysis": "one candidate",
+      "interpretation": "robustness of tier assignment to which subset of train data was used",
+      "limitations": "secondary/ablation-adjacent metric (approved plan section 9), not part of the primary PASS/FAIL criterion",
+      "role": "ablation only, see ablations section below"
+    }
+  },
+
+  "acceptance_criteria": {
+    "minimum_evaluable_n": 50,
+    "minimum_evaluable_n_definition": "the number of TEST-split (task_name, gpu_type) candidates with n_test >= N_MIN_CANDIDATE (5) -- i.e. 'covered' test contexts with enough test-split evidence to compute a test-split rate at all. This is the denominator population precision/recall are computed over.",
+    "minimum_evaluable_n_rationale": "A margin-of-error argument, fixed before any train/validation/test discovery code was run: for a binomial proportion (precision) estimated from n independent flagged candidates at the worst-case p=0.5, the 95% CI half-width is 1.96*sqrt(0.25/n). At n=50 this half-width is ~0.139 (about 14 percentage points) -- the conventional threshold below which a headline precision/recall point estimate, and especially a 4-way tier-calibration breakdown that further subdivides this population, is not treated as informative. 50 was chosen as a single exact number (not a range) from this generic statistical convention, independent of Alibaba's specific realized covered-test-candidate count -- it was NOT chosen after observing how many candidates would actually be covered, and is not adjustable after the fact.",
+    "PASS": "n_evaluable_test_candidates >= minimum_evaluable_n AND the pre-registered rate-elevation precision/recall/false-pattern-rate/tier-calibration metrics are computed and reported for method C against baselines A/B, whichever way the numbers land (a negative or null result on the comparison itself is still a valid PASS on implementation/evaluation validity grounds).",
+    "PASS_WITH_ISSUES": "as PASS, but one or more secondary items (tier calibration ordering, an ablation, the random-stratified sensitivity check) could not be meaningfully computed or the point estimates are directionally unfavorable to method C.",
+    "INCONCLUSIVE": "n_evaluable_test_candidates < minimum_evaluable_n, OR the tier assignment produces a degenerate candidate set (e.g. zero candidates reach INFERRED or CONFIRMED on train+validation), making the test-split comparison uninformative.",
+    "FAIL": "a leakage-audit violation is found and not caught before reporting results, OR the implementation cannot process real FailureExperience/Alibaba CSV data end-to-end, OR test-split information is found to have influenced any threshold/candidate/baseline decision made before step_4_test_evaluation."
+  },
+
+  "ablations": [
+    {"name": "tiered_C_vs_confirmed_only_C_double_prime", "isolates": "whether requiring validation-split replication (CONFIRMED-only) changes precision/recall vs. the more permissive INFERRED-or-CONFIRMED flag", "dataset": "alibaba"},
+    {"name": "N_MIN_TRUSTED_floor_ablation_C_vs_C_prime", "isolates": "whether the N_MIN_TRUSTED=20 trusted-sample floor adds value over a flat elevation check gated only by the N_MIN_CANDIDATE=5 floor", "dataset": "alibaba"},
+    {"name": "temporal_split_vs_random_stratified_split", "isolates": "whether split methodology itself materially changes the finding -- a sensitivity check, not a second primary result", "dataset": "alibaba"},
+    {"name": "N_MIN_TRUSTED_sweep", "isolates": "sensitivity of precision/recall to the discovery floor", "values": [5, 10, 20, 40], "dataset": "alibaba", "labeled_as": "sensitivity sweep, not a tuning procedure -- the primary protocol's N_MIN_TRUSTED=20 remains frozen regardless of this sweep's outcome"}
+  ],
+
+  "descriptive_only_sources": {
+    "aiops": {
+      "candidate_key": "(entity, fault_desrcibtion)",
+      "minimum_evidence_n": 2,
+      "minimum_evidence_n_rationale": "matches the historical Phase 4.2 protocol's 'not a singleton' candidacy floor -- still a defensible generic minimum for descriptive recurrence reporting.",
+      "no_frozen_split": "confirmed (environment='unsplit' in every AIOps FailureExperience record) -- no train-fit-then-test-score claim is made; CONFIRMED tier is structurally unreachable for this source.",
+      "temporal_clustering_test": {
+        "method": "for each entity with n>=2 positive-fault onsets, compute the observed inter-onset gap variance/coefficient-of-variation and compare against a uniform-arrival null (onsets spread evenly across the entity's observed onset span). Pre-registered here, before computation, not chosen after seeing the result.",
+        "uses_real_timestamps": true
+      }
+    },
+    "agentrx": {
+      "candidate_key": "(domain, failure_category)",
+      "minimum_evidence_n": 2,
+      "no_frozen_split": "confirmed (no environment/split manifest exists for AgentRx)",
+      "no_real_timestamp": "confirmed -- AgentRx's `timestamp` field is literally 'MISSING' in the raw joined data; temporal analysis is NOT CURRENTLY EVALUABLE for this source and is not attempted."
+    }
+  },
+
+  "synthetic_data_role": {
+    "usage": "methodological validation / regression testbed / known-answer fixtures ONLY -- src/failure_patterns/ unit and integration tests run the new discovery mechanism against experiments/results/phase4_0/episodes.json (frozen, read-only) with hand-computed expected tier assignments.",
+    "not_used_for": "any claim of real-world H2-Alibaba/H2-AIOps/H2-AgentRx support. A result on synthetic data is never reported as evidence for or against any active Phase 4.2 hypothesis."
+  },
+
+  "seed": 42,
+  "seed_usage_note": "No randomness is used by the primary Alibaba rate-elevation discovery/evaluation path (deterministic counting and comparison over the frozen split files). Seed 42 is recorded for consistency with the rest of this project's convention and is used only if a randomized robustness check (e.g. the pattern_stability ablation's train-half split) requires one.",
+
+  "_fixed_before_final_evaluation": true,
+  "_no_thresholds_or_baselines_added_or_removed_after_seeing_test_results": true
+}

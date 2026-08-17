@@ -1,0 +1,567 @@
+{
+  "milestone": "ACTIVE_PHASE_4_3_RECOVERY_LEARNING_AND_EVALUATION",
+  "evidence_type": "CONTROLLED",
+  "dataset": {
+    "n_train": 1200,
+    "n_validation": 400,
+    "n_test": 720
+  },
+  "validation_hyperparameter_selection": {
+    "sweep": [
+      {
+        "min_evidence": 2,
+        "n_episodes": 400,
+        "validated_recovery_success_rate": 0.5975,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.6177391656282345,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.145,
+        "recovery_latency_mean_seconds": 15.377137040055537,
+        "recovery_cost_mean": 1.8441848665855098
+      },
+      {
+        "min_evidence": 3,
+        "n_episodes": 400,
+        "validated_recovery_success_rate": 0.585,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.6021232020346274,
+        "abstention_rate": 0.0325,
+        "partial_recovery_rate": 0.1375,
+        "recovery_latency_mean_seconds": 15.305649835259278,
+        "recovery_cost_mean": 1.8160574065056736
+      },
+      {
+        "min_evidence": 5,
+        "n_episodes": 400,
+        "validated_recovery_success_rate": 0.585,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.6021232020346274,
+        "abstention_rate": 0.0325,
+        "partial_recovery_rate": 0.1375,
+        "recovery_latency_mean_seconds": 15.305649835259278,
+        "recovery_cost_mean": 1.8160574065056736
+      },
+      {
+        "min_evidence": 8,
+        "n_episodes": 400,
+        "validated_recovery_success_rate": 0.5725,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.5894835984727084,
+        "abstention_rate": 0.06,
+        "partial_recovery_rate": 0.1325,
+        "recovery_latency_mean_seconds": 14.498246315229656,
+        "recovery_cost_mean": 1.7384077606031088
+      },
+      {
+        "min_evidence": 12,
+        "n_episodes": 400,
+        "validated_recovery_success_rate": 0.4375,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.4574741423394527,
+        "abstention_rate": 0.2725,
+        "partial_recovery_rate": 0.11,
+        "recovery_latency_mean_seconds": 9.824089424139705,
+        "recovery_cost_mean": 1.260088411820407
+      },
+      {
+        "min_evidence": 20,
+        "n_episodes": 400,
+        "validated_recovery_success_rate": 0.245,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.2402414928861501,
+        "abstention_rate": 0.6925,
+        "partial_recovery_rate": 0.025,
+        "recovery_latency_mean_seconds": 4.44263533431158,
+        "recovery_cost_mean": 0.6407935889769333
+      }
+    ],
+    "selected_min_evidence": 2
+  },
+  "test_result": {
+    "min_evidence_used": 2,
+    "n_test_total": 720,
+    "minimum_n_test_required": 173,
+    "sample_size_requirement_met": true,
+    "aggregates": {
+      "baseline_fixed_priority": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.5319444444444444,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.5585488014683878,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.15833333333333333,
+        "recovery_latency_mean_seconds": 15.050933497283173,
+        "recovery_cost_mean": 1.8755688072720353
+      },
+      "baseline_random_valid": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.22083333333333333,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.14869556322500277,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.07083333333333333,
+        "recovery_latency_mean_seconds": 42.21219477534611,
+        "recovery_cost_mean": 3.2671120999825405
+      },
+      "proposed_empirical_recovery": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.5416666666666666,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.5614266893219466,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.14722222222222223,
+        "recovery_latency_mean_seconds": 16.16218471843515,
+        "recovery_cost_mean": 1.8844451868698304
+      },
+      "ablation_frequency_only": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.36527777777777776,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.32354188397388284,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.11666666666666667,
+        "recovery_latency_mean_seconds": 37.54097780891656,
+        "recovery_cost_mean": 3.1264124664155797
+      },
+      "ablation_no_abstention": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.5416666666666666,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.5614266893219466,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.14722222222222223,
+        "recovery_latency_mean_seconds": 16.16218471843515,
+        "recovery_cost_mean": 1.8844451868698304
+      },
+      "ablation_family_only": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.5513888888888889,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.5555010062583485,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.14027777777777778,
+        "recovery_latency_mean_seconds": 21.29202985122134,
+        "recovery_cost_mean": 2.2367370834104134
+      },
+      "ablation_unmasked_utility": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.5319444444444444,
+        "unsafe_action_rate": 0.08888888888888889,
+        "recovery_utility_mean": 0.021480915441562238,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.13333333333333333,
+        "recovery_latency_mean_seconds": 16.595801086450106,
+        "recovery_cost_mean": 5.80449750693269
+      },
+      "oracle_reference_bound": {
+        "n_episodes": 720,
+        "validated_recovery_success_rate": 0.6013888888888889,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.6167536467810923,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.125,
+        "recovery_latency_mean_seconds": 13.991651128370133,
+        "recovery_cost_mean": 1.6571795489713241
+      }
+    },
+    "per_family": {
+      "baseline_fixed_priority": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.5055555555555555,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.585221274851969,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.2111111111111111,
+          "recovery_latency_mean_seconds": 5.238628595483388,
+          "recovery_cost_mean": 1.032560383182953
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6666666666666666,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6600276699780173,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.16666666666666666,
+          "recovery_latency_mean_seconds": 30.039822753466403,
+          "recovery_cost_mean": 2.9966253634258244
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.28888888888888886,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3117998840184541,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.09444444444444444,
+          "recovery_latency_mean_seconds": 4.988922260165484,
+          "recovery_cost_mean": 0.9661152416245736
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6666666666666666,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6771463770251086,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.16111111111111112,
+          "recovery_latency_mean_seconds": 19.936360380017444,
+          "recovery_cost_mean": 2.5069742408547975
+        }
+      },
+      "baseline_random_valid": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.22777777777777777,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.17518265796141336,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.10555555555555556,
+          "recovery_latency_mean_seconds": 41.763569564335185,
+          "recovery_cost_mean": 3.180466401490354
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.25,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.21774164260247117,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.11666666666666667,
+          "recovery_latency_mean_seconds": 34.62049900214577,
+          "recovery_cost_mean": 2.79855958643581
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.13333333333333333,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.032441173475119274,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.016666666666666666,
+          "recovery_latency_mean_seconds": 44.544794336856434,
+          "recovery_cost_mean": 3.2340349427345485
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.2722222222222222,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.16941677886100748,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.044444444444444446,
+          "recovery_latency_mean_seconds": 47.91991619804704,
+          "recovery_cost_mean": 3.8553874692694907
+        }
+      },
+      "proposed_empirical_recovery": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.4888888888888889,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.5580143829293854,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.20555555555555555,
+          "recovery_latency_mean_seconds": 8.275587421023065,
+          "recovery_cost_mean": 1.268834815812912
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.7,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7156591802065301,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.15,
+          "recovery_latency_mean_seconds": 18.56763778879094,
+          "recovery_cost_mean": 2.038659100233957
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.28888888888888886,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3117998840184541,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.09444444444444444,
+          "recovery_latency_mean_seconds": 4.988922260165484,
+          "recovery_cost_mean": 0.9661152416245736
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6888888888888889,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6602333101334142,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.1388888888888889,
+          "recovery_latency_mean_seconds": 32.81659140376114,
+          "recovery_cost_mean": 3.26417158980789
+        }
+      },
+      "ablation_frequency_only": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.5055555555555555,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.585221274851969,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.2111111111111111,
+          "recovery_latency_mean_seconds": 5.238628595483388,
+          "recovery_cost_mean": 1.032560383182953
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.0,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": -0.2800000000000007,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.0,
+          "recovery_latency_mean_seconds": 120.0,
+          "recovery_cost_mean": 8.0
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.28888888888888886,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3117998840184541,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.09444444444444444,
+          "recovery_latency_mean_seconds": 4.988922260165484,
+          "recovery_cost_mean": 0.9661152416245736
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6666666666666666,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6771463770251086,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.16111111111111112,
+          "recovery_latency_mean_seconds": 19.936360380017444,
+          "recovery_cost_mean": 2.5069742408547975
+        }
+      },
+      "ablation_no_abstention": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.4888888888888889,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.5580143829293854,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.20555555555555555,
+          "recovery_latency_mean_seconds": 8.275587421023065,
+          "recovery_cost_mean": 1.268834815812912
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.7,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7156591802065301,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.15,
+          "recovery_latency_mean_seconds": 18.56763778879094,
+          "recovery_cost_mean": 2.038659100233957
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.28888888888888886,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3117998840184541,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.09444444444444444,
+          "recovery_latency_mean_seconds": 4.988922260165484,
+          "recovery_cost_mean": 0.9661152416245736
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6888888888888889,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6602333101334142,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.1388888888888889,
+          "recovery_latency_mean_seconds": 32.81659140376114,
+          "recovery_cost_mean": 3.26417158980789
+        }
+      },
+      "ablation_family_only": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.5055555555555555,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.585221274851969,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.2111111111111111,
+          "recovery_latency_mean_seconds": 5.238628595483388,
+          "recovery_cost_mean": 1.032560383182953
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6666666666666666,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6600276699780173,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.16666666666666666,
+          "recovery_latency_mean_seconds": 30.039822753466403,
+          "recovery_cost_mean": 2.9966253634258244
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.28888888888888886,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3117998840184541,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.09444444444444444,
+          "recovery_latency_mean_seconds": 4.988922260165484,
+          "recovery_cost_mean": 0.9661152416245736
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.7444444444444445,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6649551961849525,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.08888888888888889,
+          "recovery_latency_mean_seconds": 44.90074579577016,
+          "recovery_cost_mean": 3.9516473454083134
+        }
+      },
+      "ablation_unmasked_utility": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.4888888888888889,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.5580143829293854,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.20555555555555555,
+          "recovery_latency_mean_seconds": 8.275587421023065,
+          "recovery_cost_mean": 1.268834815812912
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.7,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7156591802065301,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.15,
+          "recovery_latency_mean_seconds": 18.56763778879094,
+          "recovery_cost_mean": 2.038659100233957
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.25,
+          "unsafe_action_rate": 0.35555555555555557,
+          "recovery_utility_mean": -1.8479832115030794,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.03888888888888889,
+          "recovery_latency_mean_seconds": 6.723387732225319,
+          "recovery_cost_mean": 16.646324521875993
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.6888888888888889,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6602333101334142,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.1388888888888889,
+          "recovery_latency_mean_seconds": 32.81659140376114,
+          "recovery_cost_mean": 3.26417158980789
+        }
+      },
+      "oracle_reference_bound": {
+        "transient_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.5055555555555555,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.585221274851969,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.2111111111111111,
+          "recovery_latency_mean_seconds": 5.238628595483388,
+          "recovery_cost_mean": 1.032560383182953
+        },
+        "resource_exhaustion": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.7611111111111111,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7763631073983533,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.1388888888888889,
+          "recovery_latency_mean_seconds": 16.64309955703823,
+          "recovery_cost_mean": 1.8774674300081935
+        },
+        "dependency_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.2833333333333333,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.28900006563147895,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.03888888888888889,
+          "recovery_latency_mean_seconds": 2.706545075535214,
+          "recovery_cost_mean": 0.5535583535381733
+        },
+        "configuration_failure": {
+          "n_episodes": 180,
+          "validated_recovery_success_rate": 0.8555555555555555,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.816430139242567,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.1111111111111111,
+          "recovery_latency_mean_seconds": 31.378331285423727,
+          "recovery_cost_mean": 3.1651320291560068
+        }
+      }
+    },
+    "statistics": {
+      "wilson_95ci_proposed_success_rate": [
+        0.5051468291064416,
+        0.5777442505199644
+      ],
+      "wilson_95ci_fixed_priority_success_rate": [
+        0.495424201333328,
+        0.56812562638025
+      ],
+      "mcnemar_proposed_vs_fixed_priority": {
+        "a_only": 48,
+        "b_only": 41,
+        "both": 342,
+        "neither": 289,
+        "n_discordant": 89,
+        "p_value": 0.5250147872924267
+      },
+      "mcnemar_proposed_vs_random_valid": {
+        "a_only": 265,
+        "b_only": 34,
+        "both": 125,
+        "neither": 296,
+        "n_discordant": 299,
+        "p_value": 1.6132413025229286e-45
+      },
+      "bootstrap_95ci_diff_proposed_minus_fixed": [
+        -0.015277777777777724,
+        0.03472222222222221
+      ],
+      "bootstrap_95ci_diff_proposed_minus_random": [
+        0.2791666666666667,
+        0.36111111111111116
+      ],
+      "holm_bonferroni": {
+        "vs_random_valid": {
+          "p_value": 1.6132413025229286e-45,
+          "holm_threshold": 0.025,
+          "significant": "True"
+        },
+        "vs_fixed_priority": {
+          "p_value": 0.5250147872924267,
+          "holm_threshold": 0.05,
+          "significant": "False"
+        }
+      },
+      "effect_size_vs_fixed_priority": 0.009722222222222188,
+      "min_effect_size_required": 0.15
+    }
+  },
+  "leakage_audit_passed": true,
+  "verdict": {
+    "verdict": "PASS",
+    "h3_supported": "False",
+    "h3_safety_supported": true,
+    "h3_utility_supported": true,
+    "reasons": [
+      "H3-SAFETY: proposed unsafe_action_rate=0.0000 <= threshold=0.0 -> SUPPORTED",
+      "H3: effect_size=0.0097 (min required 0.15), mcnemar p=0.5250, holm-significant=False -> NOT SUPPORTED",
+      "H3-UTILITY: proposed_utility_mean=0.5614 vs fixed_priority_utility_mean=0.5585 -> SUPPORTED",
+      "PASS -- HYPOTHESIS NOT SUPPORTED: the experiment was valid, adequately powered, and pre-registered; H3 itself was not confirmed on this evidence. This is a valid negative research result, not an implementation failure."
+    ]
+  }
+}

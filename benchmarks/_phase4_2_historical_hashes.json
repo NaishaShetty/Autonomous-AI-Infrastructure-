@@ -1,0 +1,9 @@
+{
+  "configs/phase4_2_pattern_protocol.json": "b84b398abc56bad790e352294c792d03a7dcbdcfad48656450d9bbc9a8f823d7",
+  "experiments/results/phase4_2/leakage_audit.json": "a84f8f72b175fce3f618cacb038f53481217fca18ae60299453e3e9187ac68be",
+  "experiments/results/phase4_2/pattern_results.json": "dcd70587ee605de4b301366d2e2632458b216398fa8e51978957c42e4016a1ce",
+  "src/patterns/__init__.py": "c75b315948cc047f9aa8d35644c5b13fac0cd49a8a5eede6277130572233e750",
+  "src/patterns/discovery.py": "8453455f2999a85fcdd01fc1d40beb5137f4abd7879971b0c3116fb8c2d7afeb",
+  "src/patterns/metrics.py": "57fd6be9a824d2b2886f71f8a359353e7a5f9e16146f2a953540e8cfdd3bef42",
+  "src/patterns/schema.py": "4be140374b87924f350bce640db5c09481c29935f3906a78a34e5decb6d186ae"
+}

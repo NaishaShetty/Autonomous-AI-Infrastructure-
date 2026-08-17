@@ -1,0 +1,325 @@
+{
+  "n_experiences_ingested": 81,
+  "n_ingestion_errors": 0,
+  "n_distinct_entity_fault_keys": 36,
+  "n_recurring_candidates_n_geq_2": 24,
+  "recurring_associations": [
+    {
+      "entity": "docker_001",
+      "fault_desrcibtion": "network delay",
+      "count": 5
+    },
+    {
+      "entity": "docker_001",
+      "fault_desrcibtion": "CPU fault",
+      "count": 4
+    },
+    {
+      "entity": "docker_006",
+      "fault_desrcibtion": "network delay",
+      "count": 4
+    },
+    {
+      "entity": "db_003",
+      "fault_desrcibtion": "db connection limit",
+      "count": 4
+    },
+    {
+      "entity": "os_021",
+      "fault_desrcibtion": "network delay",
+      "count": 4
+    },
+    {
+      "entity": "docker_004",
+      "fault_desrcibtion": "CPU fault",
+      "count": 3
+    },
+    {
+      "entity": "db_007",
+      "fault_desrcibtion": "db connection limit",
+      "count": 3
+    },
+    {
+      "entity": "docker_002",
+      "fault_desrcibtion": "CPU fault",
+      "count": 3
+    },
+    {
+      "entity": "docker_003",
+      "fault_desrcibtion": "network loss",
+      "count": 3
+    },
+    {
+      "entity": "docker_008",
+      "fault_desrcibtion": "CPU fault",
+      "count": 3
+    },
+    {
+      "entity": "docker_007",
+      "fault_desrcibtion": "network loss",
+      "count": 3
+    },
+    {
+      "entity": "db_003",
+      "fault_desrcibtion": "db  close",
+      "count": 3
+    },
+    {
+      "entity": "docker_006",
+      "fault_desrcibtion": "CPU fault",
+      "count": 3
+    },
+    {
+      "entity": "os_020",
+      "fault_desrcibtion": "network delay",
+      "count": 3
+    },
+    {
+      "entity": "os_018",
+      "fault_desrcibtion": "network loss",
+      "count": 3
+    },
+    {
+      "entity": "docker_003",
+      "fault_desrcibtion": "CPU fault",
+      "count": 2
+    },
+    {
+      "entity": "docker_002",
+      "fault_desrcibtion": "network delay",
+      "count": 2
+    },
+    {
+      "entity": "docker_005",
+      "fault_desrcibtion": "network delay",
+      "count": 2
+    },
+    {
+      "entity": "os_018",
+      "fault_desrcibtion": "network delay",
+      "count": 2
+    },
+    {
+      "entity": "docker_007",
+      "fault_desrcibtion": "network delay",
+      "count": 2
+    },
+    {
+      "entity": "os_021",
+      "fault_desrcibtion": "network loss",
+      "count": 2
+    },
+    {
+      "entity": "db_007",
+      "fault_desrcibtion": "db  close",
+      "count": 2
+    },
+    {
+      "entity": "os_017",
+      "fault_desrcibtion": "network delay",
+      "count": 2
+    },
+    {
+      "entity": "docker_008",
+      "fault_desrcibtion": "network loss",
+      "count": 2
+    }
+  ],
+  "occurrence_count_distribution": [
+    5,
+    4,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "temporal_clustering": {
+    "per_entity": [
+      {
+        "entity": "docker_003",
+        "n_onsets": 6,
+        "evaluable": true,
+        "mean_gap_seconds": 868116.0,
+        "stdev_gap_seconds": 1600600.716193767,
+        "coefficient_of_variation": 1.8437636401054318,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "docker_002",
+        "n_onsets": 6,
+        "evaluable": true,
+        "mean_gap_seconds": 850416.0,
+        "stdev_gap_seconds": 1607429.707788182,
+        "coefficient_of_variation": 1.890168703067889,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "docker_001",
+        "n_onsets": 10,
+        "evaluable": true,
+        "mean_gap_seconds": 479846.6666666667,
+        "stdev_gap_seconds": 1155838.7265531467,
+        "coefficient_of_variation": 2.4087668141624685,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "docker_004",
+        "n_onsets": 5,
+        "evaluable": true,
+        "mean_gap_seconds": 1082355.0,
+        "stdev_gap_seconds": 1713898.63180411,
+        "coefficient_of_variation": 1.5834902890494431,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "db_007",
+        "n_onsets": 5,
+        "evaluable": true,
+        "mean_gap_seconds": 994170.0,
+        "stdev_gap_seconds": 1814264.4668294643,
+        "coefficient_of_variation": 1.8249036551389242,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "docker_008",
+        "n_onsets": 6,
+        "evaluable": true,
+        "mean_gap_seconds": 862284.0,
+        "stdev_gap_seconds": 1688963.3993902886,
+        "coefficient_of_variation": 1.9587089629290217,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "docker_007",
+        "n_onsets": 5,
+        "evaluable": true,
+        "mean_gap_seconds": 1075680.0,
+        "stdev_gap_seconds": 1649116.6588207155,
+        "coefficient_of_variation": 1.5330922382313656,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "db_003",
+        "n_onsets": 7,
+        "evaluable": true,
+        "mean_gap_seconds": 718820.0,
+        "stdev_gap_seconds": 1373798.1748714037,
+        "coefficient_of_variation": 1.9111852409106642,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "docker_005",
+        "n_onsets": 4,
+        "evaluable": true,
+        "mean_gap_seconds": 229700.0,
+        "stdev_gap_seconds": 313969.4131599446,
+        "coefficient_of_variation": 1.366867275402458,
+        "null_reference_cv": 1.0,
+        "interpretation": "clustered (bursty)"
+      },
+      {
+        "entity": "os_018",
+        "n_onsets": 5,
+        "evaluable": true,
+        "mean_gap_seconds": 175875.0,
+        "stdev_gap_seconds": 125604.91749927627,
+        "coefficient_of_variation": 0.7141715280698011,
+        "null_reference_cv": 1.0,
+        "interpretation": "regular/underdispersed"
+      },
+      {
+        "entity": "docker_006",
+        "n_onsets": 7,
+        "evaluable": true,
+        "mean_gap_seconds": 128990.0,
+        "stdev_gap_seconds": 88558.6537838059,
+        "coefficient_of_variation": 0.6865544133948825,
+        "null_reference_cv": 1.0,
+        "interpretation": "regular/underdispersed"
+      },
+      {
+        "entity": "os_021",
+        "n_onsets": 6,
+        "evaluable": true,
+        "mean_gap_seconds": 139332.0,
+        "stdev_gap_seconds": 106097.22484589311,
+        "coefficient_of_variation": 0.7614706230147641,
+        "null_reference_cv": 1.0,
+        "interpretation": "regular/underdispersed"
+      },
+      {
+        "entity": "os_009",
+        "n_onsets": 2,
+        "evaluable": false,
+        "reason": "fewer than 3 onsets (stdev undefined) or zero mean gap"
+      },
+      {
+        "entity": "os_020",
+        "n_onsets": 3,
+        "evaluable": true,
+        "mean_gap_seconds": 219480.0,
+        "stdev_gap_seconds": 175645.3244467384,
+        "coefficient_of_variation": 0.8002794079038564,
+        "null_reference_cv": 1.0,
+        "interpretation": "regular/underdispersed"
+      },
+      {
+        "entity": "os_017",
+        "n_onsets": 3,
+        "evaluable": true,
+        "mean_gap_seconds": 258300.0,
+        "stdev_gap_seconds": 135679.64917407473,
+        "coefficient_of_variation": 0.5252793231671495,
+        "null_reference_cv": 1.0,
+        "interpretation": "regular/underdispersed"
+      },
+      {
+        "entity": "os_001",
+        "n_onsets": 1,
+        "evaluable": false,
+        "reason": "fewer than 2 onsets -- no inter-onset gap to measure"
+      }
+    ],
+    "n_entities_evaluable": 14,
+    "n_entities_total": 16
+  },
+  "label": "DESCRIPTIVE / EXPLORATORY -- no frozen train/test split exists for AIOps; no precision/recall claim is made."
+}

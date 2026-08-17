@@ -1,0 +1,15 @@
+{
+  "note": "METHODOLOGICAL VALIDATION ONLY -- not a Phase 4.2 real-data hypothesis result. Uses the frozen, read-only experiments/results/phase4_0/episodes.json (960 rows).",
+  "n_rows_total": 960,
+  "n_candidates_discovered": 12,
+  "n_candidates_after_confirmation": 12,
+  "tier_counts": {
+    "OBSERVED": 10,
+    "INFERRED": 2,
+    "CONFIRMED": 0,
+    "UNCERTAIN": 0
+  },
+  "n_non_clean_condition_candidates": 8,
+  "n_non_clean_condition_candidates_with_train_elevation": 4,
+  "sanity_interpretation": "Non-'clean' condition_id candidates are, by the generator's own design, the induced-failure conditions and are expected to show train-split rate elevation over their workload's clean baseline more often than chance. This is reported descriptively as a mechanism sanity check, not as evidence for any active Phase 4.2 hypothesis (synthetic data is not a source of real-world evidence, per the frozen protocol)."
+}

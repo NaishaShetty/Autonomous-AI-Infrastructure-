@@ -1,0 +1,52 @@
+{
+  "milestone": "ACTIVE_PHASE_4_3",
+  "n_checks": 9,
+  "n_passed": 9,
+  "checks": [
+    {
+      "check": "decision_context_excludes_ground_truth_fields",
+      "passed": true,
+      "detail": "DecisionContext fields=['candidate_actions', 'episode_id', 'family', 'scenario_id', 'severity', 'symptom_pattern', 'workload_type']; forbidden-intersection=[]"
+    },
+    {
+      "check": "non_vacuous_contamination_rejected",
+      "passed": true,
+      "detail": "contamination payload correctly rejected: ValidationError"
+    },
+    {
+      "check": "policy_select_action_signature_boundary",
+      "passed": true,
+      "detail": "all policies take exactly (self, ctx: DecisionContext)"
+    },
+    {
+      "check": "seed_ranges_disjoint_across_family_and_split",
+      "passed": true,
+      "detail": "2320 seeds, zero collisions"
+    },
+    {
+      "check": "generated_splits_disjoint",
+      "passed": true,
+      "detail": "overlap_counts={k: len(v) for k,v in overlaps} -> [0, 0, 0]"
+    },
+    {
+      "check": "val_test_unresolved_at_generation",
+      "passed": true,
+      "detail": "0 episodes had a pre-baked action/outcome (should be 0)"
+    },
+    {
+      "check": "provenance_source_type_controlled",
+      "passed": true,
+      "detail": "0/2320 episodes had non-'controlled' source_type"
+    },
+    {
+      "check": "unsafe_action_flagging_non_vacuous",
+      "passed": true,
+      "detail": "50/50 FORCE_RESTART transitions correctly flagged unsafe"
+    },
+    {
+      "check": "historical_frozen_dirs_untouched",
+      "passed": true,
+      "detail": "no prior baseline found; wrote first snapshot (18 files) to _phase4_3_historical_hashes.json"
+    }
+  ]
+}

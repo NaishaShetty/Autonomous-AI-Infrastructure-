@@ -1,0 +1,20 @@
+{
+  "src\\failure_patterns\\__init__.py": "0c1422db1883e460506e3712ebf9a78add4078022edcac5d83978264ed9dc580",
+  "src\\failure_patterns\\discovery_alibaba.py": "7de45375553785d351a77eaf408302c779fba178b8a4420726a98426ca286b62",
+  "src\\failure_patterns\\discovery_descriptive.py": "ff71c25554434d6dbe1fe187ea2c6f3d92d14e6374d9b83c673789a422aa6209",
+  "src\\failure_patterns\\metrics.py": "eed57d334931260e6d997f18ca1d323339461034d1008ba6b1fb85a8ecb7b926",
+  "src\\failure_patterns\\schema.py": "9a6930ac9fe94cfd91c1bbc576009da713990e6fce50c1a1a366c0a57b67950d",
+  "src\\failure_experience\\__init__.py": "0204b4e12e0c0953f33877029bb9cf869c635f7f9584834cd987c79f86597d28",
+  "src\\failure_experience\\eligibility.py": "998bba759b144ad3c81370a374fd91f54792dea6218aa4f064fcdaed01f9fe89",
+  "src\\failure_experience\\ingest.py": "3cf3a5aa9e3078ebc84e637070231da8f2987d3cae5c06e92cda73a307636683",
+  "src\\failure_experience\\reconstruction.py": "c3522ab666dbfd2fbe8517e223760eca2ac03a205cffeef63125f94df557fb1f",
+  "src\\failure_experience\\retrieval.py": "68f4f0bcb5242f96c3af7d38848434d0e7434cfee8b84e1230184cb9e7180631",
+  "src\\failure_experience\\schema.py": "8f97e08968a87a90d846eb2025b5787856b786d6f334bb79cf33d01b897e1169",
+  "src\\failure_experience\\sources\\__init__.py": "dbf6e0c17a0f85cfdbc5bcc215079e74b7c0cb63bdf753113762259a68b647eb",
+  "src\\failure_experience\\sources\\_util.py": "46a5c027ef7f1a99ccf88ff7e6ee9517d3d154975f948adf607eb2145288553c",
+  "src\\failure_experience\\sources\\real_agentrx.py": "5957e377a44d73f30644eaeb4c2fe8d18d3a52d5352a322a7db3affa102da6ce",
+  "src\\failure_experience\\sources\\real_aiops.py": "2e1c69c4dd1bc62dfef62f36f5d51dee781ebfc0562e97e1e21eaf43f691de28",
+  "src\\failure_experience\\sources\\real_alibaba.py": "c380109c83ab9f1fd4e460bcf6a2d14bcf20bb1058669ba30e89577a9446a8da",
+  "src\\failure_experience\\sources\\synthetic_episodic.py": "d4dda3024356a427fd75c3d392a4d59deadf6eb9628861fc420095d1080a57f3",
+  "src\\failure_experience\\storage.py": "27527d99428a7d97b658ecd279c31f49590217deabee936695cd00a5b1fb1017"
+}

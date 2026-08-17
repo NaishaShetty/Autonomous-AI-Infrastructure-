@@ -1,0 +1,46 @@
+{
+  "5": {
+    "n_candidates": 31,
+    "n_flagged": 6,
+    "n_flagged_evaluable_on_test": 6,
+    "n_flagged_true_elevated_on_test": 2,
+    "precision": 0.3333333333333333,
+    "false_pattern_rate": 0.6666666666666667,
+    "n_true_elevated_test_candidates": 3,
+    "n_true_elevated_flagged": 2,
+    "recall": 0.6666666666666666
+  },
+  "10": {
+    "n_candidates": 31,
+    "n_flagged": 6,
+    "n_flagged_evaluable_on_test": 6,
+    "n_flagged_true_elevated_on_test": 2,
+    "precision": 0.3333333333333333,
+    "false_pattern_rate": 0.6666666666666667,
+    "n_true_elevated_test_candidates": 3,
+    "n_true_elevated_flagged": 2,
+    "recall": 0.6666666666666666
+  },
+  "20": {
+    "n_candidates": 31,
+    "n_flagged": 6,
+    "n_flagged_evaluable_on_test": 6,
+    "n_flagged_true_elevated_on_test": 2,
+    "precision": 0.3333333333333333,
+    "false_pattern_rate": 0.6666666666666667,
+    "n_true_elevated_test_candidates": 3,
+    "n_true_elevated_flagged": 2,
+    "recall": 0.6666666666666666
+  },
+  "40": {
+    "n_candidates": 31,
+    "n_flagged": 6,
+    "n_flagged_evaluable_on_test": 6,
+    "n_flagged_true_elevated_on_test": 2,
+    "precision": 0.3333333333333333,
+    "false_pattern_rate": 0.6666666666666667,
+    "n_true_elevated_test_candidates": 3,
+    "n_true_elevated_flagged": 2,
+    "recall": 0.6666666666666666
+  }
+}
