@@ -1,0 +1,134 @@
+{
+  "phase": "active_4.4",
+  "title": "Sequential Recovery with Abstention",
+  "status": "FROZEN",
+  "predecessor": "active_4.3",
+  "frozen_reference_doc": "docs/PHASE4_4_PROTOCOL.md",
+
+  "hypotheses": {
+    "status": "NOT_YET_TESTED -- frozen before any test-split evaluation",
+    "H4": {
+      "description": "Proposed sequential policy has higher validated recovery success rate than strongest fixed-policy baseline",
+      "min_meaningful_effect": 0.15,
+      "alpha": 0.05,
+      "test": "paired_mcnemar",
+      "multiple_comparison_correction": "holm",
+      "family_members": ["H4", "H4_SAFETY", "H4_UTILITY", "H4_ABSTENTION", "H4_ABLATION"]
+    },
+    "H4_SAFETY": {
+      "description": "Unsafe-action rate at or below threshold",
+      "unsafe_action_rate_threshold": 0.0
+    },
+    "H4_UTILITY": {
+      "description": "Mean recovery utility of proposed policy >= strongest baseline",
+      "comparator": "baseline_fixed_priority_sequential"
+    },
+    "H4_ABSTENTION": {
+      "description": "Higher abstain/escalate rate than no-abstention fixed policy on dependency_failure family, without reducing utility on the other three families",
+      "scope_family": "dependency_failure",
+      "requires_no_utility_regression_on_other_families": true
+    },
+    "H4_ABLATION": {
+      "description": "Two-step proposed policy beats itself forced to terminate after step 1 (isolates history-conditioning from mere extra-attempt effect)",
+      "min_meaningful_effect": 0.15,
+      "gate_type": "informational_not_pass_fail",
+      "comparator": "single_step_empirical_ablation_baseline"
+    }
+  },
+
+  "environment": {
+    "step_budget": 2,
+    "observation_signal": {
+      "type": "ternary",
+      "values": ["improved", "no_change", "worsened"],
+      "observation_noise_rate": null,
+      "observation_noise_rate_status": "TO_BE_SET_BY_VALIDATION_SWEEP_SECTION_7",
+      "sweep_candidates": [0.05, 0.10, 0.20, 0.30, 0.40],
+      "sweep_selection_rule": "maximize validation-set performance gap between naive step-1-only baseline and a rule that conditions on the step-1 observation",
+      "sweep_may_touch": ["validation"],
+      "sweep_must_not_touch": ["test"]
+    },
+    "terminal_conditions": ["success_step1", "success_step2", "budget_exhausted", "abstain_or_escalate"],
+    "action_vocabulary": ["retry", "restart", "rollback", "reconfigure", "escalate_to_human", "abstain", "force_restart"],
+    "unsafe_actions": ["force_restart"],
+    "failure_families": ["resource_exhaustion", "transient_failure", "configuration_failure", "dependency_failure"],
+    "new_actions_introduced_this_phase": []
+  },
+
+  "decision_context_boundary": {
+    "visible_at_step1": ["scenario_id", "family", "noisy_symptom", "noisy_severity", "workload_type", "candidate_actions"],
+    "visible_at_step2_additional": ["step1_action", "step1_observation"],
+    "forbidden": ["hidden_cause", "final_outcome", "step2_outcome_before_occurrence", "any_other_episode_data"],
+    "schema_validation": "strict_reject_extra_fields",
+    "contamination_test_required_before_policy_code": true
+  },
+
+  "baselines": [
+    {
+      "id": "fixed_priority_sequential",
+      "description": "Hand-written rule conditioning on step-1 observation; authored before viewing any generated data",
+      "role": "primary_comparator"
+    },
+    {
+      "id": "random_valid_sequential",
+      "description": "Random safe action at each step, history-independent",
+      "role": "lower_bound"
+    },
+    {
+      "id": "oracle_reference_bound",
+      "description": "Hidden-ground-truth reference; not a competing policy",
+      "role": "upper_bound"
+    },
+    {
+      "id": "single_step_empirical_ablation",
+      "description": "Phase 4.3's trained EmpiricalRecoveryPolicy, forced to terminate after step 1",
+      "role": "ablation_comparator_for_H4_ABLATION"
+    }
+  ],
+
+  "proposed_policy": {
+    "id": "sequential_empirical_recovery",
+    "base": "phase4_3_EmpiricalRecoveryPolicy",
+    "extension": "hierarchical backoff extended with step1_action and step1_observation as context keys before family-only fallback",
+    "smoothing": "laplace",
+    "disallowed_this_phase": ["reinforcement_learning", "sequence_models", "neural_architectures"]
+  },
+
+  "sample_size": {
+    "method": "two_proportion_power_recomputed_for_2step_mcnemar",
+    "starting_p1": 0.55,
+    "starting_p2": 0.40,
+    "alpha": 0.05,
+    "power": 0.80,
+    "reuse_phase4_3_value_directly": false,
+    "test_set_multiplier_over_floor": "3-4x, matching phase 4.3 precedent"
+  },
+
+  "splits": {
+    "method": "disjoint_seed_ranges",
+    "required_overlaps": 0,
+    "required_seed_collisions": 0,
+    "train_resolution": "uniform_random_exploration_over_2step_action_space",
+    "validation_test_resolution": "scenario_only_manifest_resolved_at_evaluation_time"
+  },
+
+  "leakage_audit": {
+    "inherits_from": "phase4_3 (9 checks)",
+    "additional_checks": [
+      "cross_step_leakage_step1_cannot_see_step2",
+      "path_normalization_as_posix_from_first_commit",
+      "non_vacuous_first_baseline_records_baseline_commit"
+    ]
+  },
+
+  "prohibitions": [
+    "no_threshold_changes_after_results_visible",
+    "no_observation_noise_rate_changes_after_test_generation",
+    "no_split_swapping_for_favorable_result",
+    "no_added_model_complexity_solely_because_simple_model_ties_baseline",
+    "no_real_world_validity_claims_for_controlled_synthetic_evidence",
+    "no_modification_of_phase4_2_or_phase4_3_frozen_artifacts"
+  ],
+
+  "deviations_log": []
+}
