@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp_utc": "2026-08-12T07:22:42.017977+00:00",
+    "timestamp_utc": "2026-08-18T07:23:35.133062+00:00",
     "protocol_config": {
       "_frozen": true,
       "_note": "This file is the single source of truth for the Phase 3.1 evaluation protocol. It was written and committed BEFORE any Phase 3.1 result was produced. Do not edit values in this file to chase a better-looking result -- see docs/PHASE3_1_EVALUATION_PROTOCOL.md section 'Core Scientific Principle'.",

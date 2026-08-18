@@ -75,7 +75,7 @@ def run_one_seed(seed: int, protocol: Phase31Protocol) -> dict:
         metrics = {ratio: decision_metrics(actions, y_fail, _scaled_cost_model(ratio)) for ratio in SENSITIVITY_RATIOS}
         policy_results[name] = {
             "thresholds": thresholds[name].__dict__,
-            "tier_counts": {t.value: sum(1 for x in tiers if x == t) for t in set(tiers)},
+            "tier_counts": {t.value: sum(1 for x in tiers if x == t) for t in sorted(set(tiers), key=lambda t: t.value)},
             "metrics_by_cost_ratio": metrics,
         }
 

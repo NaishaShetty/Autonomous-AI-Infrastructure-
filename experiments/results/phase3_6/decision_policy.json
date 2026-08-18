@@ -133,9 +133,9 @@
           },
           "tier_counts": {
             "CRITICAL": 131,
+            "HIGH": 466,
             "LOW": 1530,
-            "MEDIUM": 873,
-            "HIGH": 466
+            "MEDIUM": 873
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -190,9 +190,9 @@
           },
           "tier_counts": {
             "CRITICAL": 133,
+            "HIGH": 461,
             "LOW": 1528,
-            "MEDIUM": 878,
-            "HIGH": 461
+            "MEDIUM": 878
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -461,9 +461,9 @@
           },
           "tier_counts": {
             "CRITICAL": 127,
+            "HIGH": 416,
             "LOW": 1493,
-            "MEDIUM": 964,
-            "HIGH": 416
+            "MEDIUM": 964
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -518,9 +518,9 @@
           },
           "tier_counts": {
             "CRITICAL": 113,
+            "HIGH": 423,
             "LOW": 1511,
-            "MEDIUM": 953,
-            "HIGH": 423
+            "MEDIUM": 953
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -733,9 +733,9 @@
           },
           "tier_counts": {
             "CRITICAL": 197,
+            "HIGH": 751,
             "LOW": 1509,
-            "MEDIUM": 543,
-            "HIGH": 751
+            "MEDIUM": 543
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -790,9 +790,9 @@
           },
           "tier_counts": {
             "CRITICAL": 121,
+            "HIGH": 442,
             "LOW": 1569,
-            "MEDIUM": 868,
-            "HIGH": 442
+            "MEDIUM": 868
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -847,9 +847,9 @@
           },
           "tier_counts": {
             "CRITICAL": 130,
+            "HIGH": 438,
             "LOW": 1557,
-            "MEDIUM": 875,
-            "HIGH": 438
+            "MEDIUM": 875
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1062,9 +1062,9 @@
           },
           "tier_counts": {
             "CRITICAL": 135,
+            "HIGH": 725,
             "LOW": 1409,
-            "MEDIUM": 731,
-            "HIGH": 725
+            "MEDIUM": 731
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1119,9 +1119,9 @@
           },
           "tier_counts": {
             "CRITICAL": 129,
+            "HIGH": 430,
             "LOW": 1501,
-            "MEDIUM": 940,
-            "HIGH": 430
+            "MEDIUM": 940
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1176,9 +1176,9 @@
           },
           "tier_counts": {
             "CRITICAL": 135,
+            "HIGH": 433,
             "LOW": 1508,
-            "MEDIUM": 924,
-            "HIGH": 433
+            "MEDIUM": 924
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1391,9 +1391,9 @@
           },
           "tier_counts": {
             "CRITICAL": 510,
+            "HIGH": 666,
             "LOW": 1420,
-            "MEDIUM": 404,
-            "HIGH": 666
+            "MEDIUM": 404
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1448,9 +1448,9 @@
           },
           "tier_counts": {
             "CRITICAL": 145,
+            "HIGH": 489,
             "LOW": 1527,
-            "MEDIUM": 839,
-            "HIGH": 489
+            "MEDIUM": 839
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1505,9 +1505,9 @@
           },
           "tier_counts": {
             "CRITICAL": 155,
+            "HIGH": 478,
             "LOW": 1539,
-            "MEDIUM": 828,
-            "HIGH": 478
+            "MEDIUM": 828
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1720,9 +1720,9 @@
           },
           "tier_counts": {
             "CRITICAL": 204,
+            "HIGH": 737,
             "LOW": 1418,
-            "MEDIUM": 641,
-            "HIGH": 737
+            "MEDIUM": 641
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1777,9 +1777,9 @@
           },
           "tier_counts": {
             "CRITICAL": 160,
+            "HIGH": 449,
             "LOW": 1484,
-            "MEDIUM": 907,
-            "HIGH": 449
+            "MEDIUM": 907
           },
           "metrics_by_cost_ratio": {
             "2.0": {
@@ -1834,9 +1834,9 @@
           },
           "tier_counts": {
             "CRITICAL": 164,
+            "HIGH": 451,
             "LOW": 1476,
-            "MEDIUM": 909,
-            "HIGH": 451
+            "MEDIUM": 909
           },
           "metrics_by_cost_ratio": {
             "2.0": {

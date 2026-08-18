@@ -46,7 +46,7 @@
     {
       "check": "historical_frozen_dirs_untouched",
       "passed": true,
-      "detail": "no prior baseline found; wrote first snapshot (18 files) to _phase4_3_historical_hashes.json"
+      "detail": "no changes vs baseline snapshot"
     }
   ]
 }

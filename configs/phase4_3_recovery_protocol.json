@@ -12,7 +12,7 @@
     "H3": "The proposed context-aware recovery-selection mechanism (EmpiricalRecoveryPolicy) achieves a higher validated recovery success rate than the best-performing fixed-policy baseline (FixedPriorityPolicy) on the frozen test split, at or above the pre-registered minimum effect size (0.15).",
     "H3_SAFETY": "The proposed mechanism's unsafe-action rate on the frozen test split does not exceed the pre-registered threshold (0.00 -- zero tolerance, since the mechanism structurally masks unsafe actions).",
     "H3_UTILITY": "The proposed mechanism achieves recovery utility (src.recovery.utility.recovery_utility) greater than or equal to the best fixed-policy baseline's utility on the frozen test split.",
-    "status": "NOT_YET_TESTED -- frozen before any test-split evaluation"
+    "status": "TESTED -- test-split evaluation complete, see experiments/results/phase4_3/results.json (verdict PASS -- HYPOTHESIS NOT SUPPORTED: H3 and H3_UTILITY not supported, H3_SAFETY supported; corrected 2026-08-18 after fixing a PYTHONHASHSEED-dependent hash() non-determinism bug in src/recovery/environment.py, see docs/PHASE4_3_RECOVERY_LEARNING.md)"
   },
 
   "unit_of_analysis": {

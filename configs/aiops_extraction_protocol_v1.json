@@ -2,7 +2,7 @@
   "protocol_name": "aiops_extraction_protocol",
   "version": "1.0.0",
   "frozen_date": "2026-08-13",
-  "status": "FROZEN_NOT_EXECUTED",
+  "status": "FROZEN_EXECUTED -- all 15 daily archives extracted per this frozen scope, see data/processed/aiops_kpi/, data/audit/aiops_kpi/extraction_report.json, and README.md's 'Telemetry extraction' section (updated 2026-08-18)",
   "rationale_document": "docs/PHASE3_REAL_DATA_AIOPS_PROTOCOL.md",
   "source_dataset": {
     "name": "CCF AIOps Challenge 2020, preliminary round",

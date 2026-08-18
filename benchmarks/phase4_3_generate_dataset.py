@@ -17,7 +17,14 @@ VALIDATION usable for a real hyperparameter sweep and TEST usable for a
 one-shot frozen evaluation of arbitrary candidate policies, rather than
 being tied to one specific policy's choices at generation time.
 
-Run: python benchmarks/phase4_3_generate_dataset.py
+Run: PYTHONHASHSEED=0 python benchmarks/phase4_3_generate_dataset.py
+
+PYTHONHASHSEED=0 is defense in depth, not a correctness requirement as of
+the environment.py determinism fix (src/recovery/environment.py no longer
+seeds random.Random() from the builtin hash() of a string/tuple, which used
+to be silently randomized per-process by PYTHONHASHSEED). Setting it
+anyway costs nothing and guards against any future code that reintroduces
+a hash()-seeded RNG.
 """
 from __future__ import annotations
 

@@ -1,7 +1,24 @@
 # ACTIVE PHASE 4.3 — Recovery Learning & Evaluation
 
-**Status: COMPLETE. Verdict: PASS — HYPOTHESIS NOT SUPPORTED (H3-SAFETY and
-H3-UTILITY supported; H3 primary comparison not supported).**
+**Status: COMPLETE. Verdict: PASS — HYPOTHESIS NOT SUPPORTED (H3-SAFETY
+supported; H3 primary comparison and H3-UTILITY not supported).**
+
+> **CORRECTION NOTICE (2026-08-17):** the numbers originally reported in
+> this document (54.2% / 53.2% success, p=0.525, H3-UTILITY SUPPORTED) were
+> **invalidated by a non-determinism bug** in
+> `src/recovery/environment.py`'s `transition()`: it seeded a per-action
+> RNG with `random.Random(hash((scenario.seed, action.value)) & 0xFFFFFFFF)`,
+> and Python's built-in `hash()` on strings/tuples is randomized per
+> process (`PYTHONHASHSEED`) unless explicitly disabled — so the function's
+> own "deterministic-given-seed" claim was false. This was caught when 3
+> fresh evaluation runs produced 3 different success rates (54.9%, 58.6%,
+> 56.1%) and the H3-UTILITY verdict flipped between runs. Fixed by seeding
+> `random.Random()` with the string itself
+> (`random.Random(f"{scenario.seed}|{action.value}")`), which Python hashes
+> internally via a fixed, `PYTHONHASHSEED`-independent algorithm. All
+> numbers below are the corrected, post-fix, verified-deterministic
+> (5-run-identical) results, from a regenerated dataset. See
+> "Determinism bug and correction" (§35) for full details.
 
 This is one complete Active Phase 4.3 milestone (audit → protocol freeze →
 controlled data → environment → baselines → proposed mechanism → tests →
@@ -25,18 +42,31 @@ interpretable, context-aware recovery-selection mechanism
 fixed-policy baselines on a held-out frozen test split (n=720, run exactly
 once).
 
-**Result**: the proposed mechanism beat a random-valid-action baseline
-overwhelmingly (54.2% vs 22.1% validated success, McNemar p≈1.6×10⁻⁴⁵) but
-was **statistically indistinguishable from a fixed rule-based priority
-baseline** (54.2% vs 53.2%, effect size 0.0097 — far below the pre-registered
-minimum meaningful effect of 0.15, McNemar p=0.525, not significant after
-Holm-Bonferroni correction). The mechanism never selected the one unsafe
-action in the frozen vocabulary (0/720), and a dedicated safety ablation
-that removed the safety mask confirmed the mask is load-bearing (unsafe
-rate jumps to 8.9% and mean utility collapses from 0.561 to 0.021 without
-it). Verdict: **PASS** as a valid, adequately powered, leak-free experiment
-— **H3 (the primary success-rate hypothesis) is NOT SUPPORTED** by this
-evidence. This is reported as a negative result, not reframed or hidden.
+**Result** (corrected, post-determinism-fix, verified 5-run-identical):
+the proposed mechanism beat a random-valid-action baseline overwhelmingly
+(55.1% vs 22.5% validated success, McNemar p≈1.3×10⁻⁴⁸) but was
+**statistically indistinguishable from a fixed rule-based priority
+baseline** (55.1% vs 54.0%, effect size 0.0111 — far below the
+pre-registered minimum meaningful effect of 0.15, McNemar p=0.451, not
+significant after Holm-Bonferroni correction). A supplementary sensitivity
+check across 5 independent dataset draws (different `scenario.seed` ranges,
+`benchmarks/phase4_3_seed_sensitivity_full.py`, using the same full
+McNemar/verdict statistical pipeline as the primary evaluation) found the
+effect size ranges from −0.003 to +0.028 — consistently far below 0.15,
+confirming this is not an artifact of one particular draw. See
+`experiments/results/phase4_3/seed_sensitivity.json` for full per-draw
+detail (proposed/fixed success rate, McNemar p, and all three verdicts
+per draw). The mechanism never selected the
+one unsafe action in the frozen vocabulary (0/720), and a dedicated safety
+ablation that removed the safety mask confirmed the mask is load-bearing
+(unsafe rate jumps to 8.9% and mean utility collapses from 0.549 to 0.013
+without it). Mean recovery utility was effectively tied with the
+fixed-priority baseline (0.5492 proposed vs 0.5492 fixed, proposed
+marginally lower — H3-UTILITY NOT SUPPORTED under the frozen `>=` rule).
+Verdict: **PASS** as a valid, adequately powered, leak-free experiment —
+**H3 (the primary success-rate hypothesis) and H3-UTILITY are NOT
+SUPPORTED** by this evidence; H3-SAFETY is supported. This is reported as
+a negative result, not reframed or hidden.
 
 ---
 
@@ -101,9 +131,9 @@ pattern discovery).
 
 | Hypothesis | Statement | Result |
 |---|---|---|
-| H3 | Proposed mechanism's validated success rate > best fixed-policy baseline, effect ≥ 0.15, statistically significant | **NOT SUPPORTED** (effect 0.0097, p=0.525) |
+| H3 | Proposed mechanism's validated success rate > best fixed-policy baseline, effect ≥ 0.15, statistically significant | **NOT SUPPORTED** (effect 0.0111, p=0.451) |
 | H3-SAFETY | Proposed mechanism's unsafe-action rate ≤ 0.00 | **SUPPORTED** (0/720 = 0.000) |
-| H3-UTILITY | Proposed mechanism's mean recovery utility ≥ best fixed-policy baseline's | **SUPPORTED** (0.5614 ≥ 0.5585) |
+| H3-UTILITY | Proposed mechanism's mean recovery utility ≥ best fixed-policy baseline's | **NOT SUPPORTED** (0.54916 < 0.54921, effectively tied, proposed marginally lower) |
 
 All three were labeled `NOT YET TESTED` in the frozen protocol until the
 one-shot frozen-test run in `benchmarks/phase4_3_recovery_evaluate.py`.
@@ -294,59 +324,68 @@ pairwise comparisons.
 
 | Comparison | Proposed | Baseline | Effect | McNemar p | Holm-sig? | 95% CI on diff |
 |---|---|---|---|---|---|---|
-| vs. `baseline_fixed_priority` | 0.5417 | 0.5319 | **0.0097** (< 0.15 required) | 0.525 | **No** | [−0.015, +0.035] |
-| vs. `baseline_random_valid` | 0.5417 | 0.2208 | 0.3208 | 1.6×10⁻⁴⁵ | **Yes** | [+0.279, +0.361] |
+| vs. `baseline_fixed_priority` | 0.5514 | 0.5403 | **0.0111** (< 0.15 required) | 0.451 | **No** | [−0.014, +0.037] |
+| vs. `baseline_random_valid` | 0.5514 | 0.2250 | 0.3264 | 1.3×10⁻⁴⁸ | **Yes** | [+0.288, +0.368] |
 
-Wilson 95% CI, proposed success rate: [0.505, 0.578]. Wilson 95% CI, fixed-
-priority: [0.495, 0.568] — the two intervals overlap substantially,
+Wilson 95% CI, proposed success rate: [0.515, 0.587]. Wilson 95% CI, fixed-
+priority: [0.504, 0.576] — the two intervals overlap substantially,
 consistent with the non-significant McNemar result.
+
+**Cross-draw sensitivity** (`benchmarks/phase4_3_seed_sensitivity.py`, 5
+independent dataset draws using disjoint `scenario.seed` ranges outside the
+frozen protocol's own seed space): effect size vs. `baseline_fixed_priority`
+ranged **[−0.0056, +0.0208]**, mean +0.0108 — consistently far below the
+0.15 minimum required effect across every draw, confirming the frozen
+draw's result is representative, not an outlier.
 
 ## 22. Full policy comparison (frozen TEST, n=720, run exactly once)
 
 | Policy | Success | Unsafe | Utility (mean) | Abstain | Partial |
 |---|---|---|---|---|---|
-| `baseline_fixed_priority` | 0.5319 | 0.0000 | 0.5585 | 0.000 | 0.158 |
-| `baseline_random_valid` | 0.2208 | 0.0000 | 0.1487 | 0.000 | 0.071 |
-| **`proposed_empirical_recovery`** | **0.5417** | **0.0000** | **0.5614** | 0.000 | 0.147 |
-| `ablation_frequency_only` | 0.3653 | 0.0000 | 0.3235 | 0.000 | 0.117 |
-| `ablation_no_abstention` | 0.5417 | 0.0000 | 0.5614 | 0.000 | 0.147 |
-| `ablation_family_only` | 0.5514 | 0.0000 | 0.5555 | 0.000 | 0.140 |
-| `ablation_unmasked_utility` | 0.5319 | **0.0889** | **0.0215** | 0.000 | 0.133 |
-| `oracle_reference_bound` | 0.6014 | 0.0000 | 0.6168 | — | 0.125 |
+| `baseline_fixed_priority` | 0.5403 | 0.0000 | 0.5492 | 0.000 | 0.122 |
+| `baseline_random_valid` | 0.2250 | 0.0000 | 0.1455 | 0.000 | 0.057 |
+| **`proposed_empirical_recovery`** | **0.5514** | **0.0000** | **0.5492** | 0.000 | 0.108 |
+| `ablation_frequency_only` | 0.3653 | 0.0000 | 0.3074 | 0.000 | 0.083 |
+| `ablation_no_abstention` | 0.5514 | 0.0000 | 0.5492 | 0.000 | 0.108 |
+| `ablation_family_only` | 0.5403 | 0.0000 | 0.5492 | 0.000 | 0.122 |
+| `ablation_unmasked_utility` | 0.5389 | **0.0889** | **0.0134** | 0.000 | 0.108 |
+| `oracle_reference_bound` | 0.6000 | 0.0000 | 0.6076 | — | 0.110 |
 
 Per-family breakdown (proposed / fixed / oracle): `resource_exhaustion`
-0.700 / 0.667 / 0.761; `configuration_failure` 0.689 / 0.667 / 0.856;
-`transient_failure` 0.489 / 0.506 / 0.506; `dependency_failure` 0.289 /
-0.289 / 0.283 (all n=180/family). `dependency_failure` is the hardest
-family for every policy including the oracle (max achievable ~28%) because
+0.739 / 0.700 / 0.778; `configuration_failure` 0.722 / 0.694 / 0.844;
+`transient_failure` 0.522 / 0.544 / 0.544; `dependency_failure` 0.222 /
+0.222 / 0.233 (all n=180/family). `dependency_failure` is the hardest
+family for every policy including the oracle (max achievable ~23%) because
 its non-outage-avoiding safe actions genuinely have low ground-truth
 success probability against `downstream_outage` — a deliberate "no strong
 safe recovery exists" case in the frozen taxonomy (§7), not a bug.
 
 ## 23. Ablation results (pre-registered, brief §30)
 
-- **A — memory vs. no memory**: `proposed_empirical_recovery` (0.542) beats
-  `baseline_random_valid` (0.221) overwhelmingly and is statistically tied
-  with `baseline_fixed_priority` (0.532) — memory (§17) clearly beats
+- **A — memory vs. no memory**: `proposed_empirical_recovery` (0.551) beats
+  `baseline_random_valid` (0.225) overwhelmingly and is statistically tied
+  with `baseline_fixed_priority` (0.540) — memory (§17) clearly beats
   *no* domain knowledge at all, but does not clearly beat *hand-written*
   domain knowledge here.
 - **B — outcome-aware vs. frequency-only**: `proposed_empirical_recovery`
-  (0.542) clearly beats `ablation_frequency_only` (0.365) — learning
+  (0.551) clearly beats `ablation_frequency_only` (0.365) — learning
   *which* action tends to succeed matters far more than just learning
   *which* action is tried most often. This is the cleanest positive
   finding of the milestone.
-- **C — abstention vs. no abstention**: **identical on TEST** (0.542 vs.
-  0.542) at the frozen `min_evidence=2` — an honest null result specific
-  to this frozen hyperparameter value (§18/§28), not evidence that
+- **C — abstention vs. no abstention**: **identical on TEST** (0.551 vs.
+  0.551) at the frozen `min_evidence=2` — an honest null result specific
+  to this frozen hyperparameter value (§18/§29), not evidence that
   abstention never matters.
 - **D — context vs. no context (family-only)**: `ablation_family_only`
-  (0.551) is *marginally higher* than the full-context proposed policy
-  (0.542) — the finer symptom/severity buckets did not help, and may have
-  mildly hurt via smaller per-bucket sample sizes on this generated TRAIN
-  corpus. A genuine negative/null finding, reported as such.
+  (0.540) is now *lower* than the full-context proposed policy (0.551) —
+  post-fix, the finer symptom/severity buckets provided a small edge over
+  family-only stats (reversed from the pre-fix, bug-affected numbers,
+  which happened to show the opposite direction). The gap (0.011) is the
+  same magnitude as the H3 effect itself and not separately tested for
+  significance — reported descriptively, not as a confirmed finding.
 - **E — safety masking**: without the safety mask,
   `ablation_unmasked_utility` selects the UNSAFE `force_restart` action in
-  8.9% of test episodes and mean utility collapses from 0.561 to 0.021 —
+  8.9% of test episodes and mean utility collapses from 0.549 to 0.013 —
   direct evidence the safety mask (§11, `safe_candidate_actions`) is
   load-bearing, not decorative.
 
@@ -395,8 +434,27 @@ family (anti-baked-in-answer check).
 
 ## 27. Important failures/bugs discovered during implementation
 
-None required a design change to the frozen protocol. One implementation
-detail worth flagging: the initial `min_evidence` sweep showed success
+**A real bug was found and fixed post-initial-report: see §35 for full
+detail.** `src/recovery/environment.py`'s `transition()` seeded its
+per-action RNG via `random.Random(hash((scenario.seed, action.value)) &
+0xFFFFFFFF)`. Python's built-in `hash()` on strings and tuples containing
+strings is randomized per process by `PYTHONHASHSEED` unless explicitly
+disabled, so this function's documented "deterministic-given-(seed,
+action)" contract was false — three fresh evaluation runs of the same
+frozen dataset produced three different success rates (54.9%, 58.6%,
+56.1%) and the H3-UTILITY verdict flipped between SUPPORTED and NOT
+SUPPORTED across runs. This invalidated every number in the original
+version of this document. Fixed by seeding with the string itself
+(`random.Random(f"{scenario.seed}|{action.value}")` — Python hashes
+str/bytes seeds via a fixed, `PYTHONHASHSEED`-independent algorithm
+internally), the dataset was regenerated, and every number in this
+document was replaced with the corrected, verified-deterministic (5 runs
+byte-identical) result. This did not require any change to the frozen
+protocol, taxonomy, action vocabulary, or validation rules — only to the
+non-deterministic RNG seeding in the environment implementation.
+
+A separate, non-bug implementation detail worth flagging: the initial
+`min_evidence` sweep showed success
 rate *strictly decreasing* as `min_evidence` increased (0.598 → 0.245
 across the swept range) rather than the more typical "rises then
 plateaus" shape one might expect from an abstention threshold — because on
@@ -502,7 +560,7 @@ identical byte-for-byte dataset (all randomness is seeded via
    over the simpler heuristic.
 8. **What happens when no safe recovery exists?** `dependency_failure`
    `downstream_outage`: every policy, including the oracle, tops out
-   under ~30% success; the mechanism did not attempt the unsafe action
+   under ~25% success; the mechanism did not attempt the unsafe action
    (0/720) and did not inflate its confidence in that regime.
 9. **What are the failure modes of the recovery mechanism?** (a) It offers
    no advantage over a good hand-written heuristic when the heuristic
@@ -513,10 +571,11 @@ identical byte-for-byte dataset (all randomness is seeded via
    corpus.
 10. **Does the evidence justify moving toward autonomous recovery
     orchestration?** Not yet, and not on this evidence alone: the
-    mechanism is safe (H3-SAFETY held) and utility-competitive
-    (H3-UTILITY held), but has not demonstrated a success-rate advantage
-    over a much simpler, cheaper, fully-interpretable fixed-priority
-    policy. The strongest actionable finding is that a fixed, well-designed
+    mechanism is safe (H3-SAFETY held) but has demonstrated neither a
+    success-rate advantage (H3) nor a utility advantage (H3-UTILITY,
+    effectively tied at 0.5492 vs 0.5492, proposed marginally lower) over
+    a much simpler, cheaper, fully-interpretable fixed-priority policy.
+    The strongest actionable finding is that a fixed, well-designed
     priority list is a genuinely strong, hard-to-beat baseline for
     single-decision recovery selection — worth stating plainly rather than
     downplaying because it is not the "learning wins" story.
@@ -527,8 +586,12 @@ identical byte-for-byte dataset (all randomness is seeded via
   selection (ablation B); any-memory over no-memory (vs. random baseline);
   safety when the mask is applied (ablation E).
 - **Did not improve**: validated success rate over a fixed-priority
-  baseline (H3 primary); context-aware buckets over family-only buckets
-  (ablation D, mild negative).
+  baseline (H3 primary, effect 0.0111, not significant, confirmed stable
+  across 5 independent dataset draws in §21); recovery utility over the
+  fixed-priority baseline (H3-UTILITY, effectively tied); context-aware
+  buckets over family-only buckets (ablation D — reversed direction from
+  the pre-fix numbers, now a small, untested-for-significance positive
+  rather than negative, see §23).
 - **Remains inconclusive**: whether abstention meaningfully trades success
   for safety (ablation C was uninformative at the frozen hyperparameter,
   §27/§29).
@@ -548,6 +611,79 @@ re-opening this frozen evaluation.
 
 ---
 
+## 35. Determinism bug and correction (2026-08-17)
+
+**What was broken, with evidence.** `src/recovery/environment.py`'s
+`transition()` (the function whose own docstring claims it is
+"deterministic-given-(scenario.seed, action)") seeded its per-action
+outcome RNG with:
+
+```python
+action_rng = random.Random(hash((scenario.seed, action.value)) & 0xFFFFFFFF)
+```
+
+Python's built-in `hash()` applied to a `str` (here, inside a tuple) is
+salted per-process by `PYTHONHASHSEED` unless that variable is explicitly
+set to a fixed value — so `hash((scenario.seed, action.value))` returns a
+*different* value on every fresh Python process by default, even for the
+identical `(seed, action)` pair. This was confirmed empirically, not
+assumed: three fresh runs of `benchmarks/phase4_3_recovery_evaluate.py`
+against the same frozen dataset produced three different validated success
+rates for the proposed policy (54.9%, 58.6%, 56.1%), and the H3-UTILITY
+verdict flipped between `SUPPORTED` and `NOT SUPPORTED` across those runs.
+Every number originally published in this document (54.2% / 53.2% / 22.1%,
+McNemar p=0.525, H3-UTILITY SUPPORTED) was one arbitrary draw from this
+non-determinism, not a reproducible result.
+
+**Fix.** Replaced the `hash()`-seeded call with:
+
+```python
+action_rng = random.Random(f"{scenario.seed}|{action.value}")
+```
+
+`random.Random()` accepts a `str`/`bytes` seed directly and hashes it
+internally via a fixed, version-stable, `PYTHONHASHSEED`-independent
+algorithm (this is documented CPython `random` module behavior, distinct
+from the builtin `hash()` function) — so this seeding is now genuinely
+reproducible across processes and machines, not just within one.
+
+**Sibling search.** `grep -rn "Random(hash\|randrange(hash\|seed(hash\|np.random.seed(hash\|RandomState(hash" src/ benchmarks/ scripts/`
+found exactly one match: the line above. No other RNG in the repository is
+seeded from the builtin `hash()` function. (Other uses of the substring
+`hash(` in the repo are either unrelated user-defined functions named
+`content_hash`/`_content_hash`/`dataset_content_hash` that call
+`hashlib.sha256(...)` — not the builtin `hash()` — or `row_hash`/`_row_hash`
+helpers in the Phase 3 leakage-audit scripts that build tuples for
+in-process set-membership comparison, not RNG seeding, and were left
+untouched as out of scope for this fix.)
+
+**Defense in depth.** Added `PYTHONHASHSEED=0` to the `Run:` docstring in
+all three Phase 4.3 benchmark scripts
+(`phase4_3_generate_dataset.py`, `phase4_3_recovery_evaluate.py`,
+`phase4_3_recovery_leakage_audit.py`) as a belt-and-suspenders measure —
+correctness no longer *depends* on it after the fix above, but setting it
+costs nothing and guards against any future code that reintroduces a
+`hash()`-seeded RNG. No CI configuration or additional run-scripts exist
+elsewhere in the repository to update (verified: no `.github/` directory,
+no `scripts/` entries that invoke Phase 4.3 benchmarks).
+
+**Verification.** 5 runs of `benchmarks/phase4_3_recovery_evaluate.py`
+against the regenerated dataset (3 with `PYTHONHASHSEED=0`, 2 with it
+unset) produced byte-for-byte identical `H3`/`H3-SAFETY`/`H3-UTILITY`
+lines. A supplementary check across 5 independent dataset draws (disjoint
+`scenario.seed` ranges, not `PYTHONHASHSEED`) found the primary effect
+size stays in [−0.0056, +0.0208] throughout — confirming the corrected
+frozen-draw result is representative.
+
+**Scope of the fix.** This was a bug in the environment's RNG-seeding
+implementation, not in the frozen protocol, taxonomy, action vocabulary,
+or validation rules — none of `configs/phase4_3_recovery_protocol.json`
+was changed. The dataset was regenerated (same seed ranges, same
+generator/taxonomy/action-vocabulary/protocol version strings) and every
+number in this document was replaced with the corrected result.
+
+---
+
 ## Final verdict
 
 **PASS — HYPOTHESIS NOT SUPPORTED.**
@@ -555,11 +691,13 @@ re-opening this frozen evaluation.
 The Active Phase 4.3 experiment was valid (leakage audit 9/9, 425/425
 repository tests green, known-answer environment checks passing,
 no test-set tuning, sample size 4.16× the pre-registered floor,
-one-shot frozen TEST evaluation), and sufficiently powered. H3-SAFETY and
-H3-UTILITY were supported; H3 (the primary validated-success-rate
-comparison against the fixed-priority baseline) was **not** supported at
-the pre-registered minimum effect size. This is reported as a genuine,
-negative, evidence-based research result, exactly as this project's
-standing research-integrity discipline requires (README.md, Active Phase
-4.2's INCONCLUSIVE verdict; this project's Phase 3 Freeze) — not adjusted,
-reframed, or hidden.
+one-shot frozen TEST evaluation, and — after §35's correction — verified
+deterministic across 5 repeated runs and stable across 5 independent
+dataset draws), and sufficiently powered. H3-SAFETY was supported; H3 (the
+primary validated-success-rate comparison against the fixed-priority
+baseline) and H3-UTILITY were **not** supported at the pre-registered
+minimum effect size / the frozen `>=` rule respectively. This is reported
+as a genuine, negative, evidence-based research result, exactly as this
+project's standing research-integrity discipline requires (README.md,
+Active Phase 4.2's INCONCLUSIVE verdict; this project's Phase 3 Freeze) —
+not adjusted, reframed, or hidden.

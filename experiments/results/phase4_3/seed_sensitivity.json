@@ -1,0 +1,70 @@
+{
+  "n_draws": 5,
+  "min_evidence_used": 2,
+  "draws": [
+    {
+      "draw_offset": 1000000000,
+      "n_train": 1200,
+      "n_test": 720,
+      "proposed_success_rate": 0.5680555555555555,
+      "fixed_priority_success_rate": 0.5708333333333333,
+      "effect_size": -0.002777777777777768,
+      "mcnemar_p_value": 0.9226851594412756,
+      "h3_supported": "False",
+      "h3_safety_supported": true,
+      "h3_utility_supported": false
+    },
+    {
+      "draw_offset": 2000000000,
+      "n_train": 1200,
+      "n_test": 720,
+      "proposed_success_rate": 0.5736111111111111,
+      "fixed_priority_success_rate": 0.5583333333333333,
+      "effect_size": 0.015277777777777724,
+      "mcnemar_p_value": 0.2779992890805517,
+      "h3_supported": "False",
+      "h3_safety_supported": true,
+      "h3_utility_supported": true
+    },
+    {
+      "draw_offset": 3000000000,
+      "n_train": 1200,
+      "n_test": 720,
+      "proposed_success_rate": 0.5805555555555556,
+      "fixed_priority_success_rate": 0.5611111111111111,
+      "effect_size": 0.019444444444444486,
+      "mcnemar_p_value": 0.09795444051950736,
+      "h3_supported": "False",
+      "h3_safety_supported": true,
+      "h3_utility_supported": true
+    },
+    {
+      "draw_offset": 4000000000,
+      "n_train": 1200,
+      "n_test": 720,
+      "proposed_success_rate": 0.5763888888888888,
+      "fixed_priority_success_rate": 0.5486111111111112,
+      "effect_size": 0.02777777777777768,
+      "mcnemar_p_value": 0.0077874363057435225,
+      "h3_supported": false,
+      "h3_safety_supported": true,
+      "h3_utility_supported": true
+    },
+    {
+      "draw_offset": 5000000000,
+      "n_train": 1200,
+      "n_test": 720,
+      "proposed_success_rate": 0.5722222222222222,
+      "fixed_priority_success_rate": 0.5652777777777778,
+      "effect_size": 0.00694444444444442,
+      "mcnemar_p_value": 0.6304564917867981,
+      "h3_supported": "False",
+      "h3_safety_supported": true,
+      "h3_utility_supported": false
+    }
+  ],
+  "effect_size_min": -0.002777777777777768,
+  "effect_size_max": 0.02777777777777768,
+  "effect_size_mean": 0.013333333333333308,
+  "note": "Supplementary sensitivity analysis, NOT the frozen Phase 4.3 test result. Does not overwrite experiments/results/phase4_3/results.json's primary test_result block. Each draw uses independent scenario.seed ranges disjoint from the frozen protocol's own seed space and from every other draw; min_evidence is fixed at the frozen protocol's validation-selected value (2), not re-swept per draw."
+}

@@ -8,6 +8,10 @@ into a policy input and asserts it is rejected -- proving the guard is
 load-bearing, per this project's standing leakage-audit discipline (see
 benchmarks/phase4_2_active_leakage_audit.py's check 4 for the precedent).
 
+Run: PYTHONHASHSEED=0 python benchmarks/phase4_3_recovery_leakage_audit.py
+(PYTHONHASHSEED=0 is defense in depth; see the note in
+benchmarks/phase4_3_generate_dataset.py's docstring.)
+
 Writes experiments/results/phase4_3/leakage_audit.json.
 """
 from __future__ import annotations
@@ -15,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import inspect
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -149,26 +154,49 @@ def check_8_unsafe_action_deterministically_flagged() -> dict:
 
 def check_9_historical_frozen_dirs_untouched(baseline_hashes_path: Path) -> dict:
     """Compares against a hash snapshot taken before Phase 4.3 work began,
-    if one exists; otherwise records current hashes as the first snapshot
-    (informational, not a failure)."""
+    if one exists; otherwise records current hashes as the first snapshot.
+
+    NOTE: a first-run "no prior baseline, wrote fresh snapshot" result is a
+    non-event, NOT a real pass -- there was nothing to compare against, so
+    it proves nothing about whether these directories were touched. Treat
+    it as informational only; this check only constitutes a real
+    verification once it has been run again against a later, unrelated
+    change and found the baseline unchanged.
+
+    Baseline file format: {"baseline_commit": <git rev-parse HEAD at
+    snapshot time, or null>, "hashes": {posix_relpath: sha256}}. Paths are
+    stored via Path.as_posix() so the baseline is comparable across
+    Windows/POSIX checkouts (str(Path) previously emitted OS-native
+    separators, which made a baseline written on Windows silently
+    mismatch -- and thus always "diff" -- when read back on POSIX, or
+    vice versa)."""
     current = {}
     for d in HISTORICAL_FROZEN_DIRS:
         dir_path = ROOT / d
         if not dir_path.exists():
             continue
         for f in sorted(dir_path.rglob("*.py")):
-            current[str(f.relative_to(ROOT))] = hashlib.sha256(f.read_bytes()).hexdigest()
+            current[f.relative_to(ROOT).as_posix()] = hashlib.sha256(f.read_bytes()).hexdigest()
 
     if baseline_hashes_path.exists():
-        baseline = json.loads(baseline_hashes_path.read_text())
+        raw = json.loads(baseline_hashes_path.read_text())
+        baseline = raw.get("hashes", raw)  # tolerate the old flat format too
         diffs = {k: (baseline.get(k), v) for k, v in current.items() if baseline.get(k) != v}
         missing = [k for k in baseline if k not in current]
         passed = len(diffs) == 0 and len(missing) == 0
         detail = f"diffs={list(diffs.keys())[:10]} missing={missing[:10]}" if not passed else "no changes vs baseline snapshot"
     else:
-        baseline_hashes_path.write_text(json.dumps(current, indent=2))
+        try:
+            commit = subprocess.run(
+                ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True,
+            ).stdout.strip()
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            commit = None
+        baseline_hashes_path.write_text(json.dumps({"baseline_commit": commit, "hashes": current}, indent=2))
         passed = True
-        detail = f"no prior baseline found; wrote first snapshot ({len(current)} files) to {baseline_hashes_path.name}"
+        detail = (f"NON-EVENT, not a real verification: no prior baseline found; wrote first "
+                  f"snapshot ({len(current)} files) to {baseline_hashes_path.name} at commit "
+                  f"{commit}. Re-run this audit after a later, unrelated change to get a real pass/fail.")
     return {"check": "historical_frozen_dirs_untouched", "passed": passed, "detail": detail}
 
 

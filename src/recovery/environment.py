@@ -124,7 +124,13 @@ def transition(scenario: RecoveryScenario, action: ActionId) -> Transition:
     and the ground-truth table it reads, are the ONLY things in this
     package allowed to see ``scenario.hidden_cause``."""
     spec = TAXONOMY[scenario.family]
-    action_rng = random.Random(hash((scenario.seed, action.value)) & 0xFFFFFFFF)
+    # NOTE: built-in hash() on strings/tuples-of-strings is randomized per
+    # process (PYTHONHASHSEED) unless explicitly disabled -- using it here
+    # silently broke the "deterministic-given-(seed, action)" contract this
+    # function claims. random.Random() accepts a str/bytes seed directly and
+    # hashes it via a fixed, PYTHONHASHSEED-independent algorithm internally,
+    # so seeding with the string itself (not hash() of it) is the fix.
+    action_rng = random.Random(f"{scenario.seed}|{action.value}")
 
     if is_unsafe(action):
         return Transition(

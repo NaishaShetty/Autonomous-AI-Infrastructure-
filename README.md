@@ -12096,14 +12096,28 @@ baselines, proposed mechanism, tests, leakage audit, experiments,
 ablations, and final verdict are documented in
 [`docs/PHASE4_3_RECOVERY_LEARNING.md`](PHASE4_3_RECOVERY_LEARNING.md).
 
+**Correction (2026-08-17):** the Phase 4.3 numbers originally quoted here
+were invalidated by a non-determinism bug in `src/recovery/environment.py`
+(`transition()` seeded its RNG from the builtin `hash()` of a string,
+which is randomized per-process by `PYTHONHASHSEED` unless disabled —
+three fresh runs produced three different success rates). Fixed by seeding
+`random.Random()` with the string itself instead of `hash()` of it; the
+dataset was regenerated and every number below is the corrected,
+verified-deterministic (5-run-identical) result. Full account:
+`docs/PHASE4_3_RECOVERY_LEARNING.md` §35.
+
 **Final verdict: PASS — HYPOTHESIS NOT SUPPORTED.** On a controlled,
 frozen, 2,320-episode synthetic dataset (`src/recovery/`,
 `data/controlled_recovery/`), the proposed context-aware
-`EmpiricalRecoveryPolicy` beat a random-action baseline decisively (54.2%
-vs 22.1% validated success, p≈1.6×10⁻⁴⁵) but was statistically
-indistinguishable from a fixed rule-based priority baseline (54.2% vs
-53.2%, effect 0.0097 versus a pre-registered minimum of 0.15, p=0.525, not
-significant). It never selected the frozen vocabulary's one unsafe action
+`EmpiricalRecoveryPolicy` beat a random-action baseline decisively (55.1%
+vs 22.5% validated success, p≈1.3×10⁻⁴⁸) but was statistically
+indistinguishable from a fixed rule-based priority baseline (55.1% vs
+54.0%, effect 0.0111 versus a pre-registered minimum of 0.15, p=0.451, not
+significant — and stable across 5 independent dataset draws using the
+same full statistical pipeline as the primary evaluation, effect range
+[−0.003, +0.028]). Mean recovery utility was effectively tied with the
+fixed-priority baseline (H3-UTILITY not supported under the frozen `>=`
+rule). It never selected the frozen vocabulary's one unsafe action
 (0/720), and a dedicated ablation confirmed the safety mask is load-bearing
 (removing it raised the unsafe rate to 8.9%). Leakage audit 9/9, full
 repository test suite 425/425, sample size 4.16× the pre-registered floor.

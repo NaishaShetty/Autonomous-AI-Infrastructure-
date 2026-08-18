@@ -9,6 +9,11 @@ Discipline enforced here (matches configs/phase4_3_recovery_protocol.json):
 - Oracle is used only as a reference bound (never scored as a competing
   policy for H3).
 
+Run: PYTHONHASHSEED=0 python benchmarks/phase4_3_recovery_evaluate.py
+(PYTHONHASHSEED=0 is defense in depth; see the note in
+benchmarks/phase4_3_generate_dataset.py's docstring -- correctness no
+longer depends on it after the environment.py determinism fix.)
+
 Writes experiments/results/phase4_3/results.json.
 """
 from __future__ import annotations
