@@ -1,0 +1,369 @@
+{
+  "milestone": "ACTIVE_PHASE_4_4_SEQUENTIAL_RECOVERY_WITH_ABSTENTION",
+  "evidence_type": "CONTROLLED",
+  "dataset": {
+    "n_train": 1600,
+    "n_validation": 600,
+    "n_test": 700
+  },
+  "test_result": {
+    "min_evidence_used": 2,
+    "observation_noise_rate_used": 0.05,
+    "n_test_total": 700,
+    "minimum_n_test_required": 173,
+    "sample_size_requirement_met": true,
+    "aggregates": {
+      "baseline_fixed_priority_sequential": {
+        "n_episodes": 700,
+        "validated_recovery_success_rate": 0.7514285714285714,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.7200775462273199,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.04285714285714286,
+        "mean_n_steps": 1.4285714285714286
+      },
+      "baseline_random_valid_sequential": {
+        "n_episodes": 700,
+        "validated_recovery_success_rate": 0.25857142857142856,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.14633916307877634,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.017142857142857144,
+        "mean_n_steps": 1.2385714285714287
+      },
+      "proposed_sequential_empirical_recovery": {
+        "n_episodes": 700,
+        "validated_recovery_success_rate": 0.7028571428571428,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.6723834242069608,
+        "abstention_rate": 0.11,
+        "partial_recovery_rate": 0.03428571428571429,
+        "mean_n_steps": 1.4114285714285715
+      },
+      "single_step_empirical_ablation": {
+        "n_episodes": 700,
+        "validated_recovery_success_rate": 0.5885714285714285,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.6076770051609474,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.14857142857142858,
+        "mean_n_steps": 1.0
+      },
+      "proposed_no_abstention": {
+        "n_episodes": 700,
+        "validated_recovery_success_rate": 0.75,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.7197792802403572,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.04285714285714286,
+        "mean_n_steps": 1.4114285714285715
+      },
+      "oracle_reference_bound": {
+        "n_episodes": 700,
+        "validated_recovery_success_rate": 0.78,
+        "unsafe_action_rate": 0.0,
+        "recovery_utility_mean": 0.7502647714966834,
+        "abstention_rate": 0.0,
+        "partial_recovery_rate": 0.03857142857142857,
+        "mean_n_steps": 1.2571428571428571
+      }
+    },
+    "per_family": {
+      "baseline_fixed_priority_sequential": {
+        "configuration_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.9485714285714286,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.8813430561514586,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.02857142857142857,
+          "mean_n_steps": 1.3257142857142856
+        },
+        "resource_exhaustion": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.8971428571428571,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.8349809784818096,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.05714285714285714,
+          "mean_n_steps": 1.2685714285714285
+        },
+        "transient_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.7714285714285715,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7742117761020474,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.05714285714285714,
+          "mean_n_steps": 1.4285714285714286
+        },
+        "dependency_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.38857142857142857,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.38977437417396554,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.02857142857142857,
+          "mean_n_steps": 1.6914285714285715
+        }
+      },
+      "baseline_random_valid_sequential": {
+        "configuration_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.35428571428571426,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.23763829989945467,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.005714285714285714,
+          "mean_n_steps": 1.3428571428571427
+        },
+        "resource_exhaustion": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.2914285714285714,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.17813412161264652,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.02857142857142857,
+          "mean_n_steps": 1.1942857142857144
+        },
+        "transient_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.28,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.18078005555533525,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.03428571428571429,
+          "mean_n_steps": 1.2571428571428571
+        },
+        "dependency_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.10857142857142857,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": -0.01119582475233068,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.0,
+          "mean_n_steps": 1.16
+        }
+      },
+      "proposed_sequential_empirical_recovery": {
+        "configuration_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.8857142857142857,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.8067273242105308,
+          "abstention_rate": 0.08,
+          "partial_recovery_rate": 0.017142857142857144,
+          "mean_n_steps": 1.2742857142857142
+        },
+        "resource_exhaustion": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.8685714285714285,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.822369687764317,
+          "abstention_rate": 0.022857142857142857,
+          "partial_recovery_rate": 0.022857142857142857,
+          "mean_n_steps": 1.24
+        },
+        "transient_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.7085714285714285,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6936776301955262,
+          "abstention_rate": 0.12571428571428572,
+          "partial_recovery_rate": 0.02857142857142857,
+          "mean_n_steps": 1.44
+        },
+        "dependency_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.3485714285714286,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3667590546574709,
+          "abstention_rate": 0.21142857142857144,
+          "partial_recovery_rate": 0.06857142857142857,
+          "mean_n_steps": 1.6914285714285715
+        }
+      },
+      "single_step_empirical_ablation": {
+        "configuration_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.7257142857142858,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7048189771728587,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.14857142857142858,
+          "mean_n_steps": 1.0
+        },
+        "resource_exhaustion": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.76,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.736648885379107,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.08571428571428572,
+          "mean_n_steps": 1.0
+        },
+        "transient_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.56,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.6146281232081016,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.17714285714285713,
+          "mean_n_steps": 1.0
+        },
+        "dependency_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.30857142857142855,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.3746120348837238,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.18285714285714286,
+          "mean_n_steps": 1.0
+        }
+      },
+      "proposed_no_abstention": {
+        "configuration_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.96,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.8754125295474894,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.017142857142857144,
+          "mean_n_steps": 1.2742857142857142
+        },
+        "resource_exhaustion": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.88,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.8351543691727289,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.02857142857142857,
+          "mean_n_steps": 1.24
+        },
+        "transient_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.76,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7473352148917877,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.045714285714285714,
+          "mean_n_steps": 1.44
+        },
+        "dependency_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.4,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.42121500734942546,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.08,
+          "mean_n_steps": 1.6914285714285715
+        }
+      },
+      "oracle_reference_bound": {
+        "configuration_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.9828571428571429,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.8897752978196076,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.011428571428571429,
+          "mean_n_steps": 1.1542857142857144
+        },
+        "resource_exhaustion": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.96,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.9167577378359328,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.02857142857142857,
+          "mean_n_steps": 1.1828571428571428
+        },
+        "transient_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.7714285714285715,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.7778660887266514,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.06285714285714286,
+          "mean_n_steps": 1.4285714285714286
+        },
+        "dependency_failure": {
+          "n_episodes": 175,
+          "validated_recovery_success_rate": 0.4057142857142857,
+          "unsafe_action_rate": 0.0,
+          "recovery_utility_mean": 0.4166599616045424,
+          "abstention_rate": 0.0,
+          "partial_recovery_rate": 0.05142857142857143,
+          "mean_n_steps": 1.262857142857143
+        }
+      }
+    },
+    "statistics": {
+      "mcnemar_proposed_vs_fixed_priority_sequential": {
+        "a_only": 24,
+        "b_only": 58,
+        "both": 468,
+        "neither": 150,
+        "n_discordant": 82,
+        "p_value": 0.00022196403499337815
+      },
+      "mcnemar_proposed_vs_random_valid_sequential": {
+        "a_only": 328,
+        "b_only": 17,
+        "both": 164,
+        "neither": 191,
+        "n_discordant": 345,
+        "p_value": 7.700224836808424e-76
+      },
+      "mcnemar_proposed_vs_single_step_empirical": {
+        "a_only": 80,
+        "b_only": 0,
+        "both": 412,
+        "neither": 208,
+        "n_discordant": 80,
+        "p_value": 1.6543612251060553e-24
+      },
+      "holm_bonferroni": {
+        "vs_random_valid_sequential": {
+          "p_value": 7.700224836808424e-76,
+          "holm_threshold": 0.025,
+          "significant": "True"
+        },
+        "vs_fixed_priority_sequential": {
+          "p_value": 0.00022196403499337815,
+          "holm_threshold": 0.05,
+          "significant": "True"
+        }
+      },
+      "effect_size_vs_fixed_priority_sequential": -0.0485714285714286,
+      "effect_size_vs_single_step_empirical_ablation": 0.11428571428571432,
+      "min_effect_size_required": 0.15
+    },
+    "h4_abstention": {
+      "scope_family": "dependency_failure",
+      "proposed_abstain_rate_dependency_failure": 0.21142857142857144,
+      "fixed_priority_no_abstention_baseline_abstain_rate_dependency_failure": 0.0,
+      "abstain_rate_higher_than_no_abstention_fixed": true,
+      "proposed_utility_other_families": 0.7742582140567908,
+      "proposed_no_abstention_variant_utility_other_families": 0.8193007045373343,
+      "no_utility_regression_on_other_families": false
+    }
+  },
+  "leakage_audit_passed": true,
+  "verdict": {
+    "verdict": "PASS",
+    "h4_supported": false,
+    "h4_safety_supported": true,
+    "h4_utility_supported": false,
+    "h4_abstention_supported": false,
+    "h4_ablation_supported": false,
+    "reasons": [
+      "H4-SAFETY: unsafe_action_rate=0.0000 <= 0.0 -> SUPPORTED",
+      "H4: effect_size=-0.0486 (min 0.15), holm-significant=True -> NOT SUPPORTED",
+      "H4-UTILITY: proposed=0.6724 vs fixed_priority_sequential=0.7201 -> NOT SUPPORTED",
+      "H4-ABSTENTION: abstain_rate 0.2114 vs 0.0000, other-family utility 0.7743 vs 0.8193 -> NOT SUPPORTED",
+      "H4-ABLATION (informational): effect_size_vs_single_step=+0.1143 (min 0.15) -> NOT SUPPORTED (gate_type=informational_not_pass_fail)",
+      "PASS -- HYPOTHESIS NOT SUPPORTED: the experiment was valid, adequately powered, and pre-registered; H4 itself was not confirmed on this evidence. Valid negative result."
+    ]
+  }
+}

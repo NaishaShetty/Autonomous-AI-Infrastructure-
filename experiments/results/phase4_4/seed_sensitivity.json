@@ -1,0 +1,63 @@
+{
+  "n_draws": 4,
+  "min_evidence_used": 2,
+  "observation_noise_rate_used": 0.05,
+  "draws": [
+    {
+      "draw_offset": 5000000000000,
+      "n_train": 1600,
+      "n_test": 700,
+      "proposed_success_rate": 0.6985714285714286,
+      "fixed_priority_sequential_success_rate": 0.7442857142857143,
+      "effect_size": -0.04571428571428571,
+      "mcnemar_p_value": 0.00037779201420676267,
+      "unsafe_action_rate": 0.0,
+      "h4_supported": false,
+      "h4_safety_supported": true,
+      "h4_utility_supported": false
+    },
+    {
+      "draw_offset": 6000000000000,
+      "n_train": 1600,
+      "n_test": 700,
+      "proposed_success_rate": 0.6928571428571428,
+      "fixed_priority_sequential_success_rate": 0.7314285714285714,
+      "effect_size": -0.03857142857142859,
+      "mcnemar_p_value": 0.003183010628835073,
+      "unsafe_action_rate": 0.0,
+      "h4_supported": false,
+      "h4_safety_supported": true,
+      "h4_utility_supported": false
+    },
+    {
+      "draw_offset": 7000000000000,
+      "n_train": 1600,
+      "n_test": 700,
+      "proposed_success_rate": 0.6714285714285714,
+      "fixed_priority_sequential_success_rate": 0.7185714285714285,
+      "effect_size": -0.04714285714285715,
+      "mcnemar_p_value": 0.002238345717908804,
+      "unsafe_action_rate": 0.0,
+      "h4_supported": false,
+      "h4_safety_supported": true,
+      "h4_utility_supported": false
+    },
+    {
+      "draw_offset": 8000000000000,
+      "n_train": 1600,
+      "n_test": 700,
+      "proposed_success_rate": 0.67,
+      "fixed_priority_sequential_success_rate": 0.7371428571428571,
+      "effect_size": -0.06714285714285706,
+      "mcnemar_p_value": 1.4640982465812788e-06,
+      "unsafe_action_rate": 0.0,
+      "h4_supported": false,
+      "h4_safety_supported": true,
+      "h4_utility_supported": false
+    }
+  ],
+  "effect_size_min": -0.06714285714285706,
+  "effect_size_max": -0.03857142857142859,
+  "effect_size_mean": -0.04964285714285713,
+  "note": "Supplementary sensitivity analysis, NOT the frozen Phase 4.4 primary TEST result (experiments/results/phase4_4/results.json is untouched by this script). Each draw uses scenario.seed ranges disjoint from the frozen protocol's own seed space and from every other draw. min_evidence and observation_noise_rate are fixed at their frozen values, not re-swept per draw. Built in from the start of Phase 4.4 (not added post-hoc, unlike 4.3)."
+}

@@ -1,0 +1,67 @@
+{
+  "milestone": "ACTIVE_PHASE_4_4",
+  "n_checks": 12,
+  "n_passed": 12,
+  "checks": [
+    {
+      "check": "decision_context_v2_excludes_ground_truth_fields",
+      "passed": true,
+      "detail": "DecisionContextV2 fields=['candidate_actions', 'episode_id', 'family', 'scenario_id', 'severity', 'step', 'step1_action', 'step1_observation', 'symptom_pattern', 'workload_type']; forbidden-intersection=[]"
+    },
+    {
+      "check": "non_vacuous_contamination_rejected",
+      "passed": true,
+      "detail": "contamination payload correctly rejected: ValidationError"
+    },
+    {
+      "check": "policy_select_signature_boundary",
+      "passed": true,
+      "detail": "all policies take exactly (self, ctx: DecisionContextV2)"
+    },
+    {
+      "check": "seed_ranges_disjoint_across_family_and_split",
+      "passed": true,
+      "detail": "2900 seeds, zero collisions"
+    },
+    {
+      "check": "generated_splits_disjoint",
+      "passed": true,
+      "detail": "overlap_counts={k: len(v) for k in overlaps} -> [0, 0, 0]"
+    },
+    {
+      "check": "val_test_unresolved_at_generation",
+      "passed": true,
+      "detail": "0 episodes had a pre-baked action/outcome (should be 0)"
+    },
+    {
+      "check": "provenance_source_type_controlled",
+      "passed": true,
+      "detail": "0/2900 episodes had non-'controlled' source_type"
+    },
+    {
+      "check": "unsafe_action_flagging_non_vacuous",
+      "passed": true,
+      "detail": "50/50 FORCE_RESTART step-1 transitions correctly flagged unsafe"
+    },
+    {
+      "check": "single_step_ablation_reuses_not_duplicates_phase4_3_policy",
+      "passed": true,
+      "detail": "SingleStepEmpirical.inner.__class__ is phase4.3's EmpiricalRecoveryPolicy: True, select_step1 delegates and returns a valid action: True, no select_step2 defined (forced single-step by construction): True"
+    },
+    {
+      "check": "cross_step_leakage_step1_cannot_see_step2",
+      "passed": true,
+      "detail": "structurally_absent=True, contamination_rejected=True, step1_context.step=1, step1_context.step1_action=None"
+    },
+    {
+      "check": "path_normalization_as_posix_from_first_commit",
+      "passed": true,
+      "detail": "uses_as_posix=True, reintroduced_4.3_bug_pattern=False"
+    },
+    {
+      "check": "non_vacuous_first_baseline_records_baseline_commit",
+      "passed": true,
+      "detail": "no changes vs baseline snapshot (baseline_commit=9556565a492d67ae8df9a76ce09e8c81695bcaef)"
+    }
+  ]
+}
