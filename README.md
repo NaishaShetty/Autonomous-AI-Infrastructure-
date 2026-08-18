@@ -12119,8 +12119,15 @@ same full statistical pipeline as the primary evaluation, effect range
 fixed-priority baseline (H3-UTILITY not supported under the frozen `>=`
 rule). It never selected the frozen vocabulary's one unsafe action
 (0/720), and a dedicated ablation confirmed the safety mask is load-bearing
-(removing it raised the unsafe rate to 8.9%). Leakage audit 9/9, full
-repository test suite 425/425, sample size 4.16× the pre-registered floor.
+(removing it raised the unsafe rate to 8.9%). Leakage audit 9/9. Full
+repository test suite: **408/408 data-independent tests pass on any clean
+checkout; 425/425 including the 17 real-data-dependent tests requires
+local data setup** (raw AgentRx/AIOps/Alibaba datasets are gitignored, not
+committed — see [`docs/DATA_SETUP.md`](docs/DATA_SETUP.md) and
+[`scripts/fetch_or_document_real_data.md`](scripts/fetch_or_document_real_data.md)
+for exact sources and the reproduction pipeline; without that setup, those
+17 tests skip cleanly with a pointer to this doc rather than erroring).
+Sample size 4.16× the pre-registered floor.
 This document (the reassessment above) and every prior frozen artifact
 (old/Active Phase 4.1, old/Active Phase 4.2 — including Active Phase 4.2's
 `INCONCLUSIVE` verdict — the revised real-data Phase 3 track) are

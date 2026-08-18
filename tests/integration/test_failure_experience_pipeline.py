@@ -31,18 +31,18 @@ def synthetic_sample():
 
 
 @pytest.fixture(scope="module")
-def agentrx_sample():
+def agentrx_sample(require_agentrx_data):
     return real_agentrx.load_normalized()
 
 
 @pytest.fixture(scope="module")
-def alibaba_sample():
+def alibaba_sample(require_alibaba_data):
     records, _ = real_alibaba.load_normalized(sample_size=40)
     return records
 
 
 @pytest.fixture(scope="module")
-def aiops_sample():
+def aiops_sample(require_aiops_data):
     return real_aiops.load_normalized()
 
 

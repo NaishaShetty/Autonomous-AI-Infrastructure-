@@ -18,7 +18,7 @@ def test_protocol_loads_and_is_frozen():
     assert protocol["acceptance_criteria"]["minimum_evaluable_n"] == 50
 
 
-def test_alibaba_population_matches_failure_experience_context_keys():
+def test_alibaba_population_matches_failure_experience_context_keys(require_alibaba_data):
     """Cross-check: FailureExperience-ingested Alibaba failures' (task_name
     via affected_component, gpu_type via observations.system_state) pairs
     must all be valid contexts in the population this module reads
@@ -38,7 +38,7 @@ def test_alibaba_population_matches_failure_experience_context_keys():
         assert (task_name, gpu_type) in valid_keys
 
 
-def test_alibaba_discovery_end_to_end_on_real_data():
+def test_alibaba_discovery_end_to_end_on_real_data(require_alibaba_data):
     protocol = da.load_protocol()
     rows = da.load_population(split_name="temporal")
     train_rows = [r for r in rows if r["split"] == "train"]
@@ -60,7 +60,7 @@ def test_alibaba_discovery_end_to_end_on_real_data():
     assert len(test_outcomes) == len(candidates)
 
 
-def test_aiops_descriptive_pipeline_end_to_end():
+def test_aiops_descriptive_pipeline_end_to_end(require_aiops_data):
     normalized = real_aiops.load_normalized()
     result = ingest_batch(normalized, INGESTION_TS)
     assert result.experiences
@@ -72,7 +72,7 @@ def test_aiops_descriptive_pipeline_end_to_end():
     assert temporal["n_entities_total"] > 0
 
 
-def test_agentrx_descriptive_pipeline_end_to_end():
+def test_agentrx_descriptive_pipeline_end_to_end(require_agentrx_data):
     normalized = real_agentrx.load_normalized()
     result = ingest_batch(normalized, INGESTION_TS)
     assert result.experiences
@@ -82,7 +82,7 @@ def test_agentrx_descriptive_pipeline_end_to_end():
     assert len(r["domains"]) >= 1
 
 
-def test_failure_experience_retrieval_still_works_after_phase4_2_import():
+def test_failure_experience_retrieval_still_works_after_phase4_2_import(require_aiops_data):
     """Regression guard: importing src.failure_patterns must not break the
     active Phase 4.1 retrieval path it depends on."""
     reset_db("sqlite:///:memory:")
