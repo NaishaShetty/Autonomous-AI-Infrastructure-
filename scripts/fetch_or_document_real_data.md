@@ -86,9 +86,9 @@ sampling; see each script's own docstring for its seed and rationale).
 **Source**: CCF (China Computer Federation) AIOps Challenge 2020,
 preliminary round. This is a competition-gated archive; unlike Alibaba's
 trace, there is no independently reverified, stable public download URL for
-it in this repo's audit trail (see README.md, "Dataset C -- AIOps KPI"
-section: *"the exact original download URL/date were not independently
-re-verified this pass"*). What the archive itself confirms about its own
+it in this repo's audit trail (see `docs/PHASE3_REAL_DATA_FEASIBILITY_AUDIT.md`,
+"Dataset C -- AIOps KPI" section: *"the exact original download URL/date
+were not independently re-verified this pass"*). What the archive itself confirms about its own
 identity/integrity:
 
 - Filename: `AIOps挑战赛2020预赛数据.zip`
