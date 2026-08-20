@@ -1,0 +1,13 @@
+# Normalize all text files to LF in the repository, regardless of the
+# checkout platform's line-ending convention. Added after the working tree
+# accumulated ~100 files that diffed as 100% CRLF/LF churn with no content
+# change, which was starting to mask real diffs. One-time fix: this file,
+# plus a single `git add --renormalize .` commit.
+* text=auto eol=lf
+
+# Binary/generated artifacts: leave untouched, no line-ending conversion.
+*.db binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
