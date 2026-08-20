@@ -1,0 +1,44 @@
+{
+  "STATUS": "EXPLORATORY, POST-HOC, NOT PRE-REGISTERED",
+  "WARNING": "Computed after Phase 4.4's frozen result was known. Confirmed absent from the original frozen protocol JSON (configs/phase4_4_recovery_protocol.json -- checked directly, not assumed). Does NOT alter the frozen H4 verdict (PASS -- HYPOTHESIS NOT SUPPORTED). Presented only as a candidate hypothesis for a future, properly pre-registered experiment -- not as evidence that softens or overturns the recorded result.",
+  "amendment": "abstention_credited_reanalysis",
+  "amends_frozen_result": "experiments/results/phase4_4/results.json",
+  "does_not_modify_original_verdict": true,
+  "does_not_modify_frozen_utility_function": true,
+  "determinism_check_passed": true,
+  "frozen_raw_success_rate_proposed": 0.7028571428571428,
+  "frozen_raw_success_rate_fixed_priority": 0.7514285714285714,
+  "coverage_adjusted": {
+    "proposed_sequential_empirical_recovery": {
+      "n_total": 700,
+      "n_acted": 623,
+      "coverage": 0.89,
+      "success_rate_among_acted": 0.7897271268057785,
+      "utility_mean_among_acted": 0.7554869934909673
+    },
+    "baseline_fixed_priority_sequential": {
+      "n_total": 700,
+      "n_acted": 700,
+      "coverage": 1.0,
+      "success_rate_among_acted": 0.7514285714285714,
+      "utility_mean_among_acted": 0.7200775462273199
+    }
+  },
+  "coverage_adjusted_oracle_relative_effect_fraction": 1.3404494382022465,
+  "restricted_paired_comparison_excluding_proposed_abstentions": {
+    "n_episodes_in_restricted_subset": 623,
+    "note": "subset = TEST episodes where the proposed policy did NOT abstain/escalate; fixed-priority-sequential is scored on the identical subset for a fair paired comparison (it never abstains, so it has a defined outcome on every episode)",
+    "proposed_success_rate_on_subset": 0.7897271268057785,
+    "fixed_priority_success_rate_on_same_subset": 0.7865168539325843,
+    "effect_on_subset": 0.0032102728731941976,
+    "mcnemar": {
+      "a_only": 24,
+      "b_only": 22,
+      "both": 468,
+      "neither": 109,
+      "n_discordant": 46,
+      "p_value": 0.8829959121223965
+    }
+  },
+  "honest_reframing": "On the raw (abstention-inclusive) metric the frozen result shows proposed (0.7029) losing to fixed-priority-sequential (0.7514), a statistically significant regression. But the proposed policy abstained on 11.0% of episodes, and every abstention scores as a non-success by construction. Restricted to the 623 episodes where it chose to act, proposed succeeds 0.7897 of the time vs. fixed-priority's 0.7865 on that identical subset (McNemar p=0.883). This does not overturn the frozen H4 verdict -- the pre-registered metric is what it is, and the verdict against it stands -- but it shows the negative headline effect is substantially attributable to how abstention is scored, not to the proposed policy's action-selection being worse than the fixed rule when it does act."
+}

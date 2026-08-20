@@ -1,0 +1,26 @@
+{
+  "STATUS": "EXPLORATORY, POST-HOC, NOT PRE-REGISTERED",
+  "WARNING": "Computed after the frozen result was known. Confirmed absent from the original frozen protocol JSON (configs/phase4_3_recovery_protocol.json, configs/phase4_4_recovery_protocol.json -- checked directly, not assumed). Does NOT alter the frozen verdict (PASS -- HYPOTHESIS NOT SUPPORTED). Presented only as a candidate hypothesis for a future, properly pre-registered experiment -- not as evidence that softens or overturns the recorded result.",
+  "amendment": "oracle_relative_effect_size_reanalysis",
+  "amends_frozen_result": "experiments/results/phase4_4/results.json",
+  "does_not_modify_original_verdict": true,
+  "original_verdict_recorded": "PASS",
+  "baseline_policy": "baseline_fixed_priority_sequential",
+  "proposed_policy": "proposed_sequential_empirical_recovery",
+  "baseline_rate": 0.7514285714285714,
+  "proposed_rate": 0.7028571428571428,
+  "oracle_rate": 0.78,
+  "raw_effect_vs_baseline": -0.0485714285714286,
+  "required_min_effect_as_frozen": 0.15,
+  "feasibility_check": {
+    "headroom_available": 0.02857142857142858,
+    "headroom_ratio_to_required_effect": 0.19047619047619055,
+    "was_required_effect_reachable_by_any_policy": false,
+    "summary": "NOT FEASIBLE: oracle=0.7800 - baseline=0.7514 = headroom=0.0286, required_min_effect=0.1500 (headroom covers 19.0% of what's required)"
+  },
+  "oracle_relative_effect": {
+    "fraction_of_headroom_captured_by_proposed": -1.7000000000000004,
+    "interpretation": "fraction of the reachable improvement (oracle - baseline) that the proposed policy actually captured; None if oracle == baseline (no headroom existed at all)"
+  },
+  "honest_reframing": "The frozen verdict correctly reports the proposed policy did not clear the pre-registered 0.15 absolute-point bar. But only 0.0286 points of headroom existed between baseline (0.7514) and oracle (0.7800) in the first place -- 19.0% of what was required. No policy, including a perfect one, could have passed this gate. The proposed policy captured -170.0% of the headroom that did exist."
+}

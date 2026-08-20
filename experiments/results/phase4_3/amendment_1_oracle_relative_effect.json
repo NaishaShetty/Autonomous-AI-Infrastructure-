@@ -1,0 +1,26 @@
+{
+  "STATUS": "EXPLORATORY, POST-HOC, NOT PRE-REGISTERED",
+  "WARNING": "Computed after the frozen result was known. Confirmed absent from the original frozen protocol JSON (configs/phase4_3_recovery_protocol.json, configs/phase4_4_recovery_protocol.json -- checked directly, not assumed). Does NOT alter the frozen verdict (PASS -- HYPOTHESIS NOT SUPPORTED). Presented only as a candidate hypothesis for a future, properly pre-registered experiment -- not as evidence that softens or overturns the recorded result.",
+  "amendment": "oracle_relative_effect_size_reanalysis",
+  "amends_frozen_result": "experiments/results/phase4_3/results.json",
+  "does_not_modify_original_verdict": true,
+  "original_verdict_recorded": "PASS",
+  "baseline_policy": "baseline_fixed_priority",
+  "proposed_policy": "proposed_empirical_recovery",
+  "baseline_rate": 0.5402777777777777,
+  "proposed_rate": 0.5513888888888889,
+  "oracle_rate": 0.6,
+  "raw_effect_vs_baseline": 0.011111111111111183,
+  "required_min_effect_as_frozen": 0.15,
+  "feasibility_check": {
+    "headroom_available": 0.05972222222222223,
+    "headroom_ratio_to_required_effect": 0.39814814814814825,
+    "was_required_effect_reachable_by_any_policy": false,
+    "summary": "NOT FEASIBLE: oracle=0.6000 - baseline=0.5403 = headroom=0.0597, required_min_effect=0.1500 (headroom covers 39.8% of what's required)"
+  },
+  "oracle_relative_effect": {
+    "fraction_of_headroom_captured_by_proposed": 0.18604651162790814,
+    "interpretation": "fraction of the reachable improvement (oracle - baseline) that the proposed policy actually captured; None if oracle == baseline (no headroom existed at all)"
+  },
+  "honest_reframing": "The frozen verdict correctly reports the proposed policy did not clear the pre-registered 0.15 absolute-point bar. But only 0.0597 points of headroom existed between baseline (0.5403) and oracle (0.6000) in the first place -- 39.8% of what was required. No policy, including a perfect one, could have passed this gate. The proposed policy captured 18.6% of the headroom that did exist."
+}
