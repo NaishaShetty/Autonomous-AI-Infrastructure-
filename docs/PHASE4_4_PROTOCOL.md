@@ -176,4 +176,24 @@ not modify Phase 4.2 or 4.3's frozen artifacts, thresholds, or results.
 
 ## Deviations log (append-only; empty at freeze time)
 
-(none yet)
+**Amendment 1 — EXPLORATORY, POST-HOC, NOT PRE-REGISTERED (does not alter
+the frozen verdict or any threshold retroactively):** external review
+after the frozen TEST evaluation found (a) the 0.15 minimum-effect
+threshold in H4 was never checked against this environment's own
+oracle-vs-baseline headroom before being frozen — that headroom turned out
+to be 0.0286 points, 19.0% of what H4 required, making the threshold
+unreachable by any policy from the start; and (b) the primary success-rate
+metric scores ABSTAIN/ESCALATE identically to FAILURE, which — combined
+with the proposed policy's 11.0% abstention rate — accounts for most of
+H4's significant negative effect size. Confirmed by direct inspection:
+neither metric appears in `configs/phase4_4_recovery_protocol.json` —
+neither was pre-registered. Neither issue changes the recorded H4 verdict
+(PASS — HYPOTHESIS NOT SUPPORTED stands, evaluated correctly against its
+own frozen pre-registration); this is a candidate hypothesis for a future,
+properly pre-registered phase, not evidence that softens or reopens this
+result. Both are documented, with full numbers and a restricted paired
+reanalysis, in
+[`PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md`](PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md).
+A reusable feasibility-gate check (`src/recovery/feasibility.py`,
+`benchmarks/check_effect_size_feasibility.py`) was added so future phases
+check this before freezing a threshold, not after.

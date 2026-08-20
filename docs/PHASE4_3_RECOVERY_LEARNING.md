@@ -701,3 +701,20 @@ as a genuine, negative, evidence-based research result, exactly as this
 project's standing research-integrity discipline requires (README.md,
 Active Phase 4.2's INCONCLUSIVE verdict; this project's Phase 3 Freeze) —
 not adjusted, reframed, or hidden.
+
+## Deviations log (append-only)
+
+**Amendment 1 — EXPLORATORY, POST-HOC, NOT PRE-REGISTERED (does not alter
+the verdict above):** external review found the pre-registered 0.15
+minimum effect size was never checked against this environment's own
+oracle-vs-baseline headroom before being frozen. That headroom was 0.0597
+points (oracle 0.6000 − `baseline_fixed_priority` 0.5403) — 39.8% of what
+H3 required — meaning no policy, including a perfect one, could have
+cleared the bar. The proposed policy captured 18.6% of the headroom that
+did exist. Confirmed by direct inspection: this metric is absent from
+`configs/phase4_3_recovery_protocol.json` — it was not pre-registered.
+This does NOT change the H3 verdict (correctly evaluated against its own
+frozen pre-registration, and standing as recorded); it is a candidate
+hypothesis for a future, properly pre-registered phase, not evidence that
+softens or reopens this result. Full numbers and reproduction steps:
+[`PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md`](PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md).
