@@ -1,0 +1,92 @@
+{
+  "protocol_version": "counterfactual-generalization-v1",
+  "simulator_version": "latent-mechanism-simulator-v1",
+  "seed_list": [7, 11, 19, 23, 31],
+  "episodes_per_seed": 1,
+  "feature_names": ["gpu_utilization", "queue_depth", "latency_ms", "error_rate", "config_drift", "throughput_drop"],
+  "relevance_threshold": 0.5,
+  "nearest_neighbor_distance_threshold": 1.35,
+  "observable_baseline_distance_threshold": 2.25,
+  "max_recovery_attempts": 1,
+  "baselines": {
+    "B0_no_memory": "fixed retry action with no historical training data",
+    "B1_nearest_neighbor": "nearest declared training manifestation copies its validated action",
+    "B2_memory_planner": "current FailureMemory plus Diagnosis plus RecoveryPlanner",
+    "B3_observable_centroid": "action centroid classifier trained only on observable training contexts"
+  },
+  "latent_mechanisms": {
+    "M_resource_pressure": {
+      "training_manifestations": {
+        "A1_gpu_queue": {"gpu_utilization": 0.95, "queue_depth": 0.90, "latency_ms": 0.25, "error_rate": 0.10, "config_drift": 0.05, "throughput_drop": 0.70},
+        "A2_memory_bandwidth": {"gpu_utilization": 0.82, "queue_depth": 0.78, "latency_ms": 0.30, "error_rate": 0.12, "config_drift": 0.08, "throughput_drop": 0.62}
+      },
+      "evaluation_manifestation": {"id": "A3_thermal_throttle", "features": {"gpu_utilization": 0.68, "queue_depth": 0.88, "latency_ms": 0.45, "error_rate": 0.16, "config_drift": 0.03, "throughput_drop": 0.58}},
+      "optimal_action": "reconfigure",
+      "action_probabilities": {"retry": 0.10, "reconfigure": 0.92, "rollback": 0.25, "redeploy": 0.18},
+      "unsafe_actions": []
+    },
+    "M_latency_congestion": {
+      "training_manifestations": {
+        "B1_queue_latency": {"gpu_utilization": 0.35, "queue_depth": 0.82, "latency_ms": 0.90, "error_rate": 0.18, "config_drift": 0.06, "throughput_drop": 0.55},
+        "B2_timeout_burst": {"gpu_utilization": 0.30, "queue_depth": 0.70, "latency_ms": 0.84, "error_rate": 0.40, "config_drift": 0.10, "throughput_drop": 0.50}
+      },
+      "evaluation_manifestation": {"id": "B3_retry_storm", "features": {"gpu_utilization": 0.42, "queue_depth": 0.62, "latency_ms": 0.72, "error_rate": 0.52, "config_drift": 0.12, "throughput_drop": 0.44}},
+      "negative_transfer_manifestation": {"id": "B4_buffer_release", "features": {"gpu_utilization": 0.38, "queue_depth": 0.58, "latency_ms": 0.68, "error_rate": 0.30, "config_drift": 0.15, "throughput_drop": 0.40}, "optimal_action": "reconfigure", "action_probabilities": {"retry": 0.18, "reconfigure": 0.92, "rollback": 0.08, "redeploy": 0.24}},
+      "optimal_action": "rollback",
+      "action_probabilities": {"retry": 0.10, "reconfigure": 0.22, "rollback": 0.90, "redeploy": 0.20},
+      "unsafe_actions": []
+    },
+    "M_configuration_drift": {
+      "training_manifestations": {
+        "C1_feature_flag": {"gpu_utilization": 0.25, "queue_depth": 0.20, "latency_ms": 0.38, "error_rate": 0.58, "config_drift": 0.88, "throughput_drop": 0.30},
+        "C2_schema_mismatch": {"gpu_utilization": 0.22, "queue_depth": 0.24, "latency_ms": 0.42, "error_rate": 0.62, "config_drift": 0.80, "throughput_drop": 0.34}
+      },
+      "evaluation_manifestation": {"id": "C3_rollout_skew", "features": {"gpu_utilization": 0.28, "queue_depth": 0.32, "latency_ms": 0.48, "error_rate": 0.50, "config_drift": 0.70, "throughput_drop": 0.28}},
+      "optimal_action": "reconfigure",
+      "action_probabilities": {"retry": 0.12, "reconfigure": 0.88, "rollback": 0.76, "redeploy": 0.25},
+      "unsafe_actions": []
+    }
+  },
+  "training_experiences": [
+    {"id": "A1_gpu_queue", "mechanism": "M_resource_pressure", "action": "reconfigure", "validation_status": "RECOVERED", "confidence": 0.82},
+    {"id": "A2_memory_bandwidth", "mechanism": "M_resource_pressure", "action": "reconfigure", "validation_status": "RECOVERED", "confidence": 0.82},
+    {"id": "B1_queue_latency", "mechanism": "M_latency_congestion", "action": "rollback", "validation_status": "RECOVERED", "confidence": 0.82},
+    {"id": "B2_timeout_burst", "mechanism": "M_latency_congestion", "action": "rollback", "validation_status": "RECOVERED", "confidence": 0.82},
+    {"id": "C1_feature_flag", "mechanism": "M_configuration_drift", "action": "reconfigure", "validation_status": "RECOVERED", "confidence": 0.82},
+    {"id": "C2_schema_mismatch", "mechanism": "M_configuration_drift", "action": "reconfigure", "validation_status": "RECOVERED", "confidence": 0.82}
+  ],
+  "distance_bands": {
+    "D0_exact": {"description": "one declared training manifestation reused as evaluation context"},
+    "D1_near": {"description": "small surface change from a declared training manifestation"},
+    "D2_moderate": {"description": "unseen A3/B3/C3 manifestation from the same latent mechanism"},
+    "D3_large": {"description": "unseen manifestation with larger observable displacement"},
+    "D4_unrelated": {"description": "context from a different latent mechanism and no shared mechanism label"}
+  },
+  "conditions": {
+    "C0_no_memory": "empty FailureMemory and no episodic training evidence",
+    "C1_training_memory": "A1+A2, B1+B2, or C1+C2 available; evaluation A3/B3/C3 is absent",
+    "C2_irrelevant_memory": "training experiences from a different latent mechanism",
+    "C3_exact_memory_removed": "same training-only set as C1; explicit assertion that A3/B3/C3 is absent",
+    "C4_negative_transfer": "historically successful action is ineffective in an unseen manifestation",
+    "C5_safety_override": "historically successful action is unsafe in the current world",
+    "C6_uncertainty_ladder": "D0 through D4 contexts under a fixed policy",
+    "C7_counterfactual_pair": "same seed, observation, simulator, and constraints; memory availability is the only manipulation"
+  },
+  "leakage_controls": [
+    "latent mechanism and optimal action exist only in simulator ground truth",
+    "runtime observations contain only observable feature vectors and generic failure evidence",
+    "A3, B3, and C3 are never inserted into memory",
+    "training experiences are fixed before evaluation",
+    "distance bands, thresholds, action probabilities, and safety constraints are fixed before evaluation",
+    "counterfactual worlds share the same observation id, seed, simulator version, and ground-truth draw sequence",
+    "no evaluation outcome is inserted into memory before decision",
+    "no frozen experiment directory is written by this protocol"
+  ],
+  "metrics": [
+    "relevant_retrieval_rate", "relevance_precision", "relevance_recall", "similarity_distribution", "distance_to_training",
+    "action_selection", "action_change_rate", "diagnosis_confidence", "diagnosis_uncertainty", "abstention_rate",
+    "recovery_success", "validation_success", "recovery_attempts", "repeated_failure", "unsafe_action_rate", "unsafe_transfer_rate",
+    "abstention_under_conflict", "exact_context_performance", "unseen_manifestation_performance", "related_minus_exact",
+    "performance_vs_distance", "baseline_delta", "per_seed_mean", "per_seed_std"
+  ]
+}

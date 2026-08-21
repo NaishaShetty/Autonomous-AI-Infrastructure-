@@ -1,0 +1,68 @@
+{
+  "action_scoring": {
+    "abstention_correctness": 0.0,
+    "abstention_rate": 0.0,
+    "action_counts": {
+      "retry": 5
+    },
+    "episodes": 5,
+    "failed_attempts": 0.8,
+    "mean_attempts": 1.0,
+    "mean_diagnosis_confidence": null,
+    "mean_diagnosis_uncertainty": null,
+    "mean_relevance_precision": 1.0,
+    "mean_relevance_recall": 1.0,
+    "mean_relevant_experiences_used": 2.0,
+    "optimal_decision_rate": 0.0,
+    "recovery_success": 0.2,
+    "rejected_unsafe_rate": 0.0,
+    "safe_decision_rate": 1.0,
+    "unsafe_execution_rate": 0.0,
+    "unsafe_proposal_rate": 0.0,
+    "validation_success": 0.2
+  },
+  "diagnosis_direct": {
+    "abstention_correctness": 0.0,
+    "abstention_rate": 0.0,
+    "action_counts": {
+      "reconfigure": 5
+    },
+    "episodes": 5,
+    "failed_attempts": 0.8,
+    "mean_attempts": 1.0,
+    "mean_diagnosis_confidence": null,
+    "mean_diagnosis_uncertainty": null,
+    "mean_relevance_precision": 1.0,
+    "mean_relevance_recall": 1.0,
+    "mean_relevant_experiences_used": 2.0,
+    "optimal_decision_rate": 0.0,
+    "recovery_success": 0.2,
+    "rejected_unsafe_rate": 0.0,
+    "safe_decision_rate": 1.0,
+    "unsafe_execution_rate": 0.0,
+    "unsafe_proposal_rate": 0.0,
+    "validation_success": 0.2
+  },
+  "full": {
+    "abstention_correctness": 1.0,
+    "abstention_rate": 1.0,
+    "action_counts": {
+      "abstain": 5
+    },
+    "episodes": 5,
+    "failed_attempts": 0.0,
+    "mean_attempts": 0.0,
+    "mean_diagnosis_confidence": 0.8,
+    "mean_diagnosis_uncertainty": 0.19999999999999996,
+    "mean_relevance_precision": 1.0,
+    "mean_relevance_recall": 1.0,
+    "mean_relevant_experiences_used": 2.0,
+    "optimal_decision_rate": 1.0,
+    "recovery_success": 0.0,
+    "rejected_unsafe_rate": 0.0,
+    "safe_decision_rate": 1.0,
+    "unsafe_execution_rate": 0.0,
+    "unsafe_proposal_rate": 0.0,
+    "validation_success": 0.0
+  }
+}

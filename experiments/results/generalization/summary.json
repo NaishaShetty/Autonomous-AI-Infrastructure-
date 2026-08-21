@@ -1,0 +1,258 @@
+{
+  "comparison": {
+    "decision_effect": {
+      "conflict_action_counts": {
+        "abstain": 20
+      },
+      "no_memory_action_counts": {
+        "reconfigure": 3,
+        "retry": 10,
+        "rollback": 7
+      },
+      "related_action_counts": {
+        "reconfigure": 4,
+        "redeploy": 8,
+        "retry": 8
+      }
+    },
+    "generalization": {
+      "exact_success": 1.0,
+      "related_minus_exact": 0.0,
+      "related_success": 1.0
+    },
+    "negative_experience_avoidance": {
+      "default_no_memory_action_counts": {
+        "reconfigure": 3,
+        "retry": 10,
+        "rollback": 7
+      },
+      "negative_action_counts": {
+        "reconfigure": 8,
+        "redeploy": 8,
+        "rollback": 4
+      }
+    },
+    "performance_effect": {
+      "multi_step_success": 0.65,
+      "no_memory_success": 0.65,
+      "related_success": 1.0
+    },
+    "retrieval_effect": {
+      "irrelevant_relevant_count": 0,
+      "related_relevant_count": 1.5
+    },
+    "safety_effect": {
+      "ambiguous_abstention": 1.0,
+      "safety_conflict_abstention": 1.0,
+      "safety_conflict_unsafe_action_rate": 0.0
+    }
+  },
+  "summaries": {
+    "C0_no_memory": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 3,
+        "retry": 10,
+        "rollback": 7
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.5,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_recovery_attempts": 1.85,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_retrieval_count": 0,
+      "mean_retrieval_count": 0,
+      "multi_step_rate": 0.5,
+      "precision_defined_rate": 0.0,
+      "recovery_success_rate": 0.65,
+      "unsafe_action_rate": 0.0
+    },
+    "C1_exact_memory": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 4,
+        "redeploy": 8,
+        "retry": 8
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.15,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 1.3,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 1.5,
+      "mean_retrieval_count": 2.25,
+      "multi_step_rate": 0.15,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 1.0,
+      "unsafe_action_rate": 0.0
+    },
+    "C1_related_memory": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 4,
+        "redeploy": 8,
+        "retry": 8
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.15,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 1.3,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 1.5,
+      "mean_retrieval_count": 2.25,
+      "multi_step_rate": 0.15,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 1.0,
+      "unsafe_action_rate": 0.0
+    },
+    "C1_relevant_memory": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 4,
+        "redeploy": 8,
+        "retry": 8
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.15,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 1.3,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 1.5,
+      "mean_retrieval_count": 2.25,
+      "multi_step_rate": 0.15,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 1.0,
+      "unsafe_action_rate": 0.0
+    },
+    "C2_irrelevant_memory": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 3,
+        "retry": 10,
+        "rollback": 7
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.5,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_recovery_attempts": 1.85,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_retrieval_count": 0,
+      "mean_retrieval_count": 2,
+      "multi_step_rate": 0.5,
+      "precision_defined_rate": 0.0,
+      "recovery_success_rate": 0.65,
+      "unsafe_action_rate": 0.0
+    },
+    "C3_conflicting_memory": {
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 20
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 0,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 2,
+      "mean_retrieval_count": 2,
+      "multi_step_rate": 0.0,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 0.0,
+      "unsafe_action_rate": 0.0
+    },
+    "C4_negative_experience": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 8,
+        "redeploy": 8,
+        "rollback": 4
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.6,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 2,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 1,
+      "mean_retrieval_count": 1,
+      "multi_step_rate": 0.6,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 1.0,
+      "unsafe_action_rate": 0.0
+    },
+    "C5_safety_conflict": {
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 20
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 0,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 1,
+      "mean_retrieval_count": 1,
+      "multi_step_rate": 0.0,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 0.0,
+      "unsafe_action_rate": 0.0
+    },
+    "C6_multi_step": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 3,
+        "retry": 10,
+        "rollback": 7
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.5,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_recovery_attempts": 1.85,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_retrieval_count": 0,
+      "mean_retrieval_count": 0,
+      "multi_step_rate": 0.5,
+      "precision_defined_rate": 0.0,
+      "recovery_success_rate": 0.65,
+      "unsafe_action_rate": 0.0
+    },
+    "C7_full_closed_loop": {
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 4,
+        "redeploy": 8,
+        "retry": 8
+      },
+      "episode_count": 20,
+      "failed_first_attempt_rate": 0.15,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_recovery_attempts": 1.3,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_retrieval_count": 1.5,
+      "mean_retrieval_count": 2.25,
+      "multi_step_rate": 0.15,
+      "precision_defined_rate": 1.0,
+      "recovery_success_rate": 1.0,
+      "unsafe_action_rate": 0.0
+    }
+  }
+}

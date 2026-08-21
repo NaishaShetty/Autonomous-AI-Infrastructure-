@@ -1,0 +1,57 @@
+{
+  "protocol_version": "runtime-generalization-v1",
+  "simulator_version": "simulator-v2",
+  "seed_list": [7, 11, 19, 23, 31],
+  "episodes_per_condition_per_seed": 8,
+  "feature_names": ["f1", "f2"],
+  "relevance_threshold": 0.5,
+  "max_recovery_attempts": 3,
+  "failure_types": {
+    "A_gpu_memory_shift": {"train_context": {"f1": 0.0, "f2": 0.0}, "evaluation_context": {"f1": 0.15, "f2": 0.05}},
+    "B_inference_timeout_shift": {"train_context": {"f1": 1.0, "f2": 0.0}, "evaluation_context": {"f1": 0.9, "f2": 0.1}},
+    "C_configuration_drift_shift": {"train_context": {"f1": 0.0, "f2": 1.0}, "evaluation_context": {"f1": 0.1, "f2": 0.9}},
+    "D_ambiguous_unsafe_shift": {"train_context": {"f1": 1.0, "f2": 1.0}, "evaluation_context": {"f1": 1.1, "f2": 0.9}}
+  },
+  "action_outcome_probabilities": {
+    "A_gpu_memory_shift": {"retry": 0.75, "reconfigure": 0.35, "rollback": 0.60},
+    "B_inference_timeout_shift": {"retry": 0.20, "reconfigure": 0.80, "rollback": 0.40},
+    "C_configuration_drift_shift": {"retry": 0.70, "reconfigure": 0.10, "rollback": 0.85},
+    "D_ambiguous_unsafe_shift": {"retry": 0.10, "reconfigure": 0.10, "rollback": 0.10}
+  },
+  "training_experiences": [
+    {"id": "train-A-retry-success", "failure_type": "A_gpu_memory_shift", "action": "retry", "validation_status": "RECOVERED", "confidence": 0.9},
+    {"id": "train-A-reconfigure-failed", "failure_type": "A_gpu_memory_shift", "action": "reconfigure", "validation_status": "FAILED", "confidence": 0.8},
+    {"id": "train-B-reconfigure-success", "failure_type": "B_inference_timeout_shift", "action": "reconfigure", "validation_status": "RECOVERED", "confidence": 0.9},
+    {"id": "train-B-retry-failed", "failure_type": "B_inference_timeout_shift", "action": "retry", "validation_status": "FAILED", "confidence": 0.8},
+    {"id": "train-C-rollback-success", "failure_type": "C_configuration_drift_shift", "action": "rollback", "validation_status": "RECOVERED", "confidence": 0.9},
+    {"id": "train-C-reconfigure-failed", "failure_type": "C_configuration_drift_shift", "action": "reconfigure", "validation_status": "FAILED", "confidence": 0.8},
+    {"id": "train-D-retry-failed", "failure_type": "D_ambiguous_unsafe_shift", "action": "retry", "validation_status": "FAILED", "confidence": 0.7},
+    {"id": "train-D-reconfigure-failed", "failure_type": "D_ambiguous_unsafe_shift", "action": "reconfigure", "validation_status": "FAILED", "confidence": 0.7},
+    {"id": "train-D-rollback-failed", "failure_type": "D_ambiguous_unsafe_shift", "action": "rollback", "validation_status": "FAILED", "confidence": 0.7}
+  ],
+  "conditions": {
+    "C0_no_memory": "empty memory",
+    "C1_relevant_memory": "related training memories for the target failure class",
+    "C2_irrelevant_memory": "memory from a distant failure class",
+    "C3_conflicting_memory": "equal-similarity positive memories for different actions",
+    "C4_negative_experience": "relevant failed action memory",
+    "C5_safety_conflict": "relevant action marked unsafe by current environment",
+    "C6_multi_step": "bounded retry then replan with a stochastic alternative",
+    "C7_full_closed_loop": "related memory, diagnosis, recovery, validation, and learning"
+  },
+  "metrics": [
+    "retrieval_effect", "decision_effect", "performance_effect", "safety_effect",
+    "exact_memory_success", "related_memory_success", "no_memory_baseline_success",
+    "irrelevant_memory_success", "conflicting_memory_success", "negative_experience_avoidance",
+    "abstention_rate", "unsafe_action_rate", "recovery_success", "recovery_attempts",
+    "diagnosis_uncertainty", "memory_relevance_precision", "memory_relevance_recall"
+  ],
+  "leakage_controls": [
+    "training experiences are fixed before evaluation",
+    "evaluation outcomes are never seeded before the decision",
+    "thresholds and probabilities are not changed after evaluation",
+    "each condition and seed has isolated memory and simulator state",
+    "real data and live telemetry are not used"
+  ],
+  "stopping_rules": {"max_attempts": 3, "no_infinite_recovery_loops": true}
+}

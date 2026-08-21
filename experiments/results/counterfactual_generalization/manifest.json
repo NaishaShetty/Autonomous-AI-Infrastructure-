@@ -1,0 +1,17 @@
+{
+  "evaluation_manifestations_in_training_memory": false,
+  "frozen_paths_modified": false,
+  "git_commit": "981725041ff301fea5d031a8c6b9e8b2375130f0",
+  "latent_mechanism_exposed_to_runtime": false,
+  "old_result_paths_written": [],
+  "protocol_sha256": "6ab5bd6498c84ac663357d438de82bc4fea45f4b3f8a918ec23b1321a690162d",
+  "seed_list": [
+    7,
+    11,
+    19,
+    23,
+    31
+  ],
+  "simulator_version": "latent-mechanism-simulator-v1",
+  "statistical_claim": "multi-seed descriptive controlled simulator evaluation; no significance claim"
+}

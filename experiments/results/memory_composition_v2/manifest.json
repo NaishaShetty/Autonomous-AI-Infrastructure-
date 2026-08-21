@@ -1,0 +1,16 @@
+{
+  "frozen_paths_written": [],
+  "git_commit": "981725041ff301fea5d031a8c6b9e8b2375130f0",
+  "protocol_sha256": "56d47e28a1b817ab67ee33d9bceba026ad348b0d2521631b9325da46ada02cfe",
+  "protocol_version": "memory-composition-v2",
+  "seed_list": [
+    7,
+    11,
+    19,
+    23,
+    31
+  ],
+  "simulator_version": "latent-composition-simulator-v1",
+  "statistical_claim": "descriptive controlled simulator evaluation; no significance claim",
+  "v1_result_directory_untouched": true
+}

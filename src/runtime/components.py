@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from math import fsum, isclose
+import random
 from typing import Any, Mapping, Sequence
 
 import numpy as np
@@ -130,10 +132,11 @@ class EvidenceDiagnosisEngine:
 class RuleBasedRecoveryPlanner:
     """Interpretable planner with evidence-aware ranking and hard safety gates."""
 
-    def __init__(self, minimum_confidence: float = 0.6, require_evidence: bool = False, default_action: RecoveryAction = RecoveryAction.RETRY):
+    def __init__(self, minimum_confidence: float = 0.6, require_evidence: bool = False, default_action: RecoveryAction = RecoveryAction.RETRY, abstain_on_conflict: bool = True):
         self.minimum_confidence = minimum_confidence
         self.require_evidence = require_evidence
         self.default_action = RecoveryAction(default_action)
+        self.abstain_on_conflict = abstain_on_conflict
 
     def plan(self, diagnosis: DiagnosisResult, reliability: ReliabilityAssessment, retrieved: Sequence[Any] = (), operational_context: Mapping[str, Any] | None = None) -> RecoveryPlan:
         context = operational_context or {}
@@ -142,37 +145,80 @@ class RuleBasedRecoveryPlanner:
             return RecoveryPlan((RecoveryAction.ABSTAIN,), RecoveryAction.ABSTAIN, 0.0, "insufficient diagnosis confidence", "not_approved", "insufficient_evidence", abstained=True)
         if self.require_evidence and not relevant:
             return RecoveryPlan((RecoveryAction.ABSTAIN,), RecoveryAction.ABSTAIN, 0.0, "no relevant historical recovery evidence", "not_approved", "insufficient_evidence", abstained=True)
-        action = self.default_action
-        rationale = f"selected {action.value} from deterministic baseline policy"
+        attempted = {str(value) for value in context.get("failed_actions", ())}
+        fallback_order = (self.default_action, RecoveryAction.RECONFIGURE, RecoveryAction.ROLLBACK, RecoveryAction.RETRY, RecoveryAction.REDEPLOY, RecoveryAction.RETRAIN)
+        contributions: dict[RecoveryAction, list[tuple[str, float]]] = {}
         for match in relevant:
             event = getattr(match, "event", None)
             metadata = getattr(event, "metadata", {}) if event is not None else {}
-            historical_action = metadata.get("recovery_action")
-            historical_validation = metadata.get("validation_status")
-            if historical_action and historical_validation == "RECOVERED" and historical_action in {candidate.value for candidate in RecoveryAction}:
-                action = RecoveryAction(historical_action)
-                rationale = f"selected {action.value} using relevant validated experience {getattr(event, 'event_id', 'unknown')}"
-                break
-        if diagnosis.failure_type == "resource_exhaustion" and not relevant:
+            raw_action = metadata.get("recovery_action")
+            if raw_action not in {candidate.value for candidate in RecoveryAction}:
+                continue
+            action = RecoveryAction(raw_action)
+            if action in (RecoveryAction.ABSTAIN, RecoveryAction.ESCALATE):
+                continue
+            validation = str(metadata.get("validation_status", ""))
+            sign = 1.0 if validation == "RECOVERED" else -1.0 if validation in {"FAILED", "UNCERTAIN"} else 0.0
+            similarity = float(getattr(match, "similarity", 0.0))
+            event_confidence = float(getattr(event, "confidence", 0.5) or 0.5)
+            event_id = str(getattr(event, "event_id", "unknown"))
+            contributions.setdefault(action, []).append((event_id, sign * similarity * event_confidence))
+        action_scores = {action: fsum(value for _, value in sorted(values, key=lambda item: item[0])) for action, values in contributions.items()}
+        action_evidence = {action: [event_id for event_id, _ in sorted(values, key=lambda item: item[0])] for action, values in contributions.items()}
+
+        positive = {action: score for action, score in action_scores.items() if score > 0 and action.value not in attempted}
+        if positive:
+            best_score = max(positive.values())
+            best = [action for action, score in positive.items() if isclose(score, best_score, rel_tol=1e-12, abs_tol=1e-12)]
+            if len(best) == 1:
+                action = best[0]
+                rationale = f"selected {action.value} from outcome-weighted relevant experience ({', '.join(action_evidence[action])})"
+            else:
+                action = RecoveryAction.ABSTAIN
+                rationale = "conflicting relevant actions have equal positive evidence"
+        else:
+            available = [candidate for candidate in fallback_order if candidate.value not in attempted and action_scores.get(candidate, 0.0) >= 0]
+            action = available[0] if available else RecoveryAction.ABSTAIN
+            rationale = f"selected {action.value} from bounded fallback policy" if action is not RecoveryAction.ABSTAIN else "all available actions are failed or unsupported"
+            if self.abstain_on_conflict and relevant and action is self.default_action and action_scores.get(action, 0.0) < 0:
+                action = RecoveryAction.ABSTAIN
+                rationale = "relevant negative experience conflicts with the default action"
+
+        if diagnosis.failure_type == "resource_exhaustion" and not relevant and self.default_action is RecoveryAction.RETRY:
             action = RecoveryAction.RECONFIGURE
             rationale = "selected reconfigure from observed resource-exhaustion baseline"
         if context.get("unsafe_actions") and action.value in set(context["unsafe_actions"]):
             return RecoveryPlan((RecoveryAction.ABSTAIN,), RecoveryAction.ABSTAIN, 0.0, "candidate rejected by hard safety constraint", "rejected", "unsafe", abstained=True)
+        if action in (RecoveryAction.ABSTAIN, RecoveryAction.ESCALATE):
+            return RecoveryPlan((action,), action, 0.0, rationale, "not_approved", "insufficient_or_conflicting_evidence", abstained=True, escalated=action is RecoveryAction.ESCALATE)
         return RecoveryPlan((action,), action, diagnosis.confidence, rationale, "approved", "feasible")
 
 
 class SimulatedRecoveryExecutor:
     """Deterministic simulator adapter; never represents production execution."""
 
-    def __init__(self, outcome_by_action: Mapping[str, bool] | None = None):
+    def __init__(self, outcome_by_action: Mapping[str, bool] | None = None, outcome_probabilities: Mapping[str, Mapping[str, float]] | None = None, seed: int = 0, simulator_version: str = "simulator-v2"):
         self.outcome_by_action = dict(outcome_by_action or {})
+        self.outcome_probabilities = {str(failure): dict(actions) for failure, actions in (outcome_probabilities or {}).items()}
+        self.seed = seed
+        self.simulator_version = simulator_version
+        self._rng = random.Random(seed)
 
     def execute(self, plan: RecoveryPlan, observation: Observation, attempt: int = 1) -> ExecutionResult:
         started = datetime.now(timezone.utc)
         if plan.abstained:
-            return ExecutionResult(plan.selected_action, started, datetime.now(timezone.utc), "simulated", False, error="recovery abstained")
-        success = bool(self.outcome_by_action.get(plan.selected_action.value, True))
-        return ExecutionResult(plan.selected_action, started, datetime.now(timezone.utc), "simulated", success, workload_state={"failure_present": not success}, error=None if success else "simulated action failed", attempt=attempt)
+            return ExecutionResult(plan.selected_action, started, datetime.now(timezone.utc), "simulated", False, error="recovery abstained", attempt=attempt)
+        failure_class = str(observation.environment.get("failure_class", observation.metadata.get("failure_class", "default")))
+        probability = None
+        draw = None
+        if failure_class in self.outcome_probabilities and plan.selected_action.value in self.outcome_probabilities[failure_class]:
+            probability = float(self.outcome_probabilities[failure_class][plan.selected_action.value])
+            draw = self._rng.random()
+            success = draw < probability
+        else:
+            success = bool(self.outcome_by_action.get(plan.selected_action.value, True))
+        state = {"failure_present": not success, "failure_class": failure_class, "action": plan.selected_action.value, "probability": probability, "draw": draw, "seed": self.seed, "simulator_version": self.simulator_version}
+        return ExecutionResult(plan.selected_action, started, datetime.now(timezone.utc), "simulated", success, workload_state=state, error=None if success else "simulated action failed", attempt=attempt)
 
 
 class SignalRecoveryValidator:

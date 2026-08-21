@@ -31,7 +31,7 @@ class RuntimeSystem:
     experience_store: JsonExperienceStore
 
 
-def build_runtime_system(*, workload_id: str = "default-workload", feature_names: list[str] | None = None, workload_model: Any | None = None, calibrator: Any | None = None, failure_memory: FailureMemory | None = None, policy: DecisionPolicy | None = None, diagnosis=None, planner=None, executor=None, validator=None, experience_path: str | Path | None = None, repository=None, max_attempts: int = 1, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", model_configuration: dict[str, Any] | None = None) -> RuntimeSystem:
+def build_runtime_system(*, workload_id: str = "default-workload", feature_names: list[str] | None = None, workload_model: Any | None = None, calibrator: Any | None = None, failure_memory: FailureMemory | None = None, policy: DecisionPolicy | None = None, diagnosis=None, planner=None, executor=None, validator=None, experience_path: str | Path | None = None, repository=None, max_attempts: int = 1, relevance_threshold: float = 0.5, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", model_configuration: dict[str, Any] | None = None) -> RuntimeSystem:
     """Build the runtime from explicit dependencies.
 
     No dataset is loaded and no model is trained here. A caller that has
@@ -60,5 +60,6 @@ def build_runtime_system(*, workload_id: str = "default-workload", feature_names
         repository=repository,
         workload_id=workload_id,
         max_attempts=max_attempts,
+        relevance_threshold=relevance_threshold,
     )
     return RuntimeSystem(controller=controller, normalizer=MappingEventNormalizer(), failure_memory=memory, experience_store=experience_store)

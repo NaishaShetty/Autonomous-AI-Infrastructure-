@@ -124,7 +124,7 @@ phase's own doc under `docs/`.
 
 ## Current Results (real numbers)
 
-Tests before the architectural recovery: **432 passed / 17 skipped / 0 failed / 4 warnings**. After the repaired runtime: **439 passed / 17 skipped / 0 failed / 21 warnings**. After relevance-aware learning influence, small-sample guards, source adapters, provenance, and the new experiment tests: **444 passed / 17 skipped / 0 failed / 1 warning**. The remaining warning is an external Starlette/httpx deprecation; the avoidable PCA warnings were removed with mathematically valid guards. Every historical experiment result below remains frozen and was not overwritten.
+Tests before the architectural recovery: **432 passed / 17 skipped / 0 failed / 4 warnings**. After the repaired runtime: **439 passed / 17 skipped / 0 failed / 21 warnings**. After relevance-aware learning influence, small-sample guards, source adapters, provenance, and the new experiment tests: **444 passed / 17 skipped / 0 failed / 1 warning**. After the generalized simulator, multi-step recovery, and robustness tests: **453 passed / 17 skipped / 0 failed / 1 warning**. The remaining warning is an external Starlette/httpx deprecation; the avoidable PCA warnings were removed with mathematically valid guards. Every historical experiment result below remains frozen and was not overwritten.
 
 | Phase | Question | Verdict | Headline number |
 |---|---|---|---|
@@ -154,6 +154,30 @@ exploratory:
 
 The new study is separate from frozen Phase 4. It uses a deterministic simulator with an explicit control condition (empty memory) and learned condition (one declared validated training episode), 20 evaluation episodes per condition, explicit relevance scores, and no evaluation-to-memory leakage. The learned condition retrieved one relevant experience per episode, increased diagnosis confidence from 0.6 to 0.8, reduced uncertainty from 0.4 to 0.2, changed the selected action from `retry` to `reconfigure` in 20/20 episodes, and improved simulator validation success from 0/20 to 20/20. Mean risk stayed at 0.0 because the default runtime has no injected workload model and does not fabricate one. These are controlled integration results, not production or statistical generalization claims. See [`docs/LEARNING_INFLUENCE_REPORT.md`](docs/LEARNING_INFLUENCE_REPORT.md) and [`experiments/results/learning_influence/`](experiments/results/learning_influence/).
 
+## Generalization and Robustness Study
+
+The next experiment is isolated under [`experiments/results/generalization/`](experiments/results/generalization/) and uses a new versioned protocol with four failure classes, stochastic action outcomes, five deterministic seeds, shifted related evaluation contexts, exact/related/irrelevant/conflicting/negative/safety/multi-step conditions, and a maximum of three recovery attempts. The current controlled results show **1.00 related-memory recovery success**, **1.00 relevance recall**, **0.00 irrelevant-memory relevance recall**, **1.00 abstention under conflicting memories**, **1.00 abstention under safety conflict**, and **0 retry selections** in the negative-experience condition. The no-memory and irrelevant-memory conditions achieve **0.65** recovery success under the declared simulator. These are multi-seed descriptive simulator results, not production or statistically significant benchmark claims. Full details are in [`docs/GENERALIZATION_EXPERIMENT_REPORT.md`](docs/GENERALIZATION_EXPERIMENT_REPORT.md).
+
+## Counterfactual Behavioral-Generalization Study
+
+The next experiment is isolated under [`experiments/results/counterfactual_generalization/`](experiments/results/counterfactual_generalization/) and tests genuine behavioral generalization rather than retrieval alone. It hides three latent mechanisms from the runtime, provides two distinct training manifestations per mechanism, and evaluates unseen A3/B3/C3 manifestations. It compares four predeclared baselines: B0 fixed retry, B1 nearest-neighbor action transfer, B2 the current memory-plus-planner runtime, and B3 an observable action-centroid baseline. The clean C7 counterfactual pair changes only memory availability and improves recovery success from **0.20 to 0.80**. C3 exact-memory removal retains **0.80** success, equal to exact training-memory performance in this simulator. The result is evidence of behavioral generalization within this hand-designed latent-mechanism simulator, not production robustness or statistical significance. See [`experiments/results/counterfactual_generalization/report.md`](experiments/results/counterfactual_generalization/report.md).
+
+## Memory Composition and Planner Superiority Study
+
+The new study is isolated under [`experiments/results/memory_composition/`](experiments/results/memory_composition/) and asks whether the full FailureMemory + Diagnosis + RecoveryPlanner path does more than copy one nearest historical action. The main X+Z compositional case passes a pre-evaluation discrimination check: E1 X-only and E3 Z-only are each insufficient, while the combined B2 path selects the declared safe abstention. On the five-seed headline evaluation, B1 nearest-only recovery success is **0.20**, B2 full-planner success is **0.00**, and B2 optimal-action rate is **1.00** versus B1 **0.00**. Thus B2 shows a decision-quality advantage in the declared compositional case but a recovery-success disadvantage because the correct action is abstention. The ordering test found a current runtime defect: reversing equally relevant memory order changed B2 between `abstain` and `reconfigure`; this is documented as a limitation rather than hidden. Per-seed results are condition-specific and do not aggregate unrelated baselines or distance bands. See [`experiments/results/memory_composition/report.md`](experiments/results/memory_composition/report.md).
+
+## Memory Composition v2: Order-Invariant Planning Audit
+
+The versioned follow-up is isolated under [`experiments/results/memory_composition_v2/`](experiments/results/memory_composition_v2/). The v1 defect was traced to ordinary floating-point score accumulation over retrieval order followed by exact maximum comparison, so equally relevant opposing evidence could select different actions under permutation. The runtime fix uses commutative `math.fsum` aggregation over evidence contributions and tolerance-aware tie handling; equal unresolved evidence abstains. V2 enumerates both relevant-memory permutations and the explicit equal-similarity tie, producing `abstain` for both orders with decision stability **1.00**. V2 also corrects the v1 ablation report’s namespace mismatch and separately reports recovery success, optimal decision rate, safe decision rate, abstention correctness, unsafe proposal rate, and unsafe execution rate. On C2, B2 retains recovery success **0.00** but reaches optimal decision rate **1.00**, abstention correctness **1.00**, and unsafe execution **0.00**; B1 remains at recovery **0.20** and optimal decision **0.00**. This is a decision-quality and safety result, not evidence of recovery-success superiority or production self-healing. See [`experiments/results/memory_composition_v2/report.md`](experiments/results/memory_composition_v2/report.md).
+
+## Runtime Reliability and Observability Architecture Audit
+
+The validated memory-composition/order-invariant checkpoint is complete, but the repository is not yet a genuine observable production runtime. The new read-only architecture audit distinguishes demonstrated mechanisms—failure-memory influence, local simulator generalization, counterfactual behavior, safety gating, negative evidence handling, order-invariant aggregation, compositional decisions, and deterministic reproducibility—from unsupported claims such as production self-healing, real-workload monitoring or prediction, production continual learning, broad real-world generalization, and statistical significance. It also defines the proposed telemetry contract and next runtime-integration phases without implementing them. See [`docs/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md`](docs/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md).
+
+## Reliability Model Integration Audit
+
+The current repository has no protocol-valid persisted workload model and calibrator artifact. The existing model and calibrator are in-memory research objects without a versioned artifact boundary and independent leakage manifest. The default runtime therefore remains the honest unconfigured abstainer with numerical risk `0.0`; no model is fabricated and no API startup training is introduced. See [`docs/RELIABILITY_MODEL_INTEGRATION_AUDIT.md`](docs/RELIABILITY_MODEL_INTEGRATION_AUDIT.md) and [`configs/runtime_demo/model_config.json`](configs/runtime_demo/model_config.json).
+
 ## Known Limitations
 
 - **Simulated recovery, not production infrastructure** — the new runtime has an explicit `SimulatedRecoveryExecutor` and independent validator. The controlled 4.3/4.4 action outcomes still come from a frozen deterministic ground-truth table, and neither those results nor the new demonstration is evidence of real-world recovery-rate improvement.
@@ -171,9 +195,13 @@ Full detail: each phase's own doc under [`docs/`](docs/).
 python -m venv .venv
 .venv/Scripts/pip install -r requirements.txt   # Windows; .venv/bin/pip on macOS/Linux
 
-python -m pytest tests/ -v                       # 444 passed / 17 skipped / 1 external warning
+python -m pytest tests/ -v                       # 477 passed / 17 skipped / 1 external warning
 python scripts/run_closed_loop_demo.py            # deterministic two-episode controller trace
-python scripts/run_learning_influence.py          # new control-versus-learned experiment
+python scripts/run_learning_influence.py          # frozen control-versus-learned experiment; do not overwrite its results
+python scripts/run_generalization.py               # local retrieval-generalization experiment
+python scripts/run_counterfactual_generalization.py  # latent-mechanism counterfactual experiment
+python scripts/run_memory_composition.py        # v1 compositional memory/planner experiment
+python scripts/run_memory_composition_v2.py     # v2 order-invariant planning and ablation audit
 .venv/Scripts/uvicorn src.api.app:app --port 8000  # POST /api/analyze -> canonical runtime controller
 ```
 
@@ -198,7 +226,13 @@ python benchmarks/check_effect_size_feasibility.py \             # go/no-go chec
 - [`docs/SCHEMA.md`](docs/SCHEMA.md) — the compatibility `ReliabilityEvent` schema reference.
 - [`docs/ARCHITECTURE_MAP_BASELINE.md`](docs/ARCHITECTURE_MAP_BASELINE.md) — pre-change architecture classification and target runtime map.
 - [`docs/VERSIONED_MODULE_CLASSIFICATION.md`](docs/VERSIONED_MODULE_CLASSIFICATION.md) — v1/v2, research, runtime, and historical module boundaries.
-- [`docs/LEARNING_INFLUENCE_REPORT.md`](docs/LEARNING_INFLUENCE_REPORT.md) — new control-versus-learned study and scientifically bounded interpretation.
+- [`docs/LEARNING_INFLUENCE_REPORT.md`](docs/LEARNING_INFLUENCE_REPORT.md) — frozen control-versus-learned study and scientifically bounded interpretation.
+- [`docs/GENERALIZATION_EXPERIMENT_REPORT.md`](docs/GENERALIZATION_EXPERIMENT_REPORT.md) — multi-seed shifted-context generalization, conflict, negative-memory, safety, and multi-step results.
+- [`docs/RELIABILITY_MODEL_INTEGRATION_AUDIT.md`](docs/RELIABILITY_MODEL_INTEGRATION_AUDIT.md) — audit of available model/calibrator artifacts and explicit unconfigured-runtime decision.
+- [`docs/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md`](docs/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md) — read-only audit of telemetry, detection, reliability, memory, diagnosis, recovery, validation, learning, and proposed next-phase interfaces.
+- [`experiments/results/counterfactual_generalization/report.md`](experiments/results/counterfactual_generalization/report.md) — true/counterfactual behavioral-generalization experiment with latent mechanisms, baselines, distance ladder, negative transfer, and safety results.
+- [`experiments/results/memory_composition/report.md`](experiments/results/memory_composition/report.md) — v1 compositional evidence, B1/B2 planner comparison, ablations, safety, negative transfer, and ordering robustness.
+- [`experiments/results/memory_composition_v2/report.md`](experiments/results/memory_composition_v2/report.md) — v2 order-invariant aggregation fix, corrected ablation metrics, abstention semantics, and planner/safety audit.
 
 Every phase has one doc under `docs/`; start from the verdict table above
 and follow the link for the phase you need.

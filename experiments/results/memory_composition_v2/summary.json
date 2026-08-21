@@ -1,0 +1,3146 @@
+{
+  "composition": {
+    "C0_no_memory": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "C1_nearest_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "C2_all_relevant": {
+      "abstention_correctness": 1.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 1.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.0
+    },
+    "C3_full_with_irrelevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 5.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "C4_conflicting": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "C5_safety_conflict": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 1.0,
+      "validation_success": 0.0
+    },
+    "C6_negative_outcome": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    }
+  },
+  "evidence_ablation": {
+    "E1_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "E1_plus_E3": {
+      "abstention_correctness": 1.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 1.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.0
+    },
+    "E3_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "none": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    }
+  },
+  "ordering_test": {
+    "decision_stability": 1.0,
+    "decisions": [
+      "abstain",
+      "abstain"
+    ],
+    "invariant": true,
+    "permutations": [
+      {
+        "abstained": true,
+        "abstention_correct": true,
+        "action_agreement_with_B1": null,
+        "action_disagreement": null,
+        "attempts": 0,
+        "baseline": "B2_memory_planner",
+        "bounded_replanning": false,
+        "case_id": "COMP_XZ_unseen",
+        "condition": "C2_all_relevant",
+        "decision_optimal": true,
+        "diagnosis_confidence": 0.8,
+        "diagnosis_correct": null,
+        "diagnosis_uncertainty": 0.19999999999999996,
+        "executed_unsafe_action": false,
+        "failed_attempts": 0,
+        "features": {
+          "config_drift": 0.49,
+          "error_rate": 0.37,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.32,
+          "queue_depth": 0.53,
+          "throughput_drop": 0.5
+        },
+        "latent_factors_exposed_to_runtime": false,
+        "memory_order": [
+          "E1_X_only",
+          "E3_Z_only"
+        ],
+        "nearest_distance": 0.9387000000000003,
+        "observation_id": "mc-obs-COMP_XZ_unseen-07-1000",
+        "optimal_action": "abstain",
+        "optimal_action_exposed_to_runtime": false,
+        "optimal_action_selected": true,
+        "planner_mode": "full",
+        "proposed_action": "abstain",
+        "proposed_unsafe_action": false,
+        "recovery_success": false,
+        "rejected_unsafe_action": false,
+        "relevant_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "relevant_experiences_used": 2,
+        "relevant_retrieval_precision": 1.0,
+        "relevant_retrieval_recall": 1.0,
+        "retrieved_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "safe_decision": true,
+        "seed": 7,
+        "selected_action": "abstain",
+        "similarity_distribution": [
+          0.39113598176808934,
+          0.39113598176808934
+        ],
+        "simulator_draw": null,
+        "simulator_probability": null,
+        "training_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "unsafe_execution": false,
+        "unsafe_transfer": false,
+        "validation_success": false
+      },
+      {
+        "abstained": true,
+        "abstention_correct": true,
+        "action_agreement_with_B1": null,
+        "action_disagreement": null,
+        "attempts": 0,
+        "baseline": "B2_memory_planner",
+        "bounded_replanning": false,
+        "case_id": "COMP_XZ_unseen",
+        "condition": "C2_all_relevant",
+        "decision_optimal": true,
+        "diagnosis_confidence": 0.8,
+        "diagnosis_correct": null,
+        "diagnosis_uncertainty": 0.19999999999999996,
+        "executed_unsafe_action": false,
+        "failed_attempts": 0,
+        "features": {
+          "config_drift": 0.49,
+          "error_rate": 0.37,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.32,
+          "queue_depth": 0.53,
+          "throughput_drop": 0.5
+        },
+        "latent_factors_exposed_to_runtime": false,
+        "memory_order": [
+          "E3_Z_only",
+          "E1_X_only"
+        ],
+        "nearest_distance": 0.9386999999999999,
+        "observation_id": "mc-obs-COMP_XZ_unseen-07-1001",
+        "optimal_action": "abstain",
+        "optimal_action_exposed_to_runtime": false,
+        "optimal_action_selected": true,
+        "planner_mode": "full",
+        "proposed_action": "abstain",
+        "proposed_unsafe_action": false,
+        "recovery_success": false,
+        "rejected_unsafe_action": false,
+        "relevant_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "relevant_experiences_used": 2,
+        "relevant_retrieval_precision": 1.0,
+        "relevant_retrieval_recall": 1.0,
+        "retrieved_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "safe_decision": true,
+        "seed": 7,
+        "selected_action": "abstain",
+        "similarity_distribution": [
+          0.3911359817680895,
+          0.3911359817680894
+        ],
+        "simulator_draw": null,
+        "simulator_probability": null,
+        "training_event_ids": [
+          "mc-E3_Z_only",
+          "mc-E1_X_only"
+        ],
+        "unsafe_execution": false,
+        "unsafe_transfer": false,
+        "validation_success": false
+      }
+    ]
+  },
+  "per_seed_summary": {
+    "11": {
+      "C0_no_memory": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C1_nearest_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C2_all_relevant": {
+        "abstention_correctness": 0.2857142857142857,
+        "abstention_rate": 0.2857142857142857,
+        "action_counts": {
+          "abstain": 2,
+          "reconfigure": 3,
+          "retry": 2
+        },
+        "episodes": 7,
+        "failed_attempts": 0.7142857142857143,
+        "mean_attempts": 0.7142857142857143,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.5714285714285714,
+        "mean_relevant_experiences_used": 1.1428571428571428,
+        "optimal_decision_rate": 0.2857142857142857,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C3_full_with_irrelevant": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 2,
+          "retry": 1,
+          "rollback": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 1.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C4_conflicting": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C5_safety_conflict": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.75,
+        "action_counts": {
+          "abstain": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.25,
+        "mean_attempts": 0.25,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.75,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.75,
+        "validation_success": 0.0
+      },
+      "C6_negative_outcome": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_plus_E3": {
+        "abstention_correctness": 1.0,
+        "abstention_rate": 1.0,
+        "action_counts": {
+          "abstain": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 2.0,
+        "optimal_decision_rate": 1.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E3_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_none": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      }
+    },
+    "19": {
+      "C0_no_memory": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C1_nearest_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C2_all_relevant": {
+        "abstention_correctness": 0.2857142857142857,
+        "abstention_rate": 0.2857142857142857,
+        "action_counts": {
+          "abstain": 2,
+          "reconfigure": 3,
+          "retry": 2
+        },
+        "episodes": 7,
+        "failed_attempts": 0.7142857142857143,
+        "mean_attempts": 0.7142857142857143,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.5714285714285714,
+        "mean_relevant_experiences_used": 1.1428571428571428,
+        "optimal_decision_rate": 0.2857142857142857,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C3_full_with_irrelevant": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 2,
+          "retry": 1,
+          "rollback": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 1.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C4_conflicting": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C5_safety_conflict": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.75,
+        "action_counts": {
+          "abstain": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.25,
+        "mean_attempts": 0.25,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.75,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.75,
+        "validation_success": 0.0
+      },
+      "C6_negative_outcome": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_plus_E3": {
+        "abstention_correctness": 1.0,
+        "abstention_rate": 1.0,
+        "action_counts": {
+          "abstain": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 2.0,
+        "optimal_decision_rate": 1.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E3_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_none": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      }
+    },
+    "23": {
+      "C0_no_memory": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C1_nearest_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C2_all_relevant": {
+        "abstention_correctness": 0.2857142857142857,
+        "abstention_rate": 0.2857142857142857,
+        "action_counts": {
+          "abstain": 2,
+          "reconfigure": 3,
+          "retry": 2
+        },
+        "episodes": 7,
+        "failed_attempts": 0.7142857142857143,
+        "mean_attempts": 0.7142857142857143,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.5714285714285714,
+        "mean_relevant_experiences_used": 1.1428571428571428,
+        "optimal_decision_rate": 0.2857142857142857,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C3_full_with_irrelevant": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 2,
+          "retry": 1,
+          "rollback": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 1.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C4_conflicting": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C5_safety_conflict": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.75,
+        "action_counts": {
+          "abstain": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.25,
+        "mean_attempts": 0.25,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.75,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.75,
+        "validation_success": 0.0
+      },
+      "C6_negative_outcome": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_plus_E3": {
+        "abstention_correctness": 1.0,
+        "abstention_rate": 1.0,
+        "action_counts": {
+          "abstain": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 2.0,
+        "optimal_decision_rate": 1.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E3_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_none": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      }
+    },
+    "31": {
+      "C0_no_memory": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "C1_nearest_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "C2_all_relevant": {
+        "abstention_correctness": 0.2857142857142857,
+        "abstention_rate": 0.2857142857142857,
+        "action_counts": {
+          "abstain": 2,
+          "reconfigure": 3,
+          "retry": 2
+        },
+        "episodes": 7,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.7142857142857143,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.5714285714285714,
+        "mean_relevant_experiences_used": 1.1428571428571428,
+        "optimal_decision_rate": 0.2857142857142857,
+        "recovery_success": 0.7142857142857143,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.7142857142857143
+      },
+      "C3_full_with_irrelevant": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 2,
+          "retry": 1,
+          "rollback": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 1.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "C4_conflicting": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "C5_safety_conflict": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.75,
+        "action_counts": {
+          "abstain": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.25,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.25,
+        "rejected_unsafe_rate": 0.75,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.75,
+        "validation_success": 0.25
+      },
+      "C6_negative_outcome": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "ablation_E1_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "ablation_E1_plus_E3": {
+        "abstention_correctness": 1.0,
+        "abstention_rate": 1.0,
+        "action_counts": {
+          "abstain": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 2.0,
+        "optimal_decision_rate": 1.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E3_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      },
+      "ablation_none": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 1.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 1.0
+      }
+    },
+    "7": {
+      "C0_no_memory": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C1_nearest_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C2_all_relevant": {
+        "abstention_correctness": 0.2857142857142857,
+        "abstention_rate": 0.2857142857142857,
+        "action_counts": {
+          "abstain": 2,
+          "reconfigure": 3,
+          "retry": 2
+        },
+        "episodes": 7,
+        "failed_attempts": 0.7142857142857143,
+        "mean_attempts": 0.7142857142857143,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.5714285714285714,
+        "mean_relevant_experiences_used": 1.1428571428571428,
+        "optimal_decision_rate": 0.2857142857142857,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C3_full_with_irrelevant": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 2,
+          "retry": 1,
+          "rollback": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 1.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C4_conflicting": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "C5_safety_conflict": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.75,
+        "action_counts": {
+          "abstain": 3,
+          "retry": 1
+        },
+        "episodes": 4,
+        "failed_attempts": 0.25,
+        "mean_attempts": 0.25,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.25,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.75,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.75,
+        "validation_success": 0.0
+      },
+      "C6_negative_outcome": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 4
+        },
+        "episodes": 4,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 0.25,
+        "mean_relevant_experiences_used": 0.5,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "reconfigure": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E1_plus_E3": {
+        "abstention_correctness": 1.0,
+        "abstention_rate": 1.0,
+        "action_counts": {
+          "abstain": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 0.0,
+        "mean_attempts": 0.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 2.0,
+        "optimal_decision_rate": 1.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_E3_only": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.8,
+        "mean_diagnosis_uncertainty": 0.19999999999999996,
+        "mean_relevance_precision": 1.0,
+        "mean_relevance_recall": 1.0,
+        "mean_relevant_experiences_used": 1.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      },
+      "ablation_none": {
+        "abstention_correctness": 0.0,
+        "abstention_rate": 0.0,
+        "action_counts": {
+          "retry": 1
+        },
+        "episodes": 1,
+        "failed_attempts": 1.0,
+        "mean_attempts": 1.0,
+        "mean_diagnosis_confidence": 0.6,
+        "mean_diagnosis_uncertainty": 0.4,
+        "mean_relevance_precision": null,
+        "mean_relevance_recall": 0.0,
+        "mean_relevant_experiences_used": 0.0,
+        "optimal_decision_rate": 0.0,
+        "recovery_success": 0.0,
+        "rejected_unsafe_rate": 0.0,
+        "safe_decision_rate": 1.0,
+        "unsafe_execution_rate": 0.0,
+        "unsafe_proposal_rate": 0.0,
+        "validation_success": 0.0
+      }
+    }
+  },
+  "planner_ablation": {
+    "action_scoring": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "diagnosis_direct": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "full": {
+      "abstention_correctness": 1.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 1.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.0
+    }
+  },
+  "planner_advantage": {
+    "optimal_decision_advantage": 1.0,
+    "recovery_advantage": -0.2
+  },
+  "protocol": {
+    "ablation_conditions": {
+      "E1_only": [
+        "E1_X_only"
+      ],
+      "E1_plus_E3": [
+        "E1_X_only",
+        "E3_Z_only"
+      ],
+      "E3_only": [
+        "E3_Z_only"
+      ],
+      "none": []
+    },
+    "baselines": {
+      "B0_no_memory": "fixed retry with no historical experiences",
+      "B1_nearest_neighbor": "single closest experience, historical action copy, same safety gate, execution, validation",
+      "B2_memory_planner": "canonical FailureMemory plus Diagnosis plus RuleBasedRecoveryPlanner",
+      "B3_observable_feature": "nearest action centroid using observable features only"
+    },
+    "conditions": {
+      "C0_no_memory": [],
+      "C1_nearest_only": [
+        "E1_X_only"
+      ],
+      "C2_all_relevant": [
+        "E1_X_only",
+        "E3_Z_only"
+      ],
+      "C3_full_with_irrelevant": [
+        "E1_X_only",
+        "E3_Z_only",
+        "E2_Y_only",
+        "E4_XY_partial",
+        "E5_YZ_partial"
+      ],
+      "C4_conflicting": [
+        "E1_X_only",
+        "E2_Y_only"
+      ],
+      "C5_safety_conflict": [
+        "E1_X_only"
+      ],
+      "C6_negative_outcome": [
+        "E1_X_failed",
+        "E3_Z_only"
+      ]
+    },
+    "decision_metrics": {
+      "abstention_correctness": "abstention selected when abstention is declared optimal",
+      "decision_stability": "fraction of permutation runs producing the same final decision",
+      "optimal_decision_rate": "selected final decision equals simulator-declared optimal action",
+      "recovery_success": "validated workload recovery occurred",
+      "safe_decision_rate": "no unsafe action was executed",
+      "unsafe_execution_rate": "unsafe action was actually executed"
+    },
+    "discrimination_check": {
+      "combined_latent_factors_have_declared_optimal_action": true,
+      "complementary_action_is_intentionally_not_optimal": true,
+      "complementary_experience": "E3_Z_only",
+      "evaluation_optimal_action_hidden_from_runtime": true,
+      "main_case": "COMP_XZ_unseen",
+      "nearest_action_is_intentionally_not_optimal": true,
+      "nearest_baseline_cannot_access_complementary_experience": true,
+      "nearest_experience": "E1_X_only"
+    },
+    "episodes_per_condition_per_seed": 1,
+    "evaluation_cases": {
+      "COMP_XZ_unseen": {
+        "action_probabilities": {
+          "reconfigure": 0.25,
+          "redeploy": 0.92,
+          "retry": 0.15,
+          "rollback": 0.2
+        },
+        "factors": [
+          "X_resource_pressure",
+          "Z_configuration_drift"
+        ],
+        "features": {
+          "config_drift": 0.49,
+          "error_rate": 0.37,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.32,
+          "queue_depth": 0.53,
+          "throughput_drop": 0.5
+        },
+        "optimal_action": "abstain",
+        "unsafe_actions": []
+      },
+      "NEG_XZ": {
+        "action_probabilities": {
+          "reconfigure": 0.25,
+          "redeploy": 0.92,
+          "retry": 0.15,
+          "rollback": 0.08
+        },
+        "factors": [
+          "X_resource_pressure",
+          "Z_configuration_drift"
+        ],
+        "features": {
+          "config_drift": 0.62,
+          "error_rate": 0.48,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.34,
+          "queue_depth": 0.52,
+          "throughput_drop": 0.5
+        },
+        "optimal_action": "redeploy",
+        "unsafe_actions": []
+      },
+      "SAFETY_XZ": {
+        "action_probabilities": {
+          "reconfigure": 0.25,
+          "redeploy": 0.92,
+          "retry": 0.15,
+          "rollback": 0.2
+        },
+        "factors": [
+          "X_resource_pressure",
+          "Z_configuration_drift"
+        ],
+        "features": {
+          "config_drift": 0.62,
+          "error_rate": 0.48,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.34,
+          "queue_depth": 0.52,
+          "throughput_drop": 0.5
+        },
+        "optimal_action": "redeploy",
+        "unsafe_actions": [
+          "reconfigure"
+        ]
+      }
+    },
+    "feature_names": [
+      "gpu_utilization",
+      "queue_depth",
+      "latency_ms",
+      "error_rate",
+      "config_drift",
+      "throughput_drop"
+    ],
+    "latent_factors": {
+      "X_resource_pressure": {
+        "features": {
+          "config_drift": 0.08,
+          "error_rate": 0.12,
+          "gpu_utilization": 0.92,
+          "latency_ms": 0.24,
+          "queue_depth": 0.84,
+          "throughput_drop": 0.7
+        }
+      },
+      "Y_latency_congestion": {
+        "features": {
+          "config_drift": 0.1,
+          "error_rate": 0.42,
+          "gpu_utilization": 0.28,
+          "latency_ms": 0.88,
+          "queue_depth": 0.8,
+          "throughput_drop": 0.54
+        }
+      },
+      "Z_configuration_drift": {
+        "features": {
+          "config_drift": 0.9,
+          "error_rate": 0.62,
+          "gpu_utilization": 0.24,
+          "latency_ms": 0.4,
+          "queue_depth": 0.22,
+          "throughput_drop": 0.3
+        }
+      }
+    },
+    "leakage_controls": [
+      "factor IDs and optimal actions exist only in protocol/evaluation harness",
+      "runtime observations contain only feature vectors, generic error evidence, and safety constraints",
+      "evaluation outcomes are never inserted before each decision",
+      "training experiences are fixed before evaluation",
+      "memory order is explicitly shuffled by deterministic permutations",
+      "B1 receives exactly one closest event and does not run diagnosis or multi-event aggregation",
+      "no model or calibrator is fabricated",
+      "previous result directories are never written"
+    ],
+    "max_attempts_policy": "one attempt intentionally isolates action-selection and evidence-composition effects; no replanning benefit is claimed in this protocol",
+    "max_recovery_attempts": 1,
+    "metrics": [
+      "relevant_retrieval_precision",
+      "relevant_retrieval_recall",
+      "relevant_experiences_used",
+      "similarity_distribution",
+      "diagnosis_confidence",
+      "diagnosis_uncertainty",
+      "diagnosis_correctness",
+      "selected_action",
+      "optimal_action_rate",
+      "action_agreement_with_B1",
+      "action_disagreement_rate",
+      "abstention_rate",
+      "recovery_success",
+      "validation_success",
+      "mean_attempts",
+      "failed_attempts",
+      "bounded_replanning",
+      "proposed_unsafe_actions",
+      "rejected_unsafe_actions",
+      "executed_unsafe_actions",
+      "unsafe_transfer_rate",
+      "C1_vs_C2",
+      "evidence_ablation_delta",
+      "planner_advantage",
+      "optimal_action_advantage",
+      "ordering_invariance",
+      "diagnosis_ablation",
+      "planner_ablation"
+    ],
+    "protocol_version": "memory-composition-v2",
+    "relevance_threshold": 0.2,
+    "runtime_fix": {
+      "component": "src/runtime/components.py::RuleBasedRecoveryPlanner.plan",
+      "does_not_use_event_id_as_decision_evidence": true,
+      "methodological_justification": "aggregate commutatively with math.fsum over stable evidence contributions and treat numerically equivalent positive action scores as an unresolved tie requiring abstention"
+    },
+    "seed_list": [
+      7,
+      11,
+      19,
+      23,
+      31
+    ],
+    "simulator_version": "latent-composition-simulator-v1",
+    "training_experiences": [
+      {
+        "action": "reconfigure",
+        "confidence": 0.8,
+        "factors": [
+          "X_resource_pressure"
+        ],
+        "id": "E1_X_only",
+        "validation_status": "RECOVERED"
+      },
+      {
+        "action": "rollback",
+        "confidence": 0.8,
+        "factors": [
+          "Y_latency_congestion"
+        ],
+        "id": "E2_Y_only",
+        "validation_status": "RECOVERED"
+      },
+      {
+        "action": "retry",
+        "confidence": 0.8,
+        "factors": [
+          "Z_configuration_drift"
+        ],
+        "id": "E3_Z_only",
+        "validation_status": "RECOVERED"
+      },
+      {
+        "action": "reconfigure",
+        "confidence": 0.7,
+        "factors": [
+          "X_resource_pressure",
+          "Y_latency_congestion"
+        ],
+        "id": "E4_XY_partial",
+        "validation_status": "RECOVERED"
+      },
+      {
+        "action": "rollback",
+        "confidence": 0.7,
+        "factors": [
+          "Y_latency_congestion",
+          "Z_configuration_drift"
+        ],
+        "id": "E5_YZ_partial",
+        "validation_status": "RECOVERED"
+      }
+    ],
+    "v1_limitations": [
+      "equally relevant evidence could change the B2 decision under memory permutation",
+      "ablation report rendering showed None despite stored per-seed rows",
+      "recovery success alone conflated abstention with poor decision quality"
+    ],
+    "v1_result_directory": "experiments/results/memory_composition/"
+  },
+  "summaries": {
+    "B0_no_memory__C0_no_memory": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B0_no_memory__C1_nearest_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B0_no_memory__C2_all_relevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B0_no_memory__C3_full_with_irrelevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B0_no_memory__C4_conflicting": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B0_no_memory__C5_safety_conflict": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B0_no_memory__C6_negative_outcome": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B1_nearest_neighbor__C0_no_memory": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B1_nearest_neighbor__C1_nearest_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B1_nearest_neighbor__C2_all_relevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B1_nearest_neighbor__C3_full_with_irrelevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "rollback": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B1_nearest_neighbor__C4_conflicting": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B1_nearest_neighbor__C5_safety_conflict": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 1.0,
+      "validation_success": 0.0
+    },
+    "B1_nearest_neighbor__C6_negative_outcome": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_action_scoring__C2_all_relevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_diagnosis_direct__C2_all_relevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_full__C2_all_relevant": {
+      "abstention_correctness": 1.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 1.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.0
+    },
+    "B2_memory_planner__C0_no_memory": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__C1_nearest_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__C2_all_relevant": {
+      "abstention_correctness": 1.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 1.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.0
+    },
+    "B2_memory_planner__C3_full_with_irrelevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 5.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__C4_conflicting": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__C5_safety_conflict": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 1.0,
+      "validation_success": 0.0
+    },
+    "B2_memory_planner__C6_negative_outcome": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__ablation_E1_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__ablation_E1_plus_E3": {
+      "abstention_correctness": 1.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 2.0,
+      "optimal_decision_rate": 1.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.0
+    },
+    "B2_memory_planner__ablation_E3_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.8,
+      "mean_diagnosis_uncertainty": 0.19999999999999996,
+      "mean_relevance_precision": 1.0,
+      "mean_relevance_recall": 1.0,
+      "mean_relevant_experiences_used": 1.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B2_memory_planner__ablation_none": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": 0.6,
+      "mean_diagnosis_uncertainty": 0.4,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B3_observable_feature__C0_no_memory": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B3_observable_feature__C1_nearest_only": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B3_observable_feature__C2_all_relevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B3_observable_feature__C3_full_with_irrelevant": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B3_observable_feature__C4_conflicting": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "reconfigure": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    },
+    "B3_observable_feature__C5_safety_conflict": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 1.0,
+      "action_counts": {
+        "abstain": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.0,
+      "mean_attempts": 0.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.0,
+      "rejected_unsafe_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 1.0,
+      "validation_success": 0.0
+    },
+    "B3_observable_feature__C6_negative_outcome": {
+      "abstention_correctness": 0.0,
+      "abstention_rate": 0.0,
+      "action_counts": {
+        "retry": 5
+      },
+      "episodes": 5,
+      "failed_attempts": 0.8,
+      "mean_attempts": 1.0,
+      "mean_diagnosis_confidence": null,
+      "mean_diagnosis_uncertainty": null,
+      "mean_relevance_precision": null,
+      "mean_relevance_recall": 0.0,
+      "mean_relevant_experiences_used": 0.0,
+      "optimal_decision_rate": 0.0,
+      "recovery_success": 0.2,
+      "rejected_unsafe_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "validation_success": 0.2
+    }
+  },
+  "tie_test": {
+    "decision_stability": 1.0,
+    "decisions": [
+      "abstain",
+      "abstain"
+    ],
+    "invariant": true,
+    "permutations": [
+      {
+        "abstained": true,
+        "abstention_correct": true,
+        "action_agreement_with_B1": null,
+        "action_disagreement": null,
+        "attempts": 0,
+        "baseline": "B2_memory_planner",
+        "bounded_replanning": false,
+        "case_id": "COMP_XZ_unseen",
+        "condition": "C2_all_relevant",
+        "decision_optimal": true,
+        "diagnosis_confidence": 0.8,
+        "diagnosis_correct": null,
+        "diagnosis_uncertainty": 0.19999999999999996,
+        "executed_unsafe_action": false,
+        "failed_attempts": 0,
+        "features": {
+          "config_drift": 0.49,
+          "error_rate": 0.37,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.32,
+          "queue_depth": 0.53,
+          "throughput_drop": 0.5
+        },
+        "latent_factors_exposed_to_runtime": false,
+        "memory_order": [
+          "E1_X_only",
+          "E3_Z_only"
+        ],
+        "nearest_distance": 0.9387000000000003,
+        "observation_id": "mc-obs-COMP_XZ_unseen-07-1000",
+        "optimal_action": "abstain",
+        "optimal_action_exposed_to_runtime": false,
+        "optimal_action_selected": true,
+        "planner_mode": "full",
+        "proposed_action": "abstain",
+        "proposed_unsafe_action": false,
+        "recovery_success": false,
+        "rejected_unsafe_action": false,
+        "relevant_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "relevant_experiences_used": 2,
+        "relevant_retrieval_precision": 1.0,
+        "relevant_retrieval_recall": 1.0,
+        "retrieved_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "safe_decision": true,
+        "seed": 7,
+        "selected_action": "abstain",
+        "similarity_distribution": [
+          0.39113598176808934,
+          0.39113598176808934
+        ],
+        "simulator_draw": null,
+        "simulator_probability": null,
+        "training_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "unsafe_execution": false,
+        "unsafe_transfer": false,
+        "validation_success": false
+      },
+      {
+        "abstained": true,
+        "abstention_correct": true,
+        "action_agreement_with_B1": null,
+        "action_disagreement": null,
+        "attempts": 0,
+        "baseline": "B2_memory_planner",
+        "bounded_replanning": false,
+        "case_id": "COMP_XZ_unseen",
+        "condition": "C2_all_relevant",
+        "decision_optimal": true,
+        "diagnosis_confidence": 0.8,
+        "diagnosis_correct": null,
+        "diagnosis_uncertainty": 0.19999999999999996,
+        "executed_unsafe_action": false,
+        "failed_attempts": 0,
+        "features": {
+          "config_drift": 0.49,
+          "error_rate": 0.37,
+          "gpu_utilization": 0.58,
+          "latency_ms": 0.32,
+          "queue_depth": 0.53,
+          "throughput_drop": 0.5
+        },
+        "latent_factors_exposed_to_runtime": false,
+        "memory_order": [
+          "E3_Z_only",
+          "E1_X_only"
+        ],
+        "nearest_distance": 0.9386999999999999,
+        "observation_id": "mc-obs-COMP_XZ_unseen-07-1001",
+        "optimal_action": "abstain",
+        "optimal_action_exposed_to_runtime": false,
+        "optimal_action_selected": true,
+        "planner_mode": "full",
+        "proposed_action": "abstain",
+        "proposed_unsafe_action": false,
+        "recovery_success": false,
+        "rejected_unsafe_action": false,
+        "relevant_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "relevant_experiences_used": 2,
+        "relevant_retrieval_precision": 1.0,
+        "relevant_retrieval_recall": 1.0,
+        "retrieved_event_ids": [
+          "mc-E1_X_only",
+          "mc-E3_Z_only"
+        ],
+        "safe_decision": true,
+        "seed": 7,
+        "selected_action": "abstain",
+        "similarity_distribution": [
+          0.3911359817680895,
+          0.3911359817680894
+        ],
+        "simulator_draw": null,
+        "simulator_probability": null,
+        "training_event_ids": [
+          "mc-E3_Z_only",
+          "mc-E1_X_only"
+        ],
+        "unsafe_execution": false,
+        "unsafe_transfer": false,
+        "validation_success": false
+      }
+    ]
+  },
+  "v1_discrimination_check": {
+    "b2": {
+      "abstained": true,
+      "action_agreement_with_B1": null,
+      "action_disagreement": null,
+      "attempts": 0,
+      "baseline": "B2_memory_planner",
+      "bounded_replanning": false,
+      "case_id": "COMP_XZ_unseen",
+      "condition": "C2_all_relevant",
+      "diagnosis_confidence": 0.8,
+      "diagnosis_correct": null,
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "executed_unsafe_action": false,
+      "failed_attempts": 0,
+      "features": {
+        "config_drift": 0.49,
+        "error_rate": 0.37,
+        "gpu_utilization": 0.58,
+        "latency_ms": 0.32,
+        "queue_depth": 0.53,
+        "throughput_drop": 0.5
+      },
+      "latent_factors_exposed_to_runtime": false,
+      "nearest_distance": 0.9387000000000003,
+      "observation_id": "mc-obs-COMP_XZ_unseen-07-003",
+      "optimal_action": "abstain",
+      "optimal_action_exposed_to_runtime": false,
+      "optimal_action_selected": true,
+      "planner_mode": "full",
+      "proposed_action": "abstain",
+      "proposed_unsafe_action": false,
+      "recovery_success": false,
+      "rejected_unsafe_action": false,
+      "relevant_event_ids": [
+        "mc-E1_X_only",
+        "mc-E3_Z_only"
+      ],
+      "relevant_experiences_used": 2,
+      "relevant_retrieval_precision": 1.0,
+      "relevant_retrieval_recall": 1.0,
+      "retrieved_event_ids": [
+        "mc-E1_X_only",
+        "mc-E3_Z_only"
+      ],
+      "seed": 7,
+      "selected_action": "abstain",
+      "similarity_distribution": [
+        0.39113598176808934,
+        0.39113598176808934
+      ],
+      "simulator_draw": null,
+      "simulator_probability": null,
+      "training_event_ids": [
+        "mc-E1_X_only",
+        "mc-E3_Z_only"
+      ],
+      "unsafe_transfer": false,
+      "validation_success": false
+    },
+    "checks": {
+      "b1_accesses_one_event_only": true,
+      "combined_b2_is_sufficient": true,
+      "e1_only_is_insufficient": true,
+      "e3_only_is_insufficient": true,
+      "latent_factors_hidden": true,
+      "nearest_only_is_insufficient": true,
+      "optimal_action_hidden": true
+    },
+    "e1_only": {
+      "abstained": false,
+      "action_agreement_with_B1": null,
+      "action_disagreement": null,
+      "attempts": 1,
+      "baseline": "B1_nearest_only",
+      "bounded_replanning": false,
+      "case_id": "COMP_XZ_unseen",
+      "condition": "E1_only",
+      "diagnosis_confidence": null,
+      "diagnosis_correct": null,
+      "diagnosis_uncertainty": null,
+      "executed_unsafe_action": false,
+      "failed_attempts": 1,
+      "features": {
+        "config_drift": 0.49,
+        "error_rate": 0.37,
+        "gpu_utilization": 0.58,
+        "latency_ms": 0.32,
+        "queue_depth": 0.53,
+        "throughput_drop": 0.5
+      },
+      "latent_factors_exposed_to_runtime": false,
+      "nearest_distance": 0.6990708118638626,
+      "observation_id": "mc-obs-COMP_XZ_unseen-07-001",
+      "optimal_action": "abstain",
+      "optimal_action_exposed_to_runtime": false,
+      "optimal_action_selected": false,
+      "planner_mode": "direct",
+      "proposed_action": "reconfigure",
+      "proposed_unsafe_action": false,
+      "recovery_success": false,
+      "rejected_unsafe_action": false,
+      "relevant_event_ids": [],
+      "relevant_experiences_used": 0,
+      "relevant_retrieval_precision": null,
+      "relevant_retrieval_recall": 0.0,
+      "retrieved_event_ids": [],
+      "seed": 7,
+      "selected_action": "reconfigure",
+      "similarity_distribution": [],
+      "simulator_draw": 0.32383276483316237,
+      "simulator_probability": 0.25,
+      "training_event_ids": [
+        "mc-E1_X_only"
+      ],
+      "unsafe_transfer": false,
+      "validation_success": false
+    },
+    "e3_only": {
+      "abstained": false,
+      "action_agreement_with_B1": null,
+      "action_disagreement": null,
+      "attempts": 1,
+      "baseline": "B1_complement_only",
+      "bounded_replanning": false,
+      "case_id": "COMP_XZ_unseen",
+      "condition": "E3_only",
+      "diagnosis_confidence": null,
+      "diagnosis_correct": null,
+      "diagnosis_uncertainty": null,
+      "executed_unsafe_action": false,
+      "failed_attempts": 1,
+      "features": {
+        "config_drift": 0.49,
+        "error_rate": 0.37,
+        "gpu_utilization": 0.58,
+        "latency_ms": 0.32,
+        "queue_depth": 0.53,
+        "throughput_drop": 0.5
+      },
+      "latent_factors_exposed_to_runtime": false,
+      "nearest_distance": 0.6990708118638627,
+      "observation_id": "mc-obs-COMP_XZ_unseen-07-002",
+      "optimal_action": "abstain",
+      "optimal_action_exposed_to_runtime": false,
+      "optimal_action_selected": false,
+      "planner_mode": "direct",
+      "proposed_action": "retry",
+      "proposed_unsafe_action": false,
+      "recovery_success": false,
+      "rejected_unsafe_action": false,
+      "relevant_event_ids": [],
+      "relevant_experiences_used": 0,
+      "relevant_retrieval_precision": null,
+      "relevant_retrieval_recall": 0.0,
+      "retrieved_event_ids": [],
+      "seed": 7,
+      "selected_action": "retry",
+      "similarity_distribution": [],
+      "simulator_draw": 0.32383276483316237,
+      "simulator_probability": 0.15,
+      "training_event_ids": [
+        "mc-E3_Z_only"
+      ],
+      "unsafe_transfer": false,
+      "validation_success": false
+    },
+    "nearest": {
+      "abstained": false,
+      "action_agreement_with_B1": null,
+      "action_disagreement": null,
+      "attempts": 1,
+      "baseline": "B1_nearest_neighbor",
+      "bounded_replanning": false,
+      "case_id": "COMP_XZ_unseen",
+      "condition": "C2_all_relevant",
+      "diagnosis_confidence": null,
+      "diagnosis_correct": null,
+      "diagnosis_uncertainty": null,
+      "executed_unsafe_action": false,
+      "failed_attempts": 1,
+      "features": {
+        "config_drift": 0.49,
+        "error_rate": 0.37,
+        "gpu_utilization": 0.58,
+        "latency_ms": 0.32,
+        "queue_depth": 0.53,
+        "throughput_drop": 0.5
+      },
+      "latent_factors_exposed_to_runtime": false,
+      "nearest_distance": 0.6990708118638626,
+      "observation_id": "mc-obs-COMP_XZ_unseen-07-000",
+      "optimal_action": "abstain",
+      "optimal_action_exposed_to_runtime": false,
+      "optimal_action_selected": false,
+      "planner_mode": "direct",
+      "proposed_action": "reconfigure",
+      "proposed_unsafe_action": false,
+      "recovery_success": false,
+      "rejected_unsafe_action": false,
+      "relevant_event_ids": [],
+      "relevant_experiences_used": 0,
+      "relevant_retrieval_precision": null,
+      "relevant_retrieval_recall": 0.0,
+      "retrieved_event_ids": [],
+      "seed": 7,
+      "selected_action": "reconfigure",
+      "similarity_distribution": [],
+      "simulator_draw": 0.32383276483316237,
+      "simulator_probability": 0.25,
+      "training_event_ids": [
+        "mc-E1_X_only",
+        "mc-E3_Z_only"
+      ],
+      "unsafe_transfer": false,
+      "validation_success": false
+    },
+    "passed": true
+  }
+}

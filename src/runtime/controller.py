@@ -30,7 +30,7 @@ class RuntimeController:
     action is validated independently of executor status.
     """
 
-    def __init__(self, detector: FailureDetector, assessor: ReliabilityAssessor, memory: FailureMemoryPort, diagnosis: DiagnosisEngine, planner: RecoveryPlanner, executor: RecoveryExecutor, validator: RecoveryValidator, experience_store: Any, learning_manager: LearningManager, repository: EventRepository | None = None, workload_id: str = "default-workload", max_attempts: int = 1):
+    def __init__(self, detector: FailureDetector, assessor: ReliabilityAssessor, memory: FailureMemoryPort, diagnosis: DiagnosisEngine, planner: RecoveryPlanner, executor: RecoveryExecutor, validator: RecoveryValidator, experience_store: Any, learning_manager: LearningManager, repository: EventRepository | None = None, workload_id: str = "default-workload", max_attempts: int = 1, relevance_threshold: float = 0.5):
         if max_attempts < 1:
             raise ValueError("max_attempts must be at least one")
         self.detector = detector
@@ -45,6 +45,7 @@ class RuntimeController:
         self.repository = repository
         self.workload_id = workload_id
         self.max_attempts = max_attempts
+        self.relevance_threshold = relevance_threshold
 
     def process(self, observation: Observation, *, true_label: int | None = None) -> RuntimeEpisode:
         episode = RuntimeEpisode(observation=observation)
@@ -54,7 +55,7 @@ class RuntimeController:
         retrieved: list[Any] = []
         if detection.detected:
             retrieve_matches = getattr(self.memory, "retrieve_matches", None)
-            retrieved = retrieve_matches(dict(observation.features), 0.5, k=5) if retrieve_matches else self.memory.retrieve(dict(observation.features), 0.5, k=5)
+            retrieved = retrieve_matches(dict(observation.features), 0.5, k=5, min_similarity=self.relevance_threshold) if retrieve_matches else self.memory.retrieve(dict(observation.features), 0.5, k=5)
         episode.retrieved_experiences = retrieved
         episode.transition_to(RuntimeState.ASSESSING, "reliability assessment started")
         reliability = self.assessor.assess(observation, retrieved)
@@ -76,7 +77,8 @@ class RuntimeController:
         diagnosis = self.diagnosis_engine.diagnose(observation, detection, reliability, retrieved)
         episode.diagnosis = diagnosis
         episode.transition_to(RuntimeState.DIAGNOSED, "diagnosis recorded with uncertainty")
-        plan = self.planner.plan(diagnosis, reliability, retrieved, observation.environment)
+        failed_actions: list[str] = []
+        plan = self.planner.plan(diagnosis, reliability, retrieved, {**dict(observation.environment), "failed_actions": failed_actions})
         episode.recovery_plan = plan
         episode.transition_to(RuntimeState.RECOVERY_PLANNED, "recovery plan passed through safety and feasibility gates")
 
@@ -90,15 +92,26 @@ class RuntimeController:
             episode.transition_to(RuntimeState.RECOVERY_EXECUTING, f"executing recovery attempt {attempt}")
             execution = self.executor.execute(plan, observation, attempt=attempt)
             episode.execution = execution
+            episode.executions.append(execution)
+            episode.action_history.append(plan.selected_action)
             episode.transition_to(RuntimeState.RECOVERY_VALIDATING, "executor result requires independent validation")
             validation = self.validator.validate(observation, reliability, execution)
             episode.validation = validation
+            episode.validations.append(validation)
             if validation.recovered is True:
                 episode.transition_to(RuntimeState.RECOVERED, "validator confirmed recovery")
                 break
+            failed_actions.append(plan.selected_action.value)
             if attempt == self.max_attempts:
                 episode.transition_to(RuntimeState.RECOVERY_FAILED, "maximum recovery attempts exhausted")
-        self._persist_compatibility_event(episode, is_failure=True, outcome=Outcome.INCORRECT)
+                break
+            plan = self.planner.plan(diagnosis, reliability, retrieved, {**dict(observation.environment), "failed_actions": failed_actions, "attempt_history": [action.value for action in episode.action_history]})
+            episode.recovery_plan = plan
+            episode.transition_to(RuntimeState.RECOVERY_PLANNED, f"replanned after failed recovery attempt {attempt}")
+            if plan.abstained:
+                episode.transition_to(RuntimeState.ESCALATED, "no safe alternative recovery remained")
+                break
+        self._persist_compatibility_event(episode, is_failure=True, outcome=Outcome.CORRECT if episode.validation and episode.validation.recovered is True else Outcome.INCORRECT)
         self._learn(episode)
         return episode
 
@@ -123,6 +136,9 @@ class RuntimeController:
                 "diagnosis": asdict(episode.diagnosis) if episode.diagnosis else None,
                 "recovery_action": episode.recovery_plan.selected_action.value if episode.recovery_plan else None,
                 "validation_status": episode.validation.status if episode.validation else None,
+                "action_history": [action.value for action in episode.action_history],
+                "validation_history": [validation.status for validation in episode.validations],
+                "simulator_outcomes": [dict(execution.workload_state) for execution in episode.executions],
             },
         )
         episode.event = event

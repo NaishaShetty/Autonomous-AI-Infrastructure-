@@ -180,6 +180,9 @@ class RuntimeEpisode:
     recovery_plan: RecoveryPlan | None = None
     execution: ExecutionResult | None = None
     validation: ValidationResult | None = None
+    executions: list[ExecutionResult] = field(default_factory=list)
+    validations: list[ValidationResult] = field(default_factory=list)
+    action_history: list[RecoveryAction] = field(default_factory=list)
     experience_id: str | None = None
     learning_update: Mapping[str, Any] | None = None
     memory_version_before: int | None = None

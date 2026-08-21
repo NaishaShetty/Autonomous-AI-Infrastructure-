@@ -1,0 +1,274 @@
+{
+  "baselines": {
+    "B0_no_memory": "fixed retry action with no historical training data",
+    "B1_nearest_neighbor": "nearest declared training manifestation copies its validated action",
+    "B2_memory_planner": "current FailureMemory plus Diagnosis plus RecoveryPlanner",
+    "B3_observable_centroid": "action centroid classifier trained only on observable training contexts"
+  },
+  "conditions": {
+    "C0_no_memory": "empty FailureMemory and no episodic training evidence",
+    "C1_training_memory": "A1+A2, B1+B2, or C1+C2 available; evaluation A3/B3/C3 is absent",
+    "C2_irrelevant_memory": "training experiences from a different latent mechanism",
+    "C3_exact_memory_removed": "same training-only set as C1; explicit assertion that A3/B3/C3 is absent",
+    "C4_negative_transfer": "historically successful action is ineffective in an unseen manifestation",
+    "C5_safety_override": "historically successful action is unsafe in the current world",
+    "C6_uncertainty_ladder": "D0 through D4 contexts under a fixed policy",
+    "C7_counterfactual_pair": "same seed, observation, simulator, and constraints; memory availability is the only manipulation"
+  },
+  "distance_bands": {
+    "D0_exact": {
+      "description": "one declared training manifestation reused as evaluation context"
+    },
+    "D1_near": {
+      "description": "small surface change from a declared training manifestation"
+    },
+    "D2_moderate": {
+      "description": "unseen A3/B3/C3 manifestation from the same latent mechanism"
+    },
+    "D3_large": {
+      "description": "unseen manifestation with larger observable displacement"
+    },
+    "D4_unrelated": {
+      "description": "context from a different latent mechanism and no shared mechanism label"
+    }
+  },
+  "episodes_per_seed": 1,
+  "feature_names": [
+    "gpu_utilization",
+    "queue_depth",
+    "latency_ms",
+    "error_rate",
+    "config_drift",
+    "throughput_drop"
+  ],
+  "latent_mechanisms": {
+    "M_configuration_drift": {
+      "action_probabilities": {
+        "reconfigure": 0.88,
+        "redeploy": 0.25,
+        "retry": 0.12,
+        "rollback": 0.76
+      },
+      "evaluation_manifestation": {
+        "features": {
+          "config_drift": 0.7,
+          "error_rate": 0.5,
+          "gpu_utilization": 0.28,
+          "latency_ms": 0.48,
+          "queue_depth": 0.32,
+          "throughput_drop": 0.28
+        },
+        "id": "C3_rollout_skew"
+      },
+      "optimal_action": "reconfigure",
+      "training_manifestations": {
+        "C1_feature_flag": {
+          "config_drift": 0.88,
+          "error_rate": 0.58,
+          "gpu_utilization": 0.25,
+          "latency_ms": 0.38,
+          "queue_depth": 0.2,
+          "throughput_drop": 0.3
+        },
+        "C2_schema_mismatch": {
+          "config_drift": 0.8,
+          "error_rate": 0.62,
+          "gpu_utilization": 0.22,
+          "latency_ms": 0.42,
+          "queue_depth": 0.24,
+          "throughput_drop": 0.34
+        }
+      },
+      "unsafe_actions": []
+    },
+    "M_latency_congestion": {
+      "action_probabilities": {
+        "reconfigure": 0.22,
+        "redeploy": 0.2,
+        "retry": 0.1,
+        "rollback": 0.9
+      },
+      "evaluation_manifestation": {
+        "features": {
+          "config_drift": 0.12,
+          "error_rate": 0.52,
+          "gpu_utilization": 0.42,
+          "latency_ms": 0.72,
+          "queue_depth": 0.62,
+          "throughput_drop": 0.44
+        },
+        "id": "B3_retry_storm"
+      },
+      "negative_transfer_manifestation": {
+        "action_probabilities": {
+          "reconfigure": 0.92,
+          "redeploy": 0.24,
+          "retry": 0.18,
+          "rollback": 0.08
+        },
+        "features": {
+          "config_drift": 0.15,
+          "error_rate": 0.3,
+          "gpu_utilization": 0.38,
+          "latency_ms": 0.68,
+          "queue_depth": 0.58,
+          "throughput_drop": 0.4
+        },
+        "id": "B4_buffer_release",
+        "optimal_action": "reconfigure"
+      },
+      "optimal_action": "rollback",
+      "training_manifestations": {
+        "B1_queue_latency": {
+          "config_drift": 0.06,
+          "error_rate": 0.18,
+          "gpu_utilization": 0.35,
+          "latency_ms": 0.9,
+          "queue_depth": 0.82,
+          "throughput_drop": 0.55
+        },
+        "B2_timeout_burst": {
+          "config_drift": 0.1,
+          "error_rate": 0.4,
+          "gpu_utilization": 0.3,
+          "latency_ms": 0.84,
+          "queue_depth": 0.7,
+          "throughput_drop": 0.5
+        }
+      },
+      "unsafe_actions": []
+    },
+    "M_resource_pressure": {
+      "action_probabilities": {
+        "reconfigure": 0.92,
+        "redeploy": 0.18,
+        "retry": 0.1,
+        "rollback": 0.25
+      },
+      "evaluation_manifestation": {
+        "features": {
+          "config_drift": 0.03,
+          "error_rate": 0.16,
+          "gpu_utilization": 0.68,
+          "latency_ms": 0.45,
+          "queue_depth": 0.88,
+          "throughput_drop": 0.58
+        },
+        "id": "A3_thermal_throttle"
+      },
+      "optimal_action": "reconfigure",
+      "training_manifestations": {
+        "A1_gpu_queue": {
+          "config_drift": 0.05,
+          "error_rate": 0.1,
+          "gpu_utilization": 0.95,
+          "latency_ms": 0.25,
+          "queue_depth": 0.9,
+          "throughput_drop": 0.7
+        },
+        "A2_memory_bandwidth": {
+          "config_drift": 0.08,
+          "error_rate": 0.12,
+          "gpu_utilization": 0.82,
+          "latency_ms": 0.3,
+          "queue_depth": 0.78,
+          "throughput_drop": 0.62
+        }
+      },
+      "unsafe_actions": []
+    }
+  },
+  "leakage_controls": [
+    "latent mechanism and optimal action exist only in simulator ground truth",
+    "runtime observations contain only observable feature vectors and generic failure evidence",
+    "A3, B3, and C3 are never inserted into memory",
+    "training experiences are fixed before evaluation",
+    "distance bands, thresholds, action probabilities, and safety constraints are fixed before evaluation",
+    "counterfactual worlds share the same observation id, seed, simulator version, and ground-truth draw sequence",
+    "no evaluation outcome is inserted into memory before decision",
+    "no frozen experiment directory is written by this protocol"
+  ],
+  "max_recovery_attempts": 1,
+  "metrics": [
+    "relevant_retrieval_rate",
+    "relevance_precision",
+    "relevance_recall",
+    "similarity_distribution",
+    "distance_to_training",
+    "action_selection",
+    "action_change_rate",
+    "diagnosis_confidence",
+    "diagnosis_uncertainty",
+    "abstention_rate",
+    "recovery_success",
+    "validation_success",
+    "recovery_attempts",
+    "repeated_failure",
+    "unsafe_action_rate",
+    "unsafe_transfer_rate",
+    "abstention_under_conflict",
+    "exact_context_performance",
+    "unseen_manifestation_performance",
+    "related_minus_exact",
+    "performance_vs_distance",
+    "baseline_delta",
+    "per_seed_mean",
+    "per_seed_std"
+  ],
+  "nearest_neighbor_distance_threshold": 1.35,
+  "observable_baseline_distance_threshold": 2.25,
+  "protocol_version": "counterfactual-generalization-v1",
+  "relevance_threshold": 0.5,
+  "seed_list": [
+    7,
+    11,
+    19,
+    23,
+    31
+  ],
+  "simulator_version": "latent-mechanism-simulator-v1",
+  "training_experiences": [
+    {
+      "action": "reconfigure",
+      "confidence": 0.82,
+      "id": "A1_gpu_queue",
+      "mechanism": "M_resource_pressure",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "action": "reconfigure",
+      "confidence": 0.82,
+      "id": "A2_memory_bandwidth",
+      "mechanism": "M_resource_pressure",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "action": "rollback",
+      "confidence": 0.82,
+      "id": "B1_queue_latency",
+      "mechanism": "M_latency_congestion",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "action": "rollback",
+      "confidence": 0.82,
+      "id": "B2_timeout_burst",
+      "mechanism": "M_latency_congestion",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "action": "reconfigure",
+      "confidence": 0.82,
+      "id": "C1_feature_flag",
+      "mechanism": "M_configuration_drift",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "action": "reconfigure",
+      "confidence": 0.82,
+      "id": "C2_schema_mismatch",
+      "mechanism": "M_configuration_drift",
+      "validation_status": "RECOVERED"
+    }
+  ]
+}

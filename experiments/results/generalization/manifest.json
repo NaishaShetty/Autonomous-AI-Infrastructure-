@@ -1,0 +1,15 @@
+{
+  "evaluation_outcomes_seeded_before_decision": false,
+  "git_commit": "981725041ff301fea5d031a8c6b9e8b2375130f0",
+  "original_learning_influence_untouched": true,
+  "protocol_sha256": "598d44217db5b45305cb7325df0ec29d44d5361fb00faf4b66806d1b954f9a46",
+  "seed_list": [
+    7,
+    11,
+    19,
+    23,
+    31
+  ],
+  "simulator_version": "simulator-v2",
+  "statistical_claim": "not made; results are multi-seed descriptive controlled evaluation"
+}

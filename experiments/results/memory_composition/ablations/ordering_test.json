@@ -1,0 +1,27 @@
+{
+  "decisions": [
+    "abstain",
+    "reconfigure",
+    "abstain",
+    "reconfigure"
+  ],
+  "invariant": false,
+  "orders": [
+    [
+      "E1_X_only",
+      "E3_Z_only"
+    ],
+    [
+      "E3_Z_only",
+      "E1_X_only"
+    ],
+    [
+      "E1_X_only",
+      "E3_Z_only"
+    ],
+    [
+      "E3_Z_only",
+      "E1_X_only"
+    ]
+  ]
+}

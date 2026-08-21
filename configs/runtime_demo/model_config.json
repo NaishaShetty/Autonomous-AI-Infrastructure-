@@ -1,0 +1,19 @@
+{
+  "experiment": "reliability-model-integration-v1",
+  "status": "no_valid_persisted_artifact_selected",
+  "model_identifier": "unconfigured",
+  "model_version": "none",
+  "artifact_path": null,
+  "calibration_artifact": null,
+  "training_data_identifier": null,
+  "feature_schema": ["caller-supplied feature names"],
+  "expected_input_schema": "canonical Observation.features",
+  "audit_basis": {
+    "workload_model": "src/reliability/workload_model.py::WorkloadModel; in-memory LogisticRegression wrapper without artifact persistence",
+    "calibrator": "src/reliability/calibrator.py::ConfidenceCalibrator; in-memory GradientBoostingClassifier/IsotonicRegression wrapper without artifact persistence",
+    "builder": "src/pipeline_builder.py; synthetic in-process training pipeline, not a validated persisted runtime artifact",
+    "leakage_review": "no persisted artifact with independent training/evaluation manifest was found"
+  },
+  "runtime_policy": "retain the honest unconfigured abstainer; do not train during API startup",
+  "selection_rule": "do not select a historical model solely because it has the best metric"
+}
