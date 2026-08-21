@@ -17,6 +17,15 @@ def utcnow() -> datetime:
     return datetime.now(timezone.utc)
 
 
+class TelemetrySourceType(str, Enum):
+    LIVE = "live"
+    DATASET_REPLAY = "dataset_replay"
+    SIMULATOR = "simulator"
+    SYNTHETIC_TEST = "synthetic_test"
+    STRUCTURED_MAPPING = "structured_mapping"
+    UNKNOWN = "unknown"
+
+
 class RuntimeState(str, Enum):
     OBSERVED = "observed"
     DETECTED = "detected"
@@ -55,7 +64,17 @@ class Observation:
     environment: Mapping[str, Any] = field(default_factory=dict)
     model_id: str | None = None
     model_version: str | None = None
+    deployment_id: str | None = None
+    environment_id: str | None = None
+    ingest_timestamp: datetime | None = None
+    request_id: str | None = None
+    throughput_per_second: float | None = None
+    model_confidence: float | None = None
+    predicted_label: str | int | None = None
+    prediction_distribution: Mapping[str, float] = field(default_factory=dict)
+    failure_indicators: Mapping[str, float] = field(default_factory=dict)
     source: str = "unknown"
+    source_type: TelemetrySourceType = TelemetrySourceType.UNKNOWN
     provenance: Mapping[str, Any] = field(default_factory=dict)
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
@@ -66,6 +85,10 @@ class Observation:
             raise ValueError("workload_id must not be empty")
         if self.latency_seconds is not None and self.latency_seconds < 0:
             raise ValueError("latency_seconds must be non-negative")
+        if self.throughput_per_second is not None and self.throughput_per_second < 0:
+            raise ValueError("throughput_per_second must be non-negative")
+        if self.model_confidence is not None and not 0.0 <= self.model_confidence <= 1.0:
+            raise ValueError("model_confidence must be in [0, 1]")
         for name, values in (("features", self.features), ("metrics", self.metrics), ("resource_signals", self.resource_signals)):
             for key, value in values.items():
                 if not isinstance(key, str) or not isinstance(value, (int, float)):
@@ -79,6 +102,10 @@ class DetectionResult:
     severity: str | None = None
     evidence: tuple[str, ...] = ()
     uncertainty: float = 1.0
+    detection_type: str = "threshold"
+    detector_version: str = "observation-detector-v1"
+    timestamp: datetime = field(default_factory=utcnow)
+    provenance: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if not 0.0 <= self.uncertainty <= 1.0:
@@ -98,6 +125,9 @@ class ReliabilityAssessment:
     calibrator_version: str | None = None
     training_data_id: str | None = None
     configuration: Mapping[str, Any] = field(default_factory=dict)
+    artifact_hash: str | None = None
+    timestamp: datetime = field(default_factory=utcnow)
+    provenance: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         for name, value in (("confidence", self.confidence), ("risk", self.risk), ("fused_score", self.fused_score), ("uncertainty", self.uncertainty)):

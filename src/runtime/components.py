@@ -28,9 +28,12 @@ from .contracts import (
 class ObservationFailureDetector:
     """Detect failures from explicit observed error/resource signals only."""
 
-    def __init__(self, error_rate_threshold: float = 0.5, resource_threshold: float = 0.95):
+    def __init__(self, error_rate_threshold: float = 0.5, resource_threshold: float = 0.95, latency_seconds_threshold: float | None = None, throughput_floor: float | None = None, detector_version: str = "observation-detector-v2"):
         self.error_rate_threshold = error_rate_threshold
         self.resource_threshold = resource_threshold
+        self.latency_seconds_threshold = latency_seconds_threshold
+        self.throughput_floor = throughput_floor
+        self.detector_version = detector_version
 
     def detect(self, observation: Observation) -> DetectionResult:
         evidence: list[str] = []
@@ -42,23 +45,36 @@ class ObservationFailureDetector:
         if error_rate is not None and error_rate >= self.error_rate_threshold:
             evidence.append("metrics.error_rate")
             failure_type = failure_type or "error_rate_failure"
+        if self.latency_seconds_threshold is not None and observation.latency_seconds is not None and observation.latency_seconds >= self.latency_seconds_threshold:
+            evidence.append("observation.latency_seconds")
+            failure_type = failure_type or "latency_failure"
+        if self.throughput_floor is not None and observation.throughput_per_second is not None and observation.throughput_per_second <= self.throughput_floor:
+            evidence.append("observation.throughput_per_second")
+            failure_type = failure_type or "throughput_failure"
         for name, value in observation.resource_signals.items():
             if value >= self.resource_threshold:
                 evidence.append(f"resource_signals.{name}")
                 failure_type = failure_type or "resource_exhaustion"
+        for name, value in observation.failure_indicators.items():
+            if value >= 1.0:
+                evidence.append(f"failure_indicators.{name}")
+                failure_type = failure_type or "declared_failure_indicator"
         return DetectionResult(
             detected=bool(evidence),
             failure_type=failure_type,
             severity="high" if len(evidence) > 1 else ("medium" if evidence else None),
             evidence=tuple(evidence),
             uncertainty=0.0 if evidence else 1.0,
+            detection_type="declared_thresholds_and_errors",
+            detector_version=self.detector_version,
+            provenance={"observation_id": observation.observation_id, "source_type": observation.source_type.value},
         )
 
 
 class ModelReliabilityAssessor:
     """Adapter around the existing workload model, calibrator, memory, and policy."""
 
-    def __init__(self, workload_model: WorkloadModel, calibrator: ConfidenceCalibrator, failure_memory: FailureMemory, policy: DecisionPolicy, feature_names: list[str], mode: DecisionMode = DecisionMode.COMBINED, *, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", configuration: Mapping[str, Any] | None = None):
+    def __init__(self, workload_model: WorkloadModel, calibrator: ConfidenceCalibrator, failure_memory: FailureMemory, policy: DecisionPolicy, feature_names: list[str], mode: DecisionMode = DecisionMode.COMBINED, *, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", configuration: Mapping[str, Any] | None = None, artifact_hash: str | None = None):
         self.workload_model = workload_model
         self.calibrator = calibrator
         self.failure_memory = failure_memory
@@ -70,6 +86,7 @@ class ModelReliabilityAssessor:
         self.calibrator_version = calibrator_version
         self.training_data_id = training_data_id
         self.configuration = dict(configuration or {})
+        self.artifact_hash = artifact_hash
 
     def assess(self, observation: Observation, retrieved: Sequence[Any] = ()) -> ReliabilityAssessment:
         context = dict(observation.features)
@@ -97,6 +114,13 @@ class ModelReliabilityAssessor:
             calibrator_version=self.calibrator_version,
             training_data_id=self.training_data_id,
             configuration=self.configuration,
+            artifact_hash=self.artifact_hash,
+            provenance={
+                "observation_id": observation.observation_id,
+                "source_type": observation.source_type.value,
+                "model_id": self.model_id,
+                "artifact_loaded": self.artifact_hash is not None,
+            },
         )
 
 

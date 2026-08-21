@@ -57,3 +57,56 @@ class DeterministicSimulatorSource:
             "source": "deterministic_simulator",
             "provenance": {**dict(record.get("provenance") or {}), "source_type": "simulator", "scenario_id": self.scenario_id, "step": self._step},
         })
+
+
+class LiveTelemetrySource:
+    """Adapter boundary for future live telemetry connectors.
+
+    This class accepts already-received mappings for deterministic tests and
+    labels them as ``live``. It does not connect to a broker or claim that a
+    production telemetry integration exists.
+    """
+
+    def __init__(self, records: Iterable[Mapping[str, Any]], normalizer: MappingEventNormalizer | None = None):
+        self._records: Iterator[Mapping[str, Any]] = iter(records)
+        self.normalizer = normalizer or MappingEventNormalizer()
+
+    def observe(self) -> Observation:
+        record = next(self._records)
+        return self.normalizer.normalize({
+            **record,
+            "source": "live",
+            "source_type": "live",
+            "provenance": {**dict(record.get("provenance") or {}), "source_type": "live"},
+        })
+
+
+class SyntheticTestSource:
+    """Explicit synthetic-test adapter using the canonical observation path."""
+
+    def __init__(self, records: Iterable[Mapping[str, Any]], normalizer: MappingEventNormalizer | None = None):
+        self._records: Iterator[Mapping[str, Any]] = iter(records)
+        self.normalizer = normalizer or MappingEventNormalizer()
+
+    def observe(self) -> Observation:
+        record = next(self._records)
+        return self.normalizer.normalize({
+            **record,
+            "source": "synthetic_test",
+            "source_type": "synthetic_test",
+            "provenance": {**dict(record.get("provenance") or {}), "source_type": "synthetic_test"},
+        })
+
+
+def normalize_source_record(source: ObservationSource, *, limit: int | None = None) -> list[Observation]:
+    """Consume a source through the shared Observation contract for replay/tests."""
+    observations: list[Observation] = []
+    while limit is None or len(observations) < limit:
+        try:
+            observations.append(source.observe())
+        except StopIteration:
+            break
+    return observations
+
+
+from .contracts import ObservationSource  # noqa: E402  (type-only runtime alias)

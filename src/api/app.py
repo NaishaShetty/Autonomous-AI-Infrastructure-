@@ -17,6 +17,8 @@ source repos:
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+from dataclasses import asdict
+import os
 
 from fastapi import FastAPI, HTTPException
 
@@ -33,7 +35,8 @@ _runtime = None
 async def _lifespan(app: FastAPI):
     global _runtime
     init_db()
-    _runtime = build_default_runtime()
+    artifact_path = os.environ.get("RELIABILITY_ARTIFACT_PATH")
+    _runtime = build_default_runtime(artifact_path=artifact_path) if artifact_path else build_default_runtime()
     yield
 
 
@@ -70,6 +73,11 @@ def analyze(payload: dict) -> dict:
     response["runtime"] = {
         "state": episode.state.value,
         "observation_id": observation.observation_id,
+        "source": observation.source,
+        "source_type": observation.source_type.value,
+        "provenance": dict(observation.provenance),
+        "detection": asdict(episode.detection) if episode.detection else None,
+        "reliability": asdict(episode.reliability) if episode.reliability else None,
         "transitions": [t.to_state.value for t in episode.transitions],
         "retrieved_experience_count": len(episode.retrieved_experiences),
         "diagnosis": episode.diagnosis.__dict__ if episode.diagnosis else None,

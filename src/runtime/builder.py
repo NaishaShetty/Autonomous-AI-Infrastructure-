@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from src.reliability.artifacts import load_reliability_artifact
+
 from src.decision.policy import DecisionMode, DecisionPolicy
 from src.failure_memory.memory import FailureMemory
 
@@ -31,7 +33,7 @@ class RuntimeSystem:
     experience_store: JsonExperienceStore
 
 
-def build_runtime_system(*, workload_id: str = "default-workload", feature_names: list[str] | None = None, workload_model: Any | None = None, calibrator: Any | None = None, failure_memory: FailureMemory | None = None, policy: DecisionPolicy | None = None, diagnosis=None, planner=None, executor=None, validator=None, experience_path: str | Path | None = None, repository=None, max_attempts: int = 1, relevance_threshold: float = 0.5, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", model_configuration: dict[str, Any] | None = None) -> RuntimeSystem:
+def build_runtime_system(*, workload_id: str = "default-workload", feature_names: list[str] | None = None, workload_model: Any | None = None, calibrator: Any | None = None, artifact_path: str | Path | None = None, failure_memory: FailureMemory | None = None, policy: DecisionPolicy | None = None, diagnosis=None, planner=None, executor=None, validator=None, experience_path: str | Path | None = None, repository=None, max_attempts: int = 1, relevance_threshold: float = 0.5, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", model_configuration: dict[str, Any] | None = None) -> RuntimeSystem:
     """Build the runtime from explicit dependencies.
 
     No dataset is loaded and no model is trained here. A caller that has
@@ -40,10 +42,23 @@ def build_runtime_system(*, workload_id: str = "default-workload", feature_names
     rather than silently manufacturing a model from benchmark data.
     """
     names = list(feature_names or [])
+    artifact_hash = None
+    if artifact_path is not None:
+        loaded = load_reliability_artifact(artifact_path, expected_feature_names=names or None)
+        workload_model = loaded.model
+        calibrator = loaded.calibrator
+        manifest = loaded.manifest
+        names = list(manifest.feature_names)
+        model_id = manifest.model_id
+        model_version = manifest.model_version
+        calibrator_version = manifest.calibrator_version
+        training_data_id = manifest.training_dataset_id
+        artifact_hash = manifest.artifact_sha256
+        model_configuration = {**dict(model_configuration or {}), "artifact_version": manifest.artifact_version, "feature_schema_version": manifest.feature_schema_version, "protocol_version": manifest.protocol_version}
     memory = failure_memory or FailureMemory(names or ["failure_signal"])
     if workload_model is not None and calibrator is not None:
         from .components import ModelReliabilityAssessor
-        assessor = ModelReliabilityAssessor(workload_model, calibrator, memory, policy or DecisionPolicy(), names, DecisionMode.COMBINED, model_id=model_id, model_version=model_version, calibrator_version=calibrator_version, training_data_id=training_data_id, configuration=model_configuration)
+        assessor = ModelReliabilityAssessor(workload_model, calibrator, memory, policy or DecisionPolicy(), names, DecisionMode.COMBINED, model_id=model_id, model_version=model_version, calibrator_version=calibrator_version, training_data_id=training_data_id, configuration=model_configuration, artifact_hash=artifact_hash)
     else:
         assessor = UnconfiguredReliabilityAssessor()
     experience_store = JsonExperienceStore(experience_path)

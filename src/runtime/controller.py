@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+from datetime import datetime
+from enum import Enum
 from typing import Any, Mapping
 
 from src.schema.events import Decision, EventSource, Outcome, ReliabilityEvent
@@ -128,9 +130,18 @@ class RuntimeController:
             abstained=bool(reliability and reliability.decision != Decision.ANSWER.value),
             is_failure=is_failure,
             outcome=outcome,
-            metadata={
+            metadata=_jsonable({
                 "runtime_state": episode.state.value,
                 "observation_id": episode.observation.observation_id,
+                "observation_source": episode.observation.source,
+                "observation_source_type": episode.observation.source_type.value,
+                "observation_provenance": dict(episode.observation.provenance),
+                "detection": asdict(episode.detection) if episode.detection else None,
+                "detection_provenance": dict(episode.detection.provenance) if episode.detection else {},
+                "reliability": asdict(reliability) if reliability else None,
+                "reliability_provenance": dict(reliability.provenance) if reliability else {},
+                "artifact_hash": reliability.artifact_hash if reliability else None,
+                "abstention_reason": "reliability_policy" if reliability and reliability.decision != Decision.ANSWER.value else None,
                 "retrieved_experience_count": len(episode.retrieved_experiences),
                 "relevant_experience_count": sum(1 for item in episode.retrieved_experiences if bool(getattr(item, "relevant", False))),
                 "diagnosis": asdict(episode.diagnosis) if episode.diagnosis else None,
@@ -139,7 +150,7 @@ class RuntimeController:
                 "action_history": [action.value for action in episode.action_history],
                 "validation_history": [validation.status for validation in episode.validations],
                 "simulator_outcomes": [dict(execution.workload_state) for execution in episode.executions],
-            },
+            }),
         )
         episode.event = event
         if self.repository is not None:
@@ -156,3 +167,16 @@ class RuntimeController:
 
 def false_if_none(value: bool) -> bool:
     return bool(value)
+
+
+def _jsonable(value: Any) -> Any:
+    """Convert runtime trace values to storage-safe JSON primitives."""
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, Enum):
+        return value.value
+    if isinstance(value, Mapping):
+        return {str(key): _jsonable(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_jsonable(item) for item in value]
+    return value
