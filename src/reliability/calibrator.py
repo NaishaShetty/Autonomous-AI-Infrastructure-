@@ -54,14 +54,36 @@ class ConfidenceCalibrator:
         return np.array([features.get(name, 0.0) for name in self.feature_names], dtype=float)
 
     def fit(self, feature_dicts: list[dict[str, float]], correct: list[int]) -> "ConfidenceCalibrator":
+        """Compatibility fit using an internal deterministic calibration split.
+
+        New research protocols should prefer ``fit_train_calibration`` so the
+        externally declared validation/development boundary remains visible.
+        """
         X = np.stack([self._vectorize(f) for f in feature_dicts])
         y = np.asarray(correct, dtype=int)
-
         X_train, X_calib, y_train, y_calib = train_test_split(
             X, y, test_size=0.3, random_state=self.random_state, stratify=y
         )
-        self._clf.fit(X_train, y_train)
+        return self._fit_train_calibration(X_train, y_train, X_calib, y_calib)
 
+    def fit_train_calibration(
+        self,
+        train_feature_dicts: list[dict[str, float]],
+        train_correct: list[int],
+        calibration_feature_dicts: list[dict[str, float]],
+        calibration_correct: list[int],
+    ) -> "ConfidenceCalibrator":
+        """Fit the confidence model on train and isotonic calibration on validation."""
+        X_train = np.stack([self._vectorize(f) for f in train_feature_dicts])
+        y_train = np.asarray(train_correct, dtype=int)
+        X_calib = np.stack([self._vectorize(f) for f in calibration_feature_dicts])
+        y_calib = np.asarray(calibration_correct, dtype=int)
+        if len(np.unique(y_train)) < 2 or len(np.unique(y_calib)) < 2:
+            raise ValueError("train and calibration labels must each contain both classes")
+        return self._fit_train_calibration(X_train, y_train, X_calib, y_calib)
+
+    def _fit_train_calibration(self, X_train: np.ndarray, y_train: np.ndarray, X_calib: np.ndarray, y_calib: np.ndarray) -> "ConfidenceCalibrator":
+        self._clf.fit(X_train, y_train)
         raw_calib = self._clf.predict_proba(X_calib)[:, 1]
         self._isotonic.fit(raw_calib, y_calib)
         self._fitted = True

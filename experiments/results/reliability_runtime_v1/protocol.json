@@ -1,0 +1,74 @@
+{
+  "experiment_id": "reliability_runtime_v1",
+  "protocol_version": "reliability-runtime-v1",
+  "status": "data_gate_blocked",
+  "research_question": "Can a useful failure-risk model be trained from appropriate operational data, calibrated, serialized with provenance, loaded by the canonical runtime, and evaluated without leakage?",
+  "data_policy": {
+    "required": "real operational data with decision-time features, explicit labels, independent-unit identity, temporal or group split, and sufficient train/validation/evaluation coverage",
+    "available_in_checkout": false,
+    "training_allowed": false,
+    "reason": "The repository checkout contains adapters and frozen audit/protocol documentation but no data/raw, data/processed, or data/audit files. No model is trained or artifact generated from simulated or historical result data."
+  },
+  "prediction_task": {
+    "definition": "Given decision-time observations at time t, predict whether an observed workload failure will occur within a dataset-supported horizon H.",
+    "observation_window": "Dataset-specific and must be declared before feature extraction.",
+    "prediction_horizon": "Not instantiated because the required operational data files are absent.",
+    "positive_event": "Dataset-defined failure occurring after the observation cutoff and within H.",
+    "negative_event": "An eligible non-failure observation with a complete outcome window.",
+    "censoring": "Right-censored records must be excluded or explicitly modeled; they may not be labeled negative.",
+    "feature_availability_time": "At or before the observation cutoff.",
+    "label_availability_time": "After the prediction horizon; labels are never decision-time features."
+  },
+  "split_protocol": {
+    "primary_rule": "Use the frozen dataset-specific split when available; otherwise stop rather than invent a split.",
+    "independent_units": {
+      "alibaba_gpu2020": "job_name",
+      "aiops_2020": "cmdb_id/fault entity",
+      "agentrx_magentic": "trajectory_id",
+      "agentrx_tau_retail": "trajectory_id"
+    },
+    "required_controls": [
+      "temporal ordering when timestamps exist",
+      "group disjointness across train/validation/evaluation",
+      "deployment/workload identity disjointness where available",
+      "incident/entity disjointness where repeated events exist",
+      "no evaluation data in threshold tuning or calibration"
+    ],
+    "leakage_stop_condition": "If future telemetry, future labels, evaluation groups, evaluation incidents, or evaluation-derived calibration/threshold choices cannot be ruled out, do not train."
+  },
+  "baselines": [
+    {"id": "B0", "name": "base_rate_predictor", "purpose": "constant prevalence reference"},
+    {"id": "B1", "name": "threshold_detector", "purpose": "simple observed-signal rule baseline"},
+    {"id": "B2", "name": "logistic_regression", "purpose": "simple classical supervised model"},
+    {"id": "B3", "name": "existing_runtime_reliability", "purpose": "canonical runtime assessor when an artifact is available"}
+  ],
+  "model": {
+    "family": "logistic_regression via src/reliability/workload_model.py",
+    "complexity_policy": "No advanced model is permitted before simple baselines establish signal.",
+    "outputs": ["failure_risk", "confidence", "uncertainty", "model_identity", "artifact_identity", "provenance"]
+  },
+  "calibration": {
+    "order": "train -> validation/development -> calibration -> final evaluation",
+    "metrics": ["brier_score", "expected_calibration_error", "reliability_bins"],
+    "final_evaluation_usage": "descriptive only; never used for choosing calibration method or parameters"
+  },
+  "abstention": {
+    "metrics": ["coverage", "selective_risk", "abstention_rate", "accepted_failure_rate", "abstained_failure_rate", "unsafe_decision_rate"],
+    "threshold_source": "validation/development only",
+    "goal": "test whether abstention changes failure exposure among accepted cases, not merely accuracy"
+  },
+  "artifact": {
+    "directory": "artifacts/",
+    "required_manifest_fields": ["model_version", "calibrator_version", "feature_schema_version", "training_dataset_id", "validation_dataset_id", "evaluation_dataset_id", "training_timestamp", "repository_commit", "protocol_version", "protocol_hash", "metrics", "calibration_metrics", "component_hashes", "aggregate_artifact_hash"],
+    "reload_test": "save -> reload -> same input -> same output",
+    "runtime_startup_training": false
+  },
+  "reproducibility": {
+    "seeds": [42],
+    "scientific_identifier_rule": "Use SHA-256 or explicit stable identifiers; never Python hash().",
+    "repeat_runs": 2,
+    "byte_identical_expected": true
+  },
+  "runtime_integration": "replay source -> canonical observation -> detector -> reliability artifact -> abstention -> memory -> diagnosis -> recovery -> safety -> validation -> experience",
+  "claim_boundary": "Results are valid only for the evaluated dataset/protocol; simulator or replay evidence is not production evidence."
+}

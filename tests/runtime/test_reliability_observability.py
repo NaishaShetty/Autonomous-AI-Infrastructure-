@@ -91,3 +91,46 @@ def test_default_runtime_does_not_train_and_abstains() -> None:
     assert episode.reliability is not None
     assert episode.reliability.model_id == "unconfigured"
     assert episode.reliability.decision == "ABSTAIN"
+
+
+def _write_test_artifact(tmp_path):
+    return save_reliability_artifact(
+        tmp_path / "artifact",
+        {"model": "offline"},
+        {"calibrator": "offline"},
+        artifact_version="rel-1",
+        model_id="m1",
+        model_version="1.0",
+        calibrator_version="1.0",
+        feature_schema_version="features-v1",
+        feature_names=["f1"],
+        training_dataset_id="train-a",
+        validation_dataset_id="validation-b",
+        evaluation_dataset_id="evaluation-c",
+        training_timestamp="2026-08-21T00:00:00+00:00",
+        repository_commit="abc123",
+        protocol_version="protocol-v1",
+        protocol_hash="protocol-hash",
+        evaluation_metrics={"accuracy": 0.8},
+        calibration_metrics={"ece": 0.1},
+    )
+
+
+def test_artifact_failure_modes_are_safe(tmp_path) -> None:
+    with pytest.raises(ArtifactValidationError):
+        load_reliability_artifact(tmp_path / "missing")
+    artifact_dir = tmp_path / "artifact"
+    _write_test_artifact(tmp_path)
+    with pytest.raises(ArtifactValidationError):
+        load_reliability_artifact(artifact_dir, expected_artifact_version="rel-2")
+    with pytest.raises(ArtifactValidationError):
+        load_reliability_artifact(artifact_dir, expected_feature_names=["other"])
+    (artifact_dir / "model.pkl").write_bytes(b"corrupted")
+    with pytest.raises(ArtifactValidationError):
+        load_reliability_artifact(artifact_dir)
+    (tmp_path / "malformed").mkdir()
+    (tmp_path / "malformed" / "manifest.json").write_text("not-json")
+    (tmp_path / "malformed" / "model.pkl").write_bytes(b"x")
+    (tmp_path / "malformed" / "calibrator.pkl").write_bytes(b"x")
+    with pytest.raises(ArtifactValidationError):
+        load_reliability_artifact(tmp_path / "malformed")

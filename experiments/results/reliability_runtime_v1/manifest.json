@@ -1,0 +1,22 @@
+{
+  "artifact_hashes": {},
+  "created_at": "2026-08-21T13:41:31+00:00",
+  "dataset_presence": {
+    "agentrx_processed": false,
+    "aiops_audit": false,
+    "aiops_processed": false,
+    "alibaba_audit": false,
+    "alibaba_processed": false
+  },
+  "experiment_id": "reliability_runtime_v1",
+  "protocol_sha256": "53e13b526892a74502d4ad38ff3f7ade86b568f4c0ee80bec4a6a9fea2a5d315",
+  "protocol_version": "reliability-runtime-v1",
+  "repository_commit": "200b40fbbbbaed979929f104918e04d7e17af7f5",
+  "seeds": [
+    42
+  ],
+  "software": {
+    "python": "3.12.3"
+  },
+  "status": "data_gate_blocked"
+}

@@ -1,0 +1,18 @@
+{
+  "abstention": null,
+  "artifact_generated": false,
+  "calibration": null,
+  "dataset_presence": {
+    "agentrx_processed": false,
+    "aiops_audit": false,
+    "aiops_processed": false,
+    "alibaba_audit": false,
+    "alibaba_processed": false
+  },
+  "experiment_id": "reliability_runtime_v1",
+  "metrics": null,
+  "reason": "No raw, processed, or audit data directories are present in this checkout; training is prohibited.",
+  "runtime_integration": null,
+  "status": "data_gate_blocked",
+  "training_performed": false
+}

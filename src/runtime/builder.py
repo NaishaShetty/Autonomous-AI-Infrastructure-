@@ -33,7 +33,7 @@ class RuntimeSystem:
     experience_store: JsonExperienceStore
 
 
-def build_runtime_system(*, workload_id: str = "default-workload", feature_names: list[str] | None = None, workload_model: Any | None = None, calibrator: Any | None = None, artifact_path: str | Path | None = None, failure_memory: FailureMemory | None = None, policy: DecisionPolicy | None = None, diagnosis=None, planner=None, executor=None, validator=None, experience_path: str | Path | None = None, repository=None, max_attempts: int = 1, relevance_threshold: float = 0.5, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", model_configuration: dict[str, Any] | None = None) -> RuntimeSystem:
+def build_runtime_system(*, workload_id: str = "default-workload", feature_names: list[str] | None = None, workload_model: Any | None = None, calibrator: Any | None = None, artifact_path: str | Path | None = None, expected_artifact_version: str | None = None, expected_model_version: str | None = None, expected_calibrator_version: str | None = None, failure_memory: FailureMemory | None = None, policy: DecisionPolicy | None = None, diagnosis=None, planner=None, executor=None, validator=None, experience_path: str | Path | None = None, repository=None, max_attempts: int = 1, relevance_threshold: float = 0.5, model_id: str = "injected-workload-model", model_version: str = "unknown", calibrator_version: str = "unknown", training_data_id: str = "unknown", model_configuration: dict[str, Any] | None = None) -> RuntimeSystem:
     """Build the runtime from explicit dependencies.
 
     No dataset is loaded and no model is trained here. A caller that has
@@ -44,7 +44,13 @@ def build_runtime_system(*, workload_id: str = "default-workload", feature_names
     names = list(feature_names or [])
     artifact_hash = None
     if artifact_path is not None:
-        loaded = load_reliability_artifact(artifact_path, expected_feature_names=names or None)
+        loaded = load_reliability_artifact(
+            artifact_path,
+            expected_feature_names=names or None,
+            expected_artifact_version=expected_artifact_version,
+            expected_model_version=expected_model_version,
+            expected_calibrator_version=expected_calibrator_version,
+        )
         workload_model = loaded.model
         calibrator = loaded.calibrator
         manifest = loaded.manifest

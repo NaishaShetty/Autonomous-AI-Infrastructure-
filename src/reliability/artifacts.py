@@ -149,6 +149,9 @@ def save_reliability_artifact(
     Training must happen outside this function. The function refuses overlapping
     dataset identities so evaluation data cannot silently enter artifact creation.
     """
+    dataset_ids = {training_dataset_id, validation_dataset_id, evaluation_dataset_id}
+    if len(dataset_ids) != 3:
+        raise ArtifactValidationError("training, validation, and evaluation dataset identities must be disjoint")
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     model_path = output / "model.pkl"
@@ -186,7 +189,7 @@ def save_reliability_artifact(
     return manifest
 
 
-def load_reliability_artifact(path: str | Path, *, expected_feature_names: list[str] | None = None) -> LoadedReliabilityArtifact:
+def load_reliability_artifact(path: str | Path, *, expected_feature_names: list[str] | None = None, expected_artifact_version: str | None = None, expected_model_version: str | None = None, expected_calibrator_version: str | None = None) -> LoadedReliabilityArtifact:
     """Validate and load an artifact without fitting or mutating its objects."""
     directory = Path(path)
     manifest_path = directory / "manifest.json"
@@ -203,6 +206,12 @@ def load_reliability_artifact(path: str | Path, *, expected_feature_names: list[
         raise ArtifactValidationError(f"invalid artifact manifest: {exc}") from exc
     if expected_feature_names is not None and tuple(expected_feature_names) != manifest.feature_names:
         raise ArtifactValidationError("artifact feature schema does not match runtime feature names")
+    if expected_artifact_version is not None and manifest.artifact_version != expected_artifact_version:
+        raise ArtifactValidationError("artifact version is incompatible with the runtime")
+    if expected_model_version is not None and manifest.model_version != expected_model_version:
+        raise ArtifactValidationError("model version is incompatible with the runtime")
+    if expected_calibrator_version is not None and manifest.calibrator_version != expected_calibrator_version:
+        raise ArtifactValidationError("calibrator version is incompatible with the runtime")
     if _sha256(model_path) != manifest.model_sha256 or _sha256(calibrator_path) != manifest.calibrator_sha256:
         raise ArtifactValidationError("artifact component hash mismatch")
     actual_artifact_hash = hashlib.sha256((manifest.model_sha256 + manifest.calibrator_sha256).encode()).hexdigest()
