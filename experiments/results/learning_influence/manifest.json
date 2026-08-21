@@ -1,0 +1,8 @@
+{
+  "control_memory": "empty per evaluation episode",
+  "git_commit": "e9a43fa624cf967a65bcc41d796c34f2fa0e1df9",
+  "historical_paths_modified": false,
+  "learned_memory": "training episode only per evaluation episode",
+  "protocol_sha256": "cd4526553cf8507ec2de4fe99f11fd36653ebb057fcef79899089e409cd40ef3",
+  "training_episode_id": "training-episode-000"
+}

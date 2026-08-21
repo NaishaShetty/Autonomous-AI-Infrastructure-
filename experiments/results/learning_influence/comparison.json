@@ -1,0 +1,97 @@
+{
+  "baseline_matrix": {
+    "B0_reliability_only": {
+      "reason": "No explicit workload model artifact is configured; the safe default abstainer is not treated as a model baseline.",
+      "status": "not_run"
+    },
+    "B1_model_plus_calibration": {
+      "reason": "No explicit workload model and calibrator artifacts were injected.",
+      "status": "not_run"
+    },
+    "B2_model_plus_memory": {
+      "control": "empty memory",
+      "learned": "one declared training experience",
+      "metrics": [
+        "retrieval_count",
+        "relevant_retrieval_count",
+        "risk"
+      ],
+      "status": "measured"
+    },
+    "B3_model_memory_diagnosis": {
+      "metrics": [
+        "diagnosis_confidence",
+        "diagnosis_uncertainty",
+        "diagnosis_evidence"
+      ],
+      "status": "measured"
+    },
+    "B4_model_memory_diagnosis_recovery": {
+      "metrics": [
+        "candidate_actions",
+        "selected_action",
+        "safety_status",
+        "recovery_attempts"
+      ],
+      "status": "measured"
+    },
+    "B5_complete_closed_loop": {
+      "metrics": [
+        "validation_success_rate",
+        "recovery_success_rate",
+        "safety_violation_count"
+      ],
+      "status": "measured"
+    }
+  },
+  "control": {
+    "abstention_rate": 0.0,
+    "action_counts": {
+      "retry": 20
+    },
+    "condition": "control",
+    "episode_count": 20,
+    "mean_diagnosis_confidence": 0.6,
+    "mean_diagnosis_uncertainty": 0.4,
+    "mean_recovery_attempts": 1,
+    "mean_relevant_retrieval_count": 0,
+    "mean_retrieval_count": 0,
+    "mean_risk": 0.0,
+    "recovery_success_rate": 0.0,
+    "safety_violation_count": 0,
+    "validation_success_rate": 0.0
+  },
+  "experiment": "runtime-learning-influence-v1",
+  "interpretation": "Influence and benefit are reported separately. This deterministic repeated scenario is an integration experiment, not a statistical generalization claim.",
+  "learned": {
+    "abstention_rate": 0.0,
+    "action_counts": {
+      "reconfigure": 20
+    },
+    "condition": "learned",
+    "episode_count": 20,
+    "mean_diagnosis_confidence": 0.8,
+    "mean_diagnosis_uncertainty": 0.19999999999999996,
+    "mean_recovery_attempts": 1,
+    "mean_relevant_retrieval_count": 1,
+    "mean_retrieval_count": 1,
+    "mean_risk": 0.0,
+    "recovery_success_rate": 1.0,
+    "safety_violation_count": 0,
+    "validation_success_rate": 1.0
+  },
+  "learning_benefit": {
+    "recovery_success_rate_delta": 1.0,
+    "safety_violation_delta": 0,
+    "validation_success_rate_delta": 1.0
+  },
+  "learning_influence": {
+    "abstention_rate_delta": 0.0,
+    "action_change_rate": 1.0,
+    "diagnosis_confidence_delta": 0.20000000000000007,
+    "diagnosis_uncertainty_delta": -0.20000000000000007,
+    "relevant_retrieval_count_delta": 1,
+    "retrieval_count_delta": 1,
+    "risk_delta": 0.0
+  }
+}

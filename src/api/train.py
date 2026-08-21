@@ -1,23 +1,24 @@
+"""Construction boundaries for experiment systems and the live runtime."""
 from __future__ import annotations
 
-from src.decision.policy import DecisionMode, DecisionPolicy
-from src.pipeline_builder import build_system
-
-from .pipeline import ReliabilityPipeline
+from src.pipeline_builder import build_system as build_synthetic_experiment_system
+from src.runtime.builder import RuntimeSystem, build_runtime_system
 
 
-def build_default_pipeline() -> ReliabilityPipeline:
-    """Builds the demo pipeline used by the live API on startup. Uses the
-    same ``build_system`` training procedure as the benchmark harness (see
-    ``src/pipeline_builder.py`` docstring) so the API never diverges from
-    what the benchmarks report."""
-    system = build_system()
-    return ReliabilityPipeline(
-        workload_model=system.workload_model,
-        calibrator=system.calibrator,
-        failure_memory=system.failure_memory,
-        policy=DecisionPolicy(),
-        feature_names=system.feature_names,
-        workload_id="synthetic-regime-stream",
-        mode=DecisionMode.COMBINED,
-    )
+def build_default_runtime() -> RuntimeSystem:
+    """Build an explicit runtime without training from benchmark data.
+
+    Deployments or simulations may inject versioned model/calibrator artifacts
+    through ``build_runtime_system``. The API default has no hidden training
+    dependency and therefore abstains honestly until a model is configured.
+    """
+    return build_runtime_system(workload_id="runtime-default", feature_names=["f1", "f2", "f3", "f4", "f5"])
+
+
+def build_default_pipeline() -> RuntimeSystem:
+    """Compatibility name retained for callers migrating to RuntimeSystem."""
+    return build_default_runtime()
+
+
+# Historical research name remains explicit and available to benchmarks.
+build_system = build_synthetic_experiment_system

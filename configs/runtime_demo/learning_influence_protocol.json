@@ -1,0 +1,40 @@
+{
+  "protocol_version": "runtime-learning-influence-v1",
+  "seed": 42,
+  "environment": "deterministic_simulator",
+  "scenario": "execution_error_recovery_choice",
+  "failure_type": "execution_error",
+  "training_episode_count": 1,
+  "evaluation_episode_count": 20,
+  "conditions": ["control_no_prior_experience", "learned_prior_validated_experience"],
+  "control_memory": "empty",
+  "learned_memory": "seeded_only_with_training_episode",
+  "training_action": "reconfigure",
+  "default_evaluation_action": "retry",
+  "simulated_outcomes": {
+    "retry": false,
+    "reconfigure": true
+  },
+  "metrics": [
+    "retrieval_count",
+    "relevant_retrieval_count",
+    "risk",
+    "diagnosis_confidence",
+    "diagnosis_uncertainty",
+    "selected_action",
+    "action_change_rate",
+    "abstention_rate",
+    "recovery_attempts",
+    "validation_success_rate",
+    "recovery_success_rate",
+    "safety_violation_count"
+  ],
+  "leakage_controls": {
+    "training_episode_is_not_evaluation_episode": true,
+    "control_memory_is_empty": true,
+    "learned_memory_contains_only_training_episode": true,
+    "evaluation_outcomes_are_not_used_to_seed_memory": true,
+    "historical_phase4_artifacts_are_not_used": true
+  },
+  "interpretation": "The experiment measures learning influence separately from learning benefit. Twenty identical deterministic evaluation episodes are an integration experiment, not a statistical performance claim."
+}

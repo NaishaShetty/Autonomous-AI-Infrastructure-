@@ -8,3 +8,11 @@ node_modules/
 dist/
 .venv/
 venv/
+.coverage
+.coverage.*
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt

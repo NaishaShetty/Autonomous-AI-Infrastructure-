@@ -30,16 +30,30 @@ class FailureEmbedder:
         self.n_components = n_components
         self._pca = PCA(n_components=n_components, random_state=random_state)
         self._fitted = False
+        self._small_sample = False
+        self._zero_variance = False
+        self._fit_mean: np.ndarray | None = None
+        self._fit_components = n_components
 
     def _vectorize(self, context: dict[str, float]) -> np.ndarray:
         return np.array([context.get(name, 0.0) for name in self.feature_names], dtype=float)
 
     def fit(self, contexts: list[dict[str, float]]) -> "FailureEmbedder":
+        if not contexts:
+            raise ValueError("FailureEmbedder.fit requires at least one context")
         X = np.stack([self._vectorize(c) for c in contexts])
-        n_components = min(self.n_components, X.shape[0], X.shape[1])
+        n_components = max(1, min(self.n_components, X.shape[0], X.shape[1]))
+        self._fit_components = n_components
+        self._fit_mean = X.mean(axis=0)
+        self._small_sample = X.shape[0] < 2
+        self._zero_variance = bool(np.all(np.ptp(X, axis=0) == 0.0))
+        if self._small_sample or self._zero_variance:
+            self._fitted = True
+            return self
         if n_components != self.n_components:
-            self._pca = PCA(n_components=max(1, n_components), random_state=self._pca.random_state)
+            self._pca = PCA(n_components=n_components, random_state=self._pca.random_state)
         self._pca.fit(X)
+        self._fit_components = self._pca.n_components_
         self._fitted = True
         return self
 
@@ -52,7 +66,15 @@ class FailureEmbedder:
         if not self._fitted:
             raise RuntimeError("FailureEmbedder must be fit() before embed()")
         X = np.stack([self._vectorize(c) for c in contexts])
-        projected = self._pca.transform(X)
+        if self._small_sample or self._zero_variance:
+            if self._fit_mean is None:
+                raise RuntimeError("FailureEmbedder fit state is incomplete")
+            centered = X - self._fit_mean
+            projected = np.zeros((X.shape[0], self._fit_components), dtype=float)
+            width = min(self._fit_components, centered.shape[1])
+            projected[:, :width] = centered[:, :width]
+        else:
+            projected = self._pca.transform(X)
         conf = np.asarray(confidences, dtype=float)
         derived = np.stack(
             [2.0 * np.abs(conf - 0.5), np.abs(conf - 0.5)], axis=1
@@ -61,4 +83,4 @@ class FailureEmbedder:
 
     @property
     def output_dim(self) -> int:
-        return self._pca.n_components_ + 2
+        return self._fit_components + 2

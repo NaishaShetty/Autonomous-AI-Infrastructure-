@@ -121,3 +121,8 @@ def build_system(
         test_stream=test_stream,
         n_logged_failures=len(failure_events),
     )
+
+
+# Explicit name for research callers. The legacy ``build_system`` name is
+# retained because frozen benchmarks import it; it is not the runtime builder.
+build_synthetic_experiment_system = build_system

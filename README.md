@@ -58,8 +58,9 @@ a claim of production deployment or open-ended generalization. See
   effect size is actually reachable given a baseline's headroom against
   the oracle bound, *before* a threshold is frozen — added after two
   phases froze thresholds without it (see [Current Results](#current-results-real-numbers)).
-- **Demo API** — a FastAPI service (`api/app.py`) exposing the trained
-  pipeline for live confidence/risk analysis, never mocked metrics.
+- **Canonical runtime controller** — `src/runtime/` now orchestrates structured observation, detection, reliability assessment, failure-memory retrieval, uncertain diagnosis, safety-gated recovery planning, simulated execution, independent validation, complete experience persistence, and synchronous memory updates.
+- **Runtime API** — `api/app.py` routes `/api/analyze` through the canonical controller. The API default does not train from a benchmark dataset at startup; it honestly abstains until explicit model/calibrator artifacts are injected.
+- **Deterministic closed-loop demonstration** — `scripts/run_closed_loop_demo.py` runs two simulated episodes and shows whether the second episode retrieves the first. This is an integration proof, not production recovery evidence.
 
 Only capabilities that are actually implemented and evaluated are listed
 here — see [Known Limitations](#known-limitations) for what isn't.
@@ -82,51 +83,31 @@ message queue between components (direct module calls through
 
 ## Architecture
 
-Real events flow: **workload → `reliability/` (calibrated confidence) +
-`failure_memory/` (persistent risk from past failures) → `decision/policy.py`
-(the one authoritative fusion point) → `pipeline_builder.py` → `api/`.**
-Real datasets feed a parallel research track: `failure_experience/`
-(canonical schema) → `failure_patterns/` (pattern discovery) and
-`recovery/` (the controlled recovery-selection environment behind Phases
-4.3/4.4). Frozen, synthetic-only early-Phase-4 modules
-(`experience/`, `patterns/`, un-suffixed `failure_memory/` paths) are not
-on the live serving path.
+The canonical runtime is now an explicit controller rather than the synthetic benchmark builder. Inputs arrive through an observation normalizer, then flow through detection, reliability/risk assessment, retrieval, diagnosis, recovery planning, safety and feasibility gating, simulated execution, independent validation, complete experience persistence, and synchronous learning updates. `ReliabilityEvent` remains a compatibility event at the persistence boundary; `FailureExperience` is the foundation for the complete runtime episode.
 
 ```mermaid
 flowchart TD
-    subgraph Real["Real datasets (AgentRx / AIOps 2020 / Alibaba GPU 2020)"]
-        RD["ingest"]
-    end
-
-    subgraph Serving["Live serving path"]
-        Storage["schema/ + storage/<br/>ReliabilityEvent"]
-        Reliability["reliability/<br/>calibrated confidence"]
-        FailureMemory["failure_memory/<br/>persistent risk signal"]
-        Decision["decision/policy.py<br/>fusion + abstention"]
-        Pipeline["pipeline_builder.py"]
-        API["api/app.py (FastAPI)"]
-    end
-
-    subgraph Research["Recovery-learning research track"]
-        FailureExp["failure_experience/<br/>canonical schema (PASS)"]
-        FailurePat["failure_patterns/<br/>pattern discovery (INCONCLUSIVE)"]
-        Recovery["recovery/<br/>controlled env + policies (4.3/4.4)"]
-        Feasibility["feasibility.py<br/>go/no-go threshold gate"]
-    end
-
-    RD --> FailureExp
-    FailureExp --> FailurePat
-    FailureExp --> Recovery
-    Recovery --> Feasibility
-
-    Storage --> Reliability --> Decision
-    Storage --> FailureMemory --> Decision
-    Decision --> Pipeline --> API
+    Source["Workload / dataset replay / simulator"] --> Normalize["runtime/observation.py<br/>EventNormalizer"]
+    Normalize --> Observe["Observation"]
+    Observe --> Detect["FailureDetector"]
+    Detect --> Assess["ReliabilityAssessor<br/>confidence + risk + policy"]
+    Assess --> Retrieve["FailureMemory<br/>retrieval + explicit lifecycle"]
+    Retrieve --> Diagnose["DiagnosisEngine<br/>uncertainty + evidence"]
+    Diagnose --> Plan["RecoveryPlanner"]
+    Plan --> Gate["Safety + feasibility gate"]
+    Gate -->|abstain / escalate| Store["FailureExperience<br/>provenance + lineage"]
+    Gate -->|approved| Execute["RecoveryExecutor<br/>simulated implementation"]
+    Execute --> Validate["RecoveryValidator<br/>independent state check"]
+    Validate --> Store
+    Store --> Learn["LearningManager<br/>synchronous memory update"]
+    Learn --> Retrieve
+    Store --> Compatibility["ReliabilityEvent compatibility persistence"]
+    Compatibility --> API["FastAPI /api/analyze"]
 ```
 
-Full architecture and per-phase design detail: [`docs/`](docs/), starting
-with [`PHASE2_REPORT.md`](docs/PHASE2_REPORT.md) (the unified system) and
-[`PHASE4_PLAN.md`](docs/PHASE4_PLAN.md) (the current research phase).
+The synthetic `build_system()` function remains available as an explicitly named research builder for frozen benchmarks. The API uses `build_runtime_system()` and does not secretly train from a benchmark dataset during startup. Controlled recovery modules remain simulation/research infrastructure and are not production executors.
+
+The baseline classification and migration map are recorded in [`docs/ARCHITECTURE_MAP_BASELINE.md`](docs/ARCHITECTURE_MAP_BASELINE.md). Full per-phase design detail remains under [`docs/`](docs/).
 
 ## Research Contributions
 
@@ -143,13 +124,7 @@ phase's own doc under `docs/`.
 
 ## Current Results (real numbers)
 
-Tests (fresh run, not carried forward from an earlier report): **435
-passed / 14 skipped, 0 failed** on a clean checkout with no local real-data
-setup; **449 passed / 0 skipped** once the three small marker files listed
-in [`docs/DATA_SETUP.md`](docs/DATA_SETUP.md) are present (well under 2 MB
-total — the full multi-GB raw datasets are not required just to get a
-green suite). Every number below is pulled from
-`experiments/results/*/*.json`, not restated from memory.
+Tests before the architectural recovery: **432 passed / 17 skipped / 0 failed / 4 warnings**. After the repaired runtime: **439 passed / 17 skipped / 0 failed / 21 warnings**. After relevance-aware learning influence, small-sample guards, source adapters, provenance, and the new experiment tests: **444 passed / 17 skipped / 0 failed / 1 warning**. The remaining warning is an external Starlette/httpx deprecation; the avoidable PCA warnings were removed with mathematically valid guards. Every historical experiment result below remains frozen and was not overwritten.
 
 | Phase | Question | Verdict | Headline number |
 |---|---|---|---|
@@ -158,6 +133,7 @@ green suite). Every number below is pulled from
 | 4.2 — Pattern Learning | Failure-rate-elevation patterns on Alibaba GPU2020 | **INCONCLUSIVE** | 21/50 evaluable contexts — underpowered, not negative |
 | 4.3 — Recovery Learning | Learned recovery policy vs. fixed-priority baseline | **PASS — not supported** | effect +0.011 vs. 0.15 required |
 | 4.4 — Sequential Recovery | 2-step, history-aware policy vs. fixed-priority | **PASS — not supported** | effect −0.049 (significant, wrong direction) |
+| New runtime learning influence | Validated experience affects future controlled decisions | **INTEGRATION RESULT** | relevant retrieval +1.0; action change 100%; validation success +1.0 in deterministic simulator |
 
 **Both verdicts above are the recorded result. Full stop.** A separate,
 **EXPLORATORY, POST-HOC, NOT PRE-REGISTERED** analysis (confirmed absent
@@ -174,9 +150,14 @@ exploratory:
 [`PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md`](docs/PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md),
 [`PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md`](docs/PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md).
 
+## New Runtime Learning-Influence Study
+
+The new study is separate from frozen Phase 4. It uses a deterministic simulator with an explicit control condition (empty memory) and learned condition (one declared validated training episode), 20 evaluation episodes per condition, explicit relevance scores, and no evaluation-to-memory leakage. The learned condition retrieved one relevant experience per episode, increased diagnosis confidence from 0.6 to 0.8, reduced uncertainty from 0.4 to 0.2, changed the selected action from `retry` to `reconfigure` in 20/20 episodes, and improved simulator validation success from 0/20 to 20/20. Mean risk stayed at 0.0 because the default runtime has no injected workload model and does not fabricate one. These are controlled integration results, not production or statistical generalization claims. See [`docs/LEARNING_INFLUENCE_REPORT.md`](docs/LEARNING_INFLUENCE_REPORT.md) and [`experiments/results/learning_influence/`](experiments/results/learning_influence/).
+
 ## Known Limitations
 
-- **Controlled recovery environment, not production infrastructure** — 4.3/4.4's action outcomes come from a frozen, deterministic ground-truth table over a 4-family scenario taxonomy, not a live production system; results are internally valid, not evidence of real-world recovery-rate improvement.
+- **Simulated recovery, not production infrastructure** — the new runtime has an explicit `SimulatedRecoveryExecutor` and independent validator. The controlled 4.3/4.4 action outcomes still come from a frozen deterministic ground-truth table, and neither those results nor the new demonstration is evidence of real-world recovery-rate improvement.
+- **Default API model is intentionally unconfigured** — `build_runtime_system()` does not train during startup. A versioned workload model and calibrator must be injected for calibrated ANSWER decisions; the default path abstains honestly rather than using synthetic training as hidden runtime initialization.
 - **Two consecutive "hypothesis not supported" verdicts** on recovery learning (4.3, 4.4) — both traced to a specific, documented cause (threshold feasibility + abstention scoring, see [Current Results](#current-results-real-numbers)), not yet re-run under a corrected metric.
 - **Phase 4.2 is underpowered, not negative** — 21 of a pre-registered 50 required evaluable contexts; the evidence-volume gate did what it was designed to do (block an overclaimed result), but the underlying question is still open.
 - **Real-data-dependent tests require a manual data-fetch step** — 14 tests skip cleanly without it; see [`docs/DATA_SETUP.md`](docs/DATA_SETUP.md).
@@ -190,8 +171,10 @@ Full detail: each phase's own doc under [`docs/`](docs/).
 python -m venv .venv
 .venv/Scripts/pip install -r requirements.txt   # Windows; .venv/bin/pip on macOS/Linux
 
-python -m pytest tests/ -v                       # 435 passed / 14 skipped without local real-data setup (docs/DATA_SETUP.md)
-.venv/Scripts/uvicorn src.api.app:app --port 8000  # demo API -> POST /api/analyze, GET /api/metrics/summary
+python -m pytest tests/ -v                       # 444 passed / 17 skipped / 1 external warning
+python scripts/run_closed_loop_demo.py            # deterministic two-episode controller trace
+python scripts/run_learning_influence.py          # new control-versus-learned experiment
+.venv/Scripts/uvicorn src.api.app:app --port 8000  # POST /api/analyze -> canonical runtime controller
 ```
 
 ## Reproducing Results
@@ -212,7 +195,10 @@ python benchmarks/check_effect_size_feasibility.py \             # go/no-go chec
 - [`docs/PHASE2_REPORT.md`](docs/PHASE2_REPORT.md) — the unified system: what changed from the two source prototypes, and why.
 - [`docs/PHASE4_PLAN.md`](docs/PHASE4_PLAN.md) — the current research phase's plan and amendments.
 - [`docs/DATA_SETUP.md`](docs/DATA_SETUP.md) — fetching/regenerating the real datasets locally.
-- [`docs/SCHEMA.md`](docs/SCHEMA.md) — the canonical `ReliabilityEvent` schema reference.
+- [`docs/SCHEMA.md`](docs/SCHEMA.md) — the compatibility `ReliabilityEvent` schema reference.
+- [`docs/ARCHITECTURE_MAP_BASELINE.md`](docs/ARCHITECTURE_MAP_BASELINE.md) — pre-change architecture classification and target runtime map.
+- [`docs/VERSIONED_MODULE_CLASSIFICATION.md`](docs/VERSIONED_MODULE_CLASSIFICATION.md) — v1/v2, research, runtime, and historical module boundaries.
+- [`docs/LEARNING_INFLUENCE_REPORT.md`](docs/LEARNING_INFLUENCE_REPORT.md) — new control-versus-learned study and scientifically bounded interpretation.
 
 Every phase has one doc under `docs/`; start from the verdict table above
 and follow the link for the phase you need.

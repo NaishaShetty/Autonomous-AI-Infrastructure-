@@ -18,28 +18,26 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
-from src.decision.policy import DecisionMode
 from src.schema.events import Outcome
 from src.storage.db import get_session, init_db
 from src.storage.repository import EventRepository
 
-from .pipeline import ReliabilityPipeline
-from .train import build_default_pipeline
+from .train import build_default_runtime
 
-_pipeline: ReliabilityPipeline | None = None
+_runtime = None
 
 
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
-    global _pipeline
+    global _runtime
     init_db()
-    _pipeline = build_default_pipeline()
+    _runtime = build_default_runtime()
     yield
 
 
-app = FastAPI(title="Autonomous AI Infrastructure -- Unified Reliability API", lifespan=_lifespan)
+app = FastAPI(title="Autonomous AI Infrastructure -- Closed-Loop Runtime", lifespan=_lifespan)
 
 
 @app.get("/api/health")
@@ -49,17 +47,38 @@ def health() -> dict:
 
 @app.post("/api/analyze")
 def analyze(payload: dict) -> dict:
-    """``payload`` must contain a ``context`` dict of named numeric
-    features. Optional ``true_label`` (int) is accepted only for
-    demo/benchmark use to log outcome; a real deployment would not have it
-    at request time."""
-    assert _pipeline is not None, "pipeline not initialized"
-    context = {k: float(v) for k, v in payload.get("context", {}).items()}
-    true_label = payload.get("true_label")
+    """Process a structured observation through the canonical runtime.
+
+    ``context`` remains an evaluation/API compatibility alias for ``features``.
+    ``true_label`` is evaluation-only and is never required for autonomous
+    observation, diagnosis, recovery, validation, or learning.
+    """
+    if _runtime is None:
+        raise HTTPException(status_code=503, detail="runtime not initialized")
+    raw = dict(payload)
+    true_label = raw.pop("true_label", None)
+    try:
+        observation = _runtime.normalizer.normalize(raw)
+    except (TypeError, ValueError) as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     with get_session() as session:
-        repo = EventRepository(session)
-        event = _pipeline.analyze(context, repository=repo, true_label=true_label)
-        return event.model_dump(mode="json")
+        _runtime.controller.repository = EventRepository(session)
+        episode = _runtime.controller.process(observation, true_label=true_label)
+    if episode.event is None:
+        raise HTTPException(status_code=500, detail="runtime did not produce a compatibility event")
+    response = episode.event.model_dump(mode="json")
+    response["runtime"] = {
+        "state": episode.state.value,
+        "observation_id": observation.observation_id,
+        "transitions": [t.to_state.value for t in episode.transitions],
+        "retrieved_experience_count": len(episode.retrieved_experiences),
+        "diagnosis": episode.diagnosis.__dict__ if episode.diagnosis else None,
+        "recovery_action": episode.recovery_plan.selected_action.value if episode.recovery_plan else None,
+        "validation": episode.validation.status if episode.validation else None,
+        "experience_id": episode.experience_id,
+        "learning_update": episode.learning_update,
+    }
+    return response
 
 
 @app.get("/api/metrics/summary")

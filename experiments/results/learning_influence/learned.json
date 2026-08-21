@@ -1,0 +1,526 @@
+{
+  "condition": "learned",
+  "episode_count": 20,
+  "episodes": [
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    },
+    {
+      "abstained": false,
+      "candidate_actions": [
+        "reconfigure"
+      ],
+      "diagnosis_confidence": 0.8,
+      "diagnosis_evidence": [
+        "observation.error",
+        "historical_experience:bb24666536dd4295a1c08aa7e32cba93:similarity=1.000"
+      ],
+      "diagnosis_uncertainty": 0.19999999999999996,
+      "memory_version_after": 2,
+      "memory_version_before": 1,
+      "recovery_attempts": 1,
+      "recovery_success": true,
+      "relevant_retrieval_count": 1,
+      "retrieval_count": 1,
+      "retrieval_similarities": [
+        1.0
+      ],
+      "risk": 0.0,
+      "safety_status": "approved",
+      "selected_action": "reconfigure",
+      "state": "learned",
+      "validation_status": "RECOVERED"
+    }
+  ]
+}
