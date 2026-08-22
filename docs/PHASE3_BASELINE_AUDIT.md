@@ -32,17 +32,17 @@ The documented V1 freeze commit is `[d977a32](https://github.com/NaishaShetty/Au
 | Full suite after Phase 3 changes | 507 passed, 7 skipped, 0 failed | **VERIFIED:** 502 passed, 17 skipped, 0 failed in 300.23 seconds; the five added tests passed |
 | New contract tests | Not applicable | **VERIFIED:** 5 passed |
 
-The full-suite discrepancy is recorded rather than hidden. The repository’s historical release documentation reports 507/7, while this environment produced 497/17 before the Phase 3 additions and 502/17 afterward. This is currently classified as **UNKNOWN** between environment/dependency differences, stale historical reporting, or skipped real-data coverage. No tests were changed to obtain the observed result.
+The full-suite discrepancy is recorded rather than hidden. A Phase 3.0.1 detached-worktree run at the frozen V1 commit also produced 497/17, proving that the five Phase 3 additions are not the cause. The exact current 17 skips are all dataset-gated, but the historical seven skipped node IDs were not preserved in the repository; the historical mapping therefore remains **UNKNOWN**. No tests were changed to obtain the observed result. See the [V1 Control Reconciliation Report](V1_CONTROL_RECONCILIATION_REPORT.md).
 
 ## 4. Focused validation status
 
-The V1 release documentation records 24 focused integration and persistence tests passing with zero failures [1]. The repository contains the corresponding closed-loop, Alibaba integration, failure-memory lifecycle, persistence, restart, safety, and runtime test modules. A fresh 24-test reproduction was not independently completed in this checkpoint, so the historical result is **OBSERVED from documentation, not VERIFIED by this audit**.
+The V1 release documentation records 24 focused integration and persistence tests passing with zero failures [1]. The repository contains the corresponding closed-loop, Alibaba integration, failure-memory lifecycle, persistence, restart, safety, and runtime test modules. The exact historical 24-test core selection was recovered and independently reproduced with 24 passed, 0 failed, and 0 skipped; this is **VERIFIED**. The previous 28-test subset is not treated as equivalent.
 
-An independently selected focused subset covering Alibaba integration, closed-loop runtime, memory lifecycle, persistence, restart, safety, and artifact replay collected 28 tests and produced **28 passed, 0 failed**; this is **VERIFIED** for that subset. The new Phase 3 serialization, manifest, deterministic-identifier, and immutability tests are **VERIFIED** by the 5-test unit run above.
+The exact focused selection covering failure-memory lifecycle, persistence, startup restart, and closed-loop runtime collected 24 tests and produced **24 passed, 0 failed, 0 skipped**; this is **VERIFIED**. The new Phase 3 serialization, manifest, deterministic-identifier, and immutability tests are **VERIFIED** by the 5-test unit run above.
 
 ## 5. V1 reproduction status
 
-The historical V1 integrated evaluation is documented as 8 independent jobs, 7 conditions, and 56 replay cases, with zero unsafe execution and conservative safety behavior [1] [2]. The historical artifact and runner references are present in the repository. A new end-to-end replay was not run because the required local Alibaba GPU2020 data marker is absent in this clean environment; therefore independent reproduction is **UNKNOWN / NOT VERIFIED**. The historical result is preserved unchanged.
+The historical V1 integrated evaluation is documented as 8 independent jobs, 7 conditions, and 56 replay cases, with zero unsafe execution and conservative safety behavior [1] [2]. The historical artifact and runner references are present in the repository. The serialized artifacts and process-restart behavior are independently **VERIFIED**, but the canonical 56-case replay is **BLOCKED** by missing processed Alibaba GPU2020 job/task/instance tables. The historical result is preserved unchanged. See `experiments/results/v1_control_reconciliation/`.
 
 ## 6. Current reliability model
 
@@ -135,7 +135,7 @@ This is a **PROPOSED** hypothesis, not an experimental result. No candidate mode
 
 ## 16. Phase 3.1 readiness decision
 
-**NOT READY for scientific improvement claims; READY for controlled experiment design.**
+**NOT READY.** The exact focused validation and artifact behavior are verified, but the historical seven skipped node IDs remain unreconciled and the baseline-critical 56-case replay is blocked by missing exact Alibaba inputs. Do not begin direct V1.0 comparison experiments until this boundary is explicitly accepted or the inputs are restored.
 
 The repository now has an isolated contract and result layout, but the full-suite discrepancy, focused-validation reproduction, and V1 end-to-end replay require explicit reconciliation before Phase 3.1 results can be treated as independently reproduced control comparisons. Phase 3.1 may begin protocol design and environment/data reconciliation, but it should not begin a large-scale improvement experiment until those open verification items are closed.
 

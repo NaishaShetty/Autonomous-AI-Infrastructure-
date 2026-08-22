@@ -1,0 +1,48 @@
+{
+  "current_commit": "0a7d36e0a1f3aaae465d7e53e4214a511241a62e",
+  "current_branch": "main",
+  "origin_main": "0a7d36e0a1f3aaae465d7e53e4214a511241a62e",
+  "working_tree_before_reconciliation": "clean",
+  "v1_freeze_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "phase3_checkpoint": "0a7d36e Establish Phase 3 baseline audit infrastructure",
+  "python": "3.12.3",
+  "os": "Ubuntu 24.04 linux/amd64 sandbox",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.17.1",
+    "joblib": "1.5.3",
+    "pydantic": "2.13.4",
+    "SQLAlchemy": "2.0.52",
+    "pytest": "9.1.1"
+  },
+  "baseline_runs": {
+    "frozen_commit_current_environment": {"passed": 497, "skipped": 17, "failed": 0, "duration_seconds": 458.31},
+    "phase3_before_additions": {"passed": 497, "skipped": 17, "failed": 0, "duration_seconds": 216.35},
+    "phase3_after_additions": {"passed": 502, "skipped": 17, "failed": 0, "duration_seconds": 300.23},
+    "historical_documented": {"passed": 507, "skipped": 7, "failed": 0, "duration_seconds": 1677.83}
+  },
+  "focused_validation": {
+    "command": "python3 -m pytest -q tests/integration/test_failure_memory_lifecycle.py tests/integration/test_failure_memory_persistence.py tests/integration/test_persistence_pipeline.py tests/integration/test_startup_persistence.py tests/runtime/test_closed_loop_runtime.py",
+    "collected": 24,
+    "passed": 24,
+    "skipped": 0,
+    "failed": 0,
+    "duration_seconds": 6.03,
+    "status": "verified"
+  },
+  "data_availability": {
+    "alibaba_gpu2020_raw_or_processed_job_table": false,
+    "alibaba_gpu2020_task_table": false,
+    "alibaba_gpu2020_instance_table": false,
+    "alibaba_dataset_manifest": true,
+    "alibaba_split_manifests": true,
+    "alibaba_sample_job_ids": true,
+    "reliability_artifact_files": true
+  },
+  "relevant_environment_variables": {
+    "DATABASE_URL": "not required for the focused validation; restart validation used an isolated temporary SQLite database",
+    "dataset_override": "none observed"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "historical_reported": {"passed": 507, "skipped": 7, "failed": 0},
+  "current_frozen_commit_in_same_environment": {"passed": 497, "skipped": 17, "failed": 0},
+  "phase3_after_additions": {"passed": 502, "skipped": 17, "failed": 0},
+  "verified_current_explanation": {
+    "additional_current_skips_beyond_historical_count": 10,
+    "current_skip_set": "All 17 skips are dataset-gated tests from test_failure_experience_pipeline.py and test_phase4_2_active_integration.py.",
+    "missing_dataset_markers": [
+      "data/processed/alibaba_gpu2020/task_table.main_sample.csv",
+      "data/audit/aiops_kpi/positive_windows.json",
+      "data/processed/agentrx/tau_retail_joined.jsonl"
+    ],
+    "dependency_drift_evidence": "No unavailable Python dependency was reported by pytest skip reasons.",
+    "hardware_drift_evidence": "No hardware-dependent skip was reported.",
+    "test_configuration_drift_evidence": "The frozen commit and current checkout have identical hashes for tests/conftest.py and the skipped test modules.",
+    "classification": "dataset-dependent"
+  },
+  "historical_seven_skip_mapping": {
+    "status": "NOT_RECOVERED",
+    "reason": "The committed V1 freeze contains the current dataset-gated skip conditions, but it does not preserve the historical pytest report or an environment manifest identifying the seven skipped node IDs. The release documents record only the aggregate 507/7/0 result.",
+    "verified": false,
+    "do_not_assume": ["7 historical skips plus 10 dataset skips equals 17", "historical data availability was identical to the current environment", "historical skips were all non-critical"]
+  },
+  "impact_classification": {
+    "baseline_critical": ["Alibaba GPU2020 processed job/task/instance inputs required by the 56-case replay"],
+    "baseline_relevant": ["Alibaba real-data ingestion and provenance tests"],
+    "non_critical": ["AgentRx, AIOps, and Phase 4 active-pattern dataset tests for the frozen V1 Alibaba control"],
+    "unknown": ["The exact identity and scientific relevance of each of the historical seven skipped node IDs"]
+  }
+}

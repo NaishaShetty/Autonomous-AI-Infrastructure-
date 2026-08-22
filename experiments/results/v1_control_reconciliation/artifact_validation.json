@@ -1,0 +1,38 @@
+{
+  "status": "VERIFIED_FOR_AVAILABLE_SERIALIZED_ARTIFACT",
+  "artifact_scope": "experiments/results/reliability_runtime_v2/artifacts/{random,temporal}",
+  "random_artifact": {
+    "model_version": "v2.0.0",
+    "calibrator_version": "isotonic-v2.0.0",
+    "model_sha256": "b0fc7d4469d3fe7681003cfba02163ff4419fe531de865738ad0c39412b715b2",
+    "calibrator_sha256": "404f08fc124b4920820e2faa9c184c307decbfa420524ef942320244805baffc",
+    "manifest_sha256": "c410022499d5e7e8144ab359250124c6f434754340c915f596edb51797d490de",
+    "feature_schema_version": "alibaba-gpu2020-request-scheduling-v1",
+    "protocol_version": "reliability-runtime-v2",
+    "dataset_ids": {"training": "alibaba_gpu2020_main_random_stratified_train", "validation": "alibaba_gpu2020_main_random_stratified_validation", "evaluation": "alibaba_gpu2020_main_random_stratified_evaluation"}
+  },
+  "temporal_artifact": {
+    "model_version": "v2.0.0",
+    "calibrator_version": "isotonic-v2.0.0",
+    "model_sha256": "71ff1a2ac0ea3fc21b73012ce1bdd29f7018214a2583a3c11bc7656690d60e77",
+    "calibrator_sha256": "c3b992918504fe466cbc5a41248aff27be06e7c4081591b8adeedfc1bd8767b2",
+    "manifest_sha256": "af15c5b9d1ce67ea89274e8450cc09dacf5ed523d4aaa5775c25afaeb47fe1ab",
+    "feature_schema_version": "alibaba-gpu2020-request-scheduling-v1",
+    "protocol_version": "reliability-runtime-v2",
+    "dataset_ids": {"training": "alibaba_gpu2020_main_temporal_train", "validation": "alibaba_gpu2020_main_temporal_validation", "evaluation": "alibaba_gpu2020_main_temporal_evaluation"}
+  },
+  "checks": {
+    "serialized_files_present": true,
+    "sha256_manifest_values_match_files": true,
+    "model_and_calibrator_loading": true,
+    "compatibility_validation": true,
+    "no_retraining_during_validation": true,
+    "process_a_process_b_same_artifact_hash": true,
+    "process_a_process_b_same_model_probability": true,
+    "process_b_reloaded_persisted_memory": true,
+    "runtime_training": false
+  },
+  "restart_command": "python3 scripts/run_alibaba_restart_validation.py",
+  "restart_result": "RECOVERED; same artifact hash e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc and same model probability 0.9258753239198078 across processes",
+  "boundary": "Artifact serialization/loading/restart is independently verified. This does not independently reproduce the 56-case evaluation because the raw/processed Alibaba input tables are absent."
+}

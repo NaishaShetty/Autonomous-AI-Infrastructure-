@@ -1,0 +1,21 @@
+{
+  "status": "VERIFIED",
+  "historical_documented_count": 24,
+  "exact_selection_recovered": true,
+  "command": "python3 -m pytest -q tests/integration/test_failure_memory_lifecycle.py tests/integration/test_failure_memory_persistence.py tests/integration/test_persistence_pipeline.py tests/integration/test_startup_persistence.py tests/runtime/test_closed_loop_runtime.py",
+  "modules": [
+    "tests/integration/test_failure_memory_lifecycle.py",
+    "tests/integration/test_failure_memory_persistence.py",
+    "tests/integration/test_persistence_pipeline.py",
+    "tests/integration/test_startup_persistence.py",
+    "tests/runtime/test_closed_loop_runtime.py"
+  ],
+  "collected": 24,
+  "passed": 24,
+  "failed": 0,
+  "skipped": 0,
+  "duration_seconds": 6.03,
+  "warnings": 3,
+  "warnings_summary": "scikit-learn convergence warnings from small duplicate-point clustering cases; no test failures",
+  "interpretation": "The exact 24-test core integration/persistence/restart selection is independently reproduced in the current environment. The previously run 28-test subset was not used as a substitute."
+}
