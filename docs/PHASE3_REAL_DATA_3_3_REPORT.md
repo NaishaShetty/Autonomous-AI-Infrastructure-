@@ -1,330 +1,801 @@
-<a id="phase3-real-data-3-3-report"></a>
-# PHASE3 REAL DATA 3 3 REPORT
-**Status: FROZEN HISTORICAL**  
-**Original file:** `docs/PHASE3_REAL_DATA_3_3_REPORT.md`  
-**Role:** Real-data Phase 3.3 (generalization/distribution-shift) report.
+Yes. **Phase 2 should begin with a formal Phase 1 freeze/gate**, so we don't accidentally keep changing the foundation while doing economic experiments.
 
-# Phase 3.3-RD — Real-Data Generalization / Distribution-Shift Evaluation — Completion Report
+Based on the completed Phase 1 report and its recommended priorities, I’d structure Phase 2 as the **Economic Strategy & Planner Foundation** phase. The key shift is: Phase 1 established *what the game is*; Phase 2 establishes *what actually makes money and wins*.
 
-**Executed under authorization**: explicit chat authorization received 2026-08-13, scoped to Phase 3.3-RD
-execution only (Phase 3.4-RD–3.6-RD and Phase 4 explicitly not authorized).
+
+
+# Kaggriculture — Phase 2 Plan
+
+## Economic Strategy, Resource Economics & Planner Foundation
+
+### Phase 2 objective
+
+Build a statistically validated economic understanding of Kaggriculture and use it to construct the first **economically intelligent agent**, while preserving the Phase 1 environment, harness, mechanics reference, and baseline as frozen experimental infrastructure.
+
+The goal is **not yet to build the final super-agent**.
+
+The goal is to answer:
+
+> **Given the actual 720-turn simulator, what combination of crops, animals, land, labor, fertilizer, inventory management, and market timing produces the strongest robust economic strategy?**
+
+The Phase 1 Wheat Patroller becomes our **control condition** throughout this phase.
 
 ---
 
-## 1. Objective
+# Phase 2.0 — Phase 1 Freeze & Reproducibility Gate
 
-Determine how well the real-data failure-risk signal generalizes when the evaluation distribution differs
-from the training distribution — specifically, whether the representation behavior already observed on
-Alibaba's frozen temporal split in Phase 3.2-RD (R0 ≈ 0.79, R1 ≈ 0.84, R2 collapsing to ≈ 0.40) reflects a
-genuine generalization phenomenon, characterized here (not re-optimized, not repaired). This phase does
-**not** search for a better representation, does not tune PCA, and does not attempt to make the temporal
-result "look better."
+This should be the first task before any new economic experiment.
 
-## 2. Protocol version
+### Freeze the following
 
-`1.0` (`configs/phase3_real_data_protocol.json`, `docs/PHASE3_REAL_DATA_PROTOCOL.md`) — unchanged.
-Representation matrix (`configs/phase3_2_rd_representation_matrix.json`) — unchanged, reused as-is; no
-fourth representation added, none removed.
+* Kaggriculture simulator version: `1.32.7`
+* Vendored simulator source
+* Official documentation captures
+* Mechanics reference
+* Architecture map
+* Evaluation harness
+* Existing Wheat Patroller baseline
+* Existing Phase 1 experiment results
+* Existing seed ranges/results
+* Phase 1 report
 
-## 3. Authorization scope
+The baseline should **not be silently modified** during Phase 2.
 
-Authorized: Phase 3.3-RD only. Not authorized: Phase 3.4-RD, 3.5-RD, 3.6-RD, Phase 4, any modification to
-the frozen Real-Data Phase 3 protocol, any modification to original Phase 3 results. Confirmed respected
-throughout (§21, §Files-created).
+If a bug is discovered in Phase 1 infrastructure:
 
-## 4. Integrity checks (pre-execution, per the authorization's explicit 10-point checklist)
+> Fix → rerun affected Phase 1 experiments → version the correction → refreeze.
 
-| # | Check | Result |
-|---|---|---|
-| 1 | Phase 3.1-RD results unchanged | Alibaba random AUROC re-read: `0.7348398689698409` (identical to original); Alibaba temporal AUROC: `0.7931707840566771` (identical); AIOps AUROC: `0.6455824250651649` (identical) |
-| 2 | Phase 3.2-RD results unchanged | Temporal R0/R1/R2 re-read: `0.7931707840566771 / 0.8433965882788796 / 0.39450623763274134` (identical to the frozen Phase 3.2-RD report); random R0/R1/R2 and AIOps R0/R1/R2 also re-confirmed identical |
-| 3 | Frozen protocol version still 1.0 | Confirmed |
-| 4 | Alibaba random split unchanged | 6,999 / 1,498 / 1,503 (train/val/test) — identical to Phase 3.1-RD/3.2-RD |
-| 5 | Alibaba temporal split unchanged | 6,177 / 1,324 / 2,499 — identical |
-| 6 | AIOps population unchanged | 81 valid positive windows, 145 valid negative windows — identical |
-| 7 | AgentRx composition unchanged | Magentic 58 total / 44 annotated / 0 with zero failures; τ-Retail 29 total / 29 annotated / 0 with zero failures — identical to Phase 3.1-RD's finding |
-| 8 | No excluded leakage features entered the pipeline | This phase's only new script (`phase3_3_rd_alibaba_distribution_shift.py`) reuses `build_feature_matrix()` and `assert_no_excluded_columns()` unmodified from Phase 3.1-RD's module; no new field was read; `pai_sensor_table`/`pai_machine_metric`/`max_mem`/`max_gpu_wrk_mem` remain unread |
-| 9 | Phase 4 untouched | No file under `experiments/results/phase4_*`, `docs/PHASE4_*`, `configs/phase4_*` opened for writing |
-| 10 | Original Phase 3 untouched | `experiments/results/phase3_1/aggregate_results.json` mtime unchanged, not opened for writing |
+Do not overwrite old results.
 
-No integrity check failed. Execution proceeded.
+### Reproducibility checklist
 
-## 5. Exact datasets
+Before proceeding:
 
-Alibaba GPU2020 main tier (identical 10,000-job sample, identical splits). AIOps 2020: **NOT EVALUABLE FOR
-THIS GENERALIZATION ANALYSIS** (§9). AgentRx: **NOT EVALUABLE** (§10).
+* Capture complete `pip freeze`.
+* Record Python/OS/environment versions.
+* Verify simulator hash/version.
+* Verify vendored simulator hasn't changed.
+* Verify evaluation harness produces the same Phase 1 results.
+* Preserve the original Phase 1 result directories.
+* Tag the Phase 1 state, e.g. `phase1-frozen`.
+* Record the exact baseline implementation used for Phase 1.
+* Record the exact seed ranges used.
+* Confirm deterministic seeded episodes remain deterministic.
 
-## 6. Independent units
+### Important rule
 
-Job (Alibaba) — unchanged from Phase 3.1-RD/3.2-RD. No unit-level change in this phase.
+**Phase 1 becomes the immutable control layer.**
 
-## 7. Exact splits
+Every Phase 2 strategy must be evaluated against the frozen Wheat Patroller under comparable conditions.
 
-Alibaba temporal split, reused verbatim and unmodified: train/validation = relative-time Q1–Q3 (n=6,177/
-1,324), test = strict future holdout Q4 (n=2,499). This **is** the frozen generalization/distribution-shift
-condition specified by the protocol (`docs/PHASE3_REAL_DATA_PROTOCOL.md` §9) — Phase 3.3-RD does not define a
-new split, does not rebalance Q4, and does not use Q4 labels to alter the model in any way.
-
-## 8. Representation definitions
-
-Identical to Phase 3.2-RD, reused unmodified from `configs/phase3_2_rd_representation_matrix.json`: R0
-(raw/scaled), R1 (log1p-transformed heavy-tailed fields), R2 (PCA(2)-reduced numeric block). No fourth
-representation was added. No representation was dropped. PCA dimensionality was **not** changed (no PCA(3),
-PCA(5), PCA(10) or any variant was tested — that would be a new experiment, explicitly out of scope per the
-authorization, and is instead listed as a possible future experiment in §22).
-
-## 9. Distribution-shift characterization (new analysis performed in this phase, label-free except for the
-already-disclosed base-rate figure)
-
-A purely descriptive comparison of each feature's train (Q1–Q3) vs. test (Q4) distribution was computed —
-**no model was fit, no test label was used to select or transform any feature**, and the previously-disclosed
-failure-rate shift is restated, not recomputed differently. Source:
-`experiments/results/phase3_real_data/phase3_3/alibaba_distribution_shift.json`
-(`scripts/real_data/phase3_3_rd_alibaba_distribution_shift.py`).
-
-**Already-established label shift** (identical figure to Phase 3.1-RD/3.2-RD, restated for context): train
-20.11% Failed, test 43.42% Failed.
-
-**Newly characterized covariate shift** (this phase's contribution):
-
-| Feature | Train mean | Test mean | Train median | Test median | Note |
-|---|---|---|---|---|---|
-| `mean_plan_cpu` | 691.8 | 465.9 | 600 | 600 | test jobs request ~33% less CPU on average |
-| `max_plan_cpu` | 708.6 | 478.6 | 600 | 600 | same pattern |
-| `mean_plan_gpu` | 70.5 | 56.4 | **50** | **25** | test median GPU allocation halves |
-| `max_plan_gpu` | 70.6 | 56.4 | 50 | 25 | same pattern |
-| `sum_inst_num` | 6.29 | 4.33 | 1 | 1 | test jobs request fewer total instances on average |
-| `n_instances` | 6.57 | 4.64 | 1 | 1 | same pattern |
-| `n_distinct_machines` | 4.71 | 3.41 | 1 | 1 | same pattern |
-| `job_start_time` (std) | 1,279,722 | 262,293 | — | — | test period (Q4) spans a much narrower absolute time window than the pooled Q1–Q3 train period, as expected from quartile construction |
-
-| `dominant_gpu_type` | Train proportion | Test proportion |
-|---|---|---|
-| MISC | 62.1% | **80.9%** |
-| T4 | 23.6% | 12.1% |
-| P100 | 7.2% | 4.0% |
-| V100 | 3.1% | 1.2% |
-| V100M32 | 2.0% | 0.5% |
-| UNKNOWN | 2.1% | 1.2% |
-
-**Observation**: this is a genuine covariate shift, not merely a label-rate shift — the Q4 test period has
-systematically smaller resource requests (CPU, GPU, instance counts) and a substantially different GPU-type
-mix (MISC share rising ~19 points) than the Q1–Q3 training period. Both the label distribution and the
-feature distributions differ between train and test. This is reported as a factual characterization of the
-evaluation environment; no causal claim about *why* the platform's workload composition changed over time is
-made — that is outside what this data can determine.
-
-## 10. Alibaba generalization results
-
-**These are the exact, unmodified R0/R1/R2 temporal-split results already produced and frozen in Phase
-3.2-RD** (`experiments/results/phase3_real_data/phase3_2/alibaba_results.json`,
-`results.temporal.representations`). They are reused here, not rerun, not recomputed, and not altered in
-any way — re-running the identical deterministic script (fixed seeds throughout) against unmodified data
-would reproduce them bit-for-bit, so no new computation was performed. This is precisely the frozen temporal
-generalization experiment the objective (§1) calls for; Phase 3.3-RD's contribution is characterizing (§9)
-and interpreting (§17) that already-frozen result, not re-deriving it.
-
-| Representation | AUROC | 95% CI | AUPRC | 95% CI |
-|---|---|---|---|---|
-| R0 (raw/scaled) | 0.793 | [0.774, 0.812] | 0.636 | [0.608, 0.667] |
-| R1 (log1p-transformed) | **0.843** | [0.826, 0.861] | 0.736 | [0.705, 0.769] |
-| R2 (PCA(2)-reduced) | **0.395** | [0.371, 0.418] | 0.356 | [0.337, 0.377] |
-
-Baseline A (no-signal), for reference: AUROC 0.500 [0.500, 0.500], AUPRC 0.434 [0.415, 0.454] (AUPRC above
-0.5-baseline-AUROC because AUPRC's uninformative floor equals the positive prevalence, 43.42% at Q4, not
-0.5 — see §11 for why raw AUROC/AUPRC must be read against this prevalence, not in isolation).
-
-## 11. AUPRC and AUROC, interpreted against Q4 prevalence
-
-Q4's positive (Failed) prevalence is 43.42% — over double the 20.11% train-period rate. A few consequences,
-stated explicitly per the authorization's instruction not to interpret AUPRC without this context:
-
-- AUPRC's uninformative baseline is the positive prevalence itself (here, 0.434), not 0.5. R0's AUPRC (0.636)
-  and R1's (0.736) both clear that elevated floor by a wide margin; R2's AUPRC (0.356) falls **below** the
-  0.434 floor — i.e., R2 is worse than a random-ranking classifier would be expected to score on this
-  prevalence, consistent with (and reinforcing) its sub-0.5 AUROC.
-- A higher raw AUROC on the Q4 test set is **not**, by itself, evidence of better real-world deployment
-  performance: Q4's substantially higher base rate changes the cost/benefit profile of any fixed decision
-  threshold, and the covariate shift documented in §9 means the *feature values* a deployed model would see
-  in a Q4-like future period differ systematically from what it was trained on. AUROC/AUPRC quantify ranking
-  quality on this specific, already-shifted test set — they do not by themselves certify that a threshold
-  calibrated on Q1–Q3 would behave sensibly on Q4, a question this phase does not attempt to answer (no
-  threshold/calibration analysis was in scope or run).
-
-## 12. Effect sizes
-
-| Comparison | ΔAUROC | Interpretation |
-|---|---|---|
-| R1 vs. R0 (temporal) | +0.050 | Non-overlapping 95% CIs — a real, reproducible difference under this specific train/test pair, not noise |
-| R2 vs. R0 (temporal) | −0.398 | Large, adverse, tightly-bounded (CI width 0.047) — R2 is not merely weaker, it is anti-informative on this split |
-| R0 (temporal) vs. R0 (random, Phase 3.2-RD reference 0.735) | +0.058 | Not comparable at face value — different test populations with different prevalence (§11); not interpreted as "temporal generalizes better than random" |
-
-## 13. Comparison with Phase 3.1-RD
-
-Phase 3.1-RD evaluated only R0 (called "Candidate F" there) on the temporal split: AUROC 0.793 [0.774,0.812].
-That number is exactly R0's value here (same computation, same data, same code path) — **no change**. Phase
-3.1-RD did not test whether this behavior was representation-dependent; that question was first answered in
-Phase 3.2-RD (§14) and is now characterized further (not re-answered) in this phase.
-
-## 14. Comparison with Phase 3.2-RD
-
-Phase 3.2-RD is where R0/R1/R2's temporal-split behavior was first measured (§10 of that report) — this
-phase reuses those exact numbers unchanged (§10 above) and adds the covariate-distribution characterization
-(§9) that Phase 3.2-RD's scope (representation robustness) did not include. No representation's result
-changed between Phase 3.2-RD and this phase, because none was re-run with any different configuration — this
-persistence is itself the finding requested by the objective (§1): the previously observed R1>R0≫R2 ordering
-is not an artifact of a single run; it is the frozen, reproducible state of the evaluation, now placed in the
-context of a characterized (not just observed) real covariate shift.
-
-## 15. Comparison with original Phase 3
-
-The original (synthetic) Phase 3.3 (`docs/PHASE3_3_GENERALIZATION.md`) tested **concept drift** — varying
-`drift_scale` at test time only, under a **fixed covariate distribution** — and found the frozen Candidate F
-representation generalized: AUROC stayed well above no-signal across weaker (0.698), original (0.655), and
-stronger (0.602) drift conditions, without needing to vary representation (only one representation, the
-frozen Candidate F, was ever tested in the original Phase 3.3).
-
-This real-data Phase 3.3-RD result is **not a replication of that finding** — it is a different, complementary
-condition:
-- The original Phase 3.3 explicitly excluded covariate shift (fixed feature distribution) and tested only
-  concept drift (label-generating relationship changing).
-- Alibaba's Q1–Q3→Q4 split, as characterized in §9, is **both** a label-rate shift **and** a genuine covariate
-  shift (resource-request sizes and GPU-type mix both shift), and Phase 3.2-RD showed representation choice
-  interacts strongly with it (R1 improves, R2 collapses).
-- The two experiments therefore **cannot be directly compared** as confirming or contradicting one another —
-  they probe different shift types (concept-only vs. concept+covariate) and, unlike the original, this one
-  varies representation rather than holding a single representation fixed. This is reported as **NOT
-  DIRECTLY COMPARABLE**, not forced into a replicated/contradicted classification.
-- The qualitative lesson that *does* carry over loosely: the original Phase 3.3 found the frozen candidate
-  representation (their only one) generalized under concept drift; this real-data result shows that whether
-  a real-data representation generalizes under a real (concept+covariate) shift **depends on which
-  representation** — a nuance the original single-representation design could not have surfaced, since it
-  never had a second representation to compare against under drift.
-
-## 16. Distribution-shift findings
-
-Summarized from §9: Q1–Q3→Q4 is a compound shift — failure-rate increase (20.1%→43.4%), reduced average
-resource requests (CPU/GPU/instance counts all lower in Q4), and a substantial GPU-type composition shift
-(MISC share 62.1%→80.9%). This is presented as a factual characterization; §17 discusses (as hypotheses, not
-proven mechanisms) how this might relate to R1/R2's divergent behavior.
-
-## 17. Alternative explanations (explicitly hypotheses, not demonstrated causes)
-
-Per the authorization's instruction, the following are offered as **candidate hypotheses only** — none is
-claimed as demonstrated:
-
-- **Heavy-tailed feature behavior under shift (favors R1's improvement)**: `sum_inst_num`, `plan_cpu`,
-  `plan_gpu`, and instance/machine counts are right-skewed (train means far exceed medians in every case,
-  e.g. `mean_plan_cpu` mean 691.8 vs. median 600). A linear model on raw values can be disproportionately
-  sensitive to the tail; log-compression may make the learned relationship more stable across a shift in the
-  tail's shape. This is a plausible mechanism for R1 > R0, not a proven one.
-- **PCA projection instability under covariate shift (favors R2's collapse)**: PCA(2) is fit only on Q1–Q3
-  training data. If the dominant axes of variance in Q1–Q3 (the directions PCA(2) captures) do not align the
-  same way with the failure label once the covariate distribution shifts (§9's GPU-type and resource-size
-  changes), a linear classifier trained on those axes could see its learned "risk-increasing" direction
-  become partially or wholly inverted on the shifted test data — a known failure mode of unsupervised
-  dimensionality reduction under covariate shift. Also plausible, not demonstrated: no experiment
-  decomposing the PCA components' loadings pre/post shift was run in this phase (that would be a new
-  analysis — see §22).
-- **Changed workload composition changing the feature-label relationship (concept drift, not just covariate
-  shift)**: it is possible that the *relationship* between a given resource-request pattern and failure
-  probability itself changed between Q1–Q3 and Q4 (true concept drift), independent of or in addition to the
-  covariate shift documented in §9. This phase's design (fixed model, fixed train/test split) cannot
-  distinguish covariate shift from concept drift as the dominant driver — doing so would require a dedicated
-  experiment (e.g., holding covariates fixed and varying only time, which the real data does not allow to be
-  cleanly separated) and is not attempted here.
-
-No claim of causality is made for any of the above. They are offered as candidate explanations consistent
-with the observed pattern, explicitly to satisfy the requirement not to assert an unproven mechanism as fact.
-
-## 18. AIOps
-
-**NOT EVALUABLE FOR THIS GENERALIZATION ANALYSIS.** The frozen AIOps protocol provides no legitimate
-independent distribution-shift/generalization condition: the 226-window population has no frozen train/test
-temporal partition (unlike Alibaba's Q1–Q3/Q4 split), and constructing one now (e.g., an April-vs-May split)
-would be inventing a new split after the fact — explicitly prohibited by this authorization ("Do NOT
-manufacture temporal splits from the data simply to obtain a generalization experiment"). The existing LOEO
-structure tests entity-level generalization, not distribution shift, and was already exercised in Phase
-3.1-RD/3.2-RD; it is not re-run here since nothing about it would test a *shift* condition. AIOps remains
-EXPLORATORY ONLY per the frozen protocol and this phase adds no AIOps result.
-
-## 19. AgentRx
-
-**NOT EVALUABLE**, for the same reason established in Phase 3.1-RD and reconfirmed in Phase 3.2-RD: both
-frozen samples (44 Magentic, 29 τ-Retail annotated trajectories) contain no negative class (every trajectory
-has ≥1 recorded failure), so no supervised classifier exists whose generalization could be tested. No
-unannotated trajectories were added; the two domains were not pooled; no workaround was attempted.
-
-## 20. Positive findings
-
-- R1 (log1p-transformed) not only survives but *improves* under the temporal distribution shift relative to
-  R0 (+0.050 AUROC, non-overlapping CI) — a genuinely positive, reproducible result for that representation
-  under this specific shift.
-- The distribution-shift characterization (§9) is itself a positive contribution: it establishes, using only
-  pre-outcome covariates and without any test-label tuning, that Q1–Q3→Q4 is a real, multi-faceted shift
-  (label rate, resource-request sizes, GPU-type mix) — not a sampling artifact.
-
-## 21. Negative findings
-
-- **R2 (PCA(2)) remains below the no-signal baseline under the temporal shift** (AUROC 0.395, tight CI
-  [0.371, 0.418]) — reported prominently, exactly as instructed, not minimized. This is the same result
-  already reported in Phase 3.2-RD, reconfirmed here as the frozen, unmodified state (§4, checks 1–2), not a
-  new negative finding but a persistent one.
-
-## 22. Inconclusive findings / limitations
-
-- The mechanism behind R1's improvement and R2's collapse (§17) remains **undetermined** — three plausible
-  hypotheses are offered, none confirmed. This is intentionally left inconclusive rather than resolved by a
-  new, unauthorized experiment.
-- AIOps and AgentRx contribute no generalization evidence in this phase (§18, §19) — the real-data
-  generalization question is answered by Alibaba alone in this execution.
-- The Alibaba temporal result reflects one single train/test partition (Q1–Q3 vs. Q4); no repeated or
-  cross-validated temporal generalization estimate exists (the frozen protocol defines only this one
-  temporal split), so the precision of "how well does this generalize" is bounded by having exactly one
-  such comparison, not several.
-
-## Future experiments (explicitly NOT run in this phase — separated from current findings)
-
-The following are documented as candidate follow-up work only. **None of them was performed, and none
-influenced any result reported above**:
-
-- Testing PCA at other dimensionalities (PCA(3), PCA(5), PCA(10), …) to see whether R2's collapse is
-  specific to 2 components — would require a new, separately pre-registered representation matrix under a
-  future authorized phase, not this one.
-- Decomposing PCA(2)'s component loadings before vs. after the shift to directly test the "projection
-  instability" hypothesis in §17, rather than leaving it as an untested hypothesis.
-- A dedicated experiment isolating covariate shift from concept drift (e.g., reweighting or matching on
-  covariates) to determine which dominates the Q1–Q3→Q4 shift's effect on representation robustness.
-- Threshold/calibration analysis under the shifted Q4 prevalence, since §11 notes that ranking-quality
-  metrics (AUROC/AUPRC) alone do not certify deployment-time decision quality under a shifted base rate.
-
-## 23. Reproducibility information
-
-- New script: `scripts/real_data/phase3_3_rd_alibaba_distribution_shift.py` — deterministic, no randomness
-  involved (purely descriptive statistics), reuses `build_feature_matrix()` from the unmodified Phase 3.1-RD
-  module.
-- No model-fitting script was created or run in this phase; §10's results are citations of
-  `experiments/results/phase3_real_data/phase3_2/alibaba_results.json`, not new computations.
-- Result artifact: `experiments/results/phase3_real_data/phase3_3/alibaba_distribution_shift.json`, embedding
-  phase, protocol version, dataset identifier, and the exact train/test sample sizes.
-- Provenance preserved: the distribution-shift script operates on the same provenance-carrying processed CSVs
-  and the same frozen split-membership file as all prior phases; no field was stripped or renamed.
+This directly protects us from accidentally improving the benchmark while changing the experimental environment.
 
 ---
 
-## Files created by this execution
+# Phase 2.1 — Economic Instrumentation
 
-- `scripts/real_data/phase3_3_rd_alibaba_distribution_shift.py`
-- `experiments/results/phase3_real_data/phase3_3/alibaba_distribution_shift.json`
-- `docs/PHASE3_REAL_DATA_3_3_REPORT.md` (this document)
-- `docs/PHASE3_REAL_DATA_COMPARISON.md` (updated by addition only — see that file's new H3 section)
+Before optimizing anything, expand the evaluation harness.
 
-No file outside `scripts/real_data/`, `experiments/results/phase3_real_data/phase3_3/`, and these two `docs/`
-files was modified. Phase 3.1-RD's and Phase 3.2-RD's artifacts, the frozen Real-Data Phase 3 protocol, the
-original Phase 3 results, and Phase 4 were all re-verified unchanged (§4).
+Phase 1 currently gives us final money, outcome, runtime, etc. Phase 2 needs to explain **why** an agent made money.
+
+Add episode-level telemetry for:
+
+### Financial
+
+* Starting money
+* Final money
+* Net profit
+* Total market revenue
+* Total purchases
+* Seed expenditure
+* Animal expenditure
+* Land expenditure
+* Farm-hand expenditure
+* Fertilizer expenditure
+* Wheat/feed expenditure
+
+### Production
+
+* Seeds purchased
+* Seeds planted
+* Crops harvested
+* Yield by crop
+* Animals purchased
+* Animals successfully placed
+* Animal products harvested
+* Fertilizer generated
+* Fertilizer consumed
+* Fertilizer sold
+
+### Land
+
+* Land unlocked
+* Day of each land purchase
+* Tiles used
+* Tiles idle
+* Tiles occupied by crops
+* Tiles occupied by animals/structures
+* Weed tiles
+* Productive tile-days
+
+### Labor
+
+* Farmer utilization
+* Farm-hand count by day
+* Farm-hand cost
+* Actions per worker
+* Productive actions
+* Movement actions
+* PASS actions
+* Failed/no-op actions
+
+### Market
+
+For every sell:
+
+* Resource
+* Quantity
+* Price
+* Market inventory before/after where accessible
+
+Track:
+
+* Average realized sell price
+* Base price
+* Price premium/discount
+* Price trajectory
+* Market inventory trajectory
+
+### Opponent
+
+Since the opponent's farm is public:
+
+* Opponent land
+* Opponent crops
+* Opponent animals
+* Opponent structures
+* Opponent farmer/hands
+* Opponent observable production state
+* Observable market activity
+
+This telemetry is going to be extremely important later.
 
 ---
 
-## STOP — Phase 3.3-RD complete
+# Phase 2.2 — Production Economics Model
 
-No later phase (3.4-RD…3.6-RD, Phase 4) was started. Awaiting review and separate authorization to proceed.
+Now establish the economic value of every production option **without assuming market prices remain at base price**.
+
+Start with theoretical calculations, but clearly label them as model estimates.
+
+Evaluate:
+
+### Crops
+
+* Wheat
+* Carrot
+* Tomato
+* Strawberry
+* Melon
+
+### Animals
+
+* Goose
+* Cow
+* Sheep
+
+For each calculate:
+
+* Initial capital required
+* Time to first revenue
+* Total expected production
+* Revenue at base price
+* Revenue at realistic dynamic prices
+* Feed requirements
+* Fertilizer opportunity cost
+* Labor requirements
+* Land requirements
+* Setup cost
+* Payback period
+* Revenue per tile-day
+* Revenue per farmer action
+* Revenue per worker action
+* Capital efficiency
+
+The important shift from Phase 1 is that:
+
+> **Base market price ≠ economic value.**
+
+The official mechanics explicitly make prices dynamic, and the Phase 1 report identified market behavior as a major unanswered strategic question. 
+
+---
+
+# Phase 2.3 — Crop Strategy Sweep
+
+This should be our first major experiment block.
+
+Test isolated crop strategies.
+
+### Strategies
+
+At minimum:
+
+* Wheat-only
+* Carrot-only
+* Tomato-only
+* Strawberry-only
+* Melon-only
+
+Then combinations:
+
+* Wheat + Carrot
+* Wheat + Tomato
+* Wheat + Melon
+* Wheat + Strawberry
+* Wheat + Melon + Tomato
+* Wheat + Melon + Strawberry
+* Mixed portfolio
+
+The exact combinations can expand based on results.
+
+### Questions
+
+1. Is Wheat actually optimal?
+2. Is Wheat merely a good low-risk baseline?
+3. Do slow high-value crops outperform it over 30 days?
+4. Does the 720-turn horizon favor early-return crops?
+5. Does diversification reduce variance?
+6. Does a crop's nominal yield/tile/day survive dynamic pricing?
+7. Does fertilizer materially change crop rankings?
+
+### Critical experimental constraint
+
+Don't evaluate only final money.
+
+Measure:
+
+**profit + variance + win rate + resource utilization.**
+
+A strategy that makes $7,000 against a passive opponent but collapses against aggressive selling may be worse than a $6,000 strategy with much higher win probability.
+
+---
+
+# Phase 2.4 — Fertilizer Economics
+
+Fertilizer deserves its own experiment because it has multiple opportunity costs.
+
+Test:
+
+### Fertilizer sources
+
+* Buy fertilizer
+* Animal-generated fertilizer
+* No fertilizer
+
+### Usage
+
+* Wheat
+* Carrot
+* Melon
+* Tomato
+* Strawberry
+
+Measure:
+
+* Additional yield
+* Additional revenue
+* Fertilizer cost
+* Fertilizer opportunity cost
+* Additional actions
+* ROI
+
+Determine:
+
+> **When is fertilizer worth using rather than selling it?**
+
+Also investigate whether fertilizer should be:
+
+* immediately consumed,
+* stockpiled,
+* sold,
+* reserved for specific crops.
+
+---
+
+# Phase 2.5 — Labor / Farm-Hand Economics
+
+This is one of the most important Phase 2 questions.
+
+The Phase 1 report specifically identified hired-hand ROI as a priority. 
+
+Test:
+
+* 0 hands
+* 1 hand
+* 2 hands
+* 3 hands
+* More where economically meaningful
+
+Across different farm sizes.
+
+Because hiring resets every day and follows the Fibonacci cost sequence, we should determine the actual optimal hiring policy rather than assuming "more workers = more profit."
+
+### Questions
+
+* At what cash level is a hand profitable?
+* At what number of productive tiles?
+* Does one additional worker increase output enough to pay for itself?
+* Does movement become the bottleneck?
+* Does shed logistics become the bottleneck?
+* Does labor become more valuable after land expansion?
+* Is hiring only useful on particular days?
+
+This should eventually produce a rule such as:
+
+> Hire one hand when expected additional productive revenue exceeds daily hire cost + logistical opportunity cost.
+
+But **the threshold must come from experiments**, not intuition.
+
+---
+
+# Phase 2.6 — Land Expansion Economics
+
+Current baseline uses an arbitrary safety rule:
+
+> Buy land only when cash ≥ 3× the next land price.
+
+That rule should now be treated explicitly as a **placeholder**, not a validated strategy. 
+
+Test:
+
+### Land policies
+
+* Never expand
+* Expand immediately when affordable
+* Expand at fixed days
+* Expand after a cash threshold
+* Expand when existing land utilization exceeds threshold
+* Expand based on expected future production
+
+For each:
+
+* $1,000 expansion
+* $2,000 expansion
+* $4,000 expansion
+
+Measure:
+
+* Payback time
+* Additional productive tile-days
+* Additional revenue
+* Lost capital opportunity
+* Final money
+* Win rate
+
+The desired result is an **adaptive land-expansion rule**, not merely "buy land at day X."
+
+---
+
+# Phase 2.7 — Animal Economics
+
+This is currently almost entirely unexplored.
+
+Build dedicated animal baselines for:
+
+### Goose
+
+Evaluate:
+
+* Setup cost
+* Feed consumption
+* First production
+* Ongoing production
+* Care bonus
+* Fertilizer generation
+* Harvest logistics
+* Market value
+
+### Cow
+
+Same analysis.
+
+### Sheep
+
+Same analysis.
+
+Then compare:
+
+**animal vs crop on equivalent land and labor.**
+
+Especially:
+
+* Goose vs Wheat
+* Cow vs Melon
+* Sheep vs Strawberry
+* Mixed animal/crop farms
+
+Important:
+
+Animals aren't just "buy animal → receive product."
+
+They require:
+
+* structure
+* purchase
+* shed pickup
+* placement
+* daily feeding
+* potentially care
+* harvesting
+* fertilizer collection
+
+Those action/logistical costs must be included.
+
+---
+
+# Phase 2.8 — Mixed Farm Portfolio Optimization
+
+Once individual components are understood, combine them.
+
+Candidate portfolios:
+
+### Conservative
+
+Wheat-heavy.
+
+### Balanced
+
+Wheat + Melon + one ongoing crop.
+
+### High-capital
+
+Melon/animals.
+
+### Production machine
+
+Multiple crops + farm hands.
+
+### Animal-heavy
+
+Goose/Cow/Sheep mix.
+
+### Adaptive
+
+Portfolio changes based on:
+
+* Day
+* Cash
+* Land
+* Market
+* Town demand
+* Opponent behavior
+
+This is where we start moving from **strategy testing** toward an actual planner.
+
+---
+
+# Phase 2.9 — Market Economics
+
+This is probably the most strategically important subsection.
+
+The simulator explicitly uses a dynamic market where player sales, purchases, and town consumption affect market inventory/prices. 
+
+We need to understand the market experimentally.
+
+### First: passive-market experiments
+
+Run agents that produce but don't sell immediately.
+
+Compare:
+
+* Immediate selling
+* End-of-day selling
+* Scheduled selling
+* Threshold selling
+* Price-aware selling
+
+### Then characterize
+
+For every major product:
+
+* Price response to selling
+* Price response to buying
+* Recovery after selling
+* Effect of town consumption
+* Price floor behavior
+* Price ceiling behavior
+* Market inventory trajectory
+
+### Crucial question
+
+Is it better to:
+
+**produce more and sell into the market**
+
+or
+
+**produce less and wait for favorable prices?**
+
+---
+
+# Phase 2.10 — Head-to-Head Market Interaction
+
+This deserves its own stage rather than being mixed into normal market testing.
+
+Phase 1 explicitly did **not** test aggressive-aggressive opponents. 
+
+Now test:
+
+### Same-product competition
+
+* Wheat vs Wheat
+* Melon vs Melon
+* Tomato vs Tomato
+* etc.
+
+### Different-product competition
+
+* Wheat vs Melon
+* Wheat vs Animal
+* Mixed vs Wheat
+
+### Behavior
+
+* Passive seller vs aggressive seller
+* Early seller vs late seller
+* Market-aware vs market-blind
+* High-volume seller vs low-volume seller
+
+Measure:
+
+* Price destruction
+* Relative profit
+* Win rate
+* Market recovery
+* Strategic interaction.
+
+This is where we begin optimizing for **winning**, rather than farming in isolation.
+
+---
+
+# Phase 2.11 — Town Demand Analysis
+
+Town demand creates an external source of market inventory consumption.
+
+Investigate:
+
+* Shop unlock timing
+* Duplicate shop behavior
+* Product demand
+* Consumption frequency
+* Demand-driven price changes
+* Whether producing for an upcoming demand spike is advantageous
+* Whether town consumption provides predictable price-recovery opportunities
+
+The goal is to determine whether town behavior can become a **predictable market signal**.
+
+---
+
+# Phase 2.12 — Build the Economic Planner v1
+
+Only after the above experiments.
+
+The first planner should not be ML.
+
+It should be a deterministic economic decision system.
+
+Conceptually:
+
+```text
+OBSERVATION
+    ↓
+Economic State Estimator
+    ↓
+Production Opportunities
+    ↓
+Expected ROI
+    ↓
+Resource Constraints
+    ↓
+Market Adjustment
+    ↓
+Opponent Adjustment
+    ↓
+Action Priority
+    ↓
+EXECUTION
+```
+
+It should reason about:
+
+* Current cash
+* Available land
+* Occupied tiles
+* Crops
+* Animals
+* Workers
+* Fertilizer
+* Inventory
+* Market prices
+* Town demand
+* Day remaining
+* Opponent observable state
+
+And select between:
+
+* Plant
+* Water
+* Harvest
+* Fertilize
+* Feed
+* Care
+* Buy
+* Sell
+* Hire
+* Expand
+* Move
+* Wait
+
+---
+
+# Phase 2.13 — Economic Planner vs Wheat Patroller
+
+Now establish whether the planner actually improves the baseline.
+
+Minimum comparison:
+
+**Wheat Patroller vs Economic Planner v1**
+
+Across:
+
+* At least 100 episodes initially
+* Multiple disjoint seed ranges
+* Multiple opponent types
+
+Not just PASS.
+
+We should introduce progressively stronger opponents.
+
+### Report
+
+* Win rate
+* Mean final money
+* Median
+* Standard deviation
+* Worst case
+* Best case
+* Profit
+* Action efficiency
+* Market efficiency
+* Worker efficiency
+* Land efficiency
+
+The key metric remains:
+
+> **Win probability.**
+
+---
+
+# Phase 2.14 — Robustness & Ablation
+
+Once Planner v1 looks promising, determine **why** it works.
+
+Run ablations:
+
+* Without market awareness
+* Without land planning
+* Without worker planning
+* Without animal planning
+* Without fertilizer planning
+* Without opponent awareness
+* Without crop diversification
+* Without price-aware selling
+
+This tells us which components actually matter.
+
+We don't want a giant planner containing ten complicated modules where only one actually contributes.
+
+---
+
+# Phase 2.15 — Phase 2 Gate
+
+Phase 2 should **not** be considered complete merely because we have a more profitable agent.
+
+It should pass only when we have:
+
+### Infrastructure
+
+* [ ] Phase 1 formally frozen.
+* [ ] Reproducible environment snapshot.
+* [ ] Phase 1 results preserved.
+* [ ] Extended economic telemetry.
+* [ ] Evaluation harness validated.
+
+### Economic understanding
+
+* [ ] Crop economics measured.
+* [ ] Fertilizer economics measured.
+* [ ] Farm-hand economics measured.
+* [ ] Land economics measured.
+* [ ] Animal economics measured.
+* [ ] Mixed-farm economics measured.
+* [ ] Market behavior characterized.
+* [ ] Town-demand effects characterized.
+* [ ] Head-to-head market interaction tested.
+
+### Strategy
+
+* [ ] Economic Planner v1 implemented.
+* [ ] Planner compared against frozen Wheat Patroller.
+* [ ] Multiple seeds tested.
+* [ ] Multiple opponents tested.
+* [ ] Variance reported.
+* [ ] Ablations performed.
+* [ ] No cherry-picking.
+* [ ] No test-seed tuning.
+
+### Research integrity
+
+* [ ] Documented mechanics remain distinct from implementation observations.
+* [ ] Hypotheses are explicitly labeled.
+* [ ] Raw experiment data preserved.
+* [ ] Every major strategy change has a hypothesis.
+* [ ] Negative results documented.
+* [ ] No overfitting to individual seeds.
+* [ ] No use of private opponent information.
+
+---
+
+# The Phase 2 experiment hierarchy
+
+I would **not** let an agent execute all of these arbitrarily. The order matters:
+
+```text
+PHASE 1 FREEZE
+      ↓
+Economic Telemetry
+      ↓
+Crop Economics
+      ↓
+Fertilizer Economics
+      ↓
+Labor Economics
+      ↓
+Land Economics
+      ↓
+Animal Economics
+      ↓
+Mixed Production
+      ↓
+Market Characterization
+      ↓
+Town Demand
+      ↓
+Head-to-Head Market
+      ↓
+Economic Planner v1
+      ↓
+Ablation
+      ↓
+Robustness
+      ↓
+PHASE 2 GATE
+```
+
+### One thing I'd emphasize
+
+**Don't start Phase 2 by writing the planner.**
+
+Start by making the simulator tell us *where the money is*.
+
+The Phase 1 Wheat Patroller's ~$5.1k–$5.4k final bank gives us a useful control, but we currently don't know whether its advantage comes from wheat economics, low complexity, low capital risk, market behavior, or simply the fact that it is substantially better than the weak built-ins. Phase 2's job is to decompose that.
+
+The biggest strategic questions from Phase 1 are therefore exactly the ones I'd attack first: **parallel production, hired-hand ROI, animals, land timing, and genuine head-to-head market interaction.** 
+
+And I would make **Phase 2.0 — Freeze Phase 1** mandatory, not optional. That gives us a clean scientific boundary:
+
+> **Phase 1 = frozen environment/control foundation.**
+> **Phase 2 = economic discovery.**
+> **Phase 3 = strategy/planner sophistication based on validated economics.**
+
+That keeps us from turning the competition into a giant pile of undocumented tweaks.

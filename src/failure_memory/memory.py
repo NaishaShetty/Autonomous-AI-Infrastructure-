@@ -44,6 +44,22 @@ class MemoryMatch:
 
 
 class FailureMemory:
+    """Lifecycle: INITIALIZATION -> LOAD PERSISTED MEMORY -> FIT -> SERVE ->
+    (new failure -> MARK DIRTY) -> REBUILD -> VALIDATE -> ATOMICALLY PROMOTE
+    -> SERVE.
+
+    ``store()`` never mutates the currently-served (fitted) clustering
+    state -- it only appends the new failure and marks the memory dirty.
+    A separate ``rebuild()``/``maybe_rebuild()`` call (invoked explicitly by
+    the caller, e.g. once per request in ``src/api/pipeline.py``) fits a
+    *new* embedder/kmeans out-of-place and only promotes it into
+    ``self.embedder``/``self._kmeans`` if fitting and validation both
+    succeed. If a rebuild fails, the previously-promoted, still-valid model
+    keeps serving ``risk()``/``retrieve()``/``cluster_of()`` -- the active
+    model is never left silently unusable because of a bad rebuild. This is
+    the fix for the bug where ``store()`` set ``_fitted = False`` with
+    nothing to reliably set it back to ``True`` before the next request."""
+
     def __init__(
         self,
         feature_names: list[str],
@@ -51,12 +67,16 @@ class FailureMemory:
         sigma: float = 1.0,
         random_state: int = 42,
     ):
+        self.feature_names = list(feature_names)
         self.embedder = FailureEmbedder(feature_names, n_components=2, random_state=random_state)
         self.n_clusters = n_clusters
         self.sigma = sigma
         self.random_state = random_state
         self._kmeans: KMeans | None = None
         self._fitted = False
+        self._dirty = False
+        self._version = 0
+        self._last_rebuild_error: str | None = None
         self._failure_embeddings: np.ndarray | None = None
         self._failure_events: list[ReliabilityEvent] = []
         self._dirty = False
@@ -99,32 +119,118 @@ class FailureMemory:
     def load_from_repository(
         self, repository: EventRepository, workload_id: str | None = None
     ) -> "FailureMemory":
+        """Replace this memory's failure history with exactly what the
+        repository holds (used to reconstruct a fresh instance, e.g. in
+        tests simulating a new process). Caller must ``fit()``/``rebuild()``
+        afterward -- this method only loads data, it does not fit."""
         self._failure_events = repository.get_failures(workload_id=workload_id)
         self._fitted = False
         self._dirty = bool(self._failure_events)
         self._pending_update_count = len(self._failure_events)
         return self
 
+    def merge_from_repository(
+        self, repository: EventRepository, workload_id: str | None = None
+    ) -> int:
+        """Additive reload: fetch persisted failures for ``workload_id`` and
+        append any not already present in this instance (by ``event_id``),
+        without discarding failures already loaded (e.g. from a synthetic
+        training pass). Returns the number of newly-added events and marks
+        the memory dirty if any were added. Used on API startup to
+        reconstruct live memory state from persisted evidence -- see
+        ``src/api/train.py``."""
+        existing_ids = {e.event_id for e in self._failure_events}
+        persisted = repository.get_failures(workload_id=workload_id)
+        added = [e for e in persisted if e.event_id not in existing_ids]
+        if added:
+            self._failure_events.extend(added)
+            self._dirty = True
+        return len(added)
+
     # -- clustering --------------------------------------------------------
-    def fit(self) -> "FailureMemory":
+    def _fit_new_state(
+        self, failure_events: list[ReliabilityEvent]
+    ) -> tuple[FailureEmbedder, KMeans, np.ndarray]:
+        """Fit a brand-new embedder/kmeans out-of-place. Raises on failure;
+        never mutates ``self``."""
+        embedder = FailureEmbedder(self.feature_names, n_components=2, random_state=self.random_state)
+        contexts = [e.context for e in failure_events]
+        confidences = [e.confidence for e in failure_events]
+        embedder.fit(contexts)
+        embeddings = embedder.embed_batch(contexts, confidences)
+        k = min(self.n_clusters, len(failure_events))
+        kmeans = KMeans(n_clusters=k, random_state=self.random_state, n_init=10)
+        kmeans.fit(embeddings)
+        return embedder, kmeans, embeddings
+
+    @staticmethod
+    def _validate_new_state(kmeans: KMeans, embeddings: np.ndarray) -> None:
+        """Minimal sanity checks before promoting a freshly-fit state.
+        Raises ValueError if the fit is unusable."""
+        if kmeans.cluster_centers_.shape[0] < 1:
+            raise ValueError("rebuild produced zero cluster centers")
+        if not np.all(np.isfinite(embeddings)):
+            raise ValueError("rebuild produced non-finite embeddings")
+        if not np.all(np.isfinite(kmeans.cluster_centers_)):
+            raise ValueError("rebuild produced non-finite cluster centers")
+
+    def rebuild(self) -> bool:
+        """Fit a new clustering state from the current ``_failure_events``
+        and, only if fitting and validation both succeed, atomically
+        promote it to be the active (served) state. On failure, the
+        previously-promoted state (if any) is left untouched and still
+        serves ``risk()``/``retrieve()``/``cluster_of()`` -- the memory is
+        marked dirty so a later rebuild can retry. Returns True iff the
+        active state was promoted."""
         if not self._failure_events:
-            self._fitted = False
             self._dirty = False
-            self._last_fit_event_count = 0
-            self._last_fit_timestamp = datetime.now(timezone.utc)
-            return self
-        contexts = [e.context for e in self._failure_events]
-        confidences = [e.confidence for e in self._failure_events]
-        self.embedder.fit(contexts)
-        embeddings = self.embedder.embed_batch(contexts, confidences)
-        distinct_count = max(1, int(np.unique(embeddings, axis=0).shape[0]))
-        k = min(self.n_clusters, len(self._failure_events), distinct_count)
-        self._kmeans = KMeans(n_clusters=k, random_state=self.random_state, n_init=10)
-        self._kmeans.fit(embeddings)
+            return False
+        try:
+            embedder, kmeans, embeddings = self._fit_new_state(self._failure_events)
+            self._validate_new_state(kmeans, embeddings)
+        except Exception as exc:  # noqa: BLE001 -- deliberately broad: any
+            # fit/validation failure must fall back to "keep serving the
+            # previous valid model," not crash the caller.
+            self._last_rebuild_error = str(exc)
+            return False
+
+        # Atomic promotion: only reached after a fully successful fit+validate.
+        self.embedder = embedder
+        self._kmeans = kmeans
         self._failure_embeddings = embeddings
         self._fitted = True
         self._dirty = False
-        self._memory_version += 1
+        self._version += 1
+        self._last_rebuild_error = None
+        return True
+
+    def maybe_rebuild(self) -> bool:
+        """Rebuild only if the memory is dirty (new failures since the last
+        promoted state). No-op, returns False, if already up to date."""
+        if not self._dirty:
+            return False
+        return self.rebuild()
+
+    def fit(self) -> "FailureMemory":
+        """Synchronous, unconditional fit -- used for initial/offline
+        training (e.g. ``src/pipeline_builder.py``'s synthetic logging pass)
+        where there is no previous state to protect. For the live,
+        request-serving path where a bad rebuild must not destroy a good
+        previous state, use ``rebuild()``/``maybe_rebuild()`` instead."""
+        if not self._failure_events:
+            self._fitted = False
+            self._dirty = False
+            return self
+        embedder, kmeans, embeddings = self._fit_new_state(self._failure_events)
+        self._validate_new_state(kmeans, embeddings)
+        self.embedder = embedder
+        self._kmeans = kmeans
+        self._failure_embeddings = embeddings
+        self._fitted = True
+        self._dirty = False
+        self._version += 1
+        self._memory_version = self._version
+        self._last_rebuild_error = None
         self._last_fit_event_count = len(self._failure_events)
         self._last_fit_timestamp = datetime.now(timezone.utc)
         self._pending_update_count = 0
@@ -155,6 +261,10 @@ class FailureMemory:
         return self._pending_update_count
 
     @property
+    def is_dirty(self) -> bool:
+        return self._dirty
+
+    @property
     def n_failures(self) -> int:
         return len(self._failure_events)
 
@@ -174,6 +284,18 @@ class FailureMemory:
         self._fitted = False
         self._pending_update_count = len(self._failure_events)
         return self.rebuild()
+    def status(self) -> dict:
+        """Observable memory state -- see docs/PHASE... memory status
+        requirements. Every field here is read directly off live state,
+        never fabricated."""
+        return {
+            "fitted": self._fitted,
+            "dirty": self._dirty,
+            "n_failure_events": len(self._failure_events),
+            "version": self._version,
+            "n_clusters_configured": self.n_clusters,
+            "last_rebuild_error": self._last_rebuild_error,
+        }
 
     # -- query -------------------------------------------------------------
     def risk(self, context: dict[str, float], confidence: float) -> float:
@@ -181,8 +303,6 @@ class FailureMemory:
         historically observed failure cluster? 0.0 if failure memory has no
         data yet (honest "no signal" rather than a fabricated value -- see
         PHASE1_AUDIT_REPORT.md section 2.11 on not fabricating metrics)."""
-        if self._dirty:
-            raise RuntimeError("failure memory is dirty; rebuild before querying risk")
         if not self._fitted or self._kmeans is None:
             return 0.0
         emb = self.embedder.embed(context, confidence)
@@ -195,8 +315,6 @@ class FailureMemory:
         self, context: dict[str, float], confidence: float, k: int = 5, min_similarity: float = 0.5
     ) -> list[MemoryMatch]:
         """Return scored historical matches with explicit relevance semantics."""
-        if self._dirty:
-            raise RuntimeError("failure memory is dirty; rebuild before retrieving experiences")
         if not self._fitted or self._failure_embeddings is None or not self._failure_events:
             return []
         emb = self.embedder.embed(context, confidence)
@@ -220,8 +338,6 @@ class FailureMemory:
         return [(match.event, match.distance) for match in self.retrieve_matches(context, confidence, k=k, min_similarity=0.0)]
 
     def cluster_of(self, context: dict[str, float], confidence: float) -> int | None:
-        if self._dirty:
-            raise RuntimeError("failure memory is dirty; rebuild before assigning clusters")
         if not self._fitted or self._kmeans is None:
             return None
         emb = self.embedder.embed(context, confidence)

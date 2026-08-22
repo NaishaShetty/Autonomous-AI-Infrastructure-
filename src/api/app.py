@@ -36,7 +36,12 @@ async def _lifespan(app: FastAPI):
     global _runtime
     init_db()
     artifact_path = os.environ.get("RELIABILITY_ARTIFACT_PATH")
-    _runtime = build_default_runtime(artifact_path=artifact_path) if artifact_path else build_default_runtime()
+    with get_session() as session:
+        repo = EventRepository(session)
+        _runtime = build_default_runtime(
+            artifact_path=artifact_path,
+            repository=repo,
+        )
     yield
 
 
@@ -87,6 +92,17 @@ def analyze(payload: dict) -> dict:
         "learning_update": episode.learning_update,
     }
     return response
+
+
+@app.get("/api/memory/status")
+def memory_status() -> dict:
+    """Observable failure-memory state -- real values read off the live
+    ``FailureMemory`` instance, never fabricated. Lets a caller verify that
+    a stored failure actually became usable (``fitted``/``version``) rather
+    than trusting an unobservable internal flag."""
+    if _runtime is None:
+        raise HTTPException(status_code=503, detail="runtime not initialized")
+    return _runtime.failure_memory.status()
 
 
 @app.get("/api/metrics/summary")

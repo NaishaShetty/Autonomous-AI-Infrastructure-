@@ -62,6 +62,10 @@ def build_runtime_system(*, workload_id: str = "default-workload", feature_names
         artifact_hash = manifest.artifact_sha256
         model_configuration = {**dict(model_configuration or {}), "artifact_version": manifest.artifact_version, "feature_schema_version": manifest.feature_schema_version, "protocol_version": manifest.protocol_version}
     memory = failure_memory or FailureMemory(names or ["failure_signal"])
+    if repository is not None:
+        memory.merge_from_repository(repository, workload_id=workload_id)
+        if memory.is_dirty:
+            memory.rebuild()
     if workload_model is not None and calibrator is not None:
         from .components import ModelReliabilityAssessor
         assessor = ModelReliabilityAssessor(workload_model, calibrator, memory, policy or DecisionPolicy(), names, DecisionMode.COMBINED, model_id=model_id, model_version=model_version, calibrator_version=calibrator_version, training_data_id=training_data_id, configuration=model_configuration, artifact_hash=artifact_hash)

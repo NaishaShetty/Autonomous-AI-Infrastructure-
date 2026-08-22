@@ -41,6 +41,45 @@ def test_analyze_end_to_end_persists_and_returns_valid_decision():
         assert metrics["event_count"] >= 1
 
 
+def test_memory_status_reflects_a_real_failure_stored_through_the_api():
+    """Regression test (through the real HTTP surface) for the P0 bug where
+    failure memory was invalidated on store() with nothing to reliably
+    refit it -- see tests/integration/test_failure_memory_lifecycle.py and
+    test_startup_persistence.py for the underlying unit/integration
+    coverage. Here we only assert the status endpoint reports real,
+    observed state, not a fabricated one."""
+    with TestClient(app) as client:
+        status_before = client.get("/api/memory/status").json()
+        assert set(status_before.keys()) == {
+            "fitted",
+            "dirty",
+            "n_failure_events",
+            "version",
+            "n_clusters_configured",
+            "last_rebuild_error",
+        }
+        n_before = status_before["n_failure_events"]
+
+        # Find a context that ANSWERs, then force it to be a confirmed
+        # failure -- same technique as test_startup_persistence.py.
+        forced = None
+        for magnitude in (0.0, 1.0, -1.0, 2.0, -2.0, 3.0, -3.0, 5.0, -5.0):
+            candidate = {"f1": magnitude, "f2": magnitude, "f3": magnitude, "f4": magnitude, "f5": magnitude}
+            probe = client.post("/api/analyze", json={"context": candidate}).json()
+            if probe["decision"] == "ANSWER":
+                forced_label = 1 - probe["metadata"]["predicted_label"]
+                resp = client.post("/api/analyze", json={"context": candidate, "true_label": forced_label})
+                body = resp.json()
+                if body["is_failure"]:
+                    forced = candidate
+                    break
+        assert forced is not None, "no candidate context produced a confirmed failure"
+
+        status_after = client.get("/api/memory/status").json()
+        assert status_after["n_failure_events"] == n_before + 1
+        assert status_after["fitted"] is True
+
+
 def test_metrics_summary_is_the_one_documented_route_and_no_fake_data():
     """Confirms /api/metrics (the source repo's dead/undocumented route)
     does not exist here, and that metrics before any events are honestly

@@ -101,6 +101,11 @@ class ReliabilityPipeline:
         if repository is not None:
             repository.save(event)
             if is_failure:
-                self.failure_memory.store(event, repository)
+                self.failure_memory.store(event, repository, persist=False)
+                # Lifecycle: store() only marks the memory dirty (see
+                # FailureMemory docstring) -- rebuild here so the next
+                # request's risk() reflects this failure. A failed rebuild
+                # leaves the previous valid clustering state in place.
+                self.failure_memory.maybe_rebuild()
 
         return event
