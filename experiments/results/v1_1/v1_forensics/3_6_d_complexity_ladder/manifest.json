@@ -1,0 +1,43 @@
+{
+  "artifact_hashes": {
+    "plots/complexity_generalization.png": "b5d531737f2c5b38ed36bc96a458ca1b16e5e91084c7a79ecf1dbecc144373ec",
+    "protocol.json": "b1cde487d274bb96a7e7d2a3aad682bf420b216a9c658045da3f7fcb1825368a",
+    "report.md": "44543df25e704a97c6c69f59dd79e981a464bbcc59b8f6b9d743e5fe191daaa9",
+    "results.json": "7124136662de88b9baae318dd7ee45634186bd71e48f36d6169de0b3d4912951",
+    "summary.json": "8778ee7a3de30f8042ea6cba3ef8048faef3f2e64027eb2417db66ced5d339d2"
+  },
+  "baseline": "Frozen V1 control; additive forensic copy only",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "random-stratified and canonical temporal future; no temporal-test tuning",
+  "experiment_id": "phase36_d_complexity_inductive_bias_ladder",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "Increasing model complexity improves interpolation while harming temporal generalization.",
+  "intervention": "Predeclared five-level ladder using existing baseline, V1, linear, constrained RF, and prior GB.",
+  "model_identity": "research-only copy of frozen V1-compatible pipeline",
+  "phase": "3.6",
+  "preprocessing": "canonical phase3.1 loader; no post-outcome fields",
+  "provenance": "scripts/run_phase36_forensics.py",
+  "random_seed": 42,
+  "software_version": "3.12.3",
+  "split_identity": "canonical random/temporal plus predeclared Phase 3.5 folds where used",
+  "temporal_boundaries": "canonical random and temporal tests"
+}

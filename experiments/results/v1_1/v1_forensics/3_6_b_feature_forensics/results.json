@@ -1,0 +1,535 @@
+{
+  "_coefficients_random": {
+    "cat__dominant_gpu_type_MISC": 0.12080194823733162,
+    "cat__dominant_gpu_type_P100": -0.05727175940112302,
+    "cat__dominant_gpu_type_T4": -0.7437087529308452,
+    "cat__dominant_gpu_type_UNKNOWN": -1.4115167829023834,
+    "cat__dominant_gpu_type_V100": 0.5462237355763708,
+    "cat__dominant_gpu_type_V100M32": 0.9023901936267775,
+    "num__job_start_time": 0.051880815281044455,
+    "num__max_plan_cpu": -0.7786594609639014,
+    "num__max_plan_gpu": -0.17757595472918136,
+    "num__max_plan_mem": -0.09998752565224965,
+    "num__mean_instance_start_time": 0.17037603654637024,
+    "num__mean_plan_cpu": 0.13583814804023697,
+    "num__mean_plan_gpu": -0.09950056136973107,
+    "num__mean_plan_mem": 0.9077009643453208,
+    "num__n_distinct_gpu_types": -0.0568724893649574,
+    "num__n_distinct_machines": 0.13143443752320966,
+    "num__n_distinct_task_names": -0.08611744385584638,
+    "num__n_instances": 0.9819588965927781,
+    "num__n_tasks": -0.08611744385584638,
+    "num__sum_inst_num": -1.0307530240189637
+  },
+  "_coefficients_temporal": {
+    "cat__dominant_gpu_type_MISC": 0.09537071244828131,
+    "cat__dominant_gpu_type_P100": 0.15317426034238138,
+    "cat__dominant_gpu_type_T4": -0.5623654419284535,
+    "cat__dominant_gpu_type_UNKNOWN": -1.4989963203869405,
+    "cat__dominant_gpu_type_V100": 0.6263410658850324,
+    "cat__dominant_gpu_type_V100M32": 0.4931284045286884,
+    "num__job_start_time": -0.021583455907182844,
+    "num__max_plan_cpu": -0.4518936100530469,
+    "num__max_plan_gpu": -0.13690455620734643,
+    "num__max_plan_mem": 0.4768325024326901,
+    "num__mean_instance_start_time": 0.03208990456400848,
+    "num__mean_plan_cpu": 0.3090811520293965,
+    "num__mean_plan_gpu": 0.05459621042961738,
+    "num__mean_plan_mem": -0.1063243191776281,
+    "num__n_distinct_gpu_types": -0.08486098278286779,
+    "num__n_distinct_machines": 0.1214759020726553,
+    "num__n_distinct_task_names": -0.0877774318366961,
+    "num__n_instances": 1.6076683053269747,
+    "num__n_tasks": -0.0877774318366961,
+    "num__sum_inst_num": -1.6078183746324348
+  },
+  "baseline": {
+    "random": {
+      "auprc": 0.537326980388299,
+      "auroc": 0.7347731374005991,
+      "brier": 0.1635426675275332,
+      "count": 1503,
+      "ece": 0.0988982668268682
+    },
+    "temporal": {
+      "auprc": 0.6354280714533036,
+      "auroc": 0.7930934238914346,
+      "brier": 0.27059898818888006,
+      "count": 2499,
+      "ece": 0.21911152544363569
+    }
+  },
+  "conclusion": "Ablation and coefficient evidence are explanatory; no feature is removed and no causal claim is made.",
+  "duplicates_and_groups": {
+    "random": {
+      "exact_duplicate_rows": 0,
+      "unique_feature_vectors": 1503
+    },
+    "temporal": {
+      "exact_duplicate_rows": 15,
+      "unique_feature_vectors": 2484
+    }
+  },
+  "job_start_time": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5229872974383453,
+        "auroc": 0.7142837363215535,
+        "brier": 0.16584140796928723,
+        "count": 1503,
+        "ece": 0.10421480919767821
+      },
+      "temporal": {
+        "auprc": 0.6285035810501972,
+        "auroc": 0.7816117951492317,
+        "brier": 0.27529563880367786,
+        "count": 2499,
+        "ece": 0.2156479845802134
+      }
+    },
+    "shift": {
+      "ks": 0.7265469061876247,
+      "smd": 1.5954913443211207,
+      "wasserstein": 1770023.4620730528
+    },
+    "univariate_random": {
+      "auprc": 0.3119433305807332,
+      "auroc": 0.6142516603360826,
+      "direction": "positive"
+    },
+    "univariate_temporal": {
+      "auprc": 0.300725343597163,
+      "auroc": 0.77937608770752,
+      "direction": "negative"
+    }
+  },
+  "max_plan_cpu": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5252842465667529,
+        "auroc": 0.7152344777614192,
+        "brier": 0.16571020119232613,
+        "count": 1503,
+        "ece": 0.10541830388849045
+      },
+      "temporal": {
+        "auprc": 0.6313516303321988,
+        "auroc": 0.7833240993618784,
+        "brier": 0.27505106034392357,
+        "count": 2499,
+        "ece": 0.21542086904749355
+      }
+    },
+    "shift": {
+      "ks": 0.23690673874340154,
+      "smd": -0.32179697110687683,
+      "wasserstein": 174.7507825485484
+    },
+    "univariate_random": {
+      "auprc": 0.2323148154590083,
+      "auroc": 0.6523874686739926,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.3848979483655978,
+      "auroc": 0.8154335512550597,
+      "direction": "negative"
+    }
+  },
+  "max_plan_gpu": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5230619329729369,
+        "auroc": 0.7143160430695102,
+        "brier": 0.16581493372284592,
+        "count": 1503,
+        "ece": 0.1054778666652655
+      },
+      "temporal": {
+        "auprc": 0.6286401350374102,
+        "auroc": 0.7817402016699366,
+        "brier": 0.2752275015595836,
+        "count": 2499,
+        "ece": 0.21661581525298687
+      }
+    },
+    "shift": {
+      "ks": 0.15952256682141583,
+      "smd": -0.16005405900157257,
+      "wasserstein": 12.16093975771226
+    },
+    "univariate_random": {
+      "auprc": 0.24952004951419915,
+      "auroc": 0.5659587534024413,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.42315787060067417,
+      "auroc": 0.6698636765991937,
+      "direction": "negative"
+    }
+  },
+  "max_plan_mem": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5229293950597228,
+        "auroc": 0.7144152709382342,
+        "brier": 0.16590166443763993,
+        "count": 1503,
+        "ece": 0.10510299404715497
+      },
+      "temporal": {
+        "auprc": 0.6310686087212714,
+        "auroc": 0.7832667401038984,
+        "brier": 0.274292107643868,
+        "count": 2499,
+        "ece": 0.21561104545961218
+      }
+    },
+    "shift": {
+      "ks": 0.04185466601810385,
+      "smd": 0.0026028829347329047,
+      "wasserstein": 1.6540728379675178
+    },
+    "univariate_random": {
+      "auprc": 0.28647980833696307,
+      "auroc": 0.541863776289616,
+      "direction": "positive"
+    },
+    "univariate_temporal": {
+      "auprc": 0.4530628472774665,
+      "auroc": 0.50402818425358,
+      "direction": "positive"
+    }
+  },
+  "mean_instance_start_time": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5229932974466154,
+        "auroc": 0.714295274445824,
+        "brier": 0.16583566232922634,
+        "count": 1503,
+        "ece": 0.10418842645788681
+      },
+      "temporal": {
+        "auprc": 0.6283581558736538,
+        "auroc": 0.7814775223407793,
+        "brier": 0.27536652341015205,
+        "count": 2499,
+        "ece": 0.21636347196686162
+      }
+    },
+    "shift": {
+      "ks": 0.7265469061876247,
+      "smd": 1.595518073545687,
+      "wasserstein": 1769910.636358435
+    },
+    "univariate_random": {
+      "auprc": 0.3119215815879631,
+      "auroc": 0.6142158921508448,
+      "direction": "positive"
+    },
+    "univariate_temporal": {
+      "auprc": 0.3007684669132479,
+      "auroc": 0.779273753576806,
+      "direction": "negative"
+    }
+  },
+  "mean_plan_cpu": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5228566746096461,
+        "auroc": 0.7142514295735971,
+        "brier": 0.1658475535141639,
+        "count": 1503,
+        "ece": 0.10423462496113511
+      },
+      "temporal": {
+        "auprc": 0.628800335632288,
+        "auroc": 0.7818457948493993,
+        "brier": 0.27479713338213163,
+        "count": 2499,
+        "ece": 0.2154223239953173
+      }
+    },
+    "shift": {
+      "ks": 0.23677175461002764,
+      "smd": -0.31868066059610234,
+      "wasserstein": 171.61761777232522
+    },
+    "univariate_random": {
+      "auprc": 0.235767123839257,
+      "auroc": 0.6423896839938525,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.38520355029969344,
+      "auroc": 0.8134168518892706,
+      "direction": "negative"
+    }
+  },
+  "mean_plan_gpu": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5230491938054342,
+        "auroc": 0.7143091201949482,
+        "brier": 0.16581537530396823,
+        "count": 1503,
+        "ece": 0.1055188659194184
+      },
+      "temporal": {
+        "auprc": 0.6286332751522024,
+        "auroc": 0.7817245582359422,
+        "brier": 0.2751530231939574,
+        "count": 2499,
+        "ece": 0.2155572217110677
+      }
+    },
+    "shift": {
+      "ks": 0.15952256682141583,
+      "smd": -0.16005405900157257,
+      "wasserstein": 12.16093975771226
+    },
+    "univariate_random": {
+      "auprc": 0.24952004951419915,
+      "auroc": 0.5659587534024413,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.42315787060067417,
+      "auroc": 0.6698636765991937,
+      "direction": "negative"
+    }
+  },
+  "mean_plan_mem": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5148783805510893,
+        "auroc": 0.7151190965187171,
+        "brier": 0.1671914520155848,
+        "count": 1503,
+        "ece": 0.10312527124274252
+      },
+      "temporal": {
+        "auprc": 0.6286437766525231,
+        "auroc": 0.7817219509969429,
+        "brier": 0.2752462541893845,
+        "count": 2499,
+        "ece": 0.21559914327357668
+      }
+    },
+    "shift": {
+      "ks": 0.04647847162817223,
+      "smd": 0.014782447735290579,
+      "wasserstein": 1.7108675660051085
+    },
+    "univariate_random": {
+      "auprc": 0.2908178069994716,
+      "auroc": 0.5494535544345627,
+      "direction": "positive"
+    },
+    "univariate_temporal": {
+      "auprc": 0.4610696343210953,
+      "auroc": 0.5180606704515087,
+      "direction": "positive"
+    }
+  },
+  "n_distinct_gpu_types": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5227383877116882,
+        "auroc": 0.7130306960258084,
+        "brier": 0.1658781252154015,
+        "count": 1503,
+        "ece": 0.10657343859308133
+      },
+      "temporal": {
+        "auprc": 0.6313257395600563,
+        "auroc": 0.7834485950240844,
+        "brier": 0.2758373603382622,
+        "count": 2499,
+        "ece": 0.2152546024256536
+      }
+    },
+    "shift": {
+      "ks": 0.006224445866170819,
+      "smd": 0.050228238623583735,
+      "wasserstein": 0.006359429999544692
+    },
+    "univariate_random": {
+      "auprc": 0.2630399601940586,
+      "auroc": 0.5103854656556193,
+      "direction": "positive"
+    },
+    "univariate_temporal": {
+      "auprc": 0.43921738926134574,
+      "auroc": 0.5094408124156721,
+      "direction": "positive"
+    }
+  },
+  "n_distinct_machines": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5230526421272412,
+        "auroc": 0.7143275811937804,
+        "brier": 0.1658514103430815,
+        "count": 1503,
+        "ece": 0.10584499100362618
+      },
+      "temporal": {
+        "auprc": 0.6307757276380871,
+        "auroc": 0.7838755304101839,
+        "brier": 0.2756549715136184,
+        "count": 2499,
+        "ece": 0.2162921281442005
+      }
+    },
+    "shift": {
+      "ks": 0.07150165455403719,
+      "smd": -0.033941258988495766,
+      "wasserstein": 0.947196443447642
+    },
+    "univariate_random": {
+      "auprc": 0.25047628720314735,
+      "auroc": 0.5484566604976162,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.422427251516842,
+      "auroc": 0.581182904333883,
+      "direction": "negative"
+    }
+  },
+  "n_distinct_task_names": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5230525430941935,
+        "auroc": 0.7142560448233051,
+        "brier": 0.16581180449094488,
+        "count": 1503,
+        "ece": 0.10667718149766783
+      },
+      "temporal": {
+        "auprc": 0.6285001526551673,
+        "auroc": 0.7815863745689908,
+        "brier": 0.2753086113589403,
+        "count": 2499,
+        "ece": 0.2157015770235927
+      }
+    },
+    "shift": {
+      "ks": 0.047900996726035726,
+      "smd": -0.12910303360102757,
+      "wasserstein": 0.05079876261881999
+    },
+    "univariate_random": {
+      "auprc": 0.24841551879076834,
+      "auroc": 0.5464155663142154,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.4230070427006535,
+      "auroc": 0.5653067742587293,
+      "direction": "negative"
+    }
+  },
+  "n_instances": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5115543197266925,
+        "auroc": 0.7080139195931195,
+        "brier": 0.16721743843657008,
+        "count": 1503,
+        "ece": 0.10720373808121815
+      },
+      "temporal": {
+        "auprc": 0.6160891312117086,
+        "auroc": 0.7759188887947386,
+        "brier": 0.27550245193873985,
+        "count": 2499,
+        "ece": 0.21718006236241885
+      }
+    },
+    "shift": {
+      "ks": 0.07720533323109682,
+      "smd": -0.031179028962200758,
+      "wasserstein": 1.548537179342806
+    },
+    "univariate_random": {
+      "auprc": 0.24868859225098564,
+      "auroc": 0.5560522077046979,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.421314832146183,
+      "auroc": 0.5878691687470261,
+      "direction": "negative"
+    }
+  },
+  "n_tasks": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5230525430941935,
+        "auroc": 0.7142560448233051,
+        "brier": 0.16581180449094488,
+        "count": 1503,
+        "ece": 0.10667718149766783
+      },
+      "temporal": {
+        "auprc": 0.6285001526551673,
+        "auroc": 0.7815863745689908,
+        "brier": 0.2753086113589403,
+        "count": 2499,
+        "ece": 0.2157015770235927
+      }
+    },
+    "shift": {
+      "ks": 0.047900996726035726,
+      "smd": -0.12910303360102757,
+      "wasserstein": 0.05079876261881999
+    },
+    "univariate_random": {
+      "auprc": 0.24841551879076834,
+      "auroc": 0.5464155663142154,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.4230070427006535,
+      "auroc": 0.5653067742587293,
+      "direction": "negative"
+    }
+  },
+  "sum_inst_num": {
+    "ablation": {
+      "random": {
+        "auprc": 0.5066714301293083,
+        "auroc": 0.7030848329048842,
+        "brier": 0.16800661516273244,
+        "count": 1503,
+        "ece": 0.1024837295902462
+      },
+      "temporal": {
+        "auprc": 0.6051308739492117,
+        "auroc": 0.7673123928587724,
+        "brier": 0.27721976291536277,
+        "count": 2499,
+        "ece": 0.21815936543761222
+      }
+    },
+    "shift": {
+      "ks": 0.06590899832987088,
+      "smd": -0.03611338402026542,
+      "wasserstein": 1.400366134477752
+    },
+    "univariate_random": {
+      "auprc": 0.24513566219125055,
+      "auroc": 0.5578186945304675,
+      "direction": "negative"
+    },
+    "univariate_temporal": {
+      "auprc": 0.42008171436989056,
+      "auroc": 0.5865287219966236,
+      "direction": "negative"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "experiment_id": "phase36_c_coefficient_regularization_forensics",
+  "hypothesis": "V1 linear inductive bias and regularization contribute to temporal behavior.",
+  "intervention": "Research-copy coefficient comparison and predeclared C={0.1,1,10} descriptive ladder.",
+  "selection_boundary": "no selection from temporal test",
+  "temporal_boundaries": "canonical random and temporal tests"
+}

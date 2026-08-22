@@ -1,0 +1,42 @@
+{
+  "artifact_hashes": {
+    "protocol.json": "f05da66ed4cba20a5423063225386f9e23f01e798d455a16be8ba37ba7c3c2af",
+    "report.md": "40908f626a7577188fe945354081345566e29c17698d520a9a2cc054d169c2ae",
+    "results.json": "ce9d3f89d0779c0ec16dae009174096c569d3de18c1a709c61675c5f1a992b62",
+    "summary.json": "cd4f0525dc5bf599521fc9345ef1b14fff8eca0abe6e69f8c89c1af78356dd2b"
+  },
+  "baseline": "Frozen V1 control; additive forensic copy only",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "random-stratified and canonical temporal future; no temporal-test tuning",
+  "experiment_id": "phase36_e_cross_temporal_mechanism_synthesis",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "A\u2013D forensic evidence can distinguish model, feature, population, split, regularization, group, and artifact explanations.",
+  "intervention": "Synthesis only; no new model or optimization.",
+  "model_identity": "research-only copy of frozen V1-compatible pipeline",
+  "phase": "3.6",
+  "preprocessing": "canonical phase3.1 loader; no post-outcome fields",
+  "provenance": "scripts/run_phase36_forensics.py",
+  "random_seed": 42,
+  "software_version": "3.12.3",
+  "split_identity": "canonical random/temporal plus predeclared Phase 3.5 folds where used",
+  "temporal_boundaries": "all preceding registered boundaries"
+}

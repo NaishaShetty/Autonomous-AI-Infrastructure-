@@ -1,0 +1,99 @@
+{
+  "coefficients": {
+    "random": {
+      "cat__dominant_gpu_type_MISC": 0.12080194823733162,
+      "cat__dominant_gpu_type_P100": -0.05727175940112302,
+      "cat__dominant_gpu_type_T4": -0.7437087529308452,
+      "cat__dominant_gpu_type_UNKNOWN": -1.4115167829023834,
+      "cat__dominant_gpu_type_V100": 0.5462237355763708,
+      "cat__dominant_gpu_type_V100M32": 0.9023901936267775,
+      "num__job_start_time": 0.051880815281044455,
+      "num__max_plan_cpu": -0.7786594609639014,
+      "num__max_plan_gpu": -0.17757595472918136,
+      "num__max_plan_mem": -0.09998752565224965,
+      "num__mean_instance_start_time": 0.17037603654637024,
+      "num__mean_plan_cpu": 0.13583814804023697,
+      "num__mean_plan_gpu": -0.09950056136973107,
+      "num__mean_plan_mem": 0.9077009643453208,
+      "num__n_distinct_gpu_types": -0.0568724893649574,
+      "num__n_distinct_machines": 0.13143443752320966,
+      "num__n_distinct_task_names": -0.08611744385584638,
+      "num__n_instances": 0.9819588965927781,
+      "num__n_tasks": -0.08611744385584638,
+      "num__sum_inst_num": -1.0307530240189637
+    },
+    "temporal": {
+      "cat__dominant_gpu_type_MISC": 0.09537071244828131,
+      "cat__dominant_gpu_type_P100": 0.15317426034238138,
+      "cat__dominant_gpu_type_T4": -0.5623654419284535,
+      "cat__dominant_gpu_type_UNKNOWN": -1.4989963203869405,
+      "cat__dominant_gpu_type_V100": 0.6263410658850324,
+      "cat__dominant_gpu_type_V100M32": 0.4931284045286884,
+      "num__job_start_time": -0.021583455907182844,
+      "num__max_plan_cpu": -0.4518936100530469,
+      "num__max_plan_gpu": -0.13690455620734643,
+      "num__max_plan_mem": 0.4768325024326901,
+      "num__mean_instance_start_time": 0.03208990456400848,
+      "num__mean_plan_cpu": 0.3090811520293965,
+      "num__mean_plan_gpu": 0.05459621042961738,
+      "num__mean_plan_mem": -0.1063243191776281,
+      "num__n_distinct_gpu_types": -0.08486098278286779,
+      "num__n_distinct_machines": 0.1214759020726553,
+      "num__n_distinct_task_names": -0.0877774318366961,
+      "num__n_instances": 1.6076683053269747,
+      "num__n_tasks": -0.0877774318366961,
+      "num__sum_inst_num": -1.6078183746324348
+    }
+  },
+  "conclusion": "Temporal results vary with regularization, but the small predeclared set does not establish causal superiority.",
+  "regularization": {
+    "0.1": {
+      "random": {
+        "auprc": 0.5305977034251997,
+        "auroc": 0.7318886063330456,
+        "brier": 0.16451413940949244,
+        "count": 1503,
+        "ece": 0.09884581721588148
+      },
+      "temporal": {
+        "auprc": 0.6349443197959828,
+        "auroc": 0.7939218740833927,
+        "brier": 0.2704510067441727,
+        "count": 2499,
+        "ece": 0.21978692547761536
+      }
+    },
+    "1": {
+      "random": {
+        "auprc": 0.537326980388299,
+        "auroc": 0.7347731374005991,
+        "brier": 0.1635426675275332,
+        "count": 1503,
+        "ece": 0.0988982668268682
+      },
+      "temporal": {
+        "auprc": 0.6354280714533036,
+        "auroc": 0.7930934238914346,
+        "brier": 0.27059898818888006,
+        "count": 2499,
+        "ece": 0.21911152544363569
+      }
+    },
+    "10": {
+      "random": {
+        "auprc": 0.5349133031408232,
+        "auroc": 0.7347592916514749,
+        "brier": 0.16346415089513222,
+        "count": 1503,
+        "ece": 0.09953366487109376
+      },
+      "temporal": {
+        "auprc": 0.6334447406455508,
+        "auroc": 0.7912748746895757,
+        "brier": 0.27104129652366166,
+        "count": 2499,
+        "ece": 0.221163499183323
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "classification": [
+    "GENUINE ROBUSTNESS (partial evidence)",
+    "DATASET-DEPENDENT ROBUSTNESS",
+    "EVALUATION-DEPENDENT ROBUSTNESS"
+  ],
+  "conclusion": "V1 robustness is partly explained, not proven: population/split composition and constrained linear inductive bias are supported contributors; feature dominance, group effects, and contamination remain unresolved.",
+  "decision": "HOLD",
+  "hypotheses": {
+    "Evaluation artifact exists": {
+      "evidence_against": "No direct contamination found",
+      "evidence_for": "Population effect and duplicate structure require caution",
+      "status": "UNRESOLVED"
+    },
+    "Few features dominate": {
+      "evidence_against": "No single feature alone explains all behavior",
+      "evidence_for": "Feature ablations/univariate results recorded",
+      "status": "NOT SUPPORTED"
+    },
+    "Future population is more separable": {
+      "evidence_against": "Not all features improve; separability not fully established",
+      "evidence_for": "Univariate and prevalence/population statistics differ",
+      "status": "UNRESOLVED"
+    },
+    "Group structure matters": {
+      "evidence_against": "Workload-family IDs unavailable",
+      "evidence_for": "Categorical composition differs",
+      "status": "UNRESOLVED"
+    },
+    "Linear inductive bias helps": {
+      "evidence_against": "Not causal; alternative OOD weakness also plausible",
+      "evidence_for": "V1 and simple linear copies retain temporal utility while RF/GB collapse",
+      "status": "PARTIALLY SUPPORTED"
+    },
+    "Random split differs fundamentally": {
+      "evidence_against": "Canonical protocol itself is valid",
+      "evidence_for": "Different chronological/population composition",
+      "status": "SUPPORTED"
+    },
+    "Regularization helps": {
+      "evidence_against": "No causal optimum; no temporal tuning",
+      "evidence_for": "C ladder varies temporal behavior",
+      "status": "PARTIALLY SUPPORTED"
+    },
+    "Temporal proxy exists": {
+      "evidence_against": "No leakage evidence",
+      "evidence_for": "Shifted timing/resource features are candidates",
+      "status": "POTENTIALLY INFLUENTIAL"
+    },
+    "V1 is genuinely robust": {
+      "evidence_against": "Only one dataset/future boundary",
+      "evidence_for": "Stable temporal result and ladder contrast",
+      "status": "PARTIALLY SUPPORTED"
+    },
+    "V1 is merely stable/mediocre": {
+      "evidence_against": "Does not explain all temporal strength",
+      "evidence_for": "Random AUROC is moderate; alternatives weak OOD",
+      "status": "PARTIALLY SUPPORTED"
+    }
+  }
+}

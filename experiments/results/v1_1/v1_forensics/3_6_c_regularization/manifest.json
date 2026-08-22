@@ -1,0 +1,42 @@
+{
+  "artifact_hashes": {
+    "protocol.json": "91f3306322e8510bbad631d833f68e65b103acd8d66ce5fc83d3606740f04c50",
+    "report.md": "a6572181520fd9e1cdf698acc17202b925ae2767d1904e2a3c6b2e5c6037b842",
+    "results.json": "c92ac448472ff8ab3a3a1c176da9144a7706ac169cf1e32a6d52bfe636a5ee74",
+    "summary.json": "aade3d024ab0e29024c2a44f804aeb7cbcbff359c5eb170bb5ce03129de9e75c"
+  },
+  "baseline": "Frozen V1 control; additive forensic copy only",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "random-stratified and canonical temporal future; no temporal-test tuning",
+  "experiment_id": "phase36_c_coefficient_regularization_forensics",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "V1 linear inductive bias and regularization contribute to temporal behavior.",
+  "intervention": "Research-copy coefficient comparison and predeclared C={0.1,1,10} descriptive ladder.",
+  "model_identity": "research-only copy of frozen V1-compatible pipeline",
+  "phase": "3.6",
+  "preprocessing": "canonical phase3.1 loader; no post-outcome fields",
+  "provenance": "scripts/run_phase36_forensics.py",
+  "random_seed": 42,
+  "software_version": "3.12.3",
+  "split_identity": "canonical random/temporal plus predeclared Phase 3.5 folds where used",
+  "temporal_boundaries": "canonical random and temporal tests"
+}

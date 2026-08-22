@@ -1,0 +1,10 @@
+{
+  "files": {
+    "manifest.json": "e5dfe0a15b7a5183d088af91efcca0c11097c6bd1684e9194dde17b6884d2b37",
+    "protocol.json": "f05da66ed4cba20a5423063225386f9e23f01e798d455a16be8ba37ba7c3c2af",
+    "report.md": "40908f626a7577188fe945354081345566e29c17698d520a9a2cc054d169c2ae",
+    "results.json": "ce9d3f89d0779c0ec16dae009174096c569d3de18c1a709c61675c5f1a992b62",
+    "summary.json": "cd4f0525dc5bf599521fc9345ef1b14fff8eca0abe6e69f8c89c1af78356dd2b"
+  },
+  "immutable": true
+}

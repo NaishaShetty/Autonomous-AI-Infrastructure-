@@ -1,0 +1,6 @@
+{
+  "conclusion": "V1 robustness is partly explained, not proven: population/split composition and constrained linear inductive bias are supported contributors; feature dominance, group effects, and contamination remain unresolved.",
+  "decision": "HOLD",
+  "experiment_id": "phase36_e_cross_temporal_mechanism_synthesis",
+  "phase": "3.6"
+}

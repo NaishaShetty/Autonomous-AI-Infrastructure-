@@ -1,0 +1,7 @@
+{
+  "experiment_id": "phase36_b_v1_feature_forensics",
+  "hypothesis": "V1 robustness is concentrated in a small set of stable features or depends on regime proxies.",
+  "intervention": "Univariate analysis, leave-one-feature-out ablation, and coefficient extraction; no V1 modification.",
+  "selection_boundary": "explanatory only; no temporal-test feature selection",
+  "temporal_boundaries": "canonical random and temporal tests plus training copies"
+}

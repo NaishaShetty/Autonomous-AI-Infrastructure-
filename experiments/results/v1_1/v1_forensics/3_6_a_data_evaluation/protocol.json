@@ -1,0 +1,7 @@
+{
+  "experiment_id": "phase36_a_data_evaluation_forensics",
+  "hypothesis": "Population composition, prevalence, or evaluation structure contributes to the random-temporal AUROC difference.",
+  "intervention": "Descriptive and univariate forensic comparison only.",
+  "selection_boundary": "no model selection; canonical tests are read-only",
+  "temporal_boundaries": "canonical random and temporal test populations"
+}

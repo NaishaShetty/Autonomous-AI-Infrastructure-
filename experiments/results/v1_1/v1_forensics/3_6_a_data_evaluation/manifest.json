@@ -1,0 +1,43 @@
+{
+  "artifact_hashes": {
+    "plots/feature_shift_ks.png": "5b4c45debee588e43d282d7bdbb466e50620d5d2cf6443d8824347a1d4c2118a",
+    "protocol.json": "a02768cb4d2c1495d4f39603b499713b29dc367111b7ef19479212ccc202c975",
+    "report.md": "ab3825c5841304e725de8110a82d0973a961f3ed979550a74bb17c2c16bd2aa7",
+    "results.json": "7168946ed413a3e26c405bca9d87cad25438b824415396067eb35063340872e3",
+    "summary.json": "b3cffa1474a331f9e9e2afbb3f7c3e8bd6533a984061cf566dc6d06e11099c00"
+  },
+  "baseline": "Frozen V1 control; additive forensic copy only",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "random-stratified and canonical temporal future; no temporal-test tuning",
+  "experiment_id": "phase36_a_data_evaluation_forensics",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "Population composition, prevalence, or evaluation structure contributes to the random-temporal AUROC difference.",
+  "intervention": "Descriptive and univariate forensic comparison only.",
+  "model_identity": "research-only copy of frozen V1-compatible pipeline",
+  "phase": "3.6",
+  "preprocessing": "canonical phase3.1 loader; no post-outcome fields",
+  "provenance": "scripts/run_phase36_forensics.py",
+  "random_seed": 42,
+  "software_version": "3.12.3",
+  "split_identity": "canonical random/temporal plus predeclared Phase 3.5 folds where used",
+  "temporal_boundaries": "canonical random and temporal test populations"
+}

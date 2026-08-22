@@ -1,0 +1,85 @@
+{
+  "conclusion": "Flexible alternatives improve or match random interpolation but fail temporally; simple V1 is difficult to beat, but the contrast also shows alternatives can be unusually weak OOD models.",
+  "levels": {
+    "0_prevalence": {
+      "random": {
+        "auprc": 0.2588157019294744,
+        "auroc": 0.5,
+        "brier": 0.19183055678105643,
+        "count": 1503,
+        "ece": 0.000649936018803865
+      },
+      "temporal": {
+        "auprc": 0.4341736694677871,
+        "auroc": 0.5,
+        "brier": 0.300004923637933,
+        "count": 2499,
+        "ece": 0.23310518962320234
+      }
+    },
+    "1_v1_logistic": {
+      "random": {
+        "auprc": 0.537326980388299,
+        "auroc": 0.7347731374005991,
+        "brier": 0.1635426675275332,
+        "count": 1503,
+        "ece": 0.0988982668268682
+      },
+      "temporal": {
+        "auprc": 0.6354280714533036,
+        "auroc": 0.7930934238914346,
+        "brier": 0.27059898818888006,
+        "count": 2499,
+        "ece": 0.21911152544363569
+      }
+    },
+    "2_less_regularized_linear": {
+      "random": {
+        "auprc": 0.5349133031408232,
+        "auroc": 0.7347592916514749,
+        "brier": 0.16346415089513222,
+        "count": 1503,
+        "ece": 0.09953366487109376
+      },
+      "temporal": {
+        "auprc": 0.6334447406455508,
+        "auroc": 0.7912748746895757,
+        "brier": 0.27104129652366166,
+        "count": 2499,
+        "ece": 0.221163499183323
+      }
+    },
+    "3_constrained_rf": {
+      "random": {
+        "auprc": 0.5897641733880719,
+        "auroc": 0.7256060976679144,
+        "brier": 0.14530973478138806,
+        "count": 1503,
+        "ece": 0.024033559527845215
+      },
+      "temporal": {
+        "auprc": 0.4141764051977698,
+        "auroc": 0.33252823965740874,
+        "brier": 0.31301216693440653,
+        "count": 2499,
+        "ece": 0.2541905047611354
+      }
+    },
+    "4_gradient_boosting_prior": {
+      "random": {
+        "auprc": 0.7154703117843823,
+        "auroc": 0.8070064105818446,
+        "brier": 0.12252992885494901,
+        "count": 1503,
+        "ece": 0.029420341207155944
+      },
+      "temporal": {
+        "auprc": 0.40386423767118684,
+        "auroc": 0.2294050932413847,
+        "brier": 0.3426046279740288,
+        "count": 2499,
+        "ece": 0.3259613689022235
+      }
+    }
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "conclusion": "Temporal population has higher prevalence and different feature distributions; separability and protocol effects must be separated from robustness.",
+  "duplicates": {
+    "random": {
+      "exact_duplicate_rows": 0,
+      "unique_feature_vectors": 1503
+    },
+    "temporal": {
+      "exact_duplicate_rows": 15,
+      "unique_feature_vectors": 2484
+    }
+  },
+  "feature_shift_random_test_vs_temporal_test": {
+    "job_start_time": {
+      "ks": 0.7265469061876247,
+      "smd": 1.5954913443211207,
+      "wasserstein": 1770023.4620730528
+    },
+    "max_plan_cpu": {
+      "ks": 0.23690673874340154,
+      "smd": -0.32179697110687683,
+      "wasserstein": 174.7507825485484
+    },
+    "max_plan_gpu": {
+      "ks": 0.15952256682141583,
+      "smd": -0.16005405900157257,
+      "wasserstein": 12.16093975771226
+    },
+    "max_plan_mem": {
+      "ks": 0.04185466601810385,
+      "smd": 0.0026028829347329047,
+      "wasserstein": 1.6540728379675178
+    },
+    "mean_instance_start_time": {
+      "ks": 0.7265469061876247,
+      "smd": 1.595518073545687,
+      "wasserstein": 1769910.636358435
+    },
+    "mean_plan_cpu": {
+      "ks": 0.23677175461002764,
+      "smd": -0.31868066059610234,
+      "wasserstein": 171.61761777232522
+    },
+    "mean_plan_gpu": {
+      "ks": 0.15952256682141583,
+      "smd": -0.16005405900157257,
+      "wasserstein": 12.16093975771226
+    },
+    "mean_plan_mem": {
+      "ks": 0.04647847162817223,
+      "smd": 0.014782447735290579,
+      "wasserstein": 1.7108675660051085
+    },
+    "n_distinct_gpu_types": {
+      "ks": 0.006224445866170819,
+      "smd": 0.050228238623583735,
+      "wasserstein": 0.006359429999544692
+    },
+    "n_distinct_machines": {
+      "ks": 0.07150165455403719,
+      "smd": -0.033941258988495766,
+      "wasserstein": 0.947196443447642
+    },
+    "n_distinct_task_names": {
+      "ks": 0.047900996726035726,
+      "smd": -0.12910303360102757,
+      "wasserstein": 0.05079876261881999
+    },
+    "n_instances": {
+      "ks": 0.07720533323109682,
+      "smd": -0.031179028962200758,
+      "wasserstein": 1.548537179342806
+    },
+    "n_tasks": {
+      "ks": 0.047900996726035726,
+      "smd": -0.12910303360102757,
+      "wasserstein": 0.05079876261881999
+    },
+    "sum_inst_num": {
+      "ks": 0.06590899832987088,
+      "smd": -0.03611338402026542,
+      "wasserstein": 1.400366134477752
+    }
+  },
+  "group_composition": {
+    "random": {
+      "MISC": 994,
+      "P100": 95,
+      "T4": 320,
+      "UNKNOWN": 28,
+      "V100": 40,
+      "V100M32": 26
+    },
+    "temporal": {
+      "MISC": 2021,
+      "P100": 101,
+      "T4": 303,
+      "UNKNOWN": 31,
+      "V100": 31,
+      "V100M32": 12
+    }
+  },
+  "group_fields_available": [
+    "dominant_gpu_type"
+  ],
+  "population": {
+    "random": {
+      "failure_rate": 0.2588157019294744,
+      "feature_summary": {
+        "job_start_time": {
+          "mean": 4118786.121091151,
+          "median": 4334532.0,
+          "missingness": 0.0,
+          "q10": 1798556.6,
+          "q90": 5939967.0,
+          "std": 1546834.6766179956
+        },
+        "max_plan_cpu": {
+          "mean": 646.6806387225549,
+          "median": 600.0,
+          "missingness": 0.0,
+          "q10": 100.0,
+          "q90": 1000.0,
+          "std": 527.5937391588265
+        },
+        "max_plan_gpu": {
+          "mean": 66.31322033898306,
+          "median": 50.0,
+          "missingness": 0.018629407850964737,
+          "q10": 10.0,
+          "q90": 100.0,
+          "std": 61.53411477389084
+        },
+        "max_plan_mem": {
+          "mean": 30.07892678185296,
+          "median": 29.296875,
+          "missingness": 0.0,
+          "q10": 19.55078125,
+          "q90": 31.25,
+          "std": 15.37634187372639
+        },
+        "mean_instance_start_time": {
+          "mean": 4119079.317824047,
+          "median": 4334537.5,
+          "missingness": 0.0,
+          "q10": 1798569.8885714286,
+          "q90": 5939973.399999999,
+          "std": 1546696.846042601
+        },
+        "mean_plan_cpu": {
+          "mean": 630.8567309824795,
+          "median": 600.0,
+          "missingness": 0.0,
+          "q10": 100.0,
+          "q90": 1000.0,
+          "std": 523.4267630664045
+        },
+        "mean_plan_gpu": {
+          "mean": 66.31322033898306,
+          "median": 50.0,
+          "missingness": 0.018629407850964737,
+          "q10": 10.0,
+          "q90": 100.0,
+          "std": 61.53411477389084
+        },
+        "mean_plan_mem": {
+          "mean": 29.366160474190504,
+          "median": 29.296875,
+          "missingness": 0.0,
+          "q10": 19.53125,
+          "q90": 29.296875,
+          "std": 15.029247750892392
+        },
+        "n_distinct_gpu_types": {
+          "mean": 0.9820359281437125,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 1.0,
+          "std": 0.13778485820432632
+        },
+        "n_distinct_machines": {
+          "mean": 3.7704590818363273,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 8.0,
+          "std": 9.245714031460935
+        },
+        "n_distinct_task_names": {
+          "mean": 1.1756487025948104,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 2.0,
+          "std": 0.41894924559283186
+        },
+        "n_instances": {
+          "mean": 5.130405854956753,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 12.0,
+          "std": 13.124225687702493
+        },
+        "n_tasks": {
+          "mean": 1.1756487025948104,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 2.0,
+          "std": 0.41894924559283186
+        },
+        "sum_inst_num": {
+          "mean": 4.872920825016633,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 11.0,
+          "std": 12.566222131843352
+        }
+      },
+      "n": 1503,
+      "n_train": 6999,
+      "train_failure_rate": 0.2594656379482783
+    },
+    "temporal": {
+      "failure_rate": 0.4341736694677871,
+      "feature_summary": {
+        "job_start_time": {
+          "mean": 5888809.218887555,
+          "median": 5802273.0,
+          "missingness": 0.0,
+          "q10": 5605686.2,
+          "q90": 6314727.0,
+          "std": 262292.7457179354
+        },
+        "max_plan_cpu": {
+          "mean": 478.5602240896359,
+          "median": 600.0,
+          "missingness": 0.0,
+          "q10": 100.0,
+          "q90": 800.0,
+          "std": 517.2399652190516
+        },
+        "max_plan_gpu": {
+          "mean": 56.42017828200972,
+          "median": 25.0,
+          "missingness": 0.012404961984793917,
+          "q10": 10.0,
+          "q90": 100.0,
+          "std": 62.08591166838243
+        },
+        "max_plan_mem": {
+          "mean": 30.118976496848738,
+          "median": 29.296875,
+          "missingness": 0.0,
+          "q10": 29.296875,
+          "q90": 29.296875,
+          "std": 15.397002125299984
+        },
+        "mean_instance_start_time": {
+          "mean": 5888989.2654662775,
+          "median": 5802561.0,
+          "missingness": 0.0,
+          "q10": 5605695.8,
+          "q90": 6314737.4,
+          "std": 262348.45060067344
+        },
+        "mean_plan_cpu": {
+          "mean": 465.8694811257837,
+          "median": 600.0,
+          "missingness": 0.0,
+          "q10": 100.0,
+          "q90": 800.0,
+          "std": 511.94898117248056
+        },
+        "mean_plan_gpu": {
+          "mean": 56.42017828200972,
+          "median": 25.0,
+          "missingness": 0.012404961984793917,
+          "q10": 10.0,
+          "q90": 100.0,
+          "std": 62.08591166838243
+        },
+        "mean_plan_mem": {
+          "mean": 29.590491665416167,
+          "median": 29.296875,
+          "missingness": 0.0,
+          "q10": 24.601562500000004,
+          "q90": 29.296875,
+          "std": 15.320377004780951
+        },
+        "n_distinct_gpu_types": {
+          "mean": 0.9883953581432573,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 1.0,
+          "std": 0.11434966913781311
+        },
+        "n_distinct_machines": {
+          "mean": 3.4141656662665065,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 5.0,
+          "std": 11.614889579420002
+        },
+        "n_distinct_task_names": {
+          "mean": 1.1248499399759904,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 2.0,
+          "std": 0.3662322054566574
+        },
+        "n_instances": {
+          "mean": 4.635454181672669,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 6.200000000000273,
+          "std": 18.214130864642566
+        },
+        "n_tasks": {
+          "mean": 1.1248499399759904,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 2.0,
+          "std": 0.3662322054566574
+        },
+        "sum_inst_num": {
+          "mean": 4.328531412565026,
+          "median": 1.0,
+          "missingness": 0.0,
+          "q10": 1.0,
+          "q90": 6.0,
+          "std": 17.221154572675037
+        }
+      },
+      "n": 2499,
+      "n_train": 6177,
+      "train_failure_rate": 0.20106847984458476
+    }
+  },
+  "univariate": {
+    "random": {
+      "job_start_time": {
+        "auprc": 0.3119433305807332,
+        "auroc": 0.6142516603360826,
+        "direction": "positive"
+      },
+      "max_plan_cpu": {
+        "auprc": 0.2323148154590083,
+        "auroc": 0.6523874686739926,
+        "direction": "negative"
+      },
+      "max_plan_gpu": {
+        "auprc": 0.24952004951419915,
+        "auroc": 0.5659587534024413,
+        "direction": "negative"
+      },
+      "max_plan_mem": {
+        "auprc": 0.28647980833696307,
+        "auroc": 0.541863776289616,
+        "direction": "positive"
+      },
+      "mean_instance_start_time": {
+        "auprc": 0.3119215815879631,
+        "auroc": 0.6142158921508448,
+        "direction": "positive"
+      },
+      "mean_plan_cpu": {
+        "auprc": 0.235767123839257,
+        "auroc": 0.6423896839938525,
+        "direction": "negative"
+      },
+      "mean_plan_gpu": {
+        "auprc": 0.24952004951419915,
+        "auroc": 0.5659587534024413,
+        "direction": "negative"
+      },
+      "mean_plan_mem": {
+        "auprc": 0.2908178069994716,
+        "auroc": 0.5494535544345627,
+        "direction": "positive"
+      },
+      "n_distinct_gpu_types": {
+        "auprc": 0.2630399601940586,
+        "auroc": 0.5103854656556193,
+        "direction": "positive"
+      },
+      "n_distinct_machines": {
+        "auprc": 0.25047628720314735,
+        "auroc": 0.5484566604976162,
+        "direction": "negative"
+      },
+      "n_distinct_task_names": {
+        "auprc": 0.24841551879076834,
+        "auroc": 0.5464155663142154,
+        "direction": "negative"
+      },
+      "n_instances": {
+        "auprc": 0.24868859225098564,
+        "auroc": 0.5560522077046979,
+        "direction": "negative"
+      },
+      "n_tasks": {
+        "auprc": 0.24841551879076834,
+        "auroc": 0.5464155663142154,
+        "direction": "negative"
+      },
+      "sum_inst_num": {
+        "auprc": 0.24513566219125055,
+        "auroc": 0.5578186945304675,
+        "direction": "negative"
+      }
+    },
+    "temporal": {
+      "job_start_time": {
+        "auprc": 0.300725343597163,
+        "auroc": 0.77937608770752,
+        "direction": "negative"
+      },
+      "max_plan_cpu": {
+        "auprc": 0.3848979483655978,
+        "auroc": 0.8154335512550597,
+        "direction": "negative"
+      },
+      "max_plan_gpu": {
+        "auprc": 0.42315787060067417,
+        "auroc": 0.6698636765991937,
+        "direction": "negative"
+      },
+      "max_plan_mem": {
+        "auprc": 0.4530628472774665,
+        "auroc": 0.50402818425358,
+        "direction": "positive"
+      },
+      "mean_instance_start_time": {
+        "auprc": 0.3007684669132479,
+        "auroc": 0.779273753576806,
+        "direction": "negative"
+      },
+      "mean_plan_cpu": {
+        "auprc": 0.38520355029969344,
+        "auroc": 0.8134168518892706,
+        "direction": "negative"
+      },
+      "mean_plan_gpu": {
+        "auprc": 0.42315787060067417,
+        "auroc": 0.6698636765991937,
+        "direction": "negative"
+      },
+      "mean_plan_mem": {
+        "auprc": 0.4610696343210953,
+        "auroc": 0.5180606704515087,
+        "direction": "positive"
+      },
+      "n_distinct_gpu_types": {
+        "auprc": 0.43921738926134574,
+        "auroc": 0.5094408124156721,
+        "direction": "positive"
+      },
+      "n_distinct_machines": {
+        "auprc": 0.422427251516842,
+        "auroc": 0.581182904333883,
+        "direction": "negative"
+      },
+      "n_distinct_task_names": {
+        "auprc": 0.4230070427006535,
+        "auroc": 0.5653067742587293,
+        "direction": "negative"
+      },
+      "n_instances": {
+        "auprc": 0.421314832146183,
+        "auroc": 0.5878691687470261,
+        "direction": "negative"
+      },
+      "n_tasks": {
+        "auprc": 0.4230070427006535,
+        "auroc": 0.5653067742587293,
+        "direction": "negative"
+      },
+      "sum_inst_num": {
+        "auprc": 0.42008171436989056,
+        "auroc": 0.5865287219966236,
+        "direction": "negative"
+      }
+    }
+  }
+}

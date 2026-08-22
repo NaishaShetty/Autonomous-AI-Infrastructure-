@@ -1,0 +1,43 @@
+{
+  "artifact_hashes": {
+    "plots/feature_ablation.png": "fbc094a3eee00c6a2f7c9d990ea13239f13a284b8f756c96c784052cf9cf9215",
+    "protocol.json": "995005fe8b7c745f803772fdde26fda2a7991f48bd54bf022979052578834ca9",
+    "report.md": "05eb3f0235a5d83ff267d1549b94755ad8443e0841ad3d7d6354659d5bca51b0",
+    "results.json": "97f1bcd8441d855dbaf34ca6773428bb9d84fd53ccad76c4f32bd2b066281739",
+    "summary.json": "47ad7f65a22c028647fa32ed1e767e5bb9f2da3c0852642b1be6d36ef6f684ae"
+  },
+  "baseline": "Frozen V1 control; additive forensic copy only",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "random-stratified and canonical temporal future; no temporal-test tuning",
+  "experiment_id": "phase36_b_v1_feature_forensics",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "V1 robustness is concentrated in a small set of stable features or depends on regime proxies.",
+  "intervention": "Univariate analysis, leave-one-feature-out ablation, and coefficient extraction; no V1 modification.",
+  "model_identity": "research-only copy of frozen V1-compatible pipeline",
+  "phase": "3.6",
+  "preprocessing": "canonical phase3.1 loader; no post-outcome fields",
+  "provenance": "scripts/run_phase36_forensics.py",
+  "random_seed": 42,
+  "software_version": "3.12.3",
+  "split_identity": "canonical random/temporal plus predeclared Phase 3.5 folds where used",
+  "temporal_boundaries": "canonical random and temporal tests plus training copies"
+}

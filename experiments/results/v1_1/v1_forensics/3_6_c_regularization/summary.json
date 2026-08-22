@@ -1,0 +1,6 @@
+{
+  "conclusion": "Temporal results vary with regularization, but the small predeclared set does not establish causal superiority.",
+  "decision": null,
+  "experiment_id": "phase36_c_coefficient_regularization_forensics",
+  "phase": "3.6"
+}

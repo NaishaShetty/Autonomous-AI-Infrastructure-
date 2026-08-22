@@ -1,0 +1,7 @@
+{
+  "experiment_id": "phase36_d_complexity_inductive_bias_ladder",
+  "hypothesis": "Increasing model complexity improves interpolation while harming temporal generalization.",
+  "intervention": "Predeclared five-level ladder using existing baseline, V1, linear, constrained RF, and prior GB.",
+  "selection_boundary": "scientific comparison only; no temporal selection",
+  "temporal_boundaries": "canonical random and temporal tests"
+}

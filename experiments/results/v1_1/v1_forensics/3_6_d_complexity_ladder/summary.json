@@ -1,0 +1,6 @@
+{
+  "conclusion": "Flexible alternatives improve or match random interpolation but fail temporally; simple V1 is difficult to beat, but the contrast also shows alternatives can be unusually weak OOD models.",
+  "decision": null,
+  "experiment_id": "phase36_d_complexity_inductive_bias_ladder",
+  "phase": "3.6"
+}

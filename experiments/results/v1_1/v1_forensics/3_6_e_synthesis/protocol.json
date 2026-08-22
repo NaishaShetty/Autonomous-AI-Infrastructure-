@@ -1,0 +1,7 @@
+{
+  "experiment_id": "phase36_e_cross_temporal_mechanism_synthesis",
+  "hypothesis": "A\u2013D forensic evidence can distinguish model, feature, population, split, regularization, group, and artifact explanations.",
+  "intervention": "Synthesis only; no new model or optimization.",
+  "selection_boundary": "no post-hoc model improvement",
+  "temporal_boundaries": "all preceding registered boundaries"
+}

@@ -159,6 +159,14 @@ The complete fold definitions, per-fold results, policy analysis, plots, and imm
 
 **Phase 3.5 readiness decision: V1 remains the sole production-eligible control.** A future phase may study safety-constrained use of diagnostic uncertainty across additional forward folds, but must create a new experiment ID and preserve the frozen V1 boundary.
 
+## 19. Phase 3.6 V1 robustness and mechanism forensics readiness
+
+Phase 3.6 was completed as a forensic-only additive study. Five isolated records were created under `experiments/results/v1_1/v1_forensics/`: data/evaluation forensics, feature forensics, coefficient/regularization forensics, a controlled model-complexity ladder, and a cross-temporal synthesis.
+
+The evidence partially explains the random-versus-temporal behavior. The canonical populations differ in prevalence and feature distributions, and the controlled ladder shows the tested flexible alternatives improving or matching interpolation while failing on the temporal population. Feature ablations and coefficient analysis do not identify a single dominant feature or prove causality. Duplicate and group findings remain forensic cautions, not leakage claims. The result is classified as **partially genuine, dataset-dependent, and evaluation-dependent robustness; overall unresolved in causal mechanism**.
+
+**Phase 3.6 readiness decision: HOLD as a bounded forensic conclusion.** V1 remains byte-for-byte/behaviorally frozen and remains the sole production-eligible control. No feature removal, coefficient update, calibration change, threshold change, runtime change, or V1.1 integration was performed. The historical aggregate V1 result of 507 passed / 7 skipped / 0 failed remains preserved; the exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
+
 ## References
 [1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
 
@@ -169,3 +177,5 @@ The complete fold definitions, per-fold results, policy analysis, plots, and imm
 [4]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/PHASE3_BASELINE_AUDIT.md "Phase 3 baseline audit"
 
 [5]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/distribution_robust_uncertainty "Phase 3.5 distribution-robust uncertainty evidence"
+
+[6]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics "Phase 3.6 V1 robustness and mechanism forensics evidence"
