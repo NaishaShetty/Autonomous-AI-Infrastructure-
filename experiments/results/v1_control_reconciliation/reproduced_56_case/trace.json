@@ -1,0 +1,3202 @@
+[
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 0,
+    "condition": "C0_no_memory-case-0",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "9aff906ff98ec2c8",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.26536880142905045,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 0,
+    "condition": "C1_relevant_memory-case-0",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "4d46e66d694a0658",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.26536880142905045,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 0,
+    "condition": "C2_irrelevant_memory-case-0",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "5af40807370eb6d7",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.26536880142905045,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 0,
+    "condition": "C3_conflicting_memory-case-0",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "e359495880afaca4",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.26536880142905045,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 0,
+    "condition": "C4_negative_experience-case-0",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "bce5eb7a5e61c99c",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.26536880142905045,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 0,
+    "condition": "C5_safety_conflict-case-0",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "db6ae96f12dbb995",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.26536880142905045,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 0,
+    "condition": "C6_safe_fallback-case-0",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-0-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "d05bd3d3e78ba028",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "0017f66c16d3c8f5e1c70508",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-0-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 1,
+    "condition": "C0_no_memory-case-1",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "18fe8dbda25237da",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1763566146035096,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 1,
+    "condition": "C1_relevant_memory-case-1",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "8c9d756f7add02ce",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1763566146035096,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 1,
+    "condition": "C2_irrelevant_memory-case-1",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "7820373c94e874e4",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1763566146035096,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 1,
+    "condition": "C3_conflicting_memory-case-1",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "946289d3032fd9c4",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.1763566146035096,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 1,
+    "condition": "C4_negative_experience-case-1",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "2ad13b5ace9f1d93",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1763566146035096,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 1,
+    "condition": "C5_safety_conflict-case-1",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "8b79ab8963de848c",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.1763566146035096,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 1,
+    "condition": "C6_safe_fallback-case-1",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-1-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "eab6796d793fa5c9",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "004e6e6e6c5d7d21ebabde84",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-1-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 2,
+    "condition": "C0_no_memory-case-2",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "51887fddb6a6d8dd",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.34360761062383877,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 2,
+    "condition": "C1_relevant_memory-case-2",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "be52b193959ec9a8",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.34360761062383877,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 2,
+    "condition": "C2_irrelevant_memory-case-2",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "c24ba1bc0032a9b6",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.34360761062383877,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 2,
+    "condition": "C3_conflicting_memory-case-2",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "1f7a6c0f3d5b1218",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.34360761062383877,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 2,
+    "condition": "C4_negative_experience-case-2",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "47ff9378956d2a6f",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.34360761062383877,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 2,
+    "condition": "C5_safety_conflict-case-2",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "d6a784125530b5d7",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.34360761062383877,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 2,
+    "condition": "C6_safe_fallback-case-2",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-2-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "be68fd64bf7af171",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "00b022b6b524f270a415aa54",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-2-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 3,
+    "condition": "C0_no_memory-case-3",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "ab785f930f181073",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.15633735017087302,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 3,
+    "condition": "C1_relevant_memory-case-3",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "d9da8c3333433d4f",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.15633735017087302,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 3,
+    "condition": "C2_irrelevant_memory-case-3",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "c28624a5d45cc5ed",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.15633735017087302,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 3,
+    "condition": "C3_conflicting_memory-case-3",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "d3265134782796fd",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.15633735017087302,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 3,
+    "condition": "C4_negative_experience-case-3",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "74c17a130bed377b",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.15633735017087302,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 3,
+    "condition": "C5_safety_conflict-case-3",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "e1b7e5678ba694a1",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.15633735017087302,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 3,
+    "condition": "C6_safe_fallback-case-3",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-3-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "2f7d437d8d492e26",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "00e8ecc76ad6f5463024e7e4",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-3-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 4,
+    "condition": "C0_no_memory-case-4",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "0a75d3d04cebf44f",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.11669709296795161,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 4,
+    "condition": "C1_relevant_memory-case-4",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "d7894f1d0c3ce010",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.11669709296795161,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 4,
+    "condition": "C2_irrelevant_memory-case-4",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "f9352aabc0dc328f",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.11669709296795161,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 4,
+    "condition": "C3_conflicting_memory-case-4",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "c7af81a4cb4195af",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.11669709296795161,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 4,
+    "condition": "C4_negative_experience-case-4",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "6ac04dcf9e76c15f",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.11669709296795161,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 4,
+    "condition": "C5_safety_conflict-case-4",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "f6575ff589b68438",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.11669709296795161,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 4,
+    "condition": "C6_safe_fallback-case-4",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-4-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "c56b66d06c5ebb7b",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "0127d190101ac32a1cd83e49",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-4-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 5,
+    "condition": "C0_no_memory-case-5",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "025c0a85c64e10b6",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1675776026285747,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 5,
+    "condition": "C1_relevant_memory-case-5",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "269565c8552f7a1f",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1675776026285747,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 5,
+    "condition": "C2_irrelevant_memory-case-5",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "14fe18007c4f2e2b",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1675776026285747,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 5,
+    "condition": "C3_conflicting_memory-case-5",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "a18c801428f8d534",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.1675776026285747,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 5,
+    "condition": "C4_negative_experience-case-5",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "2b8c5f9ebbbfa90d",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.1675776026285747,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 5,
+    "condition": "C5_safety_conflict-case-5",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "642d36dec389cce5",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.1675776026285747,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 5,
+    "condition": "C6_safe_fallback-case-5",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-5-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "9c89d48656ef9de9",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "014fdb2915e0b2f5edc715b0",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-5-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 6,
+    "condition": "C0_no_memory-case-6",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "850d2b5aa338878e",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.47297629674913466,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 6,
+    "condition": "C1_relevant_memory-case-6",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "73075173842d627e",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.47297629674913466,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 6,
+    "condition": "C2_irrelevant_memory-case-6",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "95cd91730978abc4",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.47297629674913466,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 6,
+    "condition": "C3_conflicting_memory-case-6",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "a0d3292aedf286bb",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.47297629674913466,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 6,
+    "condition": "C4_negative_experience-case-6",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "50689f52440559a7",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.47297629674913466,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 6,
+    "condition": "C5_safety_conflict-case-6",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "9b734bd83ad8f4ec",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.47297629674913466,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 6,
+    "condition": "C6_safe_fallback-case-6",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-6-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "a67a45cec28f585f",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "015d8242cfe19b105ed845fe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-6-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 7,
+    "condition": "C0_no_memory-case-7",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C0_no_memory-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "81ec7536fbf0ca60",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C0_no_memory-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.2801973920057662,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 7,
+    "condition": "C1_relevant_memory-case-7",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C1_relevant_memory-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "retry",
+    "experience_id": "d4815af84e25516e",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C1_relevant_memory-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.2801973920057662,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ANSWER",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 7,
+    "condition": "C2_irrelevant_memory-case-7",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C2_irrelevant_memory-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.6,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.4
+    },
+    "executed_action": "retry",
+    "experience_id": "a4c2aadf68150415",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C2_irrelevant_memory-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "retry"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.2801973920057662,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 7,
+    "condition": "C3_conflicting_memory-case-7",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C3_conflicting_memory-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "5fecaa4830162a4f",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C3_conflicting_memory-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 2,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.2801973920057662,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 7,
+    "condition": "C4_negative_experience-case-7",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C4_negative_experience-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": "reconfigure",
+    "experience_id": "fbf97d4a04353aaf",
+    "experience_persisted": true,
+    "final_outcome": "CORRECT",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C4_negative_experience-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "reconfigure"
+    ],
+    "recovery_success": true,
+    "retrieved_experiences": 1,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": "RECOVERED",
+    "workload_failure_risk": 0.2801973920057662,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "case_index": 7,
+    "condition": "C5_safety_conflict-case-7",
+    "decision_quality": "safe_abstention",
+    "detection": {
+      "detected": true,
+      "detector_version": "observation-detector-v2",
+      "failure_type": "error_rate_failure",
+      "provenance": {
+        "observation_id": "C5_safety_conflict-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": "medium"
+    },
+    "diagnosis": {
+      "confidence": 0.8,
+      "failure_type": "error_rate_failure",
+      "uncertainty": 0.19999999999999996
+    },
+    "executed_action": null,
+    "experience_id": "0529a1151cd9272b",
+    "experience_persisted": true,
+    "final_outcome": "INCORRECT",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.9886964482197877,
+    "memory_version": 2,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "model_version": "v2.0.0",
+    "observation_id": "C5_safety_conflict-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [
+      "abstain"
+    ],
+    "recovery_success": false,
+    "retrieved_experiences": 1,
+    "safety_decision": "rejected",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 0.152317880794702,
+    "unsafe_execution": false,
+    "unsafe_proposal": true,
+    "validation": null,
+    "workload_failure_risk": 0.2801973920057662,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  },
+  {
+    "abstention_decision": "ABSTAIN",
+    "artifact_hash": null,
+    "case_index": 7,
+    "condition": "C6_safe_fallback-case-7",
+    "decision_quality": "executed_or_answered",
+    "detection": {
+      "detected": false,
+      "detector_version": "observation-detector-v2",
+      "failure_type": null,
+      "provenance": {
+        "observation_id": "C6_safe_fallback-case-7-episode-2",
+        "source_type": "dataset_replay"
+      },
+      "severity": null
+    },
+    "diagnosis": null,
+    "executed_action": null,
+    "experience_id": "055e13cb2d985df0",
+    "experience_persisted": false,
+    "final_outcome": "UNKNOWN",
+    "job_id": "0178122889b6b038503abdbe",
+    "lineage": {
+      "episode_order": "episode-2-after-episode-1",
+      "protocol": "alibaba-closed-loop-v1"
+    },
+    "memory_risk": 0.0,
+    "memory_version": 0,
+    "model_id": "unconfigured",
+    "model_version": "none",
+    "observation_id": "C6_safe_fallback-case-7-episode-2",
+    "provenance": {
+      "dataset_id": "alibaba_gpu2020",
+      "role": "integration_replay",
+      "source_type": "dataset_replay",
+      "split": "random_stratified"
+    },
+    "recovery_candidates": [],
+    "recovery_success": false,
+    "retrieved_experiences": 0,
+    "safety_decision": "accepted_or_not_reached",
+    "source_type": "dataset_replay",
+    "timestamps": {
+      "trace_created": "deterministic-experiment-output"
+    },
+    "uncertainty": 1.0,
+    "unsafe_execution": false,
+    "unsafe_proposal": false,
+    "validation": null,
+    "workload_failure_risk": null,
+    "workload_id": "alibaba-gpu2020-closed-loop"
+  }
+]

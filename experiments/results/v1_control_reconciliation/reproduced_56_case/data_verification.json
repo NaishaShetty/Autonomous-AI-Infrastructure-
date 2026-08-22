@@ -1,0 +1,1078 @@
+{
+  "archive_checksums_match": true,
+  "archive_identity": {
+    "pai_group_tag_table.tar.gz": "722fef30b7fb7aa50dabd79155614b5423a9d65cf45a9b26c590d57725423a14",
+    "pai_instance_table.tar.gz": "1bf1e423a7ce3f8d086699801c362fd56a7182abdb234139e5ebbed97995ca06",
+    "pai_job_table.tar.gz": "5aad7f7caac501136d14ed6a48e40546f825d7b0617a3a4f337e2348fe0a6cb0",
+    "pai_machine_metric.tar.gz": "53ad917193d3b1dd0f3055e723148b1f36c2f81789b014ea2930a7875892eef5",
+    "pai_machine_spec.tar.gz": "cc0d38a4045af1b1af8179de8b1b54b1ddd995e6160d6d061a6b1000f1276c2d",
+    "pai_sensor_table.tar.gz": "9a0b82e8bdf3949281e4ba1423d9b4b34847e52799eecb138966de46da69c7a0",
+    "pai_task_table.tar.gz": "cd1d6dc3215d2a8607ccf6b6dd952b5db776df86926c73259fea7c1499ac40e5"
+  },
+  "expected_identity": {
+    "failed_terminal_jobs": 256762,
+    "instances": 7522002,
+    "jobs": 1055501,
+    "machine_metric_rows": 2009423,
+    "sensor_rows": 3033232,
+    "tasks": 1261050,
+    "terminal_jobs": 988910
+  },
+  "preprocessing_pipeline": [
+    "clean_alibaba_job_task.py",
+    "alibaba_power_analysis.py",
+    "alibaba_stratified_sampling.py",
+    "alibaba_extract_linked_records.py",
+    "alibaba_build_splits.py"
+  ],
+  "preprocessing_version": "repository commit 2cd669c; established scripts unchanged",
+  "processed_tables": {
+    "instance_table.main_sample.csv": {
+      "bytes": 16186944,
+      "columns": [
+        "job_name",
+        "task_name",
+        "inst_name",
+        "worker_name",
+        "inst_id",
+        "status",
+        "start_time",
+        "end_time",
+        "machine"
+      ],
+      "rows": 60005,
+      "sha256": "92508988bf370cd6fb4fa731693f48043b20a8b6a4297d113002b06407226892"
+    },
+    "job_table.clean.csv": {
+      "bytes": 141676614,
+      "columns": [
+        "_source_row_index",
+        "job_name",
+        "inst_id",
+        "user",
+        "status",
+        "start_time",
+        "end_time"
+      ],
+      "rows": 1055501,
+      "sha256": "745594d87b5f36199ce912102dd4fc3e086583db9d962bfa417a74f90c2c591e"
+    },
+    "machine_metric.main_sample.csv": {
+      "bytes": 4346867,
+      "columns": [
+        "worker_name",
+        "machine",
+        "start_time",
+        "end_time",
+        "machine_cpu_iowait",
+        "machine_cpu_kernel",
+        "machine_cpu_usr",
+        "machine_gpu",
+        "machine_load_1",
+        "machine_net_receive",
+        "machine_num_worker",
+        "machine_cpu"
+      ],
+      "rows": 19841,
+      "sha256": "6b486b6c87fa3acc9b95db9927d3717e6520539f6ea9ca49b66ac823ff15d5ea"
+    },
+    "sensor_table.main_sample.csv": {
+      "bytes": 9229394,
+      "columns": [
+        "job_name",
+        "task_name",
+        "worker_name",
+        "inst_id",
+        "machine",
+        "gpu_name",
+        "cpu_usage",
+        "gpu_wrk_util",
+        "avg_mem",
+        "max_mem",
+        "avg_gpu_wrk_mem",
+        "max_gpu_wrk_mem",
+        "read",
+        "write",
+        "read_count",
+        "write_count"
+      ],
+      "rows": 26350,
+      "sha256": "bfa695904a17c1e873da5b46bc76e7deedd59415c46b283c05559621f91806b2"
+    },
+    "task_table.clean.csv": {
+      "bytes": 123637406,
+      "columns": [
+        "_source_row_index",
+        "job_name",
+        "task_name",
+        "inst_num",
+        "status",
+        "start_time",
+        "end_time",
+        "plan_cpu",
+        "plan_mem",
+        "plan_gpu",
+        "gpu_type"
+      ],
+      "rows": 1261050,
+      "sha256": "61fb3b40a1eff60296651dbc4020523efeb614918bd81bd027d032df0072984e"
+    },
+    "task_table.main_sample.csv": {
+      "bytes": 1166053,
+      "columns": [
+        "_source_row_index",
+        "job_name",
+        "task_name",
+        "inst_num",
+        "status",
+        "start_time",
+        "end_time",
+        "plan_cpu",
+        "plan_mem",
+        "plan_gpu",
+        "gpu_type"
+      ],
+      "rows": 11750,
+      "sha256": "ba8370c0f966255714c191c420eb51ad064994b43ac7bdd38b6c286565a370cb"
+    }
+  },
+  "provenance": "Official Alibaba ClusterData GPU2020 source; raw archives restored from documented OSS endpoint and matched publisher SHA-256 values; derived files remain ignored per project policy",
+  "publisher_checksums": {
+    "pai_group_tag_table.tar.gz": "722fef30b7fb7aa50dabd79155614b5423a9d65cf45a9b26c590d57725423a14",
+    "pai_instance_table.tar.gz": "1bf1e423a7ce3f8d086699801c362fd56a7182abdb234139e5ebbed97995ca06",
+    "pai_job_table.tar.gz": "5aad7f7caac501136d14ed6a48e40546f825d7b0617a3a4f337e2348fe0a6cb0",
+    "pai_machine_metric.tar.gz": "53ad917193d3b1dd0f3055e723148b1f36c2f81789b014ea2930a7875892eef5",
+    "pai_machine_spec.tar.gz": "cc0d38a4045af1b1af8179de8b1b54b1ddd995e6160d6d061a6b1000f1276c2d",
+    "pai_sensor_table.tar.gz": "9a0b82e8bdf3949281e4ba1423d9b4b34847e52799eecb138966de46da69c7a0",
+    "pai_task_table.tar.gz": "cd1d6dc3215d2a8607ccf6b6dd952b5db776df86926c73259fea7c1499ac40e5"
+  },
+  "sampling_configuration": {
+    "allocation": "proportional to stratum share of eligible population",
+    "seed": 42,
+    "selection_algorithm": "per-stratum lexicographic sort of job_name, then random.Random(seed).sample()",
+    "tiers": {
+      "main": {
+        "actual_n": 10000,
+        "output_file": "data/audit/alibaba_gpu2020/sample_job_ids_main.txt",
+        "strata_allocation": {
+          "Failed|MISC|Q1": {
+            "available": 22256,
+            "selected": 225,
+            "target": 225
+          },
+          "Failed|MISC|Q2": {
+            "available": 37031,
+            "selected": 374,
+            "target": 374
+          },
+          "Failed|MISC|Q3": {
+            "available": 28516,
+            "selected": 288,
+            "target": 288
+          },
+          "Failed|MISC|Q4": {
+            "available": 99139,
+            "selected": 1003,
+            "target": 1003
+          },
+          "Failed|MIXED|Q1": {
+            "available": 7141,
+            "selected": 72,
+            "target": 72
+          },
+          "Failed|MIXED|Q2": {
+            "available": 6677,
+            "selected": 68,
+            "target": 68
+          },
+          "Failed|MIXED|Q3": {
+            "available": 5190,
+            "selected": 52,
+            "target": 52
+          },
+          "Failed|MIXED|Q4": {
+            "available": 3746,
+            "selected": 38,
+            "target": 38
+          },
+          "Failed|P100|Q1": {
+            "available": 2506,
+            "selected": 25,
+            "target": 25
+          },
+          "Failed|P100|Q2": {
+            "available": 3346,
+            "selected": 34,
+            "target": 34
+          },
+          "Failed|P100|Q3": {
+            "available": 5716,
+            "selected": 58,
+            "target": 58
+          },
+          "Failed|P100|Q4": {
+            "available": 1101,
+            "selected": 11,
+            "target": 11
+          },
+          "Failed|T4|Q1": {
+            "available": 7920,
+            "selected": 80,
+            "target": 80
+          },
+          "Failed|T4|Q2": {
+            "available": 5799,
+            "selected": 59,
+            "target": 59
+          },
+          "Failed|T4|Q3": {
+            "available": 3671,
+            "selected": 37,
+            "target": 37
+          },
+          "Failed|T4|Q4": {
+            "available": 1911,
+            "selected": 19,
+            "target": 19
+          },
+          "Failed|UNSPECIFIED|Q1": {
+            "available": 328,
+            "selected": 3,
+            "target": 3
+          },
+          "Failed|UNSPECIFIED|Q2": {
+            "available": 405,
+            "selected": 4,
+            "target": 4
+          },
+          "Failed|UNSPECIFIED|Q3": {
+            "available": 396,
+            "selected": 4,
+            "target": 4
+          },
+          "Failed|UNSPECIFIED|Q4": {
+            "available": 204,
+            "selected": 2,
+            "target": 2
+          },
+          "Failed|V100M32|Q1": {
+            "available": 1152,
+            "selected": 12,
+            "target": 12
+          },
+          "Failed|V100M32|Q2": {
+            "available": 1553,
+            "selected": 16,
+            "target": 16
+          },
+          "Failed|V100M32|Q3": {
+            "available": 2851,
+            "selected": 29,
+            "target": 29
+          },
+          "Failed|V100M32|Q4": {
+            "available": 373,
+            "selected": 4,
+            "target": 4
+          },
+          "Failed|V100|Q1": {
+            "available": 1509,
+            "selected": 15,
+            "target": 15
+          },
+          "Failed|V100|Q2": {
+            "available": 2047,
+            "selected": 21,
+            "target": 21
+          },
+          "Failed|V100|Q3": {
+            "available": 3168,
+            "selected": 32,
+            "target": 32
+          },
+          "Failed|V100|Q4": {
+            "available": 903,
+            "selected": 9,
+            "target": 9
+          },
+          "Terminated|MISC|Q1": {
+            "available": 104112,
+            "selected": 1053,
+            "target": 1053
+          },
+          "Terminated|MISC|Q2": {
+            "available": 92159,
+            "selected": 932,
+            "target": 932
+          },
+          "Terminated|MISC|Q3": {
+            "available": 100840,
+            "selected": 1020,
+            "target": 1020
+          },
+          "Terminated|MISC|Q4": {
+            "available": 85407,
+            "selected": 864,
+            "target": 864
+          },
+          "Terminated|MIXED|Q1": {
+            "available": 34340,
+            "selected": 347,
+            "target": 347
+          },
+          "Terminated|MIXED|Q2": {
+            "available": 30958,
+            "selected": 313,
+            "target": 313
+          },
+          "Terminated|MIXED|Q3": {
+            "available": 30174,
+            "selected": 305,
+            "target": 305
+          },
+          "Terminated|MIXED|Q4": {
+            "available": 19307,
+            "selected": 195,
+            "target": 195
+          },
+          "Terminated|P100|Q1": {
+            "available": 9537,
+            "selected": 96,
+            "target": 96
+          },
+          "Terminated|P100|Q2": {
+            "available": 10582,
+            "selected": 107,
+            "target": 107
+          },
+          "Terminated|P100|Q3": {
+            "available": 13376,
+            "selected": 135,
+            "target": 135
+          },
+          "Terminated|P100|Q4": {
+            "available": 6378,
+            "selected": 64,
+            "target": 64
+          },
+          "Terminated|T4|Q1": {
+            "available": 45872,
+            "selected": 464,
+            "target": 464
+          },
+          "Terminated|T4|Q2": {
+            "available": 44440,
+            "selected": 449,
+            "target": 449
+          },
+          "Terminated|T4|Q3": {
+            "available": 40529,
+            "selected": 410,
+            "target": 410
+          },
+          "Terminated|T4|Q4": {
+            "available": 22922,
+            "selected": 232,
+            "target": 232
+          },
+          "Terminated|UNSPECIFIED|Q1": {
+            "available": 5127,
+            "selected": 52,
+            "target": 52
+          },
+          "Terminated|UNSPECIFIED|Q2": {
+            "available": 5405,
+            "selected": 55,
+            "target": 55
+          },
+          "Terminated|UNSPECIFIED|Q3": {
+            "available": 4847,
+            "selected": 49,
+            "target": 49
+          },
+          "Terminated|UNSPECIFIED|Q4": {
+            "available": 3147,
+            "selected": 32,
+            "target": 32
+          },
+          "Terminated|V100M32|Q1": {
+            "available": 1971,
+            "selected": 20,
+            "target": 20
+          },
+          "Terminated|V100M32|Q2": {
+            "available": 2148,
+            "selected": 22,
+            "target": 22
+          },
+          "Terminated|V100M32|Q3": {
+            "available": 3187,
+            "selected": 32,
+            "target": 32
+          },
+          "Terminated|V100M32|Q4": {
+            "available": 761,
+            "selected": 8,
+            "target": 8
+          },
+          "Terminated|V100|Q1": {
+            "available": 3457,
+            "selected": 35,
+            "target": 35
+          },
+          "Terminated|V100|Q2": {
+            "available": 4678,
+            "selected": 47,
+            "target": 47
+          },
+          "Terminated|V100|Q3": {
+            "available": 4766,
+            "selected": 48,
+            "target": 48
+          },
+          "Terminated|V100|Q4": {
+            "available": 1928,
+            "selected": 20,
+            "target": 20
+          }
+        },
+        "target_n": 10000
+      },
+      "pilot": {
+        "actual_n": 2000,
+        "output_file": "data/audit/alibaba_gpu2020/sample_job_ids_pilot.txt",
+        "strata_allocation": {
+          "Failed|MISC|Q1": {
+            "available": 22256,
+            "selected": 45,
+            "target": 45
+          },
+          "Failed|MISC|Q2": {
+            "available": 37031,
+            "selected": 75,
+            "target": 75
+          },
+          "Failed|MISC|Q3": {
+            "available": 28516,
+            "selected": 58,
+            "target": 58
+          },
+          "Failed|MISC|Q4": {
+            "available": 99139,
+            "selected": 201,
+            "target": 201
+          },
+          "Failed|MIXED|Q1": {
+            "available": 7141,
+            "selected": 14,
+            "target": 14
+          },
+          "Failed|MIXED|Q2": {
+            "available": 6677,
+            "selected": 14,
+            "target": 14
+          },
+          "Failed|MIXED|Q3": {
+            "available": 5190,
+            "selected": 10,
+            "target": 10
+          },
+          "Failed|MIXED|Q4": {
+            "available": 3746,
+            "selected": 8,
+            "target": 8
+          },
+          "Failed|P100|Q1": {
+            "available": 2506,
+            "selected": 5,
+            "target": 5
+          },
+          "Failed|P100|Q2": {
+            "available": 3346,
+            "selected": 7,
+            "target": 7
+          },
+          "Failed|P100|Q3": {
+            "available": 5716,
+            "selected": 12,
+            "target": 12
+          },
+          "Failed|P100|Q4": {
+            "available": 1101,
+            "selected": 2,
+            "target": 2
+          },
+          "Failed|T4|Q1": {
+            "available": 7920,
+            "selected": 16,
+            "target": 16
+          },
+          "Failed|T4|Q2": {
+            "available": 5799,
+            "selected": 12,
+            "target": 12
+          },
+          "Failed|T4|Q3": {
+            "available": 3671,
+            "selected": 7,
+            "target": 7
+          },
+          "Failed|T4|Q4": {
+            "available": 1911,
+            "selected": 4,
+            "target": 4
+          },
+          "Failed|UNSPECIFIED|Q1": {
+            "available": 328,
+            "selected": 1,
+            "target": 1
+          },
+          "Failed|UNSPECIFIED|Q2": {
+            "available": 405,
+            "selected": 1,
+            "target": 1
+          },
+          "Failed|UNSPECIFIED|Q3": {
+            "available": 396,
+            "selected": 1,
+            "target": 1
+          },
+          "Failed|UNSPECIFIED|Q4": {
+            "available": 204,
+            "selected": 0,
+            "target": 0
+          },
+          "Failed|V100M32|Q1": {
+            "available": 1152,
+            "selected": 2,
+            "target": 2
+          },
+          "Failed|V100M32|Q2": {
+            "available": 1553,
+            "selected": 3,
+            "target": 3
+          },
+          "Failed|V100M32|Q3": {
+            "available": 2851,
+            "selected": 6,
+            "target": 6
+          },
+          "Failed|V100M32|Q4": {
+            "available": 373,
+            "selected": 1,
+            "target": 1
+          },
+          "Failed|V100|Q1": {
+            "available": 1509,
+            "selected": 3,
+            "target": 3
+          },
+          "Failed|V100|Q2": {
+            "available": 2047,
+            "selected": 4,
+            "target": 4
+          },
+          "Failed|V100|Q3": {
+            "available": 3168,
+            "selected": 6,
+            "target": 6
+          },
+          "Failed|V100|Q4": {
+            "available": 903,
+            "selected": 2,
+            "target": 2
+          },
+          "Terminated|MISC|Q1": {
+            "available": 104112,
+            "selected": 211,
+            "target": 211
+          },
+          "Terminated|MISC|Q2": {
+            "available": 92159,
+            "selected": 186,
+            "target": 186
+          },
+          "Terminated|MISC|Q3": {
+            "available": 100840,
+            "selected": 204,
+            "target": 204
+          },
+          "Terminated|MISC|Q4": {
+            "available": 85407,
+            "selected": 173,
+            "target": 173
+          },
+          "Terminated|MIXED|Q1": {
+            "available": 34340,
+            "selected": 69,
+            "target": 69
+          },
+          "Terminated|MIXED|Q2": {
+            "available": 30958,
+            "selected": 63,
+            "target": 63
+          },
+          "Terminated|MIXED|Q3": {
+            "available": 30174,
+            "selected": 61,
+            "target": 61
+          },
+          "Terminated|MIXED|Q4": {
+            "available": 19307,
+            "selected": 39,
+            "target": 39
+          },
+          "Terminated|P100|Q1": {
+            "available": 9537,
+            "selected": 19,
+            "target": 19
+          },
+          "Terminated|P100|Q2": {
+            "available": 10582,
+            "selected": 21,
+            "target": 21
+          },
+          "Terminated|P100|Q3": {
+            "available": 13376,
+            "selected": 27,
+            "target": 27
+          },
+          "Terminated|P100|Q4": {
+            "available": 6378,
+            "selected": 13,
+            "target": 13
+          },
+          "Terminated|T4|Q1": {
+            "available": 45872,
+            "selected": 93,
+            "target": 93
+          },
+          "Terminated|T4|Q2": {
+            "available": 44440,
+            "selected": 90,
+            "target": 90
+          },
+          "Terminated|T4|Q3": {
+            "available": 40529,
+            "selected": 82,
+            "target": 82
+          },
+          "Terminated|T4|Q4": {
+            "available": 22922,
+            "selected": 46,
+            "target": 46
+          },
+          "Terminated|UNSPECIFIED|Q1": {
+            "available": 5127,
+            "selected": 10,
+            "target": 10
+          },
+          "Terminated|UNSPECIFIED|Q2": {
+            "available": 5405,
+            "selected": 11,
+            "target": 11
+          },
+          "Terminated|UNSPECIFIED|Q3": {
+            "available": 4847,
+            "selected": 10,
+            "target": 10
+          },
+          "Terminated|UNSPECIFIED|Q4": {
+            "available": 3147,
+            "selected": 6,
+            "target": 6
+          },
+          "Terminated|V100M32|Q1": {
+            "available": 1971,
+            "selected": 4,
+            "target": 4
+          },
+          "Terminated|V100M32|Q2": {
+            "available": 2148,
+            "selected": 4,
+            "target": 4
+          },
+          "Terminated|V100M32|Q3": {
+            "available": 3187,
+            "selected": 6,
+            "target": 6
+          },
+          "Terminated|V100M32|Q4": {
+            "available": 761,
+            "selected": 2,
+            "target": 2
+          },
+          "Terminated|V100|Q1": {
+            "available": 3457,
+            "selected": 7,
+            "target": 7
+          },
+          "Terminated|V100|Q2": {
+            "available": 4678,
+            "selected": 9,
+            "target": 9
+          },
+          "Terminated|V100|Q3": {
+            "available": 4766,
+            "selected": 10,
+            "target": 10
+          },
+          "Terminated|V100|Q4": {
+            "available": 1928,
+            "selected": 4,
+            "target": 4
+          }
+        },
+        "target_n": 2000
+      },
+      "robustness": {
+        "actual_n": 50000,
+        "output_file": "data/audit/alibaba_gpu2020/sample_job_ids_robustness.txt",
+        "strata_allocation": {
+          "Failed|MISC|Q1": {
+            "available": 22256,
+            "selected": 1125,
+            "target": 1125
+          },
+          "Failed|MISC|Q2": {
+            "available": 37031,
+            "selected": 1872,
+            "target": 1872
+          },
+          "Failed|MISC|Q3": {
+            "available": 28516,
+            "selected": 1442,
+            "target": 1442
+          },
+          "Failed|MISC|Q4": {
+            "available": 99139,
+            "selected": 5013,
+            "target": 5013
+          },
+          "Failed|MIXED|Q1": {
+            "available": 7141,
+            "selected": 361,
+            "target": 361
+          },
+          "Failed|MIXED|Q2": {
+            "available": 6677,
+            "selected": 338,
+            "target": 338
+          },
+          "Failed|MIXED|Q3": {
+            "available": 5190,
+            "selected": 262,
+            "target": 262
+          },
+          "Failed|MIXED|Q4": {
+            "available": 3746,
+            "selected": 189,
+            "target": 189
+          },
+          "Failed|P100|Q1": {
+            "available": 2506,
+            "selected": 127,
+            "target": 127
+          },
+          "Failed|P100|Q2": {
+            "available": 3346,
+            "selected": 169,
+            "target": 169
+          },
+          "Failed|P100|Q3": {
+            "available": 5716,
+            "selected": 289,
+            "target": 289
+          },
+          "Failed|P100|Q4": {
+            "available": 1101,
+            "selected": 56,
+            "target": 56
+          },
+          "Failed|T4|Q1": {
+            "available": 7920,
+            "selected": 400,
+            "target": 400
+          },
+          "Failed|T4|Q2": {
+            "available": 5799,
+            "selected": 293,
+            "target": 293
+          },
+          "Failed|T4|Q3": {
+            "available": 3671,
+            "selected": 186,
+            "target": 186
+          },
+          "Failed|T4|Q4": {
+            "available": 1911,
+            "selected": 97,
+            "target": 97
+          },
+          "Failed|UNSPECIFIED|Q1": {
+            "available": 328,
+            "selected": 17,
+            "target": 17
+          },
+          "Failed|UNSPECIFIED|Q2": {
+            "available": 405,
+            "selected": 20,
+            "target": 20
+          },
+          "Failed|UNSPECIFIED|Q3": {
+            "available": 396,
+            "selected": 20,
+            "target": 20
+          },
+          "Failed|UNSPECIFIED|Q4": {
+            "available": 204,
+            "selected": 10,
+            "target": 10
+          },
+          "Failed|V100M32|Q1": {
+            "available": 1152,
+            "selected": 58,
+            "target": 58
+          },
+          "Failed|V100M32|Q2": {
+            "available": 1553,
+            "selected": 79,
+            "target": 79
+          },
+          "Failed|V100M32|Q3": {
+            "available": 2851,
+            "selected": 144,
+            "target": 144
+          },
+          "Failed|V100M32|Q4": {
+            "available": 373,
+            "selected": 19,
+            "target": 19
+          },
+          "Failed|V100|Q1": {
+            "available": 1509,
+            "selected": 76,
+            "target": 76
+          },
+          "Failed|V100|Q2": {
+            "available": 2047,
+            "selected": 104,
+            "target": 104
+          },
+          "Failed|V100|Q3": {
+            "available": 3168,
+            "selected": 160,
+            "target": 160
+          },
+          "Failed|V100|Q4": {
+            "available": 903,
+            "selected": 46,
+            "target": 46
+          },
+          "Terminated|MISC|Q1": {
+            "available": 104112,
+            "selected": 5264,
+            "target": 5264
+          },
+          "Terminated|MISC|Q2": {
+            "available": 92159,
+            "selected": 4660,
+            "target": 4660
+          },
+          "Terminated|MISC|Q3": {
+            "available": 100840,
+            "selected": 5099,
+            "target": 5099
+          },
+          "Terminated|MISC|Q4": {
+            "available": 85407,
+            "selected": 4318,
+            "target": 4318
+          },
+          "Terminated|MIXED|Q1": {
+            "available": 34340,
+            "selected": 1736,
+            "target": 1736
+          },
+          "Terminated|MIXED|Q2": {
+            "available": 30958,
+            "selected": 1565,
+            "target": 1565
+          },
+          "Terminated|MIXED|Q3": {
+            "available": 30174,
+            "selected": 1526,
+            "target": 1526
+          },
+          "Terminated|MIXED|Q4": {
+            "available": 19307,
+            "selected": 976,
+            "target": 976
+          },
+          "Terminated|P100|Q1": {
+            "available": 9537,
+            "selected": 482,
+            "target": 482
+          },
+          "Terminated|P100|Q2": {
+            "available": 10582,
+            "selected": 535,
+            "target": 535
+          },
+          "Terminated|P100|Q3": {
+            "available": 13376,
+            "selected": 676,
+            "target": 676
+          },
+          "Terminated|P100|Q4": {
+            "available": 6378,
+            "selected": 322,
+            "target": 322
+          },
+          "Terminated|T4|Q1": {
+            "available": 45872,
+            "selected": 2319,
+            "target": 2319
+          },
+          "Terminated|T4|Q2": {
+            "available": 44440,
+            "selected": 2247,
+            "target": 2247
+          },
+          "Terminated|T4|Q3": {
+            "available": 40529,
+            "selected": 2049,
+            "target": 2049
+          },
+          "Terminated|T4|Q4": {
+            "available": 22922,
+            "selected": 1159,
+            "target": 1159
+          },
+          "Terminated|UNSPECIFIED|Q1": {
+            "available": 5127,
+            "selected": 259,
+            "target": 259
+          },
+          "Terminated|UNSPECIFIED|Q2": {
+            "available": 5405,
+            "selected": 273,
+            "target": 273
+          },
+          "Terminated|UNSPECIFIED|Q3": {
+            "available": 4847,
+            "selected": 245,
+            "target": 245
+          },
+          "Terminated|UNSPECIFIED|Q4": {
+            "available": 3147,
+            "selected": 159,
+            "target": 159
+          },
+          "Terminated|V100M32|Q1": {
+            "available": 1971,
+            "selected": 100,
+            "target": 100
+          },
+          "Terminated|V100M32|Q2": {
+            "available": 2148,
+            "selected": 109,
+            "target": 109
+          },
+          "Terminated|V100M32|Q3": {
+            "available": 3187,
+            "selected": 161,
+            "target": 161
+          },
+          "Terminated|V100M32|Q4": {
+            "available": 761,
+            "selected": 38,
+            "target": 38
+          },
+          "Terminated|V100|Q1": {
+            "available": 3457,
+            "selected": 175,
+            "target": 175
+          },
+          "Terminated|V100|Q2": {
+            "available": 4678,
+            "selected": 237,
+            "target": 237
+          },
+          "Terminated|V100|Q3": {
+            "available": 4766,
+            "selected": 241,
+            "target": 241
+          },
+          "Terminated|V100|Q4": {
+            "available": 1928,
+            "selected": 98,
+            "target": 98
+          }
+        },
+        "target_n": 50000
+      }
+    }
+  },
+  "sampling_seed": 42,
+  "source_identity": "https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2020",
+  "source_version": "cluster-trace-gpu-v2020",
+  "split_configuration": {
+    "not_built_this_pass": "machine-disjoint split -- jobs have a many-to-many relationship with machines; deferred, see script docstring",
+    "random_stratified": {
+      "counts": {
+        "test": {
+          "failed_rate": 0.2588157019294744,
+          "n": 1503,
+          "n_failed": 389
+        },
+        "train": {
+          "failed_rate": 0.2594656379482783,
+          "n": 6999,
+          "n_failed": 1816
+        },
+        "val": {
+          "failed_rate": 0.2596795727636849,
+          "n": 1498,
+          "n_failed": 389
+        }
+      },
+      "ratios": {
+        "test": 0.15,
+        "train": 0.7,
+        "val": 0.15
+      },
+      "stratified_on": [
+        "outcome_status",
+        "dominant_gpu_type"
+      ]
+    },
+    "seed": 42,
+    "source_tier": "main",
+    "temporal": {
+      "counts": {
+        "test": {
+          "failed_rate": 0.4341736694677871,
+          "n": 2499,
+          "n_failed": 1085
+        },
+        "train": {
+          "failed_rate": 0.20106847984458476,
+          "n": 6177,
+          "n_failed": 1242
+        },
+        "val": {
+          "failed_rate": 0.20166163141993956,
+          "n": 1324,
+          "n_failed": 267
+        }
+      },
+      "definition": "train/val drawn from relative-time Q1-Q3 (val is a random 15% carve-out of that pool); test = strict future holdout Q4",
+      "quartile_boundaries_relative_seconds": {
+        "q1_boundary": 2798922.0,
+        "q2_boundary": 4218986.0,
+        "q3_boundary": 5539487.0
+      }
+    }
+  }
+}

@@ -1,29 +1,32 @@
 {
-  "status": "BLOCKED",
+  "status": "REPRODUCED",
   "historical_protocol": {"independent_jobs": 8, "declared_conditions": 7, "replay_cases": 56, "seed": 42},
   "canonical_runner": "scripts/run_alibaba_closed_loop_v2.py",
   "canonical_protocol": "experiments/results/alibaba_closed_loop_v2/protocol.json",
-  "historical_result_location": "experiments/results/alibaba_closed_loop_v2/results.json",
+  "historical_result_location": "experiments/results/alibaba_closed_loop_v2/",
+  "restored_data_verification": "data/audit/alibaba_gpu2020/restored_data_verification.json",
   "required_inputs": {
     "runner": {"path": "scripts/run_alibaba_closed_loop_v2.py", "available": true},
     "protocol": {"path": "experiments/results/alibaba_closed_loop_v2/protocol.json", "available": true, "sha256": "e9d86edb5ae5f638ea80b422f3e8e5eb1cb2e7e0ce6ab1b9c2371b6166aa4881"},
-    "dataset_manifest": {"path": "data/audit/alibaba_gpu2020/dataset_manifest.json", "available": true, "sha256": "fc23fcaa95009c560234ceb87478f73a4e87a20956f70e2da1db84b62f769782"},
-    "split_manifests": {"paths": ["data/audit/alibaba_gpu2020/splits_random_stratified.json", "data/audit/alibaba_gpu2020/splits_temporal.json"], "available": true},
-    "sample_job_ids": {"path": "data/audit/alibaba_gpu2020/sample_job_ids_main.txt", "available": true},
-    "processed_job_table": {"path": "data/processed/alibaba_gpu2020/job_table.clean.csv", "available": false},
-    "processed_task_table": {"path": "data/processed/alibaba_gpu2020/task_table.main_sample.csv", "available": false},
-    "processed_instance_table": {"path": "data/processed/alibaba_gpu2020/instance_table.main_sample.csv", "available": false},
+    "dataset_manifest": {"path": "data/audit/alibaba_gpu2020/dataset_manifest.json", "available": true},
+    "processed_job_table": {"path": "data/processed/alibaba_gpu2020/job_table.clean.csv", "available": true},
+    "processed_task_table": {"path": "data/processed/alibaba_gpu2020/task_table.main_sample.csv", "available": true},
+    "processed_instance_table": {"path": "data/processed/alibaba_gpu2020/instance_table.main_sample.csv", "available": true},
     "reliability_artifact": {"path": "experiments/results/reliability_runtime_v2/artifacts/", "available": true},
-    "memory_fixtures": {"source": "runner-generated bounded fixtures", "available": true},
-    "output_schema": {"source": "runner and committed historical outputs", "available": true}
+    "memory_fixtures": {"source": "canonical runner bounded fixtures", "available": true},
+    "output_schema": {"source": "canonical runner and protocol", "available": true}
   },
-  "attempts": [
-    {"command": "python3 scripts/run_alibaba_closed_loop_v2.py", "result": "runner import invocation error: ModuleNotFoundError: No module named 'scripts'", "interpretation": "invocation form is not the package entry point"},
-    {"command": "python3 -m scripts.run_alibaba_closed_loop_v2", "result": "FileNotFoundError: data/processed/alibaba_gpu2020/job_table.clean.csv", "interpretation": "canonical package runner reaches feature construction and is blocked by missing raw/processed input"}
-  ],
-  "historical_reproduction": "NOT CURRENTLY POSSIBLE",
-  "reason": "The exact Alibaba GPU2020 processed tables required by the canonical feature builder are not present. Existing manifests and split metadata are insufficient to reconstruct the feature matrix or 56 replay population without substituting or generating data.",
-  "substitution_policy": "No substitute dataset, synthetic table, or relabeled input was used.",
-  "historical_result": "PRESERVED",
-  "phase3_1_impact": "The V1 artifact and core runtime contract are independently reproducible, but the historical 56-case control comparison remains blocked until the exact data inputs are legitimately restored or the boundary is accepted as a declared limitation."
+  "restoration": {
+    "source": "official Alibaba ClusterData GPU2020 endpoint documented by project",
+    "source_url": "https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2020GPUTraces/",
+    "archive_checksums_match_project_manifest": true,
+    "preprocessing_pipeline": ["clean_alibaba_job_task.py", "alibaba_power_analysis.py", "alibaba_stratified_sampling.py", "alibaba_extract_linked_records.py", "alibaba_build_splits.py"],
+    "sampling_seed": 42,
+    "main_sample_jobs": 10000,
+    "processed_row_counts": {"job_table_clean": 1055501, "task_table_clean": 1261050, "task_table_main_sample": 11750, "instance_table_main_sample": 60005, "sensor_table_main_sample": 26350, "machine_metric_main_sample": 19841}
+  },
+  "attempt": {"command": "python3 -m scripts.run_alibaba_closed_loop_v2", "result": "completed", "reported": {"unique_jobs": 8, "conditions": 7, "cases": 56}},
+  "reproduced_output": "experiments/results/v1_control_reconciliation/reproduced_56_case/",
+  "historical_protection": {"historical_results_restored_after_runner_write": true, "historical_result_location_unchanged": true, "substitution_used": false, "fabricated_replay": false},
+  "boundary": "The 56-case evaluation is independently reproduced using the restored official archives, project canonical preprocessing, seed-42 main-tier sample, registered protocol, serialized reliability artifact, and bounded memory fixtures. Historical and reproduced output files are retained separately."
 }

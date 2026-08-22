@@ -1,0 +1,12 @@
+{
+  "artifact_manifest_sha256": "c410022499d5e7e8144ab359250124c6f434754340c915f596edb51797d490de",
+  "dataset_manifest_sha256": "fc23fcaa95009c560234ceb87478f73a4e87a20956f70e2da1db84b62f769782",
+  "experiment_id": "alibaba_closed_loop_v2",
+  "git_commit": "2cd669c448a40dd5987f3cade326f816dc698e7a",
+  "protocol_sha256": "e9d86edb5ae5f638ea80b422f3e8e5eb1cb2e7e0ce6ab1b9c2371b6166aa4881",
+  "seed": 42,
+  "software": {
+    "python": "3.12",
+    "runner": "run_alibaba_closed_loop_v2.py"
+  }
+}

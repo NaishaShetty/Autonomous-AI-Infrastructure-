@@ -1,0 +1,21 @@
+{
+  "experiment_id": "alibaba_closed_loop_v2",
+  "protocol_version": "alibaba-closed-loop-v2",
+  "seed": 42,
+  "dataset": "alibaba_gpu2020",
+  "population": "declared random-stratified test identities, first eight unique jobs in canonical sorted order",
+  "selection_rule": "select the first eight unique job identities after canonical sort from the frozen random-stratified test split; no outcome-based filtering or replacement",
+  "conditions": {
+    "C0": "artifact enabled, no prior memory",
+    "C1": "artifact enabled, one validated relevant prior experience",
+    "C2": "artifact enabled, one retrieved but irrelevant prior experience",
+    "C3": "artifact enabled, two conflicting relevant experiences",
+    "C4": "artifact enabled, one prior recovery known to have failed",
+    "C5": "artifact enabled, safety conflict rejects the proposed action",
+    "C6": "artifact disabled safe fallback control"
+  },
+  "decision_time_rule": "target identity outcome is unavailable before its decision; prior experience is inserted only before the subsequent condition decision",
+  "metrics": ["workload_failure_risk", "predicted_label", "reliability_uncertainty", "memory_risk", "retrieval_count", "diagnosis_confidence", "diagnosis_uncertainty", "decision", "unsafe_proposal", "unsafe_execution", "validation", "decision_quality", "recovery_success"],
+  "leakage_controls": ["job identities remain evaluation-only", "no post-failure telemetry in features", "no target outcome before decision", "no threshold tuning on evaluation cases", "no frozen result modification"],
+  "claim_boundary": "integration composition evidence under bounded Alibaba GPU2020 replay; controlled recovery is simulated and not production self-healing"
+}

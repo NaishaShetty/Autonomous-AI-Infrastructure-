@@ -42,7 +42,7 @@ The exact focused selection covering failure-memory lifecycle, persistence, star
 
 ## 5. V1 reproduction status
 
-The historical V1 integrated evaluation is documented as 8 independent jobs, 7 conditions, and 56 replay cases, with zero unsafe execution and conservative safety behavior [1] [2]. The historical artifact and runner references are present in the repository. The serialized artifacts and process-restart behavior are independently **VERIFIED**, but the canonical 56-case replay is **BLOCKED** by missing processed Alibaba GPU2020 job/task/instance tables. The historical result is preserved unchanged. See `experiments/results/v1_control_reconciliation/`.
+The historical V1 integrated evaluation is documented as 8 independent jobs, 7 conditions, and 56 replay cases, with zero unsafe execution and conservative safety behavior [1] [2]. The historical artifact and runner references are present in the repository. The serialized artifacts and process-restart behavior are independently **VERIFIED**. The established Alibaba GPU2020 archives were restored from the project-documented official endpoint, all seven publisher checksums matched, the canonical preprocessing pipeline recreated the processed tables, and the canonical 56-case replay completed. The new replay is isolated under `experiments/results/v1_control_reconciliation/reproduced_56_case/`; the historical result remains unchanged. See [V1 REPRODUCIBILITY BOUNDARY & FINAL READINESS REPORT](V1_REPRODUCIBILITY_BOUNDARY_FINAL_READINESS.md).
 
 ## 6. Current reliability model
 
@@ -135,9 +135,9 @@ This is a **PROPOSED** hypothesis, not an experimental result. No candidate mode
 
 ## 16. Phase 3.1 readiness decision
 
-**NOT READY.** The exact focused validation and artifact behavior are verified, but the historical seven skipped node IDs remain unreconciled and the baseline-critical 56-case replay is blocked by missing exact Alibaba inputs. Do not begin direct V1.0 comparison experiments until this boundary is explicitly accepted or the inputs are restored.
+**READY WITH DECLARED LIMITATION.** The historical seven skipped node IDs are **UNRECOVERABLE FROM PRESERVED EVIDENCE**, but the established Alibaba data state was restored with matching publisher checksums, canonical preprocessing, and verified processed-table identity. The exact 24-test focused validation, serialized artifact/restart behavior, and canonical 56-case replay are independently verified. Phase 3.1 may proceed only under the explicit boundary in [V1 REPRODUCIBILITY BOUNDARY & FINAL READINESS REPORT](V1_REPRODUCIBILITY_BOUNDARY_FINAL_READINESS.md).
 
-The repository now has an isolated contract and result layout, but the full-suite discrepancy, focused-validation reproduction, and V1 end-to-end replay require explicit reconciliation before Phase 3.1 results can be treated as independently reproduced control comparisons. Phase 3.1 may begin protocol design and environment/data reconciliation, but it should not begin a large-scale improvement experiment until those open verification items are closed.
+Phase 3.0.2 formally closes the remaining reproducibility questions. Phase 3.1 may begin with the independently reproduced 56-case control, but must not claim that the historical seven skip identities were recovered or infer them from today’s 17.
 
 ## References
 

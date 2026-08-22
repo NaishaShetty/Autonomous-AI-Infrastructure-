@@ -1,0 +1,15 @@
+{
+  "phase": "3.0.2",
+  "repository_commit": "2cd669c448a40dd5987f3cade326f816dc698e7a",
+  "v1_freeze_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "python": "3.12.3",
+  "platform": "Ubuntu 24.04 linux/amd64",
+  "runner": "python3 -m scripts.run_alibaba_closed_loop_v2",
+  "replay": {"unique_jobs": 8, "conditions": 7, "cases": 56, "status": "completed"},
+  "focused_validation": {"passed": 24, "failed": 0, "skipped": 0},
+  "full_suite": {"passed": 512, "skipped": 7, "failed": 0, "warnings": 114, "duration_seconds": 582.27},
+  "data_verification": "../data_verification.json",
+  "historical_result_protection": "experiments/results/alibaba_closed_loop_v2 restored unchanged before checkpoint",
+  "substitute_data": false,
+  "runtime_training": false
+}

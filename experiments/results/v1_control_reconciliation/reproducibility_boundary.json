@@ -1,0 +1,37 @@
+{
+  "phase": "3.0.2",
+  "decision": "READY WITH DECLARED LIMITATION",
+  "v1_freeze": {"commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2", "status": "VERIFIED", "modified": false},
+  "historical_skip_evidence": {
+    "historical_skip_ids": "UNRECOVERABLE FROM PRESERVED EVIDENCE",
+    "status": "DECLARED",
+    "search_scope": ["tracked repository files", "reachable Git history and refs", "pytest sources and configuration", "release/freeze documentation", "benchmark and experiment manifests", "candidate XML/HTML/JSON reports", "environment/dependency manifests", "local generated artifacts and archived filenames"],
+    "evidence_found": ["historical aggregate 507 passed / 7 skipped / 0 failed", "current frozen-commit 17-node skip inventory"],
+    "evidence_absent": ["historical node-level pytest report", "historical seven-node skip list", "historical release environment manifest"],
+    "conclusion": "The historical seven cannot be inferred from the current 17 without speculation."
+  },
+  "alibaba_data": {
+    "status": "RESTORED AND VERIFIED",
+    "source_identity": "Official Alibaba ClusterData GPU2020 release",
+    "source_url": "https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2020GPUTraces/",
+    "archive_checksums": "All seven publisher SHA-256 values matched data/audit/alibaba_gpu2020/dataset_manifest.json",
+    "preprocessing": "Canonical project pipeline: cleaning, power analysis, deterministic seed-42 sampling, linked-record extraction, and split generation",
+    "processed_table_verification": "data/audit/alibaba_gpu2020/restored_data_verification.json",
+    "substitution": "PROHIBITED; none used",
+    "raw_and_processed_storage": "Ignored local data boundary; no large datasets committed"
+  },
+  "focused_validation": {"status": "VERIFIED", "result": "24 passed / 0 failed / 0 skipped"},
+  "artifact_validation": {"status": "VERIFIED", "properties": ["loading", "hashes", "compatibility", "process restart", "identical outputs", "persisted-memory reload", "runtime training false"]},
+  "replay_56_case": {"status": "REPRODUCED", "result": "8 independent jobs x 7 conditions = 56 cases completed", "output": "experiments/results/v1_control_reconciliation/reproduced_56_case/", "historical_result": "PRESERVED"},
+  "reproducibility_matrix": [
+    {"evidence": "Full V1 suite", "historical": "507/7/0", "independently_verified": "497/17/0 frozen commit", "status": "PARTIALLY RECONCILED"},
+    {"evidence": "Exact focused validation", "historical": "24/0/0", "independently_verified": "24/0/0", "status": "VERIFIED"},
+    {"evidence": "Reliability artifact", "historical": "documented", "independently_verified": "reproduced", "status": "VERIFIED"},
+    {"evidence": "Process restart", "historical": "documented", "independently_verified": "reproduced", "status": "VERIFIED"},
+    {"evidence": "Historical skip IDs", "historical": "7", "independently_verified": "unavailable", "status": "DECLARED LIMITATION"},
+    {"evidence": "Alibaba data provenance", "historical": "established", "independently_verified": "restored with matching archive hashes and canonical processing", "status": "VERIFIED"},
+    {"evidence": "56-case replay", "historical": "56 cases", "independently_verified": "56 cases", "status": "VERIFIED"}
+  ],
+  "phase3_1_operating_boundary": "Phase 3.1 may use the frozen V1 implementation, verified 24-test control, verified serialized artifact/restart behavior, and the independently reproduced 56-case control. It must continue to label the historical seven skip identities as unrecoverable and must not claim those node IDs were reconciled. Any improvement comparison must preserve the same verified data/protocol identity or explicitly declare a different protocol.",
+  "historical_evidence_protection": "experiments/results/alibaba_closed_loop_v2/ and all other historical V1 experiment directories remain unchanged."
+}
