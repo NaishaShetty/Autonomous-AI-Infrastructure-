@@ -16,7 +16,7 @@
 | Startup policy | Pass | API path does not train at startup and safely abstains without an explicitly supplied artifact. |
 | Reproducibility | Pass | Deterministic identifiers, manifests, protocol hashes, and dedicated result directory are recorded. |
 | Historical-result preservation | Pass | Frozen historical experiment directories are not modified by this checkpoint. |
-| Repository hygiene | Pass pending final command output | Final audit includes status, diff check, ignored-file review, and complete diff review before commit. |
+| Repository hygiene | Pass | Final audit includes clean status, diff check, ignored-file review, and complete diff review. |
 
 ## Final integrated safety result
 
@@ -32,6 +32,8 @@ No frozen historical research result is to be edited, regenerated, or numericall
 
 ## Validation gate
 
+The final gate completed with **507 passed, 7 skipped, and 0 failed** in **1,677.83 seconds**. The historical counterfactual-generalization module accounts for the long runtime: one direct `run_all()` invocation produced 465 records in approximately 131 seconds, while the nine-test module completed in **1,371.73 seconds** because its tests intentionally recompute the deterministic result. The module passed all 9 tests. This is slow but finite behavior; targeted execution found no deadlock, unbounded loop, or implementation regression, so no test semantics or coverage were changed.
+
 The final gate requires all of the following to pass before the single commit is created:
 
 1. The complete `pytest -q` suite reports zero failures.
@@ -41,8 +43,8 @@ The final gate requires all of the following to pass before the single commit is
 5. `git diff --check` passes.
 6. Frozen historical result paths have no modifications.
 7. No secrets, virtual environments, caches, generated junk, or unintended large files are staged.
-8. The full diff is reviewed and contains only the approved V1 evaluation changes.
-9. Exactly one final commit is created and pushed to `origin/main` only after the repository is confirmed clean and the user-approved checkpoint is ready.
+8. The full diff is reviewed and contains only the approved V1 freeze documentation changes.
+9. The repository remains clean and aligned with `origin/main`; no speculative architectural change is introduced by this gate.
 
 ## Claim boundary and disposition
 

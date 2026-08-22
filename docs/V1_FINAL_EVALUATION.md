@@ -36,7 +36,7 @@ The independent-process validation remains part of the integrated evidence. Proc
 
 ## Reproducibility and validation
 
-The corrected v2 runner completed with status `completed`, generated `results.json`, `summary.json`, `manifest.json`, and the trace under the dedicated `experiments/results/alibaba_closed_loop_v2/` directory, and recorded the current commit and protocol/data/artifact hashes. Focused integration and persistence validation passed **24 tests**, with **0 failures**. The final repository-wide suite and its exact result are recorded in the accompanying release audit.
+The corrected v2 runner completed with status `completed`, generated `results.json`, `summary.json`, `manifest.json`, and the trace under the dedicated `experiments/results/alibaba_closed_loop_v2/` directory, and recorded the protocol/data/artifact hashes. Focused integration and persistence validation passed **24 tests**, with **0 failures**. The definitive repository-wide suite completed with **507 passed, 7 skipped, 0 failed** in **1,677.83 seconds**. The long runtime is explained by the historical counterfactual-generalization tests: one finite `run_all()` invocation produces 465 records in approximately 131 seconds, and the nine-test module intentionally recomputes that result, completing in **1,371.73 seconds**. No unbounded loop, deadlock, or implementation regression was found.
 
 ## Claim boundary
 
