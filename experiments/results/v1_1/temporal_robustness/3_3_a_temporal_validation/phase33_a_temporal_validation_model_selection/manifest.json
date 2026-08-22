@@ -1,0 +1,12 @@
+{
+  "data_manifest_sha256": "fc23fcaa95009c560234ceb87478f73a4e87a20956f70e2da1db84b62f769782",
+  "experiment_id": "phase33_a_temporal_validation_model_selection",
+  "immutable": true,
+  "phase": "3.3-A",
+  "protocol_sha256": "fa87f1058e9be78ff464d839ccacda4457dd74ad45121a4de5aeaa2a6bde0dfd",
+  "report_sha256": "7c5fd18491161ed860e50b18232059696d87f838226da6501e4767b8a220a4d2",
+  "repository_commit": "5548e682a10195183d80f30afb5a44027e03a954",
+  "results_sha256": "840b49d0685c1c4b7d3f0e1f9f2091ab258ed3cf73e47db356143f9ac647c5d8",
+  "status": "completed",
+  "summary_sha256": "9c546ee4a746ff0449b45490555dff399c102fd28ec2fa4be0cb73343ee62901"
+}

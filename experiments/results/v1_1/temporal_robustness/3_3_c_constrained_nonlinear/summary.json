@@ -1,0 +1,266 @@
+{
+  "decision": "REJECT",
+  "experiment_id": "phase33_c_constrained_nonlinear_reliability",
+  "results": {
+    "random_stratified": {
+      "counts": {
+        "evaluation": 1503,
+        "train": 6999,
+        "validation": 1498
+      },
+      "features": [
+        "job_start_time",
+        "n_tasks",
+        "n_distinct_task_names",
+        "sum_inst_num",
+        "mean_plan_cpu",
+        "max_plan_cpu",
+        "mean_plan_mem",
+        "max_plan_mem",
+        "mean_plan_gpu",
+        "max_plan_gpu",
+        "n_distinct_gpu_types",
+        "n_instances",
+        "n_distinct_machines",
+        "mean_instance_start_time"
+      ],
+      "metrics": {
+        "abstention": {
+          "abstained_count": 1452,
+          "abstained_failure_rate": 0.26721763085399447,
+          "abstention_rate": 0.9660678642714571,
+          "accept_risk_threshold": 0.1,
+          "accepted_count": 51,
+          "accepted_failure_rate": 0.0196078431372549,
+          "coverage": 0.033932135728542916,
+          "selective_risk": 0.0196078431372549,
+          "uncertainty_threshold": null
+        },
+        "auprc": 0.5749545279733255,
+        "auroc": 0.7248665039021936,
+        "brier_score": 0.14085666615172132,
+        "calibration": {
+          "brier_score": 0.14085666615172132,
+          "expected_calibration_error": 0.007263245048063462,
+          "reliability_bins": [
+            {
+              "bin": 0,
+              "count": 51,
+              "mean_prediction": 0.030993042378241617,
+              "observed_rate": 0.0196078431372549
+            },
+            {
+              "bin": 1,
+              "count": 1115,
+              "mean_prediction": 0.17454991739456222,
+              "observed_rate": 0.17399103139013453
+            },
+            {
+              "bin": 2,
+              "count": 36,
+              "mean_prediction": 0.23684210526315785,
+              "observed_rate": 0.08333333333333333
+            },
+            {
+              "bin": 3,
+              "count": 101,
+              "mean_prediction": 0.3173076923076924,
+              "observed_rate": 0.3069306930693069
+            },
+            {
+              "bin": 5,
+              "count": 48,
+              "mean_prediction": 0.5,
+              "observed_rate": 0.4791666666666667
+            },
+            {
+              "bin": 9,
+              "count": 152,
+              "mean_prediction": 0.9153846153846156,
+              "observed_rate": 0.9013157894736842
+            }
+          ]
+        },
+        "count": 1503,
+        "log_loss": 0.450882235389218
+      },
+      "raw_metrics": {
+        "abstention": {
+          "abstained_count": 1503,
+          "abstained_failure_rate": 0.2588157019294744,
+          "abstention_rate": 1.0,
+          "accept_risk_threshold": 0.1,
+          "accepted_count": 0,
+          "accepted_failure_rate": null,
+          "coverage": 0.0,
+          "selective_risk": null,
+          "uncertainty_threshold": null
+        },
+        "auprc": 0.5897641733880719,
+        "auroc": 0.7256060976679144,
+        "brier_score": 0.14530973478138806,
+        "calibration": {
+          "brier_score": 0.14530973478138806,
+          "expected_calibration_error": 0.024033559527845215,
+          "reliability_bins": [
+            {
+              "bin": 1,
+              "count": 1104,
+              "mean_prediction": 0.1741232216071647,
+              "observed_rate": 0.16847826086956522
+            },
+            {
+              "bin": 2,
+              "count": 179,
+              "mean_prediction": 0.26160626835521256,
+              "observed_rate": 0.24022346368715083
+            },
+            {
+              "bin": 4,
+              "count": 57,
+              "mean_prediction": 0.4800615821808424,
+              "observed_rate": 0.38596491228070173
+            },
+            {
+              "bin": 5,
+              "count": 11,
+              "mean_prediction": 0.5834488697127195,
+              "observed_rate": 0.09090909090909091
+            },
+            {
+              "bin": 8,
+              "count": 152,
+              "mean_prediction": 0.8007800425703253,
+              "observed_rate": 0.9013157894736842
+            }
+          ]
+        },
+        "count": 1503,
+        "log_loss": 0.46451144073645056
+      },
+      "reload_same_output": true,
+      "runtime_training": false
+    },
+    "temporal": {
+      "counts": {
+        "evaluation": 2499,
+        "train": 6177,
+        "validation": 1324
+      },
+      "features": [
+        "job_start_time",
+        "n_tasks",
+        "n_distinct_task_names",
+        "sum_inst_num",
+        "mean_plan_cpu",
+        "max_plan_cpu",
+        "mean_plan_mem",
+        "max_plan_mem",
+        "mean_plan_gpu",
+        "max_plan_gpu",
+        "n_distinct_gpu_types",
+        "n_instances",
+        "n_distinct_machines",
+        "mean_instance_start_time"
+      ],
+      "metrics": {
+        "abstention": {
+          "abstained_count": 2454,
+          "abstained_failure_rate": 0.4421352893235534,
+          "abstention_rate": 0.9819927971188476,
+          "accept_risk_threshold": 0.1,
+          "accepted_count": 45,
+          "accepted_failure_rate": 0.0,
+          "coverage": 0.01800720288115246,
+          "selective_risk": 0.0,
+          "uncertainty_threshold": null
+        },
+        "auprc": 0.4083284101121074,
+        "auroc": 0.32043293203579737,
+        "brier_score": 0.32987489496870065,
+        "calibration": {
+          "brier_score": 0.32987489496870065,
+          "expected_calibration_error": 0.2857818425102402,
+          "reliability_bins": [
+            {
+              "bin": 0,
+              "count": 45,
+              "mean_prediction": 0.0,
+              "observed_rate": 0.0
+            },
+            {
+              "bin": 1,
+              "count": 2207,
+              "mean_prediction": 0.15429215471673338,
+              "observed_rate": 0.46714997734481195
+            },
+            {
+              "bin": 2,
+              "count": 67,
+              "mean_prediction": 0.22542063863185727,
+              "observed_rate": 0.11940298507462686
+            },
+            {
+              "bin": 3,
+              "count": 174,
+              "mean_prediction": 0.3340420162386011,
+              "observed_rate": 0.25287356321839083
+            },
+            {
+              "bin": 7,
+              "count": 6,
+              "mean_prediction": 0.7441860465116279,
+              "observed_rate": 0.3333333333333333
+            }
+          ]
+        },
+        "count": 2499,
+        "log_loss": 0.9266280623431655
+      },
+      "raw_metrics": {
+        "abstention": {
+          "abstained_count": 2499,
+          "abstained_failure_rate": 0.4341736694677871,
+          "abstention_rate": 1.0,
+          "accept_risk_threshold": 0.1,
+          "accepted_count": 0,
+          "accepted_failure_rate": null,
+          "coverage": 0.0,
+          "selective_risk": null,
+          "uncertainty_threshold": null
+        },
+        "auprc": 0.4141764051977698,
+        "auroc": 0.33252823965740874,
+        "brier_score": 0.31301216693440653,
+        "calibration": {
+          "brier_score": 0.31301216693440653,
+          "expected_calibration_error": 0.25419050476113547,
+          "reliability_bins": [
+            {
+              "bin": 1,
+              "count": 2311,
+              "mean_prediction": 0.17464023208252413,
+              "observed_rate": 0.44872349632193853
+            },
+            {
+              "bin": 2,
+              "count": 182,
+              "mean_prediction": 0.2432485010417067,
+              "observed_rate": 0.25274725274725274
+            },
+            {
+              "bin": 3,
+              "count": 6,
+              "mean_prediction": 0.31885417826977486,
+              "observed_rate": 0.3333333333333333
+            }
+          ]
+        },
+        "count": 2499,
+        "log_loss": 0.8660475467126462
+      },
+      "reload_same_output": true,
+      "runtime_training": false
+    }
+  }
+}

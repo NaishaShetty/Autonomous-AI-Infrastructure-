@@ -1,0 +1,12 @@
+{
+  "data_manifest_sha256": "fc23fcaa95009c560234ceb87478f73a4e87a20956f70e2da1db84b62f769782",
+  "experiment_id": "phase33_d_drift_aware_reliability_abstention",
+  "immutable": true,
+  "phase": "3.3",
+  "protocol_sha256": "5793c2fed770321f4a008f3b80b6baae284b7c00ca2607f7506d3d240cd3bbda",
+  "report_sha256": "d1e59defeb78f094e2fd2ed475b736ad156b4a442f8cba8e2af7af9e9cd2b6bf",
+  "repository_commit": "5548e682a10195183d80f30afb5a44027e03a954",
+  "results_sha256": "a57de07f0dffa8ec19351021e17f7dd2a66697f9f365ece167ee7a500bef1363",
+  "status": "completed",
+  "summary_sha256": "6aa132e18e053595f38d5842a74d7f354ef9dc0bbae111b1876d0fd4fdd380e4"
+}

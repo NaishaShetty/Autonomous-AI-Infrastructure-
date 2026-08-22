@@ -1,0 +1,25 @@
+{
+  "baseline": "Frozen V1 calibrated risk and threshold 0.1.",
+  "dataset": "alibaba_gpu2020 official restored state; seed 42; registered splits",
+  "evaluation": "registered random-stratified and temporal future evaluations",
+  "experiment_id": "phase33_d_drift_aware_reliability_abstention",
+  "features": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "A train/validation-only standardized-distance drift signal can reduce unreliable decisions under future shift while retaining useful coverage.",
+  "intervention": "Drift-aware abstention only: standardized Euclidean distance from train feature distribution; threshold is validation 95th percentile; no future labels used for threshold.",
+  "phase": "3.3-D"
+}

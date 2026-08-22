@@ -1,0 +1,25 @@
+{
+  "baseline": "Frozen V1 logistic regression and 14-feature space.",
+  "dataset": "alibaba_gpu2020 official restored state; seed 42; registered splits",
+  "evaluation": "registered random-stratified and temporal future evaluations",
+  "experiment_id": "phase33_b_stable_contextual_feature_representations",
+  "features": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "hypothesis": "Decision-time workload-relative representations may retain signal while reducing raw-regime sensitivity.",
+  "intervention": "Feature representation only: add six decision-time ratios derived from already available job/task/instance fields; no future normalization statistics.",
+  "phase": "3.3-B"
+}

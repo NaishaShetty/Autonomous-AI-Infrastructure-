@@ -1,0 +1,312 @@
+{
+  "decision": "HOLD",
+  "experiment_id": "phase33_a_temporal_validation_model_selection",
+  "results": {
+    "random_validation_selection": {
+      "candidate_on_random_test": {
+        "calibrator_sha256": "765e004b5dedadada5ff3152c5e6d190db1c60a2d4aee44731182f71b6c3eaad",
+        "evaluation_count": 1503,
+        "metrics": {
+          "abstention": {
+            "abstained_count": 1410,
+            "abstained_failure_rate": 0.26879432624113475,
+            "abstention_rate": 0.93812375249501,
+            "accept_risk_threshold": 0.1,
+            "accepted_count": 93,
+            "accepted_failure_rate": 0.10752688172043011,
+            "coverage": 0.06187624750499002,
+            "selective_risk": 0.10752688172043011,
+            "uncertainty_threshold": null
+          },
+          "auprc": 0.537707737637906,
+          "auroc": 0.7193616648128746,
+          "brier_score": 0.14431243897113818,
+          "calibration": {
+            "brier_score": 0.14431243897113818,
+            "expected_calibration_error": 0.02186990529145332,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 93,
+                "mean_prediction": 0.07204108869741523,
+                "observed_rate": 0.10752688172043011
+              },
+              {
+                "bin": 1,
+                "count": 446,
+                "mean_prediction": 0.1425391488735216,
+                "observed_rate": 0.1547085201793722
+              },
+              {
+                "bin": 2,
+                "count": 743,
+                "mean_prediction": 0.2114649681528662,
+                "observed_rate": 0.18977119784656796
+              },
+              {
+                "bin": 3,
+                "count": 1,
+                "mean_prediction": 0.3333333333333333,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 4,
+                "count": 2,
+                "mean_prediction": 0.4253958675111483,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 5,
+                "count": 1,
+                "mean_prediction": 0.5898119023019273,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 6,
+                "count": 44,
+                "mean_prediction": 0.6340760821314554,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": 8,
+                "count": 173,
+                "mean_prediction": 0.8476821192052982,
+                "observed_rate": 0.8497109826589595
+              }
+            ]
+          },
+          "count": 1503,
+          "log_loss": 0.4712464718500076
+        },
+        "model_sha256": "f048d729f5ce03e3b71755ed7165ad42549a0dcbfc37e1fe794b39cfa436c42e",
+        "reload_same_output": true,
+        "selected_C": 10.0,
+        "selection_label": "random_validation_selection_random_test",
+        "train_count": 6999,
+        "validation_count": 1498
+      },
+      "candidate_on_temporal_future_test": {
+        "calibrator_sha256": "9f0084b02f20bf3d382e6a00ddc1abdb651819ef864587e559683416bc1e43ac",
+        "evaluation_count": 2499,
+        "metrics": {
+          "abstention": {
+            "abstained_count": 2464,
+            "abstained_failure_rate": 0.4395292207792208,
+            "abstention_rate": 0.9859943977591037,
+            "accept_risk_threshold": 0.1,
+            "accepted_count": 35,
+            "accepted_failure_rate": 0.05714285714285714,
+            "coverage": 0.014005602240896359,
+            "selective_risk": 0.05714285714285714,
+            "uncertainty_threshold": null
+          },
+          "auprc": 0.7466829174089846,
+          "auroc": 0.8323229195862313,
+          "brier_score": 0.2172879522231964,
+          "calibration": {
+            "brier_score": 0.2172879522231964,
+            "expected_calibration_error": 0.21238844927980643,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 35,
+                "mean_prediction": 0.06666666666666668,
+                "observed_rate": 0.05714285714285714
+              },
+              {
+                "bin": 1,
+                "count": 362,
+                "mean_prediction": 0.1325104914957651,
+                "observed_rate": 0.15469613259668508
+              },
+              {
+                "bin": 2,
+                "count": 1028,
+                "mean_prediction": 0.20992366412213745,
+                "observed_rate": 0.14883268482490272
+              },
+              {
+                "bin": 3,
+                "count": 1060,
+                "mean_prediction": 0.38547486033519546,
+                "observed_rate": 0.8160377358490566
+              },
+              {
+                "bin": 8,
+                "count": 14,
+                "mean_prediction": 0.8711446125799858,
+                "observed_rate": 0.6428571428571429
+              }
+            ]
+          },
+          "count": 2499,
+          "log_loss": 0.6163179284718158
+        },
+        "model_sha256": "e85ec5fcf794c3a8ceb5aec27af0605a0ebff096dd723246fa08def1204d28ed",
+        "reload_same_output": true,
+        "selected_C": 10.0,
+        "selection_label": "random_validation_selection_temporal_future_test",
+        "train_count": 6177,
+        "validation_count": 1324
+      },
+      "selection": {
+        "C": 10.0,
+        "validation_auroc": 0.6919687251536274,
+        "validation_brier": 0.1704563707475841
+      }
+    },
+    "temporal_validation_selection": {
+      "candidate_on_random_test": {
+        "calibrator_sha256": "765e004b5dedadada5ff3152c5e6d190db1c60a2d4aee44731182f71b6c3eaad",
+        "evaluation_count": 1503,
+        "metrics": {
+          "abstention": {
+            "abstained_count": 1410,
+            "abstained_failure_rate": 0.26879432624113475,
+            "abstention_rate": 0.93812375249501,
+            "accept_risk_threshold": 0.1,
+            "accepted_count": 93,
+            "accepted_failure_rate": 0.10752688172043011,
+            "coverage": 0.06187624750499002,
+            "selective_risk": 0.10752688172043011,
+            "uncertainty_threshold": null
+          },
+          "auprc": 0.537707737637906,
+          "auroc": 0.7193616648128746,
+          "brier_score": 0.14431243897113818,
+          "calibration": {
+            "brier_score": 0.14431243897113818,
+            "expected_calibration_error": 0.02186990529145332,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 93,
+                "mean_prediction": 0.07204108869741523,
+                "observed_rate": 0.10752688172043011
+              },
+              {
+                "bin": 1,
+                "count": 446,
+                "mean_prediction": 0.1425391488735216,
+                "observed_rate": 0.1547085201793722
+              },
+              {
+                "bin": 2,
+                "count": 743,
+                "mean_prediction": 0.2114649681528662,
+                "observed_rate": 0.18977119784656796
+              },
+              {
+                "bin": 3,
+                "count": 1,
+                "mean_prediction": 0.3333333333333333,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 4,
+                "count": 2,
+                "mean_prediction": 0.4253958675111483,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 5,
+                "count": 1,
+                "mean_prediction": 0.5898119023019273,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 6,
+                "count": 44,
+                "mean_prediction": 0.6340760821314554,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": 8,
+                "count": 173,
+                "mean_prediction": 0.8476821192052982,
+                "observed_rate": 0.8497109826589595
+              }
+            ]
+          },
+          "count": 1503,
+          "log_loss": 0.4712464718500076
+        },
+        "model_sha256": "f048d729f5ce03e3b71755ed7165ad42549a0dcbfc37e1fe794b39cfa436c42e",
+        "reload_same_output": true,
+        "selected_C": 10.0,
+        "selection_label": "temporal_validation_selection_random_test",
+        "train_count": 6999,
+        "validation_count": 1498
+      },
+      "candidate_on_temporal_future_test": {
+        "calibrator_sha256": "9f0084b02f20bf3d382e6a00ddc1abdb651819ef864587e559683416bc1e43ac",
+        "evaluation_count": 2499,
+        "metrics": {
+          "abstention": {
+            "abstained_count": 2464,
+            "abstained_failure_rate": 0.4395292207792208,
+            "abstention_rate": 0.9859943977591037,
+            "accept_risk_threshold": 0.1,
+            "accepted_count": 35,
+            "accepted_failure_rate": 0.05714285714285714,
+            "coverage": 0.014005602240896359,
+            "selective_risk": 0.05714285714285714,
+            "uncertainty_threshold": null
+          },
+          "auprc": 0.7466829174089846,
+          "auroc": 0.8323229195862313,
+          "brier_score": 0.2172879522231964,
+          "calibration": {
+            "brier_score": 0.2172879522231964,
+            "expected_calibration_error": 0.21238844927980643,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 35,
+                "mean_prediction": 0.06666666666666668,
+                "observed_rate": 0.05714285714285714
+              },
+              {
+                "bin": 1,
+                "count": 362,
+                "mean_prediction": 0.1325104914957651,
+                "observed_rate": 0.15469613259668508
+              },
+              {
+                "bin": 2,
+                "count": 1028,
+                "mean_prediction": 0.20992366412213745,
+                "observed_rate": 0.14883268482490272
+              },
+              {
+                "bin": 3,
+                "count": 1060,
+                "mean_prediction": 0.38547486033519546,
+                "observed_rate": 0.8160377358490566
+              },
+              {
+                "bin": 8,
+                "count": 14,
+                "mean_prediction": 0.8711446125799858,
+                "observed_rate": 0.6428571428571429
+              }
+            ]
+          },
+          "count": 2499,
+          "log_loss": 0.6163179284718158
+        },
+        "model_sha256": "e85ec5fcf794c3a8ceb5aec27af0605a0ebff096dd723246fa08def1204d28ed",
+        "reload_same_output": true,
+        "selected_C": 10.0,
+        "selection_label": "temporal_validation_selection_temporal_future_test",
+        "train_count": 6177,
+        "validation_count": 1324
+      },
+      "selection": {
+        "C": 10.0,
+        "validation_auroc": 0.6092467197460129,
+        "validation_brier": 0.15739564828645303
+      }
+    }
+  }
+}

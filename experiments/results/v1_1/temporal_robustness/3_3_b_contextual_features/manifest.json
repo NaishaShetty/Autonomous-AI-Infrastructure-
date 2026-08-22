@@ -1,0 +1,12 @@
+{
+  "data_manifest_sha256": "fc23fcaa95009c560234ceb87478f73a4e87a20956f70e2da1db84b62f769782",
+  "experiment_id": "phase33_b_stable_contextual_feature_representations",
+  "immutable": true,
+  "phase": "3.3",
+  "protocol_sha256": "599d8a820133c5014d3c10c997eb7b12aa1970bc28a2d9144e898812f9170bee",
+  "report_sha256": "64bb3b1739b567304e322ab50f68877b620b0c8a097f83783d27088b34e2ba14",
+  "repository_commit": "5548e682a10195183d80f30afb5a44027e03a954",
+  "results_sha256": "7337c13b5e2025dd958eb7fbad2cdb97c6134d4b13b29330983706fcc26077dd",
+  "status": "completed",
+  "summary_sha256": "904d90447dd227a23a7b245a910666f52eaed92fcf555dded4dc3a35a9ede8e7"
+}

@@ -1,0 +1,185 @@
+{
+  "experiment_id": "phase33_d_drift_aware_reliability_abstention",
+  "results": {
+    "random_stratified": {
+      "counts": {
+        "evaluation": 1503,
+        "train": 6999,
+        "validation": 1498
+      },
+      "drift_aware_abstention": {
+        "abstention_rate": 0.957418496340652,
+        "accepted_count": 64,
+        "coverage": 0.04258150365934797,
+        "drift_abstained_rate": 0.04790419161676647,
+        "selective_risk": 0.0625
+      },
+      "drift_method": "standardized Euclidean distance from train distribution",
+      "drift_threshold_validation_p95": 1.7230932410757887,
+      "future_drift_mean": 0.7153114617159554,
+      "future_drift_p95": 1.712338707138767,
+      "metrics": {
+        "abstention": {
+          "abstained_count": 1405,
+          "abstained_failure_rate": 0.2690391459074733,
+          "abstention_rate": 0.9347970725216235,
+          "accept_risk_threshold": 0.1,
+          "accepted_count": 98,
+          "accepted_failure_rate": 0.11224489795918367,
+          "coverage": 0.06520292747837658,
+          "selective_risk": 0.11224489795918367,
+          "uncertainty_threshold": null
+        },
+        "auprc": 0.5396812153812669,
+        "auroc": 0.720134719138979,
+        "brier_score": 0.1443950655700858,
+        "calibration": {
+          "brier_score": 0.1443950655700858,
+          "expected_calibration_error": 0.021474799416552167,
+          "reliability_bins": [
+            {
+              "bin": 0,
+              "count": 98,
+              "mean_prediction": 0.06942157167242377,
+              "observed_rate": 0.11224489795918367
+            },
+            {
+              "bin": 1,
+              "count": 439,
+              "mean_prediction": 0.1462488859829849,
+              "observed_rate": 0.1548974943052392
+            },
+            {
+              "bin": 2,
+              "count": 744,
+              "mean_prediction": 0.20963659512046606,
+              "observed_rate": 0.1881720430107527
+            },
+            {
+              "bin": 5,
+              "count": 3,
+              "mean_prediction": 0.5476241650386799,
+              "observed_rate": 0.0
+            },
+            {
+              "bin": 6,
+              "count": 44,
+              "mean_prediction": 0.6338629787194242,
+              "observed_rate": 0.5227272727272727
+            },
+            {
+              "bin": 7,
+              "count": 2,
+              "mean_prediction": 0.7148673938124781,
+              "observed_rate": 0.0
+            },
+            {
+              "bin": 8,
+              "count": 173,
+              "mean_prediction": 0.8476821192052982,
+              "observed_rate": 0.8497109826589595
+            }
+          ]
+        },
+        "count": 1503,
+        "log_loss": 0.4712960497215015
+      },
+      "reload_same_output": true,
+      "runtime_training": false,
+      "validation_drift_p95": 1.7230932410757887
+    },
+    "temporal": {
+      "counts": {
+        "evaluation": 2499,
+        "train": 6177,
+        "validation": 1324
+      },
+      "drift_aware_abstention": {
+        "abstention_rate": 0.994797919167667,
+        "accepted_count": 13,
+        "coverage": 0.005202080832332933,
+        "drift_abstained_rate": 0.04561824729891957,
+        "selective_risk": 0.0
+      },
+      "drift_method": "standardized Euclidean distance from train distribution",
+      "drift_threshold_validation_p95": 1.7116189329944673,
+      "future_drift_mean": 0.9580569790555126,
+      "future_drift_p95": 1.5688624698119646,
+      "metrics": {
+        "abstention": {
+          "abstained_count": 2478,
+          "abstained_failure_rate": 0.437046004842615,
+          "abstention_rate": 0.9915966386554622,
+          "accept_risk_threshold": 0.1,
+          "accepted_count": 21,
+          "accepted_failure_rate": 0.09523809523809523,
+          "coverage": 0.008403361344537815,
+          "selective_risk": 0.09523809523809523,
+          "uncertainty_threshold": null
+        },
+        "auprc": 0.7463900779094184,
+        "auroc": 0.8302048638043528,
+        "brier_score": 0.21853816567793097,
+        "calibration": {
+          "brier_score": 0.21853816567793097,
+          "expected_calibration_error": 0.21615543854474387,
+          "reliability_bins": [
+            {
+              "bin": 0,
+              "count": 21,
+              "mean_prediction": 0.07142857142857142,
+              "observed_rate": 0.09523809523809523
+            },
+            {
+              "bin": 1,
+              "count": 376,
+              "mean_prediction": 0.1306340702595802,
+              "observed_rate": 0.14893617021276595
+            },
+            {
+              "bin": 2,
+              "count": 1031,
+              "mean_prediction": 0.21441441441441444,
+              "observed_rate": 0.14936954413191075
+            },
+            {
+              "bin": 3,
+              "count": 1042,
+              "mean_prediction": 0.38271604938271603,
+              "observed_rate": 0.8243761996161229
+            },
+            {
+              "bin": 5,
+              "count": 15,
+              "mean_prediction": 0.5,
+              "observed_rate": 0.3333333333333333
+            },
+            {
+              "bin": 6,
+              "count": 1,
+              "mean_prediction": 0.6666666666666666,
+              "observed_rate": 1.0
+            },
+            {
+              "bin": 7,
+              "count": 2,
+              "mean_prediction": 0.7736872945599194,
+              "observed_rate": 0.5
+            },
+            {
+              "bin": 8,
+              "count": 11,
+              "mean_prediction": 0.8308186921811533,
+              "observed_rate": 0.6363636363636364
+            }
+          ]
+        },
+        "count": 2499,
+        "log_loss": 0.6188876814265515
+      },
+      "reload_same_output": true,
+      "runtime_training": false,
+      "validation_drift_p95": 1.7116189329944673
+    }
+  }
+}
