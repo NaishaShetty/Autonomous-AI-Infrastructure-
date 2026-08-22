@@ -1,0 +1,46 @@
+{
+  "abstention_policy": "single 3.4-C policy; no combination sweep",
+  "artifact_hashes": {
+    "protocol.json": "a28ba38044e0f5b2626b97d85e953d6550040c315b128a87c678220605728068",
+    "report.md": "f38551f696ef264b58aecddf74b8b6cbc3ccd05193e2c9d6c5ab3f42cb31809c",
+    "results.json": "08cddca436d043bdb799c93a136511f834607b21b6a2e6acbec0b473c7f7b3f9",
+    "summary.json": "9dd387c7146a6ba787ef3ae2476b13b591a061907326bbefca9d41436a3f023b"
+  },
+  "baseline": "Frozen V1 reliability predictor; additive layer only",
+  "calibration_identity": "Platt candidate from 3.4-A",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official Alibaba GPU2020 restored data",
+  "evaluation_protocol": "random-stratified and temporal future registered test populations",
+  "experiment_id": "3_4_d_combined",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "hypothesis": "One calibrated-risk plus validated-uncertainty policy improves safety/usefulness around frozen V1.",
+  "intervention": "Platt-calibrated V1 risk with the single validation-locked 80th-percentile bootstrap-uncertainty abstention policy.",
+  "model_identity": "frozen V1 logistic predictor wrapper",
+  "phase": "3.4",
+  "provenance": "scripts/run_phase34_experiments.py",
+  "random_seeds": [
+    42
+  ],
+  "selection_boundary": "registered train/validation only; future temporal test locked",
+  "software_version": "3.12.3",
+  "uncertainty_method": "bootstrap/model variability from 3.4-B"
+}

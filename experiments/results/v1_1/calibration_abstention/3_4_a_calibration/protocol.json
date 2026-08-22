@@ -1,0 +1,8 @@
+{
+  "abstention_policy": "none",
+  "calibration_identity": "V1 isotonic audit versus candidate Platt scaling",
+  "experiment_id": "phase34_a_calibration_platt",
+  "hypothesis": "A single Platt calibration layer can improve probability quality without changing V1 ranking.",
+  "intervention": "Fit one Platt calibrator on registered validation predictions; no future labels.",
+  "uncertainty_method": "none"
+}

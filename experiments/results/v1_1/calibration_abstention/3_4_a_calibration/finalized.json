@@ -1,0 +1,14 @@
+{
+  "files": {
+    "artifacts/random_stratified_candidate_platt.joblib": "94802b45b145c2fc75b3eadeb0099c0616806422e4f72fa6628a3ddba005739f",
+    "artifacts/random_stratified_v1_isotonic.joblib": "ff05a851346b1a8a8e3dabc874d5438acf276642021024a951e7fb5d85326530",
+    "artifacts/temporal_future_candidate_platt.joblib": "81c01476d0686fe1779ff0b5f43111375ca87ee39f3793edb4501dd72d4d16cf",
+    "artifacts/temporal_future_v1_isotonic.joblib": "a8025cd5102fd9643923cc6cde4ecb7f47326a844934dfc731f60472cc6236d1",
+    "manifest.json": "faa27750138c57522d7af5f7a84984f1e3efcacf5658899fa2fb52ac9900d55c",
+    "protocol.json": "06db5d64f6bbe01ef80ddafb0d3617b38655ed766bf235ebbd34161ef6893d34",
+    "report.md": "85cbf45e636bb9bfc7c64e4796ed4188ced116f4e459d7aba1b3037549078b70",
+    "results.json": "79c854b89ab9254bcecc6bce64ee6b81dc51dff80d1e786fbd07e9ffd47362f6",
+    "summary.json": "90628dd9292afb281f5288d599f198836d86b4550a5bb326e51e2794311a6d5b"
+  },
+  "immutable": true
+}

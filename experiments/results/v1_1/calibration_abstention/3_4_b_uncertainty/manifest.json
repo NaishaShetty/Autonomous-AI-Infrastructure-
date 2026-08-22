@@ -1,0 +1,48 @@
+{
+  "abstention_policy": "none",
+  "artifact_hashes": {
+    "artifacts/random_stratified_bootstrap_ensemble.joblib": "7c8d910a1fee8f34aca2b4988cf7fa8ada4527f2fd59925af745c6467361e832",
+    "artifacts/temporal_future_bootstrap_ensemble.joblib": "d5c90614a8ff508b306dbcda8e3defaaaee659d3272edd24d2eb64c02c5800ab",
+    "protocol.json": "ed8d3c6b4e64b01452d2d0df25841409333be11fe57ff04c4d484c04392263b1",
+    "report.md": "754ad5bfd0eec8c03c64e83cf9b253aca774d78ac203421cabc23f62ef8867d2",
+    "results.json": "b6cb0ced830eead8e4fb443b37c1b7877b559c05f619ba330bd155df76e80988",
+    "summary.json": "79351432cfdab2adb8f736301955dc0a7b8df8cf68ab445ce0e3e39d2dc1d68d"
+  },
+  "baseline": "Frozen V1 reliability predictor; additive layer only",
+  "calibration_identity": "none",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official Alibaba GPU2020 restored data",
+  "evaluation_protocol": "random-stratified and temporal future registered test populations",
+  "experiment_id": "3_4_b_uncertainty",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "hypothesis": "Decision-time bootstrap model variability identifies less trustworthy V1 predictions.",
+  "intervention": "Nine bootstrap V1-compatible logistic fits trained on resampled training rows; uncertainty is predictive standard deviation.",
+  "model_identity": "frozen V1 logistic predictor wrapper",
+  "phase": "3.4",
+  "provenance": "scripts/run_phase34_experiments.py",
+  "random_seeds": [
+    42
+  ],
+  "selection_boundary": "registered train/validation only; future temporal test locked",
+  "software_version": "3.12.3",
+  "uncertainty_method": "bootstrap/model variability"
+}

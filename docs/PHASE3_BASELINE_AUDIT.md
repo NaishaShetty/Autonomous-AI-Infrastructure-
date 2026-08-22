@@ -139,8 +139,21 @@ This is a **PROPOSED** hypothesis, not an experimental result. No candidate mode
 
 Phase 3.0.2 formally closes the remaining reproducibility questions. Phase 3.1 may begin with the independently reproduced 56-case control, but must not claim that the historical seven skip identities were recovered or infer them from today’s 17.
 
-## References
+## 17. Phase 3.4 calibration, uncertainty, and abstention readiness
 
+Phase 3.4 was completed as an additive research layer around the frozen V1 control. The actual V1 calibration implementation was audited before intervention: the Alibaba risk path uses validation-fitted isotonic calibration with clipped probability output. One alternative, Platt scaling, was evaluated without changing V1. It worsened Brier score and ECE on both random-stratified and temporal future evaluation and was rejected.
+
+Bootstrap model-variability uncertainty was the only uncertainty method tested. Higher uncertainty identified materially higher error rates, particularly on the temporal future population, so the finding is retained as **INTERESTING FINDING** rather than accepted integration. A validation-locked 80th-percentile uncertainty abstention rule retained meaningful coverage but increased temporal selective risk and was rejected. The single combined Platt-plus-uncertainty policy was also rejected. No Phase 3.4 component modifies V1 or enters production.
+
+The full Phase 3.4 synthesis and immutable experiment records are stored under `experiments/results/v1_1/calibration_abstention/`. The historical aggregate V1 result of 507 passed / 7 skipped / 0 failed remains preserved; the exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
+
+**Phase 3.4 readiness decision: V1 remains the sole production-eligible control.** A future study may investigate distribution-robust uncertainty across multiple pre-registered temporal folds, but any successful component must remain additive and undergo a separate consolidation experiment.
+
+## References
 [1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
 
 [2]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_RELEASE_AUDIT.md "V1 release audit"
+
+[3]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/calibration_abstention "Phase 3.4 calibration, uncertainty, and abstention evidence"
+
+[4]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/PHASE3_BASELINE_AUDIT.md "Phase 3 baseline audit"

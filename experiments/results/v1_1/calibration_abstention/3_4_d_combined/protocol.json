@@ -1,0 +1,8 @@
+{
+  "abstention_policy": "single 3.4-C policy; no combination sweep",
+  "calibration_identity": "Platt candidate from 3.4-A",
+  "experiment_id": "phase34_d_combined_reliability_layer",
+  "hypothesis": "One calibrated-risk plus validated-uncertainty policy improves safety/usefulness around frozen V1.",
+  "intervention": "Platt-calibrated V1 risk with the single validation-locked 80th-percentile bootstrap-uncertainty abstention policy.",
+  "uncertainty_method": "bootstrap/model variability from 3.4-B"
+}

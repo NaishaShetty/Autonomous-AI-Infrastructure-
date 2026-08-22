@@ -1,0 +1,46 @@
+{
+  "abstention_policy": "abstain when uncertainty exceeds validation 80th percentile",
+  "artifact_hashes": {
+    "protocol.json": "656e767ce613ddd7c6f257b7ebd101435230fbae9bfa1009fa2354ba170cb6a8",
+    "report.md": "0b5e6878e3c724764054c29651b408c199b504b2639c0af3b514b14b43c14278",
+    "results.json": "0cc6c2f2aedd593a71b49215cd2a3976c303681ea1b56a1408b650aacc5c1f23",
+    "summary.json": "79474d80019f73975e96bfa2655decdce0e0346c2155e7deabc6d7b017171fc7"
+  },
+  "baseline": "Frozen V1 reliability predictor; additive layer only",
+  "calibration_identity": "none",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "dataset_identity": "official Alibaba GPU2020 restored data",
+  "evaluation_protocol": "random-stratified and temporal future registered test populations",
+  "experiment_id": "3_4_c_abstention",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "hypothesis": "A validation-locked uncertainty threshold can reduce accepted-case risk while retaining meaningful coverage.",
+  "intervention": "Abstain above the 80th validation percentile of bootstrap uncertainty; threshold locked before either test evaluation.",
+  "model_identity": "frozen V1 logistic predictor wrapper",
+  "phase": "3.4",
+  "provenance": "scripts/run_phase34_experiments.py",
+  "random_seeds": [
+    42
+  ],
+  "selection_boundary": "registered train/validation only; future temporal test locked",
+  "software_version": "3.12.3",
+  "uncertainty_method": "bootstrap/model variability from 3.4-B"
+}

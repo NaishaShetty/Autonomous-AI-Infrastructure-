@@ -1,0 +1,8 @@
+{
+  "abstention_policy": "none",
+  "calibration_identity": "none",
+  "experiment_id": "phase34_b_bootstrap_uncertainty",
+  "hypothesis": "Decision-time bootstrap model variability identifies less trustworthy V1 predictions.",
+  "intervention": "Nine bootstrap V1-compatible logistic fits trained on resampled training rows; uncertainty is predictive standard deviation.",
+  "uncertainty_method": "bootstrap/model variability"
+}

@@ -1,0 +1,64 @@
+{
+  "decision": "REJECT",
+  "decision_basis": "risk-coverage and operational usefulness",
+  "experiment_id": "3_4_c_abstention",
+  "phase": "3.4",
+  "random_stratified": {
+    "candidate": {
+      "abstained_count": 284,
+      "abstained_failure_rate": 0.2746478873239437,
+      "abstention_rate": 0.18895542248835662,
+      "accepted_count": 1219,
+      "accepted_failure_rate": 0.2551271534044299,
+      "coverage": 0.8110445775116434,
+      "selective_risk": 0.2551271534044299,
+      "threshold": 0.01778018808543009
+    },
+    "risk_metrics": {
+      "auprc": 0.5349507980111027,
+      "auroc": 0.733907778080333,
+      "brier": 0.16354956885282035,
+      "count": 1503,
+      "log_loss": 0.5077780277286007
+    },
+    "v1": {
+      "abstained_count": 0,
+      "abstained_failure_rate": null,
+      "abstention_rate": 0.0,
+      "accepted_count": 1503,
+      "accepted_failure_rate": 0.2588157019294744,
+      "coverage": 1.0,
+      "selective_risk": 0.2588157019294744,
+      "threshold": 1.0
+    }
+  },
+  "temporal_future": {
+    "candidate": {
+      "abstained_count": 285,
+      "abstained_failure_rate": 0.20350877192982456,
+      "abstention_rate": 0.11404561824729897,
+      "accepted_count": 2214,
+      "accepted_failure_rate": 0.46386630532971995,
+      "coverage": 0.885954381752701,
+      "selective_risk": 0.46386630532971995,
+      "threshold": 0.015379012858824969
+    },
+    "risk_metrics": {
+      "auprc": 0.6370193682403773,
+      "auroc": 0.7942301800950338,
+      "brier": 0.2701516832654747,
+      "count": 2499,
+      "log_loss": 0.7403213852666232
+    },
+    "v1": {
+      "abstained_count": 0,
+      "abstained_failure_rate": null,
+      "abstention_rate": 0.0,
+      "accepted_count": 2499,
+      "accepted_failure_rate": 0.4341736694677871,
+      "coverage": 1.0,
+      "selective_risk": 0.4341736694677871,
+      "threshold": 1.0
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "decision": "INTERESTING FINDING",
+  "decision_basis": "error stratification and temporal decision relevance",
+  "experiment_id": "3_4_b_uncertainty",
+  "phase": "3.4",
+  "random_stratified": {
+    "risk_metrics": {
+      "auprc": 0.5349507980111027,
+      "auroc": 0.733907778080333,
+      "brier": 0.16354956885282035,
+      "count": 1503,
+      "log_loss": 0.5077780277286007
+    },
+    "uncertainty_error_rate_high_vs_low": {
+      "high": 0.363031914893617,
+      "low": 0.16644474034620507
+    },
+    "uncertainty_mean": 0.014161288428782325,
+    "uncertainty_threshold_validation_median": 0.01044816680356387
+  },
+  "temporal_future": {
+    "risk_metrics": {
+      "auprc": 0.6370193682403773,
+      "auroc": 0.7942301800950338,
+      "brier": 0.2701516832654747,
+      "count": 2499,
+      "log_loss": 0.7403213852666232
+    },
+    "uncertainty_error_rate_high_vs_low": {
+      "high": 0.6448,
+      "low": 0.22417934347477983
+    },
+    "uncertainty_mean": 0.012627843778320722,
+    "uncertainty_threshold_validation_median": 0.00922401793265789
+  }
+}

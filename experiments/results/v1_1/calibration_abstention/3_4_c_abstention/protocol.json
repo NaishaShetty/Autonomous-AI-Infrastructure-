@@ -1,0 +1,8 @@
+{
+  "abstention_policy": "abstain when uncertainty exceeds validation 80th percentile",
+  "calibration_identity": "none",
+  "experiment_id": "phase34_c_selective_uncertainty",
+  "hypothesis": "A validation-locked uncertainty threshold can reduce accepted-case risk while retaining meaningful coverage.",
+  "intervention": "Abstain above the 80th validation percentile of bootstrap uncertainty; threshold locked before either test evaluation.",
+  "uncertainty_method": "bootstrap/model variability from 3.4-B"
+}
