@@ -103,7 +103,10 @@ class FailureMemory:
             self._failure_events.append(event)
             self._dirty = True
             self._pending_update_count += 1
-            self._fitted = False
+            # Retain a previously promoted model while a new rebuild is dirty;
+            # a first-ever update has no active model and remains unfitted.
+            if self._kmeans is None:
+                self._fitted = False
             if rebuild:
                 self.rebuild()
 
@@ -201,7 +204,11 @@ class FailureMemory:
         self._fitted = True
         self._dirty = False
         self._version += 1
+        self._memory_version = self._version
         self._last_rebuild_error = None
+        self._last_fit_event_count = len(self._failure_events)
+        self._last_fit_timestamp = datetime.now(timezone.utc)
+        self._pending_update_count = 0
         return True
 
     def maybe_rebuild(self) -> bool:

@@ -1,0 +1,12 @@
+{
+  "experiment_id": "alibaba_closed_loop_v1",
+  "protocol_version": "alibaba-closed-loop-v1",
+  "seed": 42,
+  "dataset": "alibaba_gpu2020",
+  "artifact": "reliability_runtime_v2/artifacts/random",
+  "conditions": ["C0_artifact_only", "C1_relevant_prior_experience", "C2_irrelevant_prior_experience", "C4_safety_conflict"],
+  "order": "episode-1 outcome is persisted before episode-2 decision; episode-2 outcome is never available to episode-1",
+  "signals": ["workload_failure_risk", "memory_risk", "diagnosis_uncertainty", "abstention_decision"],
+  "controls": ["artifact disabled safe fallback", "memory disabled", "relevant memory", "irrelevant memory", "unsafe proposal rejected by safety gate"],
+  "claim_boundary": "bounded replay composition evidence only; controlled recovery is simulated and not production self-healing"
+}

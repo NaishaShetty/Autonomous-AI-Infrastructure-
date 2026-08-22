@@ -1,0 +1,38 @@
+{
+  "persisted_memory_reloaded": true,
+  "process_a": {
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "calibrator_version": "isotonic-v2.0.0",
+    "experience_id": "d47c064a-3cc2-4bc9-b7c0-bd56cd7ea66b",
+    "memory_fitted": true,
+    "memory_risk": 0.0,
+    "memory_version": 1,
+    "model_predicted_label": 0,
+    "model_predicted_proba": 0.9258753239198078,
+    "model_version": "v2.0.0",
+    "observation_id": "restart-A",
+    "process": "A",
+    "retrieved_experiences": 0,
+    "runtime_training": false,
+    "validation": "RECOVERED"
+  },
+  "process_b": {
+    "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+    "calibrator_version": "isotonic-v2.0.0",
+    "experience_id": "5cd82233-b88e-4bc3-9598-35b805c148c7",
+    "memory_fitted": true,
+    "memory_risk": 1.0,
+    "memory_version": 2,
+    "model_predicted_label": 0,
+    "model_predicted_proba": 0.9258753239198078,
+    "model_version": "v2.0.0",
+    "observation_id": "restart-B",
+    "process": "B",
+    "retrieved_experiences": 1,
+    "runtime_training": false,
+    "validation": "RECOVERED"
+  },
+  "process_b_retrieved_experiences": 1,
+  "runtime_training": false,
+  "same_artifact_output": true
+}

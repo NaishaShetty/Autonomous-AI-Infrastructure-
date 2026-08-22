@@ -1,0 +1,228 @@
+{
+  "claim_boundary": "bounded replay composition evidence; controlled recovery only; no production self-healing claim",
+  "conditions": [
+    {
+      "abstention_decision": "ANSWER",
+      "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+      "condition": "C0_artifact_only",
+      "detection": {
+        "detected": true,
+        "detector_version": "observation-detector-v2",
+        "failure_type": "error_rate_failure",
+        "provenance": {
+          "observation_id": "C0_artifact_only-episode-2",
+          "source_type": "dataset_replay"
+        },
+        "severity": "medium"
+      },
+      "diagnosis": {
+        "confidence": 0.6,
+        "failure_type": "error_rate_failure",
+        "uncertainty": 0.4
+      },
+      "executed_action": "retry",
+      "experience_id": "64afa808bece5ac2",
+      "experience_persisted": true,
+      "final_outcome": "CORRECT",
+      "lineage": {
+        "episode_order": "episode-2-after-episode-1",
+        "protocol": "alibaba-closed-loop-v1"
+      },
+      "memory_risk": 0.0,
+      "memory_version": 1,
+      "model_id": "alibaba-gpu2020-job-risk-logistic",
+      "model_version": "v2.0.0",
+      "observation_id": "C0_artifact_only-episode-2",
+      "provenance": {
+        "dataset_id": "alibaba_gpu2020",
+        "role": "integration_replay",
+        "source_type": "dataset_replay",
+        "split": "random_stratified"
+      },
+      "recovery_candidates": [
+        "retry"
+      ],
+      "retrieved_experiences": 0,
+      "safety_decision": "accepted_or_not_reached",
+      "source_type": "dataset_replay",
+      "timestamps": {
+        "trace_created": "deterministic-experiment-output"
+      },
+      "uncertainty": 0.152317880794702,
+      "unsafe_execution": false,
+      "unsafe_proposal": false,
+      "validation": "RECOVERED",
+      "workload_failure_risk": 0.26536880142905045,
+      "workload_id": "alibaba-gpu2020-closed-loop"
+    },
+    {
+      "abstention_decision": "ABSTAIN",
+      "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+      "condition": "C1_relevant_prior_experience",
+      "detection": {
+        "detected": true,
+        "detector_version": "observation-detector-v2",
+        "failure_type": "error_rate_failure",
+        "provenance": {
+          "observation_id": "C1_relevant_prior_experience-episode-2",
+          "source_type": "dataset_replay"
+        },
+        "severity": "medium"
+      },
+      "diagnosis": {
+        "confidence": 0.8,
+        "failure_type": "error_rate_failure",
+        "uncertainty": 0.19999999999999996
+      },
+      "executed_action": "retry",
+      "experience_id": "19eb63a9e873ec4e",
+      "experience_persisted": true,
+      "final_outcome": "CORRECT",
+      "lineage": {
+        "episode_order": "episode-2-after-episode-1",
+        "protocol": "alibaba-closed-loop-v1"
+      },
+      "memory_risk": 1.0,
+      "memory_version": 2,
+      "model_id": "alibaba-gpu2020-job-risk-logistic",
+      "model_version": "v2.0.0",
+      "observation_id": "C1_relevant_prior_experience-episode-2",
+      "provenance": {
+        "dataset_id": "alibaba_gpu2020",
+        "role": "integration_replay",
+        "source_type": "dataset_replay",
+        "split": "random_stratified"
+      },
+      "recovery_candidates": [
+        "retry"
+      ],
+      "retrieved_experiences": 1,
+      "safety_decision": "accepted_or_not_reached",
+      "source_type": "dataset_replay",
+      "timestamps": {
+        "trace_created": "deterministic-experiment-output"
+      },
+      "uncertainty": 0.152317880794702,
+      "unsafe_execution": false,
+      "unsafe_proposal": false,
+      "validation": "RECOVERED",
+      "workload_failure_risk": 0.26536880142905045,
+      "workload_id": "alibaba-gpu2020-closed-loop"
+    },
+    {
+      "abstention_decision": "ANSWER",
+      "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+      "condition": "C2_irrelevant_prior_experience",
+      "detection": {
+        "detected": true,
+        "detector_version": "observation-detector-v2",
+        "failure_type": "error_rate_failure",
+        "provenance": {
+          "observation_id": "C2_irrelevant_prior_experience-episode-2",
+          "source_type": "dataset_replay"
+        },
+        "severity": "medium"
+      },
+      "diagnosis": {
+        "confidence": 0.6,
+        "failure_type": "error_rate_failure",
+        "uncertainty": 0.4
+      },
+      "executed_action": "retry",
+      "experience_id": "0f8835d85bd86388",
+      "experience_persisted": true,
+      "final_outcome": "CORRECT",
+      "lineage": {
+        "episode_order": "episode-2-after-episode-1",
+        "protocol": "alibaba-closed-loop-v1"
+      },
+      "memory_risk": 0.0,
+      "memory_version": 2,
+      "model_id": "alibaba-gpu2020-job-risk-logistic",
+      "model_version": "v2.0.0",
+      "observation_id": "C2_irrelevant_prior_experience-episode-2",
+      "provenance": {
+        "dataset_id": "alibaba_gpu2020",
+        "role": "integration_replay",
+        "source_type": "dataset_replay",
+        "split": "random_stratified"
+      },
+      "recovery_candidates": [
+        "retry"
+      ],
+      "retrieved_experiences": 1,
+      "safety_decision": "accepted_or_not_reached",
+      "source_type": "dataset_replay",
+      "timestamps": {
+        "trace_created": "deterministic-experiment-output"
+      },
+      "uncertainty": 0.152317880794702,
+      "unsafe_execution": false,
+      "unsafe_proposal": false,
+      "validation": "RECOVERED",
+      "workload_failure_risk": 0.26536880142905045,
+      "workload_id": "alibaba-gpu2020-closed-loop"
+    },
+    {
+      "abstention_decision": "ABSTAIN",
+      "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+      "condition": "C4_safety_conflict",
+      "detection": {
+        "detected": true,
+        "detector_version": "observation-detector-v2",
+        "failure_type": "error_rate_failure",
+        "provenance": {
+          "observation_id": "C4_safety_conflict-episode-2",
+          "source_type": "dataset_replay"
+        },
+        "severity": "medium"
+      },
+      "diagnosis": {
+        "confidence": 0.8,
+        "failure_type": "error_rate_failure",
+        "uncertainty": 0.19999999999999996
+      },
+      "executed_action": null,
+      "experience_id": "7c0c88cb18715e1c",
+      "experience_persisted": true,
+      "final_outcome": "INCORRECT",
+      "lineage": {
+        "episode_order": "episode-2-after-episode-1",
+        "protocol": "alibaba-closed-loop-v1"
+      },
+      "memory_risk": 1.0,
+      "memory_version": 2,
+      "model_id": "alibaba-gpu2020-job-risk-logistic",
+      "model_version": "v2.0.0",
+      "observation_id": "C4_safety_conflict-episode-2",
+      "provenance": {
+        "dataset_id": "alibaba_gpu2020",
+        "role": "integration_replay",
+        "source_type": "dataset_replay",
+        "split": "random_stratified"
+      },
+      "recovery_candidates": [
+        "abstain"
+      ],
+      "retrieved_experiences": 1,
+      "safety_decision": "rejected",
+      "source_type": "dataset_replay",
+      "timestamps": {
+        "trace_created": "deterministic-experiment-output"
+      },
+      "uncertainty": 0.152317880794702,
+      "unsafe_execution": false,
+      "unsafe_proposal": true,
+      "validation": null,
+      "workload_failure_risk": 0.26536880142905045,
+      "workload_id": "alibaba-gpu2020-closed-loop"
+    }
+  ],
+  "experiment_id": "alibaba_closed_loop_v1",
+  "leakage_controls": {
+    "episode_2_outcome_in_episode_1": false,
+    "evaluation_used_for_threshold_tuning": false,
+    "post_failure_telemetry_as_feature": false,
+    "target_event_added_before_decision": false
+  }
+}

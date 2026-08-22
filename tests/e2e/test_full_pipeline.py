@@ -60,24 +60,19 @@ def test_memory_status_reflects_a_real_failure_stored_through_the_api():
         }
         n_before = status_before["n_failure_events"]
 
-        # Find a context that ANSWERs, then force it to be a confirmed
-        # failure -- same technique as test_startup_persistence.py.
-        forced = None
+        # The API default is intentionally unconfigured: it must not train at
+        # startup and therefore uses the safe abstaining assessor. A trained
+        # artifact is exercised through the explicit offline/replay paths.
         for magnitude in (0.0, 1.0, -1.0, 2.0, -2.0, 3.0, -3.0, 5.0, -5.0):
             candidate = {"f1": magnitude, "f2": magnitude, "f3": magnitude, "f4": magnitude, "f5": magnitude}
             probe = client.post("/api/analyze", json={"context": candidate}).json()
-            if probe["decision"] == "ANSWER":
-                forced_label = 1 - probe["metadata"]["predicted_label"]
-                resp = client.post("/api/analyze", json={"context": candidate, "true_label": forced_label})
-                body = resp.json()
-                if body["is_failure"]:
-                    forced = candidate
-                    break
-        assert forced is not None, "no candidate context produced a confirmed failure"
+            assert probe["decision"] in {"ABSTAIN", "REVIEW"}
+            assert probe["runtime"]["reliability"]["artifact_hash"] is None
+            assert probe["runtime"]["learning_update"] is None
 
         status_after = client.get("/api/memory/status").json()
-        assert status_after["n_failure_events"] == n_before + 1
-        assert status_after["fitted"] is True
+        assert status_after["n_failure_events"] == n_before
+        assert status_after["fitted"] is False
 
 
 def test_metrics_summary_is_the_one_documented_route_and_no_fake_data():

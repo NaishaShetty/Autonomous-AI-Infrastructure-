@@ -74,7 +74,7 @@ def test_failure_memory_marks_dirty_and_rebuilds_synchronously():
     assert memory.risk({"f1": 1.0}, 0.2) >= 0.0
 
 
-def test_stale_memory_cannot_be_queried_as_current():
+def test_dirty_memory_retains_last_valid_model_until_explicit_rebuild():
     memory = FailureMemory(["f1"])
     event = __import__("src.schema.events", fromlist=["ReliabilityEvent"]).ReliabilityEvent(
         workload_id="w", source="reliability_engine", context={"f1": 1.0}, raw_confidence=0.2, confidence=0.2,
@@ -84,8 +84,13 @@ def test_stale_memory_cannot_be_queried_as_current():
     memory.ingest(event)
     memory.store(event, repository=None, persist=False, rebuild=False)  # type: ignore[arg-type]
     assert memory.dirty
-    with pytest.raises(RuntimeError, match="dirty"):
-        memory.risk({"f1": 1.0}, 0.2)
+    # The active, previously validated model remains available while the
+    # newly ingested event waits for an explicit rebuild/promotion. The dirty
+    # marker prevents treating the pending event as current; it does not
+    # destroy the last valid serving state.
+    assert memory.risk({"f1": 1.0}, 0.2) >= 0.0
+    assert memory.rebuild() is True
+    assert memory.dirty is False
 
 
 def test_experience_store_reloads_complete_episode(tmp_path: Path):
