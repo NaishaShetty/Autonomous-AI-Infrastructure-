@@ -1,0 +1,10 @@
+{
+  "experiment_id": "phase31_reliability_gradient_boosting_same_features_v1",
+  "immutable": true,
+  "protocol_sha256": "1b08713fd0f74d87ae3e7988481217e38fc980809588cc0f4bef8938460f01e3",
+  "report_sha256": "84742afb50c1d077fa005d6fefb36f865f97e0ce078768105571b3addd194391",
+  "repository_commit": "ec525c698b9f59bde6b25cb174669866a0c42af7",
+  "results_sha256": "088a3ec011679c12d3876d3b94f076fec2d2481773696862cb34d70ffc244ac5",
+  "status": "completed",
+  "summary_sha256": "c60dbed6cfcfc3569c650d15308d41f16958c2f55f1e1321f464e4b900df3d4b"
+}

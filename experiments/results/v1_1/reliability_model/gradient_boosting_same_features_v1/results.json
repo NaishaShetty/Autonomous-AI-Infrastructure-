@@ -1,0 +1,817 @@
+{
+  "experiment_id": "phase31_reliability_gradient_boosting_same_features_v1",
+  "results": {
+    "random_stratified": {
+      "candidate": {
+        "hyperparameters": {
+          "learning_rate": 0.05,
+          "max_depth": 2,
+          "n_estimators": 100,
+          "random_state": 42
+        },
+        "metrics": {
+          "abstention": {
+            "abstained_count": 1365,
+            "abstained_failure_rate": 0.28205128205128205,
+            "abstention_rate": 0.908183632734531,
+            "accept_risk_threshold": 0.1,
+            "accepted_count": 138,
+            "accepted_failure_rate": 0.028985507246376812,
+            "coverage": 0.09181636726546906,
+            "selective_risk": 0.028985507246376812,
+            "uncertainty_threshold": null
+          },
+          "auprc": 0.6148702624958986,
+          "auroc": 0.7472031586769002,
+          "bootstrap": {
+            "auprc": {
+              "ci_hi": 0.6541221398604495,
+              "ci_lo": 0.576654567955726,
+              "mean": 0.6155160423267071,
+              "n_valid": 1000
+            },
+            "auroc": {
+              "ci_hi": 0.7780217748865786,
+              "ci_lo": 0.7201505953245358,
+              "mean": 0.7481869689451082,
+              "n_valid": 1000
+            }
+          },
+          "brier_score": 0.12805085116542783,
+          "calibration": {
+            "brier_score": 0.12805085116542783,
+            "expected_calibration_error": 0.008278073536693086,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 138,
+                "mean_prediction": 0.03452206481029148,
+                "observed_rate": 0.028985507246376812
+              },
+              {
+                "bin": 1,
+                "count": 852,
+                "mean_prediction": 0.1771639265983803,
+                "observed_rate": 0.17488262910798122
+              },
+              {
+                "bin": 2,
+                "count": 344,
+                "mean_prediction": 0.23906705539358605,
+                "observed_rate": 0.2180232558139535
+              },
+              {
+                "bin": 6,
+                "count": 3,
+                "mean_prediction": 0.6666666666666666,
+                "observed_rate": 0.6666666666666666
+              },
+              {
+                "bin": 7,
+                "count": 37,
+                "mean_prediction": 0.74337386311849,
+                "observed_rate": 0.8108108108108109
+              },
+              {
+                "bin": 9,
+                "count": 129,
+                "mean_prediction": 1.0,
+                "observed_rate": 1.0
+              }
+            ]
+          },
+          "calibration_parameters": {
+            "fit_split": "validation",
+            "method": "isotonic_regression",
+            "n_validation": 1498,
+            "threshold": 0.1
+          },
+          "count": 1503,
+          "log_loss": 0.4173173697249034,
+          "raw": {
+            "abstention": {
+              "abstained_count": 1450,
+              "abstained_failure_rate": 0.2675862068965517,
+              "abstention_rate": 0.9647371922821024,
+              "accept_risk_threshold": 0.1,
+              "accepted_count": 53,
+              "accepted_failure_rate": 0.018867924528301886,
+              "coverage": 0.03526280771789754,
+              "selective_risk": 0.018867924528301886,
+              "uncertainty_threshold": null
+            },
+            "auprc": 0.6404667611303849,
+            "auroc": 0.735906181203934,
+            "brier_score": 0.1366902831159167,
+            "calibration": {
+              "brier_score": 0.1366902831159167,
+              "expected_calibration_error": 0.03442682622633562,
+              "reliability_bins": [
+                {
+                  "bin": 0,
+                  "count": 53,
+                  "mean_prediction": 0.07360222505208705,
+                  "observed_rate": 0.018867924528301886
+                },
+                {
+                  "bin": 1,
+                  "count": 882,
+                  "mean_prediction": 0.17085597443093872,
+                  "observed_rate": 0.16326530612244897
+                },
+                {
+                  "bin": 2,
+                  "count": 337,
+                  "mean_prediction": 0.24474741044176768,
+                  "observed_rate": 0.22551928783382788
+                },
+                {
+                  "bin": 3,
+                  "count": 25,
+                  "mean_prediction": 0.33832510564186463,
+                  "observed_rate": 0.16
+                },
+                {
+                  "bin": 4,
+                  "count": 19,
+                  "mean_prediction": 0.45603532947314396,
+                  "observed_rate": 0.15789473684210525
+                },
+                {
+                  "bin": 5,
+                  "count": 49,
+                  "mean_prediction": 0.536839931149141,
+                  "observed_rate": 0.5102040816326531
+                },
+                {
+                  "bin": 6,
+                  "count": 8,
+                  "mean_prediction": 0.6887290563594148,
+                  "observed_rate": 0.875
+                },
+                {
+                  "bin": 7,
+                  "count": 1,
+                  "mean_prediction": 0.7315481554226113,
+                  "observed_rate": 0.0
+                },
+                {
+                  "bin": 8,
+                  "count": 129,
+                  "mean_prediction": 0.8293171791351427,
+                  "observed_rate": 1.0
+                }
+              ]
+            },
+            "count": 1503,
+            "log_loss": 0.4418023638251111
+          }
+        },
+        "model": "GradientBoostingClassifier"
+      },
+      "counts": {
+        "evaluation": 1503,
+        "train": 6999,
+        "validation": 1498
+      },
+      "evaluation_failed_rate": 0.2588157019294744,
+      "feature_columns": [
+        "job_start_time",
+        "n_tasks",
+        "n_distinct_task_names",
+        "sum_inst_num",
+        "mean_plan_cpu",
+        "max_plan_cpu",
+        "mean_plan_mem",
+        "max_plan_mem",
+        "mean_plan_gpu",
+        "max_plan_gpu",
+        "n_distinct_gpu_types",
+        "n_instances",
+        "n_distinct_machines",
+        "mean_instance_start_time"
+      ],
+      "feature_space_unchanged": true,
+      "reproducibility": {
+        "calibrator_sha256": "cf9bf72d82559e4979cebcbaae04462942668b0fb53d1b6ee90a4fe12c85498f",
+        "model_sha256": "421398a6c43adf9551874d8c3be7142ed485eef96a2dfcafa6f0fe17c6edb232",
+        "reload_same_output": true,
+        "runtime_training": false
+      },
+      "split": "random_stratified",
+      "train_failed_rate": 0.2594656379482783,
+      "v1_control": {
+        "artifact": {
+          "manifest": {
+            "artifact_sha256": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+            "artifact_version": "reliability-runtime-v2-artifact-1",
+            "calibration_metrics": {
+              "brier_score": 0.14439506557008583,
+              "expected_calibration_error": 0.02147479941655218,
+              "reliability_bins": [
+                {
+                  "bin": 0,
+                  "count": 98,
+                  "mean_prediction": 0.06942157167242377,
+                  "observed_rate": 0.11224489795918367
+                },
+                {
+                  "bin": 1,
+                  "count": 439,
+                  "mean_prediction": 0.14624888598298488,
+                  "observed_rate": 0.1548974943052392
+                },
+                {
+                  "bin": 2,
+                  "count": 744,
+                  "mean_prediction": 0.20963659512046606,
+                  "observed_rate": 0.1881720430107527
+                },
+                {
+                  "bin": 5,
+                  "count": 3,
+                  "mean_prediction": 0.5476241650386782,
+                  "observed_rate": 0.0
+                },
+                {
+                  "bin": 6,
+                  "count": 44,
+                  "mean_prediction": 0.6338629787194243,
+                  "observed_rate": 0.5227272727272727
+                },
+                {
+                  "bin": 7,
+                  "count": 2,
+                  "mean_prediction": 0.7148673938124803,
+                  "observed_rate": 0.0
+                },
+                {
+                  "bin": 8,
+                  "count": 173,
+                  "mean_prediction": 0.8476821192052982,
+                  "observed_rate": 0.8497109826589595
+                }
+              ]
+            },
+            "calibrator_sha256": "404f08fc124b4920820e2faa9c184c307decbfa420524ef942320244805baffc",
+            "calibrator_version": "isotonic-v2.0.0",
+            "created_at": "2026-08-22T11:00:00+05:30",
+            "evaluation_dataset_id": "alibaba_gpu2020_main_random_stratified_evaluation",
+            "evaluation_metrics": {
+              "auprc": 0.5396812153812669,
+              "auroc": 0.720134719138979,
+              "brier_score": 0.14439506557008583,
+              "calibration": {
+                "brier_score": 0.14439506557008583,
+                "expected_calibration_error": 0.02147479941655218,
+                "reliability_bins": [
+                  {
+                    "bin": 0,
+                    "count": 98,
+                    "mean_prediction": 0.06942157167242377,
+                    "observed_rate": 0.11224489795918367
+                  },
+                  {
+                    "bin": 1,
+                    "count": 439,
+                    "mean_prediction": 0.14624888598298488,
+                    "observed_rate": 0.1548974943052392
+                  },
+                  {
+                    "bin": 2,
+                    "count": 744,
+                    "mean_prediction": 0.20963659512046606,
+                    "observed_rate": 0.1881720430107527
+                  },
+                  {
+                    "bin": 5,
+                    "count": 3,
+                    "mean_prediction": 0.5476241650386782,
+                    "observed_rate": 0.0
+                  },
+                  {
+                    "bin": 6,
+                    "count": 44,
+                    "mean_prediction": 0.6338629787194243,
+                    "observed_rate": 0.5227272727272727
+                  },
+                  {
+                    "bin": 7,
+                    "count": 2,
+                    "mean_prediction": 0.7148673938124803,
+                    "observed_rate": 0.0
+                  },
+                  {
+                    "bin": 8,
+                    "count": 173,
+                    "mean_prediction": 0.8476821192052982,
+                    "observed_rate": 0.8497109826589595
+                  }
+                ]
+              },
+              "count": 1503,
+              "log_loss": 0.4712960497215015
+            },
+            "feature_names": [
+              "job_start_time",
+              "n_tasks",
+              "n_distinct_task_names",
+              "sum_inst_num",
+              "mean_plan_cpu",
+              "max_plan_cpu",
+              "mean_plan_mem",
+              "max_plan_mem",
+              "mean_plan_gpu",
+              "max_plan_gpu",
+              "n_distinct_gpu_types",
+              "n_instances",
+              "n_distinct_machines",
+              "mean_instance_start_time"
+            ],
+            "feature_schema_version": "alibaba-gpu2020-request-scheduling-v1",
+            "model_id": "alibaba-gpu2020-job-risk-logistic",
+            "model_sha256": "b0fc7d4469d3fe7681003cfba02163ff4419fe531de865738ad0c39412b715b2",
+            "model_version": "v2.0.0",
+            "protocol_hash": "9ff2c37e21fef4574361f1105b3037bcabffe26f4258ecfea3138bd05434137f",
+            "protocol_version": "reliability-runtime-v2",
+            "repository_commit": "e2e88d9e8d95891a40757a008bf04b327d67df9a",
+            "training_dataset_id": "alibaba_gpu2020_main_random_stratified_train",
+            "training_timestamp": "2026-08-22T11:00:00+05:30",
+            "validation_dataset_id": "alibaba_gpu2020_main_random_stratified_validation"
+          },
+          "reload_verified": true,
+          "same_input_same_output": true
+        },
+        "metrics": {
+          "auprc": 0.5396812153812669,
+          "auroc": 0.720134719138979,
+          "brier_score": 0.14439506557008583,
+          "calibration": {
+            "brier_score": 0.14439506557008583,
+            "expected_calibration_error": 0.02147479941655218,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 98,
+                "mean_prediction": 0.06942157167242377,
+                "observed_rate": 0.11224489795918367
+              },
+              {
+                "bin": 1,
+                "count": 439,
+                "mean_prediction": 0.14624888598298488,
+                "observed_rate": 0.1548974943052392
+              },
+              {
+                "bin": 2,
+                "count": 744,
+                "mean_prediction": 0.20963659512046606,
+                "observed_rate": 0.1881720430107527
+              },
+              {
+                "bin": 5,
+                "count": 3,
+                "mean_prediction": 0.5476241650386782,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 6,
+                "count": 44,
+                "mean_prediction": 0.6338629787194243,
+                "observed_rate": 0.5227272727272727
+              },
+              {
+                "bin": 7,
+                "count": 2,
+                "mean_prediction": 0.7148673938124803,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": 8,
+                "count": 173,
+                "mean_prediction": 0.8476821192052982,
+                "observed_rate": 0.8497109826589595
+              }
+            ]
+          },
+          "count": 1503,
+          "log_loss": 0.4712960497215015
+        },
+        "threshold": 0.1
+      },
+      "validation_failed_rate": 0.2596795727636849
+    },
+    "temporal": {
+      "candidate": {
+        "hyperparameters": {
+          "learning_rate": 0.05,
+          "max_depth": 2,
+          "n_estimators": 100,
+          "random_state": 42
+        },
+        "metrics": {
+          "abstention": {
+            "abstained_count": 1085,
+            "abstained_failure_rate": 0.18433179723502305,
+            "abstention_rate": 0.4341736694677871,
+            "accept_risk_threshold": 0.1,
+            "accepted_count": 1414,
+            "accepted_failure_rate": 0.6258840169731259,
+            "coverage": 0.5658263305322129,
+            "selective_risk": 0.6258840169731259,
+            "uncertainty_threshold": null
+          },
+          "auprc": 0.4153968713206156,
+          "auroc": 0.33356820211316723,
+          "bootstrap": {
+            "auprc": {
+              "ci_hi": 0.4347244465999343,
+              "ci_lo": 0.39590354641638575,
+              "mean": 0.4155693306140802,
+              "n_valid": 1000
+            },
+            "auroc": {
+              "ci_hi": 0.3541139627804526,
+              "ci_lo": 0.31090694559037885,
+              "mean": 0.3332170888789433,
+              "n_valid": 1000
+            }
+          },
+          "brier_score": 0.36854039400859095,
+          "calibration": {
+            "brier_score": 0.36854039400859095,
+            "expected_calibration_error": 0.3373822430215693,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 1414,
+                "mean_prediction": 0.07599764146503545,
+                "observed_rate": 0.6258840169731259
+              },
+              {
+                "bin": 1,
+                "count": 701,
+                "mean_prediction": 0.1674665443923647,
+                "observed_rate": 0.18830242510699002
+              },
+              {
+                "bin": 2,
+                "count": 250,
+                "mean_prediction": 0.25499076923076924,
+                "observed_rate": 0.152
+              },
+              {
+                "bin": 3,
+                "count": 118,
+                "mean_prediction": 0.37479021740522966,
+                "observed_rate": 0.211864406779661
+              },
+              {
+                "bin": 5,
+                "count": 10,
+                "mean_prediction": 0.5,
+                "observed_rate": 0.3
+              },
+              {
+                "bin": 9,
+                "count": 6,
+                "mean_prediction": 1.0,
+                "observed_rate": 0.3333333333333333
+              }
+            ]
+          },
+          "calibration_parameters": {
+            "fit_split": "validation",
+            "method": "isotonic_regression",
+            "n_validation": 1324,
+            "threshold": 0.1
+          },
+          "count": 2499,
+          "log_loss": 1.143432134755172,
+          "raw": {
+            "abstention": {
+              "abstained_count": 2421,
+              "abstained_failure_rate": 0.44609665427509293,
+              "abstention_rate": 0.9687875150060024,
+              "accept_risk_threshold": 0.1,
+              "accepted_count": 78,
+              "accepted_failure_rate": 0.0641025641025641,
+              "coverage": 0.031212484993997598,
+              "selective_risk": 0.0641025641025641,
+              "uncertainty_threshold": null
+            },
+            "auprc": 0.40950684519531066,
+            "auroc": 0.26614369797743437,
+            "brier_score": 0.33019007172194853,
+            "calibration": {
+              "brier_score": 0.33019007172194853,
+              "expected_calibration_error": 0.28671440811343846,
+              "reliability_bins": [
+                {
+                  "bin": 0,
+                  "count": 78,
+                  "mean_prediction": 0.06790289565081714,
+                  "observed_rate": 0.0641025641025641
+                },
+                {
+                  "bin": 1,
+                  "count": 2055,
+                  "mean_prediction": 0.1569682812682866,
+                  "observed_rate": 0.49343065693430654
+                },
+                {
+                  "bin": 2,
+                  "count": 324,
+                  "mean_prediction": 0.2201587658952239,
+                  "observed_rate": 0.1574074074074074
+                },
+                {
+                  "bin": 3,
+                  "count": 24,
+                  "mean_prediction": 0.3388847435709322,
+                  "observed_rate": 0.375
+                },
+                {
+                  "bin": 4,
+                  "count": 12,
+                  "mean_prediction": 0.4713410409879508,
+                  "observed_rate": 0.3333333333333333
+                },
+                {
+                  "bin": 5,
+                  "count": 2,
+                  "mean_prediction": 0.5847702681318302,
+                  "observed_rate": 0.0
+                },
+                {
+                  "bin": 6,
+                  "count": 2,
+                  "mean_prediction": 0.6498346312586236,
+                  "observed_rate": 0.5
+                },
+                {
+                  "bin": 7,
+                  "count": 2,
+                  "mean_prediction": 0.7245947130306586,
+                  "observed_rate": 0.5
+                }
+              ]
+            },
+            "count": 2499,
+            "log_loss": 0.9302599289559011
+          }
+        },
+        "model": "GradientBoostingClassifier"
+      },
+      "counts": {
+        "evaluation": 2499,
+        "train": 6177,
+        "validation": 1324
+      },
+      "evaluation_failed_rate": 0.4341736694677871,
+      "feature_columns": [
+        "job_start_time",
+        "n_tasks",
+        "n_distinct_task_names",
+        "sum_inst_num",
+        "mean_plan_cpu",
+        "max_plan_cpu",
+        "mean_plan_mem",
+        "max_plan_mem",
+        "mean_plan_gpu",
+        "max_plan_gpu",
+        "n_distinct_gpu_types",
+        "n_instances",
+        "n_distinct_machines",
+        "mean_instance_start_time"
+      ],
+      "feature_space_unchanged": true,
+      "reproducibility": {
+        "calibrator_sha256": "6b358af872467d6745d528b0e79fac648870c5e8f849926229ddf3ff36d1633e",
+        "model_sha256": "95a553ad2f436cb01f823c948a980373ce28ed68a8bab2716f759a74b49b520d",
+        "reload_same_output": true,
+        "runtime_training": false
+      },
+      "split": "temporal",
+      "train_failed_rate": 0.20106847984458476,
+      "v1_control": {
+        "artifact": {
+          "manifest": {
+            "artifact_sha256": "5fde1788df21c36cb745914d8ac39bfcac52f2fdf733390cbdf3f51bcd9f6099",
+            "artifact_version": "reliability-runtime-v2-artifact-1",
+            "calibration_metrics": {
+              "brier_score": 0.21853816567793097,
+              "expected_calibration_error": 0.21615543854474387,
+              "reliability_bins": [
+                {
+                  "bin": 0,
+                  "count": 21,
+                  "mean_prediction": 0.07142857142857142,
+                  "observed_rate": 0.09523809523809523
+                },
+                {
+                  "bin": 1,
+                  "count": 376,
+                  "mean_prediction": 0.1306340702595802,
+                  "observed_rate": 0.14893617021276595
+                },
+                {
+                  "bin": 2,
+                  "count": 1031,
+                  "mean_prediction": 0.21441441441441444,
+                  "observed_rate": 0.14936954413191075
+                },
+                {
+                  "bin": 3,
+                  "count": 1042,
+                  "mean_prediction": 0.38271604938271603,
+                  "observed_rate": 0.8243761996161229
+                },
+                {
+                  "bin": 5,
+                  "count": 15,
+                  "mean_prediction": 0.5,
+                  "observed_rate": 0.3333333333333333
+                },
+                {
+                  "bin": 6,
+                  "count": 1,
+                  "mean_prediction": 0.6666666666666666,
+                  "observed_rate": 1.0
+                },
+                {
+                  "bin": 7,
+                  "count": 2,
+                  "mean_prediction": 0.7736872945599197,
+                  "observed_rate": 0.5
+                },
+                {
+                  "bin": 8,
+                  "count": 11,
+                  "mean_prediction": 0.8308186921811533,
+                  "observed_rate": 0.6363636363636364
+                }
+              ]
+            },
+            "calibrator_sha256": "c3b992918504fe466cbc5a41248aff27be06e7c4081591b8adeedfc1bd8767b2",
+            "calibrator_version": "isotonic-v2.0.0",
+            "created_at": "2026-08-22T11:00:00+05:30",
+            "evaluation_dataset_id": "alibaba_gpu2020_main_temporal_evaluation",
+            "evaluation_metrics": {
+              "auprc": 0.7463900779094184,
+              "auroc": 0.8302048638043528,
+              "brier_score": 0.21853816567793097,
+              "calibration": {
+                "brier_score": 0.21853816567793097,
+                "expected_calibration_error": 0.21615543854474387,
+                "reliability_bins": [
+                  {
+                    "bin": 0,
+                    "count": 21,
+                    "mean_prediction": 0.07142857142857142,
+                    "observed_rate": 0.09523809523809523
+                  },
+                  {
+                    "bin": 1,
+                    "count": 376,
+                    "mean_prediction": 0.1306340702595802,
+                    "observed_rate": 0.14893617021276595
+                  },
+                  {
+                    "bin": 2,
+                    "count": 1031,
+                    "mean_prediction": 0.21441441441441444,
+                    "observed_rate": 0.14936954413191075
+                  },
+                  {
+                    "bin": 3,
+                    "count": 1042,
+                    "mean_prediction": 0.38271604938271603,
+                    "observed_rate": 0.8243761996161229
+                  },
+                  {
+                    "bin": 5,
+                    "count": 15,
+                    "mean_prediction": 0.5,
+                    "observed_rate": 0.3333333333333333
+                  },
+                  {
+                    "bin": 6,
+                    "count": 1,
+                    "mean_prediction": 0.6666666666666666,
+                    "observed_rate": 1.0
+                  },
+                  {
+                    "bin": 7,
+                    "count": 2,
+                    "mean_prediction": 0.7736872945599197,
+                    "observed_rate": 0.5
+                  },
+                  {
+                    "bin": 8,
+                    "count": 11,
+                    "mean_prediction": 0.8308186921811533,
+                    "observed_rate": 0.6363636363636364
+                  }
+                ]
+              },
+              "count": 2499,
+              "log_loss": 0.6188876814265515
+            },
+            "feature_names": [
+              "job_start_time",
+              "n_tasks",
+              "n_distinct_task_names",
+              "sum_inst_num",
+              "mean_plan_cpu",
+              "max_plan_cpu",
+              "mean_plan_mem",
+              "max_plan_mem",
+              "mean_plan_gpu",
+              "max_plan_gpu",
+              "n_distinct_gpu_types",
+              "n_instances",
+              "n_distinct_machines",
+              "mean_instance_start_time"
+            ],
+            "feature_schema_version": "alibaba-gpu2020-request-scheduling-v1",
+            "model_id": "alibaba-gpu2020-job-risk-logistic",
+            "model_sha256": "71ff1a2ac0ea3fc21b73012ce1bdd29f7018214a2583a3c11bc7656690d60e77",
+            "model_version": "v2.0.0",
+            "protocol_hash": "9ff2c37e21fef4574361f1105b3037bcabffe26f4258ecfea3138bd05434137f",
+            "protocol_version": "reliability-runtime-v2",
+            "repository_commit": "e2e88d9e8d95891a40757a008bf04b327d67df9a",
+            "training_dataset_id": "alibaba_gpu2020_main_temporal_train",
+            "training_timestamp": "2026-08-22T11:00:00+05:30",
+            "validation_dataset_id": "alibaba_gpu2020_main_temporal_validation"
+          },
+          "reload_verified": true,
+          "same_input_same_output": true
+        },
+        "metrics": {
+          "auprc": 0.7463900779094184,
+          "auroc": 0.8302048638043528,
+          "brier_score": 0.21853816567793097,
+          "calibration": {
+            "brier_score": 0.21853816567793097,
+            "expected_calibration_error": 0.21615543854474387,
+            "reliability_bins": [
+              {
+                "bin": 0,
+                "count": 21,
+                "mean_prediction": 0.07142857142857142,
+                "observed_rate": 0.09523809523809523
+              },
+              {
+                "bin": 1,
+                "count": 376,
+                "mean_prediction": 0.1306340702595802,
+                "observed_rate": 0.14893617021276595
+              },
+              {
+                "bin": 2,
+                "count": 1031,
+                "mean_prediction": 0.21441441441441444,
+                "observed_rate": 0.14936954413191075
+              },
+              {
+                "bin": 3,
+                "count": 1042,
+                "mean_prediction": 0.38271604938271603,
+                "observed_rate": 0.8243761996161229
+              },
+              {
+                "bin": 5,
+                "count": 15,
+                "mean_prediction": 0.5,
+                "observed_rate": 0.3333333333333333
+              },
+              {
+                "bin": 6,
+                "count": 1,
+                "mean_prediction": 0.6666666666666666,
+                "observed_rate": 1.0
+              },
+              {
+                "bin": 7,
+                "count": 2,
+                "mean_prediction": 0.7736872945599197,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": 8,
+                "count": 11,
+                "mean_prediction": 0.8308186921811533,
+                "observed_rate": 0.6363636363636364
+              }
+            ]
+          },
+          "count": 2499,
+          "log_loss": 0.6188876814265515
+        },
+        "threshold": 0.1
+      },
+      "validation_failed_rate": 0.20166163141993956
+    }
+  }
+}

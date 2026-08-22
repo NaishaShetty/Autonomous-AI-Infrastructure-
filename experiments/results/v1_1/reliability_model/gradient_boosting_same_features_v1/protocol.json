@@ -1,0 +1,62 @@
+{
+  "alternative_hypothesis": "The candidate improves discrimination without unacceptable calibration, safety, or decision-time regression.",
+  "baseline": {
+    "artifact": "experiments/results/reliability_runtime_v2/artifacts/",
+    "freeze_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+    "model": "EncodedWorkloadRiskModel logistic regression"
+  },
+  "calibration": {
+    "fit_data": "validation only",
+    "method": "isotonic_regression",
+    "test_locked": true
+  },
+  "dataset": {
+    "data_verification": "data/audit/alibaba_gpu2020/restored_data_verification.json",
+    "id": "alibaba_gpu2020",
+    "manifest": "data/audit/alibaba_gpu2020/dataset_manifest.json",
+    "sample_seed": 42
+  },
+  "decision_rule": "ACCEPT only for meaningful multi-metric improvement with no unacceptable safety/calibration/cost regression; otherwise REJECT or HOLD.",
+  "evaluation_protocol": "experiments/results/reliability_runtime_v2/protocol.json",
+  "experiment_id": "phase31_reliability_gradient_boosting_same_features_v1",
+  "feature_set": "v1 request-scheduling numeric feature space; no new features",
+  "features": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "intervention": "GradientBoostingClassifier only; same 14 numeric pre-outcome features, same data, same splits, same validation-fitted isotonic calibration, locked threshold 0.1.",
+  "metrics": [
+    "AUROC",
+    "AUPRC",
+    "Brier",
+    "ECE",
+    "coverage",
+    "selective risk",
+    "unsafe proposal rate",
+    "unsafe execution rate",
+    "artifact size",
+    "reload consistency"
+  ],
+  "null_hypothesis": "The candidate provides no meaningful improvement over V1 under the locked protocol.",
+  "random_seeds": [
+    42
+  ],
+  "research_question": "Can a model-only GradientBoostingClassifier improve workload-failure reliability over frozen V1 without unacceptable calibration, safety, or cost regression?",
+  "software": {
+    "numpy": "2.4.6",
+    "platform": "Linux-6.18.38+-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]"
+  }
+}
