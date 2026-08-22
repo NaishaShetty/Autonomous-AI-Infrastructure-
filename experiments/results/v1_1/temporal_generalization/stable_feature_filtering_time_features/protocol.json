@@ -1,0 +1,60 @@
+{
+  "baseline": "Frozen V1 logistic model, same restored Alibaba data, feature pipeline, calibration, splits and threshold. Phase 3.1 GB remains a rejected comparator.",
+  "calibration": {
+    "fit_split": "validation only",
+    "method": "isotonic_regression",
+    "threshold": 0.1
+  },
+  "dataset": {
+    "id": "alibaba_gpu2020",
+    "manifest": "data/audit/alibaba_gpu2020/dataset_manifest.json",
+    "preprocessing": "canonical project pipeline",
+    "sample_seed": 42
+  },
+  "evaluation_protocol": "experiments/results/reliability_runtime_v2/protocol.json",
+  "experiment_id": "phase32_stable_feature_filtering_time_features",
+  "feature_set": [
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines"
+  ],
+  "hypothesis": "The two strongly shifted clock-time features contribute to temporal failure; removing them will improve temporal robustness without unacceptable calibration or safety regression.",
+  "intervention": {
+    "removed": [
+      "job_start_time",
+      "mean_instance_start_time"
+    ],
+    "selection_basis": "Stage A distribution-shift audit only; both had KS=1.0 and standardized mean difference approximately 1.57; no temporal labels used for selection.",
+    "type": "feature_stability_filtering"
+  },
+  "metrics": [
+    "AUROC",
+    "AUPRC",
+    "Brier",
+    "ECE",
+    "coverage",
+    "selective risk",
+    "unsafe proposal rate",
+    "unsafe execution rate",
+    "reload consistency"
+  ],
+  "model": "LogisticRegression(max_iter=2000,random_state=42)",
+  "random_seeds": [
+    42
+  ],
+  "research_question": "Can removing features with measured strong temporal distribution shift improve future robustness while preserving V1 behavior?",
+  "software": {
+    "platform": "Linux-6.18.38+-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]"
+  },
+  "split": "registered random_stratified and temporal; final evaluation locked"
+}

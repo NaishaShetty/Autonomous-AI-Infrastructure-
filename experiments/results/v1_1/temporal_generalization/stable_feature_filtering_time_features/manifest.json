@@ -1,0 +1,9 @@
+{
+  "experiment_id": "phase32_stable_feature_filtering_time_features",
+  "immutable": true,
+  "protocol_sha256": "81837d111c00fe1d0f64d7590cb315f5545c8d29e116a36086cfdd2c5cf9f365",
+  "repository_commit": "195837d2b8108ef3c4d68bcb9b073a82cb3ddb1f",
+  "results_sha256": "59d67ab559cfde42bbdfd7d406f95965181e196a919eb7e9145122dc0ba8bedf",
+  "status": "completed",
+  "summary_sha256": "b42b04eaf101eaeba39044c4d5a682edf0fec50b16a2301058546c189a4ef51b"
+}

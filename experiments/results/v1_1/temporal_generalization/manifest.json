@@ -1,0 +1,20 @@
+{
+  "decision": "REJECT",
+  "experiment_id": "phase32_temporal_generalization",
+  "files": {
+    "PHASE32_TEMPORAL_GENERALIZATION_REPORT.md": "7e076a23b3c57e9cecb9718aaba2693a42fce9178bcf9621f04e1e47e872fdf5",
+    "README.md": "915b62f73a10d0a3b477b3fe19688ddcb9fe4fb6e3479d61ad5e49555109d76d",
+    "stable_feature_filtering_time_features/finalized.json": "51fae7fc3462b52c6d11d00b9d556907940139821f575531c48de91a7e561cad",
+    "stable_feature_filtering_time_features/manifest.json": "83905cc928c5df62a68af630f5f6dc1227503d347be533d2413553efcaed49c6",
+    "stable_feature_filtering_time_features/protocol.json": "81837d111c00fe1d0f64d7590cb315f5545c8d29e116a36086cfdd2c5cf9f365",
+    "stable_feature_filtering_time_features/results.json": "59d67ab559cfde42bbdfd7d406f95965181e196a919eb7e9145122dc0ba8bedf",
+    "stable_feature_filtering_time_features/summary.json": "b42b04eaf101eaeba39044c4d5a682edf0fec50b16a2301058546c189a4ef51b",
+    "stage_a_audit.json": "f5fd3a238539b24c10447e09162eff4b7f26571354e0f1dea1455e71f308a683"
+  },
+  "historical_paths_protected": true,
+  "historical_skip_limitation": "The historical seven skipped test-node identities were not recovered from preserved evidence.",
+  "phase31_negative_result_protected": true,
+  "repository_commit": "195837d2b8108ef3c4d68bcb9b073a82cb3ddb1f",
+  "status": "completed",
+  "v1_freeze_protected": true
+}

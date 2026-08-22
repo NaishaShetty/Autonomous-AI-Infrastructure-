@@ -1,0 +1,9 @@
+{
+  "files": {
+    "manifest.json": "83905cc928c5df62a68af630f5f6dc1227503d347be533d2413553efcaed49c6",
+    "protocol.json": "81837d111c00fe1d0f64d7590cb315f5545c8d29e116a36086cfdd2c5cf9f365",
+    "results.json": "59d67ab559cfde42bbdfd7d406f95965181e196a919eb7e9145122dc0ba8bedf",
+    "summary.json": "b42b04eaf101eaeba39044c4d5a682edf0fec50b16a2301058546c189a4ef51b"
+  },
+  "immutable": true
+}
