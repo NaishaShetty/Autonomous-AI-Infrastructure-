@@ -1,0 +1,19 @@
+{
+  "artifact_loaded": {
+    "count": 50,
+    "max_ms": 9.380168048664927,
+    "median_ms": 0.9806129964999855,
+    "min_ms": 0.9696959750726819,
+    "p95_ms": 1.024327939376235
+  },
+  "median_delta_ms": 0.81697350833565,
+  "safe_fallback": {
+    "count": 50,
+    "max_ms": 0.7629649480804801,
+    "median_ms": 0.1636394881643355,
+    "min_ms": 0.15774497296661139,
+    "p95_ms": 0.18897198606282473
+  },
+  "scope": "local sandbox controller timing; not a production benchmark",
+  "training_at_runtime": false
+}

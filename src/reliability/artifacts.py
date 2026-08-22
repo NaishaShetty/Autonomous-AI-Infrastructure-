@@ -143,6 +143,7 @@ def save_reliability_artifact(
     protocol_hash: str,
     evaluation_metrics: Mapping[str, float],
     calibration_metrics: Mapping[str, float],
+    created_at: str | None = None,
 ) -> ReliabilityArtifactManifest:
     """Serialize already-trained objects with required provenance metadata.
 
@@ -182,7 +183,7 @@ def save_reliability_artifact(
         model_sha256=model_hash,
         calibrator_sha256=calibrator_hash,
         artifact_sha256=artifact_hash,
-        created_at=datetime.now(timezone.utc).isoformat(),
+        created_at=created_at or datetime.now(timezone.utc).isoformat(),
     )
     _validate_manifest(manifest)
     (output / "manifest.json").write_text(json.dumps(manifest.to_dict(), indent=2, sort_keys=True) + "\n")

@@ -1,0 +1,19 @@
+{
+  "experiment_id": "reliability_runtime_v2",
+  "protocol_version": "reliability-runtime-v2",
+  "dataset": "alibaba_gpu2020",
+  "task": "predict terminal Failed versus Terminated from pre-outcome job scheduling features",
+  "independent_unit": "job_name",
+  "seed": 42,
+  "features": {
+    "numeric": ["job_start_time", "n_tasks", "n_distinct_task_names", "sum_inst_num", "mean_plan_cpu", "max_plan_cpu", "mean_plan_mem", "max_plan_mem", "mean_plan_gpu", "max_plan_gpu", "n_distinct_gpu_types", "n_instances", "n_distinct_machines", "mean_instance_start_time"],
+    "categorical": [],
+    "excluded_tables": ["pai_sensor_table", "pai_machine_metric"],
+    "excluded_fields": ["status", "end_time", "max_mem", "max_gpu_wrk_mem", "terminal_duration"],
+    "fit_boundary": "imputation, scaling, and model fit on train only; calibration and abstention threshold on validation only; final test untouched"
+  },
+  "splits": {"random_stratified": "data/audit/alibaba_gpu2020/splits_random_stratified.json", "temporal": "data/audit/alibaba_gpu2020/splits_temporal.json"},
+  "baselines": ["B0 train base rate", "B1 max_plan_gpu median threshold", "B2 logistic regression"],
+  "runtime_boundary": "artifact loading only; no API-startup training; replay evidence is bounded and not production self-healing",
+  "claim_boundary": "validated on Alibaba GPU2020 under this declared job-level protocol; no general or production claim"
+}

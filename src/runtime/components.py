@@ -94,6 +94,7 @@ class ModelReliabilityAssessor:
         prediction = self.workload_model.predict(x)
         calibration = self.calibrator.predict({
             **context,
+            "predicted_label": prediction.predicted_label,
             "predicted_proba": prediction.predicted_proba,
             "margin": prediction.margin,
             "entropy": prediction.entropy,

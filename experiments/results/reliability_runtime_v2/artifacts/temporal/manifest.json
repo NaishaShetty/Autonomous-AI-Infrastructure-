@@ -1,0 +1,149 @@
+{
+  "artifact_sha256": "5fde1788df21c36cb745914d8ac39bfcac52f2fdf733390cbdf3f51bcd9f6099",
+  "artifact_version": "reliability-runtime-v2-artifact-1",
+  "calibration_metrics": {
+    "brier_score": 0.21853816567793097,
+    "expected_calibration_error": 0.21615543854474387,
+    "reliability_bins": [
+      {
+        "bin": 0,
+        "count": 21,
+        "mean_prediction": 0.07142857142857142,
+        "observed_rate": 0.09523809523809523
+      },
+      {
+        "bin": 1,
+        "count": 376,
+        "mean_prediction": 0.1306340702595802,
+        "observed_rate": 0.14893617021276595
+      },
+      {
+        "bin": 2,
+        "count": 1031,
+        "mean_prediction": 0.21441441441441444,
+        "observed_rate": 0.14936954413191075
+      },
+      {
+        "bin": 3,
+        "count": 1042,
+        "mean_prediction": 0.38271604938271603,
+        "observed_rate": 0.8243761996161229
+      },
+      {
+        "bin": 5,
+        "count": 15,
+        "mean_prediction": 0.5,
+        "observed_rate": 0.3333333333333333
+      },
+      {
+        "bin": 6,
+        "count": 1,
+        "mean_prediction": 0.6666666666666666,
+        "observed_rate": 1.0
+      },
+      {
+        "bin": 7,
+        "count": 2,
+        "mean_prediction": 0.7736872945599197,
+        "observed_rate": 0.5
+      },
+      {
+        "bin": 8,
+        "count": 11,
+        "mean_prediction": 0.8308186921811533,
+        "observed_rate": 0.6363636363636364
+      }
+    ]
+  },
+  "calibrator_sha256": "c3b992918504fe466cbc5a41248aff27be06e7c4081591b8adeedfc1bd8767b2",
+  "calibrator_version": "isotonic-v2.0.0",
+  "created_at": "2026-08-22T11:00:00+05:30",
+  "evaluation_dataset_id": "alibaba_gpu2020_main_temporal_evaluation",
+  "evaluation_metrics": {
+    "auprc": 0.7463900779094184,
+    "auroc": 0.8302048638043528,
+    "brier_score": 0.21853816567793097,
+    "calibration": {
+      "brier_score": 0.21853816567793097,
+      "expected_calibration_error": 0.21615543854474387,
+      "reliability_bins": [
+        {
+          "bin": 0,
+          "count": 21,
+          "mean_prediction": 0.07142857142857142,
+          "observed_rate": 0.09523809523809523
+        },
+        {
+          "bin": 1,
+          "count": 376,
+          "mean_prediction": 0.1306340702595802,
+          "observed_rate": 0.14893617021276595
+        },
+        {
+          "bin": 2,
+          "count": 1031,
+          "mean_prediction": 0.21441441441441444,
+          "observed_rate": 0.14936954413191075
+        },
+        {
+          "bin": 3,
+          "count": 1042,
+          "mean_prediction": 0.38271604938271603,
+          "observed_rate": 0.8243761996161229
+        },
+        {
+          "bin": 5,
+          "count": 15,
+          "mean_prediction": 0.5,
+          "observed_rate": 0.3333333333333333
+        },
+        {
+          "bin": 6,
+          "count": 1,
+          "mean_prediction": 0.6666666666666666,
+          "observed_rate": 1.0
+        },
+        {
+          "bin": 7,
+          "count": 2,
+          "mean_prediction": 0.7736872945599197,
+          "observed_rate": 0.5
+        },
+        {
+          "bin": 8,
+          "count": 11,
+          "mean_prediction": 0.8308186921811533,
+          "observed_rate": 0.6363636363636364
+        }
+      ]
+    },
+    "count": 2499,
+    "log_loss": 0.6188876814265515
+  },
+  "feature_names": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "feature_schema_version": "alibaba-gpu2020-request-scheduling-v1",
+  "model_id": "alibaba-gpu2020-job-risk-logistic",
+  "model_sha256": "71ff1a2ac0ea3fc21b73012ce1bdd29f7018214a2583a3c11bc7656690d60e77",
+  "model_version": "v2.0.0",
+  "protocol_hash": "9ff2c37e21fef4574361f1105b3037bcabffe26f4258ecfea3138bd05434137f",
+  "protocol_version": "reliability-runtime-v2",
+  "repository_commit": "e2e88d9e8d95891a40757a008bf04b327d67df9a",
+  "training_dataset_id": "alibaba_gpu2020_main_temporal_train",
+  "training_timestamp": "2026-08-22T11:00:00+05:30",
+  "validation_dataset_id": "alibaba_gpu2020_main_temporal_validation"
+}

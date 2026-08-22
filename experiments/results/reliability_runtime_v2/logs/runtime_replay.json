@@ -1,0 +1,32 @@
+{
+  "artifact_hash": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+  "bounded_replay_evidence": true,
+  "calibrator_version": "isotonic-v2.0.0",
+  "decision": "ANSWER",
+  "detection_provenance": {
+    "observation_id": "alibaba-replay-0017f66c16d3c8f5e1c70508",
+    "source_type": "dataset_replay"
+  },
+  "diagnosis": "error_rate_failure",
+  "episode_id": "alibaba-replay-0017f66c16d3c8f5e1c70508",
+  "experience_id": "9d449524-9001-4e59-bd68-d69a9bfa613d",
+  "model_id": "alibaba-gpu2020-job-risk-logistic",
+  "model_version": "v2.0.0",
+  "recovery_action": "retry",
+  "reliability_provenance": {
+    "artifact_loaded": true,
+    "model_id": "alibaba-gpu2020-job-risk-logistic",
+    "observation_id": "alibaba-replay-0017f66c16d3c8f5e1c70508",
+    "source_type": "dataset_replay"
+  },
+  "risk": 0.0,
+  "source_provenance": {
+    "dataset_id": "alibaba_gpu2020",
+    "role": "evaluation_replay",
+    "source_type": "dataset_replay",
+    "split": "random_stratified"
+  },
+  "source_type": "dataset_replay",
+  "uncertainty": 0.152317880794702,
+  "validation": "RECOVERED"
+}

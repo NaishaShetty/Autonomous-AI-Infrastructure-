@@ -1,0 +1,137 @@
+{
+  "artifact_sha256": "e7ebdf9fa2306586a3fd02bc8eb4fbe86c49d946440e82e6aa197789de2da6fc",
+  "artifact_version": "reliability-runtime-v2-artifact-1",
+  "calibration_metrics": {
+    "brier_score": 0.14439506557008583,
+    "expected_calibration_error": 0.02147479941655218,
+    "reliability_bins": [
+      {
+        "bin": 0,
+        "count": 98,
+        "mean_prediction": 0.06942157167242377,
+        "observed_rate": 0.11224489795918367
+      },
+      {
+        "bin": 1,
+        "count": 439,
+        "mean_prediction": 0.14624888598298488,
+        "observed_rate": 0.1548974943052392
+      },
+      {
+        "bin": 2,
+        "count": 744,
+        "mean_prediction": 0.20963659512046606,
+        "observed_rate": 0.1881720430107527
+      },
+      {
+        "bin": 5,
+        "count": 3,
+        "mean_prediction": 0.5476241650386782,
+        "observed_rate": 0.0
+      },
+      {
+        "bin": 6,
+        "count": 44,
+        "mean_prediction": 0.6338629787194243,
+        "observed_rate": 0.5227272727272727
+      },
+      {
+        "bin": 7,
+        "count": 2,
+        "mean_prediction": 0.7148673938124803,
+        "observed_rate": 0.0
+      },
+      {
+        "bin": 8,
+        "count": 173,
+        "mean_prediction": 0.8476821192052982,
+        "observed_rate": 0.8497109826589595
+      }
+    ]
+  },
+  "calibrator_sha256": "404f08fc124b4920820e2faa9c184c307decbfa420524ef942320244805baffc",
+  "calibrator_version": "isotonic-v2.0.0",
+  "created_at": "2026-08-22T11:00:00+05:30",
+  "evaluation_dataset_id": "alibaba_gpu2020_main_random_stratified_evaluation",
+  "evaluation_metrics": {
+    "auprc": 0.5396812153812669,
+    "auroc": 0.720134719138979,
+    "brier_score": 0.14439506557008583,
+    "calibration": {
+      "brier_score": 0.14439506557008583,
+      "expected_calibration_error": 0.02147479941655218,
+      "reliability_bins": [
+        {
+          "bin": 0,
+          "count": 98,
+          "mean_prediction": 0.06942157167242377,
+          "observed_rate": 0.11224489795918367
+        },
+        {
+          "bin": 1,
+          "count": 439,
+          "mean_prediction": 0.14624888598298488,
+          "observed_rate": 0.1548974943052392
+        },
+        {
+          "bin": 2,
+          "count": 744,
+          "mean_prediction": 0.20963659512046606,
+          "observed_rate": 0.1881720430107527
+        },
+        {
+          "bin": 5,
+          "count": 3,
+          "mean_prediction": 0.5476241650386782,
+          "observed_rate": 0.0
+        },
+        {
+          "bin": 6,
+          "count": 44,
+          "mean_prediction": 0.6338629787194243,
+          "observed_rate": 0.5227272727272727
+        },
+        {
+          "bin": 7,
+          "count": 2,
+          "mean_prediction": 0.7148673938124803,
+          "observed_rate": 0.0
+        },
+        {
+          "bin": 8,
+          "count": 173,
+          "mean_prediction": 0.8476821192052982,
+          "observed_rate": 0.8497109826589595
+        }
+      ]
+    },
+    "count": 1503,
+    "log_loss": 0.4712960497215015
+  },
+  "feature_names": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "feature_schema_version": "alibaba-gpu2020-request-scheduling-v1",
+  "model_id": "alibaba-gpu2020-job-risk-logistic",
+  "model_sha256": "b0fc7d4469d3fe7681003cfba02163ff4419fe531de865738ad0c39412b715b2",
+  "model_version": "v2.0.0",
+  "protocol_hash": "9ff2c37e21fef4574361f1105b3037bcabffe26f4258ecfea3138bd05434137f",
+  "protocol_version": "reliability-runtime-v2",
+  "repository_commit": "e2e88d9e8d95891a40757a008bf04b327d67df9a",
+  "training_dataset_id": "alibaba_gpu2020_main_random_stratified_train",
+  "training_timestamp": "2026-08-22T11:00:00+05:30",
+  "validation_dataset_id": "alibaba_gpu2020_main_random_stratified_validation"
+}
