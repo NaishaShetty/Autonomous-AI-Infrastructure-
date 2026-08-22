@@ -1,0 +1,146 @@
+# PHASE 3 BASELINE AUDIT
+
+**Status:** Phase 3.0 infrastructure checkpoint
+
+**Scope:** Independent repository audit, V1.0 control verification, and preparation of isolated V1.1 experiment infrastructure. No V1.1 improvement experiment was run.
+
+## 1. Repository state
+
+| Item | Status | Finding |
+|---|---|---|
+| Repository | **VERIFIED** | `NaishaShetty/Autonomous-AI-Infrastructure-` |
+| Branch | **VERIFIED** | `main` |
+| HEAD | **VERIFIED** | `d977a32c2f20efa5f8e0d0349d40b270ecabeca2` |
+| `origin/main` | **VERIFIED** | Same commit as `HEAD` at audit time |
+| Working tree before implementation | **VERIFIED** | Clean; no staged, modified, or untracked files |
+| Historical paths before implementation | **OBSERVED** | Present with committed protocol, manifest, result, summary, report, and per-seed artifacts |
+
+The implementation in this checkpoint adds only Phase 3 bookkeeping, contract, documentation, tests, and reserved `experiments/results/v1_1/` directories. It does not alter the frozen V1 runtime or historical result directories.
+
+## 2. Freeze verification
+
+The documented V1 freeze commit is `[d977a32](https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/commit/d977a32c2f20efa5f8e0d0349d40b270ecabeca2)`. The repository matched that commit and `origin/main` before changes. The clean-state condition was therefore **VERIFIED at the start of Phase 3.0**. After this checkpoint, the working tree is intentionally non-clean because it contains the new Phase 3 changes; the frozen commit itself remains unchanged.
+
+## 3. Test status
+
+| Validation | Historical V1 expectation | Phase 3.0 observation |
+|---|---:|---|
+| Full suite before Phase 3 changes | 507 passed, 7 skipped, 0 failed | **OBSERVED:** 497 passed, 17 skipped, 0 failed in 216.35 seconds |
+| Compilation | Passed | **VERIFIED:** `python3 -m compileall -q src tests` |
+| Diff check | Passed | **VERIFIED:** `git diff --check` after implementation |
+| Repository hygiene | Clean at freeze | **OBSERVED:** clean before implementation; expected Phase 3 changes afterward |
+| Full suite after Phase 3 changes | 507 passed, 7 skipped, 0 failed | **VERIFIED:** 502 passed, 17 skipped, 0 failed in 300.23 seconds; the five added tests passed |
+| New contract tests | Not applicable | **VERIFIED:** 5 passed |
+
+The full-suite discrepancy is recorded rather than hidden. The repository’s historical release documentation reports 507/7, while this environment produced 497/17 before the Phase 3 additions and 502/17 afterward. This is currently classified as **UNKNOWN** between environment/dependency differences, stale historical reporting, or skipped real-data coverage. No tests were changed to obtain the observed result.
+
+## 4. Focused validation status
+
+The V1 release documentation records 24 focused integration and persistence tests passing with zero failures [1]. The repository contains the corresponding closed-loop, Alibaba integration, failure-memory lifecycle, persistence, restart, safety, and runtime test modules. A fresh 24-test reproduction was not independently completed in this checkpoint, so the historical result is **OBSERVED from documentation, not VERIFIED by this audit**.
+
+An independently selected focused subset covering Alibaba integration, closed-loop runtime, memory lifecycle, persistence, restart, safety, and artifact replay collected 28 tests and produced **28 passed, 0 failed**; this is **VERIFIED** for that subset. The new Phase 3 serialization, manifest, deterministic-identifier, and immutability tests are **VERIFIED** by the 5-test unit run above.
+
+## 5. V1 reproduction status
+
+The historical V1 integrated evaluation is documented as 8 independent jobs, 7 conditions, and 56 replay cases, with zero unsafe execution and conservative safety behavior [1] [2]. The historical artifact and runner references are present in the repository. A new end-to-end replay was not run because the required local Alibaba GPU2020 data marker is absent in this clean environment; therefore independent reproduction is **UNKNOWN / NOT VERIFIED**. The historical result is preserved unchanged.
+
+## 6. Current reliability model
+
+The reliability path is **OBSERVED** from the implementation and audit documents. V1 uses a serialized reliability artifact containing a model, calibrator, feature schema, version identifiers, dataset identities, protocol information, metrics, and hashes. The documented runtime behavior is artifact loading with compatibility validation, explicit safe fallback when no artifact is available, no API-startup training, and same-process/process-restart validation. The model is not replaced or retuned in Phase 3.0.
+
+The current data boundary is also **OBSERVED**: the Alibaba GPU2020 source is a research/evaluation source, not the project’s public dataset. Dataset provenance, split, calibration, and artifact identity must be declared in every future contract; unavailable local raw-data details remain **UNKNOWN** until data setup is performed.
+
+## 7. Current runtime architecture
+
+The canonical V1 composition is:
+
+```text
+OBSERVATION → FAILURE DETECTION → WORKLOAD RELIABILITY MODEL
+→ RELIABILITY UNCERTAINTY → ABSTENTION DECISION
+→ FAILURE MEMORY RETRIEVAL → MEMORY-DERIVED RISK
+→ DIAGNOSIS → RECOVERY PLANNING → SAFETY GATE
+→ CONTROLLED RECOVERY EXECUTION → INDEPENDENT VALIDATION
+→ FAILURE EXPERIENCE → PERSISTENCE / MEMORY UPDATE
+```
+
+This separation is **VERIFIED as the documented architecture**. Workload failure risk, memory risk, reliability uncertainty, diagnosis uncertainty, and abstention decision remain distinct concepts; the Phase 3 contract does not introduce a generic replacement risk variable.
+
+## 8. Current evaluation protocol
+
+The V1 protocol is a bounded replay composition using the serialized artifact, observation and detection, workload-risk prediction, failure-memory retrieval, diagnosis, abstention, safety-gated controlled recovery, independent validation, and experience persistence [1]. Supported claims are limited to coherent composition and bounded scientific evidence. Production reliability, real-world autonomous recovery, broad generalization, operational deployment safety, and production readiness are **not established** by V1.
+
+## 9. Dataset inventory
+
+| Dataset/source | Purpose | Boundary and status |
+|---|---|---|
+| Alibaba GPU2020 | Research/evaluation reliability and closed-loop replay | **OBSERVED:** research/evaluation source; not the project’s public dataset |
+| AIOps KPI | Real-data audit/evaluation path | **OBSERVED in test gating:** local marker may be absent; exact local availability is **UNKNOWN** |
+| AgentRx | Real-data audit/evaluation path | **OBSERVED in test gating:** local marker may be absent; exact local availability is **UNKNOWN** |
+| Synthetic V1 fixtures | Unit/integration/runtime testing | **OBSERVED:** repository test infrastructure; not evidence of production performance |
+
+For each future experiment, source, raw/derived status, license/provenance, split, training use, calibration use, evaluation use, and redistribution status are mandatory metadata. Public dataset packaging is outside Phase 3.0.
+
+## 10. Artifact inventory
+
+**Verified repository artifacts** include frozen V1 experiment protocols, manifests, results, summaries, reports, per-seed outputs, reliability-runtime artifacts, and historical phase outputs. The new contract module uses canonical JSON and SHA-256; it never uses Python `hash()` for scientific identifiers. A finalized experiment contains `protocol.json`, `manifest.json`, `results.json`, `summary.json`, `report.md`, optional `per_seed/`, and a `.finalized` digest marker. Finalization is write-once and rejects later overwrites.
+
+## 11. Historical experiment verification
+
+The following historical directories were present before implementation and remain outside the new V1.1 tree:
+
+```text
+experiments/results/learning_influence/
+experiments/results/generalization/
+experiments/results/counterfactual_generalization/
+experiments/results/memory_composition/
+experiments/results/memory_composition_v2/
+```
+
+Their contents were not edited. This is **OBSERVED** from the pre-change Git state and the scoped implementation diff; a post-commit hash manifest should be used for any future independent audit.
+
+## 12. Existing experiment infrastructure
+
+The repository already provides reusable runners, benchmark scripts, JSON protocols and manifests, per-seed result serialization, metric implementations, artifact loading, leakage audits, and report files. Phase 3.0 adds a small generic layer rather than duplicating or refactoring that working V1 code:
+
+* `src/phase3_contract.py` provides the required field contract, canonical serialization, deterministic identifiers, manifest validation, and immutable finalization.
+* `configs/phase3_evaluation_contract.json` freezes the split, leakage, randomness, metric, scientific-template, and decision rules.
+* `experiments/results/v1_1/` provides isolated category directories without speculative results.
+* `tests/unit/test_phase3_contract.py` tests the new infrastructure.
+
+## 13. V1 limitation inventory
+
+The following are evidence-backed research questions, not claims of production weakness:
+
+| Area | Evidence-backed limitation or uncertainty |
+|---|---|
+| Reliability | The current full-suite result differs from the historical documented count; cause requires environment/data reconciliation. |
+| Features | The audited V1 feature boundary is fixed; whether additional non-leaking temporal features improve prediction is not yet tested under the locked contract. |
+| Calibration | Calibration behavior is documented, but comparative calibration alternatives have not been run in Phase 3.0. |
+| Abstention | V1 demonstrates conservative abstention behavior in bounded replay; its behavior outside that protocol is unknown. |
+| Memory | Retrieval-order and conflicting-memory safety are documented for the bounded cases; broader memory distributions are not established. |
+| Diagnosis | Diagnosis is composed in the replay, but independent generalization beyond the declared protocol is unknown. |
+| Recovery | Recovery is controlled/simulated; real-world recovery safety is not established. |
+| Robustness | Robustness to distribution shift and adversarial or noisy conditions requires separately locked experiments. |
+| Evaluation | The 56-case result is bounded composition evidence and was not independently replayed here because local real-data availability is unresolved. |
+
+## 14. Phase 3 experiment contract
+
+Every future experiment must declare the 15 fields in `configs/phase3_evaluation_contract.json`, including hypothesis, frozen baseline, single intervention, dataset identity/version, split, feature set, model, calibration, seed, evaluation protocol, metrics, software version, and artifact identity. It must produce the standard artifacts where applicable and preserve negative results. The final test remains locked, model selection occurs on validation data, and metric definitions cannot change after candidate results are viewed.
+
+## 15. Proposed first V1.1 hypothesis
+
+**HYPOTHESIS:** Under the frozen V1 data boundary, split definitions, calibration protocol, and evaluation metrics, a justified classical candidate reliability model may improve calibrated failure-risk prediction relative to the V1 model without increasing unsafe downstream decisions. The first experiment should compare one candidate intervention at a time, with Logistic Regression as the initial candidate only if the baseline audit confirms compatible inputs and artifact interfaces.
+
+This is a **PROPOSED** hypothesis, not an experimental result. No candidate model was trained or evaluated in Phase 3.0.
+
+## 16. Phase 3.1 readiness decision
+
+**NOT READY for scientific improvement claims; READY for controlled experiment design.**
+
+The repository now has an isolated contract and result layout, but the full-suite discrepancy, focused-validation reproduction, and V1 end-to-end replay require explicit reconciliation before Phase 3.1 results can be treated as independently reproduced control comparisons. Phase 3.1 may begin protocol design and environment/data reconciliation, but it should not begin a large-scale improvement experiment until those open verification items are closed.
+
+## References
+
+[1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
+
+[2]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_RELEASE_AUDIT.md "V1 release audit"

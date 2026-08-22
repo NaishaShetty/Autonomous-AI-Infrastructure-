@@ -1,0 +1,45 @@
+{
+  "contract_id": "phase3-evaluation-contract-v1",
+  "status": "frozen-before-phase3.1",
+  "purpose": "Immutable comparison rules for V1.1 experiments against the frozen V1.0 control.",
+  "data_splits": {
+    "training": "Fit candidate models only on training data.",
+    "validation": "Select models and hyperparameters only on validation data.",
+    "calibration": "Use only the declared calibration split when calibration is applicable.",
+    "final_test": "Locked until the protocol, intervention, and selection decision are recorded."
+  },
+  "leakage_rules": [
+    "Do not use future telemetry.",
+    "Do not use post-failure telemetry for a pre-failure decision.",
+    "Do not use target-derived features.",
+    "Do not insert target outcomes into prior memory.",
+    "Do not tune on the final test split.",
+    "Do not select final thresholds on the final test split."
+  ],
+  "model_selection": "Validation data only.",
+  "calibration": "Calibration data must be declared in protocol.json and must not be the locked final test.",
+  "randomness": {
+    "seed_policy": "Record every seed in the contract and per_seed artifacts.",
+    "minimum_seeds": 5,
+    "default_seeds": [7, 11, 19, 23, 31],
+    "deterministic_requirements": [
+      "Stable identifiers use SHA-256 over canonical JSON.",
+      "Do not use Python hash() for scientific identifiers.",
+      "Record software version, repository commit, protocol hash, and artifact identity."
+    ],
+    "environment_recording": "Record interpreter, dependency lock, platform, and repository commit."
+  },
+  "metrics": {
+    "reliability": ["auroc", "auprc", "brier", "ece", "coverage", "selective_risk", "early_warning"],
+    "decision": ["abstention_behavior", "unsafe_action_rate"],
+    "downstream": ["diagnosis_quality", "recovery_success", "validation_success", "safety", "latency", "cost"]
+  },
+  "scientific_template": ["question", "hypothesis", "frozen_v1_control", "one_intervention", "train", "validate", "select", "lock", "final_test", "compare", "interpret", "accept_or_reject"],
+  "decision_rules": {
+    "improvement": "Meaningful improvement without unacceptable regression.",
+    "trade_off": "Improves one dimension while degrading another.",
+    "no_meaningful_change": "No evidence that the intervention is worth integrating.",
+    "regression": "Meaningfully worsens the system.",
+    "interesting_finding": "Reveals an important behavioral, scientific, or architectural property without directly improving the system."
+  }
+}
