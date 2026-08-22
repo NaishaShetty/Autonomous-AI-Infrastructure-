@@ -1,0 +1,128 @@
+{
+  "artifact_hashes": {
+    "plots/fold_timeline.png": "69a59d693c60f405f175d55a84790a8046523886771a951be884f59122fda09f",
+    "protocol.json": "24a77c9def4a08049ce9ee4f8c43c6b3c3c92ac595a2d3afeddd6d7059f91a7d",
+    "report.md": "cca22a9004de40e6a08a9092fc3340c240f59b810490a4da53a014c45d01e6ff",
+    "results.json": "38e1e37d9959b8671bd076d41e7327bfd963a14b305280bad93b1fbf05bbb266",
+    "summary.json": "9726153065730b586cd2e3d365bd490990894c48d5ce8fa64051163e32fc1f27"
+  },
+  "baseline": "Frozen V1 predictor; research-only additive analysis",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "data_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "research-only chronological future folds; canonical V1 temporal test untouched",
+  "experiment_id": "phase35_a_temporal_fold_construction",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "fold_definitions": [
+    {
+      "failure_rate": 0.1725,
+      "fold_id": "fold_1",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 3200,
+      "n_validation": 800,
+      "temporal_end": 4789055.0,
+      "temporal_start": 3563831.0,
+      "test_idx": [
+        4000,
+        6000
+      ],
+      "train_idx": [
+        0,
+        3200
+      ],
+      "training_boundary_end": 3227786.0,
+      "validation_boundary": [
+        3227788.0,
+        3563515.0
+      ],
+      "validation_idx": [
+        3200,
+        4000
+      ]
+    },
+    {
+      "failure_rate": 0.3175,
+      "fold_id": "fold_2",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 4800,
+      "n_validation": 1200,
+      "temporal_end": 5667324.0,
+      "temporal_start": 4789772.0,
+      "test_idx": [
+        6000,
+        8000
+      ],
+      "train_idx": [
+        0,
+        4800
+      ],
+      "training_boundary_end": 4113089.0,
+      "validation_boundary": [
+        4113217.0,
+        4789055.0
+      ],
+      "validation_idx": [
+        4800,
+        6000
+      ]
+    },
+    {
+      "failure_rate": 0.3785,
+      "fold_id": "fold_3",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 6400,
+      "n_validation": 1600,
+      "temporal_end": 6449460.0,
+      "temporal_start": 5668729.0,
+      "test_idx": [
+        8000,
+        10000
+      ],
+      "train_idx": [
+        0,
+        6400
+      ],
+      "training_boundary_end": 4942034.0,
+      "validation_boundary": [
+        4942986.0,
+        5667324.0
+      ],
+      "validation_idx": [
+        6400,
+        8000
+      ]
+    }
+  ],
+  "hypothesis": "Multiple genuine future regimes can be constructed from the ordered official data without changing V1.",
+  "intervention": "Pre-registered 40% warm-up followed by three contiguous 20% future folds.",
+  "model_identity": "unchanged V1-compatible logistic predictor",
+  "phase": "3.5",
+  "policy": "abstain above the fold validation 80th percentile uncertainty; minimum operational coverage 0.50; safety gate requires lower accepted-case risk than V1; success requires positive high-low error separation on at least 2 of 3 folds, no reversal, and acceptable cost",
+  "provenance": "scripts/run_phase35_experiments.py",
+  "seed": 42,
+  "selection_boundary": "all fold definitions and the uncertainty/policy criteria were locked before future-fold evaluation; no canonical V1 temporal test used",
+  "software_version": "3.12.3",
+  "threshold": null,
+  "uncertainty_method": "9-model bootstrap/model variability; each member trained only on fold training rows; uncertainty is probability standard deviation"
+}

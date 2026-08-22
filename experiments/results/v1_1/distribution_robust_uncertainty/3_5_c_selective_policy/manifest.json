@@ -1,0 +1,128 @@
+{
+  "artifact_hashes": {
+    "plots/selective_risk.png": "c66279301f929b89c788d8a6055c36ea20a74b9cbe2a0e63a167c2ec7aa2753c",
+    "protocol.json": "9655d58ef40d22ed83537ea8818228dc711dee0cf9e13021c537274ad06df1a7",
+    "report.md": "0a01d89bac12b5dd78f9b4315b4236c3be124fcf67b7c7460a186f5e253ed72e",
+    "results.json": "794a98b5ae90d799517a5b2e15024063e23404ef1f0f2b2b2fe5ab298da3e7b7",
+    "summary.json": "6e1c169df78003632daf1653b1384c46bdd46823dfa0a817bbbab3cec4c3f1dc"
+  },
+  "baseline": "Frozen V1 predictor; research-only additive analysis",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "data_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "research-only chronological future folds; canonical V1 temporal test untouched",
+  "experiment_id": "phase35_c_preregistered_selective_policy",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "fold_definitions": [
+    {
+      "failure_rate": 0.1725,
+      "fold_id": "fold_1",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 3200,
+      "n_validation": 800,
+      "temporal_end": 4789055.0,
+      "temporal_start": 3563831.0,
+      "test_idx": [
+        4000,
+        6000
+      ],
+      "train_idx": [
+        0,
+        3200
+      ],
+      "training_boundary_end": 3227786.0,
+      "validation_boundary": [
+        3227788.0,
+        3563515.0
+      ],
+      "validation_idx": [
+        3200,
+        4000
+      ]
+    },
+    {
+      "failure_rate": 0.3175,
+      "fold_id": "fold_2",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 4800,
+      "n_validation": 1200,
+      "temporal_end": 5667324.0,
+      "temporal_start": 4789772.0,
+      "test_idx": [
+        6000,
+        8000
+      ],
+      "train_idx": [
+        0,
+        4800
+      ],
+      "training_boundary_end": 4113089.0,
+      "validation_boundary": [
+        4113217.0,
+        4789055.0
+      ],
+      "validation_idx": [
+        4800,
+        6000
+      ]
+    },
+    {
+      "failure_rate": 0.3785,
+      "fold_id": "fold_3",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 6400,
+      "n_validation": 1600,
+      "temporal_end": 6449460.0,
+      "temporal_start": 5668729.0,
+      "test_idx": [
+        8000,
+        10000
+      ],
+      "train_idx": [
+        0,
+        6400
+      ],
+      "training_boundary_end": 4942034.0,
+      "validation_boundary": [
+        4942986.0,
+        5667324.0
+      ],
+      "validation_idx": [
+        6400,
+        8000
+      ]
+    }
+  ],
+  "hypothesis": "A validation-locked uncertainty policy reduces accepted-case risk across future regimes while retaining at least 50% coverage.",
+  "intervention": "One abstention rule: uncertainty above validation 80th percentile.",
+  "model_identity": "unchanged V1-compatible logistic predictor",
+  "phase": "3.5",
+  "policy": "abstain above the fold validation 80th percentile uncertainty; minimum operational coverage 0.50; safety gate requires lower accepted-case risk than V1; success requires positive high-low error separation on at least 2 of 3 folds, no reversal, and acceptable cost",
+  "provenance": "scripts/run_phase35_experiments.py",
+  "seed": 42,
+  "selection_boundary": "all fold definitions and the uncertainty/policy criteria were locked before future-fold evaluation; no canonical V1 temporal test used",
+  "software_version": "3.12.3",
+  "threshold": null,
+  "uncertainty_method": "9-model bootstrap/model variability; each member trained only on fold training rows; uncertainty is probability standard deviation"
+}

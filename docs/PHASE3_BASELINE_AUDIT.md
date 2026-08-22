@@ -149,6 +149,16 @@ The full Phase 3.4 synthesis and immutable experiment records are stored under `
 
 **Phase 3.4 readiness decision: V1 remains the sole production-eligible control.** A future study may investigate distribution-robust uncertainty across multiple pre-registered temporal folds, but any successful component must remain additive and undergo a separate consolidation experiment.
 
+## 18. Phase 3.5 distribution-robust uncertainty readiness
+
+Phase 3.5 constructed three additional research-only chronological future folds after a 40% warm-up. The unchanged nine-member bootstrap/model-variability estimator from Phase 3.4-B showed positive high-versus-low uncertainty error separation on all three folds. The signal is therefore retained as a robust diagnostic finding across the tested regimes.
+
+The single pre-registered abstention policy, using the fold-validation 80th uncertainty percentile with a 0.50 minimum coverage gate, failed as an actionable control: it improved risk on one fold, degraded risk on two folds, and fell below the coverage gate on the first fold. The overall result is **NON-ACTIONABLE / HOLD** as research evidence. No Phase 3.5 component modifies V1 or enters production.
+
+The complete fold definitions, per-fold results, policy analysis, plots, and immutable records are stored under `experiments/results/v1_1/distribution_robust_uncertainty/`. The historical aggregate V1 result of 507 passed / 7 skipped / 0 failed remains preserved; the exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
+
+**Phase 3.5 readiness decision: V1 remains the sole production-eligible control.** A future phase may study safety-constrained use of diagnostic uncertainty across additional forward folds, but must create a new experiment ID and preserve the frozen V1 boundary.
+
 ## References
 [1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
 
@@ -157,3 +167,5 @@ The full Phase 3.4 synthesis and immutable experiment records are stored under `
 [3]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/calibration_abstention "Phase 3.4 calibration, uncertainty, and abstention evidence"
 
 [4]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/PHASE3_BASELINE_AUDIT.md "Phase 3 baseline audit"
+
+[5]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/distribution_robust_uncertainty "Phase 3.5 distribution-robust uncertainty evidence"

@@ -1,0 +1,131 @@
+{
+  "artifact_hashes": {
+    "artifacts/_stage_fold_1.joblib": "7c9e173fda90b1a2beb30669e88898f1f46654035d7712f43d18bcba618e2d9b",
+    "artifacts/_stage_fold_2.joblib": "09a6e9c4f614688fbafc05515b0b5bfa04d6a6650f0026ccfa58802e64b8c084",
+    "artifacts/_stage_fold_3.joblib": "5f4fe43abcb6179467e7a6a4c64ca1b89b9b3747fd5a86bee2e7e8c1a9cdb17e",
+    "plots/high_low_error.png": "a15a5061b7cf51bfe75734f1ca80900b84817529cdc1425e165688cb30020258",
+    "protocol.json": "2a2ed7143c139d2f55be1b6894369b0a55b5ffaa7cd4dce890c3e3e618823229",
+    "report.md": "24be7dc945e6bacc8e8bd7d17d98b99f58f267d03fff6dbce1432130c46aab30",
+    "results.json": "d77da34fcedafa69a76c39f23ed9618bf2a50f11c12f3040f29abc9056c9fcdf",
+    "summary.json": "9deb93b6d35cd0b40961aea922a73d9bc1d7278af11e94a11736d12be92418ea"
+  },
+  "baseline": "Frozen V1 predictor; research-only additive analysis",
+  "data_hashes": {
+    "data/audit/alibaba_gpu2020/splits_random_stratified.json": "5b3a4ecbe634939b5a0e1dc2d3faad730e9e6cbb8041f0c9d1c259ec98f5e760",
+    "data/audit/alibaba_gpu2020/splits_temporal.json": "f9c269b1cd1c96ce71a28cc64e5368a3cbc69cf31966544a9e4cbb822a1c658d"
+  },
+  "data_identity": "official restored Alibaba GPU2020",
+  "evaluation_protocol": "research-only chronological future folds; canonical V1 temporal test untouched",
+  "experiment_id": "phase35_b_cross_temporal_uncertainty",
+  "feature_set": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time",
+    "dominant_gpu_type"
+  ],
+  "fold_definitions": [
+    {
+      "failure_rate": 0.1725,
+      "fold_id": "fold_1",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 3200,
+      "n_validation": 800,
+      "temporal_end": 4789055.0,
+      "temporal_start": 3563831.0,
+      "test_idx": [
+        4000,
+        6000
+      ],
+      "train_idx": [
+        0,
+        3200
+      ],
+      "training_boundary_end": 3227786.0,
+      "validation_boundary": [
+        3227788.0,
+        3563515.0
+      ],
+      "validation_idx": [
+        3200,
+        4000
+      ]
+    },
+    {
+      "failure_rate": 0.3175,
+      "fold_id": "fold_2",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 4800,
+      "n_validation": 1200,
+      "temporal_end": 5667324.0,
+      "temporal_start": 4789772.0,
+      "test_idx": [
+        6000,
+        8000
+      ],
+      "train_idx": [
+        0,
+        4800
+      ],
+      "training_boundary_end": 4113089.0,
+      "validation_boundary": [
+        4113217.0,
+        4789055.0
+      ],
+      "validation_idx": [
+        4800,
+        6000
+      ]
+    },
+    {
+      "failure_rate": 0.3785,
+      "fold_id": "fold_3",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 6400,
+      "n_validation": 1600,
+      "temporal_end": 6449460.0,
+      "temporal_start": 5668729.0,
+      "test_idx": [
+        8000,
+        10000
+      ],
+      "train_idx": [
+        0,
+        6400
+      ],
+      "training_boundary_end": 4942034.0,
+      "validation_boundary": [
+        4942986.0,
+        5667324.0
+      ],
+      "validation_idx": [
+        6400,
+        8000
+      ]
+    }
+  ],
+  "hypothesis": "Bootstrap uncertainty consistently identifies higher-error predictions across multiple future regimes.",
+  "intervention": "Unchanged 9-member bootstrap model-variability estimator evaluated per fold.",
+  "model_identity": "unchanged V1-compatible logistic predictor",
+  "phase": "3.5",
+  "policy": "abstain above the fold validation 80th percentile uncertainty; minimum operational coverage 0.50; safety gate requires lower accepted-case risk than V1; success requires positive high-low error separation on at least 2 of 3 folds, no reversal, and acceptable cost",
+  "provenance": "scripts/run_phase35_experiments.py",
+  "seed": 42,
+  "selection_boundary": "all fold definitions and the uncertainty/policy criteria were locked before future-fold evaluation; no canonical V1 temporal test used",
+  "software_version": "3.12.3",
+  "threshold": null,
+  "uncertainty_method": "9-model bootstrap/model variability; each member trained only on fold training rows; uncertainty is probability standard deviation"
+}

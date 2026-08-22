@@ -1,0 +1,76 @@
+{
+  "decision": "HOLD",
+  "positive_folds": 3,
+  "reversal_folds": 0,
+  "temporal_folds": {
+    "fold_1": {
+      "error_difference": 0.12,
+      "error_ratio": 1.9836065573770492,
+      "high_uncertainty_error": 0.242,
+      "low_uncertainty_error": 0.122,
+      "mean_uncertainty": 0.02734996320739478,
+      "median_uncertainty": 0.02347142920619215,
+      "n_test": 2000,
+      "uncertainty_error_correlation": 0.1346314880159366,
+      "uncertainty_quantiles": {
+        "0.1": 0.015375917299679557,
+        "0.25": 0.019500295576364825,
+        "0.5": 0.02347142920619215,
+        "0.75": 0.0300224213656297,
+        "0.9": 0.044703013783470726
+      },
+      "v1_metrics": {
+        "auprc": 0.2826451850708245,
+        "auroc": 0.5901834581198826,
+        "brier": 0.1373334655925136,
+        "count": 2000
+      }
+    },
+    "fold_2": {
+      "error_difference": 0.148,
+      "error_ratio": 1.9487179487179487,
+      "high_uncertainty_error": 0.304,
+      "low_uncertainty_error": 0.156,
+      "mean_uncertainty": 0.02841953405185516,
+      "median_uncertainty": 0.02718382462131822,
+      "n_test": 2000,
+      "uncertainty_error_correlation": 0.13401245383805785,
+      "uncertainty_quantiles": {
+        "0.1": 0.01666743217069834,
+        "0.25": 0.02344472836630706,
+        "0.5": 0.02718382462131822,
+        "0.75": 0.02922206944147872,
+        "0.9": 0.03849693354904159
+      },
+      "v1_metrics": {
+        "auprc": 0.5266228197147393,
+        "auroc": 0.7165631219174526,
+        "brier": 0.202914446283132,
+        "count": 2000
+      }
+    },
+    "fold_3": {
+      "error_difference": 0.14400000000000002,
+      "error_ratio": 2.4117647058823533,
+      "high_uncertainty_error": 0.246,
+      "low_uncertainty_error": 0.102,
+      "mean_uncertainty": 0.021002325509326576,
+      "median_uncertainty": 0.01833601318045035,
+      "n_test": 2000,
+      "uncertainty_error_correlation": 0.016404176089336493,
+      "uncertainty_quantiles": {
+        "0.1": 0.014681491223890255,
+        "0.25": 0.01810901138641841,
+        "0.5": 0.01833601318045035,
+        "0.75": 0.02089117395338675,
+        "0.9": 0.028211597167072843
+      },
+      "v1_metrics": {
+        "auprc": 0.5757477972485882,
+        "auroc": 0.7717362540663648,
+        "brier": 0.2205877895106783,
+        "count": 2000
+      }
+    }
+  }
+}

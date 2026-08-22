@@ -1,0 +1,87 @@
+{
+  "decision": "ACCEPT",
+  "decision_basis": "chronological order, non-overlap, increasing boundaries, meaningful sample sizes and failure representation",
+  "folds": [
+    {
+      "failure_rate": 0.1725,
+      "fold_id": "fold_1",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 3200,
+      "n_validation": 800,
+      "temporal_end": 4789055.0,
+      "temporal_start": 3563831.0,
+      "test_idx": [
+        4000,
+        6000
+      ],
+      "train_idx": [
+        0,
+        3200
+      ],
+      "training_boundary_end": 3227786.0,
+      "validation_boundary": [
+        3227788.0,
+        3563515.0
+      ],
+      "validation_idx": [
+        3200,
+        4000
+      ]
+    },
+    {
+      "failure_rate": 0.3175,
+      "fold_id": "fold_2",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 4800,
+      "n_validation": 1200,
+      "temporal_end": 5667324.0,
+      "temporal_start": 4789772.0,
+      "test_idx": [
+        6000,
+        8000
+      ],
+      "train_idx": [
+        0,
+        4800
+      ],
+      "training_boundary_end": 4113089.0,
+      "validation_boundary": [
+        4113217.0,
+        4789055.0
+      ],
+      "validation_idx": [
+        4800,
+        6000
+      ]
+    },
+    {
+      "failure_rate": 0.3785,
+      "fold_id": "fold_3",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 6400,
+      "n_validation": 1600,
+      "temporal_end": 6449460.0,
+      "temporal_start": 5668729.0,
+      "test_idx": [
+        8000,
+        10000
+      ],
+      "train_idx": [
+        0,
+        6400
+      ],
+      "training_boundary_end": 4942034.0,
+      "validation_boundary": [
+        4942986.0,
+        5667324.0
+      ],
+      "validation_idx": [
+        6400,
+        8000
+      ]
+    }
+  ]
+}

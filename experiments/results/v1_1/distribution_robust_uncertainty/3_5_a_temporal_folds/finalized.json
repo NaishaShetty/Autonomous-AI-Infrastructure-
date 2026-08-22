@@ -1,0 +1,11 @@
+{
+  "files": {
+    "manifest.json": "ab6e511f18a7530b75a9c69f19bbf93e2f31aab4bbf6d7dd1aef1594db81af2a",
+    "plots/fold_timeline.png": "69a59d693c60f405f175d55a84790a8046523886771a951be884f59122fda09f",
+    "protocol.json": "24a77c9def4a08049ce9ee4f8c43c6b3c3c92ac595a2d3afeddd6d7059f91a7d",
+    "report.md": "cca22a9004de40e6a08a9092fc3340c240f59b810490a4da53a014c45d01e6ff",
+    "results.json": "38e1e37d9959b8671bd076d41e7327bfd963a14b305280bad93b1fbf05bbb266",
+    "summary.json": "9726153065730b586cd2e3d365bd490990894c48d5ce8fa64051163e32fc1f27"
+  },
+  "immutable": true
+}
