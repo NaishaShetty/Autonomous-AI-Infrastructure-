@@ -1,0 +1,110 @@
+{
+  "aggregate": {
+    "C0_no_memory": {
+      "mean_diagnosis_confidence": 0.6,
+      "mean_memory_risk": 0.0,
+      "mean_retrieved": 0.0,
+      "mean_workload_failure_risk": 0.2473898451473374,
+      "n": 8,
+      "recovery_success_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "unsafe_proposal_rejection_rate": 0.0
+    },
+    "C1_relevant_memory": {
+      "mean_diagnosis_confidence": 0.8,
+      "mean_memory_risk": 0.9886964482197877,
+      "mean_retrieved": 1.0,
+      "mean_workload_failure_risk": 0.2473898451473374,
+      "n": 8,
+      "recovery_success_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "unsafe_proposal_rejection_rate": 0.0
+    },
+    "C2_irrelevant_memory": {
+      "mean_diagnosis_confidence": 0.6,
+      "mean_memory_risk": 0.0,
+      "mean_retrieved": 1.0,
+      "mean_workload_failure_risk": 0.2473898451473374,
+      "n": 8,
+      "recovery_success_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "unsafe_proposal_rejection_rate": 0.0
+    },
+    "C3_conflicting_memory": {
+      "mean_diagnosis_confidence": 0.8,
+      "mean_memory_risk": 0.9886964482197877,
+      "mean_retrieved": 2.0,
+      "mean_workload_failure_risk": 0.2473898451473374,
+      "n": 8,
+      "recovery_success_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 1.0,
+      "unsafe_proposal_rejection_rate": 1.0
+    },
+    "C4_negative_experience": {
+      "mean_diagnosis_confidence": 0.8,
+      "mean_memory_risk": 0.9886964482197877,
+      "mean_retrieved": 1.0,
+      "mean_workload_failure_risk": 0.2473898451473374,
+      "n": 8,
+      "recovery_success_rate": 1.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "unsafe_proposal_rejection_rate": 0.0
+    },
+    "C5_safety_conflict": {
+      "mean_diagnosis_confidence": 0.8,
+      "mean_memory_risk": 0.9886964482197877,
+      "mean_retrieved": 1.0,
+      "mean_workload_failure_risk": 0.2473898451473374,
+      "n": 8,
+      "recovery_success_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 1.0,
+      "unsafe_proposal_rejection_rate": 1.0
+    },
+    "C6_safe_fallback": {
+      "mean_diagnosis_confidence": 0.0,
+      "mean_memory_risk": 0.0,
+      "mean_retrieved": 0.0,
+      "mean_workload_failure_risk": 0.0,
+      "n": 8,
+      "recovery_success_rate": 0.0,
+      "safe_decision_rate": 1.0,
+      "unsafe_execution_rate": 0.0,
+      "unsafe_proposal_rate": 0.0,
+      "unsafe_proposal_rejection_rate": 0.0
+    }
+  },
+  "claim_boundary": "bounded Alibaba GPU2020 replay composition evidence; controlled recovery only; no production self-healing claim",
+  "experiment_id": "alibaba_closed_loop_v2",
+  "leakage_controls": {
+    "conflicting_retrieval_order_changes_decision": false,
+    "episode_n_plus_1_outcome_in_episode_n_memory": false,
+    "evaluation_used_for_tuning": false,
+    "future_telemetry_as_feature": false,
+    "target_outcome_before_decision": false
+  },
+  "population": {
+    "job_ids": [
+      "0017f66c16d3c8f5e1c70508",
+      "004e6e6e6c5d7d21ebabde84",
+      "00b022b6b524f270a415aa54",
+      "00e8ecc76ad6f5463024e7e4",
+      "0127d190101ac32a1cd83e49",
+      "014fdb2915e0b2f5edc715b0",
+      "015d8242cfe19b105ed845fe",
+      "0178122889b6b038503abdbe"
+    ],
+    "n_unique_jobs": 8
+  }
+}

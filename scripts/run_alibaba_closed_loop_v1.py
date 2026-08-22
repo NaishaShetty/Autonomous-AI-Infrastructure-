@@ -43,7 +43,10 @@ def run_condition(name: str, row, *, memory_events=(), unsafe=False, artifact=Tr
         if memory_events:
             memory.rebuild()
         system = build_runtime_system(workload_id="alibaba-gpu2020-closed-loop", feature_names=NUMERIC_COLS, artifact_path=ARTIFACT if artifact else None, expected_artifact_version="reliability-runtime-v2-artifact-1" if artifact else None, expected_model_version="v2.0.0" if artifact else None, expected_calibrator_version="isotonic-v2.0.0" if artifact else None, failure_memory=memory, experience_path=Path(tmp) / "episodes.jsonl", relevance_threshold=0.5)
-        source = DatasetReplaySource([make_record(f"{name}-episode-2", row, unsafe=unsafe)], dataset_id="alibaba_gpu2020")
+        record = make_record(f"{name}-episode-2", row, unsafe=unsafe)
+        if not artifact:
+            record.pop("metrics", None)
+        source = DatasetReplaySource([record], dataset_id="alibaba_gpu2020")
         observation = source.observe()
         episode = system.controller.process(observation)
         assessor = system.controller.assessor
