@@ -1,0 +1,37 @@
+[
+  {
+    "component": "raw archives",
+    "status": "PARTIAL",
+    "evidence": "official archive checksums in dataset_manifest.json; raw files not committed"
+  },
+  {
+    "component": "clean job/task tables",
+    "status": "COMPLETE",
+    "evidence": "row counts and duplicate checks in cleaning_report.json"
+  },
+  {
+    "component": "main sampled task/instance tables",
+    "status": "PARTIAL",
+    "evidence": "linked sampled records; not all raw tables materialized"
+  },
+  {
+    "component": "sensor/machine metrics",
+    "status": "PARTIAL",
+    "evidence": "sampled processed files exist but decision-time synchronization unavailable"
+  },
+  {
+    "component": "prediction timestamp",
+    "status": "MISSING",
+    "evidence": "not materialized"
+  },
+  {
+    "component": "outcome labels",
+    "status": "COMPLETE",
+    "evidence": "terminal jobs and status labels present"
+  },
+  {
+    "component": "join/entity provenance",
+    "status": "PARTIAL",
+    "evidence": "job joins available; node/GPU/runtime provenance incomplete"
+  }
+]

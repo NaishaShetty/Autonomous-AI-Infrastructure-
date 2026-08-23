@@ -1,0 +1,21 @@
+information,exists,timestamp_exists,before_v1_decision,used_by_v1,stable_across_folds,potential_value,classification,availability_note
+job_start_time,True,True,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+n_tasks,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+n_distinct_task_names,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+sum_inst_num,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+mean_plan_cpu,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+max_plan_cpu,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+mean_plan_mem,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+max_plan_mem,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+mean_plan_gpu,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+max_plan_gpu,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+n_distinct_gpu_types,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+n_instances,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+n_distinct_machines,True,False,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+mean_instance_start_time,True,True,UNKNOWN,True,Exploratory; see Phase 3.9,Already represented in V1,A — USED BY V1,Feature is in canonical V1 contract; exact runtime prediction timestamp is not in dataset.
+dominant_gpu_type,True,True,UNKNOWN,False,Not established,Potential workload composition context,C — AVAILABLE BEFORE DECISION BUT TIMESTAMP UNCERTAIN,Derived from task table; task-to-prediction ordering is not synchronized.
+job_table.user,True,False,UNKNOWN,False,Not established,Potential workload provenance; high cardinality,C — AVAILABLE BEFORE DECISION BUT TIMESTAMP UNCERTAIN,Identifier is present in clean table but decision-time boundary is not recorded.
+sensor_table and machine_metric utilization,True,True,UNKNOWN/POST-DECISION,False,Not established,Resource state and telemetry,D — ONLY AVAILABLE AFTER DECISION,Observed metric timestamps are not proven to precede V1 prediction; many are execution-time fields.
+job/task final status and end_time,True,True,False,False,Outcome-dependent,Forensic outcome label only,E — ONLY AVAILABLE AFTER OUTCOME,Forbidden as decision-time information.
+"queue pressure, cluster load, scheduler state, node health, network state",False,False,UNKNOWN,False,UNKNOWN,Plausible but unverified,F — NOT PRESENT,Future data requirement; not fabricated or imported.
+runtime prediction timestamp and ingestion timestamp,False,False,UNKNOWN,False,UNKNOWN,Required to prove temporal availability,G — UNKNOWN,Decision timestamp is not materialized in the benchmark.

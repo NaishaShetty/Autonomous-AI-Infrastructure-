@@ -1,0 +1,10 @@
+{
+  "decision_time_observability": "PARTIAL",
+  "temporal_coverage": "PARTIAL",
+  "failure_diversity": "PARTIAL",
+  "workload_diversity": "PARTIAL",
+  "environment_diversity": "UNKNOWN",
+  "provenance": "PARTIAL",
+  "timestamp_quality": "INSUFFICIENT",
+  "generalization_support": "PARTIAL"
+}

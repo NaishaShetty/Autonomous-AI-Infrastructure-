@@ -1,0 +1,8 @@
+comparison,train_job_overlap,exact_job_duplicate_count,exact_feature_vector_overlap,test_jobs,interpretation
+train_vs_validation,0.0,0.0,3.0,1498.0,"No job-id leakage; feature-vector overlap is dependence evidence, not automatically leakage."
+train_vs_random_test,0.0,0.0,5.0,1503.0,"No job-id leakage; feature-vector overlap is dependence evidence, not automatically leakage."
+train_vs_canonical_temporal,1722.0,0.0,1712.0,2499.0,"No job-id leakage; feature-vector overlap is dependence evidence, not automatically leakage."
+train_vs_fold_1_test,1414.0,0.0,1413.0,2000.0,"No job-id leakage; feature-vector overlap is dependence evidence, not automatically leakage."
+train_vs_fold_2_test,1397.0,0.0,1393.0,2000.0,"No job-id leakage; feature-vector overlap is dependence evidence, not automatically leakage."
+train_vs_fold_3_test,1371.0,0.0,1363.0,2000.0,"No job-id leakage; feature-vector overlap is dependence evidence, not automatically leakage."
+task_template_overlap_train_vs_all,,,,,Task names are shared across sample populations: 16 distinct task names; this indicates template dependence may exist.

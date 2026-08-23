@@ -1,0 +1,32 @@
+[
+  {
+    "mechanism": "workload-regime error associations",
+    "information_needed": "timestamped workload and scheduler context",
+    "exists": "partially",
+    "decision_time": "unknown",
+    "used_by_v1": "basic workload summaries only",
+    "stable": "mixed/unstable",
+    "operationally_obtainable": "unknown",
+    "bottleneck": "missing synchronized runtime context"
+  },
+  {
+    "mechanism": "high-confidence errors",
+    "information_needed": "calibrated risk plus consequence/severity",
+    "exists": "risk exists; severity absent",
+    "decision_time": "risk yes; severity no",
+    "used_by_v1": "risk yes",
+    "stable": "confidence split present",
+    "operationally_obtainable": "severity requires new instrumentation",
+    "bottleneck": "outcome consequence not represented"
+  },
+  {
+    "mechanism": "prior failure similarity",
+    "information_needed": "provenance-complete prior history",
+    "exists": "not in canonical feature boundary",
+    "decision_time": "potentially",
+    "used_by_v1": "no",
+    "stable": "Candidate C mixed/rejected",
+    "operationally_obtainable": "medium/high cost",
+    "bottleneck": "provenance and temporal validity"
+  }
+]

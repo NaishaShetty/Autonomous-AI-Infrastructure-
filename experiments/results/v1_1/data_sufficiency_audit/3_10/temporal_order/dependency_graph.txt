@@ -1,0 +1,17 @@
+WORKLOAD ARRIVAL (not materialized)
+↓
+JOB/TASK CREATION (source tables)
+↓
+PLANNING / RESOURCE REQUEST (plan_* fields)
+↓
+V1 DECISION (runtime timestamp not materialized)
+↓
+INSTANCE START / EXECUTION (instance start_time)
+↓
+TELEMETRY (sensor/machine metric samples)
+↓
+FAILURE / SUCCESS (status/label)
+↓
+RECOVERY / VALIDATION (not materialized)
+
+Evidence boundary: timestamps exist for source events, but synchronization to V1 prediction is not established; nodes with unknown ordering remain explicitly marked.

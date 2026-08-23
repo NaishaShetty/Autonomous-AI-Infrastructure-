@@ -1,0 +1,22 @@
+{
+  "PHASE3_10_SYNTHESIS.md": "ed4e9f8a376cabd692c4db0f409c5e845fdf18ca342164a584e2e99a062fa1d8",
+  "artifacts/dataset_identity.json": "eb919f6aa850839da23c8e717eabe213e63149421414d16b18a449cef72e91b3",
+  "artifacts/full_suite_attempt.txt": "96ec3a4899bfd85f3c60256dfcad05dc35ef94d30f560ce13f325ff76c5658fa",
+  "artifacts/hypothesis_evidence_matrix.json": "1879b71e7642a1508a48e82ce5a0e7e1249d490ac799f39881201c80a0183e8d",
+  "dependence/dependence_duplication_audit.csv": "40fa0b0444cac3339838092f1366e34270ddbc7a4eab7d2f4ded6926ab6916cc",
+  "distribution_shift/population_distribution_summary.csv": "d9b85b4aa972a3514c2412029c2f8a0fbd1cf2d7010672fb7761003493fd7827",
+  "diversity/scorecard.json": "f555c7f456394e8ae04bd11a16df053393b8f52978c3e4f02bc9dc5138f46a36",
+  "diversity/workload_failure_temporal_diversity.csv": "40ea6aedcaa5fd9c74714e3047872c44ef5cf92be010976e67c6b1d73f55ff93",
+  "hashes/manifest.json": "87591a7d7a66552d7e0a9f83ff27c3dc809232a6e79c9028bbd59ebfd1348b17",
+  "information/availability_matrix.json": "f476cd207f2141a47454bb55c42616cb373b4fa2be1cdb64e4df3a71ce36d006",
+  "information/bottleneck_matrix.json": "65137072c73a495c7b43fe01086692d9b34cb4c952464a357fd4161b7769e5bf",
+  "information/decision_time_information_matrix.csv": "57ea31f471d0bb51258738be2cebe6af26613ff824f019a7df6b0caefa73744f",
+  "inventory/completeness.json": "339f7f940a71c2e840c6a2abbd6d8ca120d3f260f5445d7f0c2a52d901529667",
+  "inventory/data_inventory.csv": "ff9fc93d20db893cb39a11433da8adfb054abfa4c6cf156d78a8f7b0dde585ba",
+  "missingness/missingness_by_population.csv": "09c38b5f4eb28a72499db6ca61a471a95d09c0956daf545e8741acfbc5f7de83",
+  "plots/failure_rate_by_population.png": "3b3d2258a1cb07d4aa6639dd9c409eae3a730516681c34800203a8952257f39d",
+  "plots/task_diversity_by_population.png": "c35428ba8577ec66f44c1c1d536d3325de4290b6a9f1b56eaf4fd041f71ec47e",
+  "protocol/phase310_protocol.json": "0a679fc3311df784fdcbd59e59e8df109cdf1c200528f49e6b2532bbf6ced1a7",
+  "temporal_order/dependency_graph.txt": "7aee3fb7652505f5542601305316aa5e403e1c6794aea1f03e2cf75deb396b71",
+  "timestamps/timestamp_audit.csv": "cef720ec45f4ba46967dcd659364c539d349877d630171e10fb5b41ed814fa16"
+}

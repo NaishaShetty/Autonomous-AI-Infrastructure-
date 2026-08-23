@@ -1,0 +1,15 @@
+field,timestamp_field,decision_timestamp,ordering,classification
+job_start_time,job_start_time,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,"DECISION-TIME FIELD, PREDICTION TIMESTAMP UNKNOWN"
+n_tasks,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+n_distinct_task_names,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+sum_inst_num,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+mean_plan_cpu,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+max_plan_cpu,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+mean_plan_mem,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+max_plan_mem,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+mean_plan_gpu,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+max_plan_gpu,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+n_distinct_gpu_types,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+n_instances,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+n_distinct_machines,none/materialized aggregate,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,TIMING UNKNOWN
+mean_instance_start_time,mean_instance_start_time,UNKNOWN,Cannot establish information_timestamp <= prediction timestamp from repository data,"DECISION-TIME FIELD, PREDICTION TIMESTAMP UNKNOWN"

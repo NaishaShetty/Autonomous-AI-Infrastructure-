@@ -1,0 +1,42 @@
+[
+  {
+    "evidence": "V1 uses 14 pre-outcome workload/resource aggregates and has reproducible temporal performance",
+    "supports_A": true,
+    "supports_B": false,
+    "supports_C": false,
+    "against_A": false,
+    "against_B": true,
+    "against_C": false,
+    "strength": "moderate"
+  },
+  {
+    "evidence": "Prediction timestamp, scheduler state, queue pressure, and consequence severity are absent or unproven",
+    "supports_A": false,
+    "supports_B": true,
+    "supports_C": true,
+    "against_A": true,
+    "against_B": false,
+    "against_C": false,
+    "strength": "strong"
+  },
+  {
+    "evidence": "Future-fold signatures and error behavior are regime-dependent",
+    "supports_A": false,
+    "supports_B": true,
+    "supports_C": true,
+    "against_A": true,
+    "against_B": false,
+    "against_C": false,
+    "strength": "moderate"
+  },
+  {
+    "evidence": "Single Alibaba trace with shared task templates and incomplete independent environment identifiers",
+    "supports_A": false,
+    "supports_B": false,
+    "supports_C": true,
+    "against_A": false,
+    "against_B": false,
+    "against_C": false,
+    "strength": "moderate"
+  }
+]

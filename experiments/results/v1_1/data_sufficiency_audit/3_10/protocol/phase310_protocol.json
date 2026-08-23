@@ -1,0 +1,42 @@
+{
+  "data_identity": "official restored Alibaba GPU2020",
+  "decision_timestamp": "UNKNOWN unless proven by runtime evidence",
+  "evaluation_populations": [
+    "train",
+    "validation",
+    "random_test",
+    "canonical_temporal",
+    "fold_1_train",
+    "fold_1_validation",
+    "fold_1_test",
+    "fold_2_train",
+    "fold_2_validation",
+    "fold_2_test",
+    "fold_3_train",
+    "fold_3_validation",
+    "fold_3_test"
+  ],
+  "experiment_id": "3_10_v1_data_sufficiency_decision_time_observability_audit",
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "methods": [
+    "repository data inventory",
+    "timestamp and temporal-order audit",
+    "decision-time information matrix",
+    "missingness and completeness analysis",
+    "join/dependence audit",
+    "workload/failure/temporal/environment diversity audit",
+    "distribution-shift supporting audit",
+    "three-hypothesis evidence matrix"
+  ],
+  "no_candidate_implementation": true,
+  "no_model_training": true,
+  "no_v1_modification": true,
+  "phase": "3.10",
+  "provenance": "scripts/run_phase310_data_audit.py",
+  "seed": 3100,
+  "software_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "python": "3.12.3"
+  }
+}
