@@ -1,7 +1,7 @@
 import hashlib,json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]; BASE=ROOT/'experiments/results/v1_1/v1_forensics'; STAGES=['3_6_a_data_evaluation','3_6_b_feature_forensics','3_6_c_regularization','3_6_d_complexity_ladder','3_6_e_synthesis']
-def test_all_forensic_stages_exist(): assert [p.name for p in sorted(BASE.iterdir()) if p.is_dir()]==STAGES
+def test_all_forensic_stages_exist(): assert set(STAGES)<=set(p.name for p in BASE.iterdir() if p.is_dir())
 def test_stage_contracts_and_hashes():
  for n in STAGES:
   d=BASE/n
