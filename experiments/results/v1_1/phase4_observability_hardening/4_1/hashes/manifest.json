@@ -1,0 +1,12 @@
+{
+  "files": {
+    "artifacts/source_boundary.json": "9acfeb510830058ae8577ab1706335c8f5e83b91259747213a45088ddc258139",
+    "audit/repository_audit.md": "1339eddc33579ad4f0f38b029cc26da1118ee705db71f179a5570f07c31c6c25",
+    "coverage/observability_coverage.json": "29384fdb97f83270d464896b2a416569ab234e64cd86819643af5a9986c94d7e",
+    "protocol/phase41_hardening_protocol.json": "c9c0765b78f8fc031df549ccaab59f5b5550507a32eda1a231fba6064bf2550c",
+    "quality/gates.json": "279a3bbd45c815aa291602251379d6c23386d646c60d4af731a1ddcbdc999b43",
+    "replay/restart_validation.json": "022e2e28f5b3390000b11a92463738be9cc952856270ac43fa44d58fbc5e5e4b",
+    "reports/PHASE4_1_OBSERVABILITY_HARDENING_REPORT.md": "e11883602cbb587e7c495cf4f4b5c2550565a40e7e90746f3d91cb98bcde7a0e",
+    "reports/PHASE4_1_RUNTIME_OBSERVABILITY_REPORT.md": "e11883602cbb587e7c495cf4f4b5c2550565a40e7e90746f3d91cb98bcde7a0e"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "source": "Alibaba GPU2020 / current repository runtime",
+  "real_timestamped_source": "NOT_AVAILABLE",
+  "controlled_runtime": "SYNTHETIC_TEST_ONLY",
+  "workload_events": "SUPPORTED_BY_SCHEMA_AND_COLLECTOR",
+  "task_events": "SUPPORTED_BY_SCHEMA",
+  "prediction_events": "SUPPORTED_BY_SCHEMA",
+  "scheduler_coverage": "UNAVAILABLE_CURRENT_SOURCE",
+  "queue_coverage": "UNAVAILABLE_CURRENT_SOURCE",
+  "resource_coverage": "PARTIAL_SCHEMA_ONLY",
+  "environment_coverage": "ONE_CANONICAL_ENVIRONMENT",
+  "failure_coverage": "BINARY_HISTORICAL_OUTCOME_ONLY",
+  "recovery_coverage": "SCHEMA_ONLY",
+  "consequence_coverage": "SCHEMA_ONLY",
+  "timestamp_quality": "EXPLICIT; UNKNOWN NOT UPGRADED",
+  "provenance_coverage": "REQUIRED_FOR_PERSISTED_EVENTS"
+}

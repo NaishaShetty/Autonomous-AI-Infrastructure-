@@ -1,0 +1,13 @@
+{
+  "fixture_boundary": "CONTROLLED RUNTIME / SYNTHETIC OR SIMULATED ENVIRONMENT",
+  "steps": [
+    "ingest",
+    "persist",
+    "close",
+    "restart",
+    "reload",
+    "reconstruct_snapshot"
+  ],
+  "equivalence": "deterministic replay serialization equality plus identical bounded decision snapshot fields",
+  "status": "PASS_TESTED"
+}

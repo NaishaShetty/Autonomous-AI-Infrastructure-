@@ -1,0 +1,13 @@
+{
+  "real_timestamped_source": "NOT AVAILABLE",
+  "current_source": "Alibaba GPU2020 historical processed trace",
+  "source_identity": "alibaba_gpu2020",
+  "environment_identity": "alibaba_gpu2020_main_trace",
+  "collection_period": {
+    "start": 960837,
+    "end": 6449460
+  },
+  "controlled_runtime_used": "only synthetic/test-only fixtures",
+  "fabricated_observations": false,
+  "benchmark_acceptance": "not applicable; no new source integrated"
+}

@@ -271,3 +271,15 @@ The Phase 4.0 gate passed: architecture **READY**; interfaces **READY**; state m
 Phase 4.1 implemented deterministic runtime observability using `ObservationCollector`, `EventValidator`, `EventStore`, `DecisionSnapshotBuilder`, workload/environment/resource/scheduler state stores, `ObservationReplay`, and `ObservabilityAPI`. The runtime rejects malformed schema, missing provenance, timezone-naive timestamps, timestamp-unknown information in proven snapshots, and post-decision observations. Replay serialization is deterministic and event history is time-bounded at the API boundary.
 
 Phase 4.1 readiness is **PARTIAL / ENGINEERING-READY, NOT PRODUCTION-READY** because live timestamped collection and persistent deployment storage are not connected. V1 remains frozen at `d977a32c2f20efa5f8e0d0349d40b270ecabeca2`; no V1.1 model was trained or integrated. New artifacts are isolated under `experiments/results/v1_1/phase4_foundation/4_0_4_1/` and historical Phase 3 artifacts remain protected.
+
+## 29. Phase 4.1 observability hardening
+
+Phase 4.1 was hardened before Phase 4.2. The existing canonical event, timestamp, provenance, decision-snapshot, state, replay, and bounded API contracts were extended rather than recreated. `PersistentEventStore` now provides append-only SQLite persistence for normalized canonical events while retaining the raw source event separately. Event IDs are immutable and duplicate ingestion is rejected. Restart loading reconstructs deterministic event history and decision-time snapshots.
+
+The hardening tests validated ingest → persist → close → restart → reload → replay → snapshot reconstruction. Persistent replay preserves canonical identity, timestamp ordering, provenance, and decision-time eligibility. The API remains time-bounded. Missing mandatory source identity or timestamp quality fails explicitly, and post-decision or timestamp-unknown information cannot enter a proven decision snapshot.
+
+No legitimate synchronized external runtime event source is currently available. Controlled synthetic fixtures were used only for engineering validation and are labeled `SYNTHETIC / TEST ONLY`; they are not benchmark or infrastructure evidence. No timestamps, queue state, resource state, environment identity, or production readiness were fabricated.
+
+The hardening gate is: real timestamped source **NOT AVAILABLE**; runtime collection **PARTIAL**; persistent storage **READY**; persistent replay **READY**; restart reconstruction **READY**; decision-time enforcement **READY**; timestamp integrity **READY**; provenance **READY**; environment identity **PARTIAL**; data quality **PARTIAL**; API safety **READY**; V1 integration boundary **READY**; historical protection **PASS**; focused tests **PASS**; full suite **INCOMPLETE**. Final decision: **B — PHASE 4.1 ENGINEERING-READY / DATA-SOURCE LIMITED**. Phase 4.2 is not automatically authorized.
+
+New hardening artifacts are isolated under `experiments/results/v1_1/phase4_observability_hardening/4_1/`. The current V1 and all Phase 3 evidence remain protected.

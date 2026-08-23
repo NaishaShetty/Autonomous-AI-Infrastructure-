@@ -1,0 +1,13 @@
+{
+  "schema": "PASS",
+  "identifiers": "PASS_FOR_EVENT_ID_PRIMARY_KEY",
+  "duplicates": "PASS_DUPLICATES_REJECTED",
+  "timestamp": "PASS_CONTRACT_ENFORCED",
+  "temporal_ordering": "PASS_DIAGNOSTIC_NO_REORDER",
+  "provenance": "PASS_REQUIRED_FIELDS_ENFORCED",
+  "completeness": "PARTIAL_SOURCE_LIMITATION",
+  "environment_identity": "PARTIAL_ONE_CANONICAL_ENVIRONMENT",
+  "source_integrity": "PARTIAL_NO_REAL_RUNTIME_SOURCE",
+  "leakage": "PASS_POST_DECISION_BLOCKED",
+  "contamination": "PASS_NO_EXTERNAL_MERGE"
+}

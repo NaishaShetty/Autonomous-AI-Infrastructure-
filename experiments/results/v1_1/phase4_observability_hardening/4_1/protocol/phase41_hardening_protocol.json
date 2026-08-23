@@ -1,0 +1,13 @@
+{
+  "controlled_runtime": "SYNTHETIC_TEST_ONLY",
+  "foundation_commit": "b2c624c84743dbb403b56ed9be28dcfa2c1cb105",
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "no_model_training": true,
+  "no_phase42": true,
+  "no_v1_modification": true,
+  "phase": "4.1_hardening",
+  "real_timestamped_source": "NOT_AVAILABLE",
+  "replay": "deterministic persistent replay",
+  "restart_equivalence": "serialized canonical event equality and bounded snapshot reconstruction",
+  "storage": "append-only SQLite canonical event store"
+}
