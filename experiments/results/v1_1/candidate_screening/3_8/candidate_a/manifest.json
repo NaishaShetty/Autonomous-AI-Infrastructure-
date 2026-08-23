@@ -1,0 +1,16 @@
+{
+  "candidate_a/artifacts/leakage_audit.json": "a3aa9bf732fd16271347a819e9e4e9c544ec2dba40766cfdda82e7f6c4c27259",
+  "candidate_a/manifest.json": "0ad930cfc24494e6c97211046337344d56988f88265262a1a4772d2d3195f230",
+  "candidate_a/per_fold/canonical_temporal.json": "180bfec11adf42c97c1215b3145e35ac893a72e9d98cf73525ad0bd5c6a870a0",
+  "candidate_a/per_fold/fold_1.json": "46d9dc70e7bd4ea83cee0931e6595ca027f5d7ff8d0a22c2e2a3418eb082bc23",
+  "candidate_a/per_fold/fold_2.json": "eea2fda3da2bcd45a7f9d98b0d9e2077bd24b569fe33f77985bea7683afd0540",
+  "candidate_a/per_fold/fold_3.json": "52b874c2eb29d95bc184b521de9decfd36416c1020345e4a522fbb122fdcc151",
+  "candidate_a/per_fold/random_stratified.json": "30d1e275fad19ac42f39f89ee7ce2c02c1f92d01f7af01e2232699e7b5be7555",
+  "candidate_a/predictions/canonical_temporal.npy": "5e6aba7f48d68214497d6b867ac0fbefa08ed773cf742926816d1680fe3a7b58",
+  "candidate_a/predictions/fold_1.npy": "85b95620200f9e447e73a67abf2ed3cf7d88ad31e05ad07b0d1213b8d337334a",
+  "candidate_a/predictions/fold_2.npy": "dd276ec905fd173028afd6bf64886f3424a96b513d7639c667932a9a6080a4ff",
+  "candidate_a/predictions/fold_3.npy": "5b6c9527c4e64cf3532470a3d3c9f90dc63eaf5c7b9a1c9fb5283ca6995b4b7e",
+  "candidate_a/predictions/random_stratified.npy": "34286424b237a01c1216831b4b893e1ebfa35aa6e81e5d13a193033345a6f1d5",
+  "candidate_a/protocol.json": "a33bc4af718e95748d30c4d02629e7ce67306ef47af23bbd85495bcc4930e373",
+  "candidate_a/report.md": "5d381031fdd6ce1f40e2b8c7034286de534b651a7e0d1ac3df8c7625255f69c9"
+}

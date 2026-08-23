@@ -1,0 +1,74 @@
+{
+  "candidate_a": {
+    "best_auroc_delta": 0.0,
+    "losses": 0,
+    "mean_auroc_delta": 0.0,
+    "median_auroc_delta": 0.0,
+    "populations": [
+      {
+        "auprc_delta": 0.0,
+        "auroc_delta": 0.0,
+        "population": "random_stratified"
+      },
+      {
+        "auprc_delta": 0.0,
+        "auroc_delta": 0.0,
+        "population": "canonical_temporal"
+      },
+      {
+        "auprc_delta": 0.0,
+        "auroc_delta": 0.0,
+        "population": "fold_1"
+      },
+      {
+        "auprc_delta": 0.0,
+        "auroc_delta": 0.0,
+        "population": "fold_2"
+      },
+      {
+        "auprc_delta": 0.0,
+        "auroc_delta": 0.0,
+        "population": "fold_3"
+      }
+    ],
+    "ties": 5,
+    "wins": 0,
+    "worst_auroc_delta": 0.0
+  },
+  "candidate_c": {
+    "best_auroc_delta": 0.0097531764456118,
+    "losses": 2,
+    "mean_auroc_delta": 0.0019307481353483924,
+    "median_auroc_delta": 8.603888696967488e-05,
+    "populations": [
+      {
+        "auprc_delta": 0.025413558057085117,
+        "auroc_delta": 0.0097531764456118,
+        "population": "random_stratified"
+      },
+      {
+        "auprc_delta": 4.228383041493533e-05,
+        "auroc_delta": 8.603888696967488e-05,
+        "population": "canonical_temporal"
+      },
+      {
+        "auprc_delta": 0.0006331336534392551,
+        "auroc_delta": -8.932089846303004e-05,
+        "population": "fold_1"
+      },
+      {
+        "auprc_delta": -0.0010491197407430652,
+        "auroc_delta": -0.00020189783969304376,
+        "population": "fold_2"
+      },
+      {
+        "auprc_delta": 5.302355222702726e-05,
+        "auroc_delta": 0.00010574408231656118,
+        "population": "fold_3"
+      }
+    ],
+    "ties": 0,
+    "wins": 3,
+    "worst_auroc_delta": -0.00020189783969304376
+  }
+}

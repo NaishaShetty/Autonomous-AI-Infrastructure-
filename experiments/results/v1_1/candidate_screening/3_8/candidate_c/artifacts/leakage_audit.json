@@ -1,0 +1,44 @@
+{
+  "candidate_id": "candidate_c",
+  "future_fold_results_used_for_configuration": false,
+  "future_labels_used_before_decision": false,
+  "populations": {
+    "canonical_temporal": {
+      "future_labels_used": false,
+      "memory_constructed_from_training_only": true,
+      "missing_provenance_used": false,
+      "strict_timestamp_check": true,
+      "v1_predictor_modified": false
+    },
+    "fold_1": {
+      "future_labels_used": false,
+      "memory_constructed_from_training_only": true,
+      "missing_provenance_used": false,
+      "strict_timestamp_check": true,
+      "v1_predictor_modified": false
+    },
+    "fold_2": {
+      "future_labels_used": false,
+      "memory_constructed_from_training_only": true,
+      "missing_provenance_used": false,
+      "strict_timestamp_check": true,
+      "v1_predictor_modified": false
+    },
+    "fold_3": {
+      "future_labels_used": false,
+      "memory_constructed_from_training_only": true,
+      "missing_provenance_used": false,
+      "strict_timestamp_check": true,
+      "v1_predictor_modified": false
+    },
+    "random_stratified": {
+      "future_labels_used": false,
+      "memory_constructed_from_training_only": true,
+      "missing_provenance_used": false,
+      "strict_timestamp_check": true,
+      "v1_predictor_modified": false
+    }
+  },
+  "status": "PASS",
+  "v1_predictor_modified": false
+}

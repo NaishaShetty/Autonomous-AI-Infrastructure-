@@ -1,0 +1,49 @@
+{
+  "calibration": "validation-only isotonic calibration; frozen V1 path",
+  "candidate_id": "candidate_a",
+  "candidates": [
+    "candidate_a",
+    "candidate_c"
+  ],
+  "combined_candidate": false,
+  "data_identity": "official restored Alibaba GPU2020",
+  "evaluation_populations": [
+    "random_stratified",
+    "canonical_temporal",
+    "fold_1",
+    "fold_2",
+    "fold_3"
+  ],
+  "experiment_id": "phase38_candidate_a_c_independent_screening",
+  "feature_contract": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "future_fold_source": "experiments/results/v1_1/distribution_robust_uncertainty/3_5_a_temporal_folds/manifest.json",
+  "intervention": "bounded uncertainty evidence-request and escalation policy",
+  "no_future_tuning": true,
+  "no_search": true,
+  "phase": "3.8",
+  "preprocessing": "training-fitted median imputation and standardization",
+  "provenance": "scripts/run_phase38_screening.py",
+  "seed": 3637,
+  "software_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "python": "3.12.3"
+  },
+  "status": "FINALIZED_SCREENING"
+}

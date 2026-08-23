@@ -1,0 +1,59 @@
+{
+  "candidate_id": "candidate_a",
+  "future_fold_results_used_for_configuration": false,
+  "future_labels_used_before_decision": false,
+  "populations": {
+    "canonical_temporal": {
+      "decision_time_available": true,
+      "evidence_columns": [
+        "n_tasks",
+        "n_instances",
+        "mean_plan_cpu"
+      ],
+      "future_labels_used": false,
+      "v1_predictor_modified": false
+    },
+    "fold_1": {
+      "decision_time_available": true,
+      "evidence_columns": [
+        "n_tasks",
+        "n_instances",
+        "mean_plan_cpu"
+      ],
+      "future_labels_used": false,
+      "v1_predictor_modified": false
+    },
+    "fold_2": {
+      "decision_time_available": true,
+      "evidence_columns": [
+        "n_tasks",
+        "n_instances",
+        "mean_plan_cpu"
+      ],
+      "future_labels_used": false,
+      "v1_predictor_modified": false
+    },
+    "fold_3": {
+      "decision_time_available": true,
+      "evidence_columns": [
+        "n_tasks",
+        "n_instances",
+        "mean_plan_cpu"
+      ],
+      "future_labels_used": false,
+      "v1_predictor_modified": false
+    },
+    "random_stratified": {
+      "decision_time_available": true,
+      "evidence_columns": [
+        "n_tasks",
+        "n_instances",
+        "mean_plan_cpu"
+      ],
+      "future_labels_used": false,
+      "v1_predictor_modified": false
+    }
+  },
+  "status": "PASS",
+  "v1_predictor_modified": false
+}
