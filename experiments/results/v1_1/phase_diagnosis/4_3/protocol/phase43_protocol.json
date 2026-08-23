@@ -1,0 +1,41 @@
+{
+  "baselines": [
+    "failure-class-as-cause",
+    "exit-code-rule",
+    "timeout-rule"
+  ],
+  "causal_ground_truth": "CAUSAL_GROUND_TRUTH_UNAVAILABLE",
+  "causal_statuses": [
+    "OBSERVED",
+    "CORRELATED",
+    "SUPPORTED_CAUSAL_HYPOTHESIS",
+    "CONFIRMED_CAUSE",
+    "UNKNOWN"
+  ],
+  "classification": "CONTROLLED_RUNTIME",
+  "confidence_levels": [
+    "HIGH",
+    "MEDIUM",
+    "LOW",
+    "UNKNOWN"
+  ],
+  "contradiction_handling": "retain contradictory evidence explicitly; do not force a hypothesis",
+  "diagnosis_boundary": "failure timestamp; only canonical events timestamped at or before boundary",
+  "failure_classes": [
+    "PROCESS_NONZERO_EXIT",
+    "PROCESS_TIMEOUT"
+  ],
+  "hypotheses": [
+    "PROCESS_EXIT_FAILURE",
+    "RUNTIME_TIMEOUT",
+    "EXCESSIVE_RUNTIME",
+    "RESOURCE_PRESSURE",
+    "WORKLOAD_CONFIGURATION",
+    "UNKNOWN"
+  ],
+  "memory_used": false,
+  "no_recovery": true,
+  "no_v1_1": true,
+  "phase": "4.3",
+  "unknown_handling": "insufficient or unsupported evidence produces UNKNOWN"
+}

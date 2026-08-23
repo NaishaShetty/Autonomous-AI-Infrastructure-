@@ -1,0 +1,9 @@
+{
+  "diagnoses_identical_on_replay": true,
+  "evidence_references_identical": true,
+  "future_events_excluded": true,
+  "hypotheses_identical": true,
+  "memory_used": false,
+  "retrospective_analysis_classification": "RETROSPECTIVE_ANALYSIS_NOT_AUTONOMOUS_DIAGNOSIS",
+  "scores_identical": true
+}

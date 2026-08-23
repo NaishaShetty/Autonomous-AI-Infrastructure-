@@ -1,0 +1,50 @@
+{
+  "GPU_FAILURE": {
+    "diagnosable": "UNAVAILABLE",
+    "evaluation_status": "not evaluated",
+    "evidence_quality": "UNAVAILABLE",
+    "observable": false
+  },
+  "NETWORK_FAILURE": {
+    "diagnosable": "UNAVAILABLE",
+    "evaluation_status": "not evaluated",
+    "evidence_quality": "UNAVAILABLE",
+    "observable": false
+  },
+  "PROCESS_NONZERO_EXIT": {
+    "diagnosable": "failure-class explanation only",
+    "evaluation_status": "evaluated",
+    "evidence_quality": "actual exit evidence; deeper cause unavailable",
+    "observable": true
+  },
+  "QUEUE_STARVATION": {
+    "diagnosable": "UNAVAILABLE",
+    "evaluation_status": "not evaluated",
+    "evidence_quality": "UNAVAILABLE",
+    "observable": false
+  },
+  "RECOVERY_FAILURE": {
+    "diagnosable": "UNAVAILABLE_NOT_IMPLEMENTED",
+    "evaluation_status": "not evaluated",
+    "evidence_quality": "UNAVAILABLE",
+    "observable": false
+  },
+  "RESOURCE_PRESSURE": {
+    "diagnosable": "hypothesis only",
+    "evaluation_status": "not causally evaluated",
+    "evidence_quality": "insufficient direct causal evidence",
+    "observable": "partial"
+  },
+  "RUNTIME_TIMEOUT": {
+    "diagnosable": "runtime termination mechanism supported",
+    "evaluation_status": "evaluated",
+    "evidence_quality": "actual deadline/termination evidence",
+    "observable": true
+  },
+  "SCHEDULER_FAILURE": {
+    "diagnosable": "UNAVAILABLE",
+    "evaluation_status": "not evaluated",
+    "evidence_quality": "UNAVAILABLE",
+    "observable": false
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "fabricated_labels": false,
+  "reason": "controlled runtime establishes actual process outcomes and timeout termination but does not provide independently adjudicated deeper causal labels",
+  "status": "CAUSAL_GROUND_TRUTH_UNAVAILABLE"
+}

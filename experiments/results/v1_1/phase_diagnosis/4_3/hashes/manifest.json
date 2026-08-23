@@ -1,0 +1,17 @@
+{
+  "files": {
+    "artifacts/diagnosis_events.json": "179d0043b76d17cdec9a372ba3f29a4b981a3972c8eccc052eb9de176997fca1",
+    "artifacts/diagnosis_manifest.json": "7764d0e8d1d8b9418ddf4a218be40fe133ecf9533cd11e999bf5703da11e5057",
+    "coverage/diagnosis_coverage.json": "97c000c9762aa49e18d31ea3fbf422b3ff1df0e0ba69f3197f8ebebac5c8dcc9",
+    "diagnosis_results.json": "a4d47cbb0c3259fa81723c3b1ee13de9f4a2e0a297a7ba213fbe54174593601b",
+    "evaluation/baseline_comparison.json": "424bf37ecd75bbd4368b976d197149391e354d45ce55438544efed32e8858441",
+    "evaluation/causal_ground_truth.json": "7ddc13ff91fe816f5cb36cb075d6825d5004e0a9fd2113b8a9a5dfdafe672add",
+    "evaluation/diagnosis_metrics.json": "9addfb843e63bb464061fef96c9d4d6728bcefaee761f23e66ac20138fb43382",
+    "protocol/phase43_protocol.json": "3329f61515b54b92545f06aefda1f62f535dbf3c2402f91542cb4f6e012affcd",
+    "quality/diagnosis_quality.json": "8afc267f70523595ce30e2eafbe157a21b0b5f2d10c45b110bbc29c82b3d6cf6",
+    "replay/diagnosis_replay_validation.json": "2e624b5cf96191f14ca95bc63b207b5c2c9f23941c2f787869dbd606e478e799",
+    "reports/PHASE4_3_CAUSAL_UNDERSTANDING_REPORT.md": "0181440bf5c8cc6eb2e1f1c587bfc69852ccf3d283ddb5085e35c018d55fb6f1",
+    "reports/PHASE4_3_DIAGNOSIS_REPORT.md": "0181440bf5c8cc6eb2e1f1c587bfc69852ccf3d283ddb5085e35c018d55fb6f1",
+    "reports/PHASE4_3_SYNTHESIS.md": "f96c29253290e7b4d91053dbcebd19bd019def17251748443766702b1b1847d6"
+  }
+}

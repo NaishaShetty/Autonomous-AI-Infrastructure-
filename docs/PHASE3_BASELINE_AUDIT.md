@@ -317,3 +317,15 @@ The controlled-runtime persisted campaign contained 26 events across one control
 Temporal leakage protection passed: evaluating at an explicit `at_or_before` boundary was unchanged after later events were inserted. Monitoring replay is deterministic and does not rewrite observation timestamps or generate new events. Provenance, evidence references, detector/rule versions, workload identity, environment identity, timestamp quality, and temporal availability are preserved in detection records.
 
 Final decision: **B — PHASE 4.2 ENGINEERING-COMPLETE / EVALUATION-LIMITED**. **PHASE 4.3 AUTHORIZATION: AUTHORIZED** to consume structured failure events for diagnosis/causal-understanding engineering, subject to the controlled-runtime boundary. New artifacts are isolated under `experiments/results/v1_1/phase_monitoring_failure_detection/4_2/`; V1 and all historical evidence remain unchanged.
+
+## 33. Phase 4.3 diagnosis and causal understanding
+
+Phase 4.3 consumes confirmed Phase 4.2 failure events and produces structured, provenance-backed diagnoses. The deterministic chain is `CONFIRMED FAILURE → ELIGIBLE EVIDENCE → HYPOTHESES → SUPPORTING/CONTRADICTORY EVIDENCE → CAUSAL STATUS → CONFIDENCE → STRUCTURED DIAGNOSIS`. No recovery, retry, rollback, rescheduling, infrastructure mutation, retraining, redeployment, V1.1, model competition, or benchmark finalization was implemented.
+
+The controlled-runtime nonzero-exit case yields `PROCESS_EXIT_FAILURE` with high diagnostic confidence and causal status `OBSERVED`; its deeper root cause remains `UNKNOWN`. The controlled-runtime timeout yields `RUNTIME_TIMEOUT` with high diagnostic confidence and causal status `SUPPORTED_CAUSAL_HYPOTHESIS`; the immediate runtime deadline/termination mechanism is supported, while deeper workload cause remains `UNKNOWN`. Failure class is not treated as root cause, and unsupported GPU, scheduler, queue, network, allocation, and recovery causes remain unavailable.
+
+Diagnosis evidence is restricted to the explicit diagnosis boundary and preserves failure/observation IDs, timestamps, source and source records, provenance, timestamp quality, temporal availability, detector references, diagnosis version, workload identity, and environment identity. Future-event invariance, post-failure exclusion, deterministic diagnosis replay, and provenance preservation passed. Historical failure memory was not integrated because it is not validated for this controlled-runtime use.
+
+Causal ground truth is explicitly `CAUSAL_GROUND_TRUTH_UNAVAILABLE`; root-cause accuracy was not computed. Controlled-runtime evidence supports architecture and evidence-quality validation only, not causal generalization, production reliability, or independent-environment claims. Final decision: **B — PHASE 4.3 ENGINEERING-COMPLETE / CAUSAL-EVALUATION-LIMITED**. **PHASE 4.4 AUTHORIZATION: AUTHORIZED** to consume structured diagnoses for failure-memory/experience integration, subject to temporal, provenance, uncertainty, and controlled-runtime boundaries.
+
+New artifacts are isolated under `experiments/results/v1_1/phase_diagnosis/4_3/`; frozen V1 and all prior evidence remain unchanged.

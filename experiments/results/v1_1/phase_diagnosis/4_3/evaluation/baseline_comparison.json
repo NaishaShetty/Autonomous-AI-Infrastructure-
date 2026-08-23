@@ -1,0 +1,7 @@
+{
+  "exit_code_rule_baseline": "identifies nonzero exit but cannot explain deeper cause",
+  "failure_class_as_cause_baseline": "would incorrectly equate observed failure class with root cause",
+  "improvement_claim": "none; causal ground truth unavailable",
+  "phase43_result": "preserves observed failure class, offers bounded hypotheses, and marks deeper root cause UNKNOWN where unsupported",
+  "timeout_rule_baseline": "identifies timeout but cannot distinguish workload cause from resource pressure"
+}

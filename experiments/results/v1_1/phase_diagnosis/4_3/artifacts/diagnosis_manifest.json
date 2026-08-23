@@ -1,0 +1,10 @@
+{
+  "controlled_runtime_only": true,
+  "detector_reference": "phase4.2-detector-v1",
+  "diagnosis_version": "deterministic-causal-rules-v1",
+  "environment_count": 1,
+  "memory_integrated": false,
+  "no_recovery": true,
+  "no_v1_1": true,
+  "source": "project-owned-controlled-runtime"
+}
