@@ -1,0 +1,29 @@
+{
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "no_model_to_infrastructure_path": true,
+  "no_model_training": true,
+  "no_v1_modification": true,
+  "phase": "4.0+4.1",
+  "phase40_gate": "PASS",
+  "provenance_required": true,
+  "reuses_phase311_312_event_taxonomy": true,
+  "runtime_components": [
+    "ObservationCollector",
+    "EventValidator",
+    "EventStore",
+    "DecisionSnapshotBuilder",
+    "WorkloadStateStore",
+    "EnvironmentStateStore",
+    "ResourceStateStore",
+    "SchedulerStateStore",
+    "ObservationReplay",
+    "ObservabilityAPI"
+  ],
+  "safety_actions": [
+    "ACT",
+    "ABSTAIN",
+    "ESCALATE",
+    "REQUEST_MORE_EVIDENCE"
+  ],
+  "timestamp_unknown_is_not_upgraded": true
+}

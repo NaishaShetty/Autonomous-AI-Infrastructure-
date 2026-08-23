@@ -1,0 +1,10 @@
+{
+  "event_ingestion": "IMPLEMENTED",
+  "timestamp_normalization": "IMPLEMENTED_VIA_FOUNDATION",
+  "decision_snapshot": "IMPLEMENTED",
+  "provenance": "IMPLEMENTED",
+  "replay": "IMPLEMENTED_DETERMINISTIC_IN_MEMORY",
+  "persistent_store": "NOT_IMPLEMENTED",
+  "live_source": "NOT_CONNECTED",
+  "production_readiness": "PARTIAL"
+}

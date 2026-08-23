@@ -1,0 +1,9 @@
+{
+  "PHASE4_0_4_1_SYNTHESIS.md": "3d953d2840c58412b140f90a479b36f267c12943afdbb12ad5d5c93a221e3a0a",
+  "hashes/manifest.json": "3b2c99be83a1aa21866df5f0ee231606c37f5f8f8a4953b4d88489ec7b01cda0",
+  "protocol/phase4_protocol.json": "2b183412b68a13c61f722de14473427a01b54e14a5bf215ae593fa3d58d9a71c",
+  "reports/PHASE4_0_ARCHITECTURE_REPORT.md": "f75944467ab6a21086783d68df1683a1876becd4fbb044889b6e4e52795f8953",
+  "reports/PHASE4_1_RUNTIME_OBSERVABILITY_REPORT.md": "f56f16e92f8320e64a58ded68881b5781c4b3035e173ae9abb55eb10270a6e3a",
+  "runtime/coverage.json": "1cf369de9d2b0d864954c26141fa3540f89c33ef20d14b3dc2b842d7e5b8ea4b",
+  "tests/gate.json": "adb67c20951b9496de8ea90e59c920e61beccfa8ea8b963b401ad289f054b7e6"
+}

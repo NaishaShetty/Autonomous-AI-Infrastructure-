@@ -1,0 +1,6 @@
+{
+  "phase40_gate": "PASS",
+  "focused_architecture_tests": 7,
+  "phase41_runtime_tests": "included_in_same focused suite",
+  "synthetic_fixture_status": "TEST_ONLY"
+}
