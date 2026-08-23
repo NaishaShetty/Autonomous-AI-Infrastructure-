@@ -1,0 +1,14 @@
+{
+  "files": {
+    "controlled_runtime.sqlite": "3573d9b4b06de5f9bf47f1278f1420f1ce69044664cdc9f381420453d0a10724",
+    "coverage/controlled_runtime_coverage.json": "e2f23fc8bf92986092e392f4670933282e20aaffccf01761dce95ab4b48cd716",
+    "environment.json": "af64a469a22f821e337ad7ed9b5291ad8ae2b09f54f421d7dc04583090c6670d",
+    "protocol/phase412_protocol.json": "cd2c544852cf9e79d9233ea941c11b34330cad2d5d959fa55518bd328d689d54",
+    "quality/controlled_runtime_quality.json": "d88fd2ca7525b3284e7bf8bd4c9d72f96f7257bfeed97cbf9b8cf0fc7f28b380",
+    "registry/controlled_runtime_source.json": "cc5d8eb0cca1d47beeaf8abd0f462bd7cf7fe8c3b63bc312636daee36e57b563",
+    "replay/controlled_runtime_replay.json": "7fcd3fa8fa1e2857f6cc0107f7386d71af65074da06c0bc011e44e50a3b639fd",
+    "reports/PHASE4_1_2_CONTROLLED_RUNTIME_REPORT.md": "81064e9875a7cb31328ce1db280d2eb1b1a7c07af8b51aca6cab9870e266e215",
+    "reports/PHASE4_1_2_SYNTHESIS.md": "fa5dd8fb2c3dc0342505153f1cae7fd4e305cadccd714ea248b5f97c8c7e442d",
+    "runs.json": "c3a92510d1af2441ab4cc7a953109bc36fe6ee4064b8911d33441570fd289c35"
+  }
+}

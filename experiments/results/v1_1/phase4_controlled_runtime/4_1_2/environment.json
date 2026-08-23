@@ -1,0 +1,17 @@
+{
+  "allocation": "UNAVAILABLE",
+  "classification": "CONTROLLED_RUNTIME",
+  "environment_id": "controlled-runtime-local-environment",
+  "hardware": {
+    "cpu_count": 6,
+    "gpu": "UNAVAILABLE"
+  },
+  "host_identity": "db71298c03d4",
+  "os": "Linux-6.18.38+-x86_64-with-glibc2.39",
+  "project_owned": true,
+  "python": "3.12.3",
+  "queue": "UNAVAILABLE",
+  "runtime_version": "phase4.1.2-controlled-runtime-v1",
+  "scheduler": "UNAVAILABLE",
+  "source_id": "project-owned-controlled-runtime"
+}

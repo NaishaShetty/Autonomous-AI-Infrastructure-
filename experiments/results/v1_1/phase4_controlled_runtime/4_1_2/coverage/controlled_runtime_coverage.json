@@ -1,0 +1,20 @@
+{
+  "consequence": "UNAVAILABLE_NOT_PRODUCTION_CONTEXT",
+  "cpu_process_telemetry": "OBSERVED_FROM_PROC",
+  "environment": "OBSERVED_CONTROLLED_RUNTIME",
+  "execution_lifecycle": "OBSERVED",
+  "failure": "OBSERVED_ACTUAL_NONZERO_EXIT",
+  "gpu": "UNAVAILABLE",
+  "memory_process_rss": "OBSERVED_FROM_PROC",
+  "node": "LOCAL_HOST_IDENTITY_ONLY",
+  "provenance": "OBSERVED_AND_REQUIRED",
+  "queue": "UNAVAILABLE",
+  "recovery": "UNAVAILABLE_NOT_IMPLEMENTED",
+  "resource_allocation": "UNAVAILABLE",
+  "runtime_telemetry": "OBSERVED",
+  "scheduler": "UNAVAILABLE",
+  "timeout": "OBSERVED_ACTUAL_TERMINATION",
+  "timestamp_quality": "EXACT_FOR_LOCAL_BOUNDARY_CLOCK; NOT SYNCHRONIZED EXTERNAL INFRASTRUCTURE",
+  "validation": "UNAVAILABLE_NOT_IMPLEMENTED",
+  "workload_lifecycle": "OBSERVED"
+}

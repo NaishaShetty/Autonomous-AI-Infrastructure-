@@ -1,0 +1,13 @@
+{
+  "completeness": "PASS_FOR_SUPPORTED_SCENARIOS; UNAVAILABLE_FIELDS_EXPLICIT",
+  "contamination": "PASS_NO_BENCHMARK_MERGE",
+  "duplicates": "PASS_REJECTED_BY_PERSISTENT_STORE",
+  "environment_identity": "PASS_ONE_CONTROLLED_ENVIRONMENT",
+  "event_ids": "PASS_UNIQUE",
+  "leakage": "PASS_NO_POST_OUTCOME_DECISION_SNAPSHOT_USED",
+  "provenance": "PASS_REQUIRED_SOURCE_AND_RECORD",
+  "scheduler_queue_allocation": "UNAVAILABLE_AND_NOT_FABRICATED",
+  "schema": "PASS",
+  "temporal_ordering": "PASS_SCENARIO_ORDER",
+  "timestamps": "PASS_ACTUAL_BOUNDARY_TIMESTAMPS"
+}

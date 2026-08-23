@@ -1,0 +1,18 @@
+{
+  "actual_workloads": true,
+  "classification": "CONTROLLED_RUNTIME",
+  "environment_id": "controlled-runtime-local-environment",
+  "no_phase42": true,
+  "no_v1_modification": true,
+  "not_benchmark_evidence": true,
+  "not_external_infrastructure": true,
+  "not_independent_environment": true,
+  "phase": "4.1.2",
+  "project_owned": true,
+  "runtime_version": "phase4.1.2-controlled-runtime-v1",
+  "schema_version": "3.11.3.12.v1",
+  "source_id": "project-owned-controlled-runtime",
+  "synthetic_fixture_boundary": "No synthetic events; scenarios launch actual local subprocesses. Test metadata is engineering-only.",
+  "uses_existing_observation_replay": true,
+  "uses_existing_persistent_event_store": true
+}

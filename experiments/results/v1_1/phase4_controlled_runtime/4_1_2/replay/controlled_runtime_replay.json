@@ -1,0 +1,35 @@
+{
+  "event_counts": {
+    "failure": 5,
+    "success": 5,
+    "timeout": 16
+  },
+  "fabricated_events_on_replay": false,
+  "new_timestamps_on_replay": false,
+  "replay_preserves": [
+    "event IDs",
+    "timestamps",
+    "provenance",
+    "event order",
+    "decision-time eligibility"
+  ],
+  "restart": {
+    "event_count_after": 26,
+    "event_count_before": 26,
+    "replay_equal": true
+  },
+  "restart_sequence": [
+    "run workload",
+    "persist events",
+    "close store",
+    "reopen store",
+    "reload events",
+    "replay",
+    "compare serialized events"
+  ],
+  "scenario_statuses": {
+    "failure": "FAILED",
+    "success": "COMPLETED",
+    "timeout": "TIMEOUT"
+  }
+}

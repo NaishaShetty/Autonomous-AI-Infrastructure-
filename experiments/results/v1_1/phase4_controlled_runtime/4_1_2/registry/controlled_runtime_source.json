@@ -1,0 +1,26 @@
+{
+  "checksum": "artifact hash manifest",
+  "collection_period": {
+    "end": "2026-08-23T10:27:33.115595Z",
+    "start": "2026-08-23T10:27:32.813985Z"
+  },
+  "configuration": {
+    "environment_id": "controlled-runtime-local-environment",
+    "instrumentation_version": "phase4.1.2-controlled-runtime-v1",
+    "source_id": "project-owned-controlled-runtime",
+    "telemetry_interval_seconds": 0.02,
+    "timeout_seconds": 0.25,
+    "workload_parameters": {},
+    "workload_type": "python"
+  },
+  "environment_id": "controlled-runtime-local-environment",
+  "instrumentation_version": "phase4.1.2-controlled-runtime-v1",
+  "project_owned": true,
+  "provenance": "actual local subprocess boundary and /proc observations",
+  "research_boundary": "controlled runtime engineering evidence only",
+  "runtime_id": "controlled-runtime-local-process-runner",
+  "runtime_version": "phase4.1.2-controlled-runtime-v1",
+  "schema_version": "3.11.3.12.v1",
+  "source_class": "CONTROLLED_RUNTIME",
+  "source_id": "project-owned-controlled-runtime"
+}
