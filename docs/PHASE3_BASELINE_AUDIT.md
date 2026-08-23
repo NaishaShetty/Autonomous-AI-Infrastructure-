@@ -167,6 +167,14 @@ The evidence partially explains the random-versus-temporal behavior. The canonic
 
 **Phase 3.6 readiness decision: HOLD as a bounded forensic conclusion.** V1 remains byte-for-byte/behaviorally frozen and remains the sole production-eligible control. No feature removal, coefficient update, calibration change, threshold change, runtime change, or V1.1 integration was performed. The historical aggregate V1 result of 507 passed / 7 skipped / 0 failed remains preserved; the exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
 
+## 20. Phase 3.6.1 baseline identity and protocol reconciliation readiness
+
+Phase 3.6.1 reconciled the numerical discrepancy between canonical V1 and the Phase 3.6 research-copy results. The canonical V1 metrics were independently reproduced by applying the preserved isotonic calibrators to the preserved numeric-only V1 model artifacts: random AUROC 0.7201 and temporal AUROC 0.8302. The Phase 3.6 copy was independently reproduced at random AUROC 0.7348 and temporal AUROC 0.7931.
+
+The root cause is an **expected protocol difference**. Canonical V1 uses 14 numeric features, while the Phase 3.6 research-copy logistic model adds one-hot `dominant_gpu_type`. The Phase 3.6 copy also reports raw probabilities, while canonical Brier/ECE results use preserved calibrated outputs. The Gradient Boosting discrepancy is separately explained by configuration: Phase 3.1 uses learning rate 0.05 and maximum depth 2, while Phase 3.6-D uses learning rate 0.10 and maximum depth 3.
+
+**Phase 3.6.1 readiness decision: canonical V1 remains unchanged.** Phase 3.6-D and 3.6-C are valid but non-equivalent research protocols; their comparisons must not be represented as direct canonical V1 reproductions. Phase 3.6-E’s mechanism conclusion is bounded accordingly. All prior evidence remains immutable, and the exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
+
 ## References
 [1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
 
@@ -179,3 +187,5 @@ The evidence partially explains the random-versus-temporal behavior. The canonic
 [5]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/distribution_robust_uncertainty "Phase 3.5 distribution-robust uncertainty evidence"
 
 [6]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics "Phase 3.6 V1 robustness and mechanism forensics evidence"
+
+[7]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics/3_6_1_baseline_reconciliation "Phase 3.6.1 baseline identity and protocol reconciliation evidence"

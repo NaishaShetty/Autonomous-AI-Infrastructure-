@@ -1,0 +1,236 @@
+{
+  "canonical_v1": {
+    "random": {
+      "auprc": 0.5396812153812669,
+      "auroc": 0.720134719138979,
+      "brier": 0.1443950655700858,
+      "count": 1503,
+      "ece": 0.021474799416552174
+    },
+    "temporal": {
+      "auprc": 0.7463900779094184,
+      "auroc": 0.8302048638043528,
+      "brier": 0.21853816567793097,
+      "count": 2499,
+      "ece": 0.2161554385447439
+    }
+  },
+  "final_conclusion": "The numerical discrepancy is explained by feature-space and calibration identity differences, not by a data or split mismatch. Canonical V1 is numeric-only; Phase 3.6 LR includes dominant_gpu_type. Phase 3.1 GB uses learning_rate=0.05,max_depth=2; Phase 3.6 GB uses defaults learning_rate=0.1,max_depth=3. The prior comparisons are valid as explicitly different research protocols but not direct canonical reproductions.",
+  "gradient_boosting": {
+    "phase31_canonical_reproduction": {
+      "random": {
+        "auprc": 0.6148702624958986,
+        "auroc": 0.7472031586769002,
+        "brier": 0.12805085116542783,
+        "count": 1503,
+        "ece": 0.008278073536693084
+      },
+      "temporal": {
+        "auprc": 0.4153968713206156,
+        "auroc": 0.33356820211316723,
+        "brier": 0.36854039400859095,
+        "count": 2499,
+        "ece": 0.33738224302156933
+      }
+    },
+    "phase36_copy_reproduction": {
+      "random": {
+        "auprc": 0.7154703117843823,
+        "auroc": 0.8070064105818446,
+        "brier": 0.12252992885494901,
+        "count": 1503,
+        "ece": 0.029420341207155944
+      },
+      "temporal": {
+        "auprc": 0.40386423767118684,
+        "auroc": 0.2294050932413847,
+        "brier": 0.3426046279740288,
+        "count": 2499,
+        "ece": 0.3259613689022235
+      }
+    }
+  },
+  "independent_canonical_reproduction": {
+    "random": {
+      "auprc": 0.5396812153812669,
+      "auroc": 0.720134719138979,
+      "brier": 0.1443950655700858,
+      "count": 1503,
+      "ece": 0.021474799416552174
+    },
+    "temporal": {
+      "auprc": 0.7463900779094184,
+      "auroc": 0.8302048638043528,
+      "brier": 0.21853816567793097,
+      "count": 2499,
+      "ece": 0.2161554385447439
+    }
+  },
+  "independent_research_copy_reproduction": {
+    "random": {
+      "auprc": 0.537326980388299,
+      "auroc": 0.7347731374005991,
+      "brier": 0.1635426675275332,
+      "count": 1503,
+      "ece": 0.0988982668268682
+    },
+    "temporal": {
+      "auprc": 0.6354280714533036,
+      "auroc": 0.7930934238914346,
+      "brier": 0.27059898818888006,
+      "count": 2499,
+      "ece": 0.21911152544363569
+    }
+  },
+  "matrix": {
+    "AUPRC implementation": [
+      "sklearn average_precision_score",
+      "sklearn average_precision_score",
+      true,
+      "same",
+      "none"
+    ],
+    "AUROC implementation": [
+      "sklearn roc_auc_score",
+      "sklearn roc_auc_score",
+      true,
+      "same",
+      "none"
+    ],
+    "Brier implementation": [
+      "sklearn brier_score_loss",
+      "sklearn brier_score_loss",
+      true,
+      "same",
+      "none"
+    ],
+    "Calibration": [
+      "canonical stored/raw control path",
+      "none in Phase 3.6 copy",
+      "False",
+      "copy reports raw model probabilities",
+      "Brier/ECE not comparable"
+    ],
+    "Coefficients": [
+      "serialized canonical coefficients",
+      "refit coefficients in different design matrix",
+      "False",
+      "feature-space difference",
+      "changes predictions"
+    ],
+    "Dataset": [
+      "official restored Alibaba GPU2020",
+      "official restored Alibaba GPU2020",
+      true,
+      "same loader/data hash",
+      "no impact"
+    ],
+    "ECE implementation": [
+      "canonical reliability bins",
+      "10 equal-width bins in copy",
+      "False",
+      "binning implementation differs",
+      "ECE not directly comparable"
+    ],
+    "Encoding": [
+      "none",
+      "one-hot dominant_gpu_type",
+      "False",
+      "copy adds one-hot encoding",
+      "changes coefficients/ranking"
+    ],
+    "Features": [
+      "14 numeric V1 features",
+      "14 numeric + dominant_gpu_type",
+      "False",
+      "categorical feature added in copy",
+      "changes predictions"
+    ],
+    "Imputation": [
+      "median numeric imputation",
+      "median numeric + constant categorical imputation",
+      "False",
+      "copy imputes added category",
+      "changes design matrix"
+    ],
+    "Model": [
+      "LogisticRegression max_iter=2000 random_state=42",
+      "same LR configuration inside larger feature space",
+      "False",
+      "feature space differs",
+      "changes predictions"
+    ],
+    "Processed tables": [
+      "canonical processed tables",
+      "same restored processed tables",
+      true,
+      "same source identity",
+      "no impact"
+    ],
+    "Scaling": [
+      "standardized numeric features",
+      "standardized numeric features",
+      "True for numeric",
+      "same numeric scaling",
+      "none"
+    ],
+    "Test rows": [
+      "registered split test",
+      "same registered split test",
+      true,
+      "same index hash",
+      "same"
+    ],
+    "Threshold": [
+      "canonical runtime threshold artifact",
+      "not used for AUROC reproduction",
+      "False",
+      "threshold metrics out of scope",
+      "none for ranking"
+    ],
+    "Train rows": [
+      "registered split train",
+      "same registered split train",
+      true,
+      "same index hash",
+      "same"
+    ],
+    "Validation rows": [
+      "registered split val",
+      "same registered split val",
+      true,
+      "same index hash",
+      "same"
+    ]
+  },
+  "phase36_c_validity": "VALID BUT DIFFERENT PROTOCOL / research-copy-specific; still descriptively useful but affected by the same feature-space discrepancy",
+  "phase36_d_validity": "VALID BUT DIFFERENT PROTOCOL; not a direct canonical V1 reproduction",
+  "phase36_e_impact": "The mechanism conclusion is bounded: the ladder compares distinct feature/model protocols and cannot by itself explain canonical V1 difficulty to beat.",
+  "phase36_research_copy": {
+    "random": {
+      "auprc": 0.537326980388299,
+      "auroc": 0.7347731374005991,
+      "brier": 0.1635426675275332,
+      "count": 1503,
+      "ece": 0.0988982668268682
+    },
+    "temporal": {
+      "auprc": 0.6354280714533036,
+      "auroc": 0.7930934238914346,
+      "brier": 0.27059898818888006,
+      "count": 2499,
+      "ece": 0.21911152544363569
+    }
+  },
+  "prediction_hashes": {
+    "canonical_v1": {
+      "random": "6782965cab285ae363cc689a556b2b14033ae04d7a2e127c93a9fb745ba7fe88",
+      "temporal": "f4d2e45699e4f7dceddf952395cd142de17030a5131ace7425b35afcacf2b0e7"
+    },
+    "phase36_copy": {
+      "random": "463084b6da8241a8794a53a0be141469b7911330464df70649fb5b0e0e6a035a",
+      "temporal": "2fb7b5fac74a2e4975cc25b47e2d8120fd2aaa6a696c37c6cfb1fe1efd8426d9"
+    }
+  },
+  "primary_classification": "EXPECTED PROTOCOL DIFFERENCE"
+}

@@ -1,0 +1,121 @@
+{
+  "AUPRC implementation": [
+    "sklearn average_precision_score",
+    "sklearn average_precision_score",
+    true,
+    "same",
+    "none"
+  ],
+  "AUROC implementation": [
+    "sklearn roc_auc_score",
+    "sklearn roc_auc_score",
+    true,
+    "same",
+    "none"
+  ],
+  "Brier implementation": [
+    "sklearn brier_score_loss",
+    "sklearn brier_score_loss",
+    true,
+    "same",
+    "none"
+  ],
+  "Calibration": [
+    "canonical stored/raw control path",
+    "none in Phase 3.6 copy",
+    "False",
+    "copy reports raw model probabilities",
+    "Brier/ECE not comparable"
+  ],
+  "Coefficients": [
+    "serialized canonical coefficients",
+    "refit coefficients in different design matrix",
+    "False",
+    "feature-space difference",
+    "changes predictions"
+  ],
+  "Dataset": [
+    "official restored Alibaba GPU2020",
+    "official restored Alibaba GPU2020",
+    true,
+    "same loader/data hash",
+    "no impact"
+  ],
+  "ECE implementation": [
+    "canonical reliability bins",
+    "10 equal-width bins in copy",
+    "False",
+    "binning implementation differs",
+    "ECE not directly comparable"
+  ],
+  "Encoding": [
+    "none",
+    "one-hot dominant_gpu_type",
+    "False",
+    "copy adds one-hot encoding",
+    "changes coefficients/ranking"
+  ],
+  "Features": [
+    "14 numeric V1 features",
+    "14 numeric + dominant_gpu_type",
+    "False",
+    "categorical feature added in copy",
+    "changes predictions"
+  ],
+  "Imputation": [
+    "median numeric imputation",
+    "median numeric + constant categorical imputation",
+    "False",
+    "copy imputes added category",
+    "changes design matrix"
+  ],
+  "Model": [
+    "LogisticRegression max_iter=2000 random_state=42",
+    "same LR configuration inside larger feature space",
+    "False",
+    "feature space differs",
+    "changes predictions"
+  ],
+  "Processed tables": [
+    "canonical processed tables",
+    "same restored processed tables",
+    true,
+    "same source identity",
+    "no impact"
+  ],
+  "Scaling": [
+    "standardized numeric features",
+    "standardized numeric features",
+    "True for numeric",
+    "same numeric scaling",
+    "none"
+  ],
+  "Test rows": [
+    "registered split test",
+    "same registered split test",
+    true,
+    "same index hash",
+    "same"
+  ],
+  "Threshold": [
+    "canonical runtime threshold artifact",
+    "not used for AUROC reproduction",
+    "False",
+    "threshold metrics out of scope",
+    "none for ranking"
+  ],
+  "Train rows": [
+    "registered split train",
+    "same registered split train",
+    true,
+    "same index hash",
+    "same"
+  ],
+  "Validation rows": [
+    "registered split val",
+    "same registered split val",
+    true,
+    "same index hash",
+    "same"
+  ]
+}
