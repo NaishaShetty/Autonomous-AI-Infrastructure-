@@ -1,0 +1,834 @@
+{
+  "detection": {
+    "anomaly_count": 0,
+    "f1": 1.0,
+    "false_negatives": 0,
+    "false_positives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "run_count": 3,
+    "true_negatives": 1,
+    "true_positives": 2,
+    "unsupported_classes": [
+      "GPU_FAILURE",
+      "SCHEDULER_FAILURE",
+      "NETWORK_FAILURE"
+    ]
+  },
+  "diagnosis": {
+    "causal_ground_truth": "CAUSAL_GROUND_TRUTH_UNAVAILABLE",
+    "evidence_provenance_completeness": 1.0,
+    "n": 2,
+    "records": [
+      {
+        "alternative_hypotheses": [
+          {
+            "causal_status": "UNKNOWN",
+            "confidence": "LOW",
+            "contradiction_count": 0,
+            "contradictory_evidence_ids": [],
+            "evidence_count": 0,
+            "evidence_ids": [],
+            "name": "WORKLOAD_CONFIGURATION",
+            "score": 0.2
+          },
+          {
+            "causal_status": "UNKNOWN",
+            "confidence": "LOW",
+            "contradiction_count": 0,
+            "contradictory_evidence_ids": [],
+            "evidence_count": 0,
+            "evidence_ids": [],
+            "name": "RESOURCE_PRESSURE",
+            "score": 0.1
+          }
+        ],
+        "causal_status": "OBSERVED",
+        "certainty": "CONFIRMED_FAILURE_EVIDENCE",
+        "confidence": "HIGH",
+        "contradictory_evidence": [],
+        "diagnosis_boundary": "2026-08-23T12:54:55.389693Z",
+        "diagnosis_id": "diagnosis:failure:run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+        "diagnosis_method": "deterministic-causal-rules-v1",
+        "diagnosis_timestamp": "2026-08-23T12:54:55.389693Z",
+        "environment_id": "controlled-runtime-local-environment",
+        "evidence": [
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-094ab044805f41b9b4f10b419bb664c8:execution_started:430a6558a140",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-094ab044805f41b9b4f10b419bb664c8:execution_started:430a6558a140",
+            "observed_value": true,
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-094ab044805f41b9b4f10b419bb664c8:execution_started",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "establishes process was launched",
+            "signal": "execution_started",
+            "timestamp": "2026-08-23T12:54:55.338852Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-094ab044805f41b9b4f10b419bb664c8:telemetry_observed:a2af3974646c",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-094ab044805f41b9b4f10b419bb664c8:telemetry_observed:a2af3974646c",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-094ab044805f41b9b4f10b419bb664c8:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.359986Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-d36a5b7742a84408b5cae7080e8a85ac:execution_started:97adec005f8a",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-d36a5b7742a84408b5cae7080e8a85ac:execution_started:97adec005f8a",
+            "observed_value": true,
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:execution_started",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "establishes process was launched",
+            "signal": "execution_started",
+            "timestamp": "2026-08-23T12:54:55.368300Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-d36a5b7742a84408b5cae7080e8a85ac:telemetry_observed:facf9c4aae78",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-d36a5b7742a84408b5cae7080e8a85ac:telemetry_observed:facf9c4aae78",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.389243Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+            "observed_value": "NONZERO_EXIT",
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "direct failure observation",
+            "signal": "failure_class",
+            "timestamp": "2026-08-23T12:54:55.389693Z"
+          }
+        ],
+        "failure_id": "failure:run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+        "foundation_references": {
+          "detector_version": "phase4.2-detector-v1",
+          "memory_used": false
+        },
+        "memory_used": false,
+        "primary_hypothesis": {
+          "causal_status": "OBSERVED",
+          "confidence": "HIGH",
+          "contradiction_count": 0,
+          "contradictory_evidence_ids": [],
+          "evidence_count": 1,
+          "evidence_ids": [
+            "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44"
+          ],
+          "name": "PROCESS_EXIT_FAILURE",
+          "score": 1.0
+        },
+        "provenance": {
+          "checksum": null,
+          "extraction_method": "controlled_runtime_boundary",
+          "ingestion_time": null,
+          "processing_time": null,
+          "schema_version": "3.11.3.12.v1",
+          "source": "project-owned-controlled-runtime",
+          "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected",
+          "source_version": "phase4.1.2-controlled-runtime-v1",
+          "timestamp_quality": "EXACT",
+          "timestamp_source": "Python wall-clock at actual runtime boundary",
+          "transformation": "runtime_event_to_canonical_event",
+          "transformation_version": "phase4.1.2-controlled-runtime-v1"
+        },
+        "root_cause": "UNKNOWN",
+        "run_id": "run-d36a5b7742a84408b5cae7080e8a85ac",
+        "workload_id": "workload-837f50a9a7784d858ea1378f09e32cee"
+      },
+      {
+        "alternative_hypotheses": [
+          {
+            "causal_status": "CORRELATED",
+            "confidence": "MEDIUM",
+            "contradiction_count": 0,
+            "contradictory_evidence_ids": [],
+            "evidence_count": 0,
+            "evidence_ids": [
+              "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+              "run-0197426482db4bb3b1dd73dc9dd23430:failure_detected:0bf9778a1534"
+            ],
+            "name": "EXCESSIVE_RUNTIME",
+            "score": 0.4
+          },
+          {
+            "causal_status": "UNKNOWN",
+            "confidence": "LOW",
+            "contradiction_count": 0,
+            "contradictory_evidence_ids": [],
+            "evidence_count": 0,
+            "evidence_ids": [],
+            "name": "RESOURCE_PRESSURE",
+            "score": 0.2
+          }
+        ],
+        "causal_status": "SUPPORTED_CAUSAL_HYPOTHESIS",
+        "certainty": "CONFIRMED_FAILURE_EVIDENCE",
+        "confidence": "HIGH",
+        "contradictory_evidence": [],
+        "diagnosis_boundary": "2026-08-23T12:54:55.654429Z",
+        "diagnosis_id": "diagnosis:failure:run-0197426482db4bb3b1dd73dc9dd23430:failure_detected:0bf9778a1534",
+        "diagnosis_method": "deterministic-causal-rules-v1",
+        "diagnosis_timestamp": "2026-08-23T12:54:55.654429Z",
+        "environment_id": "controlled-runtime-local-environment",
+        "evidence": [
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-094ab044805f41b9b4f10b419bb664c8:execution_started:430a6558a140",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-094ab044805f41b9b4f10b419bb664c8:execution_started:430a6558a140",
+            "observed_value": true,
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-094ab044805f41b9b4f10b419bb664c8:execution_started",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "establishes process was launched",
+            "signal": "execution_started",
+            "timestamp": "2026-08-23T12:54:55.338852Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-094ab044805f41b9b4f10b419bb664c8:telemetry_observed:a2af3974646c",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-094ab044805f41b9b4f10b419bb664c8:telemetry_observed:a2af3974646c",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-094ab044805f41b9b4f10b419bb664c8:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.359986Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-d36a5b7742a84408b5cae7080e8a85ac:execution_started:97adec005f8a",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-d36a5b7742a84408b5cae7080e8a85ac:execution_started:97adec005f8a",
+            "observed_value": true,
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:execution_started",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "establishes process was launched",
+            "signal": "execution_started",
+            "timestamp": "2026-08-23T12:54:55.368300Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-d36a5b7742a84408b5cae7080e8a85ac:telemetry_observed:facf9c4aae78",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-d36a5b7742a84408b5cae7080e8a85ac:telemetry_observed:facf9c4aae78",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.389243Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+            "observed_value": "NONZERO_EXIT",
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "direct failure observation",
+            "signal": "failure_class",
+            "timestamp": "2026-08-23T12:54:55.389693Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:execution_started:560fc1c9d66a",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:execution_started:560fc1c9d66a",
+            "observed_value": true,
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:execution_started",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "establishes process was launched",
+            "signal": "execution_started",
+            "timestamp": "2026-08-23T12:54:55.392830Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:63dc473ef965",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:63dc473ef965",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.418060Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:33ffd429a932",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:33ffd429a932",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.439303Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:8aae5e24e27a",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:8aae5e24e27a",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.460473Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:b508b17d6b80",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:b508b17d6b80",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.481614Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:85f333d2f596",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:85f333d2f596",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.502969Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:459b611825ed",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:459b611825ed",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.525001Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:4d6d5f25db22",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:4d6d5f25db22",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.546524Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:f12e115fc06e",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:f12e115fc06e",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.567996Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:60d7f8dc93e0",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:60d7f8dc93e0",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.588719Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:0525558cc801",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:0525558cc801",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.610313Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:61c9d7db158e",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:61c9d7db158e",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.631963Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:70053f7aa973",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed:70053f7aa973",
+            "observed_value": {
+              "cpu_ticks": null,
+              "rss": null
+            },
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:telemetry_observed",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "pre-failure runtime context",
+            "signal": "process_telemetry",
+            "timestamp": "2026-08-23T12:54:55.653411Z"
+          },
+          {
+            "availability": "AVAILABLE_AT_FAILURE",
+            "evidence_id": "run-0197426482db4bb3b1dd73dc9dd23430:failure_detected:0bf9778a1534",
+            "expected_value": null,
+            "kind": "CURRENT_OBSERVATION",
+            "observation_id": "run-0197426482db4bb3b1dd73dc9dd23430:failure_detected:0bf9778a1534",
+            "observed_value": "TIMEOUT",
+            "provenance": {
+              "checksum": null,
+              "extraction_method": "controlled_runtime_boundary",
+              "ingestion_time": null,
+              "processing_time": null,
+              "schema_version": "3.11.3.12.v1",
+              "source": "project-owned-controlled-runtime",
+              "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:failure_detected",
+              "source_version": "phase4.1.2-controlled-runtime-v1",
+              "timestamp_quality": "EXACT",
+              "timestamp_source": "Python wall-clock at actual runtime boundary",
+              "transformation": "runtime_event_to_canonical_event",
+              "transformation_version": "phase4.1.2-controlled-runtime-v1"
+            },
+            "relationship": "direct failure observation",
+            "signal": "failure_class",
+            "timestamp": "2026-08-23T12:54:55.654429Z"
+          }
+        ],
+        "failure_id": "failure:run-0197426482db4bb3b1dd73dc9dd23430:failure_detected:0bf9778a1534",
+        "foundation_references": {
+          "detector_version": "phase4.2-detector-v1",
+          "memory_used": false
+        },
+        "memory_used": false,
+        "primary_hypothesis": {
+          "causal_status": "SUPPORTED_CAUSAL_HYPOTHESIS",
+          "confidence": "HIGH",
+          "contradiction_count": 0,
+          "contradictory_evidence_ids": [],
+          "evidence_count": 2,
+          "evidence_ids": [
+            "run-d36a5b7742a84408b5cae7080e8a85ac:failure_detected:a12cd8bd7f44",
+            "run-0197426482db4bb3b1dd73dc9dd23430:failure_detected:0bf9778a1534"
+          ],
+          "name": "RUNTIME_TIMEOUT",
+          "score": 1.0
+        },
+        "provenance": {
+          "checksum": null,
+          "extraction_method": "controlled_runtime_boundary",
+          "ingestion_time": null,
+          "processing_time": null,
+          "schema_version": "3.11.3.12.v1",
+          "source": "project-owned-controlled-runtime",
+          "source_record_id": "run-0197426482db4bb3b1dd73dc9dd23430:failure_detected",
+          "source_version": "phase4.1.2-controlled-runtime-v1",
+          "timestamp_quality": "EXACT",
+          "timestamp_source": "Python wall-clock at actual runtime boundary",
+          "transformation": "runtime_event_to_canonical_event",
+          "transformation_version": "phase4.1.2-controlled-runtime-v1"
+        },
+        "root_cause": "UNKNOWN",
+        "run_id": "run-0197426482db4bb3b1dd73dc9dd23430",
+        "workload_id": "workload-b737e62dcc864f9b80e22517576ddb40"
+      }
+    ],
+    "root_cause_accuracy": "NOT COMPUTED",
+    "top_1_failure_class_explanation_accuracy": 1.0,
+    "unknown_root_cause_rate": 1.0
+  },
+  "environment_count": 1,
+  "test_suite": {
+    "command": "C:\\Users\\naish\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -m pytest -q",
+    "duration_seconds": 0.031,
+    "ended_at": "2026-08-23T12:54:55.687841Z",
+    "exit_code": 1,
+    "failed": null,
+    "passed": null,
+    "raw_log": "raw/full_pytest.log",
+    "skipped": null,
+    "started_at": "2026-08-23T12:54:55.661431Z",
+    "status": "COMPLETED",
+    "termination_reason": "pytest exit"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "commands": [
+    "C:\\Users\\naish\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -m pytest -q",
+    "C:\\Users\\naish\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe scripts/run_system_evaluation.py"
+  ],
+  "created_at": "2026-08-23T12:55:40.155303Z",
+  "environment": {
+    "cwd": "C:\\Autonomous AI infrastructure",
+    "environment_count": 1,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13 (main, Aug  7 2026, 02:26:41) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "evaluation_id": "run_20260823T125539Z",
+  "fresh_cases": [
+    "normal_workload",
+    "nonzero_exit",
+    "timeout"
+  ],
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "known_unavailable_cases": [
+    "anomalous_successful_workload",
+    "ambiguous_process_runtime_diagnosis",
+    "real_recovery",
+    "external_environment"
+  ],
+  "purpose": "system-level evidence audit; no system tuning",
+  "repository": {
+    "branch": "main",
+    "head": "680a5614e641ba778210525ef995a3a6b53c69d8",
+    "origin_main": "680a5614e641ba778210525ef995a3a6b53c69d8",
+    "working_tree_before": "?? experiments/results/system_evaluation/\n?? scripts/run_system_evaluation.py"
+  }
+}

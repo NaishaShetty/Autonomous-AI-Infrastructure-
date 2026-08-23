@@ -28,7 +28,29 @@ class StructuredDiagnosis:
         x=asdict(self); x['primary_hypothesis']=asdict(self.primary_hypothesis); x['alternative_hypotheses']=[asdict(h) for h in self.alternative_hypotheses]; x['evidence']=[asdict(e) for e in self.evidence]; x['contradictory_evidence']=[asdict(e) for e in self.contradictory_evidence]; return x
 
 def _dt(x): return datetime.fromisoformat(str(x).replace('Z','+00:00'))
-def _eligible(events,boundary): return [e for e in events if e.get('timestamp') and _dt(e['timestamp'])<=_dt(boundary)]
+def _eligible_current_incident(events, failure, boundary):
+    """Return only current-incident evidence available at the decision boundary.
+
+    ``job_id`` is the canonical controlled-runtime run identity.  Diagnosis
+    does not currently support a historical-memory input, so evidence from
+    another run is never eligible merely because it is earlier in time.
+    Workload and environment identities are additional guards when present.
+    """
+    run_id = str(failure['run_id'])
+    workload_id = failure.get('workload_id')
+    environment_id = failure.get('environment_id')
+    eligible = []
+    for event in events:
+        timestamp = event.get('timestamp')
+        event_run_id = event.get('job_id') or event.get('run_id')
+        if not timestamp or str(event_run_id) != run_id or _dt(timestamp) > _dt(boundary):
+            continue
+        if workload_id is not None and event.get('workload_id') != workload_id:
+            continue
+        if environment_id is not None and event.get('environment_id') != environment_id:
+            continue
+        eligible.append(event)
+    return sorted(eligible, key=lambda event: (event.get('timestamp') or '', event.get('event_id') or ''))
 
 def _ev(e,signal,value,relationship):
  return Evidence(evidence_id=str(e['event_id']),observation_id=str(e['event_id']),timestamp=e.get('timestamp'),signal=signal,observed_value=value,expected_value=None,availability='AVAILABLE_AT_FAILURE',provenance=e.get('provenance',{}),relationship=relationship)
@@ -36,10 +58,10 @@ def _ev(e,signal,value,relationship):
 class DiagnosisEngine:
     version='phase4.3-diagnosis-v1'
     def diagnose(self,failure:Mapping[str,Any],events:Sequence[Mapping[str,Any]],diagnosis_boundary:str|None=None)->StructuredDiagnosis:
-        boundary=diagnosis_boundary or str(failure['failure_timestamp']); eligible=_eligible(events,boundary)
+        boundary=diagnosis_boundary or str(failure['failure_timestamp']); eligible=_eligible_current_incident(events,failure,boundary)
         fid=str(failure['failure_id']); rid=str(failure['run_id']); wid=str(failure['workload_id']); env=str(failure['environment_id']); cls=str(failure['failure_class']); evidence=[]; contradictions=[]
         for e in eligible:
-            if e.get('event_id') in set(failure.get('evidence_references',[])) or e.get('event_type')=='failure_detected':
+            if e.get('event_id') in set(failure.get('evidence_references',[])):
                 p=e.get('payload',{}); kind=p.get('failure_kind'); evidence.append(_ev(e,'failure_class',kind, 'direct failure observation'))
             elif e.get('event_type')=='execution_started': evidence.append(_ev(e,'execution_started',True,'establishes process was launched'))
             elif e.get('event_type')=='telemetry_observed':
@@ -53,7 +75,7 @@ class DiagnosisEngine:
             h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('WORKLOAD_CONFIGURATION',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('RESOURCE_PRESSURE',0.1,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
         else: return self._unknown(failure,boundary,f'Unsupported failure class: {cls}')
         primary=Hypothesis(primary_name,1.0,len(h_ev),0,confidence,status,h_ev)
-        prov=failure.get('provenance',{}); return StructuredDiagnosis(f'diagnosis:{fid}',fid,wid,rid,env,str(boundary),boundary,primary,alts,tuple(evidence),tuple(contradictions),confidence,'CONFIRMED_FAILURE_EVIDENCE',status,root,prov,{'detector_version':'phase4.2-detector-v1','memory_used':False})
+        prov=failure.get('provenance',{}); return StructuredDiagnosis(f'diagnosis:{fid}',fid,wid,rid,env,str(boundary),boundary,primary,alts,tuple(evidence),tuple(contradictions),confidence,'CONFIRMED_FAILURE_EVIDENCE',status,root,prov,{'detector_version':'phase4.2-detector-v1','memory_used':False,'evidence_scope':'CURRENT_RUN_ONLY','run_id':rid,'workload_id':wid,'environment_id':env})
     def _unknown(self,failure,boundary,reason):
         h=Hypothesis('UNKNOWN',0.0,0,0,Confidence.UNKNOWN.value,CausalStatus.UNKNOWN.value,())
         return StructuredDiagnosis(f"diagnosis:{failure['failure_id']}",str(failure['failure_id']),str(failure.get('workload_id')),str(failure.get('run_id')),str(failure.get('environment_id')),str(boundary),str(boundary),h,(),(),(),Confidence.UNKNOWN.value,'CONFIRMED_FAILURE_EVIDENCE',CausalStatus.UNKNOWN.value,'UNKNOWN',failure.get('provenance',{}),{'reason':reason,'memory_used':False})

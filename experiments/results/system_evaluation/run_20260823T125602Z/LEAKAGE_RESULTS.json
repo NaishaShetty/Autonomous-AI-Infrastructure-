@@ -1,0 +1,7 @@
+{
+  "interpretation": "The caller-safe same-run evaluation passed no cross-run events. The unscoped DiagnosisEngine API admitted prior-run evidence and is a documented contamination defect.",
+  "post_boundary_evidence_count": 0,
+  "pre_failure_detection_count": 0,
+  "status": "FAIL",
+  "unscoped_cross_run_evidence_count": 8
+}

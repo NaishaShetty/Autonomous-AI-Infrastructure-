@@ -46,7 +46,7 @@ def test_selected_candidates_have_falsifiable_protocols():
 
 
 def test_report_contains_required_direction_and_no_integration():
-    text = REPORT.read_text()
+    text = REPORT.read_text(encoding="utf-8")
     assert "V1.1 DIRECTION IDENTIFIED — NO CANDIDATE YET" in text
     assert "RELIABILITY/DECISION ARCHITECTURE" in text
     assert "No new candidate experiment was executed" in text

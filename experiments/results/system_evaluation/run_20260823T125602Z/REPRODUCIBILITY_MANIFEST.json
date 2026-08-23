@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-08-23T12:56:02.892234Z",
+  "evaluation_id": "run_20260823T125602Z",
+  "files": {
+    "ABLATION_RESULTS.json": "e54c59ac2ea6ff93b4eec2def7f13757c5756a1e8d1008a5b39b44287f15235c",
+    "BASELINE_COMPARISON.json": "777d33f64986936e80cbbbc13181567d6e4429c082cad6e2710d7d66a11f5e99",
+    "CAPABILITY_MATRIX.md": "149460d18ff959a2a6427e510298bbb7d8127be7a818f8f804aa4169817a8975",
+    "EVALUATION_PROTOCOL.json": "9c4b9b5b1edd75b560854ba24d3d740b3fbac2e0a06e74310ed984f09cf51c1b",
+    "LEAKAGE_RESULTS.json": "68948b90d9b46146e57db8653c4d449b1e7eb1c3c940b14a6c88ace23fc5fda7",
+    "METRICS_SUMMARY.json": "2a60514e6e5699fd2147a9d2adc2232ab42c56c4d51cebeb87a95189667eb228",
+    "OVERHEAD_RESULTS.json": "a1cbf9489be0e868adca63b585c77a8649c1901c2afff89b333b734253c6e9c3",
+    "ROBUSTNESS_RESULTS.json": "e7e6e550cc999e350f0ff19a25dbdec1f93a19d47733ca9d5e1ae33aa6b965a3",
+    "SYSTEM_EVALUATION_REPORT.md": "98249d987dcc04cf31d4b010c862727d91128563ba62772078973bfa4ce73b07",
+    "controlled_runtime.sqlite": "3d467d0ea8dac07d340475afdfa82ea7f5352f5dba156cac9fc0e1267dcf8e59",
+    "raw/controlled_runtime_evidence.json": "3ee7c61c6c05f6a03467932026e03deb28000f703eb996e97cfe0114035916e8",
+    "raw/full_pytest.log": "503abcabbae2a72e1d14d245eed10a0498e2fcca62a6aad2939bbaccb3a11bfe"
+  }
+}

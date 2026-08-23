@@ -1,0 +1,7 @@
+{
+  "interpretation": "Diagnosis was deliberately given the complete replay. Its internal current-run boundary rejected all prior-run evidence; no historical-memory path was enabled.",
+  "post_boundary_evidence_count": 0,
+  "pre_failure_detection_count": 0,
+  "status": "PASS",
+  "unscoped_cross_run_evidence_count": 0
+}

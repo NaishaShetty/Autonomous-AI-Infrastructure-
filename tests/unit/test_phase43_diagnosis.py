@@ -16,6 +16,37 @@ def test_future_events_do_not_change_boundary_diagnosis():
  f=failure(); early=[ev('start','execution_started','2026-01-01T00:00:01Z'),ev('fobs','failure_detected','2026-01-01T00:00:02Z',payload={'failure_kind':'NONZERO_EXIT'})]; future=early+[ev('later','workload_completed','2026-01-01T00:00:04Z')]
  assert DiagnosisEngine().replay(f,early)==DiagnosisEngine().replay(f,future,boundary='2026-01-01T00:00:02Z')
 
+def test_current_incident_scope_rejects_prior_events_from_other_runs():
+ f=failure('timeout','PROCESS_TIMEOUT','run-b','2026-01-01T00:00:05Z')
+ events=[
+  ev('a-start','execution_started','2026-01-01T00:00:00Z','run-a'),
+  ev('a-failure','failure_detected','2026-01-01T00:00:01Z','run-a',{'failure_kind':'NONZERO_EXIT'}),
+  ev('b-start','execution_started','2026-01-01T00:00:03Z','run-b'),
+  ev('fobs','failure_detected','2026-01-01T00:00:05Z','run-b',{'failure_kind':'TIMEOUT'}),
+ ]
+ d=DiagnosisEngine().diagnose(f,events)
+ assert d.primary_hypothesis.name=='RUNTIME_TIMEOUT'
+ assert all(item.observation_id.startswith('b-') or item.observation_id=='fobs' for item in d.evidence)
+ assert d.foundation_references['evidence_scope']=='CURRENT_RUN_ONLY'
+
+def test_current_incident_scope_rejects_all_prior_runs_even_with_shared_workload_and_environment():
+ f=failure('target','PROCESS_NONZERO_EXIT','run-e','2026-01-01T00:00:10Z')
+ events=[ev(f'old-{i}','failure_detected',f'2026-01-01T00:00:0{i}Z',f'run-{letter}',{'failure_kind':'NONZERO_EXIT'}) for i,letter in enumerate('abcd',1)]
+ events += [ev('target-start','execution_started','2026-01-01T00:00:09Z','run-e'),ev('fobs','failure_detected','2026-01-01T00:00:10Z','run-e',{'failure_kind':'NONZERO_EXIT'})]
+ d=DiagnosisEngine().diagnose(f,events)
+ assert [item.observation_id for item in d.evidence]==['target-start','fobs']
+
+def test_same_run_future_and_other_identity_events_are_rejected():
+ f=failure('f','PROCESS_NONZERO_EXIT','r1','2026-01-01T00:00:02Z')
+ events=[
+  ev('fobs','failure_detected','2026-01-01T00:00:02Z','r1',{'failure_kind':'NONZERO_EXIT'}),
+  ev('future','telemetry_observed','2026-01-01T00:00:03Z','r1'),
+  {**ev('wrong-workload','execution_started','2026-01-01T00:00:01Z','r1'), 'workload_id':'other'},
+  {**ev('wrong-environment','execution_started','2026-01-01T00:00:01Z','r1'), 'environment_id':'other'},
+ ]
+ d=DiagnosisEngine().diagnose(f,events)
+ assert [item.observation_id for item in d.evidence]==['fobs']
+
 def test_unknown_when_no_eligible_evidence():
  d=DiagnosisEngine().diagnose(failure(),[ev('later','failure_detected','2026-01-01T00:00:03Z',payload={'failure_kind':'NONZERO_EXIT'})],diagnosis_boundary='2026-01-01T00:00:02Z'); assert d.primary_hypothesis.name=='UNKNOWN'; assert d.root_cause=='UNKNOWN'
 

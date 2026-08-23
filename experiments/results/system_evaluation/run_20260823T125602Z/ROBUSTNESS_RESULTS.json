@@ -1,0 +1,9 @@
+{
+  "monitoring_replay_equal": true,
+  "restart_replay": {
+    "equal": true,
+    "event_count_after": 25,
+    "event_count_before": 25
+  },
+  "status": "PARTIAL"
+}
