@@ -1,0 +1,21 @@
+{
+  "PHASE3_9_SYNTHESIS.md": "2b8a0c8989aedde9c5dc49363ca81b8bffb20c86b8a0792338e654888549b57a",
+  "artifacts/full_suite_attempt.txt": "f81403b8464428ef32cc31b056f10e97a7a789e7b95fa057be223ab892f3ad8f",
+  "error_signatures/cross_fold/cross_fold_signatures.csv": "b254ae2d5fbdbb5bd1100978c99925eaac3b49227b8dcf4231f3819cc02cac13",
+  "error_signatures/univariate/univariate_signatures.csv": "564114351e3ca4034ea82a00633abfff276f24be9012732de22b3ed8400eaf96",
+  "failure_taxonomy/failure_cases/canonical_temporal.csv": "ff983a7cb186bce441df636e2c22de8a3f62601d738d4396762cae743a1bd8c8",
+  "failure_taxonomy/failure_cases/fold_1.csv": "34cb773203de951e267156fb31311ab0c4e3560642e3cf173f269047184634f9",
+  "failure_taxonomy/failure_cases/fold_2.csv": "4310990621173805071b039bbf428dc57126a577c3687f7d854647bb5ed88de5",
+  "failure_taxonomy/failure_cases/fold_3.csv": "b667fe1cc3b080256b2789959d24e096f71ec33236ea641811280332a746b638",
+  "failure_taxonomy/failure_cases/random_stratified.csv": "8c51ec0b00696db5059a065a3d866e994ef65961b21dc5f821c356da179568d2",
+  "failure_taxonomy/taxonomy.json": "e4a67dccf9db968ef61787547c476de76454b4f247079cd43482a22efa4c292c",
+  "hashes/manifest.json": "8cc252c0d5d71f948e9bac559c036e762f429ffc3e46c01f86bb5f0b15913cbf",
+  "information_gap/availability_matrix.json": "b0f423fcfcae6cd53bd673af6b137a873a82fa5a08d7612c7b37ec43c9ff558f",
+  "information_gap/information_gap_matrix.csv": "1f64fa37b5852fed3e19db59f09324f7ee164f2748ec5abc8737d7f811d49935",
+  "opportunity_map/opportunity_matrix.csv": "26ff22b5c7ce47bde088dd125b1000b4ffaa0dda953d5b2fc98b5a2b946152f5",
+  "plots/error_rate_by_population.png": "611604fbbed43fca6f47de8ba3ea4fd25768715f06dc95fd0ee68993de3e0f50",
+  "plots/error_signature_population.png": "6cb4686876dff30b04ebe9c76c8712060930bb8f0bf10f026576ad36547a8faa",
+  "protocol/phase39_protocol.json": "60a3cb9631054c48066b2484e80fd7edb20871d4401e80a0c993362315f9396a",
+  "tables/case_level_forensics.csv": "1ade95ea4c3423caf31e270ddda96da855a35dfba8547b7b5d11fa324eed35ae",
+  "tables/population_metrics.json": "21c3a994b67de011a3418b1dac3b86fcfb544b0e6db17352b3eed17a3eac991f"
+}

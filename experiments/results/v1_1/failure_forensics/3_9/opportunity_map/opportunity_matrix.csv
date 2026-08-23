@@ -1,0 +1,5 @@
+failure_mechanism,evidence_strength,decision_time_information,current_v1_capability,missing_capability,potential_intervention,risk,priority
+uncertainty-associated errors,High; reproduced in prior phases,Risk/uncertainty available,V1 uses risk but not a validated action policy,Uncertainty interpretation,Bounded evidence request or escalation,Coverage/latency and policy overfit,1
+decision-time workload regime signatures,Medium; exploratory cross-fold analysis,14 numeric features available,V1 consumes them predictively,Contextual scrutiny,"Separate diagnostic context, not blind abstention",Regime instability,2
+prior failure similarity,Medium; architecture exists but Candidate C rejected,Potentially prior-only,V1 memory path is not a validated predictor context,Provenance-aware memory,New strict retrieval study,Leakage/staleness/overhead,3
+post-outcome errors,High that information exists only after outcome,Not decision-time,Not available to prediction,None safely at original decision,Instrumentation for later diagnosis only,Cannot solve original error,4

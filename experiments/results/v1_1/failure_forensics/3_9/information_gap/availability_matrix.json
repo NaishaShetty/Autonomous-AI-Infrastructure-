@@ -1,0 +1,62 @@
+[
+  {
+    "acquisition_cost": "None",
+    "already_used_by_v1": true,
+    "availability": "DECISION-TIME",
+    "classification": "A",
+    "failure_category": "high/low-confidence error",
+    "information_needed": "V1 risk and calibrated score",
+    "leakage_risk": "Low",
+    "potentially_useful": "Yes, policy interpretation"
+  },
+  {
+    "acquisition_cost": "None in current contract",
+    "already_used_by_v1": true,
+    "availability": "DECISION-TIME",
+    "classification": "A",
+    "failure_category": "temporal-regime error",
+    "information_needed": "job start time and workload/resource summary",
+    "leakage_risk": "Low",
+    "potentially_useful": "Possibly; signatures are exploratory"
+  },
+  {
+    "acquisition_cost": "Low",
+    "already_used_by_v1": "Yes, through imputation",
+    "availability": "DECISION-TIME",
+    "classification": "A",
+    "failure_category": "missingness-associated error",
+    "information_needed": "feature presence at decision time",
+    "leakage_risk": "Low",
+    "potentially_useful": "Possibly"
+  },
+  {
+    "acquisition_cost": "Medium/high",
+    "already_used_by_v1": false,
+    "availability": "Potentially available",
+    "classification": "C",
+    "failure_category": "prior failure similarity",
+    "information_needed": "temporally eligible failure memory",
+    "leakage_risk": "High unless prior-only",
+    "potentially_useful": "Unproven; Candidate C rejected"
+  },
+  {
+    "acquisition_cost": "Not applicable",
+    "already_used_by_v1": false,
+    "availability": "POST-OUTCOME",
+    "classification": "D",
+    "failure_category": "future telemetry or final outcome",
+    "information_needed": "post-decision resource state/outcome",
+    "leakage_risk": "Prohibited",
+    "potentially_useful": "Forensic explanation only"
+  },
+  {
+    "acquisition_cost": "Unknown",
+    "already_used_by_v1": false,
+    "availability": "UNKNOWN",
+    "classification": "F",
+    "failure_category": "unmaterialized queue/machine context",
+    "information_needed": "runtime context not in processed contract",
+    "leakage_risk": "Unknown",
+    "potentially_useful": "Unknown"
+  }
+]

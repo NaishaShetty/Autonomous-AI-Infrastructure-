@@ -1,0 +1,7 @@
+failure_category,information_needed,availability,already_used_by_v1,potentially_useful,acquisition_cost,leakage_risk,classification
+high/low-confidence error,V1 risk and calibrated score,DECISION-TIME,True,"Yes, policy interpretation",None,Low,A
+temporal-regime error,job start time and workload/resource summary,DECISION-TIME,True,Possibly; signatures are exploratory,None in current contract,Low,A
+missingness-associated error,feature presence at decision time,DECISION-TIME,"Yes, through imputation",Possibly,Low,Low,A
+prior failure similarity,temporally eligible failure memory,Potentially available,False,Unproven; Candidate C rejected,Medium/high,High unless prior-only,C
+future telemetry or final outcome,post-decision resource state/outcome,POST-OUTCOME,False,Forensic explanation only,Not applicable,Prohibited,D
+unmaterialized queue/machine context,runtime context not in processed contract,UNKNOWN,False,Unknown,Unknown,Unknown,F

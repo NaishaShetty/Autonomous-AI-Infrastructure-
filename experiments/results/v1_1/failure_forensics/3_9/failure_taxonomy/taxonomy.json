@@ -1,0 +1,47 @@
+{
+  "case_count": 10002,
+  "category_policy": "correct, high-confidence error, and low-confidence error; secondary tags are multi-label and descriptive.",
+  "failure_definition": "Canonical V1 threshold prediction is incorrect; threshold=0.5.",
+  "primary_categories": [
+    {
+      "cases": 1180,
+      "confidence": "HIGH",
+      "cross_fold_stability": "ROBUST",
+      "decision_time_information": "A \u2014 observable and already used by V1",
+      "failure_category": "high_confidence_error",
+      "limitations": "Primary categories are mutually exclusive; secondary tags are multi-label.",
+      "percent_of_all_cases": 11.797640471905618,
+      "percent_of_failures": 43.65519792822789,
+      "population_distribution": {
+        "canonical_temporal": 217,
+        "fold_1": 49,
+        "fold_2": 301,
+        "fold_3": 368,
+        "random_stratified": 245
+      },
+      "temporal_presence": true
+    },
+    {
+      "cases": 1523,
+      "confidence": "HIGH",
+      "cross_fold_stability": "REGIME-SPECIFIC",
+      "decision_time_information": "A \u2014 observable and already used by V1",
+      "failure_category": "low_confidence_error",
+      "limitations": "Primary categories are mutually exclusive; secondary tags are multi-label.",
+      "percent_of_all_cases": 15.226954609078183,
+      "percent_of_failures": 56.34480207177211,
+      "population_distribution": {
+        "canonical_temporal": 869,
+        "fold_1": 296,
+        "fold_2": 332,
+        "random_stratified": 26
+      },
+      "temporal_presence": true
+    }
+  ],
+  "unsupported_categories": [
+    "failure severity",
+    "causal feature mechanism",
+    "memory-relevant error without a validated memory label"
+  ]
+}

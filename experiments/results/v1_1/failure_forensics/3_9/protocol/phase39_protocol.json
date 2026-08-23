@@ -1,0 +1,48 @@
+{
+  "analysis_methods": [
+    "case-level deterministic classification",
+    "univariate SMD/KS/AUROC",
+    "cross-fold signature comparison",
+    "availability matrix",
+    "opportunity map"
+  ],
+  "data_identity": "official restored Alibaba GPU2020",
+  "evaluation_populations": [
+    "random_stratified",
+    "canonical_temporal",
+    "fold_1",
+    "fold_2",
+    "fold_3"
+  ],
+  "experiment_id": "3_9_v1_failure_information_gap_forensics",
+  "failure_definition": "incorrect threshold prediction at 0.5",
+  "feature_contract": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "high_confidence_rule": "uncertainty <= 0.50",
+  "no_candidate_implementation": true,
+  "no_model_search": true,
+  "phase": "3.9",
+  "post_outcome_policy": "post-outcome fields are forensic only, never decision-time inputs",
+  "seed": 3900,
+  "software_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "python": "3.12.3"
+  },
+  "uncertainty_definition": "1 - abs(2*risk - 1)"
+}
