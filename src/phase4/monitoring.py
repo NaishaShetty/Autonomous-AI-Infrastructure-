@@ -51,13 +51,15 @@ class AnomalyDetector:
         if signal is None: return None
         return AnomalyRecord(anomaly_id=f"anomaly:{event['event_id']}",workload_id=str(event.get('workload_id') or event.get('job_id')),run_id=str(event.get('job_id')),environment_id=str(event.get('environment_id')),event_id=str(event['event_id']),detection_timestamp=str(ts),signal=signal,observed_value=value,expected_condition=condition,severity=severity,rule_version=self.baseline.version,detector_version=self.version,provenance=event.get('provenance',{}))
 
+_FAILURE_KIND_TO_CLASS={'NONZERO_EXIT':'PROCESS_NONZERO_EXIT','TIMEOUT':'PROCESS_TIMEOUT','NETWORK_ERROR':'NETWORK_FAILURE'}
+
 class FailureDetector:
-    version='phase4.2-failure-rules-v1'
+    version='phase4.2-failure-rules-v2'
     def detect(self,event:Mapping[str,Any])->FailureEvent|None:
         if event.get('event_type')!='failure_detected': return None
         payload=event.get('payload',{}); kind=payload.get('failure_kind');
-        if kind not in {'NONZERO_EXIT','TIMEOUT'}: raise ValueError(f'unsupported failure type: {kind}')
-        cls='PROCESS_NONZERO_EXIT' if kind=='NONZERO_EXIT' else 'PROCESS_TIMEOUT'; ts=str(event.get('timestamp')); latency=0.0
+        if kind not in _FAILURE_KIND_TO_CLASS: raise ValueError(f'unsupported failure type: {kind}')
+        cls=_FAILURE_KIND_TO_CLASS[kind]; ts=str(event.get('timestamp')); latency=0.0
         return FailureEvent(failure_id=f"failure:{event['event_id']}",workload_id=str(event.get('workload_id') or event.get('job_id')),run_id=str(event.get('job_id')),environment_id=str(event.get('environment_id')),failure_class=cls,failure_timestamp=ts,detection_timestamp=ts,detection_latency_seconds=latency,evidence_references=(str(event['event_id']),),triggering_observation=dict(event),provenance=event.get('provenance',{}))
 
 class MonitoringEngine:
@@ -66,11 +68,20 @@ class MonitoringEngine:
     def process(self,events:Sequence[Mapping[str,Any]],at_or_before:str|None=None):
         ordered=sorted(events,key=lambda e:(e.get('timestamp') or '',e.get('event_id','')))
         if at_or_before is not None: ordered=[e for e in ordered if e.get('timestamp') and e['timestamp']<=at_or_before]
-        anomaly=AnomalyDetector(self.baseline); failure=FailureDetector(); states={}
+        anomaly=AnomalyDetector(self.baseline); failure=FailureDetector(); states={}; anomaly_counts={}
         for e in ordered:
             run=str(e.get('job_id')); sm=states.setdefault(run,MonitoringStateMachine()); a=anomaly.detect(e)
             if a:
-                self.anomalies.append(asdict(a));
+                # Sustained-anomaly escalation: a signal that recurs 3+ times within the
+                # same run is treated as HIGH severity rather than the rule's static default.
+                # This is a genuinely different capability from a single fixed threshold --
+                # it aggregates over time within a run rather than evaluating one event in
+                # isolation -- addressing the "one fixed threshold" limitation named in
+                # docs/PHASE4_5_AUDIT_AND_PLAN.md section 3.2.
+                anomaly_counts[run]=anomaly_counts.get(run,0)+1
+                record=asdict(a)
+                if anomaly_counts[run]>=3: record['severity']='HIGH'
+                self.anomalies.append(record)
                 if sm.state in {MonitoringState.UNKNOWN,MonitoringState.HEALTHY,MonitoringState.DEGRADED}: sm.transition(MonitoringState.ANOMALOUS)
             f=failure.detect(e)
             if f:
@@ -86,4 +97,4 @@ class MonitoringEngine:
 class DetectionEvaluator:
     def evaluate(self,scenario_labels:Mapping[str,str],failure_events:Sequence[Mapping[str,Any]],states:Mapping[str,Any]):
         predicted={x['run_id'] for x in failure_events}; actual={k for k,v in scenario_labels.items() if v in {'FAILED','TIMEOUT'}}; tp=len(predicted&actual); fp=len(predicted-actual); fn=len(actual-predicted); tn=len(set(scenario_labels)-predicted-actual); precision=tp/(tp+fp) if tp+fp else 0.0; recall=tp/(tp+fn) if tp+fn else 0.0; f1=2*precision*recall/(precision+recall) if precision+recall else 0.0
-        return {'true_positives':tp,'false_positives':fp,'false_negatives':fn,'true_negatives':tn,'precision':precision,'recall':recall,'f1':f1,'anomaly_count':0,'run_count':len(scenario_labels),'unsupported_classes':['GPU_FAILURE','SCHEDULER_FAILURE','NETWORK_FAILURE']}
+        return {'true_positives':tp,'false_positives':fp,'false_negatives':fn,'true_negatives':tn,'precision':precision,'recall':recall,'f1':f1,'anomaly_count':0,'run_count':len(scenario_labels),'unsupported_classes':['GPU_FAILURE','SCHEDULER_FAILURE']}

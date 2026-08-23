@@ -1,0 +1,266 @@
+{
+  "closed_loop_episodes": {
+    "episodes": [
+      {
+        "action": null,
+        "decision": null,
+        "diagnosis_confidence": null,
+        "diagnosis_hypothesis": null,
+        "episode": "success_1",
+        "final_state": "COMPLETED",
+        "learning_recorded": null,
+        "memory_used": null,
+        "prediction_score": null,
+        "run_id": "run-74ac500414744c13930f0314feb9ffb7",
+        "safety_authorized": null,
+        "state_history": [
+          "RECEIVED",
+          "OBSERVING",
+          "UNKNOWN",
+          "COMPLETED"
+        ],
+        "validation": null,
+        "workload_id": "workload-success"
+      },
+      {
+        "action": "retry",
+        "decision": "ANSWER",
+        "diagnosis_confidence": "HIGH",
+        "diagnosis_hypothesis": "NETWORK_CONNECTIVITY_FAILURE",
+        "episode": "network_failure",
+        "final_state": "COMPLETED",
+        "learning_recorded": true,
+        "memory_used": false,
+        "prediction_score": 0.1391624853515625,
+        "run_id": "run-4fc17a28a5204f6a828f4d120d900dd6",
+        "safety_authorized": true,
+        "state_history": [
+          "RECEIVED",
+          "OBSERVING",
+          "PREDICTED",
+          "DECIDING",
+          "DIAGNOSING",
+          "PLANNING",
+          "SAFETY_CHECK",
+          "EXECUTING",
+          "VALIDATING",
+          "NOT_RECOVERED",
+          "COMPLETED"
+        ],
+        "validation": "NOT_RECOVERED",
+        "workload_id": "workload-net"
+      },
+      {
+        "action": "restart",
+        "decision": "ANSWER",
+        "diagnosis_confidence": "HIGH",
+        "diagnosis_hypothesis": "PROCESS_EXIT_FAILURE",
+        "episode": "recurring_failure_1",
+        "final_state": "COMPLETED",
+        "learning_recorded": true,
+        "memory_used": false,
+        "prediction_score": 0.02574,
+        "run_id": "run-0d7f8521639548dcad5ebec6318322cb",
+        "safety_authorized": true,
+        "state_history": [
+          "RECEIVED",
+          "OBSERVING",
+          "PREDICTED",
+          "DECIDING",
+          "DIAGNOSING",
+          "PLANNING",
+          "SAFETY_CHECK",
+          "EXECUTING",
+          "VALIDATING",
+          "NOT_RECOVERED",
+          "COMPLETED"
+        ],
+        "validation": "NOT_RECOVERED",
+        "workload_id": "workload-recurring"
+      },
+      {
+        "action": "restart",
+        "decision": "ANSWER",
+        "diagnosis_confidence": "HIGH",
+        "diagnosis_hypothesis": "PROCESS_EXIT_FAILURE",
+        "episode": "recurring_failure_2",
+        "final_state": "COMPLETED",
+        "learning_recorded": true,
+        "memory_used": true,
+        "prediction_score": 0.023344,
+        "run_id": "run-dc38062b7e9542dd8fa4dd33bb50577b",
+        "safety_authorized": true,
+        "state_history": [
+          "RECEIVED",
+          "OBSERVING",
+          "PREDICTED",
+          "DECIDING",
+          "DIAGNOSING",
+          "PLANNING",
+          "SAFETY_CHECK",
+          "EXECUTING",
+          "VALIDATING",
+          "NOT_RECOVERED",
+          "COMPLETED"
+        ],
+        "validation": "NOT_RECOVERED",
+        "workload_id": "workload-recurring"
+      },
+      {
+        "action": "retry",
+        "decision": "ANSWER",
+        "diagnosis_confidence": "HIGH",
+        "diagnosis_hypothesis": "PROCESS_EXIT_FAILURE",
+        "episode": "recurring_failure_3",
+        "final_state": "COMPLETED",
+        "learning_recorded": true,
+        "memory_used": true,
+        "prediction_score": 0.026721,
+        "run_id": "run-2ec463eabb06465a8d24a5b01a42f90a",
+        "safety_authorized": true,
+        "state_history": [
+          "RECEIVED",
+          "OBSERVING",
+          "PREDICTED",
+          "DECIDING",
+          "DIAGNOSING",
+          "PLANNING",
+          "SAFETY_CHECK",
+          "EXECUTING",
+          "VALIDATING",
+          "NOT_RECOVERED",
+          "COMPLETED"
+        ],
+        "validation": "NOT_RECOVERED",
+        "workload_id": "workload-recurring"
+      },
+      {
+        "action": "retry",
+        "decision": "REVIEW",
+        "diagnosis_confidence": "HIGH",
+        "diagnosis_hypothesis": "RUNTIME_TIMEOUT",
+        "episode": "timeout_1",
+        "final_state": "COMPLETED",
+        "learning_recorded": null,
+        "memory_used": false,
+        "prediction_score": 0.3078758239746094,
+        "run_id": "run-257fb052b6914c058a2ae7508a5ee28e",
+        "safety_authorized": true,
+        "state_history": [
+          "RECEIVED",
+          "OBSERVING",
+          "PREDICTED",
+          "DECIDING",
+          "ESCALATED",
+          "DIAGNOSING",
+          "PLANNING",
+          "SAFETY_CHECK",
+          "ABSTAINED",
+          "COMPLETED"
+        ],
+        "validation": null,
+        "workload_id": "workload-timeout"
+      }
+    ],
+    "final_memory_version": 4
+  },
+  "generated_at": "2026-08-23T14:20:31.235622Z",
+  "prediction_evaluation": {
+    "false_negatives": 5,
+    "false_positives": 0,
+    "note": "Lead time is measured relative to the failure boundary the predictor was evaluated at, which is the failure's own timestamp -- the predictor is queried using only events strictly before that boundary, so a fired prediction is a genuine pre-failure signal, but this harness does not yet vary the query time across multiple points within a run to report a lead-time distribution in seconds; that is future work, not claimed here.",
+    "precision": null,
+    "recall": 0.0,
+    "rows": [
+      {
+        "failed": false,
+        "fired_at_threshold": false,
+        "prediction_score": 0.034673,
+        "scenario": "success"
+      },
+      {
+        "failed": false,
+        "fired_at_threshold": false,
+        "prediction_score": 0.023593,
+        "scenario": "success"
+      },
+      {
+        "failed": false,
+        "fired_at_threshold": false,
+        "prediction_score": 0.023835,
+        "scenario": "success"
+      },
+      {
+        "failed": true,
+        "fired_at_threshold": false,
+        "prediction_score": 0.023532,
+        "scenario": "fail"
+      },
+      {
+        "failed": true,
+        "fired_at_threshold": false,
+        "prediction_score": 0.030455,
+        "scenario": "fail"
+      },
+      {
+        "failed": true,
+        "fired_at_threshold": false,
+        "prediction_score": 0.30788269042968747,
+        "scenario": "timeout_via_cpu"
+      },
+      {
+        "failed": true,
+        "fired_at_threshold": false,
+        "prediction_score": 0.30788612365722656,
+        "scenario": "timeout_via_cpu"
+      },
+      {
+        "failed": true,
+        "fired_at_threshold": false,
+        "prediction_score": 0.13758291857910157,
+        "scenario": "network"
+      }
+    ],
+    "true_negatives": 3,
+    "true_positives": 0
+  },
+  "purpose": "Phase 4.4 / Phase 5 end-to-end evidence for docs/PHASE4_5_AUDIT_AND_PLAN.md sections 5-6",
+  "safety_adversarial_matrix": [
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_NONZERO_EXIT",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_NONZERO_EXIT",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_TIMEOUT",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_TIMEOUT",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "NETWORK_FAILURE",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "NETWORK_FAILURE",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    }
+  ]
+}

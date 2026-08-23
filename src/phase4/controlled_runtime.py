@@ -48,10 +48,36 @@ class ControlledRuntime:
         self._raw.append(raw); self.collector.ingest(raw); return raw
     def _command(self, params):
         mode=params.get('mode','success'); duration=float(params.get('duration_seconds',0.15))
-        code="import sys,time\nmode=sys.argv[1]; d=float(sys.argv[2])\nif mode=='sleep': time.sleep(d)\nelif mode=='fail': sys.stderr.write('controlled failure\\n'); sys.exit(7)\nelif mode=='cpu':\n t=time.time()+d; x=0\n while time.time()<t: x=(x*33+7)%1000003\n"
+        code=(
+            "import sys,time,socket\n"
+            "mode=sys.argv[1]; d=float(sys.argv[2])\n"
+            "if mode=='sleep': time.sleep(d)\n"
+            "elif mode=='fail': sys.stderr.write('controlled failure\\n'); sys.exit(7)\n"
+            "elif mode=='cpu':\n"
+            " t=time.time()+d; x=0\n"
+            " while time.time()<t: x=(x*33+7)%1000003\n"
+            "elif mode=='memory':\n"
+            " block=bytearray(64*1024*1024); time.sleep(d)\n"
+            "elif mode=='network':\n"
+            " s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.settimeout(min(d,2.0))\n"
+            " try:\n"
+            "  s.connect(('10.255.255.1',65530))\n"
+            " except OSError:\n"
+            "  sys.stderr.write('controlled network failure\\n'); sys.exit(9)\n"
+            " finally:\n"
+            "  s.close()\n"
+        )
         return [sys.executable,'-c',code,mode,str(duration)]
-    def run(self, workload_type='success', parameters=None)->RunResult:
-        params=dict(parameters or {}); params.setdefault('mode',workload_type); run_id=f'run-{uuid.uuid4().hex}'; workload_id=f'workload-{uuid.uuid4().hex}'; start=now_iso(); self._raw=[]
+    def run(self, workload_type='success', parameters=None, workload_id=None)->RunResult:
+        # ``workload_id`` defaults to a fresh random identity (unchanged
+        # behavior for every pre-existing caller/test). Passing an explicit,
+        # stable ``workload_id`` is what makes a "recurring workload
+        # experiencing repeated incidents over time" representable at all --
+        # docs/PHASE4_PLAN.md section 1 named exactly this gap for Gen 1's
+        # synthetic data; this is the Gen 3 controlled-runtime equivalent,
+        # and it is what src/phase4/memory.py's workload-scoped retrieval
+        # needs to ever have anything to retrieve across separate runs.
+        params=dict(parameters or {}); params.setdefault('mode',workload_type); run_id=f'run-{uuid.uuid4().hex}'; workload_id=workload_id or f'workload-{uuid.uuid4().hex}'; start=now_iso(); self._raw=[]
         self._emit(run_id,workload_id,'workload_received',{'workload_type':workload_type,'configuration':self.config.as_dict(),'environment':self.env})
         self._emit(run_id,workload_id,'workload_registered',{'workload_type':workload_type})
         proc=subprocess.Popen(self._command(params),stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -72,7 +98,9 @@ class ControlledRuntime:
             if deadline is not None and time.monotonic()>=deadline and proc.poll() is None:
                 timed_out=True; proc.kill(); self._emit(run_id,workload_id,'failure_detected',{'failure_kind':'TIMEOUT','configured_timeout_seconds':self.config.timeout_seconds,'termination':'actual subprocess kill','pid':proc.pid}); break
         stdout,stderr=proc.communicate(); exit_code=proc.returncode; status='TIMEOUT' if timed_out else ('COMPLETED' if exit_code==0 else 'FAILED')
-        if not timed_out and exit_code!=0: self._emit(run_id,workload_id,'failure_detected',{'failure_kind':'NONZERO_EXIT','exit_code':exit_code,'stderr':stderr[-1000:]})
+        if not timed_out and exit_code!=0:
+            kind='NETWORK_ERROR' if (params.get('mode')=='network' and exit_code==9) else 'NONZERO_EXIT'
+            self._emit(run_id,workload_id,'failure_detected',{'failure_kind':kind,'exit_code':exit_code,'stderr':stderr[-1000:]})
         if exit_code==0 and not timed_out: self._emit(run_id,workload_id,'workload_completed',{'exit_code':exit_code,'stdout':stdout[-1000:]})
         end=now_iso(); return RunResult(run_id,workload_id,self.config.environment_id,status,exit_code,list(self._raw),self.config.as_dict(),start,end)
 
