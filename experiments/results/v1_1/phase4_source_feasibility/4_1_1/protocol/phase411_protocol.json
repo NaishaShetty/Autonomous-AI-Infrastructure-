@@ -1,0 +1,20 @@
+{
+  "controlled_runtime_instrumentation": "NOT IMPLEMENTED; no legitimate existing workload execution path identified",
+  "decision_options": [
+    "A_REAL_EXTERNAL_RUNTIME",
+    "B_CONTROLLED_RUNTIME",
+    "C_PARTIALLY_FEASIBLE",
+    "D_NO_LEGITIMATE_RUNTIME_SOURCE"
+  ],
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "hardening_commit": "066e9b9b131d2ec843133fe34ca185ddbd0d8d79",
+  "historical_trace": "Alibaba GPU2020; replayable historical data, not synchronized runtime evidence",
+  "no_benchmark_integration": true,
+  "no_model_training": true,
+  "no_phase42": true,
+  "no_v1_modification": true,
+  "phase": "4.1.1",
+  "phase40_41_foundation_commit": "b2c624c84743dbb403b56ed9be28dcfa2c1cb105",
+  "real_timestamped_source": "NOT AVAILABLE",
+  "title": "runtime source feasibility and instrumentation decision"
+}

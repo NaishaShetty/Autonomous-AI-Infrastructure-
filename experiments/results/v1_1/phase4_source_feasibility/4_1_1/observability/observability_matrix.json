@@ -1,0 +1,177 @@
+[
+  {
+    "requirement": "workload_received",
+    "available": "PARTIAL",
+    "evidence": "Alibaba source fields exist, but occurrence/runtime semantics are historical",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "task_created",
+    "available": "PARTIAL",
+    "evidence": "Alibaba source fields exist, but occurrence/runtime semantics are historical",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "scheduling_event",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "resource_requested",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "resource_allocated",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "prediction_input_snapshot",
+    "available": "UNAVAILABLE",
+    "evidence": "No synchronized runtime prediction event source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "prediction_generated",
+    "available": "UNAVAILABLE",
+    "evidence": "No synchronized runtime prediction event source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "execution_started",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "telemetry_observed",
+    "available": "PARTIAL",
+    "evidence": "Sampled sensor/machine tables exist; timing relative to decision unknown",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "failure_detected",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "diagnosis_started",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "recovery_started",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "recovery_completed",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "validation_completed",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "workload_completed",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "queue_state",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "scheduler_state",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "allocation_state",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "resource_state",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "node_identity_state",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "gpu_identity_state",
+    "available": "UNAVAILABLE",
+    "evidence": "No legitimate connected runtime source",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "environment_identity",
+    "available": "PARTIAL",
+    "evidence": "Metadata and processed provenance exist; runtime lineage incomplete",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "provenance",
+    "available": "PARTIAL",
+    "evidence": "Metadata and processed provenance exist; runtime lineage incomplete",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "source_record_identity",
+    "available": "PARTIAL",
+    "evidence": "Metadata and processed provenance exist; runtime lineage incomplete",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  },
+  {
+    "requirement": "reproducibility",
+    "available": "PARTIAL",
+    "evidence": "Metadata and processed provenance exist; runtime lineage incomplete",
+    "quality": "UNKNOWN unless proven by a real source",
+    "notes": "No fabrication; schema support is not data availability"
+  }
+]

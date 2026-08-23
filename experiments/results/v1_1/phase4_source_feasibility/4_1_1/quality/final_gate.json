@@ -1,0 +1,18 @@
+{
+  "candidate_source_identified": "PARTIAL",
+  "legitimate_runtime_source": "NOT AVAILABLE",
+  "timestamped_collection": "NOT AVAILABLE",
+  "decision_time_support": "NOT AVAILABLE",
+  "timestamp_integrity": "PARTIAL",
+  "provenance": "PARTIAL",
+  "environment_identity": "PARTIAL",
+  "resource_observability": "NOT AVAILABLE",
+  "scheduler_observability": "NOT AVAILABLE",
+  "reproducibility": "PARTIAL",
+  "persistent_integration": "READY_FOR_FUTURE_SOURCE",
+  "replay": "READY_FOR_FUTURE_SOURCE",
+  "v1_boundary": "READY",
+  "historical_protection": "PASS",
+  "focused_tests": "PASS_EXISTING_TESTS",
+  "final_source_decision": "D \u2014 NO LEGITIMATE RUNTIME SOURCE CURRENTLY AVAILABLE"
+}

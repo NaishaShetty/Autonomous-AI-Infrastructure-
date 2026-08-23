@@ -1,0 +1,12 @@
+{
+  "artifacts/source_feasibility.json": "b295076bebea7b3de300da0d357a785a2a5a43e1c47574c3f47fce4f3c2ceba0",
+  "audit/repository_audit.md": "5f4f433642bdf3b7a5b0023e2586151d55c140a4f171532f4336070445a51aa3",
+  "hashes/manifest.json": "9deebac85957d7a7576fd4dc373af563f9dcaa733081d693b3ce2e10b8af909f",
+  "observability/observability_matrix.json": "a878c6244502eb9e1352cb233ffebc9faabce41dfb97fe56f8aae8379b666c37",
+  "protocol/phase411_protocol.json": "903f317974fba63e7e437b40d7f23cbfc4154857a42944e4b0beaa0bf0341830",
+  "quality/final_gate.json": "7ff51a526e9ec032e67c52b3052374e8bba91224d7bf6c129ca137ee48b076de",
+  "quality/v1_historical_boundary.json": "ab6d13a19f85ecb2a32aa113444b86b9db11d1d7ab18c992a7cc1cfb11144cba",
+  "reports/PHASE4_1_1_SOURCE_FEASIBILITY_REPORT.md": "ce5fc7c718866ae6888867011a6cb42475f4e0a4b96e085910df8d1484cb2273",
+  "reports/PHASE4_1_1_SYNTHESIS.md": "3fcfe81a61af276a6d205f957917b67be267af325a7a8e23946833fe43ef10c3",
+  "source_evaluation/source_inventory.json": "ff0493610f93b631d7ca83bf75e36e140e15d968e0d58c04489a3ab61e787147"
+}

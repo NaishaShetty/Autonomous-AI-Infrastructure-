@@ -1,0 +1,58 @@
+[
+  {
+    "source_id": "alibaba_gpu2020_historical",
+    "source_class": "HISTORICAL_TRACE",
+    "engineering_status": "REPLAYABLE DATA ONLY",
+    "research_status": "REJECT AS LIVE RUNTIME SOURCE",
+    "timestamp_quality": "APPROXIMATE/PARTIAL; runtime decision synchronization unknown",
+    "decision_time_support": "NOT PROVEN",
+    "environment_identity": "ONE TRACE IDENTITY",
+    "provenance": "SOURCE AND PROCESSED PROVENANCE PARTIAL",
+    "reproducibility": "REPLAYABLE PROCESSED ARTIFACTS; NOT REPRODUCIBLE RUNTIME",
+    "acceptance_decision": "REJECT",
+    "reason": "Historical rows and sampled telemetry do not prove actual event occurrence at a synchronized runtime decision boundary.",
+    "limitations": "No prediction timestamp, scheduler identity/state, queue, live allocation, or independent runtime environment."
+  },
+  {
+    "source_id": "phase4_persistent_event_store",
+    "source_class": "UNUSABLE",
+    "engineering_status": "STORAGE INFRASTRUCTURE ONLY",
+    "research_status": "NOT A SOURCE",
+    "timestamp_quality": "PRESERVES INPUT QUALITY; DOES NOT CREATE IT",
+    "decision_time_support": "DEPENDS ON INPUT SOURCE",
+    "environment_identity": "DEPENDS ON INPUT SOURCE",
+    "provenance": "REQUIRES INPUT PROVENANCE",
+    "reproducibility": "DETERMINISTIC STORAGE/REPLAY",
+    "acceptance_decision": "DEFER",
+    "reason": "A store is not an event source and cannot manufacture runtime observations.",
+    "limitations": "No events are connected without a legitimate producer."
+  },
+  {
+    "source_id": "synthetic_test_fixtures",
+    "source_class": "SYNTHETIC_TEST_FIXTURE",
+    "engineering_status": "TEST ONLY",
+    "research_status": "REJECT AS RESEARCH SOURCE",
+    "timestamp_quality": "CONTROLLED TEST VALUES",
+    "decision_time_support": "TEST CONTRACT ONLY",
+    "environment_identity": "CONTROLLED TEST LABEL",
+    "provenance": "SYNTHETIC/TEST-ONLY",
+    "reproducibility": "DETERMINISTIC FIXTURE",
+    "acceptance_decision": "REJECT",
+    "reason": "Artificial records validate software contracts only.",
+    "limitations": "No real infrastructure occurrence or generalization evidence."
+  },
+  {
+    "source_id": "external_runtime_source",
+    "source_class": "UNUSABLE",
+    "engineering_status": "NOT CONNECTED",
+    "research_status": "DEFER",
+    "timestamp_quality": "UNKNOWN",
+    "decision_time_support": "UNKNOWN",
+    "environment_identity": "UNKNOWN",
+    "provenance": "UNKNOWN",
+    "reproducibility": "UNKNOWN",
+    "acceptance_decision": "DEFER",
+    "reason": "No external source was acquired or silently integrated.",
+    "limitations": "Requires explicit source approval, license, provenance, timestamp, and environment evaluation."
+  }
+]
