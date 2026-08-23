@@ -1,0 +1,54 @@
+{
+  "experiment_id": "phase37_selected_candidate_screening",
+  "phase": "3.7",
+  "status": "PREREGISTERED_DESIGN_ONLY",
+  "frozen_control": {
+    "name": "canonical_v1",
+    "commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+    "modified": false
+  },
+  "data": {
+    "identity": "official restored Alibaba GPU2020",
+    "feature_contract": "matched 14-feature numeric contract",
+    "future_boundary": "canonical temporal test plus Phase 3.5 authoritative Fold 1, Fold 2, Fold 3",
+    "historical_skip_node_limitation": "historical seven skipped-node identities remain unrecoverable"
+  },
+  "common_rules": {
+    "training": "fit candidate components only within each training boundary",
+    "validation": "use only the declared validation portion for threshold/policy calibration",
+    "future_evaluation": "evaluate once on each frozen future regime; never select using future results",
+    "preprocessing": "training-fitted median imputation and standardization where applicable",
+    "calibration": "preserve V1 isotonic calibration; no replacement unless separately preregistered",
+    "tuning": "no grid search, random search, Bayesian optimization, repeated temporal tuning, or test-set selection",
+    "randomness": "deterministic seed 3637 and explicitly serialized configuration",
+    "comparison": "direct frozen-V1 comparison with absolute, mean, median, and worst-fold deltas",
+    "minimum_metrics": ["AUROC", "AUPRC", "Brier", "ECE"],
+    "additional_metrics": ["coverage", "selective_risk", "false_positive_rate", "false_negative_rate", "escalation_rate", "latency", "memory_overhead"]
+  },
+  "candidates": [
+    {
+      "candidate_id": "candidate_a",
+      "name": "structured_uncertainty_evidence_request",
+      "hypothesis": "A structured uncertainty signal combined with bounded contextual evidence can improve decision safety without the coverage failure of standalone threshold abstention.",
+      "architecture": "Frozen V1 calibrated risk -> frozen uncertainty signal -> deterministic evidence-request policy -> predict/warn/request-evidence/escalate action.",
+      "features": "Frozen V1 14-feature numeric input plus no unregistered predictive features; context is derived only from training-available evidence.",
+      "policy": "Predeclare one validation-locked policy with fixed action costs and a minimum useful-coverage gate; evidence request is bounded and cannot mutate V1.",
+      "acceptance": ["No catastrophic future-fold degradation", "useful coverage remains above the predeclared gate", "decision-safety or selective-risk improvement versus V1 is positive on the aggregate and not negative on every future fold", "no leakage detected"],
+      "rejection": ["any catastrophic future fold", "coverage below gate without compensating safety benefit", "future-fold tuning", "uncontrolled action behavior", "no measurable benefit over V1"],
+      "deterministic_id": "candidate_a__structured_uncertainty_evidence_request__phase37__seed3637"
+    },
+    {
+      "candidate_id": "candidate_c",
+      "name": "provenance_aware_failure_memory_context",
+      "hypothesis": "Temporally eligible, provenance-tagged historical failure memory can improve current risk interpretation without modifying the frozen V1 predictor.",
+      "architecture": "Current workload -> frozen V1 risk plus prior-only memory retrieval -> bounded contextual decision assessment -> safe action or escalation.",
+      "features": "Frozen V1 14-feature numeric input; memory fields are contextual metadata and are not added to V1 training or V1 prediction.",
+      "policy": "Use a fixed retrieval rule, explicit empty-memory behavior, provenance display, age/quality bounds, and validation-locked action mapping.",
+      "acceptance": ["No temporal leakage", "no catastrophic future-fold degradation", "measurable decision-quality or safety benefit versus no-memory control", "memory overhead and retrieval behavior remain bounded and reproducible"],
+      "rejection": ["retrieval uses future outcomes", "memory materially worsens temporal safety", "benefit depends on one fold only", "unbounded or non-auditable retrieval", "no measurable benefit over no-memory control"],
+      "deterministic_id": "candidate_c__provenance_aware_failure_memory_context__phase37__seed3637"
+    }
+  ],
+  "not_screened_in_phase37": true,
+  "screening_status": "No candidate-specific model or policy experiment was executed in the discovery/design phase; this file freezes the design boundary for a later screening phase."
+}

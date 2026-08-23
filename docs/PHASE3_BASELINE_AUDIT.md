@@ -183,6 +183,14 @@ The matched ladder showed that the controlled C=0.1 linear variant remained clos
 
 **Phase 3.6.2 readiness decision: HOLD as a bounded inductive-bias study.** V1 remains unchanged and remains the sole production-eligible control. No ladder candidate was integrated, and all prior evidence remains immutable. The exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
 
+## 23. Phase 3.7 V1.1 candidate discovery and design
+
+Phase 3.7 completed an evidence-grounded candidate discovery and design pass without modifying V1 or screening candidates on future-fold results. Five candidate categories were investigated: structured uncertainty/evidence request, distribution context, provenance-aware failure memory, constrained model disagreement, and explicit structured decision policy. Based on accumulated evidence, Candidates A and C were selected for future screening; no candidate was accepted or integrated.
+
+The selected protocols freeze the canonical V1 control, matched 14-feature data contract, canonical temporal test, and all three Phase 3.5 chronological folds. They prohibit hyperparameter search, feature fishing, test-set selection, and future-fold tuning. The design-only outcome is **V1.1 DIRECTION IDENTIFIED — NO CANDIDATE YET**, with a primary **RELIABILITY/DECISION ARCHITECTURE** direction around frozen V1. The full inventory, selection record, protocols, and report are stored under `experiments/results/v1_1/candidate_discovery/3_7/`.
+
+No candidate-specific experiment was executed in Phase 3.7; prior Phase 3 results are not relabeled as candidate results. The current full-suite attempt ran from `2026-08-23T08:51:32Z` to `2026-08-23T08:56:32Z`, reached approximately 49%, and timed out with exit code 124 while CPU-bound; it is recorded as incomplete rather than successful. The inherited verified 558-passed / 7-skipped result remains distinct. V1 remains the sole production-eligible control, and the historical seven skipped-node identities remain unrecoverable.
+
 ## References
 [1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
 

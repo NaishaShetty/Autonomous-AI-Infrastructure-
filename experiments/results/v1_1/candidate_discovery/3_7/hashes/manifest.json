@@ -1,0 +1,20 @@
+{
+  "candidate_screening_executed": false,
+  "decision": "V1.1 DIRECTION IDENTIFIED \u2014 NO CANDIDATE YET",
+  "experiment_id": "phase37_v11_candidate_discovery_design",
+  "files": {
+    "artifacts/full_suite_attempt.txt": "9035bc7b054f8bc11c40cada3496ec3758edcd3d826f0155a6244ceac2e3cff6",
+    "candidate_inventory/candidate_inventory.md": "db8689cb4052244b52bd042163c3f421cb7878c3584f2423590394727d1d794b",
+    "candidate_protocols/selected_candidate_protocols.json": "b381c58bf5fa393215df0eeba1e00526b7204805050b32e239bd59a011d46e11",
+    "candidate_selection/selection_record.md": "fadce985edddc37e63a92921f792758555f047160fbc2c531b638e3240010997",
+    "reports/PHASE3_7_V1_1_CANDIDATE_DISCOVERY_DESIGN.md": "bcaf0153b0a41199a03deaab1f329eab6952e3bf16f1b1da82137bbed055b55a"
+  },
+  "phase": "3.7",
+  "primary_architecture": "RELIABILITY/DECISION ARCHITECTURE",
+  "selected_candidates": [
+    "candidate_a",
+    "candidate_c"
+  ],
+  "status": "PREREGISTERED_DESIGN_ONLY",
+  "v1_status": "FROZEN"
+}
