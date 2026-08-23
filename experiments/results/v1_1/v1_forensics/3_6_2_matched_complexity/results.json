@@ -1,0 +1,174 @@
+{
+  "conclusion": "Matched-feature evidence tests the inductive-bias hypothesis. Flexible levels must be interpreted through the locked ladder and calibrated metrics; no model is promoted.",
+  "decision": "DIAGNOSTICALLY SUPPORTIVE; NO V1 INTEGRATION",
+  "feature_hashes": {
+    "feature_order": "670685efd5870429ac11549f36f2ddbf2fcc9e38baefb80f6f233dbb3af567a8",
+    "raw_14_feature_matrix": "1c265e95e255303022b056b3709d8a755903aa4189528fab2f7fde51600d4f40",
+    "row_identity": "ee38b03987a118487e5e3422c0b2f0377e90bc6c6f4423f087abcb8564e1d66f"
+  },
+  "interaction_set": [
+    "n_tasks__x__mean_plan_cpu",
+    "n_tasks__x__mean_plan_gpu",
+    "mean_plan_cpu__x__mean_plan_gpu"
+  ],
+  "ladder": {
+    "0_prevalence": {
+      "random": {
+        "auprc": 0.2588157019294744,
+        "auroc": 0.5,
+        "brier": 0.19183055678105643,
+        "calibration": "constant",
+        "count": 1503,
+        "ece": 0.000649936018803865,
+        "raw_auroc": 0.5
+      },
+      "temporal": {
+        "auprc": 0.4341736694677871,
+        "auroc": 0.5,
+        "brier": 0.300004923637933,
+        "calibration": "constant",
+        "count": 2499,
+        "ece": 0.23310518962320234,
+        "raw_auroc": 0.5
+      }
+    },
+    "1_v1_logistic": {
+      "random": {
+        "auprc": 0.5396812153812669,
+        "auroc": 0.720134719138979,
+        "brier": 0.1443950655700858,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.021474799416552174,
+        "raw_auroc": 0.7142860439464077
+      },
+      "temporal": {
+        "auprc": 0.7463900779094184,
+        "auroc": 0.8302048638043528,
+        "brier": 0.21853816567793097,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.2161554385447439,
+        "raw_auroc": 0.7817186919481942
+      }
+    },
+    "2_controlled_linear_C01": {
+      "random": {
+        "auprc": 0.5359258819276151,
+        "auroc": 0.7212677629423142,
+        "brier": 0.1451895377260718,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.018372970437862964,
+        "raw_auroc": 0.7131945373904456
+      },
+      "temporal": {
+        "auprc": 0.7440801405541121,
+        "auroc": 0.8290071633891499,
+        "brier": 0.21531916752095362,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.21236481373301236,
+        "raw_auroc": 0.7789980380526532
+      }
+    },
+    "3_limited_interactions": {
+      "random": {
+        "auprc": 0.5466454022537603,
+        "auroc": 0.7143425807553319,
+        "brier": 0.14373060833292758,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.012491081781787188,
+        "raw_auroc": 0.70695241216026
+      },
+      "temporal": {
+        "auprc": 0.7864609512688718,
+        "auroc": 0.8439427319953852,
+        "brier": 0.1895146360501609,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.19096083782730808,
+        "raw_auroc": 0.8114953167469479
+      }
+    },
+    "4_constrained_random_forest": {
+      "random": {
+        "auprc": 0.5749545279733255,
+        "auroc": 0.7248665039021936,
+        "brier": 0.14085666615172132,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.007263245048063462,
+        "raw_auroc": 0.7256060976679144
+      },
+      "temporal": {
+        "auprc": 0.4083284101121074,
+        "auroc": 0.32043293203579737,
+        "brier": 0.32987489496870065,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.28578184251024025,
+        "raw_auroc": 0.33252823965740874
+      }
+    },
+    "5_phase31_gradient_boosting": {
+      "random": {
+        "auprc": 0.6148702624958986,
+        "auroc": 0.7472031586769002,
+        "brier": 0.12805085116542783,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.008278073536693084,
+        "raw_auroc": 0.735906181203934
+      },
+      "temporal": {
+        "auprc": 0.4153968713206156,
+        "auroc": 0.33356820211316723,
+        "brier": 0.36854039400859095,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.33738224302156933,
+        "raw_auroc": 0.26614369797743437
+      }
+    }
+  },
+  "prediction_hashes": {
+    "0_prevalence": {
+      "random": "253552e2fa81d04fa085f9ad9b74e53ccecd2de2cb0fd4dfa7e48adb48a4596a",
+      "temporal": "723e4d526548562d60fa774fe32bd2084bf4601afb7c93434938c88175505c8a"
+    },
+    "1_v1_logistic": {
+      "random": "6782965cab285ae363cc689a556b2b14033ae04d7a2e127c93a9fb745ba7fe88",
+      "temporal": "f4d2e45699e4f7dceddf952395cd142de17030a5131ace7425b35afcacf2b0e7"
+    },
+    "2_controlled_linear_C01": {
+      "random": "5150e6eb3db851a2a60527ad4430e753b00b3e2e99dbcb3bcd7b8c322486d24b",
+      "temporal": "a6d844f44830c62b9afa4442806e3286d10cd50de912a438ae9bc710204df777"
+    },
+    "3_limited_interactions": {
+      "random": "09da70bfbf6ddf32455bcce4053d20f383c4457c84328f4e3d130e987bd0e5f4",
+      "temporal": "7966d95d22c62d480d237e6463a30a21e070b78b0a99910e3ca4fba12fe38cb2"
+    },
+    "4_constrained_random_forest": {
+      "random": "80159dec28eed7a166fbebb3db2734fdcbf84a0f06ba25f3e2a222721ac7c33c",
+      "temporal": "dd5e524808104eefa92c4e0287e020bd7570f2caf904f5c08351bad3fd4169f5"
+    },
+    "5_phase31_gradient_boosting": {
+      "random": "38d8aac424bf24aedc11b4aabe584bcc129cf319d5b1e7ecd676b76fe12e66bf",
+      "temporal": "b0c71ef582a31e23e26b023f679f7ef179ec34bb4e97f6167d9c4dc55818dfad"
+    }
+  },
+  "split_hashes": {
+    "random": {
+      "test": "a1d7cb453ab1b0484fe1b72b86b335ad1ef7bb762eae6343b12085ee25ed3172",
+      "train": "0b5a09b649625905c00b3b134ac299daa199a506a4efe0ff1e5df99ff62a11a5",
+      "val": "77231781114ca996572a57cd02fa7d668035f340ce5dc2cea56ed957fc56f147"
+    },
+    "temporal": {
+      "test": "77115c351890c2430e48e68e3906694348917aa10993579c9d3c282995a5265f",
+      "train": "273dddd51c70968f049f0e5d89aba0c48b2c729374d7b702c55ec05d4bb7b687",
+      "val": "d848c9698bd96ce7f54871df73ff571d8e5b3ad7c01544244b70d0231e2a7fb2"
+    }
+  }
+}

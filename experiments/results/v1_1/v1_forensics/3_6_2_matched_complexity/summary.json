@@ -1,0 +1,126 @@
+{
+  "decision": "DIAGNOSTICALLY SUPPORTIVE; NO V1 INTEGRATION",
+  "experiment_id": "phase362_matched_feature_complexity_inductive_bias",
+  "ladder": {
+    "0_prevalence": {
+      "random": {
+        "auprc": 0.2588157019294744,
+        "auroc": 0.5,
+        "brier": 0.19183055678105643,
+        "calibration": "constant",
+        "count": 1503,
+        "ece": 0.000649936018803865,
+        "raw_auroc": 0.5
+      },
+      "temporal": {
+        "auprc": 0.4341736694677871,
+        "auroc": 0.5,
+        "brier": 0.300004923637933,
+        "calibration": "constant",
+        "count": 2499,
+        "ece": 0.23310518962320234,
+        "raw_auroc": 0.5
+      }
+    },
+    "1_v1_logistic": {
+      "random": {
+        "auprc": 0.5396812153812669,
+        "auroc": 0.720134719138979,
+        "brier": 0.1443950655700858,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.021474799416552174,
+        "raw_auroc": 0.7142860439464077
+      },
+      "temporal": {
+        "auprc": 0.7463900779094184,
+        "auroc": 0.8302048638043528,
+        "brier": 0.21853816567793097,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.2161554385447439,
+        "raw_auroc": 0.7817186919481942
+      }
+    },
+    "2_controlled_linear_C01": {
+      "random": {
+        "auprc": 0.5359258819276151,
+        "auroc": 0.7212677629423142,
+        "brier": 0.1451895377260718,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.018372970437862964,
+        "raw_auroc": 0.7131945373904456
+      },
+      "temporal": {
+        "auprc": 0.7440801405541121,
+        "auroc": 0.8290071633891499,
+        "brier": 0.21531916752095362,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.21236481373301236,
+        "raw_auroc": 0.7789980380526532
+      }
+    },
+    "3_limited_interactions": {
+      "random": {
+        "auprc": 0.5466454022537603,
+        "auroc": 0.7143425807553319,
+        "brier": 0.14373060833292758,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.012491081781787188,
+        "raw_auroc": 0.70695241216026
+      },
+      "temporal": {
+        "auprc": 0.7864609512688718,
+        "auroc": 0.8439427319953852,
+        "brier": 0.1895146360501609,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.19096083782730808,
+        "raw_auroc": 0.8114953167469479
+      }
+    },
+    "4_constrained_random_forest": {
+      "random": {
+        "auprc": 0.5749545279733255,
+        "auroc": 0.7248665039021936,
+        "brier": 0.14085666615172132,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.007263245048063462,
+        "raw_auroc": 0.7256060976679144
+      },
+      "temporal": {
+        "auprc": 0.4083284101121074,
+        "auroc": 0.32043293203579737,
+        "brier": 0.32987489496870065,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.28578184251024025,
+        "raw_auroc": 0.33252823965740874
+      }
+    },
+    "5_phase31_gradient_boosting": {
+      "random": {
+        "auprc": 0.6148702624958986,
+        "auroc": 0.7472031586769002,
+        "brier": 0.12805085116542783,
+        "calibration": "validation_only_isotonic",
+        "count": 1503,
+        "ece": 0.008278073536693084,
+        "raw_auroc": 0.735906181203934
+      },
+      "temporal": {
+        "auprc": 0.4153968713206156,
+        "auroc": 0.33356820211316723,
+        "brier": 0.36854039400859095,
+        "calibration": "validation_only_isotonic",
+        "count": 2499,
+        "ece": 0.33738224302156933,
+        "raw_auroc": 0.26614369797743437
+      }
+    }
+  }
+}

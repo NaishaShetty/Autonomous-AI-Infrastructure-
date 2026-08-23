@@ -1,0 +1,67 @@
+{
+  "calibration": "isotonic fitted on validation only for every learned model",
+  "canonical_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "categorical_features_used": [],
+  "dataset_identity": "official restored Alibaba GPU2020",
+  "evaluation": "registered random-stratified and temporal future test partitions; no temporal-test tuning",
+  "experiment_id": "phase362_matched_feature_complexity_inductive_bias",
+  "feature_contract": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "ladder": [
+    {
+      "description": "training-set prevalence constant",
+      "id": "0_prevalence",
+      "kind": "prevalence"
+    },
+    {
+      "description": "frozen V1 numeric-only logistic control",
+      "id": "1_v1_logistic",
+      "kind": "v1"
+    },
+    {
+      "C": 0.1,
+      "description": "same pipeline with predeclared C=0.1",
+      "id": "2_controlled_linear_C01",
+      "kind": "lr"
+    },
+    {
+      "description": "same preprocessing plus three predeclared pairwise products",
+      "id": "3_limited_interactions",
+      "kind": "interactions"
+    },
+    {
+      "description": "25 trees, depth 2, min leaf 50, max_features 0.7",
+      "id": "4_constrained_random_forest",
+      "kind": "rf"
+    },
+    {
+      "description": "100 trees, learning_rate 0.05, depth 2",
+      "id": "5_phase31_gradient_boosting",
+      "kind": "gb"
+    }
+  ],
+  "phase": "3.6.2",
+  "preprocessing": "median imputation and standardization; fitting on training only",
+  "provenance": "scripts/run_phase362_matched_complexity.py",
+  "random_seed": 42,
+  "research_question": "When feature space and evaluation protocol are held constant, does increased flexibility improve random performance while damaging temporal generalization?",
+  "software_versions": {
+    "numpy": "2.4.6",
+    "python": "3.12.3"
+  },
+  "threshold": "not used for ranking metrics"
+}

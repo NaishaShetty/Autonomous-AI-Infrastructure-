@@ -175,6 +175,14 @@ The root cause is an **expected protocol difference**. Canonical V1 uses 14 nume
 
 **Phase 3.6.1 readiness decision: canonical V1 remains unchanged.** Phase 3.6-D and 3.6-C are valid but non-equivalent research protocols; their comparisons must not be represented as direct canonical V1 reproductions. Phase 3.6-E’s mechanism conclusion is bounded accordingly. All prior evidence remains immutable, and the exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
 
+## 21. Phase 3.6.2 matched-feature complexity and inductive-bias readiness
+
+Phase 3.6.2 held constant the official Alibaba GPU2020 data, registered random/temporal rows, exact 14-feature numeric V1 matrix, train-only median imputation and standardization, validation-only isotonic calibration, and metric definitions. The frozen V1 control reproduced at random AUROC 0.7201 and temporal AUROC 0.8302. The Phase 3.1 Gradient Boosting configuration reproduced at 0.7472 random and 0.3336 temporal AUROC under the matched feature contract.
+
+The matched ladder showed that the controlled C=0.1 linear variant remained close to V1, the predeclared limited-interaction model improved temporal AUROC to 0.8439, while the constrained Random Forest and matched Phase 3.1 Gradient Boosting collapsed temporally to 0.3204 and 0.3336. The evidence is therefore **diagnostically supportive but not sufficient for V1.1 integration**: flexible nonlinear alternatives can fail under the registered temporal shift, but the small interaction result prevents a universal claim that added expressiveness is harmful.
+
+**Phase 3.6.2 readiness decision: HOLD as a bounded inductive-bias study.** V1 remains unchanged and remains the sole production-eligible control. No ladder candidate was integrated, and all prior evidence remains immutable. The exact seven historical skipped test-node identities remain unrecoverable from preserved evidence.
+
 ## References
 [1]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/blob/main/docs/V1_FINAL_EVALUATION.md "V1 final integrated evaluation"
 
@@ -189,3 +197,5 @@ The root cause is an **expected protocol difference**. Canonical V1 uses 14 nume
 [6]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics "Phase 3.6 V1 robustness and mechanism forensics evidence"
 
 [7]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics/3_6_1_baseline_reconciliation "Phase 3.6.1 baseline identity and protocol reconciliation evidence"
+
+[8]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics/3_6_2_matched_complexity "Phase 3.6.2 matched-feature complexity and inductive-bias evidence"
