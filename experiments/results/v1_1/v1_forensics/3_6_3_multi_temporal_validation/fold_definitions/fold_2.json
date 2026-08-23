@@ -1,0 +1,27 @@
+{
+  "failure_rate": 0.3175,
+  "fold_id": "fold_2",
+  "n_instances": null,
+  "n_test": 2000,
+  "n_train": 4800,
+  "n_validation": 1200,
+  "temporal_end": 5667324.0,
+  "temporal_start": 4789772.0,
+  "test_idx": [
+    6000,
+    8000
+  ],
+  "train_idx": [
+    0,
+    4800
+  ],
+  "training_boundary_end": 4113089.0,
+  "validation_boundary": [
+    4113217.0,
+    4789055.0
+  ],
+  "validation_idx": [
+    4800,
+    6000
+  ]
+}

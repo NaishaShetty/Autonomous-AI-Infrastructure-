@@ -199,3 +199,13 @@ The matched ladder showed that the controlled C=0.1 linear variant remained clos
 [7]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics/3_6_1_baseline_reconciliation "Phase 3.6.1 baseline identity and protocol reconciliation evidence"
 
 [8]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics/3_6_2_matched_complexity "Phase 3.6.2 matched-feature complexity and inductive-bias evidence"
+
+## 22. Phase 3.6.3 multi-temporal inductive-bias validation
+
+Phase 3.6.3 extended the matched 14-feature complexity ladder across all three pre-registered authoritative chronological folds from Phase 3.5. The frozen V1 control, C=0.1 linear variant, limited-interaction model, constrained Random Forest, and matched Gradient Boosting configuration were evaluated with training-fitted median imputation and standardization, validation-only isotonic calibration, and unchanged AUROC/AUPRC/Brier/ECE definitions. No model, threshold, feature set, or protocol component was selected using future-fold results.
+
+The limited-interaction model's Phase 3.6.2 temporal advantage did not persist consistently. Relative to V1, its AUROC delta was -0.0032 on Fold 1, -0.0718 on Fold 2, and +0.0123 on Fold 3: one AUROC win and two losses, with mean delta -0.0209 and worst-case delta -0.0718. Its corresponding AUPRC deltas were -0.0009, -0.1234, and +0.0468. The result is therefore **PARTIAL VALIDATION / REGIME-SENSITIVE**, not evidence of a temporally robust improvement. The three-fold evidence specifically rejects promoting the interaction model on the basis of the single canonical temporal split.
+
+**Phase 3.6.3 readiness decision: HOLD.** V1 remains frozen and remains the sole production-eligible control. The interaction model and all other ladder candidates remain research-only; no feature, model, calibration, threshold, runtime, or integration change was made. The complete protocol, fold-level metrics, predictions, plots, report, and immutable SHA-256 finalization record are stored under `experiments/results/v1_1/v1_forensics/3_6_3_multi_temporal_validation/`. The historical aggregate V1 result and the unrecoverable historical seven skipped-node identities remain unchanged.
+
+[9]: https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-/tree/main/experiments/results/v1_1/v1_forensics/3_6_3_multi_temporal_validation "Phase 3.6.3 multi-temporal inductive-bias validation evidence"

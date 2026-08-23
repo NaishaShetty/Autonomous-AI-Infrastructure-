@@ -1,0 +1,89 @@
+{
+  "conclusion": "The interaction model must be evaluated across all three folds; no future fold is selected or discarded.",
+  "constrained_rf": {
+    "max_auprc": 0.4063490414487864,
+    "max_auroc": 0.5550241192155596,
+    "mean_auprc": 0.3051693555933814,
+    "mean_auroc": 0.5255917032788747,
+    "median_auprc": 0.312591275606882,
+    "median_auroc": 0.5403117474495381,
+    "min_auprc": 0.19656774972447555,
+    "min_auroc": 0.48143924317152664,
+    "range_auroc": 0.07358487604403297,
+    "std_auroc": 0.03179301045716006
+  },
+  "decision": "PARTIAL VALIDATION / REGIME-SENSITIVE",
+  "gradient_boosting": {
+    "max_auprc": 0.4085609202955632,
+    "max_auroc": 0.558905299000692,
+    "mean_auprc": 0.3128730537641729,
+    "mean_auroc": 0.5499195450471744,
+    "median_auprc": 0.34654493744672316,
+    "median_auroc": 0.5474932941074673,
+    "min_auprc": 0.18351330355023254,
+    "min_auroc": 0.543360042033364,
+    "range_auroc": 0.015545256967328003,
+    "std_auroc": 0.006574129790924791
+  },
+  "interaction_vs_v1": {
+    "best_auroc_delta": 0.01229181965904691,
+    "fold_deltas": [
+      {
+        "auprc_delta": -0.0009016789460291885,
+        "auroc_delta": -0.0032339419414160187,
+        "fold": "fold_1"
+      },
+      {
+        "auprc_delta": -0.12344945438563426,
+        "auroc_delta": -0.07177871996769647,
+        "fold": "fold_2"
+      },
+      {
+        "auprc_delta": 0.046803350856744697,
+        "auroc_delta": 0.01229181965904691,
+        "fold": "fold_3"
+      }
+    ],
+    "losses_auroc": 2,
+    "mean_auroc_delta": -0.020906947416688526,
+    "median_auroc_delta": -0.0032339419414160187,
+    "wins_auroc": 1,
+    "worst_auroc_delta": -0.07177871996769647
+  },
+  "limited_interactions": {
+    "max_auprc": 0.7152830756759764,
+    "max_auroc": 0.8189193698715449,
+    "mean_auprc": 0.4534118251977653,
+    "mean_auroc": 0.6802114796029892,
+    "median_auprc": 0.4258028396168977,
+    "median_auroc": 0.6551377231692191,
+    "min_auprc": 0.21914956030042188,
+    "min_auroc": 0.5665773457682034,
+    "range_auroc": 0.2523420241033415,
+    "std_auroc": 0.10453275157709462
+  },
+  "linear_c01": {
+    "max_auprc": 0.6678078761759778,
+    "max_auroc": 0.8064399740262778,
+    "mean_auprc": 0.48378717167539803,
+    "mean_auroc": 0.701247163497943,
+    "median_auprc": 0.5601488012085717,
+    "median_auroc": 0.7302933287185255,
+    "min_auprc": 0.22340483764164448,
+    "min_auroc": 0.5670081877490258,
+    "range_auroc": 0.23943178627725192,
+    "std_auroc": 0.09988211336535667
+  },
+  "v1_logistic": {
+    "max_auprc": 0.6684797248192317,
+    "max_auroc": 0.806627550212498,
+    "mean_auprc": 0.47926108602273826,
+    "mean_auroc": 0.7011184270196776,
+    "median_auprc": 0.549252294002532,
+    "median_auroc": 0.7269164431369156,
+    "min_auprc": 0.22005123924645106,
+    "min_auroc": 0.5698112877096194,
+    "range_auroc": 0.23681626250287857,
+    "std_auroc": 0.09838576717238126
+  }
+}

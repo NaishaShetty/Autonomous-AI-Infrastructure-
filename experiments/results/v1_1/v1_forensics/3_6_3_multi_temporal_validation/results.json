@@ -1,0 +1,340 @@
+{
+  "decision": "PARTIAL VALIDATION / REGIME-SENSITIVE",
+  "feature_hashes": {
+    "base_feature_order": "670685efd5870429ac11549f36f2ddbf2fcc9e38baefb80f6f233dbb3af567a8",
+    "base_full_matrix": "b8a0392787969cd82eb4afda37bfeae6da58ccb592e783bb2c3b009442270578",
+    "row_identity": "073836451991b848fdebaa6e063eaf0cf7790a507b98f03fa1da163b8d8a4bf1"
+  },
+  "fold_hashes": {
+    "fold_1": {
+      "future_rows": "00b6e354a8d930c2beab1bb00c0c41c43c2eeb36160f18e10e9f2d5247d5d0bc",
+      "train_rows": "9a5e76849a39b76520e1a137a194bdc63385eea7cd5585d34dccaf60ee2ea4b3",
+      "validation_rows": "7b9e2bf45bfe43acd9c0523bc2408e621f450963b2ac436d40f88b56bf26bfa2"
+    },
+    "fold_2": {
+      "future_rows": "b3a67170915454def793b1266373efd8719c8b1a805a6555bc7e10f6ee06ad7e",
+      "train_rows": "7dd0083d72f97c3ab616aec735db295ce92b796376dc9d385a796edd6fe49cc8",
+      "validation_rows": "a9afe6bec8ccc62c12fc9013a937986f8e4710377f63152153c2967588218c80"
+    },
+    "fold_3": {
+      "future_rows": "d792ce07de4416a6107522babf25ba8530d312a0edcc61159994e750ac95999b",
+      "train_rows": "fe3d208342c4b4cfacd019746e4ba8da24c3e385d45a90397e8f11ed26efb9f9",
+      "validation_rows": "eebd3190160dd5e13dc102f58a1946ad0f9e0764098d46f5bcd480ac70b6d81f"
+    }
+  },
+  "fold_results": {
+    "fold_1": {
+      "constrained_rf": {
+        "auprc": 0.19656774972447555,
+        "auroc": 0.5403117474495381,
+        "brier": 0.17644680268831686,
+        "count": 2000,
+        "ece": 0.12180648661748592,
+        "expressiveness": "moderate",
+        "future_end": 4789055.0,
+        "future_start": 3563831.0,
+        "model": "Constrained Random Forest",
+        "raw_auprc": 0.22429255453399155,
+        "raw_auroc": 0.5503673540873069
+      },
+      "gradient_boosting": {
+        "auprc": 0.18351330355023254,
+        "auroc": 0.543360042033364,
+        "brier": 0.15465374487101852,
+        "count": 2000,
+        "ece": 0.06695127951988213,
+        "expressiveness": "high",
+        "future_end": 4789055.0,
+        "future_start": 3563831.0,
+        "model": "Gradient Boosting",
+        "raw_auprc": 0.1946739337913218,
+        "raw_auroc": 0.5507754279959719
+      },
+      "limited_interactions": {
+        "auprc": 0.21914956030042188,
+        "auroc": 0.5665773457682034,
+        "brier": 0.1870903776784435,
+        "count": 2000,
+        "ece": 0.2057613301810892,
+        "expressiveness": "moderate",
+        "future_end": 4789055.0,
+        "future_start": 3563831.0,
+        "model": "Limited Interactions",
+        "raw_auprc": 0.2629216742761674,
+        "raw_auroc": 0.5621191821007925
+      },
+      "linear_c01": {
+        "auprc": 0.22340483764164448,
+        "auroc": 0.5670081877490258,
+        "brier": 0.18939159018069437,
+        "count": 2000,
+        "ece": 0.20744270617789604,
+        "expressiveness": "low",
+        "future_end": 4789055.0,
+        "future_start": 3563831.0,
+        "model": "Linear C=0.1",
+        "raw_auprc": 0.25845492159768507,
+        "raw_auroc": 0.5550663339025351
+      },
+      "v1_logistic": {
+        "auprc": 0.22005123924645106,
+        "auroc": 0.5698112877096194,
+        "brier": 0.19046742954661391,
+        "count": 2000,
+        "ece": 0.2103030334943403,
+        "expressiveness": "low",
+        "future_end": 4789055.0,
+        "future_start": 3563831.0,
+        "model": "V1 Logistic",
+        "raw_auprc": 0.25505519382371533,
+        "raw_auroc": 0.5573834230920793
+      }
+    },
+    "fold_2": {
+      "constrained_rf": {
+        "auprc": 0.312591275606882,
+        "auroc": 0.48143924317152664,
+        "brier": 0.2356688346647142,
+        "count": 2000,
+        "ece": 0.14032302688619633,
+        "expressiveness": "moderate",
+        "future_end": 5667324.0,
+        "future_start": 4789772.0,
+        "model": "Constrained Random Forest",
+        "raw_auprc": 0.3028596223374497,
+        "raw_auroc": 0.4520204205243575
+      },
+      "gradient_boosting": {
+        "auprc": 0.34654493744672316,
+        "auroc": 0.5474932941074673,
+        "brier": 0.22913757872831564,
+        "count": 2000,
+        "ece": 0.13374207643747957,
+        "expressiveness": "high",
+        "future_end": 5667324.0,
+        "future_start": 4789772.0,
+        "model": "Gradient Boosting",
+        "raw_auprc": 0.3358881984503716,
+        "raw_auroc": 0.4899270283522251
+      },
+      "limited_interactions": {
+        "auprc": 0.4258028396168977,
+        "auroc": 0.6551377231692191,
+        "brier": 0.22443886135790297,
+        "count": 2000,
+        "ece": 0.11786678606273206,
+        "expressiveness": "moderate",
+        "future_end": 5667324.0,
+        "future_start": 4789772.0,
+        "model": "Limited Interactions",
+        "raw_auprc": 0.5676474248336976,
+        "raw_auroc": 0.6952565544691529
+      },
+      "linear_c01": {
+        "auprc": 0.5601488012085717,
+        "auroc": 0.7302933287185255,
+        "brier": 0.2043749911694884,
+        "count": 2000,
+        "ece": 0.10519782167871378,
+        "expressiveness": "low",
+        "future_end": 5667324.0,
+        "future_start": 4789772.0,
+        "model": "Linear C=0.1",
+        "raw_auprc": 0.49330298939235406,
+        "raw_auroc": 0.6789374405122437
+      },
+      "v1_logistic": {
+        "auprc": 0.549252294002532,
+        "auroc": 0.7269164431369156,
+        "brier": 0.20772719055463262,
+        "count": 2000,
+        "ece": 0.10940530256896273,
+        "expressiveness": "low",
+        "future_end": 5667324.0,
+        "future_start": 4789772.0,
+        "model": "V1 Logistic",
+        "raw_auprc": 0.49378735320315326,
+        "raw_auroc": 0.6800461480776441
+      }
+    },
+    "fold_3": {
+      "constrained_rf": {
+        "auprc": 0.4063490414487864,
+        "auroc": 0.5550241192155596,
+        "brier": 0.23106161533433225,
+        "count": 2000,
+        "ece": 0.05680657529696773,
+        "expressiveness": "moderate",
+        "future_end": 6449460.0,
+        "future_start": 5668729.0,
+        "model": "Constrained Random Forest",
+        "raw_auprc": 0.3900756820405425,
+        "raw_auroc": 0.48958075393936556
+      },
+      "gradient_boosting": {
+        "auprc": 0.4085609202955632,
+        "auroc": 0.558905299000692,
+        "brier": 0.23094761942466044,
+        "count": 2000,
+        "ece": 0.05741100314986907,
+        "expressiveness": "high",
+        "future_end": 6449460.0,
+        "future_start": 5668729.0,
+        "model": "Gradient Boosting",
+        "raw_auprc": 0.3574517876595821,
+        "raw_auroc": 0.3216442726560681
+      },
+      "limited_interactions": {
+        "auprc": 0.7152830756759764,
+        "auroc": 0.8189193698715449,
+        "brier": 0.1370584181075954,
+        "count": 2000,
+        "ece": 0.025518389441539707,
+        "expressiveness": "moderate",
+        "future_end": 6449460.0,
+        "future_start": 5668729.0,
+        "model": "Limited Interactions",
+        "raw_auprc": 0.627714573817557,
+        "raw_auroc": 0.7882727155824267
+      },
+      "linear_c01": {
+        "auprc": 0.6678078761759778,
+        "auroc": 0.8064399740262778,
+        "brier": 0.14936186219968797,
+        "count": 2000,
+        "ece": 0.01552538884953954,
+        "expressiveness": "low",
+        "future_end": 6449460.0,
+        "future_start": 5668729.0,
+        "model": "Linear C=0.1",
+        "raw_auprc": 0.5599159101676563,
+        "raw_auroc": 0.7539616834457905
+      },
+      "v1_logistic": {
+        "auprc": 0.6684797248192317,
+        "auroc": 0.806627550212498,
+        "brier": 0.14912294155622044,
+        "count": 2000,
+        "ece": 0.013071187402857608,
+        "expressiveness": "low",
+        "future_end": 6449460.0,
+        "future_start": 5668729.0,
+        "model": "V1 Logistic",
+        "raw_auprc": 0.5624708336346997,
+        "raw_auroc": 0.7540924022611166
+      }
+    }
+  },
+  "model_summary": {
+    "conclusion": "The interaction model must be evaluated across all three folds; no future fold is selected or discarded.",
+    "constrained_rf": {
+      "max_auprc": 0.4063490414487864,
+      "max_auroc": 0.5550241192155596,
+      "mean_auprc": 0.3051693555933814,
+      "mean_auroc": 0.5255917032788747,
+      "median_auprc": 0.312591275606882,
+      "median_auroc": 0.5403117474495381,
+      "min_auprc": 0.19656774972447555,
+      "min_auroc": 0.48143924317152664,
+      "range_auroc": 0.07358487604403297,
+      "std_auroc": 0.03179301045716006
+    },
+    "decision": "PARTIAL VALIDATION / REGIME-SENSITIVE",
+    "gradient_boosting": {
+      "max_auprc": 0.4085609202955632,
+      "max_auroc": 0.558905299000692,
+      "mean_auprc": 0.3128730537641729,
+      "mean_auroc": 0.5499195450471744,
+      "median_auprc": 0.34654493744672316,
+      "median_auroc": 0.5474932941074673,
+      "min_auprc": 0.18351330355023254,
+      "min_auroc": 0.543360042033364,
+      "range_auroc": 0.015545256967328003,
+      "std_auroc": 0.006574129790924791
+    },
+    "interaction_vs_v1": {
+      "best_auroc_delta": 0.01229181965904691,
+      "fold_deltas": [
+        {
+          "auprc_delta": -0.0009016789460291885,
+          "auroc_delta": -0.0032339419414160187,
+          "fold": "fold_1"
+        },
+        {
+          "auprc_delta": -0.12344945438563426,
+          "auroc_delta": -0.07177871996769647,
+          "fold": "fold_2"
+        },
+        {
+          "auprc_delta": 0.046803350856744697,
+          "auroc_delta": 0.01229181965904691,
+          "fold": "fold_3"
+        }
+      ],
+      "losses_auroc": 2,
+      "mean_auroc_delta": -0.020906947416688526,
+      "median_auroc_delta": -0.0032339419414160187,
+      "wins_auroc": 1,
+      "worst_auroc_delta": -0.07177871996769647
+    },
+    "limited_interactions": {
+      "max_auprc": 0.7152830756759764,
+      "max_auroc": 0.8189193698715449,
+      "mean_auprc": 0.4534118251977653,
+      "mean_auroc": 0.6802114796029892,
+      "median_auprc": 0.4258028396168977,
+      "median_auroc": 0.6551377231692191,
+      "min_auprc": 0.21914956030042188,
+      "min_auroc": 0.5665773457682034,
+      "range_auroc": 0.2523420241033415,
+      "std_auroc": 0.10453275157709462
+    },
+    "linear_c01": {
+      "max_auprc": 0.6678078761759778,
+      "max_auroc": 0.8064399740262778,
+      "mean_auprc": 0.48378717167539803,
+      "mean_auroc": 0.701247163497943,
+      "median_auprc": 0.5601488012085717,
+      "median_auroc": 0.7302933287185255,
+      "min_auprc": 0.22340483764164448,
+      "min_auroc": 0.5670081877490258,
+      "range_auroc": 0.23943178627725192,
+      "std_auroc": 0.09988211336535667
+    },
+    "v1_logistic": {
+      "max_auprc": 0.6684797248192317,
+      "max_auroc": 0.806627550212498,
+      "mean_auprc": 0.47926108602273826,
+      "mean_auroc": 0.7011184270196776,
+      "median_auprc": 0.549252294002532,
+      "median_auroc": 0.7269164431369156,
+      "min_auprc": 0.22005123924645106,
+      "min_auroc": 0.5698112877096194,
+      "range_auroc": 0.23681626250287857,
+      "std_auroc": 0.09838576717238126
+    }
+  },
+  "prediction_hashes": {
+    "fold_1": {
+      "constrained_rf": "0a2aee50a27be49a11f119847b0d77fdab74a6203c3a899013eeb9fe6a5e2194",
+      "gradient_boosting": "7ca11aec209e35cade5a51683dd4a5e28db5aeb50122aa249554dfd141b972e2",
+      "limited_interactions": "f260468993919cfb130104db39af4c12ed2c91d5ca2bad597501ef6c715837e7",
+      "linear_c01": "abbfd478a5ba237ffe7e2acebaab4f6894054e0b893df318fe401a40059ad8f3",
+      "v1_logistic": "a1076a3c616919971736842fb09c30632ea75f667b8df5e5db14ae56b8aeb267"
+    },
+    "fold_2": {
+      "constrained_rf": "8ae9321f982dab15ff654cd50790e3c7ef4d2fd2cc856c3cf8685b28449d4058",
+      "gradient_boosting": "ca6f2dfe5cddb6da5cc55d6617f62ccb9af490924a568cd46b3bc061fa86b540",
+      "limited_interactions": "02d49ba0ceda6d0d0fc92e9e5e88652fb634765fa0772ba1b436281b6b67f99d",
+      "linear_c01": "6521d7951c70920b6ac940d4917914071e0c3965d7eeca6551524f32347f5ef2",
+      "v1_logistic": "b845624548d89839e7c7b92bd2e8f983cb136e4ccb494a1e2523ee5aabd40855"
+    },
+    "fold_3": {
+      "constrained_rf": "ffc65aaeef0d64d07cdc9c42717927bfcb62b648c9d5b6d02fc417991155027f",
+      "gradient_boosting": "28931bb6f756f0e5ea06cbda098261c53ff911a6ceb5058efdfe2275aba3e692",
+      "limited_interactions": "1b438060e4d2aa36757059296eb4e8a7a9298b5aba1d3f8d4a750abd21fbb6a2",
+      "linear_c01": "04d6f6e5d5ffb0945543d8b30c09810b351181c85d5b7b9363492c3bea13b7e2",
+      "v1_logistic": "3714467afeaa4af30182bb0cd3130545c394c76c9ec6627d17f45b718b1542ef"
+    }
+  }
+}

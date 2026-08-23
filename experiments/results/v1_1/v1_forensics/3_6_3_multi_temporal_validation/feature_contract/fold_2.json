@@ -1,0 +1,21 @@
+{
+  "feature_names": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "future_matrix_hash": "d04c245fcd101af2371d061518ba30c1464d24c142f3155df65cd013cc10bb66",
+  "train_matrix_hash": "3b64fc5bc07a8e703cb8819f7c5e2f281d064949e32fa007ea1ee1acf81655cb",
+  "validation_matrix_hash": "b2584bb5fb4ef307d9731b4914c19270c74ed0ace4bc9ea69272904b5b73ad9f"
+}

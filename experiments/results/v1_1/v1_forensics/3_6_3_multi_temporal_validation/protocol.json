@@ -1,0 +1,153 @@
+{
+  "calibration": "validation-only isotonic calibration per fold/model",
+  "canonical_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "data_identity": "official restored Alibaba GPU2020",
+  "experiment_id": "phase363_multi_temporal_inductive_bias_validation",
+  "feature_contract": [
+    "job_start_time",
+    "n_tasks",
+    "n_distinct_task_names",
+    "sum_inst_num",
+    "mean_plan_cpu",
+    "max_plan_cpu",
+    "mean_plan_mem",
+    "max_plan_mem",
+    "mean_plan_gpu",
+    "max_plan_gpu",
+    "n_distinct_gpu_types",
+    "n_instances",
+    "n_distinct_machines",
+    "mean_instance_start_time"
+  ],
+  "fold_definitions": [
+    {
+      "failure_rate": 0.1725,
+      "fold_id": "fold_1",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 3200,
+      "n_validation": 800,
+      "temporal_end": 4789055.0,
+      "temporal_start": 3563831.0,
+      "test_idx": [
+        4000,
+        6000
+      ],
+      "train_idx": [
+        0,
+        3200
+      ],
+      "training_boundary_end": 3227786.0,
+      "validation_boundary": [
+        3227788.0,
+        3563515.0
+      ],
+      "validation_idx": [
+        3200,
+        4000
+      ]
+    },
+    {
+      "failure_rate": 0.3175,
+      "fold_id": "fold_2",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 4800,
+      "n_validation": 1200,
+      "temporal_end": 5667324.0,
+      "temporal_start": 4789772.0,
+      "test_idx": [
+        6000,
+        8000
+      ],
+      "train_idx": [
+        0,
+        4800
+      ],
+      "training_boundary_end": 4113089.0,
+      "validation_boundary": [
+        4113217.0,
+        4789055.0
+      ],
+      "validation_idx": [
+        4800,
+        6000
+      ]
+    },
+    {
+      "failure_rate": 0.3785,
+      "fold_id": "fold_3",
+      "n_instances": null,
+      "n_test": 2000,
+      "n_train": 6400,
+      "n_validation": 1600,
+      "temporal_end": 6449460.0,
+      "temporal_start": 5668729.0,
+      "test_idx": [
+        8000,
+        10000
+      ],
+      "train_idx": [
+        0,
+        6400
+      ],
+      "training_boundary_end": 4942034.0,
+      "validation_boundary": [
+        4942986.0,
+        5667324.0
+      ],
+      "validation_idx": [
+        6400,
+        8000
+      ]
+    }
+  ],
+  "fold_source": "Phase 3.5 authoritative fold manifest",
+  "hypothesis": "The Phase 3.6.2 limited-interaction result may or may not persist across multiple chronological future regimes.",
+  "interaction_set": [
+    "n_tasks__x__mean_plan_cpu",
+    "n_tasks__x__mean_plan_gpu",
+    "mean_plan_cpu__x__mean_plan_gpu"
+  ],
+  "metrics": "AUROC/AUPRC primary; Brier/ECE secondary",
+  "models": [
+    [
+      "v1_logistic",
+      "V1 Logistic",
+      "low",
+      "v1"
+    ],
+    [
+      "linear_c01",
+      "Linear C=0.1",
+      "low",
+      "c01"
+    ],
+    [
+      "limited_interactions",
+      "Limited Interactions",
+      "moderate",
+      "interactions"
+    ],
+    [
+      "constrained_rf",
+      "Constrained Random Forest",
+      "moderate",
+      "rf"
+    ],
+    [
+      "gradient_boosting",
+      "Gradient Boosting",
+      "high",
+      "gb"
+    ]
+  ],
+  "phase": "3.6.3",
+  "preprocessing": "training-fitted median imputation and standardization per fold",
+  "provenance": "scripts/run_phase363_multi_temporal.py",
+  "random_seed": 42,
+  "software_versions": {
+    "numpy": "2.4.6",
+    "python": "3.12.3"
+  }
+}
