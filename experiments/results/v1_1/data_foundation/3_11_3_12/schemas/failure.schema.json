@@ -1,0 +1,82 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/failurerecord.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "confidence": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "detection_timestamp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "environment_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "object"
+    },
+    "failure_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_timestamp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "job_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "operational_consequence": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "recovery_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "task_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "failure_id",
+    "provenance"
+  ],
+  "title": "FailureRecord",
+  "type": "object"
+}

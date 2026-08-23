@@ -1,0 +1,8 @@
+{
+  "environment_identity_valid": true,
+  "provenance_valid": "PARTIAL",
+  "reason": "Current source lacks synchronized prediction and ingestion timestamps.",
+  "schema_valid": true,
+  "status": "PARTIAL",
+  "timestamp_valid": false
+}

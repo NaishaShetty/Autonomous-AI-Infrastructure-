@@ -1,0 +1,49 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/canonicalresourcestate.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allocated": {
+      "type": "object"
+    },
+    "available": {
+      "type": "object"
+    },
+    "contention": {
+      "type": "object"
+    },
+    "gpu_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "node_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "requested": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "utilization": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "timestamp",
+    "provenance"
+  ],
+  "title": "CanonicalResourceState",
+  "type": "object"
+}

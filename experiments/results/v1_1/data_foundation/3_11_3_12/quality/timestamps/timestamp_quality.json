@@ -1,0 +1,10 @@
+{
+  "prediction_timestamp_present": false,
+  "quality_classes_used": [
+    "UNKNOWN",
+    "APPROXIMATE"
+  ],
+  "source_timestamps_present": true,
+  "status": "PARTIAL",
+  "timezone_normalization": "not applied to relative source units"
+}

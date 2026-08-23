@@ -1,0 +1,47 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/canonicalworkload.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "dataset_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "environment_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "resource_request": {
+      "type": "object"
+    },
+    "time_period": {
+      "type": "object"
+    },
+    "trace_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "workload_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "workload_id",
+    "dataset_id",
+    "provenance"
+  ],
+  "title": "CanonicalWorkload",
+  "type": "object"
+}

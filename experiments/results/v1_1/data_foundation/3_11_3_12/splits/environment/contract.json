@@ -1,0 +1,16 @@
+{
+  "split_id": "environment_holdout",
+  "status": "CONTRACT_ONLY_NOT_EXECUTED",
+  "strategy": "ENVIRONMENT_HOLDOUT",
+  "test_environments_or_periods": [
+    "environment_C"
+  ],
+  "train_environments_or_periods": [
+    "environment_A",
+    "environment_B"
+  ],
+  "validation_environments_or_periods": [
+    "environment_A",
+    "environment_B"
+  ]
+}

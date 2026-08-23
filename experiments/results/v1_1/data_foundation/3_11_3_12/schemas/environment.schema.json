@@ -1,0 +1,60 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/environmentidentity.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "availability_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "collection_period": {
+      "type": "object"
+    },
+    "environment_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hardware_metadata": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scheduler_metadata": {
+      "type": "object"
+    },
+    "schema_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "environment_id",
+    "source",
+    "provenance",
+    "schema_version"
+  ],
+  "title": "EnvironmentIdentity",
+  "type": "object"
+}

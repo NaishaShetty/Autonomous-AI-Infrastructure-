@@ -1,0 +1,14 @@
+{
+  "split_id": "temporal_holdout",
+  "status": "CONTRACT_ONLY_NOT_EXECUTED",
+  "strategy": "TEMPORAL_HOLDOUT",
+  "test_environments_or_periods": [
+    "late_period"
+  ],
+  "train_environments_or_periods": [
+    "early_period"
+  ],
+  "validation_environments_or_periods": [
+    "middle_period"
+  ]
+}

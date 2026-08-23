@@ -1,0 +1,61 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/canonicalprediction.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "decision_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "generated_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "input_snapshot_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "job_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "predicted_label": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "prediction_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "risk_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "prediction_id",
+    "job_id",
+    "input_snapshot_id",
+    "decision_time",
+    "provenance"
+  ],
+  "title": "CanonicalPrediction",
+  "type": "object"
+}

@@ -1,0 +1,76 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/operationalconsequence.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_workloads": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "cascading_impact": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "downtime": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "failure_severity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recovery_cost": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "recovery_failure": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "recovery_success": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "retry_count": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "safety_impact": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "wasted_compute": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "workload_delay": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [],
+  "title": "OperationalConsequence",
+  "type": "object"
+}

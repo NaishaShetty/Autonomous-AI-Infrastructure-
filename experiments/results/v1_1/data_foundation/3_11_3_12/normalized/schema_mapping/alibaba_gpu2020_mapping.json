@@ -1,0 +1,20 @@
+{
+  "adapter_version": "alibaba-gpu2020-metadata-adapter-v1",
+  "mapping_status": "METADATA_ONLY_NO_CANONICAL_EVENT_RECONSTRUCTION",
+  "mappings": {
+    "job_table.end_time": "CanonicalOutcome.end_time",
+    "job_table.start_time": "CanonicalWorkload.time_period.start",
+    "job_table.status": "CanonicalOutcome.status",
+    "task_table.plan_cpu": "CanonicalWorkload.resource_request.cpu",
+    "task_table.plan_gpu": "CanonicalWorkload.resource_request.gpu",
+    "task_table.plan_mem": "CanonicalWorkload.resource_request.memory"
+  },
+  "source": "alibaba_gpu2020",
+  "unavailable": [
+    "prediction_timestamp",
+    "scheduler_state",
+    "queue_depth",
+    "resource_allocated",
+    "environment_id_from_source_record"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "3.11.3.12.v1",
+  "sources": [
+    {
+      "integration_status": "METADATA_ONLY_NORMALIZED",
+      "license": "Creative Commons Attribution 4.0 International; see data/audit/alibaba_gpu2020_official_LICENSE",
+      "raw_files_committed": false,
+      "source_id": "alibaba_gpu2020",
+      "source_url": "https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2020",
+      "status": "CANONICAL_CONTROL_SOURCE"
+    },
+    {
+      "reason": "No source was silently acquired or merged in this phase",
+      "source_id": "additional_public_traces",
+      "status": "DEFERRED_NOT_INTEGRATED"
+    }
+  ]
+}

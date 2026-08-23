@@ -1,0 +1,86 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/canonicalprovenance.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extraction_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ingestion_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "processing_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schema_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp_quality": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transformation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transformation_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "source",
+    "schema_version",
+    "timestamp_quality"
+  ],
+  "title": "CanonicalProvenance",
+  "type": "object"
+}

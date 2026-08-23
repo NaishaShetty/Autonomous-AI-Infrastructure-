@@ -1,0 +1,30 @@
+{
+  "environments": [
+    {
+      "availability_status": "CANONICAL_CONTROL_ONLY",
+      "checksum": "5aad7f7caac501136d14ed6a48e40546f825d7b0617a3a4f337e2348fe0a6cb0",
+      "collection_period": {
+        "end_relative_time": 6449460,
+        "start_relative_time": 960837
+      },
+      "environment_id": "alibaba_gpu2020_main_trace",
+      "hardware_metadata": {
+        "gpu_types": [
+          "T4",
+          "P100",
+          "V100",
+          "V100M32",
+          "MISC"
+        ]
+      },
+      "provenance": "data/audit/alibaba_gpu2020/dataset_manifest.json",
+      "scheduler_metadata": {
+        "scheduler_id": null,
+        "status": "UNKNOWN"
+      },
+      "schema_version": "3.11.3.12.v1",
+      "source": "official Alibaba GPU2020"
+    }
+  ],
+  "schema_version": "3.11.3.12.v1"
+}

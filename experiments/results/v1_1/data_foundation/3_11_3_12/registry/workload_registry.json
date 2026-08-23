@@ -1,0 +1,20 @@
+{
+  "schema_version": "3.11.3.12.v1",
+  "workloads": [
+    {
+      "checksum": "250a681e3f5520f96dbebe198827f56ffa539655e8bb7725080c54e1d6073b08",
+      "dataset_id": "alibaba_gpu2020_processed",
+      "environment_id": "alibaba_gpu2020_main_trace",
+      "processing_version": "canonical-seed-42-main-tier",
+      "provenance": "data/audit/alibaba_gpu2020/sampling_frame.json",
+      "schema_version": "3.11.3.12.v1",
+      "source": "official Alibaba GPU2020",
+      "time_period": {
+        "end": 6449460,
+        "start": 960837
+      },
+      "trace_id": "alibaba_gpu2020",
+      "workload_registry_id": "alibaba_gpu2020_main_sample"
+    }
+  ]
+}

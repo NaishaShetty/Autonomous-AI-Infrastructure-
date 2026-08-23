@@ -1,0 +1,35 @@
+{
+  "benchmark_status": "FOUNDATION_NOT_FINAL_BENCHMARK",
+  "canonical_event_schema": "schemas/canonical_event.schema.json",
+  "data_quality_gates": [
+    "schema",
+    "provenance",
+    "timestamps",
+    "identifiers",
+    "ordering",
+    "duplicates",
+    "leakage",
+    "completeness",
+    "environment_identity",
+    "source_integrity"
+  ],
+  "decision_time_rule": "only timestamp-proven information at or before prediction_decision_time; otherwise TIMESTAMP_UNKNOWN",
+  "experiment_id": "phase311_312_decision_time_observability_multi_environment_data_foundation",
+  "frozen_v1_commit": "d977a32c2f20efa5f8e0d0349d40b270ecabeca2",
+  "no_external_silent_merge": true,
+  "no_model_training": true,
+  "no_v1_1_creation": true,
+  "phase": "3.11+3.12",
+  "provenance": "scripts/build_phase311_312_foundation.py",
+  "timestamp_quality": [
+    "EXACT",
+    "SYNCHRONIZED",
+    "APPROXIMATE",
+    "INFERRED",
+    "UNKNOWN"
+  ],
+  "workstreams": [
+    "decision_time_observability",
+    "multi_environment_data_expansion"
+  ]
+}

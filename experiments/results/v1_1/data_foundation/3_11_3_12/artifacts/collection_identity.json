@@ -1,0 +1,14 @@
+{
+  "collection_id": "phase311_312_foundation_collection_v1",
+  "constituent_datasets": [
+    "alibaba_gpu2020_processed"
+  ],
+  "excluded_sources": [
+    "additional_public_traces"
+  ],
+  "included_sources": [
+    "alibaba_gpu2020"
+  ],
+  "schema_version": "3.11.3.12.v1",
+  "status": "FOUNDATION_ONLY_NOT_FINAL_BENCHMARK"
+}

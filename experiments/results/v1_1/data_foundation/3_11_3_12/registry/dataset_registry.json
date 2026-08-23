@@ -1,0 +1,54 @@
+{
+  "datasets": [
+    {
+      "adapter_version": "alibaba-gpu2020-metadata-adapter-v1",
+      "checksum": "fc23fcaa95009c560234ceb87478f73a4e87a20956f70e2da1db84b62f769782",
+      "dataset_id": "alibaba_gpu2020_processed",
+      "dataset_version": "canonical-processed-v1",
+      "environment_count": 1,
+      "failure_count": 2594,
+      "files": [
+        {
+          "file": "instance_table.main_sample.csv",
+          "rows": 60005,
+          "sha256": "92508988bf370cd6fb4fa731693f48043b20a8b6a4297d113002b06407226892"
+        },
+        {
+          "file": "job_table.clean.csv",
+          "rows": 1055501,
+          "sha256": "745594d87b5f36199ce912102dd4fc3e086583db9d962bfa417a74f90c2c591e"
+        },
+        {
+          "file": "machine_metric.main_sample.csv",
+          "rows": 19841,
+          "sha256": "6b486b6c87fa3acc9b95db9927d3717e6520539f6ea9ca49b66ac823ff15d5ea"
+        },
+        {
+          "file": "sensor_table.main_sample.csv",
+          "rows": 26350,
+          "sha256": "bfa695904a17c1e873da5b46bc76e7deedd59415c46b283c05559621f91806b2"
+        },
+        {
+          "file": "task_table.clean.csv",
+          "rows": 1261050,
+          "sha256": "61fb3b40a1eff60296651dbc4020523efeb614918bd81bd027d032df0072984e"
+        },
+        {
+          "file": "task_table.main_sample.csv",
+          "rows": 11750,
+          "sha256": "ba8370c0f966255714c191c420eb51ad064994b43ac7bdd38b6c286565a370cb"
+        }
+      ],
+      "processing_version": "repository-processed-boundary",
+      "row_count": 10000,
+      "source": "alibaba_gpu2020",
+      "source_version": "official-cluster-trace-gpu-v2020",
+      "temporal_range": {
+        "end": 6449460,
+        "start": 960837
+      },
+      "workload_count": 10000
+    }
+  ],
+  "schema_version": "3.11.3.12.v1"
+}

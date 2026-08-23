@@ -1,0 +1,63 @@
+{
+  "$id": "https://autonomous-ai-infrastructure.local/schema/decisiontimesnapshot.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "availability": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "environment_context": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "array"
+    },
+    "queue_context": {
+      "type": "object"
+    },
+    "recent_historical_context": {
+      "type": "object"
+    },
+    "resource_context": {
+      "type": "object"
+    },
+    "scheduler_context": {
+      "type": "object"
+    },
+    "snapshot_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "task_context": {
+      "type": "object"
+    },
+    "timestamp_quality": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "workload_context": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "snapshot_id",
+    "decision_time",
+    "availability",
+    "provenance"
+  ],
+  "title": "DecisionTimeSnapshot",
+  "type": "object"
+}
