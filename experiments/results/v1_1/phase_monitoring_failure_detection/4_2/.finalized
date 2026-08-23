@@ -1,0 +1,15 @@
+{
+  "artifacts/detection_manifest.json": "8367c911516feec9b85d85b8416ad7d525b2237c9569950cf0a10b8f041c641c",
+  "artifacts/failure_events.json": "551595847c15c278002e32ec4d985378f0c4bc09f5b1b634a773829a377d9329",
+  "coverage/monitoring_coverage.json": "c884f70103284b63fc2053db2b7e76bb29189b9f2e974ff05235f03d2d7f8094",
+  "evaluation/baseline_comparison.json": "d23037d5108a15ff1dee1e19e608a78921665a0a6bd7a4d2ed21535fe9da8042",
+  "evaluation/detection_metrics.json": "5779c70001d764be6aae5c3a975bc0f1d7cc23d78be80e330ed2be3722ba149e",
+  "hashes/manifest.json": "55074ebbba8e461e04824a8f7369d63a0c877486b231b2a1b21ba6e763a9c27a",
+  "monitoring_results.json": "875d2286d131f0b865367b1a2ca446c4db17c569ee405cfef1c1ad1759aa3ca0",
+  "protocol/phase42_protocol.json": "19b40ba38ed22c77b548d709b41144b391871893c63726363e66f89228b2a54a",
+  "quality/detection_quality.json": "f5bdb4649966804cad3853727340f21b2e0afe342dea93b5dadc44c231f28b79",
+  "replay/monitoring_replay_validation.json": "774e9568eb7d1dd25907eefdef2def352bebf7f83c1fe58c0f5d168c069bb829",
+  "reports/PHASE4_2_FAILURE_DETECTION_REPORT.md": "21d69d62958b24cff0f831b0004ef184234730b340fc47bb564c073a8baf2697",
+  "reports/PHASE4_2_MONITORING_REPORT.md": "21d69d62958b24cff0f831b0004ef184234730b340fc47bb564c073a8baf2697",
+  "reports/PHASE4_2_SYNTHESIS.md": "b7c3bb0db6d547a479bbaaa68fbdf563dbaa16bc91b7d4fc3125c69c075a1fe2"
+}

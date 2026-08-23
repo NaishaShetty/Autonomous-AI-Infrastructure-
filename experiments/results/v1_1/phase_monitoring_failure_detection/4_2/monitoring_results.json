@@ -1,0 +1,203 @@
+{
+  "anomalies": [],
+  "baseline": {
+    "learned": false,
+    "max_process_rss_bytes": 536870912,
+    "max_runtime_seconds": 1.0,
+    "rationale": "Conservative local-process safety envelope; not tuned on evaluation outcomes.",
+    "source": "fixed engineering envelope established before evaluation",
+    "version": "phase4.2-baseline-v1"
+  },
+  "controlled_runtime": true,
+  "event_count": 26,
+  "failures": [
+    {
+      "availability": "AVAILABLE_AT_DECISION",
+      "certainty": "CONFIRMED",
+      "detection_latency_seconds": 0.0,
+      "detection_timestamp": "2026-08-23T10:27:32.860313Z",
+      "detector_version": "phase4.2-detector-v1",
+      "environment_id": "controlled-runtime-local-environment",
+      "evidence_references": [
+        "run-a645819d404146d19ae6babe0a16372e:failure_detected:ad75c8e960ed"
+      ],
+      "failure_class": "PROCESS_NONZERO_EXIT",
+      "failure_id": "failure:run-a645819d404146d19ae6babe0a16372e:failure_detected:ad75c8e960ed",
+      "failure_timestamp": "2026-08-23T10:27:32.860313Z",
+      "provenance": {
+        "checksum": null,
+        "extraction_method": "controlled_runtime_boundary",
+        "ingestion_time": null,
+        "processing_time": null,
+        "schema_version": "3.11.3.12.v1",
+        "source": "project-owned-controlled-runtime",
+        "source_record_id": "run-a645819d404146d19ae6babe0a16372e:failure_detected",
+        "source_version": "phase4.1.2-controlled-runtime-v1",
+        "timestamp_quality": "EXACT",
+        "timestamp_source": "Python wall-clock at actual runtime boundary",
+        "transformation": "runtime_event_to_canonical_event",
+        "transformation_version": "phase4.1.2-controlled-runtime-v1"
+      },
+      "run_id": "run-a645819d404146d19ae6babe0a16372e",
+      "triggering_observation": {
+        "cluster_id": null,
+        "correlation_id": null,
+        "entity_id": null,
+        "environment_id": "controlled-runtime-local-environment",
+        "event_id": "run-a645819d404146d19ae6babe0a16372e:failure_detected:ad75c8e960ed",
+        "event_type": "failure_detected",
+        "event_version": "1",
+        "ingestion_timestamp": null,
+        "job_id": "run-a645819d404146d19ae6babe0a16372e",
+        "node_id": null,
+        "parent_event_id": null,
+        "payload": {
+          "exit_code": 7,
+          "failure_kind": "NONZERO_EXIT",
+          "stderr": "controlled failure\n"
+        },
+        "producer": "phase4.1.2-controlled-runtime-v1",
+        "provenance": {
+          "checksum": null,
+          "extraction_method": "controlled_runtime_boundary",
+          "ingestion_time": null,
+          "processing_time": null,
+          "schema_version": "3.11.3.12.v1",
+          "source": "project-owned-controlled-runtime",
+          "source_record_id": "run-a645819d404146d19ae6babe0a16372e:failure_detected",
+          "source_version": "phase4.1.2-controlled-runtime-v1",
+          "timestamp_quality": "EXACT",
+          "timestamp_source": "Python wall-clock at actual runtime boundary",
+          "transformation": "runtime_event_to_canonical_event",
+          "transformation_version": "phase4.1.2-controlled-runtime-v1"
+        },
+        "resource_id": null,
+        "schema_version": "3.11.3.12.v1",
+        "source_dataset": "project-owned-controlled-runtime",
+        "source_record_id": "run-a645819d404146d19ae6babe0a16372e:failure_detected",
+        "task_id": null,
+        "timestamp": "2026-08-23T10:27:32.860313Z",
+        "timestamp_precision": "microsecond",
+        "timestamp_source": "Python wall-clock at actual runtime boundary",
+        "timestamp_timezone": "UTC",
+        "workload_id": "workload-56109838c3df4e13b572320ea5741b3e"
+      },
+      "workload_id": "workload-56109838c3df4e13b572320ea5741b3e"
+    },
+    {
+      "availability": "AVAILABLE_AT_DECISION",
+      "certainty": "CONFIRMED",
+      "detection_latency_seconds": 0.0,
+      "detection_timestamp": "2026-08-23T10:27:33.114922Z",
+      "detector_version": "phase4.2-detector-v1",
+      "environment_id": "controlled-runtime-local-environment",
+      "evidence_references": [
+        "run-29a58ca40a4047beac70c5903fb70676:failure_detected:f6cc249ed831"
+      ],
+      "failure_class": "PROCESS_TIMEOUT",
+      "failure_id": "failure:run-29a58ca40a4047beac70c5903fb70676:failure_detected:f6cc249ed831",
+      "failure_timestamp": "2026-08-23T10:27:33.114922Z",
+      "provenance": {
+        "checksum": null,
+        "extraction_method": "controlled_runtime_boundary",
+        "ingestion_time": null,
+        "processing_time": null,
+        "schema_version": "3.11.3.12.v1",
+        "source": "project-owned-controlled-runtime",
+        "source_record_id": "run-29a58ca40a4047beac70c5903fb70676:failure_detected",
+        "source_version": "phase4.1.2-controlled-runtime-v1",
+        "timestamp_quality": "EXACT",
+        "timestamp_source": "Python wall-clock at actual runtime boundary",
+        "transformation": "runtime_event_to_canonical_event",
+        "transformation_version": "phase4.1.2-controlled-runtime-v1"
+      },
+      "run_id": "run-29a58ca40a4047beac70c5903fb70676",
+      "triggering_observation": {
+        "cluster_id": null,
+        "correlation_id": null,
+        "entity_id": null,
+        "environment_id": "controlled-runtime-local-environment",
+        "event_id": "run-29a58ca40a4047beac70c5903fb70676:failure_detected:f6cc249ed831",
+        "event_type": "failure_detected",
+        "event_version": "1",
+        "ingestion_timestamp": null,
+        "job_id": "run-29a58ca40a4047beac70c5903fb70676",
+        "node_id": null,
+        "parent_event_id": null,
+        "payload": {
+          "configured_timeout_seconds": 0.25,
+          "failure_kind": "TIMEOUT",
+          "pid": 40068,
+          "termination": "actual subprocess kill"
+        },
+        "producer": "phase4.1.2-controlled-runtime-v1",
+        "provenance": {
+          "checksum": null,
+          "extraction_method": "controlled_runtime_boundary",
+          "ingestion_time": null,
+          "processing_time": null,
+          "schema_version": "3.11.3.12.v1",
+          "source": "project-owned-controlled-runtime",
+          "source_record_id": "run-29a58ca40a4047beac70c5903fb70676:failure_detected",
+          "source_version": "phase4.1.2-controlled-runtime-v1",
+          "timestamp_quality": "EXACT",
+          "timestamp_source": "Python wall-clock at actual runtime boundary",
+          "transformation": "runtime_event_to_canonical_event",
+          "transformation_version": "phase4.1.2-controlled-runtime-v1"
+        },
+        "resource_id": null,
+        "schema_version": "3.11.3.12.v1",
+        "source_dataset": "project-owned-controlled-runtime",
+        "source_record_id": "run-29a58ca40a4047beac70c5903fb70676:failure_detected",
+        "task_id": null,
+        "timestamp": "2026-08-23T10:27:33.114922Z",
+        "timestamp_precision": "microsecond",
+        "timestamp_source": "Python wall-clock at actual runtime boundary",
+        "timestamp_timezone": "UTC",
+        "workload_id": "workload-1cf13887be324c64adbeaffed5663d46"
+      },
+      "workload_id": "workload-1cf13887be324c64adbeaffed5663d46"
+    }
+  ],
+  "metrics": {
+    "anomaly_count": 0,
+    "f1": 1.0,
+    "false_negatives": 0,
+    "false_positives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "run_count": 3,
+    "true_negatives": 1,
+    "true_positives": 2,
+    "unsupported_classes": [
+      "GPU_FAILURE",
+      "SCHEDULER_FAILURE",
+      "NETWORK_FAILURE"
+    ]
+  },
+  "states": {
+    "run-29a58ca40a4047beac70c5903fb70676": {
+      "current_state": "FAILED",
+      "history": [
+        "UNKNOWN",
+        "HEALTHY",
+        "FAILED"
+      ]
+    },
+    "run-a24d1db653584286ad818f90acd630be": {
+      "current_state": "HEALTHY",
+      "history": [
+        "UNKNOWN",
+        "HEALTHY"
+      ]
+    },
+    "run-a645819d404146d19ae6babe0a16372e": {
+      "current_state": "FAILED",
+      "history": [
+        "UNKNOWN",
+        "HEALTHY",
+        "FAILED"
+      ]
+    }
+  }
+}

@@ -305,3 +305,15 @@ The source is registered explicitly as **CONTROLLED_RUNTIME**, project-owned, lo
 The controlled-runtime gate passed for actual workload execution, event emission, timestamps, provenance, workload identity, persistence, restart, replay, decision-time boundary, API safety, source registration, and V1/historical protection. Coverage and resource telemetry remain partial because this is not a cluster. Final decision: **A — CONTROLLED RUNTIME OPERATIONALLY READY**. **PHASE 4.2 AUTHORIZATION: AUTHORIZED FOR CONTROLLED-RUNTIME ENGINEERING**, with no authorization for external, independent-environment, production, benchmark, or generalization claims.
 
 New artifacts are isolated under `experiments/results/v1_1/phase4_controlled_runtime/4_1_2/`. Frozen V1 and all prior evidence remain unchanged.
+
+## 32. Phase 4.2 monitoring and failure detection
+
+Phase 4.2 now consumes the persisted controlled-runtime observation layer and establishes the chain `ACTUAL RUNTIME OBSERVATION → MONITORING STATE → ANOMALY → CONFIRMED FAILURE → STRUCTURED FAILURE EVENT`. Diagnosis, root-cause analysis, recovery planning, recovery execution, V1.1 modeling, benchmark finalization, and production deployment were not implemented.
+
+The monitoring state machine explicitly separates `HEALTHY`, `DEGRADED`, `ANOMALOUS`, `FAILED`, and `UNKNOWN`. A fixed versioned baseline and transparent rules were used. High RSS can produce an anomaly without producing a failure. Only actual nonzero process exit and actual runtime-enforced timeout produce confirmed failure events, classified respectively as `PROCESS_NONZERO_EXIT` and `PROCESS_TIMEOUT`. Unsupported GPU, scheduler, queue, allocation, and network failure classes are not emitted.
+
+The controlled-runtime persisted campaign contained 26 events across one controlled environment: one normal completion, one actual nonzero exit, and one actual timeout. Monitoring produced two confirmed failures and no false positives: TP=2, FP=0, FN=0, precision=1.0, recall=1.0, F1=1.0. These are controlled-runtime engineering metrics, not claims of external generalization. Detection latency is measured at the controlled event boundary and is 0.0 seconds for the recorded failure events.
+
+Temporal leakage protection passed: evaluating at an explicit `at_or_before` boundary was unchanged after later events were inserted. Monitoring replay is deterministic and does not rewrite observation timestamps or generate new events. Provenance, evidence references, detector/rule versions, workload identity, environment identity, timestamp quality, and temporal availability are preserved in detection records.
+
+Final decision: **B — PHASE 4.2 ENGINEERING-COMPLETE / EVALUATION-LIMITED**. **PHASE 4.3 AUTHORIZATION: AUTHORIZED** to consume structured failure events for diagnosis/causal-understanding engineering, subject to the controlled-runtime boundary. New artifacts are isolated under `experiments/results/v1_1/phase_monitoring_failure_detection/4_2/`; V1 and all historical evidence remain unchanged.

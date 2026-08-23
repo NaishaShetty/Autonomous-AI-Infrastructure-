@@ -1,0 +1,31 @@
+{
+  "baseline": "lifecycle-only fixed exit-status/timeout rules",
+  "controlled_runtime_results": {
+    "baseline": {
+      "f1": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positives": 2
+    },
+    "detector": {
+      "anomaly_count": 0,
+      "f1": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "run_count": 3,
+      "true_negatives": 1,
+      "true_positives": 2,
+      "unsupported_classes": [
+        "GPU_FAILURE",
+        "SCHEDULER_FAILURE",
+        "NETWORK_FAILURE"
+      ]
+    }
+  },
+  "detector": "phase4.2 transparent failure confirmation rules",
+  "interpretation": "The proposed detector is itself transparent lifecycle evidence logic; comparison confirms no unsupported complexity was needed. No generalization claim."
+}

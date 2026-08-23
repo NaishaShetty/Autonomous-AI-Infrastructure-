@@ -1,0 +1,10 @@
+{
+  "anomaly_version": "phase4.2-anomaly-rules-v1",
+  "baseline_version": "phase4.2-baseline-v1",
+  "controlled_runtime_only": true,
+  "detector_version": "phase4.2-detector-v1",
+  "environment_count": 1,
+  "no_recovery": true,
+  "no_v1_1": true,
+  "source": "project-owned-controlled-runtime"
+}

@@ -1,0 +1,13 @@
+{
+  "anomaly_failure_separation": "PASS",
+  "decision_time_integrity": "PASS",
+  "historical_protection": "PASS",
+  "monitoring_contract": "PASS",
+  "provenance": "PASS_FOR_DETECTED_EVENTS",
+  "safety_boundary": "PASS_NO_EXECUTOR_OR_RECOVERY_CALLS",
+  "state_machine": "PASS",
+  "timestamp_integrity": "PASS_INHERITED_CANONICAL_CONTRACT",
+  "unknown_handling": "PASS",
+  "unsupported_signal_handling": "PASS_EXPLICIT_UNAVAILABLE",
+  "v1_integrity": "PASS"
+}

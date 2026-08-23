@@ -1,0 +1,26 @@
+{
+  "allocation": "UNAVAILABLE",
+  "consequence": "UNAVAILABLE",
+  "cpu_process_ticks": "OBSERVABLE",
+  "gpu": "UNAVAILABLE",
+  "network": "UNAVAILABLE",
+  "node": "PARTIALLY_OBSERVABLE_LOCAL_HOST_ONLY",
+  "process_exit": "OBSERVABLE",
+  "process_lifecycle": "OBSERVABLE",
+  "queue": "UNAVAILABLE",
+  "recovery": "UNAVAILABLE_NOT_IMPLEMENTED",
+  "rss": "OBSERVABLE",
+  "runtime_duration": "PARTIALLY_OBSERVABLE",
+  "scheduler": "UNAVAILABLE",
+  "supported_failures": [
+    "PROCESS_NONZERO_EXIT",
+    "PROCESS_TIMEOUT"
+  ],
+  "timeout": "OBSERVABLE",
+  "unsupported_failures": [
+    "GPU_FAILURE",
+    "SCHEDULER_FAILURE",
+    "NETWORK_FAILURE"
+  ],
+  "validation": "UNAVAILABLE_NOT_IMPLEMENTED"
+}

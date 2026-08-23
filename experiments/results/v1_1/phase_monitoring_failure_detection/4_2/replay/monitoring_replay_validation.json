@@ -1,0 +1,10 @@
+{
+  "anomaly_replay_deterministic": true,
+  "event_count": 26,
+  "failure_replay_deterministic": true,
+  "future_events_included": false,
+  "future_leakage_test": "PASS \u2014 at_or_before boundary unchanged after later event insertion",
+  "observation_timestamps_rewritten": false,
+  "persisted_stream_replayed": true,
+  "state_replay_deterministic": true
+}

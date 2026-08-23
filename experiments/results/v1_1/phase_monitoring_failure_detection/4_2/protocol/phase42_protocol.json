@@ -1,0 +1,31 @@
+{
+  "anomaly_rule_version": "phase4.2-anomaly-rules-v1",
+  "baseline": {
+    "learned": false,
+    "max_process_rss_bytes": 536870912,
+    "max_runtime_seconds": 1.0,
+    "rationale": "Conservative local-process safety envelope; not tuned on evaluation outcomes.",
+    "source": "fixed engineering envelope established before evaluation",
+    "version": "phase4.2-baseline-v1"
+  },
+  "baseline_version": "phase4.2-baseline-v1",
+  "classification": "CONTROLLED_RUNTIME",
+  "decision_time_rule": "events at or before evaluation timestamp only; future events excluded",
+  "failure_rule_version": "phase4.2-failure-rules-v1",
+  "monitoring_states": [
+    "HEALTHY",
+    "DEGRADED",
+    "ANOMALOUS",
+    "FAILED",
+    "UNKNOWN"
+  ],
+  "no_benchmark_finalization": true,
+  "no_diagnosis": true,
+  "no_recovery": true,
+  "no_v1_1": true,
+  "phase": "4.2",
+  "supported_failure_classes": [
+    "PROCESS_NONZERO_EXIT",
+    "PROCESS_TIMEOUT"
+  ]
+}
