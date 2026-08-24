@@ -93,6 +93,57 @@ class DiagnosisEngine:
         elif cls=='NETWORK_FAILURE':
             primary_name='NETWORK_CONNECTIVITY_FAILURE'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
             h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('DEPENDENCY_UNAVAILABLE',0.3,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('DNS_RESOLUTION_FAILURE',0.15,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='PROCESS_OOM':
+            # Phase 4.5 taxonomy widening (gap 3). See
+            # src/phase4/controlled_runtime.py's 'oom' mode docstring for
+            # exactly what evidence backs this: either a real OS-level
+            # RLIMIT_AS refusal or a real, measured self-enforced budget
+            # violation -- either way a real allocation attempt happened.
+            primary_name='OUT_OF_MEMORY'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('MEMORY_LEAK',0.3,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('RESOURCE_PRESSURE',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='GPU_DEVICE_FAILURE':
+            primary_name='GPU_DEVICE_UNAVAILABLE'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('DRIVER_MISCONFIGURATION',0.25,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('DEVICE_ALLOCATION_CONTENTION',0.15,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='DATA_CORRUPTION':
+            primary_name='DATA_INTEGRITY_FAILURE'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('STORAGE_MEDIUM_FAULT',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('TRANSFER_CORRUPTION',0.15,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='RESOURCE_UNAVAILABLE':
+            # Deliberately distinct from a true distributed SCHEDULER_FAILURE
+            # (which remains unsupported -- this single-process sandbox has
+            # no real distributed scheduler to observe). This class is a
+            # real, local, OS-level resource-contention failure (verified
+            # port-bind contention in controlled_runtime.py).
+            primary_name='RESOURCE_UNAVAILABLE'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('QUOTA_EXCEEDED',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('CONCURRENT_RESOURCE_CONTENTION',0.25,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='INTERMITTENT_FAILURE':
+            # Lower initial confidence and a CORRELATED (not OBSERVED) causal
+            # status is deliberate: a single intermittent-failure observation
+            # cannot yet distinguish "flaky, will self-resolve" from "a real
+            # persistent regression that merely hasn't been retried enough
+            # times to look persistent" -- this hypothesis is honest about
+            # that uncertainty rather than asserting a class it can't back.
+            primary_name='INTERMITTENT_TRANSIENT_FAILURE'; root='UNKNOWN'; status=CausalStatus.CORRELATED.value; confidence=Confidence.MEDIUM.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('PERSISTENT_REGRESSION',0.3,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('EXTERNAL_TRANSIENT_DEPENDENCY',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='AGENT_INCORRECT_ANSWER':
+            # Phase 4.5b -- the second gap named in the project's own
+            # strategic review: this is the first failure class in the
+            # whole pipeline diagnosing an actual AI/ML agent OUTPUT
+            # correctness failure rather than an OS/process failure. The
+            # `failure_detected` event's own payload IS the direct evidence
+            # (a real ground-truth oracle comparison, computed in
+            # agent_task.py -- see that module for what "real" means here):
+            # the agent's self-consistency majority vote disagreed with the
+            # actual correct answer. OBSERVED/HIGH is warranted for the
+            # same reason PROCESS_NONZERO_EXIT gets it: the disagreement is
+            # directly, exactly observed, not inferred.
+            primary_name='AGENT_INCORRECT_OUTPUT'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('INSUFFICIENT_SELF_CONSISTENCY_SAMPLES',0.35,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),Hypothesis('AGENT_CAPABILITY_LIMIT',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()))
+        elif cls=='AGENT_TASK_TIMEOUT':
+            primary_name='AGENT_RUNTIME_TIMEOUT'; root='UNKNOWN'; status=CausalStatus.SUPPORTED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('EXCESSIVE_SAMPLE_COUNT',0.3,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),)
+        elif cls=='AGENT_WORKER_ERROR':
+            primary_name='AGENT_WORKER_CRASH'; root='UNKNOWN'; status=CausalStatus.OBSERVED.value; confidence=Confidence.HIGH.value
+            h_ev=tuple(e.evidence_id for e in evidence if e.signal=='failure_class'); alts=(Hypothesis('AGENT_TASK_CONFIGURATION_ERROR',0.2,0,0,Confidence.LOW.value,CausalStatus.UNKNOWN.value,()),)
         else: return self._unknown(failure,boundary,f'Unsupported failure class: {cls}')
         memory_used=False; memory_version=None
         if memory is not None:

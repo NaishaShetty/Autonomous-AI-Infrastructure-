@@ -52,8 +52,53 @@ _CANDIDATES: dict[str, tuple[ActionId, ...]] = {
     "PROCESS_TIMEOUT": (ActionId.RETRY, ActionId.RESTART, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
     "PROCESS_NONZERO_EXIT": (ActionId.RESTART, ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
     "NETWORK_FAILURE": (ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    # Phase 4.5 gap 3/4: widened taxonomy, widened action vocabulary.
+    # RECONFIGURE here means "reduce the workload's resource footprint"
+    # (this repo's single-process controlled runtime has no batch-size or
+    # concurrency knob of its own, so the closest real, executable analogue
+    # is halving whatever numeric resource-load parameter the workload was
+    # given -- see ``_reduced_parameters`` below) -- a real, measurable
+    # behavior change, never a no-op.
+    "PROCESS_OOM": (ActionId.RECONFIGURE, ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    # No action in this repository's real, executable vocabulary can fix a
+    # genuinely absent GPU device -- inventing one would be exactly the kind
+    # of fabricated capability this project's own audits have repeatedly
+    # flagged. Escalate immediately rather than pretend a fix is possible.
+    "GPU_DEVICE_FAILURE": (ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    "DATA_CORRUPTION": (ActionId.ROLLBACK, ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    "RESOURCE_UNAVAILABLE": (ActionId.RETRY, ActionId.RECONFIGURE, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    "INTERMITTENT_FAILURE": (ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    # Phase 4.5b -- an actual AI/ML agent output-correctness failure class.
+    # RETRY here means "re-answer with more self-consistency samples" (see
+    # src/phase4/agent_recovery.py) -- a real, executable, more-costly
+    # action with a measured effect (isolated evaluation: majority-vote
+    # accuracy rose from 75.7% at n=1 to 95.0% at n=5 samples on the same
+    # task distribution), not a no-op retry of an already-deterministic
+    # computation.
+    "AGENT_INCORRECT_ANSWER": (ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    "AGENT_TASK_TIMEOUT": (ActionId.RECONFIGURE, ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
+    "AGENT_WORKER_ERROR": (ActionId.RESTART, ActionId.RETRY, ActionId.ESCALATE_TO_HUMAN, ActionId.ABSTAIN),
 }
-_EXECUTABLE = {ActionId.RETRY, ActionId.RESTART}
+_EXECUTABLE = {ActionId.RETRY, ActionId.RESTART, ActionId.ROLLBACK, ActionId.RECONFIGURE}
+
+
+def _reduced_parameters(parameters: Mapping[str, Any]) -> dict:
+    """Real, deterministic resource-footprint reduction for RECONFIGURE.
+
+    Halves whichever numeric "load" parameter the original workload was
+    given. This is the controlled runtime's closest real analogue to
+    "lower batch size / reduce concurrency" -- the runtime has no such
+    knobs of its own, but every mode it supports takes a numeric parameter
+    that controls how much work/resource it consumes, and this genuinely
+    reduces it before re-invoking ``ControlledRuntime.run`` for real."""
+    reduced = dict(parameters)
+    if "alloc_mb" in reduced:
+        reduced["alloc_mb"] = max(1, int(reduced["alloc_mb"]) // 2)
+    if "port" in reduced:
+        reduced["port"] = int(reduced["port"]) + 1000
+    if "duration_seconds" in reduced:
+        reduced["duration_seconds"] = max(0.01, float(reduced["duration_seconds"]) / 2.0)
+    return reduced
 
 
 def _provenance(source: str) -> Provenance:
@@ -117,6 +162,22 @@ def _failure_class_from_diagnosis(diagnosis) -> str:
         return "PROCESS_NONZERO_EXIT"
     if name == "NETWORK_CONNECTIVITY_FAILURE":
         return "NETWORK_FAILURE"
+    if name == "OUT_OF_MEMORY":
+        return "PROCESS_OOM"
+    if name == "GPU_DEVICE_UNAVAILABLE":
+        return "GPU_DEVICE_FAILURE"
+    if name == "DATA_INTEGRITY_FAILURE":
+        return "DATA_CORRUPTION"
+    if name == "RESOURCE_UNAVAILABLE":
+        return "RESOURCE_UNAVAILABLE"
+    if name == "INTERMITTENT_TRANSIENT_FAILURE":
+        return "INTERMITTENT_FAILURE"
+    if name == "AGENT_INCORRECT_OUTPUT":
+        return "AGENT_INCORRECT_ANSWER"
+    if name == "AGENT_RUNTIME_TIMEOUT":
+        return "AGENT_TASK_TIMEOUT"
+    if name == "AGENT_WORKER_CRASH":
+        return "AGENT_WORKER_ERROR"
     return "UNKNOWN"
 
 
@@ -163,11 +224,22 @@ class ControlledRuntimeRecoveryExecutor:
     def __init__(self, runtime: ControlledRuntime):
         self.runtime = runtime
 
-    def execute(self, action: RecoveryAction, original_workload_type: str, original_parameters: Mapping[str, Any]) -> ExecutionResult:
+    def execute(self, action: RecoveryAction, original_workload_type: str, original_parameters: Mapping[str, Any], workload_id: str | None = None) -> ExecutionResult:
         action_id = ActionId(action.action_type)
         if action_id not in _EXECUTABLE:
             return ExecutionResult(action_type=action_id.value, executed=False, run_result=None, note=f"{action_id.value} has no executor in this repository; recorded as not-executed rather than simulated")
-        result = self.runtime.run(original_workload_type, dict(original_parameters))
+        if action_id == ActionId.ROLLBACK:
+            checkpoint = self.runtime.checkpoint_for(workload_id) if workload_id else None
+            if checkpoint is None:
+                return ExecutionResult(action_type=action_id.value, executed=False, run_result=None, note=f"no prior successful checkpoint exists yet for workload_id={workload_id!r}; ROLLBACK has nothing real to roll back to, so it is honestly recorded as not-executed rather than faked")
+            checkpoint_type, checkpoint_params = checkpoint
+            result = self.runtime.run(checkpoint_type, dict(checkpoint_params), workload_id=workload_id)
+            return ExecutionResult(action_type=action_id.value, executed=True, run_result=result, note=f"re-invoked ControlledRuntime.run with the last real known-good checkpoint (type={checkpoint_type}, params={checkpoint_params})")
+        if action_id == ActionId.RECONFIGURE:
+            reduced = _reduced_parameters(original_parameters)
+            result = self.runtime.run(original_workload_type, reduced, workload_id=workload_id)
+            return ExecutionResult(action_type=action_id.value, executed=True, run_result=result, note=f"re-invoked ControlledRuntime.run with resource-reduced parameters {reduced} (was {dict(original_parameters)})")
+        result = self.runtime.run(original_workload_type, dict(original_parameters), workload_id=workload_id)
         return ExecutionResult(action_type=action_id.value, executed=True, run_result=result, note=f"re-invoked ControlledRuntime.run for {action_id.value}")
 
 

@@ -1,0 +1,41 @@
+{
+  "artifact_sha256": "73617ebd2177bdd6a4cdad7c83b658bc55dd531f35efa652a8e70116a075bb3b",
+  "artifact_version": "phase4.5-prediction-artifact-v1",
+  "calibration_metrics": {
+    "brier_score": 0.24742667817433786,
+    "threshold": 0.46635509567472677
+  },
+  "calibrator_sha256": "2e23fa3bc713d25999def2c93caa68e17d88313284b056ee771a7dc76e02674d",
+  "calibrator_version": "phase4.5-pr-curve-threshold-v1",
+  "created_at": "2026-08-24T07:31:26.280371+00:00",
+  "evaluation_dataset_id": "phase4.5-test-seeds-20000-20150",
+  "evaluation_metrics": {
+    "auc": 0.5149357040113343,
+    "brier_score": 0.24742667817433786,
+    "f1": 0.7319211102994887,
+    "false_negatives": 17,
+    "false_positives": 350,
+    "n": 875,
+    "precision": 0.5887191539365453,
+    "recall": 0.9671814671814671,
+    "threshold": 0.46635509567472677,
+    "true_negatives": 7,
+    "true_positives": 501
+  },
+  "feature_names": [
+    "rss_ratio",
+    "anomaly_rate",
+    "elapsed_ratio",
+    "sample_count_ratio"
+  ],
+  "feature_schema_version": "phase4.5-features-v1",
+  "model_id": "phase4-telemetry-risk-logreg",
+  "model_sha256": "82bad8085b845fa128279b55ce2e8a2eac2df5afa922e42553ebd5ebe5721fee",
+  "model_version": "phase4.5-logreg-v1",
+  "protocol_hash": "n/a-controlled-runtime-generated-not-a-fixed-config-file",
+  "protocol_version": "phase4.5-prediction-training-v1",
+  "repository_commit": "phase4.5-working-tree",
+  "training_dataset_id": "phase4.5-train-seeds-0-600",
+  "training_timestamp": "2026-08-24T07:31:26.279756Z",
+  "validation_dataset_id": "phase4.5-val-seeds-10000-10150"
+}

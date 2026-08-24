@@ -1,0 +1,430 @@
+{
+  "action_efficacy": {
+    "DATA_CORRUPTION": {
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      },
+      "rollback": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "RECOVERED": 40
+        },
+        "recovery_rate": 1.0,
+        "successes": 40,
+        "wilson_95_ci": [
+          0.9123754607496077,
+          1.0
+        ]
+      }
+    },
+    "GPU_DEVICE_FAILURE": {
+      "_note": "no real executable action exists for this failure class (see src/phase4/recovery.py _CANDIDATES); not fabricated"
+    },
+    "INTERMITTENT_FAILURE": {
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      }
+    },
+    "NETWORK_FAILURE": {
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      }
+    },
+    "PROCESS_NONZERO_EXIT": {
+      "restart": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      },
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      }
+    },
+    "PROCESS_OOM": {
+      "reconfigure": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      },
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      }
+    },
+    "PROCESS_TIMEOUT": {
+      "restart": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      },
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      }
+    },
+    "RESOURCE_UNAVAILABLE": {
+      "reconfigure": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "RECOVERED": 40
+        },
+        "recovery_rate": 1.0,
+        "successes": 40,
+        "wilson_95_ci": [
+          0.9123754607496077,
+          1.0
+        ]
+      },
+      "retry": {
+        "n_episodes_requested": 40,
+        "n_excluded_no_failure_observed": 0,
+        "n_valid_trials": 40,
+        "outcome_counts": {
+          "NOT_RECOVERED": 40
+        },
+        "recovery_rate": 0.0,
+        "successes": 0,
+        "wilson_95_ci": [
+          0.0,
+          0.08762453925039232
+        ]
+      }
+    }
+  },
+  "adaptive_learning": {
+    "adaptive_planner": {
+      "early_window_correct_rate": 0.98,
+      "late_window_correct_rate": 1.0
+    },
+    "base_planner_control": {
+      "early_window_correct_rate": 0.0,
+      "late_window_correct_rate": 0.0
+    },
+    "n_episodes": 1000,
+    "true_success_prob": {
+      "reconfigure": 0.65,
+      "retry": 0.35
+    }
+  },
+  "continuous_mode": {
+    "episodes_run": 40,
+    "final_state_counts": {
+      "COMPLETED": 40
+    },
+    "stopped_reason": "max_episodes",
+    "wall_clock_seconds": 3.5078435450000143
+  },
+  "generated_at": "2026-08-24T07:31:58.411582Z",
+  "prediction_training": {
+    "corpus_sizes": {
+      "test_rows": 875,
+      "test_seeds": 150,
+      "train_rows": 3577,
+      "train_seeds": 600,
+      "validation_rows": 876,
+      "validation_seeds": 150
+    },
+    "manifest": {
+      "artifact_sha256": "73617ebd2177bdd6a4cdad7c83b658bc55dd531f35efa652a8e70116a075bb3b",
+      "artifact_version": "phase4.5-prediction-artifact-v1",
+      "calibration_metrics": {
+        "brier_score": 0.24742667817433786,
+        "threshold": 0.46635509567472677
+      },
+      "calibrator_sha256": "2e23fa3bc713d25999def2c93caa68e17d88313284b056ee771a7dc76e02674d",
+      "calibrator_version": "phase4.5-pr-curve-threshold-v1",
+      "created_at": "2026-08-24T07:31:26.280371+00:00",
+      "evaluation_dataset_id": "phase4.5-test-seeds-20000-20150",
+      "evaluation_metrics": {
+        "auc": 0.5149357040113343,
+        "brier_score": 0.24742667817433786,
+        "f1": 0.7319211102994887,
+        "false_negatives": 17,
+        "false_positives": 350,
+        "n": 875,
+        "precision": 0.5887191539365453,
+        "recall": 0.9671814671814671,
+        "threshold": 0.46635509567472677,
+        "true_negatives": 7,
+        "true_positives": 501
+      },
+      "feature_names": [
+        "rss_ratio",
+        "anomaly_rate",
+        "elapsed_ratio",
+        "sample_count_ratio"
+      ],
+      "feature_schema_version": "phase4.5-features-v1",
+      "model_id": "phase4-telemetry-risk-logreg",
+      "model_sha256": "82bad8085b845fa128279b55ce2e8a2eac2df5afa922e42553ebd5ebe5721fee",
+      "model_version": "phase4.5-logreg-v1",
+      "protocol_hash": "n/a-controlled-runtime-generated-not-a-fixed-config-file",
+      "protocol_version": "phase4.5-prediction-training-v1",
+      "repository_commit": "phase4.5-working-tree",
+      "training_dataset_id": "phase4.5-train-seeds-0-600",
+      "training_timestamp": "2026-08-24T07:31:26.279756Z",
+      "validation_dataset_id": "phase4.5-val-seeds-10000-10150"
+    },
+    "test_metrics": {
+      "per_checkpoint": {
+        "auc": 0.5149357040113343,
+        "brier_score": 0.24742667817433786,
+        "f1": 0.7319211102994887,
+        "false_negatives": 17,
+        "false_positives": 350,
+        "n": 875,
+        "precision": 0.5887191539365453,
+        "recall": 0.9671814671814671,
+        "threshold": 0.46635509567472677,
+        "true_negatives": 7,
+        "true_positives": 501
+      },
+      "run_level_early_warning": {
+        "false_negative_runs": 0,
+        "lead_time_seconds": {
+          "count": 87,
+          "max": 0.160136,
+          "mean": 0.05748521839080461,
+          "median": 0.046092,
+          "min": 0.033403,
+          "p10": 0.036916,
+          "p90": 0.09274
+        },
+        "per_failure_class": {
+          "DATA_CHECKSUM_MISMATCH": {
+            "fired_before_failure": 7,
+            "runs": 7
+          },
+          "GPU_DEVICE_UNAVAILABLE": {
+            "fired_before_failure": 11,
+            "runs": 11
+          },
+          "INTERMITTENT_TRANSIENT": {
+            "fired_before_failure": 9,
+            "runs": 9
+          },
+          "NETWORK_ERROR": {
+            "fired_before_failure": 12,
+            "runs": 12
+          },
+          "NONE": {
+            "fired_before_failure": 0,
+            "runs": 0
+          },
+          "NONZERO_EXIT": {
+            "fired_before_failure": 9,
+            "runs": 9
+          },
+          "PROCESS_OOM": {
+            "fired_before_failure": 17,
+            "runs": 17
+          },
+          "RESOURCE_UNAVAILABLE": {
+            "fired_before_failure": 17,
+            "runs": 17
+          },
+          "TIMEOUT": {
+            "fired_before_failure": 5,
+            "runs": 5
+          }
+        },
+        "true_positive_runs": 87
+      }
+    },
+    "threshold": 0.46635509567472677
+  },
+  "purpose": "Phase 4.5 'what's lacking' review -- statistically meaningful, at-scale evidence for all 7 gaps",
+  "safety_adversarial_matrix": [
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_NONZERO_EXIT",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_NONZERO_EXIT",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_TIMEOUT",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_TIMEOUT",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "NETWORK_FAILURE",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "NETWORK_FAILURE",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_OOM",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "PROCESS_OOM",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "GPU_DEVICE_FAILURE",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "GPU_DEVICE_FAILURE",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "DATA_CORRUPTION",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "DATA_CORRUPTION",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "RESOURCE_UNAVAILABLE",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "RESOURCE_UNAVAILABLE",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    },
+    {
+      "authorized": false,
+      "failure_class": "INTERMITTENT_FAILURE",
+      "proposed_action": "force_restart",
+      "reason": "force_restart is classified UNSAFE in src.recovery.actions; rejecting"
+    },
+    {
+      "authorized": false,
+      "failure_class": "INTERMITTENT_FAILURE",
+      "proposed_action": "delete_production_database",
+      "reason": "unknown action_type 'delete_production_database'; rejecting fail-closed"
+    }
+  ]
+}

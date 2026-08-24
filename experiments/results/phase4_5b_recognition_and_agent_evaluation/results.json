@@ -1,0 +1,139 @@
+{
+  "agent_pipeline_decision_band_breakdown": {
+    "n_samples_1": {
+      "decision_band_counts_among_wrong": {
+        "ABSTAIN": 0,
+        "ANSWER": 73,
+        "REVIEW": 0
+      },
+      "n_correct_first_try": 227,
+      "n_episodes": 300,
+      "n_samples": 1,
+      "n_wrong_first_try": 73,
+      "retry_executions": 73,
+      "retry_recovered": 32,
+      "retry_recovery_rate": 0.4383561643835616,
+      "retry_recovery_rate_wilson_95ci": [
+        0.3304516589160894,
+        0.5524242832818866
+      ]
+    },
+    "n_samples_5": {
+      "decision_band_counts_among_wrong": {
+        "ABSTAIN": 0,
+        "ANSWER": 0,
+        "REVIEW": 15
+      },
+      "n_correct_first_try": 285,
+      "n_episodes": 300,
+      "n_samples": 5,
+      "n_wrong_first_try": 15,
+      "retry_executions": 0,
+      "retry_recovered": 0,
+      "retry_recovery_rate": null,
+      "retry_recovery_rate_wilson_95ci": null
+    }
+  },
+  "agent_task_self_consistency_accuracy_curve": {
+    "1": {
+      "accuracy": 0.758,
+      "n_seeds": 1000
+    },
+    "10": {
+      "accuracy": 1.0,
+      "n_seeds": 1000
+    },
+    "20": {
+      "accuracy": 1.0,
+      "n_seeds": 1000
+    },
+    "3": {
+      "accuracy": 0.887,
+      "n_seeds": 1000
+    },
+    "5": {
+      "accuracy": 0.959,
+      "n_seeds": 1000
+    }
+  },
+  "agent_task_uncertainty_signal_calibration": {
+    "[0.0-0.4)": {
+      "accuracy": 0.2,
+      "n": 5
+    },
+    "[0.4-0.6)": {
+      "accuracy": 0.6292134831460674,
+      "n": 89
+    },
+    "[0.6-0.8)": {
+      "accuracy": 0.9829059829059829,
+      "n": 234
+    },
+    "[0.8-1.0]": {
+      "accuracy": 1.0,
+      "n": 672
+    }
+  },
+  "generated_at": "2026-08-24T12:22:50.121790Z",
+  "prediction_scope_router": {
+    "corpus_sizes": {
+      "predictable_scope_train_rows": 1705,
+      "predictable_scope_validation_rows": 323,
+      "test_rows": 1842,
+      "train_rows": 8674,
+      "validation_rows": 1704
+    },
+    "fallback_priors": {
+      "corruption": 1.0,
+      "cpu": 0.47530864197530864,
+      "fail": 1.0,
+      "flaky": 0.5132075471698113,
+      "gpu": 1.0,
+      "network": 1.0,
+      "oom": 0.5,
+      "resource_unavailable": 0.5301587301587302,
+      "success": 0.0
+    },
+    "scoped_test_metrics": {
+      "detectable_only_scope": {
+        "auc": 0.8569109980742671,
+        "brier_score": 0.12914748796291373,
+        "f1": 0.8734448734448734,
+        "false_negatives": 0,
+        "false_positives": 295,
+        "n": 1422,
+        "precision": 0.7753236862147753,
+        "recall": 1.0,
+        "true_negatives": 109,
+        "true_positives": 1018
+      },
+      "predictable_scope": {
+        "auc": 0.6357756640014705,
+        "brier_score": 0.2237578576808124,
+        "f1": 0.7133956386292836,
+        "false_negatives": 5,
+        "false_positives": 179,
+        "n": 420,
+        "precision": 0.5612745098039216,
+        "recall": 0.9786324786324786,
+        "true_negatives": 7,
+        "true_positives": 229
+      },
+      "router_combined_output_all_scopes": {
+        "auc": 0.8267084529160124,
+        "brier_score": 0.1507198849669949,
+        "f1": 0.8388832828792464,
+        "false_negatives": 5,
+        "false_positives": 474,
+        "n": 1842,
+        "precision": 0.7245787332945962,
+        "recall": 0.9960063897763578,
+        "true_negatives": 116,
+        "true_positives": 1247
+      },
+      "threshold": 0.3651732243037946
+    },
+    "threshold": 0.3651732243037946
+  },
+  "purpose": "Phase 4.5b -- at-scale evidence for (A) the honest scope-split predictor and (B) real AI/ML agent output-correctness evaluation"
+}

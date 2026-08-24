@@ -50,12 +50,24 @@ any memory-read path was added to diagnosis.
 """
 from __future__ import annotations
 
+import json
+import sqlite3
 from dataclasses import asdict, dataclass
 from datetime import datetime
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 RELEVANCE_HALF_LIFE_SECONDS = 3600.0
 MEMORY_CONTRACT_VERSION = "phase4.memory-contract-v1"
+
+# Phase 4.5 gap 2: durable storage. This is a SCHEMA version for the SQLite
+# table layout itself (bumped only if columns/types change), independent of
+# ``MEMORY_CONTRACT_VERSION`` above (which governs retrieval/scope/relevance
+# semantics) and independent of ``memory_version`` (a per-store write
+# counter). Same three-way separation the rest of this repository already
+# uses (see e.g. ``src/phase4/controlled_runtime.py``'s
+# RUNTIME_VERSION/SCHEMA_VERSION split).
+MEMORY_SCHEMA_VERSION = 1
 
 
 def _dt(value: str) -> datetime:
@@ -90,7 +102,7 @@ class MemoryMatch:
 
 
 class FailureMemoryStore:
-    """In-process, append-only historical failure memory.
+    """Append-only historical failure memory, durable across process restarts.
 
     Deliberately not shared with, and does not import, ``src.failure_memory``
     or ``src.failure_experience`` (Gen 1/Gen 2 memory implementations). Those
@@ -98,17 +110,71 @@ class FailureMemoryStore:
     foundation. This is a new, independent implementation scoped to the
     Gen 3 controlled-runtime contracts, per Decision B of
     ``docs/PHASE4_5_AUDIT_AND_PLAN.md``.
+
+    Phase 4.5 gap 2: backing storage is real SQLite (same pattern as
+    ``src/phase4/observability.py``'s ``PersistentEventStore``), not an
+    in-memory Python list. ``path=None`` (the default -- every pre-existing
+    caller/test in this repository constructs ``FailureMemoryStore()`` with
+    no arguments) uses an in-memory SQLite database: same engine, same SQL,
+    same schema-versioning code path, just not durable across process exit --
+    this keeps every existing test byte-for-byte unaffected while giving a
+    caller who passes an explicit file ``path`` real, restart-surviving
+    persistence with a single shared implementation (no separate "durable"
+    subclass to silently drift out of sync with the retrieval contract
+    above). All six contract items above are enforced by the SQL query in
+    ``retrieve`` exactly as they were by the old Python-list filter.
     """
 
     version = MEMORY_CONTRACT_VERSION
 
-    def __init__(self) -> None:
-        self._records: list[MemoryRecord] = []
-        self._memory_version = 0
+    def __init__(self, path: str | Path | None = None) -> None:
+        self.path = str(path) if path is not None else ":memory:"
+        self._db = sqlite3.connect(self.path)
+        self._db.execute("PRAGMA journal_mode=WAL" if self.path != ":memory:" else "PRAGMA journal_mode=MEMORY")
+        self._db.execute(
+            "CREATE TABLE IF NOT EXISTS memory_schema_meta (id INTEGER PRIMARY KEY CHECK (id=1), schema_version INTEGER NOT NULL)"
+        )
+        self._db.execute(
+            "CREATE TABLE IF NOT EXISTS memory_records ("
+            "memory_id TEXT PRIMARY KEY, workload_id TEXT NOT NULL, environment_id TEXT NOT NULL, "
+            "failure_class TEXT NOT NULL, root_cause TEXT NOT NULL, diagnosis_confidence TEXT NOT NULL, "
+            "source_run_id TEXT NOT NULL, source_diagnosis_id TEXT NOT NULL, action_taken TEXT NOT NULL, "
+            "validated_outcome TEXT NOT NULL, recorded_at TEXT NOT NULL, memory_version INTEGER NOT NULL, "
+            "provenance_json TEXT NOT NULL)"
+        )
+        self._db.execute(
+            "CREATE INDEX IF NOT EXISTS idx_memory_scope ON memory_records(workload_id, environment_id, failure_class)"
+        )
+        row = self._db.execute("SELECT schema_version FROM memory_schema_meta WHERE id=1").fetchone()
+        if row is None:
+            self._db.execute("INSERT INTO memory_schema_meta(id, schema_version) VALUES (1, ?)", (MEMORY_SCHEMA_VERSION,))
+            self._db.commit()
+            self._schema_version = MEMORY_SCHEMA_VERSION
+        else:
+            self._schema_version = int(row[0])
+            if self._schema_version > MEMORY_SCHEMA_VERSION:
+                raise ValueError(
+                    f"memory store at {self.path!r} was written by a newer schema "
+                    f"(schema_version={self._schema_version}) than this code supports "
+                    f"(MEMORY_SCHEMA_VERSION={MEMORY_SCHEMA_VERSION})"
+                )
+            # A future schema migration would branch on self._schema_version
+            # here (e.g. ALTER TABLE + rewrite) before continuing; there is
+            # exactly one schema version so far, so there is nothing to
+            # migrate from yet.
+        row = self._db.execute("SELECT COALESCE(MAX(memory_version), 0) FROM memory_records").fetchone()
+        self._memory_version = int(row[0]) if row else 0
 
     @property
     def memory_version(self) -> int:
         return self._memory_version
+
+    @property
+    def schema_version(self) -> int:
+        return self._schema_version
+
+    def close(self) -> None:
+        self._db.close()
 
     def add(
         self,
@@ -143,8 +209,31 @@ class FailureMemoryStore:
             memory_version=self._memory_version,
             provenance=dict(provenance),
         )
-        self._records.append(record)
+        self._db.execute(
+            "INSERT INTO memory_records(memory_id, workload_id, environment_id, failure_class, root_cause, "
+            "diagnosis_confidence, source_run_id, source_diagnosis_id, action_taken, validated_outcome, "
+            "recorded_at, memory_version, provenance_json) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (
+                record.memory_id, record.workload_id, record.environment_id, record.failure_class,
+                record.root_cause, record.diagnosis_confidence, record.source_run_id, record.source_diagnosis_id,
+                record.action_taken, record.validated_outcome, record.recorded_at, record.memory_version,
+                json.dumps(dict(provenance), sort_keys=True),
+            ),
+        )
+        self._db.commit()
         return record
+
+    def _row_to_record(self, row: tuple) -> MemoryRecord:
+        (memory_id, workload_id, environment_id, failure_class, root_cause, diagnosis_confidence,
+         source_run_id, source_diagnosis_id, action_taken, validated_outcome, recorded_at,
+         memory_version, provenance_json) = row
+        return MemoryRecord(
+            memory_id=memory_id, workload_id=workload_id, environment_id=environment_id,
+            failure_class=failure_class, root_cause=root_cause, diagnosis_confidence=diagnosis_confidence,
+            source_run_id=source_run_id, source_diagnosis_id=source_diagnosis_id, action_taken=action_taken,
+            validated_outcome=validated_outcome, recorded_at=recorded_at, memory_version=memory_version,
+            provenance=json.loads(provenance_json),
+        )
 
     def retrieve(
         self,
@@ -160,14 +249,16 @@ class FailureMemoryStore:
         if not workload_id or not environment_id:
             return ()
         boundary = _dt(at_or_before)
+        rows = self._db.execute(
+            "SELECT memory_id, workload_id, environment_id, failure_class, root_cause, diagnosis_confidence, "
+            "source_run_id, source_diagnosis_id, action_taken, validated_outcome, recorded_at, memory_version, "
+            "provenance_json FROM memory_records WHERE workload_id=? AND environment_id=? AND failure_class=? "
+            "AND source_run_id != ?",
+            (workload_id, environment_id, failure_class, exclude_run_id),
+        ).fetchall()
         matches: list[MemoryMatch] = []
-        for record in self._records:
-            if record.source_run_id == exclude_run_id:
-                continue  # contract item 1: never eligible by run_id
-            if record.workload_id != workload_id or record.environment_id != environment_id:
-                continue
-            if record.failure_class != failure_class:
-                continue
+        for row in rows:
+            record = self._row_to_record(row)
             recorded_at = _dt(record.recorded_at)
             if recorded_at > boundary:
                 continue  # contract item 2: temporal safety
@@ -199,8 +290,33 @@ class FailureMemoryStore:
             failure_class=failure_class,
             exclude_run_id=exclude_run_id,
             at_or_before=at_or_before,
-            top_k=len(self._records) + 1,
+            top_k=1_000_000,
         )
         relevant = [m for m in matches if m.record.action_taken == action]
         successes = sum(1 for m in relevant if m.record.validated_outcome == "RECOVERED")
         return successes, len(relevant)
+
+    def action_success_estimate(
+        self,
+        *,
+        workload_id: str,
+        environment_id: str,
+        failure_class: str,
+        action: str,
+        exclude_run_id: str,
+        at_or_before: str,
+    ) -> float:
+        """Phase 4.5 gap 5: a real online-updated success-rate estimate per
+        (workload, environment, failure_class, action), Beta(1, 1)-smoothed
+        (Laplace smoothing) so an action with zero evidence gets a neutral
+        0.5 rather than 0.0 or an error. Every call re-derives the estimate
+        from the current durable record set, so it updates immediately as
+        new validated outcomes are written via ``LearningManager.record`` --
+        this is what makes it "online": no separate offline retraining step,
+        no cached/stale value. See ``src/phase4/adaptive.py`` for the
+        component that actually uses this to rank candidate actions."""
+        successes, total = self.prior_outcome_rate(
+            workload_id=workload_id, environment_id=environment_id, failure_class=failure_class,
+            action=action, exclude_run_id=exclude_run_id, at_or_before=at_or_before,
+        )
+        return (successes + 1.0) / (total + 2.0)

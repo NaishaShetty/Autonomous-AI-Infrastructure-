@@ -1,0 +1,11 @@
+{
+  "corruption": 1.0,
+  "cpu": 0.47530864197530864,
+  "fail": 1.0,
+  "flaky": 0.5132075471698113,
+  "gpu": 1.0,
+  "network": 1.0,
+  "oom": 0.5,
+  "resource_unavailable": 0.5301587301587302,
+  "success": 0.0
+}

@@ -51,10 +51,40 @@ class AnomalyDetector:
         if signal is None: return None
         return AnomalyRecord(anomaly_id=f"anomaly:{event['event_id']}",workload_id=str(event.get('workload_id') or event.get('job_id')),run_id=str(event.get('job_id')),environment_id=str(event.get('environment_id')),event_id=str(event['event_id']),detection_timestamp=str(ts),signal=signal,observed_value=value,expected_condition=condition,severity=severity,rule_version=self.baseline.version,detector_version=self.version,provenance=event.get('provenance',{}))
 
-_FAILURE_KIND_TO_CLASS={'NONZERO_EXIT':'PROCESS_NONZERO_EXIT','TIMEOUT':'PROCESS_TIMEOUT','NETWORK_ERROR':'NETWORK_FAILURE'}
+_FAILURE_KIND_TO_CLASS={
+    'NONZERO_EXIT':'PROCESS_NONZERO_EXIT','TIMEOUT':'PROCESS_TIMEOUT','NETWORK_ERROR':'NETWORK_FAILURE',
+    # Phase 4.5 failure-taxonomy widening (docs review gap 3). Each of these
+    # is produced by a real, detectable condition in
+    # src/phase4/controlled_runtime.py -- see that module's docstring for
+    # exactly what is real vs. honestly-labeled-fallback per mode. Note that
+    # 'GPU_FAILURE'/'GPU_ECC_ERROR'/'SCHEDULER_FAILURE' remain deliberately
+    # ABSENT from this map (still raise ValueError below, still listed as
+    # unsupported by DetectionEvaluator) -- those are placeholder probe
+    # payloads / a true distributed-scheduler class this single-process
+    # sandbox has no real signal for. 'GPU_DEVICE_UNAVAILABLE' below is a
+    # different, real signal (real device-absence probe), which is why it
+    # gets its own distinct kind string rather than reusing 'GPU_FAILURE'.
+    'PROCESS_OOM':'PROCESS_OOM','GPU_DEVICE_UNAVAILABLE':'GPU_DEVICE_FAILURE',
+    'DATA_CHECKSUM_MISMATCH':'DATA_CORRUPTION','RESOURCE_UNAVAILABLE':'RESOURCE_UNAVAILABLE',
+    'INTERMITTENT_TRANSIENT':'INTERMITTENT_FAILURE',
+    # Phase 4.5b -- the second gap named in the project's own strategic
+    # review: this pipeline never evaluated an actual AI/ML agent's OUTPUT
+    # correctness, only OS/process telemetry. AGENT_INCORRECT_ANSWER is a
+    # real, detected failure class produced by src/phase4/agent_runtime.py
+    # (majority-vote answer, from real independent samples, disagrees with
+    # a real ground-truth oracle) -- not a process failure, but reuses this
+    # exact detection/classification path since the shape of the evidence
+    # (a `failure_detected` canonical event with a `failure_kind`) is
+    # identical. AGENT_TASK_TIMEOUT/AGENT_WORKER_ERROR are the honest
+    # non-correctness failure modes of that same runtime (the subprocess
+    # itself hanging or crashing, distinct from "it ran and answered
+    # wrong").
+    'AGENT_INCORRECT_ANSWER':'AGENT_INCORRECT_ANSWER','AGENT_TASK_TIMEOUT':'AGENT_TASK_TIMEOUT',
+    'AGENT_WORKER_ERROR':'AGENT_WORKER_ERROR',
+}
 
 class FailureDetector:
-    version='phase4.2-failure-rules-v2'
+    version='phase4.5-failure-rules-v3'
     def detect(self,event:Mapping[str,Any])->FailureEvent|None:
         if event.get('event_type')!='failure_detected': return None
         payload=event.get('payload',{}); kind=payload.get('failure_kind');
