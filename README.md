@@ -1,297 +1,493 @@
-# Autonomous AI Infrastructure — Unified Reliability + Failure Memory
+# Autonomous AI Infrastructure
 
-A research-grade, self-healing AI/ML infrastructure system: it observes AI/ML
-workloads, estimates whether it should trust its own read of the situation,
-retrieves similar past failures from persistent memory, and learns which
-recovery action to take — evaluated with the same rigor a systems paper
-would demand, not just shipped as a demo.
+Self-healing AI/ML infrastructure that observes workloads, estimates
+whether it should trust its own read of the situation, predicts and
+diagnoses failures, plans and safety-gates a recovery action, and learns
+from persistent failure memory — evaluated with the same rigor a systems
+paper would demand, including every negative and underpowered result.
 
-## Overview
+## Origin
 
-Most "self-healing infrastructure" prototypes wire a single anomaly score
-straight into a single remediation rule, which makes it hard to answer basic
-research questions in isolation — does failure memory actually improve the
-recovery decision? does a context-aware policy beat a hand-written heuristic?
-This project is built the other way: confidence calibration, failure memory,
-pattern discovery, and recovery selection are separate, independently
-testable modules behind one decision policy, each with its own frozen
-protocol, leakage audit, and oracle reference bound.
+This project did not start from a blank page. It began by **auditing**,
+not trusting, two independently developed predecessor prototypes:
 
-**Research question:** given calibrated confidence, persistent failure
-memory, and a controlled recovery-selection environment, can a
-context-aware, learned recovery policy detect and diagnose failures,
-abstain when evidence is insufficient, and select a recovery action that
-measurably beats a strong, non-learned heuristic — without exceeding a
-zero-tolerance unsafe-action rate?
+- **AI-Abstention-Engine** (~9,700 backend lines) — confidence/abstention
+  logic. Phase 1's audit (`docs/archive/PHASE1_AUDIT_REPORT.md`) found
+  concrete defects: a live confidence-scale bug producing
+  `global_reliability_score: 189.61` on a documented 0–100 scale (from
+  averaging two incompatible representations), a query defaulting to
+  abstention while its own explanation text claimed "Confidence 61%", a
+  404 on `/api/metrics`, and a committed database containing real personal
+  emails and password hashes.
+- **Introspective Failure Memory Model** (~1,560 backend lines) — episodic
+  failure memory and risk-coverage prediction. The audit found a real
+  risk-coverage signal (baseline error 35.44% → 8.05% at 15% coverage) but
+  no tests, in-memory-only storage, and a live 500 error from unhandled
+  numpy JSON serialization.
 
-This is scoped to what's actually been run: two prior research prototypes
-(audited, then rebuilt behind one architecture — see
-[`docs/archive/PHASE1_AUDIT_REPORT.md`](docs/archive/PHASE1_AUDIT_REPORT.md)), extended
-through a pre-registered, frozen-protocol experimental track on both real
-operational datasets and a controlled recovery-selection environment — not
-a claim of production deployment or open-ended generalization. See
-[Known Limitations](#known-limitations).
+Both were audited component-by-component before Phase 2 migrated them into
+one pydantic-enforced architecture — **not a copy-paste merge**. That
+migration immediately produced a real negative research finding: the
+failure-memory risk signal did **not** improve calibrated abstention
+beyond confidence alone (selective risk 0.1667 vs. 0.2083 at 20% coverage;
+failure-memory correlation with correctness 0.031 — essentially noise —
+vs. 0.200 for confidence). That negative result is what opened the current
+research track (Phase 3 onward). Full detail:
+[`docs/MASTER_RECORD_CONTENT.md`](docs/MASTER_RECORD_CONTENT.md), sections 3–7.
 
-## What It Can Do
+## Research question
 
-- **Confidence + abstention** — a calibrated confidence signal
-  (`reliability/`) fused with a persistent failure-memory risk signal
-  (`failure_memory/`) behind one authoritative decision policy
-  (`decision/policy.py`), migrated and rebuilt from the AI-Abstention-Engine
-  and Introspective-Failure-Memory-Model prototypes.
-- **Failure memory** — a canonical `FailureExperience` schema
-  (`failure_experience/`) ingesting real operational data from three
-  independent sources (AgentRx, AIOps 2020, Alibaba GPU 2020) plus
-  synthetic data into one retrieval-ready corpus, 961/961 records ingested
-  with zero provenance violations.
-- **Failure pattern discovery** — failure-rate-elevation pattern mining on
-  real GPU-cluster data (`failure_patterns/`), with a pre-registered
-  evidence-volume gate rather than reporting whatever pattern count comes
-  out.
-- **Recovery learning** — a controlled, leakage-audited recovery-selection
-  environment (`recovery/`) with an oracle reference bound, a
-  non-strawman fixed-priority baseline, and an experience-based empirical
-  policy with an explicit evidence-count abstention rule — evaluated
-  single-step (4.3) and two-step/sequential-with-abstention (4.4).
-- **Feasibility gating** — a reusable check
-  (`src/recovery/feasibility.py`) that verifies a pre-registered minimum
-  effect size is actually reachable given a baseline's headroom against
-  the oracle bound, *before* a threshold is frozen — added after two
-  phases froze thresholds without it (see [Current Results](#current-results-real-numbers)).
-- **Canonical runtime controller** — `src/runtime/` now orchestrates structured observation, detection, reliability assessment, failure-memory retrieval, uncertain diagnosis, safety-gated recovery planning, simulated execution, independent validation, complete experience persistence, and synchronous memory updates.
-- **Runtime API** — `api/app.py` routes `/api/analyze` through the canonical controller. The API default does not train from a benchmark dataset at startup; it honestly abstains until explicit model/calibrator artifacts are injected.
-- **Deterministic closed-loop demonstration** — `scripts/run_closed_loop_demo.py` runs two simulated episodes and shows whether the second episode retrieves the first. This is an integration proof, not production recovery evidence.
+Given calibrated confidence, persistent failure memory, and a controlled
+recovery-selection environment, can a context-aware, learned recovery
+policy detect and diagnose failures, abstain when evidence is
+insufficient, and select a recovery action that measurably beats a
+strong, non-learned heuristic — without exceeding a zero-tolerance
+unsafe-action rate? This is scoped to what was actually run: a
+pre-registered, frozen-protocol experimental track on real operational
+data, a controlled recovery-selection environment, and a real AI/ML agent
+evaluation track — not a claim of production deployment.
 
-Only capabilities that are actually implemented and evaluated are listed
-here — see [Known Limitations](#known-limitations) for what isn't.
+## Key capabilities — status, not a checklist
 
-## Tech Stack
-
-**Core** — Python, Pydantic (canonical event schema), SQLAlchemy + SQLite
-(persistence), scikit-learn / numpy / pandas / scipy (calibration,
-representations, statistics), FastAPI + Uvicorn (demo API), pytest (test
-suite: unit / integration / e2e / recovery).
-
-**Research infrastructure** — one `benchmarks/*.py` script per experiment
-(deterministic given a fixed seed), one frozen protocol JSON per phase
-under `configs/`, one results JSON per phase under `experiments/results/`
-as the source of truth for every number in this README.
-
-**Explicitly not used** — no Docker/CI pipeline yet, no frontend, no
-message queue between components (direct module calls through
-`pipeline_builder.py`), no ORM abstraction beyond SQLAlchemy's own.
+| Capability | Status | Evidence |
+|---|---|---|
+| Confidence-calibrated abstention (arithmetic self-consistency) | **DEMONSTRATED** | AUROC 0.955 (Phase 5.2 benchmark, n=310, underpowered vs. n=500 gate); 0.953 at Phase 4.6 scale |
+| Confidence-calibrated abstention (extractive QA span-logit) | **DEMONSTRATED** | AUROC 0.938 (benchmark, n=49, underpowered); 0.934 at Phase 4.6 scale |
+| Confidence-calibrated abstention (sentiment softmax-margin) | **NOT VALIDATED (discrimination)** / **PARTIALLY DEMONSTRATED (calibration)** | AUROC 0.439 — near-chance, a genuine discrimination ceiling; temperature scaling fixed ECE 0.089 → 0.023 without improving discrimination |
+| Persistent failure memory changes recovery decisions | **DEMONSTRATED (controlled)** | Repeated-incident experiment: memory ON retry→retry→reconfigure→recovered vs. memory OFF retry×6, real process restarts |
+| Failure-class diagnosis | **PARTIALLY DEMONSTRATED** | 35/35 (1.0) class-matching accuracy, but false-causal-attribution-rate is *also* 1.0 — no independent causal ground truth exists |
+| Recovery execution (real, against project's own controlled runtime) | **PARTIALLY DEMONSTRATED** | Executes for real (not simulated table lookup); benchmark-slice recovery success is 0/35 — a genuine negative finding, not a defect |
+| Safety gating | **DEMONSTRATED** | 6-case and 16-case adversarial safety matrices, 0 incorrectly authorized, across two independent phases |
+| Failure prediction — `resource_unavailable` | **DEMONSTRATED (aggregate only)** | STRONG_EVIDENCE from a real pre-flight-probe mechanism; `NOT_EVALUABLE` at benchmark record level (no per-episode join key) |
+| Failure prediction — `cpu` / pooled `oom` / `flaky` | **NOT VALIDATED** | Always-fires false-alarm-rate ≈ 1.0 despite a nominal AUROC edge, confirmed across replicates |
+| Environment generalization — ranking | **DEMONSTRATED (aggregate only)** | OOM AUROC transfers well: dev 0.989, held-out 0.983, robustness 0.935 |
+| Environment generalization — operating point | **NOT VALIDATED** | The fixed decision threshold does not transfer cleanly — ranking generalization ≠ operating-point generalization |
+| Memory adaptation at benchmark scale | **NOT EVALUABLE** | Only 1 repeated-workload group (3 records) exists in the canonical dataset |
+| Multi-environment generalization at benchmark scale | **NOT EVALUABLE** | Canonical dataset represents only 1 environment |
+| Production self-healing / deployment | **NOT VALIDATED / OUT OF SCOPE** | Recovery runs against this project's own local controlled subprocess runtime, not a production fleet |
 
 ## Architecture
 
-The canonical runtime is now an explicit controller rather than the synthetic benchmark builder. Inputs arrive through an observation normalizer, then flow through detection, reliability/risk assessment, retrieval, diagnosis, recovery planning, safety and feasibility gating, simulated execution, independent validation, complete experience persistence, and synchronous learning updates. `ReliabilityEvent` remains a compatibility event at the persistence boundary; `FailureExperience` is the foundation for the complete runtime episode.
-
 ```mermaid
 flowchart TD
-    Source["Workload / dataset replay / simulator"] --> Normalize["runtime/observation.py<br/>EventNormalizer"]
-    Normalize --> Observe["Observation"]
-    Observe --> Detect["FailureDetector"]
-    Detect --> Assess["ReliabilityAssessor<br/>confidence + risk + policy"]
-    Assess --> Retrieve["FailureMemory<br/>retrieval + explicit lifecycle"]
-    Retrieve --> Diagnose["DiagnosisEngine<br/>uncertainty + evidence"]
-    Diagnose --> Plan["RecoveryPlanner"]
-    Plan --> Gate["Safety + feasibility gate"]
-    Gate -->|abstain / escalate| Store["FailureExperience<br/>provenance + lineage"]
-    Gate -->|approved| Execute["RecoveryExecutor<br/>simulated implementation"]
-    Execute --> Validate["RecoveryValidator<br/>independent state check"]
+    Source["Workload / dataset replay / controlled subprocess runtime"] --> Observe["Observe"]
+    Observe --> Detect["Detect"]
+    Detect --> Predict["Predict"]
+    Predict --> Decide["Abstain / Decide"]
+    Decide --> Diagnose["Diagnose (memory-aware)"]
+    Diagnose --> Plan["Plan recovery"]
+    Plan --> Gate{"Safety + feasibility gate"}
+    Gate -->|approved| Execute["Execute"]
+    Gate -->|reject| Store["Persist experience"]
+    Execute --> Validate["Independently validate"]
     Validate --> Store
-    Store --> Learn["LearningManager<br/>synchronous memory update"]
-    Learn --> Retrieve
-    Store --> Compatibility["ReliabilityEvent compatibility persistence"]
-    Compatibility --> API["FastAPI /api/analyze"]
+    Store --> Learn["Learn (memory update)"]
+    Learn --> Diagnose
 ```
 
-The synthetic `build_system()` function remains available as an explicitly named research builder for frozen benchmarks. The API uses `build_runtime_system()` and does not secretly train from a benchmark dataset during startup. Controlled recovery modules remain simulation/research infrastructure and are not production executors.
+Full diagram set (8 diagrams, implemented-vs-simulated/aggregate-only
+clearly distinguished): [`docs/architecture/`](docs/architecture/README.md).
 
-The baseline classification and migration map are recorded in [`docs/archive/ARCHITECTURE_MAP_BASELINE.md`](docs/archive/ARCHITECTURE_MAP_BASELINE.md). Full per-phase design detail remains under [`docs/archive/`](docs/archive/), and the single consolidated project record is [`docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx`](docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx).
+## Autonomy control loop
 
-## Research Contributions
+`src/phase4/pipeline.py`'s `AutonomyPipeline` implements this loop end to
+end: `observe → detect → predict → decide/abstain → diagnose (memory-aware)
+→ plan (memory-informed) → safety-gate → execute → independently validate →
+learn`, walking an explicit `AutonomyState` enum (`RECEIVED → OBSERVING →
+PREDICTED → DECIDING → DIAGNOSING → PLANNING → SAFETY_CHECK → EXECUTING →
+VALIDATING → RECOVERED / NOT_RECOVERED / ABSTAINED → COMPLETED`). Two entry
+points exercise it: `run_workload()` (process/infrastructure telemetry —
+CPU timeout, OOM, GPU absence, data corruption, resource contention, flaky
+processes, network failure) and `run_agent_task()` (a real AI/ML agent's
+output — arithmetic self-consistency, sentiment classification, extractive
+QA — each with its own correctness oracle and uncertainty mechanism).
+Recovery executes for real against this project's own controlled
+subprocess runtime (`ControlledRuntime.run()`), not a simulated
+ground-truth lookup table, and validation independently re-derives the
+outcome from raw events through a fresh `MonitoringEngine` rather than
+trusting the executor's self-report (tested against a deliberately lying
+executor).
 
-| Type | Contribution |
-|---|---|
-| Research | A calibrated confidence + persistent failure-memory fusion behind one decision policy, migrated from two independently-developed prototypes after a formal audit, not a naive merge |
-| Research | A controlled, leakage-audited recovery-selection environment with an explicit oracle reference bound, used to test whether a learned policy beats a serious (non-strawman) fixed-priority baseline, single-step and two-step-with-abstention |
-| Research | A feasibility-gate methodology (`src/recovery/feasibility.py`) that checks a pre-registered effect-size threshold against actual baseline-to-oracle headroom before freezing it — added retroactively after two phases skipped this check (see [Current Results](#current-results-real-numbers)) |
-| Research | A canonical `FailureExperience` schema unifying three independent real operational datasets and synthetic data into one retrieval corpus, with a pre-registered evidence-volume gate for pattern discovery rather than reporting underpowered patterns as findings |
-| Engineering | A leakage-audit discipline applied to every phase (7 → 9 → 12 checks as the environment grew), including a caught-and-fixed non-determinism bug (`hash()` seeding) that had silently flipped a verdict between runs |
+## Quantitative results (real numbers, pulled from source artifacts)
 
-Full breakdown: [`docs/archive/PHASE4_PLAN.md`](docs/archive/PHASE4_PLAN.md) and each
-phase's own doc under `docs/archive/`, or the consolidated record below.
+### Uncertainty (Phase 5.2 benchmark, calibration/test split; Phase 4.6 in-project scale in parentheses)
 
-## Current Results (real numbers)
+| Family | Metric | Value | n (test) | Status |
+|---|---|---|---|---|
+| Arithmetic self-consistency | AUROC | 0.955 (0.953 at Phase 4.6 scale) | 310 (min 500) | UNDERPOWERED |
+| Extractive QA span-logit | AUROC | 0.938 (0.934 at Phase 4.6 scale) | 49 (min 300) | UNDERPOWERED |
+| Sentiment softmax-margin | AUROC | 0.439 (0.659 at Phase 4.6 scale) | 113 (min 300) | UNDERPOWERED, near-chance |
+| Sentiment (4 candidate estimators) | AUROC | mathematically identical across all 4 | — | Rank-equivalent transforms — real, explained negative result |
 
-Tests before the architectural recovery: **432 passed / 17 skipped / 0 failed / 4 warnings**. After the repaired runtime: **439 passed / 17 skipped / 0 failed / 21 warnings**. After relevance-aware learning influence, small-sample guards, source adapters, provenance, and the new experiment tests: **444 passed / 17 skipped / 0 failed / 1 warning**. After the generalized simulator, multi-step recovery, and robustness tests: **453 passed / 17 skipped / 0 failed / 1 warning**. The remaining warning is an external Starlette/httpx deprecation; the avoidable PCA warnings were removed with mathematically valid guards. Every historical experiment result below remains frozen and was not overwritten.
+### Temperature scaling (calibration, not discrimination)
 
-| Phase | Question | Verdict | Headline number |
+| Family | ECE before | ECE after | AUROC change |
 |---|---|---|---|
-| 3.1–3.6 (frozen baseline) | Confidence + failure-memory detection, synthetic + real data | frozen | see [`PHASE3_FREEZE.md`](docs/archive/PHASE3_FREEZE.md) |
-| 4.1 — Failure Experience | Canonical schema across 4 real+synthetic sources | **PASS** | 961/961 ingested, 0 provenance violations |
-| 4.2 — Pattern Learning | Failure-rate-elevation patterns on Alibaba GPU2020 | **INCONCLUSIVE** | 21/50 evaluable contexts — underpowered, not negative |
-| 4.3 — Recovery Learning | Learned recovery policy vs. fixed-priority baseline | **PASS — not supported** | effect +0.011 vs. 0.15 required |
-| 4.4 — Sequential Recovery | 2-step, history-aware policy vs. fixed-priority | **PASS — not supported** | effect −0.049 (significant, wrong direction) |
-| New runtime learning influence | Validated experience affects future controlled decisions | **INTEGRATION RESULT** | relevant retrieval +1.0; action change 100%; validation success +1.0 in deterministic simulator |
+| Sentiment | 0.089 | 0.023 | none — discrimination ceiling unchanged |
 
-**Both verdicts above are the recorded result. Full stop.** A separate,
-**EXPLORATORY, POST-HOC, NOT PRE-REGISTERED** analysis (confirmed absent
-from either frozen `configs/phase4_*_recovery_protocol.json` by direct
-inspection) found that neither phase checked, before freezing its
-0.15-point threshold, whether that much headroom existed between its
-baseline and its own oracle bound — 4.3 had 0.060 points available (40%
-of what was required), 4.4 had 0.029 (19%) — and that 4.4's negative
-effect is largely attributable to its metric scoring abstention identically
-to failure. This analysis does **not** change, soften, or reopen either
-recorded verdict; it is a candidate hypothesis for a future,
-properly pre-registered phase, nothing more. Full numbers, clearly marked
-exploratory:
-[`PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md`](docs/archive/PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md),
-[`PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md`](docs/archive/PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md).
+### Abstention (benchmark, `SIMULATED_POLICY_EVALUATION` — no realized ABSTAIN/RETRY episodes exist in the raw sources)
 
-## New Runtime Learning-Influence Study
+| Task | Selective risk | n | Status |
+|---|---|---|---|
+| ABST-ARITH | 0.0 | 310 | PARTIALLY_VALIDATED |
+| ABST-SENT | 0.3125 | 113 | PARTIALLY_VALIDATED |
+| ABST-QA | 0.03125 | 49 | PARTIALLY_VALIDATED |
 
-The new study is separate from frozen Phase 4. It uses a deterministic simulator with an explicit control condition (empty memory) and learned condition (one declared validated training episode), 20 evaluation episodes per condition, explicit relevance scores, and no evaluation-to-memory leakage. The learned condition retrieved one relevant experience per episode, increased diagnosis confidence from 0.6 to 0.8, reduced uncertainty from 0.4 to 0.2, changed the selected action from `retry` to `reconfigure` in 20/20 episodes, and improved simulator validation success from 0/20 to 20/20. Mean risk stayed at 0.0 because the default runtime has no injected workload model and does not fabricate one. These are controlled integration results, not production or statistical generalization claims. See [`docs/archive/LEARNING_INFLUENCE_REPORT.md`](docs/archive/LEARNING_INFLUENCE_REPORT.md) and [`experiments/results/learning_influence/`](experiments/results/learning_influence/).
+### Calibrated-vs-generic decision policy
 
-## Generalization and Robustness Study
+The generic `DecisionPolicy` (`answer_threshold=0.70`, `abstain_threshold=0.40`)
+and the agent-specific calibrated profile (`AgentDecisionCalibrationProfile`,
+Phase 4.7 — 4 fixed agreement-rate buckets, Laplace-smoothed per-bucket
+estimates, pre-registered expected-utility formula) were both stress-tested:
+an 18-point pre-registered grid over `COST_RETRY_PER_EXTRA_SAMPLE` ×
+`BENEFIT_CORRECT` × `COST_WRONG_ANSWER` produced byte-identical
+decisions/outcomes in all 18 configurations (final accuracy 1.000 on a
+40-seed/3-wrong-episode grid) — no fragility observed within the
+pre-registered range, with the explicit caveat that this small grid limits
+how far "no fragility" generalizes.
 
-The next experiment is isolated under [`experiments/results/generalization/`](experiments/results/generalization/) and uses a new versioned protocol with four failure classes, stochastic action outcomes, five deterministic seeds, shifted related evaluation contexts, exact/related/irrelevant/conflicting/negative/safety/multi-step conditions, and a maximum of three recovery attempts. The current controlled results show **1.00 related-memory recovery success**, **1.00 relevance recall**, **0.00 irrelevant-memory relevance recall**, **1.00 abstention under conflicting memories**, **1.00 abstention under safety conflict**, and **0 retry selections** in the negative-experience condition. The no-memory and irrelevant-memory conditions achieve **0.65** recovery success under the declared simulator. These are multi-seed descriptive simulator results, not production or statistically significant benchmark claims. Full details are in [`docs/archive/GENERALIZATION_EXPERIMENT_REPORT.md`](docs/archive/GENERALIZATION_EXPERIMENT_REPORT.md).
+### Memory — repeated-incident result
 
-## Counterfactual Behavioral-Generalization Study
+| Condition | Sequence (real process restarts) |
+|---|---|
+| Memory ON | retry → retry → reconfigure → **recovered** |
+| Memory OFF | retry × 6 (no adaptation) |
 
-The next experiment is isolated under [`experiments/results/counterfactual_generalization/`](experiments/results/counterfactual_generalization/) and tests genuine behavioral generalization rather than retrieval alone. It hides three latent mechanisms from the runtime, provides two distinct training manifestations per mechanism, and evaluates unseen A3/B3/C3 manifestations. It compares four predeclared baselines: B0 fixed retry, B1 nearest-neighbor action transfer, B2 the current memory-plus-planner runtime, and B3 an observable action-centroid baseline. The clean C7 counterfactual pair changes only memory availability and improves recovery success from **0.20 to 0.80**. C3 exact-memory removal retains **0.80** success, equal to exact training-memory performance in this simulator. The result is evidence of behavioral generalization within this hand-designed latent-mechanism simulator, not production robustness or statistical significance. See [`experiments/results/counterfactual_generalization/report.md`](experiments/results/counterfactual_generalization/report.md).
+Separately, a 300-episode full-loop evaluation (Phase 4.10) found no
+observable ON/OFF difference for a documented structural reason: every
+episode used a distinct `workload_id`, so no episode's stored experience
+was ever eligible for retrieval by a later one — the memory-isolation
+contract behaving exactly as designed, not evidence memory is inert.
 
-## Memory Composition and Planner Superiority Study
+### Failure prediction (P3/P4/P5 evidentiary stages, aggregate-level; all 4 `PRED-*` benchmark tasks are `NOT_EVALUABLE` at record level)
 
-The new study is isolated under [`experiments/results/memory_composition/`](experiments/results/memory_composition/) and asks whether the full FailureMemory + Diagnosis + RecoveryPlanner path does more than copy one nearest historical action. The main X+Z compositional case passes a pre-evaluation discrimination check: E1 X-only and E3 Z-only are each insufficient, while the combined B2 path selects the declared safe abstention. On the five-seed headline evaluation, B1 nearest-only recovery success is **0.20**, B2 full-planner success is **0.00**, and B2 optimal-action rate is **1.00** versus B1 **0.00**. Thus B2 shows a decision-quality advantage in the declared compositional case but a recovery-success disadvantage because the correct action is abstention. The ordering test found a current runtime defect: reversing equally relevant memory order changed B2 between `abstain` and `reconfigure`; this is documented as a limitation rather than hidden. Per-seed results are condition-specific and do not aggregate unrelated baselines or distance bands. See [`experiments/results/memory_composition/report.md`](experiments/results/memory_composition/report.md).
+| Failure class | Real AUROC vs. shuffled control | False-alarm-rate at calibrated threshold | Status |
+|---|---|---|---|
+| `resource_unavailable` | pre-flight-probe feature; combined feature reached AUROC 0.916 (held-out) | — | **STRONG_EVIDENCE** |
+| `oom` (≥2-observability-sample subset) | 0.780 ± 0.096 vs. 0.625 ± 0.093 (shuffled) — real, replicated ranking edge | 1.00 ± 0.00, specificity 0.179 ± 0.254 | **NOT VALIDATED** at operating point despite real ranking signal |
+| `cpu` | 0.616 ± 0.045 vs. 0.389 ± 0.032 (shuffled) | 1.00 ± 0.00 | **NOT VALIDATED, final** |
+| `flaky`, pooled `oom` | nominal edge present | always-fires (≈1.00) | **NOT VALIDATED** |
 
-## Memory Composition v2: Order-Invariant Planning Audit
+### Environment generalization (Phase 4.9, aggregate-level; `GEN-*` benchmark tasks `NOT_EVALUABLE` at record level)
 
-The versioned follow-up is isolated under [`experiments/results/memory_composition_v2/`](experiments/results/memory_composition_v2/). The v1 defect was traced to ordinary floating-point score accumulation over retrieval order followed by exact maximum comparison, so equally relevant opposing evidence could select different actions under permutation. The runtime fix uses commutative `math.fsum` aggregation over evidence contributions and tolerance-aware tie handling; equal unresolved evidence abstains. V2 enumerates both relevant-memory permutations and the explicit equal-similarity tie, producing `abstain` for both orders with decision stability **1.00**. V2 also corrects the v1 ablation report’s namespace mismatch and separately reports recovery success, optimal decision rate, safe decision rate, abstention correctness, unsafe proposal rate, and unsafe execution rate. On C2, B2 retains recovery success **0.00** but reaches optimal decision rate **1.00**, abstention correctness **1.00**, and unsafe execution **0.00**; B1 remains at recovery **0.20** and optimal decision **0.00**. This is a decision-quality and safety result, not evidence of recovery-success superiority or production self-healing. See [`experiments/results/memory_composition_v2/report.md`](experiments/results/memory_composition_v2/report.md).
+| Metric | Dev | Held-out | Robustness |
+|---|---|---|---|
+| OOM AUROC (ranking) | 0.989 | 0.983 | 0.935 |
 
-## Runtime Reliability and Observability Architecture Audit
+**Ranking generalizes; the fixed operating-point threshold does not
+transfer cleanly across environments** — reported as two distinct claims,
+never merged into one "generalizes" statement.
 
-The validated memory-composition/order-invariant checkpoint is complete, but the repository is not yet a genuine observable production runtime. The new read-only architecture audit distinguishes demonstrated mechanisms—failure-memory influence, local simulator generalization, counterfactual behavior, safety gating, negative evidence handling, order-invariant aggregation, compositional decisions, and deterministic reproducibility—from unsupported claims such as production self-healing, real-workload monitoring or prediction, production continual learning, broad real-world generalization, and statistical significance. It also defines the proposed telemetry contract and next runtime-integration phases without implementing them. See [`docs/archive/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md`](docs/archive/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md).
+### Recovery
 
-## Reliability Model Integration Audit
+| Result | Value | Scope |
+|---|---|---|
+| Recovery success (benchmark `REC-EVAL`) | 0/35 (0.0) | Phase 5.2 dataset slice — genuine negative finding |
+| Safety-adversarial matrix | 0/6 and 0/16 incorrectly authorized (two independent phases) | Phase 4.4/5 and Phase 4.5 gap fixes |
+| `RECONFIGURE` vs. `RETRY` on `RESOURCE_UNAVAILABLE` | 100% recovery (Wilson 95% CI [0.91,1.0]) vs. 0% (CI [0.0,0.09]) | n=40 each, real controlled-runtime executions |
 
-The current repository has no protocol-valid persisted workload model and calibrator artifact. The existing model and calibrator are in-memory research objects without a versioned artifact boundary and independent leakage manifest. The default runtime therefore remains the honest unconfigured abstainer with numerical risk `0.0`; no model is fabricated and no API startup training is introduced. See [`docs/archive/RELIABILITY_MODEL_INTEGRATION_AUDIT.md`](docs/archive/RELIABILITY_MODEL_INTEGRATION_AUDIT.md) and [`configs/runtime_demo/model_config.json`](configs/runtime_demo/model_config.json).
+### Diagnosis
 
-## Phase 4.4 / Phase 5 — Closed-Loop Autonomy Pipeline
+| Metric | Value | Caveat |
+|---|---|---|
+| Failure-class-matching accuracy | 1.0 (35/35) | **Never state this without the next line** |
+| False-causal-attribution-rate | 1.0 | No independent causal ground truth exists in this dataset — every diagnosis names a cause, none is independently verified |
 
-`src/phase4/` implements the full observe → predict → decide/abstain →
-diagnose (memory-aware) → plan (memory-informed) → safety-gate → execute →
-independently validate → learn loop end to end (`src/phase4/pipeline.py`,
-`AutonomyPipeline`), replacing the earlier stub `Protocol` interfaces with
-tested implementations: `TelemetryRiskPredictor`
-(`src/phase4/prediction.py`), `AbstentionAwareDecisionPolicy`
-(`src/phase4/decision.py`, reusing the same authoritative
-`src.decision.policy.DecisionPolicy` as the rest of the project rather than
-a new one), `RuleBasedRecoveryPlanner` / `RecoverySafetyGate` /
-`ControlledRuntimeRecoveryExecutor` / `SignalRecoveryValidator`
-(`src/phase4/recovery.py`), and `LearningManager`
-(`src/phase4/learning.py`).
+### Final benchmark capability matrix
 
-Recovery here executes for real against this project's own controlled
-subprocess runtime (`ControlledRuntime.run()` retry/restart) — it is not a
-simulated ground-truth table lookup — and validation independently
-re-derives the outcome from raw events through a fresh `MonitoringEngine`
-rather than trusting the executor's self-report (tested against a
-deliberately lying executor). A frozen historical-memory contract
-(`src/phase4/memory.py`) — scoped by `(workload_id, environment_id,
-failure_class)`, never by `run_id`; temporally safe; versioned; fail-closed
-on under-specified queries — was written and frozen before any memory-read
-path was added to diagnosis, per this project's existing audit discipline.
+16 tasks / 8 tracks / 33 metrics / 10 baselines / 5 ablations, scored
+against the Phase 5.2 canonical dataset:
 
-Run `python scripts/run_phase4_5_pipeline_demo.py` to regenerate real
-evidence into `experiments/results/phase4_4_autonomy_pipeline/results.json`:
-6 closed-loop episodes (including a case where memory measurably changes
-the planner's chosen action across 3 repeated incidents of the same
-workload), a 6-case safety adversarial matrix (0 incorrectly authorized),
-and an honestly-reported prediction evaluation (this run: 0 true positives,
-0 false positives, 5 false negatives, 3 true negatives — reported as
-measured, not tuned after the fact, consistent with this project's
-"measure influence, do not assume it" standard). 36 new unit/integration
-tests cover memory, prediction/decision, recovery/safety/validation,
-monitoring extensions, and the full pipeline; the suite is
-**668 passed / 17 skipped / 0 failed**. Full narrative in the consolidated
-record (`docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx`).
+**0 VALIDATED · 6 PARTIALLY_VALIDATED · 3 UNDERPOWERED · 0 NOT_VALIDATED · 7 NOT_EVALUABLE**
 
-This closes the gap the rest of this README is candid about below: recovery
-execution and validation are now real against this project's own runtime,
-not a lookup table — but that runtime is still a local controlled
-subprocess environment, not a production fleet, so "production
-self-healing" remains future work, not a claim made here.
+Full per-task table: [`BENCHMARK_CARD.md`](experiments/results/phase5_6_external_release/20260827T055356Z/BENCHMARK_CARD.md).
+**Read it left to right — there is no single overall benchmark score.**
 
-## Known Limitations
+## Honest negative and limited findings
 
-- **Recovery now executes for real against this project's own controlled runtime** (`src/phase4/`, see the section above) rather than only a simulated ground-truth table — but that runtime is a local controlled subprocess environment, not a production fleet. The frozen 4.3/4.4 controlled-environment results below still come from their original deterministic ground-truth table and are unchanged.
-- **Simulated recovery, not production infrastructure (frozen 4.3/4.4 results)** — the new runtime has an explicit `SimulatedRecoveryExecutor` and independent validator. The controlled 4.3/4.4 action outcomes still come from a frozen deterministic ground-truth table, and neither those results nor the new demonstration is evidence of real-world recovery-rate improvement.
-- **Default API model is intentionally unconfigured** — `build_runtime_system()` does not train during startup. A versioned workload model and calibrator must be injected for calibrated ANSWER decisions; the default path abstains honestly rather than using synthetic training as hidden runtime initialization.
-- **Two consecutive "hypothesis not supported" verdicts** on recovery learning (4.3, 4.4) — both traced to a specific, documented cause (threshold feasibility + abstention scoring, see [Current Results](#current-results-real-numbers)), not yet re-run under a corrected metric.
-- **Phase 4.2 is underpowered, not negative** — 21 of a pre-registered 50 required evaluable contexts; the evidence-volume gate did what it was designed to do (block an overclaimed result), but the underlying question is still open.
-- **Real-data-dependent tests require a manual data-fetch step** — 14 tests skip cleanly without it; see [`docs/archive/DATA_SETUP.md`](docs/archive/DATA_SETUP.md).
-- **No production authentication, rate limiting, or deployment hardening** on the demo API.
+This section is as visible as the results above, deliberately, per this
+project's own integrity discipline:
 
-Full detail: each phase's own doc is preserved under [`docs/archive/`](docs/archive/); the single consolidated record is [`docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx`](docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx).
+1. **Sentiment uncertainty has a real discrimination ceiling** (AUROC
+   0.439–0.659 depending on scale) that calibration cannot fix — 4
+   candidate estimators tested produced mathematically identical AUROC
+   (rank-equivalent transforms), a real negative result, not a bug.
+2. **3 of 4 failure-prediction classes are `NOT VALIDATED`** — `cpu`,
+   pooled `oom`, and `flaky` all show an always-fires false-alarm-rate near
+   1.0 at their calibrated threshold despite a nominally positive AUROC
+   edge that does not survive replication in most cases.
+3. **All 4 `PRED-*` benchmark tasks are `NOT_EVALUABLE` at record level** —
+   their only supporting evidence is Phase 4 aggregate-level results, with
+   no per-episode join key in the canonical dataset.
+4. **Diagnosis accuracy (1.0) always carries a false-causal-attribution-rate
+   of 1.0 in the same breath** — no independent causal ground truth exists;
+   this is class-matching, not causal diagnosis.
+5. **Recovery success is 0/35 on the benchmark dataset slice** — a genuine
+   negative finding, reported as such, not softened.
+6. **Ranking generalization ≠ operating-point generalization** — OOM
+   ranking transfers well (0.989/0.983/0.935) but the fixed decision
+   threshold does not; these are always reported as two distinct claims.
+7. **Memory adaptation and multi-environment generalization are
+   `NOT_EVALUABLE` at benchmark scale** — 1 repeated-workload group (3
+   records) and 1 represented environment respectively, far below any
+   usable evaluation scale, even though the underlying Phase 4 mechanisms
+   are real and separately demonstrated in aggregate.
+8. **Phase 4.2 pattern learning is underpowered, not negative** — 21 of a
+   pre-registered 50 required evaluable contexts.
+9. **Two consecutive "hypothesis not supported" verdicts** on controlled
+   recovery-policy learning (Phase 4.3, 4.4); a later exploratory,
+   post-hoc, explicitly-not-pre-registered analysis found neither phase
+   had checked feasibility headroom before freezing its threshold — this
+   does not reopen either recorded verdict.
+10. **No model repository was published to Hugging Face** — no single
+    trained-model artifact in this project is independently validated at
+    record level; see [Hugging Face](#hugging-face) below.
 
-## Quick Start
+## Benchmark
+
+16 tasks across 8 tracks (uncertainty, abstention, failure_prediction,
+diagnosis, recovery, memory, generalization, end_to_end), 33 metrics
+(AUROC/AUPRC/Brier/ECE/risk-coverage with bootstrap CIs, Wilson CIs for
+binomial rates), 10 baselines (including adversarial ones like
+`BASE-ALWAYS-ABSTAIN`, flagged `ALWAYS_ABSTAIN_NOT_SUCCESSFUL`, so a
+trivial policy cannot appear to win), 5 ablations (2 computable, 3
+`AGGREGATE_REFERENCE_EVIDENCE` only), 12 leakage rules (3 mechanically
+enforced every run). Determinism verified: the runner executes the full
+benchmark twice per invocation and reports `determinism_check`;
+independently re-verified byte-identical across separate process
+invocations on different days. Full card:
+[`BENCHMARK_CARD.md`](experiments/results/phase5_6_external_release/20260827T055356Z/BENCHMARK_CARD.md).
+Diagram: [`docs/architecture/07_benchmark_architecture.md`](docs/architecture/07_benchmark_architecture.md).
+
+## Dataset
+
+3,106 records: 3,060 `agent_task` episodes (2,000 arithmetic
+self-consistency, 660 sentiment, 400 extractive QA) and 46
+`controlled_runtime` failure/recovery episodes — generated entirely by
+this project's own Phase 4 evaluation code, no third-party dataset
+content. 1 represented environment. Splits (grouped by `workload_id`, 0
+crossings): train=2,142, calibration_validation=482, test=482. Several
+Phase 4 findings (e.g. `resource_unavailable` prediction, OOM environment
+generalization) are real but only exist as **aggregate-level** evidence
+from the original evaluation runs — the canonical dataset has no
+per-episode join key that would let a benchmark re-derive them at record
+level, so those tasks are honestly marked `NOT_EVALUABLE` rather than
+scored from data that cannot support the score. Full card:
+[`DATASET_CARD.md`](experiments/results/phase5_6_external_release/20260827T055356Z/DATASET_CARD.md).
+
+## Hugging Face
+
+- Dataset: <https://huggingface.co/datasets/naishashetty/autonomous-ai-infrastructure-dataset> (CC BY 4.0)
+- Benchmark: <https://huggingface.co/datasets/naishashetty/autonomous-ai-infrastructure-benchmark> (MIT)
+- No model repository was published — see the [Honest negative and limited
+  findings](#honest-negative-and-limited-findings) section, item 10, and
+  `RELEASE_DECISION.md` in the Phase 5.6 release directory for the full
+  reasoning.
+
+## Tech stack
+
+Actually used, per `requirements.txt`: Python, Pydantic (canonical event
+schema), SQLAlchemy + SQLite (persistence), scikit-learn / numpy / pandas /
+scipy (calibration, statistics), PyTorch + Hugging Face Transformers (real
+agent-task models: sentiment/QA checkpoints), matplotlib (reporting),
+FastAPI + Uvicorn (demo API), pytest (unit/integration/e2e/recovery test
+suite). The standalone benchmark release package has a much smaller,
+pinned dependency set — numpy, pandas, scikit-learn, scipy only (see
+`experiments/results/phase5_6_external_release/20260827T055356Z/release/benchmark/requirements.txt`)
+— no torch/transformers required to run the benchmark itself.
+
+## Quick start
 
 ```bash
+git clone https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-.git
+cd Autonomous-AI-Infrastructure-
 python -m venv .venv
-.venv/Scripts/pip install -r requirements.txt   # Windows; .venv/bin/pip on macOS/Linux
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 
-python -m pytest tests/ -v                       # 477 passed / 17 skipped / 1 external warning
-python scripts/run_closed_loop_demo.py            # deterministic two-episode controller trace
-python scripts/run_learning_influence.py          # frozen control-versus-learned experiment; do not overwrite its results
-python scripts/run_generalization.py               # local retrieval-generalization experiment
-python scripts/run_counterfactual_generalization.py  # latent-mechanism counterfactual experiment
-python scripts/run_memory_composition.py        # v1 compositional memory/planner experiment
-python scripts/run_memory_composition_v2.py     # v2 order-invariant planning and ablation audit
-.venv/Scripts/uvicorn src.api.app:app --port 8000  # POST /api/analyze -> canonical runtime controller
-python scripts/run_phase4_5_pipeline_demo.py       # Phase 4.4/5 closed-loop autonomy pipeline evidence run
+python -m pytest tests/ -q                              # full test suite (see Testing below)
+python scripts/run_phase5_4_benchmark.py                # run the 16-task benchmark, writes to experiments/results/
+python scripts/run_phase4_5_pipeline_demo.py            # closed-loop autonomy pipeline evidence run
+python scripts/demo_autonomy_loop.py                    # Phase 6 demo: one real pipeline episode, plain output
+uvicorn src.api.app:app --port 8000                     # POST /api/analyze -> canonical runtime controller
 ```
 
-## Reproducing Results
+## CLI / API demo
 
-Every phase has its own `benchmarks/phase*.py` script(s), named in that
-phase's doc under `docs/archive/`, that regenerate its results deterministically
-from a fixed seed and write to `experiments/results/`. Two are worth
-calling out directly:
+`python scripts/run_phase5_4_benchmark.py` runs the full 16-task benchmark
+against the canonical dataset, runs it twice to verify determinism, and
+writes the capability matrix and all supporting artifacts to
+`experiments/results/phase5_benchmark_implementation/<timestamp>/`.
+`scripts/demo_autonomy_loop.py`
+(new in Phase 6) drives one real episode through
+`AutonomyPipeline.run_workload()` end to end — observe → detect → predict
+→ decide → diagnose → plan → safety-gate → recover → validate → learn —
+and prints each stage's real output. It is not cherry-picked to always
+succeed: whichever outcome the deterministic scenario actually produces
+(recovered, not-recovered, or abstained) is what gets printed. See
+`experiments/results/phase6_finalization/<timestamp>/API_CLI_VALIDATION_REPORT.md`
+for the captured, real (not fabricated) output from the run performed
+during this phase.
 
 ```bash
-python benchmarks/amendment_oracle_relative_analysis.py         # 4.3 + 4.4 headroom-normalized reanalysis
-python benchmarks/check_effect_size_feasibility.py \             # go/no-go check before freezing any future threshold
-    --from-results experiments/results/phase4_3/results.json --baseline-key baseline_fixed_priority --required-effect 0.15
+$ python scripts/demo_autonomy_loop.py
+# illustrative excerpt — see the validation report above for the actual captured run
+[observe]   workload=demo-oom-01 environment=UNSPECIFIED_PRE_4_9
+[detect]    failure_class=PROCESS_OOM confidence=0.61
+[predict]   risk=... (aggregate-only evidence for this class; NOT VALIDATED at operating point)
+[decide]    ANSWER / ABSTAIN -> ...
+[diagnose]  suspected_cause=... (class-matching only, no causal ground truth)
+[plan]      action=RECONFIGURE
+[safety]    authorized=True
+[execute]   real subprocess retry/restart against ControlledRuntime
+[validate]  independently re-derived outcome=...
+[learn]     experience written to FailureMemoryStore
 ```
+
+## Docker
+
+```bash
+docker build -t autonomous-ai-infrastructure:latest .
+docker run --rm autonomous-ai-infrastructure:latest              # runs the benchmark + benchmark-scoped tests
+docker run --rm autonomous-ai-infrastructure:latest pytest tests/unit/test_phase54_benchmark.py -q
+```
+
+CPU only, no GPU assumed. See
+`experiments/results/phase6_finalization/<timestamp>/DOCKER_REPRODUCIBILITY_REPORT.md`
+for whether the build/run was actually verified in this environment or
+only statically inspected.
+
+## CI / testing status
+
+`.github/workflows/ci.yml` runs unit tests, benchmark-specific tests,
+schema/leakage/determinism checks, and a build check on every push/PR (fast
+path). `.github/workflows/full-suite.yml` (manually triggered) runs the
+entire repository test suite including the slower real-model tests. YAML
+syntax was validated with a parser; **Actions were not triggered from this
+environment** (no push to `origin`) — see the CI/CD validation report.
+
+Full local suite result, this phase (blocking run, 24m10s): **878 passed,
+10 failed, 117 warnings.** Breakdown, independently diagnosed this phase:
+
+1. **8 failures** in `tests/runtime/test_counterfactual_generalization.py`
+   — a hardcoded, non-hermetic temp-file path in frozen `src/runtime/`.
+   Documented, out of scope (frozen boundary), not touched.
+2. The previously-reported `huggingface_hub` corruption is **confirmed
+   fixed** this phase (`huggingface_hub` 1.28.0 imports cleanly; all 4
+   previously-affected test files now pass).
+3. **2 additional failures**, newly observed this phase, in
+   `test_p5_step6_memory_repeated_incident.py` and
+   `test_phase412_controlled_runtime.py` (both in the
+   `resource_unavailable` preflight-probe path) — confirmed **flaky under
+   full-suite execution** (both pass in isolation: a TCP port picked by an
+   unrelated earlier test can transiently collide with this test's own
+   port-contention check across ~890 tests). A pre-existing timing
+   sensitivity in `src/phase4/`, not introduced or fixed by this phase
+   (frozen boundary). See `FINAL_SYSTEM_AUDIT.md` in the Phase 6 output
+   directory for the full diagnosis.
+
+## Reproducibility
+
+Every phase has its own script(s) under `benchmarks/` or `scripts/` that
+regenerate its results deterministically from a fixed seed, writing to
+`experiments/results/`. The benchmark runner reproduces byte-identically
+(modulo run metadata) across independent invocations; the release
+packages were independently clean-room reproduced (see
+`CLEAN_ROOM_REPRODUCTION_REPORT.md`).
 
 ## Documentation
 
-The complete project history, findings, and verdicts — everything that used
-to be spread across ~60 separate markdown files — is now consolidated into
-one document:
-[`docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx`](docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx).
-Start there for a single, chronological read of the whole project. The
-original per-phase `.md` files are preserved unmodified (not deleted, since
-several are frozen research records this project's own integrity rules
-require keeping) under [`docs/archive/`](docs/archive/), and are still linked
-individually below and throughout this README for anyone who wants to jump
-straight to a specific phase's primary source.
+- [`docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx`](docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx) — the single consolidated project record, start here for full chronology.
+- [`docs/paper/Autonomous_AI_Infrastructure_Research_Report.md`](docs/paper/Autonomous_AI_Infrastructure_Research_Report.md) — the research write-up.
+- [`experiments/results/phase5_6_external_release/20260827T055356Z/BENCHMARK_CARD.md`](experiments/results/phase5_6_external_release/20260827T055356Z/BENCHMARK_CARD.md) / [`DATASET_CARD.md`](experiments/results/phase5_6_external_release/20260827T055356Z/DATASET_CARD.md) — benchmark and dataset cards.
+- [`docs/archive/DATA_SETUP.md`](docs/archive/DATA_SETUP.md) — fetching/regenerating real datasets locally.
+- [`docs/architecture/`](docs/architecture/README.md) — 8 architecture diagrams.
+- Every other historical per-phase report remains under `docs/archive/`
+  and `experiments/results/` — not linked individually here to keep this
+  front page navigable; the comprehensive record indexes all of them.
 
-- [`docs/archive/PHASE2_REPORT.md`](docs/archive/PHASE2_REPORT.md) — the unified system: what changed from the two source prototypes, and why.
-- [`docs/archive/PHASE4_PLAN.md`](docs/archive/PHASE4_PLAN.md) — the current research phase's plan and amendments.
-- [`docs/archive/DATA_SETUP.md`](docs/archive/DATA_SETUP.md) — fetching/regenerating the real datasets locally.
-- [`docs/archive/SCHEMA.md`](docs/archive/SCHEMA.md) — the compatibility `ReliabilityEvent` schema reference.
-- [`docs/archive/ARCHITECTURE_MAP_BASELINE.md`](docs/archive/ARCHITECTURE_MAP_BASELINE.md) — pre-change architecture classification and target runtime map.
-- [`docs/archive/VERSIONED_MODULE_CLASSIFICATION.md`](docs/archive/VERSIONED_MODULE_CLASSIFICATION.md) — v1/v2, research, runtime, and historical module boundaries.
-- [`docs/archive/LEARNING_INFLUENCE_REPORT.md`](docs/archive/LEARNING_INFLUENCE_REPORT.md) — frozen control-versus-learned study and scientifically bounded interpretation.
-- [`docs/archive/GENERALIZATION_EXPERIMENT_REPORT.md`](docs/archive/GENERALIZATION_EXPERIMENT_REPORT.md) — multi-seed shifted-context generalization, conflict, negative-memory, safety, and multi-step results.
-- [`docs/archive/RELIABILITY_MODEL_INTEGRATION_AUDIT.md`](docs/archive/RELIABILITY_MODEL_INTEGRATION_AUDIT.md) — audit of available model/calibrator artifacts and explicit unconfigured-runtime decision.
-- [`docs/archive/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md`](docs/archive/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md) — read-only audit of telemetry, detection, reliability, memory, diagnosis, recovery, validation, learning, and proposed next-phase interfaces.
-- [`experiments/results/counterfactual_generalization/report.md`](experiments/results/counterfactual_generalization/report.md) — true/counterfactual behavioral-generalization experiment with latent mechanisms, baselines, distance ladder, negative transfer, and safety results.
-- [`experiments/results/memory_composition/report.md`](experiments/results/memory_composition/report.md) — v1 compositional evidence, B1/B2 planner comparison, ablations, safety, negative transfer, and ordering robustness.
-- [`experiments/results/memory_composition_v2/report.md`](experiments/results/memory_composition_v2/report.md) — v2 order-invariant aggregation fix, corrected ablation metrics, abstention semantics, and planner/safety audit.
+## Project structure
 
-Every phase's original doc is preserved under `docs/archive/`; start from the verdict table above
-and follow the link for the phase you need.
+```
+src/
+  phase4/        canonical AutonomyPipeline (observe...learn), agent tasks, prediction, recovery
+  phase5/         Phase 5.2 dataset construction
+  benchmark/       Phase 5.3/5.4 benchmark runner, tasks, metrics, leakage, reporting
+  runtime/ recovery/ failure_experience/ decision/   frozen V1 (Generation 2)
+  failure_memory/ failure_patterns/                  frozen Generation 1 (synthetic)
+  reliability/ data/ data_foundation/ experience/ evaluation/ storage/ schema/ api/
+tests/            unit/ integration/ e2e/ recovery/ runtime/
+scripts/          per-experiment regeneration scripts, Phase 6 demo
+benchmarks/       frozen per-phase benchmark scripts
+configs/          frozen protocol JSON per phase
+experiments/results/   one results directory per phase/run, source of truth for every number
+docs/             comprehensive record, architecture diagrams, research paper, archived per-phase docs
+```
+
+## Research provenance summary
+
+Phase 1 (audit) → Phase 2 (migration, negative result) → Phase 3
+(synthetic + real-data reliability research) → Phase 4 original
+(synthetic failure memory/pattern learning) → Phase 4 active (real-data
+re-run + recovery learning, 4.3/4.4 both "hypothesis not supported") → V1
+(Generation 2, frozen, full closed-loop on Alibaba trace replay) →
+Generation 3 restart (project-owned controlled runtime) → Phase 4.4/4.5
+(full loop connected) → Phase 4.5 gap fixes → Phase 4.5b (real AI/ML agent
+evaluation) → Phase 4.6–4.10 (real HF models, calibrated retry, rigorous
+prediction re-evaluation, environment generalization) → post-P5
+remediation (7 steps) and 5 follow-ups → Phase 5.1–5.6 (dataset
+specification/construction, benchmark specification/implementation,
+finalization, external release) → **Phase 6 (this phase): productization
+and finalization** — no new experiments, no metric or label changes.
+Full detail: `docs/MASTER_RECORD_CONTENT.md`.
+
+## Limitations vs. future work
+
+**Limitations (current, real):**
+- Recovery executes against this project's own local controlled subprocess
+  runtime, not a production fleet.
+- 3 of 4 failure-prediction classes are not validated at their operating
+  point; the 4th is aggregate-only evidence, not record-level.
+- Diagnosis is class-matching, not causal — no causal ground truth exists.
+- The canonical dataset represents 1 environment and near-zero repeated-incident
+  volume, so generalization and memory-adaptation claims cannot be
+  benchmarked at scale even though the underlying mechanisms are real.
+- No production authentication, rate limiting, or deployment hardening on
+  the demo API.
+
+**Future work (not started, not claimed here):**
+- A properly pre-registered re-run of the recovery-learning feasibility
+  question raised by the exploratory 4.3/4.4 amendment analysis.
+- A larger, multi-environment, multi-repeated-incident dataset revision
+  that would make `MEM-EVAL` and `GEN-*` benchmark tasks evaluable.
+- An operating-point-transferable failure-prediction detector for `cpu`/
+  `oom`/`flaky` (currently always-fires at any calibrated threshold tried).
+- Production hardening of the demo API if a deployment use case emerges.
+
+## License
+
+- Code (this repository and the benchmark release package): **MIT** — see [`LICENSE`](LICENSE).
+- Dataset release package: **CC BY 4.0** — see the dataset package's own `LICENSE`.
+
+## Citation
+
+See [`CITATION.cff`](CITATION.cff). Dataset- and benchmark-specific
+citation files are bundled in their respective Hugging Face release
+packages.
+
+## Contributing / research integrity
+
+This project's standing rule: **every number in any document must trace to
+a source artifact under `experiments/results/`, and no negative or
+underpowered finding is ever deleted or softened to make a phase look more
+complete.** Contributions that violate either rule will be reverted. See
+`docs/MASTER_RECORD_CONTENT.md` for the full history of how this discipline
+was applied (and occasionally caught its own violations) throughout the
+project.
+
+## Status
+
+**Phase 4: FROZEN. Phase 5 (5.1–5.6): COMPLETE. Phase 6: FINALIZATION.**
+This project does not claim universal validation of any capability — see
+the capability table and the honest-negative-findings section above before
+relying on any specific claim.

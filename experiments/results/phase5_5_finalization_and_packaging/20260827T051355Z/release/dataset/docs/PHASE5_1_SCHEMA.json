@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phase5.1-canonical-schema-v1",
+  "title": "Autonomous AI Infrastructure — Phase 5.1 Canonical Dataset Schema (design only, not yet instantiated)",
+  "schema_version": "phase5.1-schema-v1.0.0",
+  "compatibility_policy": "see PHASE5_1_SYNTHESIS.md and this file's own '_versioning_policy' block",
+  "type": "object",
+  "definitions": {
+    "Availability": {
+      "type": "string",
+      "enum": ["AVAILABLE_BEFORE_DECISION", "AVAILABLE_AT_DECISION", "AVAILABLE_AFTER_DECISION", "AVAILABLE_AFTER_OUTCOME", "TIMESTAMP_UNKNOWN", "UNAVAILABLE"],
+      "description": "Mirrors src/data_foundation/foundation.py::Availability exactly. Only BEFORE/AT are eligible as pre-decision input."
+    },
+    "EvidenceClass": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "description": "1=canonical raw, 2=canonical derived, 3=report/summary, 4=historical doc, 5=duplicated convenience, 6=engineering test artifact, 7=non-research synthetic fixture, 8=unsupported/invalid evidence. See PHASE5_1_SOURCE_INVENTORY.json."
+    },
+    "ExperimentalBoundary": {
+      "type": "string",
+      "enum": ["controlled_runtime_evidence", "research_evaluation_evidence", "benchmark_ready_evidence", "engineering_only_evidence"]
+    },
+    "LabelType": {
+      "type": "string",
+      "enum": ["OBJECTIVE_GROUND_TRUTH", "OBSERVED_OUTCOME_VALIDATED", "DERIVED_LABEL", "MODEL_PREDICTION", "MODEL_DIAGNOSIS", "HUMAN_ENGINEERING_ANNOTATION", "EXECUTOR_SELF_REPORT_UNVALIDATED", "UNKNOWN", "UNAVAILABLE", "NOT_APPLICABLE"]
+    },
+    "Provenance": {
+      "type": "object",
+      "required": ["source", "source_version", "extraction_method", "timestamp_quality", "evidence_class"],
+      "properties": {
+        "source": {"type": "string"},
+        "source_version": {"type": "string"},
+        "source_record_id": {"type": ["string", "null"]},
+        "extraction_method": {"type": "string", "enum": ["direct_telemetry_read", "sql_query", "deterministic_derivation", "model_inference", "human_report_transcription"]},
+        "transformation": {"type": "string", "default": "identity"},
+        "transformation_version": {"type": ["string", "null"]},
+        "timestamp_quality": {"type": "string", "enum": ["EXACT", "SYNCHRONIZED", "APPROXIMATE", "INFERRED", "UNKNOWN"]},
+        "checksum": {"type": ["string", "null"]},
+        "evidence_class": {"$ref": "#/definitions/EvidenceClass"},
+        "frozen_run_dir": {"type": ["string", "null"]}
+      }
+    },
+    "Track": {"type": "string", "enum": ["controlled_runtime", "agent_task"]},
+    "TaskFamily": {
+      "type": "string",
+      "enum": ["arithmetic_self_consistency", "sentiment_softmax_margin", "extractive_qa_span_logit", "NOT_APPLICABLE"],
+      "description": "Never merged into a generic 'agent' family, per design principle: preserve arithmetic/sentiment/QA as distinct mechanisms."
+    },
+    "FailureClass": {
+      "type": "string",
+      "enum": [
+        "PROCESS_TIMEOUT_CPU", "PROCESS_OOM", "GPU_DEVICE_UNAVAILABLE", "DATA_INTEGRITY_FAILURE",
+        "RESOURCE_UNAVAILABLE", "INTERMITTENT_TRANSIENT_FAILURE", "NETWORK_FAILURE", "GENERIC_FAIL",
+        "AGENT_INCORRECT_ANSWER", "AGENT_TASK_TIMEOUT", "AGENT_WORKER_ERROR", "NONE"
+      ],
+      "description": "Authoritative enum sourced from src/phase4/architecture.py and diagnosis.py's elif chain. NONE = no failure occurred (success episode)."
+    },
+    "EnvironmentId": {
+      "type": "string",
+      "enum": ["phase4.9-env-baseline-cpu", "phase4.9-env-memory-constrained", "phase4.9-env-dependency-network-constrained", "UNSPECIFIED_PRE_4_9"],
+      "description": "UNSPECIFIED_PRE_4_9 covers episodes generated before Phase 4.9 introduced explicit EnvironmentProfile identity; such episodes are eligible for the dataset but not for the environment-generalization benchmark view."
+    },
+    "EnvironmentRole": {"type": "string", "enum": ["development", "held_out", "robustness", "UNSPECIFIED"]},
+    "AutonomyState": {
+      "type": "string",
+      "enum": ["RECEIVED","OBSERVING","PREDICTED","DECIDING","REQUESTING_EVIDENCE","ABSTAINED","ESCALATED","DIAGNOSING","PLANNING","SAFETY_CHECK","EXECUTING","VALIDATING","RECOVERED","NOT_RECOVERED","UNKNOWN","COMPLETED"]
+    },
+    "PredictabilityStatus": {
+      "type": "string",
+      "enum": ["STRONG_EVIDENCE", "PLAUSIBLE", "NOT_VALIDATED", "NOT_PREDICTABLE_SINGLE_CLASS", "NOT_EVALUATED"],
+      "description": "Preserves negative predictability results explicitly; an 'always fires' pattern (false_alarm_rate ~=1.00) forces NOT_VALIDATED regardless of nominal AUROC."
+    },
+    "CapabilityGrade": {"type": "string", "enum": ["A", "B", "C", "D", "NOT_GRADED"]},
+    "SplitAssignment": {"type": "string", "enum": ["train", "calibration_validation", "test", "development_env", "held_out_env", "robustness_env", "EXCLUDED_NOT_ASSIGNED"]},
+
+    "Identity": {
+      "type": "object",
+      "required": ["dataset_version", "schema_version", "record_id", "track", "environment_id", "workload_id", "run_id", "episode_id"],
+      "properties": {
+        "dataset_version": {"type": "string"},
+        "schema_version": {"type": "string"},
+        "source_artifact_version": {"type": "string", "description": "the specific src/phase4 module version (e.g. RUNTIME_VERSION) this record's raw evidence was generated under"},
+        "record_id": {"type": "string"},
+        "track": {"$ref": "#/definitions/Track"},
+        "environment_id": {"$ref": "#/definitions/EnvironmentId"},
+        "environment_role": {"$ref": "#/definitions/EnvironmentRole"},
+        "workload_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "episode_id": {"type": "string"},
+        "seed": {"type": ["integer", "null"]},
+        "group_key": {"type": "string", "description": "leakage-safe grouping key for splitting; see PHASE5_1_SPLIT_POLICY.md — equals workload_id for repeated-incident-safe grouping"}
+      }
+    },
+
+    "Temporal": {
+      "type": "object",
+      "required": ["decision_time", "availability_of_this_record"],
+      "properties": {
+        "observation_time": {"type": ["string", "null"], "format": "date-time"},
+        "decision_time": {"type": "string", "format": "date-time"},
+        "failure_time": {"type": ["string", "null"], "format": "date-time"},
+        "recovery_start_time": {"type": ["string", "null"], "format": "date-time"},
+        "validation_time": {"type": ["string", "null"], "format": "date-time"},
+        "learning_write_time": {"type": ["string", "null"], "format": "date-time"},
+        "availability_of_this_record": {"$ref": "#/definitions/Availability"},
+        "phase_of_episode": {"type": "string", "enum": ["pre_decision", "at_decision", "post_failure", "post_recovery", "during_learning"]}
+      }
+    },
+
+    "Workload": {
+      "type": "object",
+      "properties": {
+        "workload_type": {"type": "string"},
+        "scenario_mode": {"type": "string", "description": "e.g. cpu/oom/gpu/corruption/resource_unavailable/flaky/network/fail/success"},
+        "scenario_parameters": {"type": "object", "description": "the real parameters passed to ControlledRuntime.run(), e.g. alloc_mb, limit_mb, timeout_seconds, port"},
+        "runtime_config": {"type": "object", "description": "RuntimeConfig fields active for this run: timeout_seconds, telemetry_interval_seconds"}
+      }
+    },
+
+    "Observation": {
+      "type": "object",
+      "description": "Only telemetry actually observed; verified against controlled_runtime.py/monitoring.py.",
+      "properties": {
+        "sample_index": {"type": "integer"},
+        "process_rss_bytes": {"type": ["integer", "null"], "description": "null on Windows before post_p5_remediation Step 2 fix — see leakage/provenance notes; never coerce null to 0"},
+        "process_cpu_percent": {"type": ["number", "null"]},
+        "process_age_seconds": {"type": ["number", "null"]},
+        "rss_ratio_env_normalized": {"type": ["number", "null"], "description": "Phase 4.9/Step 4 environment-aware feature; derived, not raw"},
+        "resource_preflight_probe": {"type": "object", "description": "port pre-flight probe result for resource_unavailable family (post-P5 Step 3 feature)"},
+        "gpu_probe_state": {"type": "string", "enum": ["PRESENT", "ABSENT", "PROBE_FAILED", "PROBE_TIMEOUT", "UNAVAILABLE"], "description": "gpu_probe.py's 5-state classification"},
+        "checkpoint_time": {"type": "string", "format": "date-time"},
+        "checkpoint_index": {"type": "integer"},
+        "time_to_failure_seconds": {"type": ["number", "null"], "description": "null when this checkpoint precedes no known future failure at generation time; must never be populated using information after the checkpoint"},
+        "availability": {"$ref": "#/definitions/Availability"}
+      }
+    },
+
+    "AgentOutputArithmetic": {
+      "type": "object",
+      "properties": {
+        "task_family": {"const": "arithmetic_self_consistency"},
+        "task_id": {"type": "string"},
+        "difficulty": {"type": "integer"},
+        "expression": {"type": "string"},
+        "samples": {"type": "array", "items": {"type": "integer"}},
+        "majority_answer": {"type": "integer"},
+        "agreement_rate": {"type": "number"},
+        "correct_answer": {"type": "integer", "description": "ground truth, computed by real arithmetic, never seen by agent_sample"},
+        "is_correct": {"type": "boolean", "description": "OBJECTIVE_GROUND_TRUTH"}
+      }
+    },
+    "AgentOutputSentiment": {
+      "type": "object",
+      "properties": {
+        "task_family": {"const": "sentiment_softmax_margin"},
+        "model_checkpoint": {"const": "distilbert-base-uncased-finetuned-sst-2-english"},
+        "template_label": {"type": "string", "description": "ground truth fixed by template construction (evidence_class=7 for the text corpus itself)"},
+        "predicted_label": {"type": "string"},
+        "softmax_margin": {"type": "number"},
+        "temperature_scaled": {"type": "boolean"},
+        "is_correct": {"type": "boolean"}
+      }
+    },
+    "AgentOutputQA": {
+      "type": "object",
+      "properties": {
+        "task_family": {"const": "extractive_qa_span_logit"},
+        "model_checkpoint": {"const": "distilbert-base-cased-distilled-squad"},
+        "gold_answer_span": {"type": "string", "description": "asserted verbatim substring of context at generation time"},
+        "predicted_span": {"type": "string"},
+        "span_logit_confidence": {"type": "number"},
+        "is_correct": {"type": "boolean"}
+      }
+    },
+
+    "Failure": {
+      "type": "object",
+      "properties": {
+        "failure_class": {"$ref": "#/definitions/FailureClass"},
+        "failure_detected": {"type": "boolean"},
+        "failure_detected_time": {"type": ["string", "null"], "format": "date-time"},
+        "ground_truth_source": {"type": "string", "enum": ["real_subprocess_exit_semantics", "real_checksum_mismatch", "real_port_bind_contention", "real_gpu_probe", "agent_oracle_mismatch", "NOT_APPLICABLE"]}
+      }
+    },
+
+    "Prediction": {
+      "type": "object",
+      "properties": {
+        "prediction_id": {"type": ["string", "null"]},
+        "score": {"type": ["number", "null"]},
+        "model_artifact_version": {"type": ["string", "null"]},
+        "predictability_status": {"$ref": "#/definitions/PredictabilityStatus"},
+        "auroc_family_level": {"type": ["number", "null"], "description": "family-level metric, attached for context; not a per-episode ground truth"},
+        "false_alarm_rate_family_level": {"type": ["number", "null"]},
+        "label_type": {"const": "MODEL_PREDICTION"}
+      }
+    },
+
+    "Decision": {
+      "type": "object",
+      "properties": {
+        "decision_id": {"type": "string"},
+        "action": {"type": "string", "enum": ["ANSWER", "RETRY", "REVIEW", "ABSTAIN", "ESCALATE"]},
+        "policy_profile": {"type": "string", "enum": ["generic", "agent_specific_calibrated"]},
+        "safety_status": {"type": "string", "enum": ["AUTHORIZED", "DENIED", "NOT_EVALUATED"]},
+        "rationale": {"type": "string"},
+        "label_type": {"const": "MODEL_PREDICTION"}
+      }
+    },
+
+    "Diagnosis": {
+      "type": "object",
+      "properties": {
+        "diagnosis_id": {"type": "string"},
+        "suspected_cause": {"type": ["string", "null"], "description": "null = UNKNOWN, a valid retained value"},
+        "alternative_causes": {"type": "array", "items": {"type": "string"}},
+        "confidence": {"type": ["string", "null"], "enum": ["HIGH", "MEDIUM", "LOW", null]},
+        "causal_status": {"type": "string", "enum": ["OBSERVED", "CORRELATED", "UNKNOWN"]},
+        "memory_informed": {"type": "boolean"},
+        "label_type": {"const": "MODEL_DIAGNOSIS"}
+      }
+    },
+
+    "Recovery": {
+      "type": "object",
+      "properties": {
+        "action_id": {"type": "string"},
+        "action_type": {"type": "string", "enum": ["RETRY", "RESTART", "ROLLBACK", "RECONFIGURE", "ESCALATE", "ABSTAIN"]},
+        "reversible": {"type": "boolean"},
+        "authorization_required": {"type": "boolean"},
+        "authorized": {"type": "boolean"},
+        "executed": {"type": "boolean"},
+        "executor_self_report": {"type": ["string", "null"], "description": "label_type=EXECUTOR_SELF_REPORT_UNVALIDATED — must never be copied into validated_outcome"},
+        "recovery_success_rate_family_level": {"type": ["number", "null"]}
+      }
+    },
+
+    "Safety": {
+      "type": "object",
+      "properties": {
+        "safety_gate_evaluated": {"type": "boolean"},
+        "unsafe_authorization": {"type": "boolean", "description": "target is always false; recorded explicitly rather than assumed"},
+        "circuit_breaker_triggered": {"type": "boolean"}
+      }
+    },
+
+    "Validation": {
+      "type": "object",
+      "properties": {
+        "validation_status": {"type": "string", "enum": ["RECOVERED", "NOT_RECOVERED", "UNKNOWN"]},
+        "validator": {"const": "SignalRecoveryValidator_independent_rederivation"},
+        "label_type": {"const": "OBSERVED_OUTCOME_VALIDATED"}
+      }
+    },
+
+    "MemoryInteraction": {
+      "type": "object",
+      "properties": {
+        "memory_id_written": {"type": ["string", "null"]},
+        "memory_version_at_write": {"type": ["integer", "null"]},
+        "memory_matches_read": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "memory_id": {"type": "string"},
+              "relevance": {"type": "number"},
+              "age_seconds": {"type": "number"},
+              "source_run_id_excluded_check": {"const": true}
+            }
+          }
+        },
+        "scope_key": {"type": "string", "description": "(workload_id, environment_id, failure_class) — the ONLY legal retrieval scope, never run_id"}
+      }
+    },
+
+    "Generalization": {
+      "type": "object",
+      "properties": {
+        "fit_environment_id": {"$ref": "#/definitions/EnvironmentId"},
+        "eval_environment_role": {"$ref": "#/definitions/EnvironmentRole"},
+        "zero_shot": {"type": "boolean", "description": "true iff this environment's data never influenced fitting/thresholding/feature choice"},
+        "degradation_from_dev": {"type": ["number", "null"]}
+      }
+    },
+
+    "Labels": {
+      "type": "object",
+      "required": ["label_type"],
+      "properties": {
+        "label_type": {"$ref": "#/definitions/LabelType"},
+        "value": {"description": "polymorphic; interpretation depends on label_type"},
+        "origin_record_id": {"type": "string"},
+        "is_ground_truth_eligible": {"type": "boolean", "description": "true only for OBJECTIVE_GROUND_TRUTH and OBSERVED_OUTCOME_VALIDATED"}
+      }
+    },
+
+    "SchemaVersioning": {
+      "type": "object",
+      "properties": {
+        "schema_version": {"type": "string"},
+        "compatibility_policy": {"type": "string", "const": "additive-minor, breaking-major; see PHASE5_1_SYNTHESIS.md"},
+        "deprecated_fields": {"type": "array", "items": {"type": "string"}},
+        "immutable_identifier_fields": {"type": "array", "items": {"type": "string"}, "const": ["record_id", "run_id", "workload_id", "episode_id", "memory_id"]}
+      }
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "identity": {"$ref": "#/definitions/Identity"},
+    "provenance": {"$ref": "phase5.1-canonical-schema-v1#/definitions/Provenance"},
+    "experimental_boundary": {"$ref": "#/definitions/ExperimentalBoundary"},
+    "evidence_class": {"$ref": "#/definitions/EvidenceClass"},
+    "temporal": {"$ref": "#/definitions/Temporal"},
+    "workload": {"$ref": "#/definitions/Workload"},
+    "observations": {"type": "array", "items": {"$ref": "#/definitions/Observation"}},
+    "agent_output": {
+      "oneOf": [
+        {"$ref": "#/definitions/AgentOutputArithmetic"},
+        {"$ref": "#/definitions/AgentOutputSentiment"},
+        {"$ref": "#/definitions/AgentOutputQA"},
+        {"type": "null"}
+      ]
+    },
+    "failure": {"$ref": "#/definitions/Failure"},
+    "prediction": {"$ref": "#/definitions/Prediction"},
+    "decision": {"$ref": "#/definitions/Decision"},
+    "diagnosis": {"$ref": "#/definitions/Diagnosis"},
+    "recovery": {"$ref": "#/definitions/Recovery"},
+    "safety": {"$ref": "#/definitions/Safety"},
+    "validation": {"$ref": "#/definitions/Validation"},
+    "memory_interaction": {"$ref": "#/definitions/MemoryInteraction"},
+    "generalization": {"$ref": "#/definitions/Generalization"},
+    "labels": {"type": "array", "items": {"$ref": "#/definitions/Labels"}},
+    "split_assignment": {"$ref": "#/definitions/SplitAssignment"},
+    "capability_grade_context": {"$ref": "#/definitions/CapabilityGrade"}
+  },
+  "required": ["identity", "provenance", "experimental_boundary", "evidence_class", "temporal", "split_assignment"],
+
+  "_versioning_policy": {
+    "current_version": "phase5.1-schema-v1.0.0",
+    "policy": "semantic versioning over the schema, not the data. MAJOR: any removal or type-narrowing of an existing field, or any change to an enum that removes a value. MINOR: adding a new optional field or a new enum value. PATCH: documentation-only changes. A field may be deprecated (moved to a 'deprecated_fields' list) for at least one MINOR version before removal in a MAJOR version. New fields must specify 'availability' status from day one, never silently default to a fabricated value. record_id/run_id/workload_id/episode_id/memory_id are immutable identifiers and must never be reassigned across schema versions."
+  }
+}

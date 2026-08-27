@@ -15,7 +15,7 @@ from src.phase4.pipeline import AutonomyPipeline
 
 @pytest.fixture()
 def pipeline():
-    tmp = tempfile.TemporaryDirectory()
+    tmp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
     store = PersistentEventStore(pathlib.Path(tmp.name) / "events.sqlite")
     config = RuntimeConfig(timeout_seconds=0.3, telemetry_interval_seconds=0.02)
     runtime = ControlledRuntime(store, config)
@@ -79,7 +79,19 @@ def test_abstention_path_is_reachable_when_predicted_risk_is_high(pipeline):
     from src.phase4.decision import AbstentionAwareDecisionPolicy
     from src.decision.policy import PolicyConfig
 
-    pipeline.decision_policy = AbstentionAwareDecisionPolicy(PolicyConfig(answer_threshold=0.99, abstain_threshold=0.7))
+    # Phase 4.10 audit fix: a pure CPU busy-loop workload has ~0 rss_ratio
+    # and ~0 anomaly_rate (no memory allocation in the spin loop), and
+    # elapsed_ratio clips to exactly 1.0 once the configured timeout has
+    # elapsed (prediction.py's TelemetryRiskPredictor always evaluates at
+    # the failure_detected event's own timestamp, which by construction is
+    # at/after the deadline). So this scenario's risk is DETERMINISTICALLY
+    # `WEIGHT_ELAPSED_RATIO * 1.0 = 0.30` (never more, never less) on every
+    # machine -- not measurement noise. abstain_threshold=0.7 previously
+    # sat exactly ON that boundary (fused_score = 1 - risk = 0.70 exactly),
+    # and DecisionPolicy.decide()'s ABSTAIN rule is a strict `<`, so this
+    # scenario could never actually abstain as written. 0.75 gives this
+    # deterministic 0.70 fused_score real headroom below the threshold.
+    pipeline.decision_policy = AbstentionAwareDecisionPolicy(PolicyConfig(answer_threshold=0.99, abstain_threshold=0.75))
     result = pipeline.run_workload("cpu", {"mode": "cpu", "duration_seconds": 2.0}, workload_id="workload-timeout-heavy")
     assert result.decision is not None
     assert result.decision.decision == "ABSTAIN"

@@ -16,7 +16,7 @@ from src.phase4.pipeline import AutonomyPipeline
 
 @pytest.fixture()
 def pipeline():
-    tmp = tempfile.TemporaryDirectory()
+    tmp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
     store = PersistentEventStore(pathlib.Path(tmp.name) / "events.sqlite")
     config = RuntimeConfig(timeout_seconds=0.2, telemetry_interval_seconds=0.01)
     runtime = ControlledRuntime(store, config)

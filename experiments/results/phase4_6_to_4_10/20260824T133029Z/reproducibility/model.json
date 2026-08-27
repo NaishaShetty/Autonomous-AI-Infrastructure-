@@ -1,0 +1,37 @@
+{
+  "classification": {
+    "task_family": "classification",
+    "model_id": "distilbert-base-uncased-finetuned-sst-2-english",
+    "model_revision": "714eb0fa89d2f80546fda750413ed43d93601a13",
+    "source": "huggingface_hub",
+    "tokenizer_id": "distilbert-base-uncased-finetuned-sst-2-english",
+    "device": "cpu",
+    "precision": "fp32",
+    "seed": 4600,
+    "torch_version": "2.13.0+cpu",
+    "transformers_version": "5.15.1",
+    "python_version": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "runtime_version": "phase4.6-real-model-runtime-v1"
+  },
+  "extractive_qa": {
+    "task_family": "extractive_qa",
+    "model_id": "distilbert-base-cased-distilled-squad",
+    "model_revision": "564e9b582944a57a3e586bbb98fd6f0a4118db7f",
+    "source": "huggingface_hub",
+    "tokenizer_id": "distilbert-base-cased-distilled-squad",
+    "device": "cpu",
+    "precision": "fp32",
+    "seed": 4600,
+    "torch_version": "2.13.0+cpu",
+    "transformers_version": "5.15.1",
+    "python_version": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "runtime_version": "phase4.6-real-model-runtime-v1"
+  },
+  "arithmetic": {
+    "task_family": "arithmetic",
+    "task_version": "phase4.5b-agent-arithmetic-task-v1",
+    "note": "synthetic controlled baseline, not a pretrained model; retained unchanged from Phase 4.5b"
+  }
+}

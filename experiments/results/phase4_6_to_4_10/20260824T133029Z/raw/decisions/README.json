@@ -1,0 +1,5 @@
+{
+  "note": "Per-episode decision objects (AutonomyDecision/AgentAutonomyDecision) are not separately dumped to disk for this run to keep artifact size bounded -- every evaluation script in scripts/run_phase4_*.py is fully deterministic given its documented seed ranges, so any decision record can be reproduced exactly by re-running the relevant script (see each report's reproducibility section). Aggregated decision-outcome breakdowns (decision distribution, retry rate, review rate, abstention rate) ARE persisted per-condition in evaluation/retry_metrics.json and evaluation/ablation_results.json.",
+  "reproduce_full_loop_decisions": "python scripts/run_phase4_10_final_integrated_evaluation.py <output_dir>",
+  "reproduce_baseline_vs_calibrated_decisions": "python scripts/run_phase4_7_retry_calibration_experiment.py <output_dir>"
+}

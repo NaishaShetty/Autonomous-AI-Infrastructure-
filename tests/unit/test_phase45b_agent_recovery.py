@@ -15,7 +15,7 @@ from src.phase4.recovery import RecoverySafetyGate, RuleBasedRecoveryPlanner, Si
 
 
 def _runtime(n_samples=1):
-    tmp = tempfile.TemporaryDirectory()
+    tmp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
     store = PersistentEventStore(pathlib.Path(tmp.name) / "events.sqlite")
     runtime = AgentTaskRuntime(store, AgentRunConfig(n_samples=n_samples))
     return runtime, tmp

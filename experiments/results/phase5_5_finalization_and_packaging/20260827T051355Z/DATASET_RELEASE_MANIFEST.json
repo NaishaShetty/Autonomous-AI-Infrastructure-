@@ -1,0 +1,150 @@
+{
+  "_meta": {
+    "package": "dataset",
+    "dataset_version": "phase5.2-dataset-v1.0.0",
+    "total_files": 20,
+    "total_size_bytes": 9313246
+  },
+  "files": [
+    {
+      "path": "CITATION.cff",
+      "size_bytes": 674,
+      "sha256": "7ba06b57877b128d359e35514425015c415f1fa4bab514be85980d31141e6e89",
+      "classification": "PUBLIC",
+      "purpose": "citation metadata"
+    },
+    {
+      "path": "DATASET_CARD.md",
+      "size_bytes": 4655,
+      "sha256": "d74360f62ea3b5e2e39d62162f2804a8405861d1b677b7fb11e4768e334cf35c",
+      "classification": "PUBLIC",
+      "purpose": "release card"
+    },
+    {
+      "path": "DATASET_README.md",
+      "size_bytes": 5241,
+      "sha256": "fc89ec0ec07fd7df23d958725fb2b304204cff41533a54a5f0aef95dd3cb3465",
+      "classification": "PUBLIC",
+      "purpose": "release content"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1534,
+      "sha256": "614bba11e317e0c67b9cf90cca6544215a409b1f9991b6ccc54c103c12b20e88",
+      "classification": "PUBLIC",
+      "purpose": "release usage guide"
+    },
+    {
+      "path": "data/SHA256_MANIFEST.json",
+      "size_bytes": 2489,
+      "sha256": "6f03964b7118a3a602d6eed792848a2f8bb7f01cb17da2bec8ecabd08864cbb7",
+      "classification": "PUBLIC",
+      "purpose": "release content"
+    },
+    {
+      "path": "data/all_records.jsonl",
+      "size_bytes": 8290562,
+      "sha256": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83",
+      "classification": "PUBLIC",
+      "purpose": "dataset content"
+    },
+    {
+      "path": "data/dataset_metadata.json",
+      "size_bytes": 1079,
+      "sha256": "e84bcad8539f94f499002182522db43bf93b9d4d1943a0a987e005e4dfab6e7b",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/dataset_statistics.json",
+      "size_bytes": 2040,
+      "sha256": "487ab59d56219176812b38a44cbd6d9b3868f48058033da022bb6af53ea77384",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/leakage_audit.json",
+      "size_bytes": 108,
+      "sha256": "c16608573ce5c4f557332023dd6fc2ec7e67d7d812414b2a204959a3c885e109",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/lineage.json",
+      "size_bytes": 106144,
+      "sha256": "78701dc5abb5c6c813fa14f8c09b3000f0678ac93e7e2f870794b4f5ebe8c384",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/provenance_audit.json",
+      "size_bytes": 710,
+      "sha256": "dccaa1ea4b2d12fd5fcd9e3800859a6e439b4d0303b2807a91c0159775fe6694",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/publication_boundary_audit.json",
+      "size_bytes": 788,
+      "sha256": "305c9dd969feb1be5d1aec28f5c8dcb3995d77fff7ff356f19b080dd7c19d4b9",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/record_id_audit.json",
+      "size_bytes": 252,
+      "sha256": "5a498a4e25e2104663756cec2e2818b53b67238162ddfd9ddd92755f142e532c",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/split_assignment_manifest.json",
+      "size_bytes": 848448,
+      "sha256": "f2597fea99c42f1c44a5aa622b9cfdef57f69711f3db57538804fe36428cd703",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "data/split_audit.json",
+      "size_bytes": 2054,
+      "sha256": "4cd964806ebdb1000569c52d4f3d6e4f227ac32a3dd75602b9e7240de4bf18bd",
+      "classification": "PUBLIC",
+      "purpose": "dataset integrity/provenance artifact"
+    },
+    {
+      "path": "docs/PHASE5_1_LEAKAGE_POLICY.md",
+      "size_bytes": 7759,
+      "sha256": "597662caea5db3877187b504a642839653e1798af7f5077dcbbe96671675d5aa",
+      "classification": "PUBLIC",
+      "purpose": "Phase 5.1 protocol/schema documentation"
+    },
+    {
+      "path": "docs/PHASE5_1_PROVENANCE_CONTRACT.md",
+      "size_bytes": 7025,
+      "sha256": "716181bbdf13ef03de01796ad0bb4eb4f3163f0cc264960b36eaa99607704302",
+      "classification": "PUBLIC",
+      "purpose": "Phase 5.1 protocol/schema documentation"
+    },
+    {
+      "path": "docs/PHASE5_1_PUBLICATION_BOUNDARY.md",
+      "size_bytes": 6309,
+      "sha256": "462fe26a9306ff67d30b6f590d7ea823b86307cc9494f6a526fc6a67c5653628",
+      "classification": "PUBLIC",
+      "purpose": "Phase 5.1 protocol/schema documentation"
+    },
+    {
+      "path": "docs/PHASE5_1_SCHEMA.json",
+      "size_bytes": 18531,
+      "sha256": "724675dd52dba3e0210d267af4f54c5991bd0bb9cb06f3d8c534d95c0a0f709a",
+      "classification": "PUBLIC",
+      "purpose": "Phase 5.1 protocol/schema documentation"
+    },
+    {
+      "path": "docs/PHASE5_1_SPLIT_POLICY.md",
+      "size_bytes": 6844,
+      "sha256": "cee17979da2dc816b21d6d38fc83dd9aab4815c99c50b3af8f49c0892907e18f",
+      "classification": "PUBLIC",
+      "purpose": "Phase 5.1 protocol/schema documentation"
+    }
+  ]
+}

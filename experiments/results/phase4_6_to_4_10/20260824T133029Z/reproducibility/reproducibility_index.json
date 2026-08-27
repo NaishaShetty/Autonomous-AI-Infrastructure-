@@ -1,0 +1,27 @@
+{
+  "note": "Per-priority reproducibility manifests live alongside each priority's own protocol/evaluation files in this same run directory. This index just points to them so the whole run's reproducibility trail can be found from one place.",
+  "run_id": "20260824T133029Z",
+  "python_version": "3.12.13",
+  "pytest_version": "9.1.1",
+  "os": "Windows-11-10.0.26200-SP0",
+  "hardware_note": "This machine has a real NVIDIA GeForce RTX 4050 Laptop GPU with a working nvidia-smi -- see protocol/phase4_10_protocol.json's audit_findings for why this matters (the controlled runtime's 'gpu' mode assumes no GPU device is present).",
+  "priority_manifests": {
+    "phase4_6": {
+      "protocol": "protocol/experiment_protocol.json",
+      "model_manifest": "reproducibility/model.json",
+      "dataset_manifest": "reproducibility/dataset.json",
+      "seeds_manifest": "reproducibility/seeds.json",
+      "environment_manifest": "reproducibility/environment.json"
+    },
+    "phase4_7": {"protocol": "protocol/phase4_7_protocol.json"},
+    "phase4_8": {"protocol": "protocol/phase4_8_protocol.json"},
+    "phase4_9": {"protocol": "protocol/phase4_9_protocol.json"},
+    "phase4_10": {"protocol": "protocol/phase4_10_protocol.json"}
+  },
+  "software_versions": {
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.1",
+    "scikit-learn": "1.9.0",
+    "numpy": "2.4.6"
+  }
+}

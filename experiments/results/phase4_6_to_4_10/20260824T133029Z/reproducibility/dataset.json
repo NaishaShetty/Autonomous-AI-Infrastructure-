@@ -1,0 +1,9 @@
+{
+  "classification_corpus_version": "phase4.6-sentiment-templated-v2",
+  "qa_corpus_version": "phase4.6-qa-templated-v2",
+  "arithmetic_seed_range": [
+    0,
+    2000
+  ],
+  "generator": "data/real_model_tasks/generate_corpora.py"
+}

@@ -1,0 +1,37 @@
+{
+  "audit": "temporal_leakage",
+  "scope": "Phase 4.6-4.10 new code paths (real-model tasks, agent calibration, prediction_eval_v2, environments, ablations)",
+  "checks_performed": [
+    {
+      "check": "rolling_checkpoints() prefix construction",
+      "result": "PASS",
+      "evidence": "src/phase4/prediction.py's rolling_checkpoints() excludes any failure_detected event from every prefix and only includes events at or before each checkpoint's own timestamp; prediction_eval_v2.py and environments.py both reuse this function unmodified rather than re-deriving the temporal cut"
+    },
+    {
+      "check": "agent uncertainty predictor only reads events strictly before the failure boundary",
+      "result": "PASS",
+      "evidence": "pipeline.py's run_agent_task computes prediction_prefix by filtering to event_type != failure_detected and timestamp < failure_boundary, unchanged by Phase 4.7's agent_decision_policy addition"
+    },
+    {
+      "check": "AgentDecisionCalibrationProfile.fit() only touches its own calibration seed range",
+      "result": "PASS",
+      "evidence": "tests/unit/test_agent_calibration.py::test_fit_only_touches_the_calibration_split asserts total observed rows == calibration split size exactly"
+    },
+    {
+      "check": "prediction_eval_v2 train/validation/test seed ranges are disjoint per replicate, and disjoint ACROSS replicates",
+      "result": "PASS",
+      "evidence": "scripts/run_phase4_8_prediction_evaluation.py's REPLICATE_SEED_OFFSETS (0, 100000, 200000) with train/validation/test blocks at offset+0, offset+500000, offset+900000 -- no overlap possible within or across replicates"
+    },
+    {
+      "check": "environment generalization (Phase 4.9) never lets held-out/robustness data influence the frozen model",
+      "result": "PASS",
+      "evidence": "scripts/run_phase4_9_environment_generalization.py fits and calibrates only on BASELINE_CPU train/validation seeds; held-out and robustness environments only ever receive the already-frozen model+threshold via compute_metrics(), never model.fit()"
+    },
+    {
+      "check": "label-shuffle negative control (Phase 4.8) shuffles at the RUN level, not per-checkpoint",
+      "result": "PASS",
+      "evidence": "src/phase4/prediction_eval_v2.py's _shuffle_labels_by_run permutes which run_id got which label, preserving within-run label consistency across all of that run's checkpoints -- verified by tests/unit/test_prediction_eval_v2.py::test_shuffle_preserves_within_run_label_consistency_across_multiple_checkpoints_per_run"
+    }
+  ],
+  "verdict": "No temporal leakage found in any Phase 4.6-4.10 code path."
+}

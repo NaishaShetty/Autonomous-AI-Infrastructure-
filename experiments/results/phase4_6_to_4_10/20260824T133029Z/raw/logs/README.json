@@ -1,0 +1,4 @@
+{
+  "note": "Raw stdout/stderr logs from the evaluation script runs that produced this run's artifacts were captured to session-local scratch files during generation and are not committed here to keep the repository artifact tree bounded to structured, reusable data (JSON metrics/protocol/reproducibility files) rather than free-text console transcripts. Every script under scripts/run_phase4_*.py prints its own summary to stdout when run and is fully reproducible from its documented, frozen seed ranges (see protocol/*.json and each report's own methodology section).",
+  "full_suite_regression_log_summary": "802 passed, 4 failed (see reports/PHASE4_10_FINAL_INTEGRATED_EVALUATION.md section 5 for the exact command, duration, and failure list)"
+}

@@ -1,0 +1,35 @@
+MIT License
+
+Copyright (c) 2026 Autonomous AI Infrastructure project contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Scope note: this license covers the source code in this repository (all
+`src/`, `scripts/`, `tests/` content, including the Phase 5.3/5.4 benchmark
+implementation under `src/benchmark/`). It does NOT cover the Phase 5.2
+canonical dataset content, which is released separately under CC BY 4.0 (see
+`experiments/results/phase5_6_external_release/*/release/dataset/LICENSE`).
+It also does not cover, and makes no license claim over, the two third-party
+Hugging Face model checkpoints referenced by this project
+(`distilbert-base-uncased-finetuned-sst-2-english`,
+`distilbert-base-cased-distilled-squad`, both Apache-2.0, © their respective
+authors) — this project only runs those checkpoints locally for inference and
+records their derived numeric outputs; it does not redistribute their weights.

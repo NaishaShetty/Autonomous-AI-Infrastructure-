@@ -1,0 +1,42 @@
+{
+  "priority": "phase4.7-priority2-agent-calibrated-retry",
+  "objective": "Determine whether a mechanism-aware calibrated policy can safely use RETRY when evidence indicates positive expected value, while still abstaining/reviewing when it does not -- without lowering the generic DecisionPolicy's thresholds.",
+  "module": "src/phase4/agent_calibration.py",
+  "profile_class": "AgentDecisionCalibrationProfile",
+  "calibration_version": "phase4.7-agent-decision-calibration-v1",
+  "split_seeds": {"train": [0, 2000], "calibration": [10000, 12000], "test": [60000, 60300]},
+  "base_n_samples": 5,
+  "buckets_fixed_before_calibration": ["0.0-0.4", "0.4-0.6", "0.6-0.8", "0.8-1.0"],
+  "utility_constants_fixed_before_calibration": {
+    "benefit_correct": 1.0,
+    "cost_wrong_answer": 1.0,
+    "cost_retry_per_extra_sample": 0.01,
+    "cost_review": 0.30,
+    "cost_abstain": 0.40,
+    "max_retry_n_samples": 40,
+    "retry_sample_increase_factor": 2
+  },
+  "integrity_notes": [
+    "TEST split (60000-60300) never used to fit bucket probabilities or select utility constants",
+    "TRAIN split (0-2000) reserved for protocol symmetry with prediction_training.SplitSeeds; unused by this non-ML profile, documented as such",
+    "utility constants fixed in code before the TEST-split experiment ran; not tuned after inspecting TEST results",
+    "pipeline.py change is additive and opt-in: agent_decision_policy=None (default) is provably byte-identical to the pre-Phase-4.7 code path"
+  ],
+  "ablation": {
+    "baseline": "generic DecisionPolicy (answer_threshold=0.70, abstain_threshold=0.40), agent_decision_policy=None",
+    "calibrated": "AgentDecisionCalibrationProfile fit on the calibration split above"
+  },
+  "incidental_fix": {
+    "description": "tempfile.TemporaryDirectory(ignore_cleanup_errors=True) added to 8 test files to resolve a pre-existing Windows SQLite-handle-vs-tmpdir-cleanup race (test-infrastructure only, no src/ changes)",
+    "files": [
+      "tests/integration/test_phase44_pipeline.py",
+      "tests/integration/test_phase45b_agent_pipeline.py",
+      "tests/integration/test_phase45b_prediction_scope_router_pipeline.py",
+      "tests/integration/test_phase45_continuous_mode.py",
+      "tests/integration/test_phase45_pipeline_extensions.py",
+      "tests/unit/test_phase45b_agent_recovery.py",
+      "tests/unit/test_phase45b_agent_runtime.py",
+      "tests/unit/test_phase45b_prediction_scope_router.py"
+    ]
+  }
+}

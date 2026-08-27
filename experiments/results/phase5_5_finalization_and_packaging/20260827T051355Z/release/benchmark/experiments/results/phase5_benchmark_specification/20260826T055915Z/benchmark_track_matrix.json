@@ -1,0 +1,14 @@
+{
+  "_meta": {"benchmark_version": "phase5.3-benchmark-v1.0.0", "purpose": "Compact cross-reference: track x task x eligibility x dataset coverage, for quick lookup without reading the full task catalog."},
+  "matrix": [
+    {"track": "uncertainty", "tasks": ["UNC-ARITH", "UNC-SENT", "UNC-QA"], "eligibility": ["EVALUABLE", "EVALUABLE", "EVALUABLE"], "dataset_coverage": "FULLY_SUPPORTED"},
+    {"track": "abstention", "tasks": ["ABST-ARITH", "ABST-SENT", "ABST-QA"], "eligibility": ["LIMITED", "LIMITED", "LIMITED"], "dataset_coverage": "PARTIALLY_SUPPORTED"},
+    {"track": "failure_prediction", "tasks": ["PRED-RESOURCE-UNAVAILABLE", "PRED-OOM", "PRED-CPU", "PRED-FLAKY"], "eligibility": ["NOT_EVALUABLE", "NOT_EVALUABLE", "NOT_EVALUABLE", "NOT_EVALUABLE"], "dataset_coverage": "UNSUPPORTED_CONTRACT_ONLY"},
+    {"track": "diagnosis", "tasks": ["DIAG-EVAL"], "eligibility": ["LIMITED"], "dataset_coverage": "PARTIALLY_SUPPORTED"},
+    {"track": "recovery", "tasks": ["REC-EVAL"], "eligibility": ["LIMITED"], "dataset_coverage": "PARTIALLY_SUPPORTED"},
+    {"track": "memory", "tasks": ["MEM-EVAL"], "eligibility": ["NOT_EVALUABLE"], "dataset_coverage": "UNSUPPORTED_CONTRACT_ONLY"},
+    {"track": "generalization", "tasks": ["GEN-RANKING-CONTRACT", "GEN-OPERATING-POINT-CONTRACT"], "eligibility": ["NOT_EVALUABLE", "NOT_EVALUABLE"], "dataset_coverage": "UNSUPPORTED_CONTRACT_ONLY"},
+    {"track": "end_to_end", "tasks": ["E2E-EVAL"], "eligibility": ["LIMITED"], "dataset_coverage": "PARTIALLY_SUPPORTED"}
+  ],
+  "totals": {"tracks": 8, "tasks": 16, "evaluable": 3, "limited": 6, "not_evaluable": 7}
+}

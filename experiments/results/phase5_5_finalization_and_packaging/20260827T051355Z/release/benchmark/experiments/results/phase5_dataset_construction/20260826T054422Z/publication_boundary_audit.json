@@ -1,0 +1,13 @@
+{
+  "classification_applied": {
+    "agent_task_episode_records": "PUBLIC_DATASET_CONTENT",
+    "controlled_runtime_episode_records": "PUBLIC_DATASET_CONTENT",
+    "engineering_test_artifacts": "EXCLUDED (tests/ never read as a content source)",
+    "sqlite_memory_store_files": "EXCLUDED_FROM_THIS_CONSTRUCTION (step6_memory_on.sqlite / step6_persistence_check.sqlite were never read by this script)",
+    "trained_model_artifacts_referenced": "EXCLUDED_FROM_THIS_CONSTRUCTION (not ingested as records; prediction_artifact/ and prediction_scope_router_artifact/ pickled artifacts were never read by this script)",
+    "v1_gen2_evidence": "EXCLUDED (never referenced by any source in src/phase5/sources.py)"
+  },
+  "findings": [],
+  "total_findings": 0,
+  "total_records_scanned": 3106
+}

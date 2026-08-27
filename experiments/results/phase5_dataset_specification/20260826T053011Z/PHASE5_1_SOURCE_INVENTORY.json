@@ -1,0 +1,317 @@
+{
+  "inventory_id": "phase5.1-source-inventory-v1",
+  "generated_from": "read-only audit of docs/MASTER_RECORD_CONTENT.md, FINAL_PHASE4_CLOSURE_REPORT.md, FINAL_WEAKNESS_REGISTER.md, FINAL_SYSTEM_AUDIT.md, DOCUMENT_CLEANUP_MANIFEST.md, docs/archive/*, experiments/results/*, src/phase4/*",
+  "classification_scheme": {
+    "1": "CANONICAL_RAW_EVIDENCE - directly produced by a real controlled-runtime execution, real subprocess, real HF model inference, or a real external dataset (Alibaba/AgentRx/AIOps); nothing derived from it yet",
+    "2": "CANONICAL_DERIVED_EVIDENCE - a deterministic, documented transformation of raw evidence (features, corpora rows, checkpoints, aggregated metrics) produced by versioned code under src/phase4",
+    "3": "REPORTS_SUMMARIES - markdown narrative reports that quote/derive from canonical evidence but are not themselves machine-readable evidence",
+    "4": "HISTORICAL_DOCUMENTATION - frozen docs/archive/* material describing earlier generations (Gen 1, Gen 2/V1, Phase 3) not part of the Phase 4 Gen-3 evidence base",
+    "5": "DUPLICATED_CONVENIENCE_OUTPUTS - copies or restatements of canonical evidence kept for convenience (e.g. .docx snapshot, per-phase README restatements)",
+    "6": "ENGINEERING_TEST_ARTIFACTS - pytest suite outputs, CI-style logs, regression fixtures; valuable for reproducibility, not for the research dataset itself",
+    "7": "NON_RESEARCH_SYNTHETIC_FIXTURES - deterministic templated corpora (sentiment/QA text) generated for evaluation convenience, not real-world data, and not evidence of any real failure/agent behavior",
+    "8": "UNSUPPORTED_OR_INVALID_EVIDENCE - claims, numbers, or artifacts explicitly flagged in the frozen record as not validated, a mixing artifact, non-replicating, or otherwise unfit as ground truth"
+  },
+  "sources": [
+    {
+      "id": "SRC-001",
+      "path": "src/phase4/controlled_runtime.py",
+      "class": 1,
+      "produces": "real local subprocess executions across 8 modes (cpu, oom, gpu, corruption, resource_unavailable, flaky, network, fail); real telemetry events (process_rss_bytes, process_cpu_percent, process_age_seconds, resource_preflight_probe)",
+      "notes": "RUNTIME_VERSION=phase4.5-controlled-runtime-v2; SCHEMA_VERSION=3.11.3.12.v1; RSS telemetry Windows defect fixed in post-P5 remediation Step 2 -- pre-fix runs are evidence of the defect, not of OOM signal, and must be tagged accordingly if ever ingested"
+    },
+    {
+      "id": "SRC-002",
+      "path": "src/phase4/environments.py",
+      "class": 2,
+      "produces": "3 EnvironmentProfile definitions (baseline_cpu/development, memory_constrained/held_out, dependency_network_constrained/robustness) and CorpusRow generation over them",
+      "notes": "Fit/threshold-calibration is baseline_cpu-only by construction; held_out/robustness rows must never be used for fitting downstream"
+    },
+    {
+      "id": "SRC-003",
+      "path": "src/phase4/prediction_training.py",
+      "class": 2,
+      "produces": "CorpusRow objects (seed, split, run_id, workload_id, failure_class, label, checkpoint_index, checkpoint_time, time_to_failure_seconds, features, mode); trained LogisticRegression risk models",
+      "notes": "Unpinned random_state (ENG-3, NOT YET STARTED) -- a documented test-order/RNG sensitivity in the FIT path itself, not in any reported metric (each reported metric used its own seeded protocol)"
+    },
+    {
+      "id": "SRC-004",
+      "path": "src/phase4/prediction_eval_v2.py",
+      "class": 2,
+      "produces": "within-family, negative-controlled (label-shuffled), replicated AUROC/false-alarm-rate evaluation per failure family",
+      "notes": "Authoritative source for the final predictability verdicts (cpu/oom/flaky NOT VALIDATED; resource_unavailable STRONG EVIDENCE)"
+    },
+    {
+      "id": "SRC-005",
+      "path": "src/phase4/diagnosis.py",
+      "class": 2,
+      "produces": "Diagnosis objects (suspected_cause, alternative_causes, evidence, contradictory_evidence, confidence) per failure class",
+      "notes": "Contains the fixed _eligible_current_incident boundary (EVALUATION_INCIDENT_001); a diagnosis output is a MODEL OUTPUT, never ground truth"
+    },
+    {
+      "id": "SRC-006",
+      "path": "src/phase4/memory.py",
+      "class": 2,
+      "produces": "MemoryRecord rows in FailureMemoryStore (SQLite); scoped by (workload_id, environment_id, failure_class), never run_id; versioned by memory_version",
+      "notes": "FROZEN CONTRACT per file docstring; validated_outcome comes from SignalRecoveryValidator, not from the recovery executor's self-report"
+    },
+    {
+      "id": "SRC-007",
+      "path": "src/phase4/recovery.py",
+      "class": 2,
+      "produces": "RecoveryAction plans, real execution results (RETRY/RESTART/ROLLBACK/RECONFIGURE), SignalRecoveryValidator outcomes",
+      "notes": "Executor self-report is distinct from validator-derived outcome; only the latter is eligible as an observed-outcome label"
+    },
+    {
+      "id": "SRC-008",
+      "path": "src/phase4/adaptive.py",
+      "class": 2,
+      "produces": "AdaptiveRecoveryPlanner online Beta(1,1)-smoothed success-rate estimates",
+      "notes": "Derived from memory; itself a model output, not ground truth"
+    },
+    {
+      "id": "SRC-009",
+      "path": "src/phase4/guardrails.py",
+      "class": 2,
+      "produces": "RecoveryCircuitBreaker execution caps per (workload_id, environment_id)",
+      "notes": "Safety-relevant; affects action eligibility, not a labeling source"
+    },
+    {
+      "id": "SRC-010",
+      "path": "src/phase4/agent_task.py",
+      "class": 1,
+      "produces": "TaskInstance (arithmetic), SelfConsistencyResult (samples, majority_answer, agreement_rate, is_correct) -- a real, ground-truth-checked oracle",
+      "notes": "correct_answer computed by real arithmetic, never read by agent_sample; is_correct is OBJECTIVE_GROUND_TRUTH"
+    },
+    {
+      "id": "SRC-011",
+      "path": "src/phase4/classification_task.py",
+      "class": 1,
+      "produces": "sentiment classification task instances, real DistilBERT softmax outputs, softmax-margin uncertainty",
+      "notes": "Uses distilbert-base-uncased-finetuned-sst-2-english (real HF checkpoint); label ground truth fixed by template construction (class 7 for the templated text itself, class 1 for the real model inference on it)"
+    },
+    {
+      "id": "SRC-012",
+      "path": "src/phase4/qa_task.py",
+      "class": 1,
+      "produces": "extractive QA task instances, real DistilBERT span-logit confidence",
+      "notes": "Uses distilbert-base-cased-distilled-squad; gold answer asserted substring of context at generation time (class 7 for text corpus, class 1 for real model inference)"
+    },
+    {
+      "id": "SRC-013",
+      "path": "data/real_model_tasks/generate_corpora.py",
+      "class": 7,
+      "produces": "deterministic templated sentiment/QA text corpora",
+      "notes": "Synthetic/templated -- correctness guaranteed by construction, not a real-world text distribution; must never be presented as a standard external benchmark (GLUE/SQuAD)"
+    },
+    {
+      "id": "SRC-014",
+      "path": "src/phase4/agent_runtime.py",
+      "class": 2,
+      "produces": "agent execution orchestration across task families",
+      "notes": "Glue code; produces episode-level records, not itself a data source"
+    },
+    {
+      "id": "SRC-015",
+      "path": "src/phase4/agent_recovery.py",
+      "class": 2,
+      "produces": "AgentRecoveryExecutor RETRY (doubled self-consistency samples) execution results",
+      "notes": "Real, measurably more costly action; execution outcome subject to same validator-vs-self-report distinction as SRC-007"
+    },
+    {
+      "id": "SRC-016",
+      "path": "src/phase4/agent_calibration.py",
+      "class": 2,
+      "produces": "AgentDecisionCalibrationProfile (4 agreement-rate buckets, Laplace-smoothed p_correct/p_retry_success)",
+      "notes": "Fit on a disjoint calibration split; a MODEL PARAMETER artifact, not a label source"
+    },
+    {
+      "id": "SRC-017",
+      "path": "src/phase4/gpu_probe.py",
+      "class": 2,
+      "produces": "5-state GPU device classification with provenance",
+      "notes": "Fixed for determinism in post-P5 remediation Step 1"
+    },
+    {
+      "id": "SRC-018",
+      "path": "src/phase4/uncertainty_eval.py",
+      "class": 2,
+      "produces": "AUROC/Brier/ECE evaluation of uncertainty mechanisms per task family",
+      "notes": "Authoritative source for arithmetic (0.953/0.636), sentiment (0.659), QA (0.934) uncertainty numbers"
+    },
+    {
+      "id": "SRC-019",
+      "path": "src/phase4/ablations.py",
+      "class": 2,
+      "produces": "retry-off ablation, memory ON/OFF ablation results",
+      "notes": "Causal-confirmation evidence, e.g. retry-off ablation for the 1.7%->0.0% error-rate result"
+    },
+    {
+      "id": "SRC-020",
+      "path": "src/data_foundation/foundation.py",
+      "class": 2,
+      "produces": "CanonicalEvent, Provenance, DecisionTimeSnapshot, Availability, FailureRecord schema primitives (SCHEMA_VERSION=3.11.3.12.v1)",
+      "notes": "The authoritative low-level schema that every Phase 4 event/record is built from; the canonical schema in this Phase 5.1 spec is a superset/specialization of this, not a replacement"
+    },
+    {
+      "id": "SRC-021",
+      "path": "experiments/results/phase4_4_autonomy_pipeline/",
+      "class": 2,
+      "produces": "Phase 4.4/4.5 raw episode evidence (668/693 passed test runs' generated evidence)",
+      "notes": "Real controlled-runtime evidence; earliest Gen-3 full-loop evidence"
+    },
+    {
+      "id": "SRC-022",
+      "path": "experiments/results/phase4_5_autonomy_pipeline_at_scale/",
+      "class": 2,
+      "produces": "at-scale evidence + prediction_artifact/ (TrainedRiskPredictor versioned artifact)",
+      "notes": "Trained model artifact with checksum; canonical derived evidence"
+    },
+    {
+      "id": "SRC-023",
+      "path": "experiments/results/phase4_5b_recognition_and_agent_evaluation/",
+      "class": 2,
+      "produces": "PredictionScopeRouter evidence, real agent-task evidence, prediction_scope_router_artifact/",
+      "notes": "detectable_only_scope AUC=0.857 explicitly flagged class 8 (mixing artifact, not predictive skill)"
+    },
+    {
+      "id": "SRC-024",
+      "path": "experiments/results/phase4_6_to_4_10/20260824T133029Z/",
+      "class": 2,
+      "produces": "real HF model evaluation, calibrated retry experiment, rigorous prediction re-evaluation, environment generalization; protocol/, evaluation/, audits/, raw/, reports/, reproducibility/, SHA256_MANIFEST.json",
+      "notes": "Authoritative source for Phase 4.6-4.10 numbers; internally checksum-manifested"
+    },
+    {
+      "id": "SRC-025",
+      "path": "experiments/results/post_p5_remediation/20260825T064402Z/",
+      "class": 2,
+      "produces": "7-step remediation raw evidence, audits/, reports/, manifests/, reproducibility/, SHA256_MANIFEST.json",
+      "notes": "FROZEN. Single most authoritative source for final predictability/generalization/memory verdicts. Read-only for this Phase 5.1 work."
+    },
+    {
+      "id": "SRC-026",
+      "path": "experiments/results/post_p5_remediation_followups/20260825T144031Z/",
+      "class": 2,
+      "produces": "5 follow-up experiments' raw evidence; FOLLOWUPS_SUMMARY.md; reports/, protocol/, raw/, manifests/",
+      "notes": "FROZEN. Final-state verdicts for cpu/oom/resource_unavailable prediction, P2-W1/W3, P5 re-evaluation."
+    },
+    {
+      "id": "SRC-027",
+      "path": "experiments/results/system_evaluation/",
+      "class": 2,
+      "produces": "5 independent full-pipeline evaluation bundles; EVALUATION_INCIDENT_001.md and its status doc",
+      "notes": "Source of the diagnosis cross-run-contamination discovery; pre-fix runs are evidence of the defect only"
+    },
+    {
+      "id": "SRC-028",
+      "path": "experiments/results/phase4_closure/",
+      "class": 3,
+      "produces": "closure-phase supporting material",
+      "notes": "Report-class; not independent raw evidence"
+    },
+    {
+      "id": "SRC-029",
+      "path": "experiments/results/generalization/",
+      "class": 2,
+      "produces": "memory recovery success / relevance recall / abstention-under-conflict standalone study",
+      "notes": "Independent, isolated research study, real controlled-runtime evidence"
+    },
+    {
+      "id": "SRC-030",
+      "path": "experiments/results/counterfactual_generalization/",
+      "class": 2,
+      "produces": "counterfactual behavioral-generalization study (C7 pair)",
+      "notes": "Standalone study; real controlled-runtime evidence"
+    },
+    {
+      "id": "SRC-031",
+      "path": "experiments/results/memory_composition/ , memory_composition_v2/",
+      "class": 2,
+      "produces": "memory-order permutation studies; v1 found a real runtime defect, v2 confirms fsum fix",
+      "notes": "v1 evidence includes a known, since-fixed defect; keep tagged as pre-fix historical evidence, do not treat as current-system behavior"
+    },
+    {
+      "id": "SRC-032",
+      "path": "experiments/results/learning_influence/",
+      "class": 2,
+      "produces": "LearningManager integration study (20/20 episodes)",
+      "notes": "Controlled integration result, not a statistical-generalization claim -- must not be reweighted as such in any dataset split"
+    },
+    {
+      "id": "SRC-033",
+      "path": "experiments/results/v1_1/ , v1_control_reconciliation/ , reliability_runtime_v1/ , reliability_runtime_v2/ , alibaba_closed_loop_v1/ , alibaba_closed_loop_v2/",
+      "class": 4,
+      "produces": "Generation 2 (V1, frozen) evidence over Alibaba GPU2020 trace replay",
+      "notes": "FROZEN, historical. Explicitly out of scope for Gen-3 dataset unless a future phase explicitly designs a cross-generation comparison view; must never be silently merged with Gen-3 controlled-runtime evidence (different data-generating process -- trace replay vs. real subprocess)"
+    },
+    {
+      "id": "SRC-034",
+      "path": "experiments/results/phase3_1 .. phase3_6, phase3_2c, phase3_real_data",
+      "class": 4,
+      "produces": "Phase 3 synthetic + real-data reliability research",
+      "notes": "FROZEN historical track; independent of Phase 4 by src/phase3_contract.py's own explicit statement"
+    },
+    {
+      "id": "SRC-035",
+      "path": "experiments/results/phase4_0 .. phase4_4, phase4_1_active, phase4_2_active",
+      "class": 4,
+      "produces": "original/active-era Phase 4 pattern-learning and failure-memory evidence (Gen 1 track)",
+      "notes": "Predates Gen-3 controlled runtime; H1 partially supported, H2 inconclusive"
+    },
+    {
+      "id": "SRC-036",
+      "path": "docs/archive/*.md (56+ files)",
+      "class": 4,
+      "produces": "narrative documentation for Phase 1-4 and V1",
+      "notes": "Historical documentation, not raw/derived evidence itself"
+    },
+    {
+      "id": "SRC-037",
+      "path": "docs/MASTER_RECORD_CONTENT.md",
+      "class": 3,
+      "produces": "single consolidated narrative record, cites canonical paths",
+      "notes": "Best single entry point per project convention; a report, not a primary source"
+    },
+    {
+      "id": "SRC-038",
+      "path": "docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx",
+      "class": 5,
+      "produces": "historical snapshot superseded by MASTER_RECORD_CONTENT.md",
+      "notes": "Duplicated convenience output, preserved unchanged"
+    },
+    {
+      "id": "SRC-039",
+      "path": "FINAL_PHASE4_CLOSURE_REPORT.md , FINAL_WEAKNESS_REGISTER.md , FINAL_SYSTEM_AUDIT.md , DOCUMENT_CLEANUP_MANIFEST.md",
+      "class": 3,
+      "produces": "closure-phase reports/audits",
+      "notes": "Reports; authoritative for verdicts/grades but not raw data themselves"
+    },
+    {
+      "id": "SRC-040",
+      "path": "tests/{unit,integration,e2e,recovery,runtime}/",
+      "class": 6,
+      "produces": "pytest suite (837 passed / 0 failed at freeze)",
+      "notes": "Engineering test artifacts; valuable for reproducibility verification, excluded from the research dataset content itself"
+    },
+    {
+      "id": "SRC-041",
+      "path": "data/ (Alibaba GPU2020, AgentRx, CCF AIOps 2020)",
+      "class": 1,
+      "produces": "3 real external operational datasets",
+      "notes": "Gitignored, fetched via docs/archive/DATA_SETUP.md; used exclusively by frozen Phase 3/V1 tracks, not by the Gen-3 controlled runtime; checksum-verified against publisher"
+    },
+    {
+      "id": "SRC-042",
+      "path": "reports referencing detectable_only_scope AUC=0.857 (Phase 4.5b)",
+      "class": 8,
+      "produces": "N/A",
+      "notes": "Explicitly flagged by the project itself as a mixing artifact, not real predictive skill -- excluded as a label/ground-truth source, retained only as a documented negative/cautionary finding"
+    },
+    {
+      "id": "SRC-043",
+      "path": "pre-RSS-telemetry-fix OOM prediction evidence (any run before post_p5_remediation Step 2)",
+      "class": 8,
+      "produces": "N/A",
+      "notes": "Silently-broken telemetry (RSS always None on Windows); unsupported as an OOM-signal evidence source, valid only as evidence of the defect itself"
+    }
+  ]
+}

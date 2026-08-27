@@ -1,0 +1,82 @@
+{
+  "by_decision_type": {
+    "ANSWER": 4,
+    "NOT_APPLICABLE": 3101,
+    "REVIEW": 1
+  },
+  "by_failure_class": {
+    "AGENT_INCORRECT_ANSWER": 219,
+    "GENERIC_FAIL": 13,
+    "NETWORK_FAILURE": 11,
+    "NONE": 2852,
+    "PROCESS_OOM": 10,
+    "PROCESS_TIMEOUT_CPU": 1
+  },
+  "by_outcome_class": {
+    "ANSWERED_CORRECT": 2841,
+    "ANSWERED_INCORRECT": 219,
+    "NOT_RECOVERED": 34,
+    "NO_FAILURE": 11,
+    "UNKNOWN": 1
+  },
+  "by_recovery_outcome": {
+    "NOT_APPLICABLE": 3071,
+    "NOT_RECOVERED": 34,
+    "UNKNOWN": 1
+  },
+  "by_split_assignment": {
+    "calibration_validation": 482,
+    "test": 482,
+    "train": 2142
+  },
+  "by_task_family": {
+    "NOT_APPLICABLE": 46,
+    "arithmetic_self_consistency": 2000,
+    "extractive_qa_span_logit": 400,
+    "sentiment_softmax_margin": 660
+  },
+  "by_track": {
+    "agent_task": 3060,
+    "controlled_runtime": 46
+  },
+  "by_track_and_split": {
+    "agent_task": {
+      "calibration_validation": 471,
+      "test": 472,
+      "train": 2117
+    },
+    "controlled_runtime": {
+      "calibration_validation": 11,
+      "test": 10,
+      "train": 25
+    }
+  },
+  "by_uncertainty_mechanism": {
+    "NOT_APPLICABLE": 41,
+    "arithmetic_self_consistency": 2000,
+    "controlled_runtime_prediction_score": 5,
+    "extractive_qa_span_logit": 400,
+    "sentiment_softmax_margin": 660
+  },
+  "environments": 1,
+  "episodes": 3106,
+  "negative_result_counts": {
+    "NOT_RECOVERED_episodes": 34,
+    "UNKNOWN_diagnosis_episodes": 0,
+    "UNKNOWN_validation_episodes": 1,
+    "agent_task_incorrect_answers": 219,
+    "failure_class_mapping_fallback_used": 0,
+    "predictability_status_NOT_EVALUATED": 3065
+  },
+  "runs": 3106,
+  "total_records": 3106,
+  "unknown_unavailable_not_applicable_counts": {
+    "decision_absent_NOT_APPLICABLE": 3101,
+    "diagnosis_suspected_cause_null_UNKNOWN": 0,
+    "environment_id_UNSPECIFIED_PRE_4_9": 3106,
+    "prediction_absent_NOT_APPLICABLE": 41,
+    "recovery_absent_NOT_APPLICABLE": 3071,
+    "validation_status_UNKNOWN": 1
+  },
+  "workloads": 3104
+}

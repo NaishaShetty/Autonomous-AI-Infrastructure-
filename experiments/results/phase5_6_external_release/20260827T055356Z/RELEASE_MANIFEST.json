@@ -1,0 +1,51 @@
+{
+  "phase": "5.6",
+  "purpose": "External Hugging Face release readiness audit and packaging for the Phase 5.5-finalized dataset and benchmark; no publish performed",
+  "generated_at_utc": "20260827T055356Z",
+  "repository_commit": "8086e7185d0917e8431749db0f0c47ba18088eb5",
+  "source_phase5_5_directory": "experiments/results/phase5_5_finalization_and_packaging/20260827T051355Z",
+  "release_packages": {
+    "dataset": {
+      "path": "release/dataset",
+      "n_files": 21,
+      "version": "phase5.2-dataset-v1.0.0",
+      "schema_version": "phase5.1-schema-v1.0.0",
+      "n_records": 3106,
+      "sha256_all_records_jsonl": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83"
+    },
+    "benchmark": {
+      "path": "release/benchmark",
+      "n_files": 63,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "implementation_version": "phase5.4-implementation-v1.0.0",
+      "config_hash": "d8d349a545a1910bfada66de5628cf3ebb52c50f9a15465dd34840ab8de5e08b",
+      "n_unit_tests_passing_in_cleanroom": 41
+    }
+  },
+  "total_public_release_files": 84,
+  "redactions_applied_this_phase": [
+    {
+      "file": "release/benchmark/experiments/results/phase5_dataset_construction/20260826T054422Z/regeneration_audit.json",
+      "fields": ["run_a", "run_b"],
+      "reason": "contained developer-machine absolute temp paths including Windows username and session id",
+      "impact_on_reproducibility": "none; fields are informational and not consumed by any loader/validator code"
+    }
+  ],
+  "license_status": "RESOLVED - MIT for benchmark/software code, CC BY 4.0 for the dataset, decided by the project owner 2026-08-27; see LICENSE_PROVENANCE_AUDIT.md for the upstream redistribution audit and RELEASE_DECISION.md for the decision record",
+  "security_audit_result": "1 finding (redacted), 0 credentials/tokens/passwords found",
+  "publication_boundary_audit_result": "PASS - 0 excluded-category artifacts present in release/",
+  "dataset_integrity_result": "PASS - 3106/3106 records parse, SHA-256 matches manifest, 0 split overlaps",
+  "benchmark_integrity_result": "PASS - clean-room run byte-identical (modulo run metadata) to frozen Phase 5.4 reference, config_hash matches",
+  "clean_room_reproduction_result": "PASS - see CLEAN_ROOM_REPRODUCTION_REPORT.md",
+  "determinism_result": "PASS - internal double-run and cross-machine/cross-day comparison both identical",
+  "leakage_result": "PASS - 0 violations, inherited from Phase 5.2/5.4/5.5 and re-verified",
+  "cross_environment_portability_result": "PASS - no hardcoded OS-specific paths, no GPU assumption, no hash()-order or filesystem-order dependence, host identity excluded by code",
+  "full_repo_test_suite": "20 failed, 868 passed, 1353.24s (22m33s). 8 failures are the previously-known tests/runtime/test_counterfactual_generalization.py set (frozen src/runtime/, unrelated). 12 new failures traced to a corrupted local huggingface_hub package install (ModuleNotFoundError), breaking transformers-dependent src/phase4/real_model_runtime.py tests; a local environment defect, not a repository or release-package defect. release/benchmark/ has zero dependency on transformers/torch/huggingface_hub. See FINAL_PUBLICATION_AUDIT.md and RELEASE_DECISION.md for full detail.",
+  "huggingface_publish_attempted": false,
+  "recommended_hf_artifacts": {
+    "dataset_repository": "RECOMMENDED - CC BY 4.0",
+    "benchmark_evaluation_package": "RECOMMENDED - MIT",
+    "model_repository": "NOT RECOMMENDED - no validated end-to-end model artifact exists; see RELEASE_DECISION.md"
+  },
+  "release_decision": "READY_FOR_PUBLICATION - see RELEASE_DECISION.md"
+}

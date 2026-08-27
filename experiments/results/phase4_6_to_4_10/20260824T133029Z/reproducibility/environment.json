@@ -1,0 +1,6 @@
+{
+  "python_version": "3.12.13",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "metrics_version": "phase4.6-uncertainty-eval-v1",
+  "runtime_version": "phase4.6-real-model-runtime-v1"
+}

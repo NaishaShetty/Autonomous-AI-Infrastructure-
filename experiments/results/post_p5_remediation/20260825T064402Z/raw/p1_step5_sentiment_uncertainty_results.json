@@ -1,0 +1,72 @@
+{
+  "corpus_version": "phase4.6-sentiment-templated-v2",
+  "n_total": 660,
+  "n_calibration": 253,
+  "n_test": 407,
+  "fitted_temperature": 2.929413318634033,
+  "candidates": {
+    "baseline_softmax_confidence": {
+      "n": 407,
+      "mechanism": "baseline_softmax_confidence",
+      "task_family": "classification",
+      "accuracy": 0.9090909090909091,
+      "error_rate": 0.09090909090909094,
+      "n_correct": 370,
+      "n_incorrect": 37,
+      "auroc_error_detection": 0.6285975164353542,
+      "auprc_error_detection": 0.42742902569961116,
+      "brier_score": 0.08823575595916076,
+      "ece": 0.08896693828943615,
+      "metrics_version": "phase4.6-uncertainty-eval-v1"
+    },
+    "margin": {
+      "n": 407,
+      "mechanism": "margin",
+      "task_family": "classification",
+      "accuracy": 0.9090909090909091,
+      "error_rate": 0.09090909090909094,
+      "n_correct": 370,
+      "n_incorrect": 37,
+      "auroc_error_detection": 0.6285609934258584,
+      "auprc_error_detection": 0.42742902569961116,
+      "brier_score": 0.0857862869321611,
+      "ece": 0.08702478595953247,
+      "metrics_version": "phase4.6-uncertainty-eval-v1"
+    },
+    "entropy_based_confidence": {
+      "n": 407,
+      "mechanism": "entropy_based_confidence",
+      "task_family": "classification",
+      "accuracy": 0.9090909090909091,
+      "error_rate": 0.09090909090909094,
+      "n_correct": 370,
+      "n_incorrect": 37,
+      "auroc_error_detection": 0.6285609934258584,
+      "auprc_error_detection": 0.42742902569961116,
+      "brier_score": 0.07830028182289744,
+      "ece": 0.07736033563233788,
+      "metrics_version": "phase4.6-uncertainty-eval-v1"
+    },
+    "temperature_scaled_confidence": {
+      "n": 407,
+      "mechanism": "temperature_scaled_confidence",
+      "task_family": "classification",
+      "accuracy": 0.9090909090909091,
+      "error_rate": 0.09090909090909094,
+      "n_correct": 370,
+      "n_incorrect": 37,
+      "auroc_error_detection": 0.6285609934258582,
+      "auprc_error_detection": 0.42742902569961116,
+      "brier_score": 0.07489299651555754,
+      "ece": 0.023451681951340057,
+      "metrics_version": "phase4.6-uncertainty-eval-v1"
+    }
+  },
+  "verdict": {
+    "baseline_auroc": 0.6285975164353542,
+    "best_candidate": "baseline_softmax_confidence",
+    "best_auroc": 0.6285975164353542,
+    "improvement_over_baseline": 0.0,
+    "material_improvement": false
+  }
+}

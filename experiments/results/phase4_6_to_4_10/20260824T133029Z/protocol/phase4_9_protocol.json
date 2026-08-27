@@ -1,0 +1,23 @@
+{
+  "priority": "phase4.9-priority4-independent-environments",
+  "objective": "Determine whether the learned uncertainty/prediction relationship transfers to genuinely different controlled conditions -- not merely a different run_id/environment_id label.",
+  "module": "src/phase4/environments.py",
+  "environments_version": "phase4.9-independent-environments-v1",
+  "environments": [
+    {"environment_id": "phase4.9-env-baseline-cpu", "role": "development"},
+    {"environment_id": "phase4.9-env-memory-constrained", "role": "held_out"},
+    {"environment_id": "phase4.9-env-dependency-network-constrained", "role": "robustness"}
+  ],
+  "protocol": {
+    "dev_train_seeds": [0, 500],
+    "dev_validation_seeds": [500000, 500150],
+    "test_seeds_per_environment": [900000, 900150],
+    "model_fit_and_threshold_calibrated_on": "development environment only",
+    "held_out_and_robustness_data_never_used_for": ["training", "threshold_selection", "feature_selection"]
+  },
+  "integrity_notes": [
+    "each environment's test corpus is generated under that environment's OWN RuntimeConfig and scenario generator -- a real difference in resource limits/timing/dependency contention, not a relabeled identical run",
+    "one frozen model+threshold per family, evaluated zero-shot (no refitting) against all three environments",
+    "NOT_PREDICTABLE_SINGLE_CLASS_IN_THIS_ENVIRONMENT reported honestly (cpu family, robustness environment) rather than fabricating a score when a sample happened to contain only one outcome class"
+  ]
+}

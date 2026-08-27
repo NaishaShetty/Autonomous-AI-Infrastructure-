@@ -16,3 +16,14 @@ venv/
 *.pem
 *.key
 *.crt
+
+# Local scratch / IDE / OS cruft (Phase 6 cleanup)
+.cowork_scratch/
+*.tmp
+*.bak
+*~
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log

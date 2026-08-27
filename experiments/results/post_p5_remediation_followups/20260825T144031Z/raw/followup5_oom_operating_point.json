@@ -1,0 +1,407 @@
+{
+  "protocol": "frozen full_v3 oom predictor from P3 Step 3, same 3 seed-range replicates, threshold never re-selected using either test subset",
+  "subsets": {
+    "ge2_samples": {
+      "aggregate_metrics": {
+        "auprc": {
+          "mean": 0.9858671869381808,
+          "n": 3,
+          "std": 0.012314083475122334
+        },
+        "auroc": {
+          "mean": 0.7802935726163484,
+          "n": 3,
+          "std": 0.09608587367602997
+        },
+        "brier_score": {
+          "mean": 0.19983215097310209,
+          "n": 3,
+          "std": 0.00826406338392746
+        },
+        "detection_before_failure_rate": {
+          "mean": 1.0,
+          "n": 3,
+          "std": 0.0
+        },
+        "ece": {
+          "mean": 0.3304255982784058,
+          "n": 3,
+          "std": 0.07029942644756014
+        },
+        "false_alarm_rate": {
+          "mean": 1.0,
+          "n": 3,
+          "std": 0.0
+        },
+        "false_positive_rate": {
+          "mean": 0.8205128205128205,
+          "n": 3,
+          "std": 0.2538332035028632
+        },
+        "lead_time_seconds_mean": {
+          "mean": 0.12836523388477045,
+          "n": 3,
+          "std": 0.006638919630772903
+        },
+        "precision": {
+          "mean": 0.9592920732971799,
+          "n": 3,
+          "std": 0.03137828046850214
+        },
+        "recall": {
+          "mean": 0.8912538699690402,
+          "n": 3,
+          "std": 0.14801330992999998
+        },
+        "shuffled_control_auroc": {
+          "mean": 0.6246804086391247,
+          "n": 3,
+          "std": 0.09299389215567853
+        },
+        "shuffled_control_false_alarm_rate": {
+          "mean": 1.0,
+          "n": 3,
+          "std": 0.0
+        },
+        "specificity": {
+          "mean": 0.1794871794871795,
+          "n": 3,
+          "std": 0.2538332035028632
+        },
+        "useful_lead_time_seconds_mean": {
+          "mean": 0.12836523388477045,
+          "n": 3,
+          "std": 0.006638919630772903
+        }
+      },
+      "always_fires_flag": true,
+      "replicate_metrics": [
+        {
+          "auprc": 0.9980219059641634,
+          "auroc": 0.9143167028199566,
+          "brier_score": 0.20817125692117458,
+          "detection_before_failure_rate": 1.0,
+          "ece": 0.39086768245876147,
+          "f1": 0.9892703862660944,
+          "false_alarm_rate": 1.0,
+          "false_negatives": 0,
+          "false_positive_rate": 1.0,
+          "false_positives": 10,
+          "lead_time_seconds_mean": 0.13420179069767438,
+          "lead_time_seconds_n": 43,
+          "n_checkpoints": 471,
+          "n_negative_runs": 1,
+          "n_positive": 461,
+          "n_runs": 44,
+          "n_test_rows": 471,
+          "precision": 0.9787685774946921,
+          "precision_wilson_ci95": [
+            0.9613628680135888,
+            0.9884275463056283
+          ],
+          "recall": 1.0,
+          "recall_wilson_ci95": [
+            0.9917356794228399,
+            1.0
+          ],
+          "run_level_false_negatives": 0,
+          "run_level_true_positives": 43,
+          "specificity": 0.0,
+          "specificity_wilson_ci95": [
+            -2.0052288475052677e-17,
+            0.2775401687666165
+          ],
+          "threshold": 9.435758124838065e-07,
+          "true_negatives": 0,
+          "true_positives": 461,
+          "useful_lead_time_seconds_mean": 0.13420179069767438,
+          "useful_lead_time_seconds_n": 43
+        },
+        {
+          "auprc": 0.9905903867532049,
+          "auroc": 0.6938631221719457,
+          "brier_score": 0.20275390249192696,
+          "detection_before_failure_rate": 1.0,
+          "ece": 0.3685644851176451,
+          "f1": 0.8056460369163952,
+          "false_alarm_rate": 1.0,
+          "false_negatives": 173,
+          "false_positive_rate": 0.46153846153846156,
+          "false_positives": 6,
+          "lead_time_seconds_mean": 0.11907798113207549,
+          "lead_time_seconds_n": 53,
+          "n_checkpoints": 557,
+          "n_negative_runs": 1,
+          "n_positive": 544,
+          "n_runs": 54,
+          "n_test_rows": 557,
+          "precision": 0.9840848806366048,
+          "precision_wilson_ci95": [
+            0.9657175306165574,
+            0.992686173180507
+          ],
+          "recall": 0.6819852941176471,
+          "recall_wilson_ci95": [
+            0.6416905336117926,
+            0.7197278033673634
+          ],
+          "run_level_false_negatives": 0,
+          "run_level_true_positives": 53,
+          "specificity": 0.5384615384615384,
+          "specificity_wilson_ci95": [
+            0.29143432431832045,
+            0.7679424569851186
+          ],
+          "threshold": 0.5,
+          "true_negatives": 7,
+          "true_positives": 371,
+          "useful_lead_time_seconds_mean": 0.11907798113207549,
+          "useful_lead_time_seconds_n": 53
+        },
+        {
+          "auprc": 0.9689892680971739,
+          "auroc": 0.7327008928571428,
+          "brier_score": 0.18857129350620472,
+          "detection_before_failure_rate": 1.0,
+          "ece": 0.2318446272588107,
+          "f1": 0.951854775059195,
+          "false_alarm_rate": 1.0,
+          "false_negatives": 5,
+          "false_positive_rate": 1.0,
+          "false_positives": 56,
+          "lead_time_seconds_mean": 0.13181592982456145,
+          "lead_time_seconds_n": 57,
+          "n_checkpoints": 664,
+          "n_negative_runs": 5,
+          "n_positive": 608,
+          "n_runs": 62,
+          "n_test_rows": 664,
+          "precision": 0.9150227617602428,
+          "precision_wilson_ci95": [
+            0.8912531404560027,
+            0.9339817271202026
+          ],
+          "recall": 0.9917763157894737,
+          "recall_wilson_ci95": [
+            0.9808947341090811,
+            0.9964824171012975
+          ],
+          "run_level_false_negatives": 0,
+          "run_level_true_positives": 57,
+          "specificity": 0.0,
+          "specificity_wilson_ci95": [
+            0.0,
+            0.06419614448811528
+          ],
+          "threshold": 0.0028854395254515925,
+          "true_negatives": 0,
+          "true_positives": 603,
+          "useful_lead_time_seconds_mean": 0.13181592982456145,
+          "useful_lead_time_seconds_n": 57
+        }
+      ],
+      "verdict": "NOT VALIDATED -- always-fires at calibrated operating point (false_alarm_rate=1.00), regardless of AUROC ranking quality"
+    },
+    "lt2_samples": {
+      "aggregate_metrics": {
+        "auprc": {
+          "mean": 0.9772744930006597,
+          "n": 3,
+          "std": 0.011592630269043863
+        },
+        "auroc": {
+          "mean": 0.6274429125321714,
+          "n": 3,
+          "std": 0.03241362940729878
+        },
+        "brier_score": {
+          "mean": 0.16618184069619632,
+          "n": 3,
+          "std": 0.016014910413521426
+        },
+        "detection_before_failure_rate": {
+          "mean": 1.0,
+          "n": 3,
+          "std": 0.0
+        },
+        "ece": {
+          "mean": 0.28143290579443475,
+          "n": 3,
+          "std": 0.06534228560385268
+        },
+        "false_alarm_rate": {
+          "mean": 1.0,
+          "n": 3,
+          "std": 0.0
+        },
+        "false_positive_rate": {
+          "mean": 0.8333333333333334,
+          "n": 3,
+          "std": 0.23570226039551584
+        },
+        "lead_time_seconds_mean": {
+          "mean": 0.15971556008970797,
+          "n": 3,
+          "std": 0.0007033901326019426
+        },
+        "precision": {
+          "mean": 0.9615264577371068,
+          "n": 3,
+          "std": 0.030136852033389828
+        },
+        "recall": {
+          "mean": 0.9245283018867925,
+          "n": 3,
+          "std": 0.10673309904702602
+        },
+        "shuffled_control_auroc": {
+          "mean": 0.5940240025249609,
+          "n": 3,
+          "std": 0.04527838646477765
+        },
+        "shuffled_control_false_alarm_rate": {
+          "mean": 0.6666666666666666,
+          "n": 3,
+          "std": 0.4714045207910317
+        },
+        "specificity": {
+          "mean": 0.16666666666666666,
+          "n": 3,
+          "std": 0.23570226039551584
+        },
+        "useful_lead_time_seconds_mean": {
+          "mean": 0.15971556008970797,
+          "n": 3,
+          "std": 0.0007033901326019426
+        }
+      },
+      "always_fires_flag": true,
+      "replicate_metrics": [
+        {
+          "auprc": 0.9831265088003036,
+          "auroc": 0.6104651162790697,
+          "brier_score": 0.17755617481099867,
+          "detection_before_failure_rate": 1.0,
+          "ece": 0.3641510775599981,
+          "f1": 0.9885057471264368,
+          "false_alarm_rate": 1.0,
+          "false_negatives": 0,
+          "false_positive_rate": 1.0,
+          "false_positives": 2,
+          "lead_time_seconds_mean": 0.15886837209302326,
+          "lead_time_seconds_n": 43,
+          "n_checkpoints": 88,
+          "n_negative_runs": 1,
+          "n_positive": 86,
+          "n_runs": 44,
+          "n_test_rows": 88,
+          "precision": 0.9772727272727273,
+          "precision_wilson_ci95": [
+            0.9208730093704058,
+            0.9937452028558621
+          ],
+          "recall": 1.0,
+          "recall_wilson_ci95": [
+            0.9572402984808818,
+            1.0
+          ],
+          "run_level_false_negatives": 0,
+          "run_level_true_positives": 43,
+          "specificity": 0.0,
+          "specificity_wilson_ci95": [
+            0.0,
+            0.6576280471103807
+          ],
+          "threshold": 9.435758124838065e-07,
+          "true_negatives": 0,
+          "true_positives": 86,
+          "useful_lead_time_seconds_mean": 0.15886837209302326,
+          "useful_lead_time_seconds_n": 43
+        },
+        {
+          "auprc": 0.9876111789502284,
+          "auroc": 0.5990566037735849,
+          "brier_score": 0.1435334111293795,
+          "detection_before_failure_rate": 1.0,
+          "ece": 0.27574873374091474,
+          "f1": 0.8677248677248678,
+          "false_alarm_rate": 1.0,
+          "false_negatives": 24,
+          "false_positive_rate": 0.5,
+          "false_positives": 1,
+          "lead_time_seconds_mean": 0.160590641509434,
+          "lead_time_seconds_n": 53,
+          "n_checkpoints": 108,
+          "n_negative_runs": 1,
+          "n_positive": 106,
+          "n_runs": 54,
+          "n_test_rows": 108,
+          "precision": 0.9879518072289156,
+          "precision_wilson_ci95": [
+            0.9348626221234112,
+            0.9978700774122953
+          ],
+          "recall": 0.7735849056603774,
+          "recall_wilson_ci95": [
+            0.6851667228942294,
+            0.8428663720351962
+          ],
+          "run_level_false_negatives": 0,
+          "run_level_true_positives": 53,
+          "specificity": 0.5,
+          "specificity_wilson_ci95": [
+            0.09452865480086611,
+            0.905471345199134
+          ],
+          "threshold": 0.5,
+          "true_negatives": 1,
+          "true_positives": 82,
+          "useful_lead_time_seconds_mean": 0.160590641509434,
+          "useful_lead_time_seconds_n": 53
+        },
+        {
+          "auprc": 0.961085791251447,
+          "auroc": 0.6728070175438596,
+          "brier_score": 0.17745593614821076,
+          "detection_before_failure_rate": 1.0,
+          "ece": 0.20439890608239136,
+          "f1": 0.9579831932773109,
+          "false_alarm_rate": 1.0,
+          "false_negatives": 0,
+          "false_positive_rate": 1.0,
+          "false_positives": 10,
+          "lead_time_seconds_mean": 0.15968766666666664,
+          "lead_time_seconds_n": 57,
+          "n_checkpoints": 124,
+          "n_negative_runs": 5,
+          "n_positive": 114,
+          "n_runs": 62,
+          "n_test_rows": 124,
+          "precision": 0.9193548387096774,
+          "precision_wilson_ci95": [
+            0.8578992198561806,
+            0.9556074947030864
+          ],
+          "recall": 1.0,
+          "recall_wilson_ci95": [
+            0.9674003068525885,
+            1.0
+          ],
+          "run_level_false_negatives": 0,
+          "run_level_true_positives": 57,
+          "specificity": 0.0,
+          "specificity_wilson_ci95": [
+            -2.0052288475052677e-17,
+            0.2775401687666165
+          ],
+          "threshold": 0.0028854395254515925,
+          "true_negatives": 0,
+          "true_positives": 114,
+          "useful_lead_time_seconds_mean": 0.15968766666666664,
+          "useful_lead_time_seconds_n": 57
+        }
+      ],
+      "verdict": "NOT VALIDATED -- always-fires at calibrated operating point (false_alarm_rate=1.00), regardless of AUROC ranking quality"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "calibration_version": "phase4.7-agent-decision-calibration-v1",
+  "base_n_samples": 5,
+  "split_seeds": {
+    "train": [
+      0,
+      2000
+    ],
+    "calibration": [
+      10000,
+      12000
+    ],
+    "test": [
+      60000,
+      60300
+    ]
+  },
+  "bucket_stats": {
+    "0.0-0.4": {
+      "n_observed": 173,
+      "n_correct": 120,
+      "p_correct": 0.6914285714285714,
+      "n_retry_observed": 173,
+      "n_retry_correct": 169,
+      "p_retry_success": 0.9714285714285714
+    },
+    "0.4-0.6": {
+      "n_observed": 477,
+      "n_correct": 468,
+      "p_correct": 0.9791231732776617,
+      "n_retry_observed": 477,
+      "n_retry_correct": 477,
+      "p_retry_success": 0.9979123173277662
+    },
+    "0.6-0.8": {
+      "n_observed": 746,
+      "n_correct": 745,
+      "p_correct": 0.9973262032085561,
+      "n_retry_observed": 746,
+      "n_retry_correct": 746,
+      "p_retry_success": 0.9986631016042781
+    },
+    "0.8-1.0": {
+      "n_observed": 604,
+      "n_correct": 604,
+      "p_correct": 0.9983498349834984,
+      "n_retry_observed": 604,
+      "n_retry_correct": 604,
+      "p_retry_success": 0.9983498349834984
+    }
+  },
+  "baseline": {
+    "label": "baseline",
+    "n_episodes": 300,
+    "n_wrong_initially": 7,
+    "initial_accuracy": 0.9766666666666667,
+    "final_accuracy": 0.9833333333333333,
+    "final_error_rate": 0.01666666666666672,
+    "retry_rate_among_wrong": 0.2857142857142857,
+    "n_retried": 2,
+    "retry_recovery_rate": 1.0,
+    "retry_recovery_rate_wilson_ci95": [
+      0.3423719528896193,
+      1.0
+    ],
+    "unnecessary_retry_rate": 0.0,
+    "review_rate": 0.016666666666666666,
+    "abstention_rate": 0.006666666666666667,
+    "avg_samples_per_episode": 5.033333333333333,
+    "unsafe_action_count": 0,
+    "wall_clock_seconds": 28.87373920000391
+  },
+  "calibrated": {
+    "label": "calibrated",
+    "n_episodes": 300,
+    "n_wrong_initially": 9,
+    "initial_accuracy": 0.97,
+    "final_accuracy": 1.0,
+    "final_error_rate": 0.0,
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 9,
+    "retry_recovery_rate": 1.0,
+    "retry_recovery_rate_wilson_ci95": [
+      0.7008472464490406,
+      1.0
+    ],
+    "unnecessary_retry_rate": 0.0,
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "avg_samples_per_episode": 5.15,
+    "unsafe_action_count": 0,
+    "wall_clock_seconds": 30.030582599982154
+  }
+}

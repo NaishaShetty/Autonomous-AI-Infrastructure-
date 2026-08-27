@@ -1,0 +1,27 @@
+{
+  "audit": "environment_isolation",
+  "scope": "Phase 4.9's three controlled environments",
+  "checks_performed": [
+    {
+      "check": "environments differ in real resource limits/runtime configuration/dependency conditions, not only environment_id labels",
+      "result": "PASS",
+      "evidence": "tests/unit/test_environments.py::test_environments_differ_in_real_runtime_configuration_not_just_label and ::test_environments_differ_in_resource_limits both assert on the actual RuntimeConfig kwargs and resource_limits dicts, not just the environment_id string"
+    },
+    {
+      "check": "held-out and robustness environment data never influences model fitting or threshold calibration",
+      "result": "PASS",
+      "evidence": "scripts/run_phase4_9_environment_generalization.py: model.fit() and calibrate_threshold() are called exactly once, on dev_train/dev_val (BASELINE_CPU only); MEMORY_CONSTRAINED and DEPENDENCY_NETWORK_CONSTRAINED corpora are only ever passed to compute_metrics() (read-only scoring), never to any fit/calibration call"
+    },
+    {
+      "check": "each environment's corpus is generated under that environment's own scenario parameters",
+      "result": "PASS",
+      "evidence": "generate_corpus_rows_for_environment() sources both RuntimeConfig and scenario_fn from the EnvironmentProfile argument; confirmed by direct parameter inspection in test_scenario_fn_produces_genuinely_different_oom_parameters_by_environment"
+    },
+    {
+      "check": "no seed number reused across the dev/test seed ranges within Phase 4.9's protocol",
+      "result": "PASS",
+      "evidence": "protocol/phase4_9_protocol.json: dev_train=[0,500), dev_validation=[500000,500150), test=[900000,900150) for all three environments -- mutually disjoint by construction"
+    }
+  ],
+  "verdict": "No environment cross-contamination found. The Phase 4.9 report's headline finding (oom's dev-environment AUROC collapses in both other environments) is itself independent confirmation that the held-out/robustness environments are not leaking into the frozen model's apparent performance -- a leaking evaluation would show artificially preserved, not degraded, performance."
+}

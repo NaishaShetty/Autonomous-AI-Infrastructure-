@@ -1,0 +1,12 @@
+{
+  "n_files": 6,
+  "run_dir": "experiments\\results\\phase5_5_finalization_and_packaging\\20260827T051355Z\\gate_a_independent_rerun",
+  "sha256": {
+    "BENCHMARK_RUN_MANIFEST.json": "c8ac9b0d23777d0c93e31d5ae1b223d0245d9cf2c0a4be7db46d824b433bb138",
+    "PHASE5_4_BENCHMARK_REPORT.md": "e0d789f9922c8b44e1279b0bdbceab029d0e5df5f3144497cd9a7760d6176c9b",
+    "PHASE5_4_BENCHMARK_RESULTS.json": "2df5adde655dcb7e4ac93c8234e894fe81009b1ec41f3bddf0b376cc36dd8f5f",
+    "PHASE5_4_LIMITATIONS.md": "f253f8b92cc0ed29959ca0c3301054ae72d9daf8910dbaa039f9fd959876ba23",
+    "PHASE5_4_SYNTHESIS.md": "2ad5244232a79e10692bcd79e396d3c951dd2258a6393c3c62203dc91a890240",
+    "PHASE5_4_VALIDATION_REPORT.md": "48c76135e198b88f1717241c8c9f1a55d0b9d6153b6be3e8adc7e3e49fa390f5"
+  }
+}

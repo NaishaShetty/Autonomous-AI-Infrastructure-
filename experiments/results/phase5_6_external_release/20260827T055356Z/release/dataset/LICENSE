@@ -1,0 +1,36 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+This dataset ("Autonomous AI Infrastructure — Phase 5.2 Canonical Dataset",
+dataset_version phase5.2-dataset-v1.0.0) is licensed under the Creative
+Commons Attribution 4.0 International License.
+
+To view a copy of this license, visit:
+https://creativecommons.org/licenses/by/4.0/
+
+or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+Summary (not a substitute for the full legal text linked above): you are free
+to share (copy and redistribute in any medium or format) and adapt (remix,
+transform, and build upon) this dataset for any purpose, including
+commercially, as long as you give appropriate credit, provide a link to the
+license, and indicate if changes were made.
+
+---
+
+Attribution: cite as specified in this package's CITATION.cff.
+
+Scope and provenance note: this dataset is generated entirely by this
+project's own agent-task and controlled-runtime evaluation code (templated,
+deterministically-generated synthetic evaluation inputs; see DATASET_CARD.md
+§"Datasets and data generation"). It contains no copied third-party dataset
+text or content. It does contain derived numeric outputs (predicted labels,
+confidence scores, correctness flags) produced by running two third-party,
+Apache-2.0-licensed Hugging Face model checkpoints
+(`distilbert-base-uncased-finetuned-sst-2-english`,
+`distilbert-base-cased-distilled-squad`) locally for inference — see
+`LICENSE_PROVENANCE_AUDIT.md` in the Phase 5.6 release directory for the full
+upstream-source redistribution audit. This CC BY 4.0 grant applies to this
+project's own dataset content (the records, schema, splits, and
+documentation); it does not and cannot grant any rights over the two
+upstream model checkpoints themselves, which remain governed by their own
+Apache-2.0 licenses.

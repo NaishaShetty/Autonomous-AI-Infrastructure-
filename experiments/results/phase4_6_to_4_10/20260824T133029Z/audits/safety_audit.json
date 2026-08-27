@@ -1,0 +1,37 @@
+{
+  "audit": "safety",
+  "scope": "Phase 4.7's calibrated retry policy and Phase 4.10's ablations, against the existing RecoverySafetyGate/RecoveryCircuitBreaker",
+  "checks_performed": [
+    {
+      "check": "RecoverySafetyGate and RecoveryCircuitBreaker are unmodified by Phase 4.6-4.10",
+      "result": "PASS",
+      "evidence": "git diff shows no changes to src/phase4/recovery.py or src/phase4/guardrails.py across this entire five-priority effort"
+    },
+    {
+      "check": "AgentDecisionCalibrationProfile cannot bypass the safety gate",
+      "result": "PASS",
+      "evidence": "tests/integration/test_phase47_agent_calibration_pipeline.py::test_calibrated_profile_never_bypasses_the_safety_gate_or_review_abstain_paths -- every decision value produced is one of the four authorized actions, and pipeline.py's `if not authorized or decision.decision not in (\"ANSWER\",\"RETRY\")` gate is untouched"
+    },
+    {
+      "check": "unsafe_action_count across every real-execution evaluation run this priority set produced",
+      "result": "PASS -- 0 in every condition",
+      "evidence": "Phase 4.7 baseline (0) and calibrated (0); Phase 4.10 full-loop (0), memory-off (0), retry-off (0), predictor-off (0) -- evaluation/retry_metrics.json and evaluation/ablation_results.json"
+    },
+    {
+      "check": "RecoveryCircuitBreaker still only counts real executions, never escalations/abstentions, under the calibrated policy",
+      "result": "PASS (mechanism unchanged; caveat below)",
+      "evidence": "AgentRecoveryExecutor/pipeline.py's `if execution.executed: self.recovery_budget.record_attempt(...)` guard is unmodified by any Phase 4.6-4.10 change"
+    },
+    {
+      "check": "known pre-existing test failures in this exact area",
+      "result": "DOCUMENTED, not a Phase 4.6-4.10 regression",
+      "evidence": "tests/integration/test_phase45_pipeline_extensions.py::test_circuit_breaker_only_counts_real_executions_not_escalations_or_abstentions fails on this machine due to the real-GPU-hardware finding (see protocol/phase4_10_protocol.json audit_findings) -- unrelated to the circuit breaker's own logic, which is untouched"
+    },
+    {
+      "check": "no UNKNOWN diagnosis was ever converted to a safe authorization",
+      "result": "PASS",
+      "evidence": "pipeline.py's `if diagnosis.primary_hypothesis.name == \"UNKNOWN\": escalate, stop` branch is unmodified; not exercised differently by the calibrated policy, which only changes the DECISION stage, upstream of diagnosis"
+    }
+  ],
+  "verdict": "No safety-gate bypass, no unsafe autonomous action, and no circuit-breaker miscounting found in any Phase 4.6-4.10 code path. Safety-relevant source files (recovery.py, guardrails.py) remain byte-for-byte unmodified from Phase 4.5b."
+}

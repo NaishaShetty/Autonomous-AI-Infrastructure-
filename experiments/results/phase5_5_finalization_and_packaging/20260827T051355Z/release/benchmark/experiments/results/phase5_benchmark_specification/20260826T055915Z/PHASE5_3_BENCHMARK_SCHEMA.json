@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "benchmark_version": "phase5.3-benchmark-v1.0.0",
+    "built_against_dataset_version": "phase5.2-dataset-v1.0.0",
+    "built_against_schema_version": "phase5.1-schema-v1.0.0",
+    "status": "SPECIFICATION_ONLY_NOT_IMPLEMENTED",
+    "purpose": "Defines the machine-readable shape of a BENCHMARK TASK INSTANCE, which is a projection/derivation of one or more PHASE5_1_SCHEMA.json dataset records, never the dataset record itself."
+  },
+  "definitions": {
+    "TrackId": {
+      "type": "string",
+      "enum": [
+        "uncertainty", "abstention", "failure_prediction", "diagnosis",
+        "recovery", "memory", "generalization", "end_to_end"
+      ]
+    },
+    "EligibilityStatus": {
+      "type": "string",
+      "enum": ["EVALUABLE", "LIMITED", "NOT_EVALUABLE", "CONTRACT_ONLY_FUTURE_DATA"],
+      "description": "Per design principle: any task missing an answer to one of the 12 required questions must be marked LIMITED or NOT_EVALUABLE, never silently omitted."
+    },
+    "EvaluationUnit": {
+      "type": "string",
+      "enum": [
+        "one_agent_output", "one_run", "one_failure_episode",
+        "one_prediction_checkpoint", "one_decision", "one_recovery_episode",
+        "one_repeated_incident_sequence", "one_full_autonomy_loop"
+      ]
+    },
+    "TaskInstance": {
+      "type": "object",
+      "required": [
+        "task_id", "track", "eligibility_status", "evaluation_unit",
+        "scientific_question", "supporting_evidence", "ground_truth_definition",
+        "decision_time_available_information", "hidden_information",
+        "baseline_to_beat", "negative_control", "success_metric",
+        "failure_result_definition", "inconclusive_result_definition",
+        "unavailable_evidence", "independent_reproducibility",
+        "source_record_selector", "leaked_from_dataset_record_fields",
+        "minimum_sample_requirement", "dataset_coverage_status"
+      ],
+      "properties": {
+        "task_id": {"type": "string"},
+        "track": {"$ref": "#/definitions/TrackId"},
+        "eligibility_status": {"$ref": "#/definitions/EligibilityStatus"},
+        "evaluation_unit": {"$ref": "#/definitions/EvaluationUnit"},
+        "scientific_question": {"type": "string"},
+        "supporting_evidence": {"type": "string", "description": "Which frozen Phase 4/5.2 evidence substantiates this task exists as askable, with file references."},
+        "ground_truth_definition": {"type": "string"},
+        "decision_time_available_information": {"type": "array", "items": {"type": "string"}},
+        "hidden_information": {"type": "array", "items": {"type": "string"}},
+        "baseline_to_beat": {"type": "array", "items": {"type": "string"}, "description": "baseline_id references into PHASE5_3_BASELINE_CATALOG.json"},
+        "negative_control": {"type": "array", "items": {"type": "string"}},
+        "success_metric": {"type": "array", "items": {"type": "string"}, "description": "metric_id references into PHASE5_3_METRIC_CATALOG.json"},
+        "failure_result_definition": {"type": "string"},
+        "inconclusive_result_definition": {"type": "string"},
+        "unavailable_evidence": {"type": "string"},
+        "independent_reproducibility": {"type": "string"},
+        "source_record_selector": {
+          "type": "object",
+          "description": "How to derive this task's instances from PHASE5_1_SCHEMA.json dataset records (filter predicate over identity/track/task_family/failure/etc).",
+          "properties": {
+            "track_filter": {"type": ["string", "null"]},
+            "task_family_filter": {"type": ["string", "null"]},
+            "failure_class_filter": {"type": ["string", "null"]},
+            "additional_predicate": {"type": ["string", "null"]}
+          }
+        },
+        "leaked_from_dataset_record_fields": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Record fields this task instance MUST NOT read as input (they are the label, or post-decision outcome, or otherwise forbidden per leakage policy)."
+        },
+        "minimum_sample_requirement": {"type": "integer"},
+        "dataset_coverage_status": {
+          "type": "string",
+          "enum": ["FULLY_SUPPORTED", "PARTIALLY_SUPPORTED", "UNSUPPORTED_CONTRACT_ONLY"]
+        }
+      }
+    },
+    "MetricDefinition": {
+      "type": "object",
+      "required": [
+        "metric_id", "name", "mathematical_definition", "unit", "interpretation",
+        "failure_mode", "minimum_sample_considerations", "direction", "known_pathological_cases"
+      ],
+      "properties": {
+        "metric_id": {"type": "string"},
+        "name": {"type": "string"},
+        "mathematical_definition": {"type": "string"},
+        "unit": {"type": "string"},
+        "interpretation": {"type": "string"},
+        "failure_mode": {"type": "string"},
+        "minimum_sample_considerations": {"type": "string"},
+        "direction": {"type": "string", "enum": ["higher_is_better", "lower_is_better", "context_dependent_no_universal_direction"]},
+        "known_pathological_cases": {"type": "array", "items": {"type": "string"}},
+        "forbidden_standalone_use": {"type": ["string", "null"], "description": "e.g. 'must never be reported alone for X claim'"}
+      }
+    },
+    "Baseline": {
+      "type": "object",
+      "required": ["baseline_id", "name", "definition", "scientific_justification", "applicable_tracks"],
+      "properties": {
+        "baseline_id": {"type": "string"},
+        "name": {"type": "string"},
+        "definition": {"type": "string"},
+        "scientific_justification": {"type": "string"},
+        "applicable_tracks": {"type": "array", "items": {"$ref": "#/definitions/TrackId"}}
+      }
+    },
+    "Ablation": {
+      "type": "object",
+      "required": ["ablation_id", "component", "on_off_definition", "causal_vs_correlational_status", "supporting_evidence"],
+      "properties": {
+        "ablation_id": {"type": "string"},
+        "component": {"type": "string"},
+        "on_off_definition": {"type": "string"},
+        "causal_vs_correlational_status": {"type": "string"},
+        "supporting_evidence": {"type": "string"},
+        "confound_disclosure": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "top_level_object": {
+    "type": "object",
+    "required": ["benchmark_version", "task_id", "instance_id", "input", "hidden", "label", "prediction_slot", "reproducibility"],
+    "properties": {
+      "benchmark_version": {"type": "string"},
+      "task_id": {"type": "string"},
+      "instance_id": {"type": "string", "description": "Deterministic derivation: sha256(task_id + 0x1F + record_id + 0x1F + sub_index), mirroring phase5.2's record_id method — never Python hash()."},
+      "source_record_ids": {"type": "array", "items": {"type": "string"}, "description": "One or more PHASE5_1_SCHEMA record_id values this instance derives from."},
+      "input": {"type": "object", "description": "Task-specific projection of decision-time-available fields only."},
+      "hidden": {"type": "object", "description": "Task-specific projection of fields that must be withheld from any system under test until scoring."},
+      "label": {"type": "object", "properties": {"value": {}, "label_type": {"type": "string"}}},
+      "prediction_slot": {"type": "object", "description": "Empty slot a system-under-test fills in; never populated by this specification."},
+      "split_assignment": {"type": "string", "enum": ["train", "calibration_validation", "test"]},
+      "environment_role": {"type": "string", "enum": ["development", "held_out", "robustness", "UNSPECIFIED"]},
+      "reproducibility": {
+        "type": "object",
+        "required": ["dataset_version", "schema_version", "benchmark_version", "protocol_version", "metric_version", "baseline_version"],
+        "properties": {
+          "dataset_version": {"type": "string"},
+          "schema_version": {"type": "string"},
+          "benchmark_version": {"type": "string"},
+          "protocol_version": {"type": "string"},
+          "metric_version": {"type": "string"},
+          "baseline_version": {"type": "string"},
+          "dataset_sha256": {"type": "string"},
+          "benchmark_spec_sha256": {"type": "string"},
+          "code_commit": {"type": "string"}
+        }
+      }
+    }
+  },
+  "_versioning_policy": {
+    "benchmark_version": "phase5.3-benchmark-v1.0.0",
+    "compatibility_rule": "A change to task definitions, eligibility statuses, or scoring semantics increments MINOR; a change to instance derivation that changes which instances exist increments MAJOR; a metric-only clarification (no numeric change) increments PATCH.",
+    "independently_versioned_axes": ["benchmark_version", "dataset_version", "schema_version", "protocol_version", "metric_version", "baseline_version"],
+    "immutable_identifiers": ["task_id", "instance_id", "source_record_ids"]
+  }
+}

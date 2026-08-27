@@ -1,0 +1,29 @@
+{
+  "n_files": 23,
+  "run_dir": "experiments\\results\\phase5_dataset_construction\\20260826T054422Z",
+  "sha256": {
+    "DATASET_README.md": "fc89ec0ec07fd7df23d958725fb2b304204cff41533a54a5f0aef95dd3cb3465",
+    "LEAKAGE_VALIDATION_REPORT.md": "f7eba2645c925f0b8c13833b1279d77934f9ebe1495f76516142e1c37ebe261d",
+    "NEGATIVE_RESULT_PRESERVATION_REPORT.md": "8cc0a307cdeb97537ebff1cbebd8f0c374d69f591d6176db25360d311b9eb19f",
+    "PHASE5_2_DATASET_AUDIT.md": "6ad3620b8a470dade765dc5dc0b2a9ca551d4da1e17d6f7f6e22e066f7ee8f55",
+    "PHASE5_2_DATASET_CONSTRUCTION_REPORT.md": "56cac55d431b094139c90fd018ac73dacc73b4b1a2e2d020f4766ec65d71155c",
+    "PHASE5_2_SYNTHESIS.md": "8021cf39e15500c3141a1be6db506d3355929c763516cdd31f3210abdb2baf78",
+    "PROVENANCE_VALIDATION_REPORT.md": "45f85eab4370fdf624b3e8d7da8b48234cff31bbab51db35f843d28465e16a5c",
+    "SCHEMA_VALIDATION_REPORT.md": "0922dfcafadc217010639cf1cf8b394d88803563208250fd3b50a8e14137507d",
+    "SPLIT_VALIDATION_REPORT.md": "07014dbde5ef129a2c1a2c49c410494cd7f6d47abd4334349d8654c599e16a8e",
+    "dataset/agent_task/records.jsonl": "cd75beb91069e3945a0724bb2a26f4e8dfe51be0a408abb60c5dc2eb3b09f16f",
+    "dataset/all_records.jsonl": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83",
+    "dataset/controlled_runtime/records.jsonl": "cfd1d43aa9d7fd23e613f73a59b2b1be9dfc7a363709ca73f371657a4661349a",
+    "dataset_metadata.json": "e84bcad8539f94f499002182522db43bf93b9d4d1943a0a987e005e4dfab6e7b",
+    "dataset_statistics.json": "487ab59d56219176812b38a44cbd6d9b3868f48058033da022bb6af53ea77384",
+    "leakage_audit.json": "c16608573ce5c4f557332023dd6fc2ec7e67d7d812414b2a204959a3c885e109",
+    "lineage.json": "78701dc5abb5c6c813fa14f8c09b3000f0678ac93e7e2f870794b4f5ebe8c384",
+    "provenance_audit.json": "dccaa1ea4b2d12fd5fcd9e3800859a6e439b4d0303b2807a91c0159775fe6694",
+    "publication_boundary_audit.json": "305c9dd969feb1be5d1aec28f5c8dcb3995d77fff7ff356f19b080dd7c19d4b9",
+    "record_id_audit.json": "5a498a4e25e2104663756cec2e2818b53b67238162ddfd9ddd92755f142e532c",
+    "regeneration_audit.json": "e5480407b50eae0c4107d7387e1f2468101524143279462f3185490b68655c3f",
+    "schema_validation_audit.json": "e9e6fabc09b230251be0eec21e46401e03b82fc0216e06eb0b6983c08539e5c6",
+    "split_assignment_manifest.json": "f2597fea99c42f1c44a5aa622b9cfdef57f69711f3db57538804fe36428cd703",
+    "split_audit.json": "4cd964806ebdb1000569c52d4f3d6e4f227ac32a3dd75602b9e7240de4bf18bd"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "_meta": {
+    "benchmark_version": "phase5.3-benchmark-v1.0.0",
+    "purpose": "Explicit registry of every capability this benchmark specification does NOT claim is evaluable from the current canonical dataset, with the exact reason and the future data requirement that would change that. Nothing in this file is a fabricated capability -- every entry names a real gap already disclosed in Phase 5.2's audit trail."
+  },
+  "unsupported_capabilities": [
+    {"capability": "Rolling / per-checkpoint failure-prediction trajectory", "blocked_by_limitation": 1, "status": "NOT_EVALUABLE", "future_requirement": "Per-checkpoint process_rss_bytes/process_cpu_percent rows with checkpoint index and timestamp, joined to episode_id."},
+    {"capability": "Environment-generalization benchmark (dev/held-out/robustness)", "blocked_by_limitation": 2, "status": "NOT_EVALUABLE", "future_requirement": "Real per-episode Phase-4.9 EnvironmentId field on controlled_runtime records."},
+    {"capability": "Memory-write timing analysis (e.g. time-to-first-adaptation)", "blocked_by_limitation": 3, "status": "NOT_EVALUABLE", "future_requirement": "memory_interaction.write_time (or recorded_at) populated whenever memory_used=true."},
+    {"capability": "Realized-abstention-outcome evaluation (as opposed to simulated policy)", "blocked_by_limitation": 4, "status": "NOT_EVALUABLE", "future_requirement": "Per-episode raw sources that actually contain ABSTAIN/RETRY decision.action values."},
+    {"capability": "Record-level resource_unavailable / cpu / pooled-oom / flaky predictability benchmarking", "blocked_by_limitation": 5, "status": "NOT_EVALUABLE", "future_requirement": "Per-episode join key added to the aggregate evaluation artifacts (post_p5_remediation*), or a fresh per-episode re-run of those specific evaluations."},
+    {"capability": "Environment-generalization for non-OOM families (resource_unavailable, cpu, flaky)", "blocked_by_limitation": "2 and 5 combined", "status": "NOT_EVALUABLE", "future_requirement": "Both a per-episode environment_id AND a per-episode join key for these families' aggregate results."},
+    {"capability": "Repeated-incident memory adaptation at statistical scale (n>=10 sequences)", "blocked_by_limitation": "3 and dataset structure (3,104 workloads / 3,106 episodes)", "status": "NOT_EVALUABLE", "future_requirement": "A dataset extension that deliberately ingests multiple runs of the same workload_id, as the Step 6 experiment did, with per-episode identity retained."},
+    {"capability": "Clean isolation of predictor's causal contribution (unconfounded by retry)", "blocked_by_limitation": "none (this is an experimental-design gap, not a data-ingestion gap)", "status": "NOT_EVALUABLE", "future_requirement": "A 2x2 (retry ON/OFF x predictor ON/OFF) experimental design, not documented as having been run in the frozen evidence."}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "differing_files_sample": [],
+  "file_sha256_identical": true,
+  "n_files_compared": 7,
+  "n_files_differing": 0,
+  "n_records_a": 3106,
+  "n_records_b": 3106,
+  "overall_byte_identical": true,
+  "record_contents_identical": true,
+  "record_ids_identical": true,
+  "run_a": "[REDACTED: local developer machine temp path removed for external release; see SECURITY_AUDIT.md]",
+  "run_b": "[REDACTED: local developer machine temp path removed for external release; see SECURITY_AUDIT.md]",
+  "split_assignments_identical": true
+}

@@ -1,0 +1,445 @@
+{
+  "_meta": {
+    "package": "benchmark",
+    "benchmark_version": "phase5.3-benchmark-v1.0.0",
+    "implementation_version": "phase5.4-implementation-v1.0.0",
+    "total_files": 62,
+    "total_size_bytes": 9594861
+  },
+  "files": [
+    {
+      "path": "BENCHMARK_CARD.md",
+      "size_bytes": 5685,
+      "sha256": "b2623a2c1eee238634f6667f166db2305ba1c298533e913aedb6d544c8c1fd3d",
+      "classification": "PUBLIC",
+      "purpose": "release card"
+    },
+    {
+      "path": "CITATION.cff",
+      "size_bytes": 966,
+      "sha256": "5978042567280910b682d50d1734e2689082beee0b423b8a4d501293af463840",
+      "classification": "PUBLIC",
+      "purpose": "citation metadata"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 3927,
+      "sha256": "5e04a33a62f911fd92bd90be2f3507dd3553e4e2ef1202b73a9c82d56f6edb26",
+      "classification": "PUBLIC",
+      "purpose": "release usage guide"
+    },
+    {
+      "path": "REPRODUCIBILITY_GUIDE.md",
+      "size_bytes": 2804,
+      "sha256": "c13f0fc54b5ce1fc4b898848c3fdfeeb05d3d47f456547b1840949b23996dea5",
+      "classification": "PUBLIC",
+      "purpose": "reproduction protocol"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_ABLATION_MATRIX.json",
+      "size_bytes": 5593,
+      "sha256": "4d9af4de39defb2a5ca68529f688cead1ab7337555b796eab62fa9cf406de3fa",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_BASELINE_CATALOG.json",
+      "size_bytes": 5212,
+      "sha256": "368cace9c9e227827d8c234be450874f3ba4481936c79bee13f7b893c4be23b9",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_BENCHMARK_SCHEMA.json",
+      "size_bytes": 8870,
+      "sha256": "77d8002176264348a59fa6151df3a7d31e0ee7603fcbfd188e34ac6babcd868b",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_BENCHMARK_SPECIFICATION.md",
+      "size_bytes": 16353,
+      "sha256": "d03a388322b4de5d260318f7fee729c7c178241d3c763663612576f4338503a5",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_DATASET_COVERAGE.json",
+      "size_bytes": 5043,
+      "sha256": "48284f63ab85a86ac39af8e7e5d207a1e13ecf8ea101624fab0cc20d5beeda82",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_LEAKAGE_POLICY.md",
+      "size_bytes": 5333,
+      "sha256": "c503441c0365c804175c1d22608f5ee0cfc7c64d8f83cee5b9230ac587a8a446",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_LIMITATIONS.md",
+      "size_bytes": 7988,
+      "sha256": "5eb0641f55cf79cc71d87616a9fa1ca751f4888766fe3162289d14204bdb15b3",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_METRIC_CATALOG.json",
+      "size_bytes": 31742,
+      "sha256": "f794ee1fc169427f5e60570cc905a01bd690355c3207a0eafda0fd99596e2388",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_PUBLICATION_BOUNDARY.md",
+      "size_bytes": 5483,
+      "sha256": "74e4b06039965586db05858ae30353bcce998383502e989d54271006279f4550",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_REPRODUCIBILITY_PROTOCOL.md",
+      "size_bytes": 4423,
+      "sha256": "0579f112b7deea08d47fc066c9bce4e3a2320ffb3ebe93053f7b0c62f556f623",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_SPLIT_POLICY.md",
+      "size_bytes": 4685,
+      "sha256": "f335decdd5881f51b11810b064baad7d998fb95bb5b71f9fb4383236de663547",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_SYNTHESIS.md",
+      "size_bytes": 3692,
+      "sha256": "da1ad003ac4dc6626267f05de268fe5df54081e5d95c6846256da49303dccd3e",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_TASK_CATALOG.json",
+      "size_bytes": 43207,
+      "sha256": "17067f324f7b7bd60494bd2b4f18eb2d41c29fe63fdb710d22f380b1423de05a",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/PHASE5_3_VALIDATION_REPORT.md",
+      "size_bytes": 10767,
+      "sha256": "0b9ca573990881ab5819b91ec0869c6c9be048122043d65477fb53c40f9e99a0",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/SHA256_MANIFEST.json",
+      "size_bytes": 2113,
+      "sha256": "8151688ab46257a8784ffdb33409902925723c8174d84d56c50e4008322218e8",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/benchmark_eligibility.json",
+      "size_bytes": 3674,
+      "sha256": "7f6be3ab4fcfa3416f8aa3dd60d8b1640d6b412f0e65008c9833112173c99ef8",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/benchmark_track_matrix.json",
+      "size_bytes": 1605,
+      "sha256": "73447787a2db8e73100ecf3847429d007c719ab130a8e8ac17b5494142770e11",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/metric_definitions.json",
+      "size_bytes": 2883,
+      "sha256": "3b87597a921e1202c33c35bb8388b4809cb90ad469f2a6a985e8e1aed50a121a",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/task_lineage.json",
+      "size_bytes": 4407,
+      "sha256": "1277370be789c8d3849fd28c176c800d3317a7c6aa92fec23e5c385966022c5e",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_benchmark_specification/20260826T055915Z/unsupported_capabilities.json",
+      "size_bytes": 2887,
+      "sha256": "eca96b08c319c3ee456758eae6b3d6fb64024b610edbb66da568339ff28b823d",
+      "classification": "PUBLIC",
+      "purpose": "frozen Phase 5.3 benchmark specification"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/DATASET_README.md",
+      "size_bytes": 5241,
+      "sha256": "fc89ec0ec07fd7df23d958725fb2b304204cff41533a54a5f0aef95dd3cb3465",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/SHA256_MANIFEST.json",
+      "size_bytes": 2489,
+      "sha256": "6f03964b7118a3a602d6eed792848a2f8bb7f01cb17da2bec8ecabd08864cbb7",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/dataset/all_records.jsonl",
+      "size_bytes": 8290562,
+      "sha256": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/dataset_metadata.json",
+      "size_bytes": 1079,
+      "sha256": "e84bcad8539f94f499002182522db43bf93b9d4d1943a0a987e005e4dfab6e7b",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/dataset_statistics.json",
+      "size_bytes": 2040,
+      "sha256": "487ab59d56219176812b38a44cbd6d9b3868f48058033da022bb6af53ea77384",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/leakage_audit.json",
+      "size_bytes": 108,
+      "sha256": "c16608573ce5c4f557332023dd6fc2ec7e67d7d812414b2a204959a3c885e109",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/lineage.json",
+      "size_bytes": 106144,
+      "sha256": "78701dc5abb5c6c813fa14f8c09b3000f0678ac93e7e2f870794b4f5ebe8c384",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/provenance_audit.json",
+      "size_bytes": 710,
+      "sha256": "dccaa1ea4b2d12fd5fcd9e3800859a6e439b4d0303b2807a91c0159775fe6694",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/publication_boundary_audit.json",
+      "size_bytes": 788,
+      "sha256": "305c9dd969feb1be5d1aec28f5c8dcb3995d77fff7ff356f19b080dd7c19d4b9",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/record_id_audit.json",
+      "size_bytes": 252,
+      "sha256": "5a498a4e25e2104663756cec2e2818b53b67238162ddfd9ddd92755f142e532c",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/regeneration_audit.json",
+      "size_bytes": 637,
+      "sha256": "e5480407b50eae0c4107d7387e1f2468101524143279462f3185490b68655c3f",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/schema_validation_audit.json",
+      "size_bytes": 164,
+      "sha256": "e9e6fabc09b230251be0eec21e46401e03b82fc0216e06eb0b6983c08539e5c6",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/split_assignment_manifest.json",
+      "size_bytes": 848448,
+      "sha256": "f2597fea99c42f1c44a5aa622b9cfdef57f69711f3db57538804fe36428cd703",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_construction/20260826T054422Z/split_audit.json",
+      "size_bytes": 2054,
+      "sha256": "4cd964806ebdb1000569c52d4f3d6e4f227ac32a3dd75602b9e7240de4bf18bd",
+      "classification": "PUBLIC",
+      "purpose": "bundled canonical dataset + integrity artifacts"
+    },
+    {
+      "path": "experiments/results/phase5_dataset_specification/20260826T053011Z/PHASE5_1_SCHEMA.json",
+      "size_bytes": 18531,
+      "sha256": "724675dd52dba3e0210d267af4f54c5991bd0bb9cb06f3d8c534d95c0a0f709a",
+      "classification": "PUBLIC",
+      "purpose": "Phase 5.1 schema"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 61,
+      "sha256": "47fc573f2b5180d45678ec0e1d6c803fb9b43debafe88f375422e83aa7eefa6e",
+      "classification": "PUBLIC",
+      "purpose": "pinned dependency versions"
+    },
+    {
+      "path": "scripts/generate_sha256_manifest.py",
+      "size_bytes": 1003,
+      "sha256": "30c198e76bfa3f2ab4ee3d2921d7cca2d1c73516df17daf5d18fea4adafc5d8c",
+      "classification": "PUBLIC",
+      "purpose": "runner / manifest-generation script"
+    },
+    {
+      "path": "scripts/run_phase5_4_benchmark.py",
+      "size_bytes": 14843,
+      "sha256": "c58419063d24d192eec7fdb60ddc48e1b8420addb878b82ad55fa2729debc657",
+      "classification": "PUBLIC",
+      "purpose": "runner / manifest-generation script"
+    },
+    {
+      "path": "src/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "PUBLIC",
+      "purpose": "release content"
+    },
+    {
+      "path": "src/benchmark/__init__.py",
+      "size_bytes": 484,
+      "sha256": "2f506cc252a999fb2d6fd2f7b660683d4cc29f9f363c63fcb0da92b1ef32c115",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/ablations.py",
+      "size_bytes": 5474,
+      "sha256": "2ca04ed3b65705e4a1458bf4d440e257136cbe30fa965b41ba2ea7711de61bbb",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/baselines.py",
+      "size_bytes": 5142,
+      "sha256": "4dcbee92bc1a487e50fc811fc45c9e111be08a6395868d7213572b03b35e2fde",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/constants.py",
+      "size_bytes": 5796,
+      "sha256": "94bf27cd2bd05a77cc2955c88c81a70b12a90c2d2b3201779fdd099dc52ee40e",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/dataset_loader.py",
+      "size_bytes": 4428,
+      "sha256": "961edc35076ce78a813e5bc62c206dd8f50fdb0775d1370c6a08cb0bf0651a5e",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/ids.py",
+      "size_bytes": 996,
+      "sha256": "6ef925b94c7c3ab9a3ead84b397ead1491a05b887c8c79fdca69bb55d79835a4",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/leakage.py",
+      "size_bytes": 5985,
+      "sha256": "e414257e40aefa55bb85063e4159d9da9cf4ee9110304902193553abf768222b",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/metrics.py",
+      "size_bytes": 16231,
+      "sha256": "e251ba8f6596e0794b64697d2194781f603752721bbb87cd258cc65372a5c319",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/registry.py",
+      "size_bytes": 3724,
+      "sha256": "550a420966cca646984dd8c3c2dfbe4d0b6d72cd9451151c93bda0a0aae24875",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/reporting.py",
+      "size_bytes": 4624,
+      "sha256": "3069c0b7a2ff1fdbc0b857019d882cc4a21293b4b4fbae33bd08813808ae11ce",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/reproducibility.py",
+      "size_bytes": 2980,
+      "sha256": "a25fd2a8baa34373f3e77ecc1a9b13ad6228c0ac31c8733dd5cee621b7a1925a",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/runner.py",
+      "size_bytes": 3709,
+      "sha256": "762f9af019e01292d780f5babbd521c4d9445e7831437901763182216ba3a87a",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/splits.py",
+      "size_bytes": 1527,
+      "sha256": "0b5af07dee5223aecfe65ad8c8125804c21f5e88e5687fff8c660db2d74c9857",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/status.py",
+      "size_bytes": 1453,
+      "sha256": "d39e619f51e5b22d63dac1d3b2f459374abce8d72635cdda6fd7e42e5ba20293",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/tasks.py",
+      "size_bytes": 25219,
+      "sha256": "8ff72c37a07109207a5bf4c634bafd7111b70bbce88f84520db93027df08c311",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/benchmark/validation.py",
+      "size_bytes": 7230,
+      "sha256": "dad5035bcfd4ad5e81b77d6dda42dafa0e9b20d4b1631617e9442ac09e5f5ca1",
+      "classification": "PUBLIC",
+      "purpose": "benchmark implementation module"
+    },
+    {
+      "path": "src/phase5/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "PUBLIC",
+      "purpose": "diagnosis-to-failure-class mapping dependency"
+    },
+    {
+      "path": "src/phase5/failure_mapping.py",
+      "size_bytes": 2407,
+      "sha256": "a2f209e11d97f1bd279c8a870827dfc1257ac14531781714588cfbb0fc876264",
+      "classification": "PUBLIC",
+      "purpose": "diagnosis-to-failure-class mapping dependency"
+    },
+    {
+      "path": "tests/unit/test_phase54_benchmark.py",
+      "size_bytes": 12956,
+      "sha256": "bb2f5fc4fa96fc5aaa16136a1512e98bde8f5b0f4435c3a2dd7aae448febaf27",
+      "classification": "PUBLIC",
+      "purpose": "unit tests"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "_meta": {"benchmark_version": "phase5.3-benchmark-v1.0.0", "total_ablations": 5, "note": "Ablations distinguish CORRELATION (component present correlates with better outcome) from CAUSAL CONTRIBUTION (disabling the component, holding everything else fixed, removes the effect). Only a controlled ON/OFF comparison on matched instances supports a causal claim."},
+  "ablations": [
+    {
+      "ablation_id": "ABL-UNCERTAINTY-MECHANISM",
+      "component": "Per-family uncertainty mechanism (agreement_rate / softmax_margin / span_logit_confidence)",
+      "on_off_definition": "ON: decision policy conditions on the family's own uncertainty signal. OFF: decision policy uses a constant/uninformative score for that family.",
+      "causal_vs_correlational_status": "CAUSAL for arithmetic and QA (AUROC 0.953/0.934 is a real signal whose removal would flatten the risk-coverage curve to the family's base rate); CORRELATIONAL-ONLY-AT-CEILING for sentiment (AUROC 0.659 is barely above chance, so ON vs OFF for sentiment specifically is not expected to show a large causal gap — this must be disclosed, not hidden, when this ablation is run).",
+      "supporting_evidence": "PHASE5_1_BENCHMARK_VIEWS.md View 1; UNC-ARITH/UNC-SENT/UNC-QA task definitions in PHASE5_3_TASK_CATALOG.json.",
+      "confound_disclosure": null
+    },
+    {
+      "ablation_id": "ABL-CALIBRATED-VS-GENERIC-POLICY",
+      "component": "Decision policy calibration (per-family calibrated thresholds vs one generic threshold)",
+      "on_off_definition": "ON (calibrated): BASE-CALIBRATED-MECHANISM-AWARE. OFF (generic): BASE-GENERIC-POLICY.",
+      "causal_vs_correlational_status": "CAUSAL where families have genuinely different discrimination ceilings (arithmetic/QA vs sentiment) — a generic threshold necessarily mis-serves at least one family; the causal claim is about selective-risk degradation from using one threshold across mismatched signal qualities, not about any single family in isolation.",
+      "supporting_evidence": "PHASE5_1_BENCHMARK_VIEWS.md View 1's explicit prohibition on pooling AUROC across families implies the same prohibition on pooling policy thresholds.",
+      "confound_disclosure": null
+    },
+    {
+      "ablation_id": "ABL-MEMORY-ON-OFF",
+      "component": "FailureMemoryStore read path",
+      "on_off_definition": "ON: planner may retrieve MemoryRecords scoped to (workload_id, environment_id, failure_class). OFF: retrieval disabled entirely.",
+      "causal_vs_correlational_status": "CAUSAL, per the Step 6 repeated-incident experiment (retry->retry->reconfigure->recovered with memory ON vs retry x6 with memory OFF) — graded A, 'real, replicated, mechanistically understood' (docs/MASTER_RECORD_CONTENT.md lines ~508, 783). NOT re-verifiable at scale from the current Phase 5.2 canonical dataset (see MEM-EVAL, NOT_EVALUABLE) because that dataset lacks repeated-workload_id structure; the causal finding is preserved as an aggregate historical result, not a re-runnable benchmark task today.",
+      "supporting_evidence": "docs/MASTER_RECORD_CONTENT.md §16, §22; scripts/run_p5_step6_memory_repeated_incident.py (historical, not re-executed by this specification).",
+      "confound_disclosure": null
+    },
+    {
+      "ablation_id": "ABL-RETRY-ON-OFF",
+      "component": "RETRY (extra self-consistency sampling round), arithmetic family only",
+      "on_off_definition": "ON: agent may request an additional sampling round when agreement_rate is below threshold. OFF: no retry; the first-round answer is final.",
+      "causal_vs_correlational_status": "CAUSAL, strongly confirmed — disabling retry removed the WHOLE observed improvement in the frozen evidence (docs/MASTER_RECORD_CONTENT.md line ~651, 'Agent-specific calibrated retry: causally confirmed (retry-off ablation...)'). This is the clearest causal (not merely correlational) finding in the frozen record.",
+      "supporting_evidence": "docs/MASTER_RECORD_CONTENT.md line ~651.",
+      "confound_disclosure": null
+    },
+    {
+      "ablation_id": "ABL-PREDICTOR-ON-OFF",
+      "component": "Failure predictor (prediction.score input to the decision stage)",
+      "on_off_definition": "ON: decision stage conditions on prediction.score. OFF: decision stage ignores prediction.score entirely.",
+      "causal_vs_correlational_status": "CONFOUNDED, explicitly disclosed as such — the frozen evidence showed little difference between ON and OFF in one sample specifically BECAUSE retry alone was already highly effective at fixing the same failures the predictor would have flagged (ABL-RETRY-ON-OFF dominates in that sample). This must be reported as a SPECIFIC, DISCLOSED CONFOUND, never generalized to 'the predictor doesn't matter' — a different sample where retry is disabled or less effective could show a different result, and this specification does not claim to know which.",
+      "supporting_evidence": "Task brief's explicit instruction: 'predictor ON/OFF showed little difference in one sample because retry alone was already highly effective = a specific, disclosed confound, not proof predictor doesn't matter in general.'",
+      "confound_disclosure": "This ablation's null result is confounded by ABL-RETRY-ON-OFF being ON in the same sample. A clean isolation of the predictor's causal contribution requires a 2x2 design (retry ON/OFF x predictor ON/OFF), which is not documented as having been run in the frozen evidence and is therefore NOT_EVALUABLE as a clean causal claim from current evidence — only the confounded single-factor result is available."
+    }
+  ]
+}

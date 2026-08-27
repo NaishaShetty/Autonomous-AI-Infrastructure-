@@ -1,0 +1,435 @@
+{
+  "environments": {
+    "phase4.9-env-baseline-cpu": {
+      "environment_id": "phase4.9-env-baseline-cpu",
+      "role": "development",
+      "description": "Same configuration used by every prior phase (4.4-4.8): the reference environment every model/threshold/policy is fit and calibrated against.",
+      "resource_limits": {
+        "oom_limit_mb_fail_variant": 32,
+        "oom_limit_mb_ok_variant": 256
+      },
+      "runtime_config_kwargs": {
+        "timeout_seconds": 0.15,
+        "telemetry_interval_seconds": 0.01
+      },
+      "dependency_conditions": "resource_unavailable family: ~50% of episodes have the contended port pre-occupied",
+      "telemetry_capabilities": "10ms telemetry poll interval",
+      "failure_mechanisms": "unchanged from controlled_runtime.py's original 12 scenario families",
+      "environment_version": "phase4.9-independent-environments-v1"
+    },
+    "phase4.9-env-memory-constrained": {
+      "environment_id": "phase4.9-env-memory-constrained",
+      "role": "held_out",
+      "description": "Real, tighter memory budget for the OOM family (limit_mb=8 vs 32) plus 5x finer telemetry sampling resolution -- never used to fit or calibrate anything.",
+      "resource_limits": {
+        "oom_limit_mb_fail_variant": 8,
+        "oom_limit_mb_ok_variant": 64
+      },
+      "runtime_config_kwargs": {
+        "timeout_seconds": 0.15,
+        "telemetry_interval_seconds": 0.002
+      },
+      "dependency_conditions": "resource_unavailable family: ~50% pre-occupied (unchanged from baseline)",
+      "telemetry_capabilities": "2ms telemetry poll interval (5x finer than baseline)",
+      "failure_mechanisms": "oom mode's real memory budget is 4x tighter than baseline; all other families unchanged",
+      "environment_version": "phase4.9-independent-environments-v1"
+    },
+    "phase4.9-env-dependency-network-constrained": {
+      "environment_id": "phase4.9-env-dependency-network-constrained",
+      "role": "robustness",
+      "description": "Real, tighter execution deadline (timeout_seconds=0.08 vs 0.15) plus a genuinely more-often-contended dependency (resource_unavailable family occupied 80% of the time vs baseline's ~50%) -- never used to fit or calibrate anything.",
+      "resource_limits": {
+        "oom_limit_mb_fail_variant": 32,
+        "oom_limit_mb_ok_variant": 256
+      },
+      "runtime_config_kwargs": {
+        "timeout_seconds": 0.08,
+        "telemetry_interval_seconds": 0.01
+      },
+      "dependency_conditions": "resource_unavailable family: 80% pre-occupied (usually contended, not occasionally)",
+      "telemetry_capabilities": "10ms telemetry poll interval (unchanged from baseline)",
+      "failure_mechanisms": "cpu/timeout family's failure boundary is roughly halved; resource contention is the common case rather than the exception",
+      "environment_version": "phase4.9-independent-environments-v1"
+    }
+  },
+  "dev_seed_ranges": {
+    "train": [
+      0,
+      500
+    ],
+    "validation": [
+      500000,
+      500150
+    ]
+  },
+  "test_seed_range": [
+    900000,
+    900150
+  ],
+  "results_by_family": {
+    "cpu": {
+      "status": "EVALUATED",
+      "failure_class": "PROCESS_TIMEOUT",
+      "threshold": 0.4969288654133812,
+      "n_dev_train_rows": 669,
+      "n_dev_validation_rows": 209,
+      "per_environment": {
+        "phase4.9-env-baseline-cpu": {
+          "status": "EVALUATED",
+          "role": "development",
+          "metrics": {
+            "n_checkpoints": 148,
+            "n_runs": 11,
+            "threshold": 0.4969288654133812,
+            "true_positives": 90,
+            "false_positives": 50,
+            "false_negatives": 5,
+            "true_negatives": 3,
+            "precision": 0.6428571428571429,
+            "recall": 0.9473684210526315,
+            "f1": 0.7659574468085106,
+            "auroc": 0.4967229394240318,
+            "auprc": 0.6512334157750594,
+            "brier_score": 0.2500193274945358,
+            "ece": 0.14189254172451804,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 4,
+            "run_level_true_positives": 7,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.15519100000000002,
+            "lead_time_seconds_n": 7,
+            "useful_lead_time_seconds_mean": 0.15519100000000002,
+            "useful_lead_time_seconds_n": 7
+          }
+        },
+        "phase4.9-env-memory-constrained": {
+          "status": "EVALUATED",
+          "role": "held_out",
+          "metrics": {
+            "n_checkpoints": 507,
+            "n_runs": 11,
+            "threshold": 0.4969288654133812,
+            "true_positives": 365,
+            "false_positives": 129,
+            "false_negatives": 9,
+            "true_negatives": 4,
+            "precision": 0.7388663967611336,
+            "recall": 0.9759358288770054,
+            "f1": 0.8410138248847927,
+            "auroc": 0.48602790398456036,
+            "auprc": 0.7344064691323766,
+            "brier_score": 0.25047744817145107,
+            "ece": 0.2386138175845246,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 3,
+            "run_level_true_positives": 8,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.14891325,
+            "lead_time_seconds_n": 8,
+            "useful_lead_time_seconds_mean": 0.14891325,
+            "useful_lead_time_seconds_n": 8
+          }
+        },
+        "phase4.9-env-dependency-network-constrained": {
+          "status": "NOT_PREDICTABLE_SINGLE_CLASS_IN_THIS_ENVIRONMENT",
+          "n_rows": 83
+        }
+      },
+      "auroc_degradation_from_dev": {
+        "phase4.9-env-memory-constrained": 0.010695035439471423,
+        "phase4.9-env-dependency-network-constrained": null
+      }
+    },
+    "oom": {
+      "status": "EVALUATED",
+      "failure_class": "PROCESS_OOM",
+      "threshold": 0.5066405122480699,
+      "n_dev_train_rows": 693,
+      "n_dev_validation_rows": 153,
+      "per_environment": {
+        "phase4.9-env-baseline-cpu": {
+          "status": "EVALUATED",
+          "role": "development",
+          "metrics": {
+            "n_checkpoints": 224,
+            "n_runs": 26,
+            "threshold": 0.5066405122480699,
+            "true_positives": 58,
+            "false_positives": 20,
+            "false_negatives": 77,
+            "true_negatives": 69,
+            "precision": 0.7435897435897436,
+            "recall": 0.42962962962962964,
+            "f1": 0.5446009389671362,
+            "auroc": 0.6781106949646276,
+            "auprc": 0.7069813221328947,
+            "brier_score": 0.24280388103611164,
+            "ece": 0.0947192071884666,
+            "false_alarm_rate": 0.2727272727272727,
+            "n_negative_runs": 11,
+            "run_level_true_positives": 9,
+            "run_level_false_negatives": 6,
+            "lead_time_seconds_mean": 0.07636144444444444,
+            "lead_time_seconds_n": 9,
+            "useful_lead_time_seconds_mean": 0.07636144444444444,
+            "useful_lead_time_seconds_n": 9
+          }
+        },
+        "phase4.9-env-memory-constrained": {
+          "status": "EVALUATED",
+          "role": "held_out",
+          "metrics": {
+            "n_checkpoints": 698,
+            "n_runs": 26,
+            "threshold": 0.5066405122480699,
+            "true_positives": 8,
+            "false_positives": 2,
+            "false_negatives": 387,
+            "true_negatives": 301,
+            "precision": 0.8,
+            "recall": 0.020253164556962026,
+            "f1": 0.03950617283950617,
+            "auroc": 0.5063917784183481,
+            "auprc": 0.5804952895209767,
+            "brier_score": 0.4621103292796481,
+            "ece": 0.4501706570324772,
+            "false_alarm_rate": 0.18181818181818182,
+            "n_negative_runs": 11,
+            "run_level_true_positives": 7,
+            "run_level_false_negatives": 8,
+            "lead_time_seconds_mean": 0.08600671428571428,
+            "lead_time_seconds_n": 7,
+            "useful_lead_time_seconds_mean": 0.08600671428571428,
+            "useful_lead_time_seconds_n": 7
+          }
+        },
+        "phase4.9-env-dependency-network-constrained": {
+          "status": "EVALUATED",
+          "role": "robustness",
+          "metrics": {
+            "n_checkpoints": 201,
+            "n_runs": 26,
+            "threshold": 0.5066405122480699,
+            "true_positives": 122,
+            "false_positives": 66,
+            "false_negatives": 7,
+            "true_negatives": 6,
+            "precision": 0.648936170212766,
+            "recall": 0.9457364341085271,
+            "f1": 0.7697160883280757,
+            "auroc": 0.5236864771748492,
+            "auprc": 0.6861626141592307,
+            "brier_score": 0.29193133723445014,
+            "ece": 0.2388241357423886,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 9,
+            "run_level_true_positives": 17,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.08351729411764706,
+            "lead_time_seconds_n": 17,
+            "useful_lead_time_seconds_mean": 0.08351729411764706,
+            "useful_lead_time_seconds_n": 17
+          }
+        }
+      },
+      "auroc_degradation_from_dev": {
+        "phase4.9-env-memory-constrained": 0.17171891654627947,
+        "phase4.9-env-dependency-network-constrained": 0.15442421778977844
+      }
+    },
+    "resource_unavailable": {
+      "status": "EVALUATED",
+      "failure_class": "RESOURCE_UNAVAILABLE",
+      "threshold": 0.4138978757336574,
+      "n_dev_train_rows": 654,
+      "n_dev_validation_rows": 199,
+      "per_environment": {
+        "phase4.9-env-baseline-cpu": {
+          "status": "EVALUATED",
+          "role": "development",
+          "metrics": {
+            "n_checkpoints": 197,
+            "n_runs": 24,
+            "threshold": 0.4138978757336574,
+            "true_positives": 60,
+            "false_positives": 127,
+            "false_negatives": 1,
+            "true_negatives": 9,
+            "precision": 0.32085561497326204,
+            "recall": 0.9836065573770492,
+            "f1": 0.48387096774193544,
+            "auroc": 0.5987222757955641,
+            "auprc": 0.3795836116181037,
+            "brier_score": 0.24668429395698818,
+            "ece": 0.1953187918101454,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 16,
+            "run_level_true_positives": 8,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.087746625,
+            "lead_time_seconds_n": 8,
+            "useful_lead_time_seconds_mean": 0.087746625,
+            "useful_lead_time_seconds_n": 8
+          }
+        },
+        "phase4.9-env-memory-constrained": {
+          "status": "EVALUATED",
+          "role": "held_out",
+          "metrics": {
+            "n_checkpoints": 592,
+            "n_runs": 24,
+            "threshold": 0.4138978757336574,
+            "true_positives": 203,
+            "false_positives": 389,
+            "false_negatives": 0,
+            "true_negatives": 0,
+            "precision": 0.34290540540540543,
+            "recall": 1.0,
+            "f1": 0.5106918238993711,
+            "auroc": 0.4580837565058822,
+            "auprc": 0.32163478656856936,
+            "brier_score": 0.3275849478371957,
+            "ece": 0.3108335136025916,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 16,
+            "run_level_true_positives": 8,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.088489375,
+            "lead_time_seconds_n": 8,
+            "useful_lead_time_seconds_mean": 0.088489375,
+            "useful_lead_time_seconds_n": 8
+          }
+        },
+        "phase4.9-env-dependency-network-constrained": {
+          "status": "EVALUATED",
+          "role": "robustness",
+          "metrics": {
+            "n_checkpoints": 58,
+            "n_runs": 8,
+            "threshold": 0.4138978757336574,
+            "true_positives": 13,
+            "false_positives": 2,
+            "false_negatives": 37,
+            "true_negatives": 6,
+            "precision": 0.8666666666666667,
+            "recall": 0.26,
+            "f1": 0.4,
+            "auroc": 0.46749999999999997,
+            "auprc": 0.8416568186956598,
+            "brier_score": 0.4212428830249884,
+            "ece": 0.5359892830485496,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 1,
+            "run_level_true_positives": 7,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.08512342857142856,
+            "lead_time_seconds_n": 7,
+            "useful_lead_time_seconds_mean": 0.08512342857142856,
+            "useful_lead_time_seconds_n": 7
+          }
+        }
+      },
+      "auroc_degradation_from_dev": {
+        "phase4.9-env-memory-constrained": 0.14063851928968196,
+        "phase4.9-env-dependency-network-constrained": 0.13122227579556417
+      }
+    },
+    "flaky": {
+      "status": "EVALUATED",
+      "failure_class": "INTERMITTENT_TRANSIENT",
+      "threshold": 0.40587357128607454,
+      "n_dev_train_rows": 447,
+      "n_dev_validation_rows": 152,
+      "per_environment": {
+        "phase4.9-env-baseline-cpu": {
+          "status": "EVALUATED",
+          "role": "development",
+          "metrics": {
+            "n_checkpoints": 210,
+            "n_runs": 28,
+            "threshold": 0.40587357128607454,
+            "true_positives": 112,
+            "false_positives": 95,
+            "false_negatives": 1,
+            "true_negatives": 2,
+            "precision": 0.5410628019323671,
+            "recall": 0.9911504424778761,
+            "f1": 0.7,
+            "auroc": 0.554785147340571,
+            "auprc": 0.5455414713070635,
+            "brier_score": 0.24794621148787363,
+            "ece": 0.04297154293395249,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 12,
+            "run_level_true_positives": 16,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.0803159375,
+            "lead_time_seconds_n": 16,
+            "useful_lead_time_seconds_mean": 0.0803159375,
+            "useful_lead_time_seconds_n": 16
+          }
+        },
+        "phase4.9-env-memory-constrained": {
+          "status": "EVALUATED",
+          "role": "held_out",
+          "metrics": {
+            "n_checkpoints": 715,
+            "n_runs": 28,
+            "threshold": 0.40587357128607454,
+            "true_positives": 35,
+            "false_positives": 27,
+            "false_negatives": 366,
+            "true_negatives": 287,
+            "precision": 0.5645161290322581,
+            "recall": 0.08728179551122195,
+            "f1": 0.1511879049676026,
+            "auroc": 0.5030576425179091,
+            "auprc": 0.569608203309777,
+            "brier_score": 0.42740503675961783,
+            "ece": 0.40513895509648984,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 12,
+            "run_level_true_positives": 16,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.083224625,
+            "lead_time_seconds_n": 16,
+            "useful_lead_time_seconds_mean": 0.083224625,
+            "useful_lead_time_seconds_n": 16
+          }
+        },
+        "phase4.9-env-dependency-network-constrained": {
+          "status": "EVALUATED",
+          "role": "robustness",
+          "metrics": {
+            "n_checkpoints": 210,
+            "n_runs": 28,
+            "threshold": 0.40587357128607454,
+            "true_positives": 122,
+            "false_positives": 88,
+            "false_negatives": 0,
+            "true_negatives": 0,
+            "precision": 0.580952380952381,
+            "recall": 1.0,
+            "f1": 0.7349397590361446,
+            "auroc": 0.5150894187779433,
+            "auprc": 0.6426479821772367,
+            "brier_score": 0.29000194494568354,
+            "ece": 0.20868243187062605,
+            "false_alarm_rate": 1.0,
+            "n_negative_runs": 11,
+            "run_level_true_positives": 17,
+            "run_level_false_negatives": 0,
+            "lead_time_seconds_mean": 0.08406035294117646,
+            "lead_time_seconds_n": 17,
+            "useful_lead_time_seconds_mean": 0.08406035294117646,
+            "useful_lead_time_seconds_n": 17
+          }
+        }
+      },
+      "auroc_degradation_from_dev": {
+        "phase4.9-env-memory-constrained": 0.051727504822661974,
+        "phase4.9-env-dependency-network-constrained": 0.03969572856262771
+      }
+    }
+  }
+}

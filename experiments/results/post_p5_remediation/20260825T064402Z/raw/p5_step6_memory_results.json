@@ -1,0 +1,116 @@
+{
+  "workload_id": "post-p5-step6-incident-resource-unavailable",
+  "n_episodes": 6,
+  "memory_on": {
+    "episodes": [
+      {
+        "episode": 0,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      },
+      {
+        "episode": 1,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 2
+      },
+      {
+        "episode": 2,
+        "action": "reconfigure",
+        "validation_status": "RECOVERED",
+        "memory_version_after": 3
+      },
+      {
+        "episode": 3,
+        "action": "reconfigure",
+        "validation_status": "RECOVERED",
+        "memory_version_after": 4
+      },
+      {
+        "episode": 4,
+        "action": "reconfigure",
+        "validation_status": "RECOVERED",
+        "memory_version_after": 5
+      },
+      {
+        "episode": 5,
+        "action": "reconfigure",
+        "validation_status": "RECOVERED",
+        "memory_version_after": 6
+      }
+    ],
+    "actions": [
+      "retry",
+      "retry",
+      "reconfigure",
+      "reconfigure",
+      "reconfigure",
+      "reconfigure"
+    ],
+    "first_decision_change_episode": 2
+  },
+  "memory_off": {
+    "episodes": [
+      {
+        "episode": 0,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      },
+      {
+        "episode": 1,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      },
+      {
+        "episode": 2,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      },
+      {
+        "episode": 3,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      },
+      {
+        "episode": 4,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      },
+      {
+        "episode": 5,
+        "action": "retry",
+        "validation_status": "NOT_RECOVERED",
+        "memory_version_after": 1
+      }
+    ],
+    "actions": [
+      "retry",
+      "retry",
+      "retry",
+      "retry",
+      "retry",
+      "retry"
+    ],
+    "first_decision_change_episode": null
+  },
+  "restart_persistence_check": {
+    "record_written": "memory:run-1:1",
+    "memory_version_before_restart": 1,
+    "memory_version_after_restart": 1,
+    "versions_match": true,
+    "retrieved_after_restart_count": 1,
+    "retrieved_correctly": true,
+    "cross_scope_query_correctly_returned_nothing": true
+  },
+  "verdict": {
+    "memory_on_decision_changed": true,
+    "memory_off_decision_changed": false,
+    "hypothesis_confirmed": true
+  }
+}

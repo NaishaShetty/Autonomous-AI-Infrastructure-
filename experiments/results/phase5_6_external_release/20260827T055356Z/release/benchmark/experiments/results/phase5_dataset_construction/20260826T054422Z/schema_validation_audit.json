@@ -1,0 +1,8 @@
+{
+  "failed": 0,
+  "failures_sample": [],
+  "n_failure_records_total": 0,
+  "passed": 3106,
+  "schema_version": "phase5.1-schema-v1.0.0",
+  "total_records": 3106
+}

@@ -194,7 +194,7 @@ def main():
     print(f"wrote {out_dir / 'results.json'}")
     print(f"predictable-scope AUC (real trained-model skill, timeout-only): {scope_router['scoped_test_metrics']['predictable_scope'].get('auc')}")
     print(f"router combined-output AUC (all scopes, NOT comparable to the old single-model 0.515 -- see prediction_training.py's evaluate_by_scope docstring): {scope_router['scoped_test_metrics']['router_combined_output_all_scopes'].get('auc')}")
-    print("for a genuine apples-to-apples comparison against the original single blended model, see docs/PHASE4_5_GAP_FIXES_REPORT.md's reported AUC=0.515 (that model never saw `mode` at all)")
+    print("for a genuine apples-to-apples comparison against the original single blended model, see docs/archive/PHASE4_5_GAP_FIXES_REPORT.md's reported AUC=0.515 (that model never saw `mode` at all)")
     print(f"agent self-consistency accuracy curve: {json.dumps(accuracy_curve)}")
     print(f"n_samples=1 decision-band breakdown: {json.dumps(band_breakdown_n1, default=str)}")
     print(f"n_samples=5 decision-band breakdown: {json.dumps(band_breakdown_n5, default=str)}")

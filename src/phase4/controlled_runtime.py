@@ -79,7 +79,18 @@ def now_iso(): return datetime.now(timezone.utc).isoformat().replace('+00:00','Z
 def event_id(run_id, kind): return f'{run_id}:{kind}:{uuid.uuid4().hex[:12]}'
 
 def environment_identity(environment_id: str | None = None):
-    return {'environment_id':environment_id or ENVIRONMENT_ID,'classification':'CONTROLLED_RUNTIME','project_owned':True,'host_identity':platform.node(),'os':platform.platform(),'python':platform.python_version(),'hardware':{'cpu_count':os.cpu_count(),'gpu':'UNAVAILABLE'},'scheduler':'UNAVAILABLE','queue':'UNAVAILABLE','allocation':'UNAVAILABLE','source_id':SOURCE_ID,'runtime_version':RUNTIME_VERSION}
+    # 'gpu' here is deliberately a cheap PATH-only check (never a subprocess
+    # probe invocation -- environment_identity() is called on every
+    # ControlledRuntime construction, and a real device probe on that path
+    # would add real per-instance latency across the whole suite). It used
+    # to be hardcoded 'UNAVAILABLE' unconditionally, which is simply false
+    # on any machine with a real GPU (see gpu_probe.py's docstring for the
+    # P3-W7 background). 'UNKNOWN' here means "not probed at environment
+    # level"; the 'gpu' controlled-runtime mode performs the real, fully
+    # classified probe (see gpu_probe.py / controlled_runtime's gpu branch).
+    gpu_tool_present = bool(shutil.which('nvidia-smi') or shutil.which('rocm-smi'))
+    gpu_label = 'UNKNOWN (tool present on PATH, not probed at environment level)' if gpu_tool_present else 'UNKNOWN (no GPU management tool on PATH)'
+    return {'environment_id':environment_id or ENVIRONMENT_ID,'classification':'CONTROLLED_RUNTIME','project_owned':True,'host_identity':platform.node(),'os':platform.platform(),'python':platform.python_version(),'hardware':{'cpu_count':os.cpu_count(),'gpu':gpu_label},'scheduler':'UNAVAILABLE','queue':'UNAVAILABLE','allocation':'UNAVAILABLE','source_id':SOURCE_ID,'runtime_version':RUNTIME_VERSION}
 
 @dataclass(frozen=True)
 class RuntimeConfig:
@@ -155,17 +166,39 @@ elif mode == 'oom':
                 sys.exit(12)
         sys.exit(0)
 elif mode == 'gpu':
-    tool = shutil.which('nvidia-smi') or shutil.which('rocm-smi')
-    available = False
-    if tool:
-        try:
-            probe = sp.run([tool, '-L'], capture_output=True, timeout=min(d, 2.0) or 2.0)
-            available = probe.returncode == 0 and bool(probe.stdout.strip())
-        except Exception:
-            available = False
-    if available:
+    # Explicit probe-state classification (post-P5 remediation P3-W7):
+    # every distinct outcome (no tool on PATH, tool ran and found nothing,
+    # probe timed out, probe errored, tool ran and found a device) is
+    # named, not collapsed into a single "available" boolean -- the prior
+    # boolean collapse is consistent with the unreplicated GPU AUROC
+    # race documented in the P3 remediation register. See
+    # src/phase4/gpu_probe.py for the parent-process equivalent used by
+    # environment_identity(); this subprocess is a standalone `python -c`
+    # invocation and cannot import the package, so the classification is
+    # duplicated here deliberately (same reasoning as every other mode's
+    # self-contained logic in this script).
+    forced = extra.get('force_gpu_state')  # test-only deterministic override; never set by production/eval callers
+    timeout_s = min(d, 2.0) or 2.0
+    if forced is not None:
+        state = forced
+    else:
+        tool = shutil.which('nvidia-smi') or shutil.which('rocm-smi')
+        if not tool:
+            state = 'UNKNOWN'
+        else:
+            try:
+                probe = sp.run([tool, '-L'], capture_output=True, timeout=timeout_s, text=True)
+                output = (probe.stdout or '').strip()
+                state = 'GPU_AVAILABLE' if (probe.returncode == 0 and output) else 'GPU_UNAVAILABLE'
+            except sp.TimeoutExpired:
+                state = 'GPU_PROBE_TIMEOUT'
+            except Exception:
+                state = 'GPU_PROBE_ERROR'
+    provenance = json.dumps({'gpu_probe_state': state, 'forced': forced is not None, 'probe_version': 'phase4.post-p5-gpu-probe-v1'})
+    if state == 'GPU_AVAILABLE':
+        sys.stdout.write(provenance + '\n')
         sys.exit(0)
-    sys.stderr.write('controlled gpu failure: no GPU device found by a real device probe (shutil.which + real subprocess invocation)\n')
+    sys.stderr.write(f'controlled gpu failure: gpu_probe_state={state} ({provenance})\n')
     sys.exit(11)
 elif mode == 'corruption':
     payload = os.urandom(4096)
@@ -287,22 +320,96 @@ class ControlledRuntime:
         # and it is what src/phase4/memory.py's workload-scoped retrieval
         # needs to ever have anything to retrieve across separate runs.
         params=dict(parameters or {}); params.setdefault('mode',workload_type); run_id=f'run-{uuid.uuid4().hex}'; workload_id=workload_id or f'workload-{uuid.uuid4().hex}'; start=now_iso(); self._raw=[]
-        self._emit(run_id,workload_id,'workload_received',{'workload_type':workload_type,'configuration':self.config.as_dict(),'environment':self.env})
+        # P4-W2 (post-P5 remediation): the workload's own configured
+        # parameters (e.g. 'oom' mode's real limit_mb/alloc_mb budget) are
+        # known BEFORE the run even starts -- a genuine configuration
+        # input, never an outcome -- but were previously never emitted
+        # into any canonical event, so a feature extractor had no way to
+        # normalize a run's telemetry against ITS OWN actual resource
+        # constraint (as opposed to a fixed, environment-independent
+        # constant). Emitting them here is what makes an
+        # environment-aware/normalized feature representation possible.
+        self._emit(run_id,workload_id,'workload_received',{'workload_type':workload_type,'configuration':self.config.as_dict(),'environment':self.env,'workload_parameters':dict(params)})
         self._emit(run_id,workload_id,'workload_registered',{'workload_type':workload_type})
+        # P3-W2 (post-P5 remediation): resource_unavailable has NO telemetry
+        # window at all otherwise -- the subprocess's bind() outcome is
+        # decided within microseconds of process start, before the
+        # telemetry-sampling loop below can ever observe a single sample
+        # (see prediction_features_v2.py's own docstring: "resource_
+        # unavailable is decided by a single bind() syscall at/near
+        # execution start"). This is a REAL, independent, honestly-timed
+        # pre-flight probe from the PARENT process -- not a peek at the
+        # child's outcome and not label leakage: it performs the exact same
+        # real bind() the child is about to attempt, strictly BEFORE the
+        # child is even spawned, so it is genuinely available at the
+        # decision boundary. It is emitted only for resource_unavailable
+        # workloads that name a port; every other mode is unaffected.
+        if str(params.get('mode')) == 'resource_unavailable' and 'port' in params:
+            try:
+                port = int(params['port'])
+                probe_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                try:
+                    probe_sock.bind(('127.0.0.1', port))
+                    resource_available = True
+                except OSError:
+                    resource_available = False
+                finally:
+                    probe_sock.close()
+                self._emit(run_id, workload_id, 'telemetry_observed', {
+                    'telemetry_kind': 'resource_preflight_probe', 'port': port,
+                    'resource_available': resource_available,
+                    'cpu': 'UNAVAILABLE', 'memory': 'UNAVAILABLE', 'gpu': 'UNAVAILABLE',
+                    'scheduler': 'UNAVAILABLE', 'queue': 'UNAVAILABLE', 'sample_index': -1,
+                })
+            except (ValueError, TypeError):
+                pass  # non-integer/missing port: no probe possible, honestly skip it
         proc=subprocess.Popen(self._command(params,workload_id),stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
         self._emit(run_id,workload_id,'execution_started',{'pid':proc.pid,'workload_type':workload_type})
         timed_out=False; telemetry_count=0; deadline=time.monotonic()+self.config.timeout_seconds if self.config.timeout_seconds is not None else None
+        # P3-W2 (post-P5 remediation): decision-time telemetry collection.
+        # This USED to read /proc/{pid}/status and /proc/{pid}/stat directly
+        # -- POSIX-only paths that silently never exist on Windows, so
+        # process_rss_bytes (and therefore rss_ratio/anomaly_rate/
+        # rss_growth_rate downstream in prediction_features_v2.py) was
+        # `None` for every single telemetry sample ever collected on a
+        # Windows host, with no error and no warning. That is precisely the
+        # "telemetry may simply be insufficient" hypothesis P3-W1 asks to
+        # rule out before touching the predictive model -- it was true, at
+        # least for OOM's only intended signal. psutil.Process is real,
+        # cross-platform, and gives access to the same underlying OS
+        # counters (Windows: GetProcessMemoryInfo/NtQuerySystemInformation;
+        # POSIX: /proc or task_info) that /proc parsing approximated on
+        # Linux alone.
+        try:
+            import psutil
+            _psutil_proc = psutil.Process(proc.pid)
+            _psutil_ok = True
+        except Exception:
+            _psutil_proc = None
+            _psutil_ok = False
         while proc.poll() is None:
             time.sleep(max(0.001,self.config.telemetry_interval_seconds))
             try:
-                rss=None; cpu_ticks=None
-                status=Path(f'/proc/{proc.pid}/status')
-                if status.exists():
-                    for line in status.read_text().splitlines():
-                        if line.startswith('VmRSS:'): rss=int(line.split()[1])*1024
-                stat=Path(f'/proc/{proc.pid}/stat')
-                if stat.exists(): cpu_ticks=stat.read_text().split()[13:15]
-                self._emit(run_id,workload_id,'telemetry_observed',{'pid':proc.pid,'process_rss_bytes':rss,'process_cpu_ticks':cpu_ticks,'cpu':'OBSERVED_FROM_PROC','memory':'OBSERVED_FROM_PROC','gpu':'UNAVAILABLE','scheduler':'UNAVAILABLE','queue':'UNAVAILABLE','sample_index':telemetry_count}); telemetry_count+=1
+                rss=None; cpu_percent=None; process_age_seconds=None
+                system_available_memory_bytes=None; system_memory_percent=None
+                if _psutil_ok:
+                    try:
+                        mem = _psutil_proc.memory_info(); rss = int(mem.rss)
+                        cpu_percent = float(_psutil_proc.cpu_percent(interval=None))
+                        process_age_seconds = max(0.0, time.time() - _psutil_proc.create_time())
+                        vm = psutil.virtual_memory()
+                        system_available_memory_bytes = int(vm.available); system_memory_percent = float(vm.percent)
+                    except psutil.NoSuchProcess:
+                        pass  # process exited between poll() and the sample; leave fields None, honest
+                self._emit(run_id,workload_id,'telemetry_observed',{
+                    'pid':proc.pid,'process_rss_bytes':rss,'process_cpu_percent':cpu_percent,
+                    'process_age_seconds':process_age_seconds,
+                    'system_available_memory_bytes':system_available_memory_bytes,
+                    'system_memory_percent':system_memory_percent,
+                    'cpu':'OBSERVED_FROM_PSUTIL' if _psutil_ok else 'UNAVAILABLE',
+                    'memory':'OBSERVED_FROM_PSUTIL' if _psutil_ok else 'UNAVAILABLE',
+                    'gpu':'UNAVAILABLE','scheduler':'UNAVAILABLE','queue':'UNAVAILABLE','sample_index':telemetry_count,
+                }); telemetry_count+=1
             except (FileNotFoundError,PermissionError): pass
             if deadline is not None and time.monotonic()>=deadline and proc.poll() is None:
                 timed_out=True; proc.kill(); self._emit(run_id,workload_id,'failure_detected',{'failure_kind':'TIMEOUT','configured_timeout_seconds':self.config.timeout_seconds,'termination':'actual subprocess kill','pid':proc.pid}); break

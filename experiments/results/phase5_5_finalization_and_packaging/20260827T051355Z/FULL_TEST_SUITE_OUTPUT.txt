@@ -1,0 +1,62 @@
+    experience_store = JsonExperienceStore(experience_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <src.runtime.experience.JsonExperienceStore object at 0x000001E415409150>
+path = '/tmp/counterfactual_experiences_19.jsonl'
+
+    def __init__(self, path: str | Path | None = None):
+        self.path = Path(path) if path is not None else None
+        self.episodes: list[FailureExperience] = []
+        if self.path and self.path.exists():
+            for line in self.path.read_text().splitlines():
+                if line.strip():
+>                   self.episodes.append(FailureExperience.model_validate_json(line))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   pydantic_core._pydantic_core.ValidationError: 1 validation error for FailureExperience
+E                     Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='ibility":{"observation_c...ersion":"4.1.0-active"}', input_type=str]
+E                       For further information visit https://errors.pydantic.dev/2.13/v/json_invalid
+
+src\runtime\experience.py:45: ValidationError
+============================== warnings summary ===============================
+..\Users\naish\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\naish\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+tests/integration/test_phase46_integration.py::test_all_three_task_families_produce_complete_metrics_with_no_nan_or_exception
+  C:\Users\naish\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\models\bert\tokenization_bert.py:104: DeprecationWarning: Deprecated in 0.9.0: WordPiece.__init__ will not create from files anymore, try `WordPiece.from_file` instead
+    self._tokenizer = Tokenizer(WordPiece(self._vocab, unk_token=str(unk_token)))
+
+tests/runtime/test_closed_loop_runtime.py: 3 warnings
+tests/runtime/test_generalization.py: 60 warnings
+  C:\Users\naish\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py:1403: ConvergenceWarning: Number of distinct clusters (1) found smaller than n_clusters (2). Possibly due to duplicate points in X.
+    return fit_method(estimator, *args, **kwargs)
+
+tests/runtime/test_generalization.py: 15 warnings
+  C:\Users\naish\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py:1403: ConvergenceWarning: Number of distinct clusters (1) found smaller than n_clusters (3). Possibly due to duplicate points in X.
+    return fit_method(estimator, *args, **kwargs)
+
+tests/runtime/test_generalization.py: 35 warnings
+  C:\Users\naish\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py:1403: ConvergenceWarning: Number of distinct clusters (2) found smaller than n_clusters (3). Possibly due to duplicate points in X.
+    return fit_method(estimator, *args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/runtime/test_counterfactual_generalization.py::test_counterfactual_pair_is_same_observation_with_only_memory_changed
+FAILED tests/runtime/test_counterfactual_generalization.py::test_unseen_manifestations_are_never_in_training_memory
+FAILED tests/runtime/test_counterfactual_generalization.py::test_baselines_are_present_and_nearest_neighbor_is_explicit
+FAILED tests/runtime/test_counterfactual_generalization.py::test_exact_removed_and_unseen_generalization_are_measured_separately
+FAILED tests/runtime/test_counterfactual_generalization.py::test_negative_transfer_and_safety_have_zero_executed_unsafe_actions
+FAILED tests/runtime/test_counterfactual_generalization.py::test_distance_ladder_is_declared_and_uncertainty_does_not_improve_with_distance
+FAILED tests/runtime/test_counterfactual_generalization.py::test_training_event_ids_are_deterministic_and_no_uuid_is_used_in_result_rows
+FAILED tests/runtime/test_counterfactual_generalization.py::test_counterfactual_outputs_are_byte_reproducible
+8 failed, 880 passed, 117 warnings in 1338.76s (0:22:18)
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+[exited with code 0]

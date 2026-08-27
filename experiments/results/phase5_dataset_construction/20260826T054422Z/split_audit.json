@@ -1,0 +1,48 @@
+{
+  "environment_axis_check": {
+    "distinct_environment_ids_present": {
+      "UNSPECIFIED_PRE_4_9": 3106
+    },
+    "explanation": "No source used in this construction carries a genuine per-episode Phase-4.9 EnvironmentId (phase4.9-env-baseline-cpu / -memory-constrained / -dependency-network-constrained); every extracted record's identity.environment_id is UNSPECIFIED_PRE_4_9 because the only sources with real per-episode raw evidence available to this construction (phase4_4_autonomy_pipeline/results.json, phase4_5_autonomy_pipeline_at_scale/continuous_mode_metrics.jsonl, phase4_6_to_4_10 agent-task raw evidence) predate Phase 4.9's EnvironmentProfile introduction or do not carry it at the per-record level. The Phase-4.9/post-P5-Step-4 environment-role evidence that DOES exist (experiments/results/post_p5_remediation/20260825T064402Z/raw/p4_step4_results.json) is aggregate-only (per-environment metric rollups, no retained per-episode/per-run identity), so it cannot be joined back to individual dataset records without fabricating a join key. This is classified as (c) unavailable source evidence, disclosed rather than worked around by inventing environment_id values.",
+    "status": "DISCLOSED_LIMITATION_NOT_APPLICABLE"
+  },
+  "overlap_counts": {
+    "calibration_validation_and_test": 0,
+    "train_and_calibration_validation": 0,
+    "train_and_test": 0
+  },
+  "per_split_counts": {
+    "calibration_validation": {
+      "environments": [
+        "UNSPECIFIED_PRE_4_9"
+      ],
+      "episodes": 482,
+      "records": 482,
+      "runs": 482,
+      "workloads": 480
+    },
+    "test": {
+      "environments": [
+        "UNSPECIFIED_PRE_4_9"
+      ],
+      "episodes": 482,
+      "records": 482,
+      "runs": 482,
+      "workloads": 482
+    },
+    "train": {
+      "environments": [
+        "UNSPECIFIED_PRE_4_9"
+      ],
+      "episodes": 2142,
+      "records": 2142,
+      "runs": 2142,
+      "workloads": 2142
+    }
+  },
+  "total_records": 3106,
+  "workload_id_cross_split_violations": {
+    "count": 0,
+    "examples": {}
+  }
+}

@@ -34,3 +34,57 @@ def test_environment_is_controlled_and_missing_cluster_state_is_explicit():
 
 def test_scenario_runner_produces_all_engineering_scenarios(tmp_path):
     result=run_scenarios(tmp_path); assert result['success']['status']=='COMPLETED'; assert result['failure']['status']=='FAILED'; assert result['timeout']['status']=='TIMEOUT'; assert result['_restart']['replay_equal'] is True
+
+
+def test_resource_unavailable_gets_a_real_preflight_probe_before_the_subprocess_runs(tmp_path):
+    """P3-W2 (post-P5 remediation): resource_unavailable had NO telemetry
+    window at all -- the outcome is decided within microseconds of process
+    start. The parent now performs a real, independently-timed pre-flight
+    bind() probe on the same port before the child is even spawned, so a
+    genuine decision-time signal exists. Verify it fires, is correctly
+    timestamped before execution_started, and honestly reflects real port
+    contention state (both the free and the occupied case)."""
+    import socket as _socket
+    store = PersistentEventStore(tmp_path / 'events.sqlite')
+    runtime = ControlledRuntime(store, RuntimeConfig(timeout_seconds=2, telemetry_interval_seconds=0.01))
+
+    # Case 1: port genuinely free -> probe must say available.
+    free_port = 48765
+    result_ok = runtime.run('resource_unavailable', {'mode': 'resource_unavailable', 'port': free_port}, workload_id='w-free')
+    probes_ok = [e for e in result_ok.events if e['payload'].get('telemetry_kind') == 'resource_preflight_probe']
+    assert len(probes_ok) == 1
+    assert probes_ok[0]['payload']['resource_available'] is True
+    exec_started_ts = next(e['timestamp'] for e in result_ok.events if e['event_type'] == 'execution_started')
+    assert probes_ok[0]['timestamp'] <= exec_started_ts  # real precursor: strictly before/at execution start
+
+    # Case 2: port genuinely occupied by a separate real socket -> probe must say unavailable.
+    occupied_port = 48766
+    runtime.occupy_external_resource(occupied_port)
+    result_bad = runtime.run('resource_unavailable', {'mode': 'resource_unavailable', 'port': occupied_port}, workload_id='w-occupied')
+    probes_bad = [e for e in result_bad.events if e['payload'].get('telemetry_kind') == 'resource_preflight_probe']
+    assert len(probes_bad) == 1
+    assert probes_bad[0]['payload']['resource_available'] is False
+    assert result_bad.exit_code == 14  # RESOURCE_UNAVAILABLE exit code -- probe matches the real outcome
+    runtime.close()
+    store.close()
+
+
+def test_telemetry_reports_real_process_rss_cross_platform(tmp_path):
+    """Regression test (post-P5 remediation, P3-W1/P3-W2): telemetry
+    collection used to read /proc/{pid}/status directly, a POSIX-only path
+    that silently never exists on Windows -- so process_rss_bytes (and
+    every downstream feature derived from it: rss_ratio, anomaly_rate,
+    rss_growth_rate) was `None` for every telemetry sample on any Windows
+    host, with no error raised. A workload that allocates real, measurable
+    memory (well above noise) must show at least one telemetry sample with
+    a real positive process_rss_bytes on THIS platform, whatever it is."""
+    store = PersistentEventStore(tmp_path / 'events.sqlite')
+    runtime = ControlledRuntime(store, RuntimeConfig(timeout_seconds=2, telemetry_interval_seconds=0.01))
+    result = runtime.run('oom', {'mode': 'oom', 'alloc_mb': 200, 'limit_mb': 4096})
+    telemetry = [e for e in result.events if e['event_type'] == 'telemetry_observed']
+    assert telemetry, "expected at least one telemetry_observed event"
+    rss_values = [e['payload'].get('process_rss_bytes') for e in telemetry]
+    assert any(isinstance(v, (int, float)) and v > 0 for v in rss_values), (
+        f"process_rss_bytes was never a real positive value across {len(telemetry)} samples: {rss_values}"
+    )
+    store.close()

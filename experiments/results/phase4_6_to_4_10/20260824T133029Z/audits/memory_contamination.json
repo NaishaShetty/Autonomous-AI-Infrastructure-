@@ -1,0 +1,27 @@
+{
+  "audit": "memory_contamination",
+  "scope": "Phase 4.10's memory ON/OFF ablation and FailureMemoryStore usage across the new modules",
+  "checks_performed": [
+    {
+      "check": "FailureMemoryStore scoping contract (workload_id, environment_id, failure_class) is unmodified",
+      "result": "PASS",
+      "evidence": "src/phase4/memory.py was not touched by Phase 4.6-4.10; every new pipeline construction (agent_calibration integration tests, Phase 4.7/4.10 experiment scripts) passes a fresh FailureMemoryStore() rather than reusing a global/module-level instance"
+    },
+    {
+      "check": "memory OFF ablation genuinely isolates episodes from each other",
+      "result": "PASS",
+      "evidence": "scripts/run_phase4_10_final_integrated_evaluation.py's memory_mode='per_episode' path constructs an entirely fresh AutonomyPipeline (fresh FailureMemoryStore AND fresh RecoveryCircuitBreaker) per episode -- verified this does NOT rely on swapping pipeline.memory mid-run, since LearningManager/RuleBasedRecoveryPlanner capture their memory reference at construction time, not via a live attribute lookup"
+    },
+    {
+      "check": "measured memory ON vs OFF outcome on the 300-episode held-out test set",
+      "result": "NO_OBSERVABLE_DIFFERENCE_IN_THIS_SAMPLE -- reported honestly, not treated as evidence memory has no effect in general",
+      "evidence": "evaluation/ablation_results.json: full_loop_reference and ablation_memory_off produced byte-identical episode-level outcomes. Root cause identified and documented in PHASE4_10_FINAL_INTEGRATED_EVALUATION.md: every episode in this test set uses a unique workload_id (f'{label}-{seed}'), so FailureMemoryStore's (workload_id, environment_id, failure_class) scoping contract means no episode's memory record is ever looked up by a later episode in this particular design -- this ablation demonstrates memory scoping is correctly workload-id-isolated (a contamination-prevention property, verified working as designed), not that accumulated memory is inert in general (a workload_id that recurs across episodes, as in run_continuous() streams, would exercise the planner's memory-informed avoidance heuristic differently -- out of scope for this specific 300-distinct-workload_id test)"
+    },
+    {
+      "check": "cross-run isolation (existing coverage, re-verified passing)",
+      "result": "PASS",
+      "evidence": "tests/integration/test_failure_memory_lifecycle.py, tests/integration/test_failure_memory_persistence.py, tests/unit/test_phase44_memory.py, tests/unit/test_phase45_memory_persistence.py -- all pass in the Phase 4.10 full-suite run"
+    }
+  ],
+  "verdict": "No memory contamination found. Memory ON vs OFF ablation is honestly reported as showing no observable difference IN THIS SPECIFIC 300-unique-workload_id test design, with the structural reason stated explicitly rather than a broader claim being implied."
+}

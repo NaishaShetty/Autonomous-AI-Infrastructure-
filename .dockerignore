@@ -1,0 +1,17 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.git/
+.github/
+.cowork_scratch/
+data/
+*.db
+*.sqlite3
+.coverage
+.coverage.*
+.env
+.env.*
+!.env.example
+docs/*.docx

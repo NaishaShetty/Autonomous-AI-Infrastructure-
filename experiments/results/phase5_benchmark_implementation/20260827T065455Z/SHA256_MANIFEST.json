@@ -1,0 +1,12 @@
+{
+  "n_files": 6,
+  "run_dir": "C:\\Autonomous AI infrastructure\\experiments\\results\\phase5_benchmark_implementation\\20260827T065455Z",
+  "sha256": {
+    "BENCHMARK_RUN_MANIFEST.json": "9ea430e2675ac8c848f4b1a5bef944aa186ae600c1a8e52a9e80f6676e82ebf5",
+    "PHASE5_4_BENCHMARK_REPORT.md": "e0d789f9922c8b44e1279b0bdbceab029d0e5df5f3144497cd9a7760d6176c9b",
+    "PHASE5_4_BENCHMARK_RESULTS.json": "d5d9a617c493a1291cb7c5378d5f0c5abbc8891c8ca76267a2f6bb6ec95fee5e",
+    "PHASE5_4_LIMITATIONS.md": "f253f8b92cc0ed29959ca0c3301054ae72d9daf8910dbaa039f9fd959876ba23",
+    "PHASE5_4_SYNTHESIS.md": "2ad5244232a79e10692bcd79e396d3c951dd2258a6393c3c62203dc91a890240",
+    "PHASE5_4_VALIDATION_REPORT.md": "48c76135e198b88f1717241c8c9f1a55d0b9d6153b6be3e8adc7e3e49fa390f5"
+  }
+}

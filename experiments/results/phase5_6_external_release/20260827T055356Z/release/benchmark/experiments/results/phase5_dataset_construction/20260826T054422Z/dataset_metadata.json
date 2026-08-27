@@ -1,0 +1,17 @@
+{
+  "dataset_version": "phase5.2-dataset-v1.0.0",
+  "generation_spec_version": "phase5.2-generation-spec-v1",
+  "schema_version": "phase5.1-schema-v1.0.0",
+  "source_file_sha256": {
+    "experiments/results/phase4_4_autonomy_pipeline/results.json": "d7b3af45ed30154df96ba73f0befc29160657bdd9bacd93e5ec9a50da858fd93",
+    "experiments/results/phase4_5_autonomy_pipeline_at_scale/continuous_mode_metrics.jsonl": "8b10cec4dc2d28026260b6e87022cf1909635423d84fdb2dcc6b43d22bd57a64",
+    "experiments/results/phase4_6_to_4_10/20260824T133029Z/raw/episodes/arithmetic_episodes.json": "2bcbac1d79cedf50070904bfc4b3fe34aec1cb88259424b46e1ce1f1a2221cd7",
+    "experiments/results/phase4_6_to_4_10/20260824T133029Z/raw/predictions/classification_predictions.json": "b562db97bf1f3fe96b3d959326525a62d8653596caf6a65b631605df0c7ed24a",
+    "experiments/results/phase4_6_to_4_10/20260824T133029Z/raw/predictions/qa_predictions.json": "0557bbda5dd26d5dfd7e21e7db6e242eff94a6ed95e444df5f7e62b0771ed915"
+  },
+  "total_records": 3106,
+  "tracks": [
+    "agent_task",
+    "controlled_runtime"
+  ]
+}

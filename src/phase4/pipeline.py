@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
+from .agent_calibration import AgentAutonomyDecision, AgentDecisionCalibrationProfile
 from .agent_recovery import AgentExecutionResult, AgentRecoveryExecutor
 from .agent_runtime import AgentTaskRuntime
 from .architecture import AutonomyState, WorkloadStateMachine
@@ -53,7 +54,7 @@ class PipelineResult:
     final_state: str
     state_history: list[str]
     prediction_score: float | None = None
-    decision: AutonomyDecision | None = None
+    decision: AutonomyDecision | AgentAutonomyDecision | None = None
     diagnosis: StructuredDiagnosis | None = None
     action: RecoveryAction | None = None
     safety_authorized: bool | None = None
@@ -107,6 +108,7 @@ class AutonomyPipeline:
         rolling_prediction: bool = False,
         agent_runtime: AgentTaskRuntime | None = None,
         agent_predictor: AgentUncertaintyPredictor | None = None,
+        agent_decision_policy: AgentDecisionCalibrationProfile | None = None,
     ):
         self.runtime = runtime
         self.memory = memory or FailureMemoryStore()
@@ -139,6 +141,13 @@ class AutonomyPipeline:
         self.agent_runtime = agent_runtime
         self.agent_predictor = agent_predictor or AgentUncertaintyPredictor()
         self.agent_executor = AgentRecoveryExecutor(agent_runtime) if agent_runtime is not None else None
+        # Phase 4.7 -- optional mechanism-aware calibrated policy for the
+        # agent self-consistency signal. Opt-in (mirrors rolling_prediction
+        # / agent_runtime's own opt-in discipline): when None (the
+        # default), run_agent_task behaves EXACTLY as it did before this
+        # change, using the generic self.decision_policy -- every existing
+        # test/caller is unaffected. See src/phase4/agent_calibration.py.
+        self.agent_decision_policy = agent_decision_policy
 
     def run_workload(self, workload_type: str, parameters: Mapping[str, Any] | None = None, workload_id: str | None = None) -> PipelineResult:
         sm = WorkloadStateMachine()
@@ -168,7 +177,21 @@ class AutonomyPipeline:
             return pr
 
         failure_boundary = str(engine_failures[0]["failure_timestamp"])
-        prediction_prefix = [e for e in result.events if e.get("event_type") != "failure_detected" and (e.get("timestamp") or "") < failure_boundary]
+        # Post-P5 remediation: was strict `<` against a microsecond-
+        # precision timestamp string. On a fast machine, two events
+        # emitted in rapid succession (e.g. the LAST self-consistency
+        # sample and the failure_detected event immediately following it)
+        # can legitimately share the exact same timestamp, and strict `<`
+        # then silently dropped that last, most-informative event from the
+        # prediction prefix -- reproduced directly as real, non-RNG,
+        # non-load-dependent run-to-run nondeterminism. `<=` matches the
+        # convention every other temporal-cut boundary in this codebase
+        # already uses (see `prediction.py::rolling_checkpoints`'s
+        # identical `<= ts`). The `event_type != "failure_detected"` guard
+        # already independently excludes the failure event itself, so this
+        # cannot let the failure event's own evidence leak into its own
+        # prediction.
+        prediction_prefix = [e for e in result.events if e.get("event_type") != "failure_detected" and (e.get("timestamp") or "") <= failure_boundary]
 
         rolling_series: list[tuple[str, float]] | None = None
         lead_time_seconds: float | None = None
@@ -329,7 +352,21 @@ class AutonomyPipeline:
             )
 
         failure_boundary = str(engine_failures[0]["failure_timestamp"])
-        prediction_prefix = [e for e in result.events if e.get("event_type") != "failure_detected" and (e.get("timestamp") or "") < failure_boundary]
+        # Post-P5 remediation: was strict `<` against a microsecond-
+        # precision timestamp string. On a fast machine, two events
+        # emitted in rapid succession (e.g. the LAST self-consistency
+        # sample and the failure_detected event immediately following it)
+        # can legitimately share the exact same timestamp, and strict `<`
+        # then silently dropped that last, most-informative event from the
+        # prediction prefix -- reproduced directly as real, non-RNG,
+        # non-load-dependent run-to-run nondeterminism. `<=` matches the
+        # convention every other temporal-cut boundary in this codebase
+        # already uses (see `prediction.py::rolling_checkpoints`'s
+        # identical `<= ts`). The `event_type != "failure_detected"` guard
+        # already independently excludes the failure event itself, so this
+        # cannot let the failure event's own evidence leak into its own
+        # prediction.
+        prediction_prefix = [e for e in result.events if e.get("event_type") != "failure_detected" and (e.get("timestamp") or "") <= failure_boundary]
 
         prediction = self.agent_predictor.predict_from_events(
             job_id=result.run_id, events_prefix=prediction_prefix,
@@ -337,7 +374,18 @@ class AutonomyPipeline:
         )
         sm.transition(AutonomyState.PREDICTED)
         sm.transition(AutonomyState.DECIDING)
-        decision = self.decision_policy.decide(prediction)
+        if self.agent_decision_policy is not None:
+            # Phase 4.7 -- mechanism-aware calibrated policy. Its decision
+            # is one of ANSWER/RETRY/ABSTAIN/REVIEW; ANSWER and RETRY both
+            # permit the diagnosis/planning/safety/execution path below
+            # (the planner is what actually picks RETRY as the concrete
+            # action for an AGENT_INCORRECT_ANSWER diagnosis either way --
+            # see RuleBasedRecoveryPlanner's candidate table -- so this
+            # profile's ANSWER/RETRY distinction is about which confidence
+            # tier justified autonomous action, not a second action-picker).
+            decision = self.agent_decision_policy.decide(prediction, effective_n_samples)
+        else:
+            decision = self.decision_policy.decide(prediction)
 
         pr = PipelineResult(run_id=result.run_id, workload_id=result.workload_id, final_state="", state_history=[], prediction_score=prediction.score, decision=decision, notes=notes)
 
@@ -347,7 +395,7 @@ class AutonomyPipeline:
             pr.notes.append("decision layer abstained on the agent's self-consistency-derived risk signal; no diagnosis attempted")
             return pr
 
-        entry_state = AutonomyState.DIAGNOSING if decision.decision == "ANSWER" else AutonomyState.ESCALATED
+        entry_state = AutonomyState.DIAGNOSING if decision.decision in ("ANSWER", "RETRY") else AutonomyState.ESCALATED
         sm.transition(entry_state)
         if entry_state == AutonomyState.ESCALATED:
             sm.transition(AutonomyState.DIAGNOSING)
@@ -368,10 +416,10 @@ class AutonomyPipeline:
         sm.transition(AutonomyState.SAFETY_CHECK)
         authorized, reason = self.gate.authorize(action, diagnosis)
         pr.safety_authorized, pr.safety_reason = authorized, reason
-        if not authorized or decision.decision == "REVIEW":
+        if not authorized or decision.decision not in ("ANSWER", "RETRY"):
             sm.transition(AutonomyState.ABSTAINED); sm.transition(AutonomyState.COMPLETED)
             pr.final_state = sm.state.value; pr.state_history = [s.value for s in sm.history]
-            pr.notes.append("safety gate rejected the action, or decision was REVIEW; no execution")
+            pr.notes.append("safety gate rejected the action, or decision was REVIEW/ABSTAIN; no execution")
             return pr
 
         budget = self.recovery_budget.check(result.workload_id, self.agent_runtime.config.environment_id)

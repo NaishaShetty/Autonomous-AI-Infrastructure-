@@ -1,0 +1,62 @@
+{
+  "run_id": "20260824T133029Z",
+  "priority": "phase4.6-priority1-real-model-and-task-families",
+  "objective": "Real local open-weight AI/ML model(s) + at least 3 structurally different task families, each with an objective correctness oracle and its own legitimate uncertainty mechanism, evaluated for correctness-vs-uncertainty discrimination.",
+  "task_families": [
+    {
+      "name": "arithmetic",
+      "status": "retained unchanged from Phase 4.5b",
+      "module": "src/phase4/agent_task.py",
+      "oracle": "real arithmetic recomputation of the instance's own recorded op sequence",
+      "uncertainty_mechanism": "self_consistency_disagreement",
+      "n_samples": 5,
+      "n_seeds_evaluated": 2000,
+      "seed_range": [0, 1999]
+    },
+    {
+      "name": "classification",
+      "module": "src/phase4/classification_task.py",
+      "model_id": "distilbert-base-uncased-finetuned-sst-2-english",
+      "model_revision": "714eb0fa89d2f80546fda750413ed43d93601a13",
+      "oracle": "exact templated label",
+      "uncertainty_mechanism": "softmax_margin_classification",
+      "corpus": "data/real_model_tasks/sentiment_eval.json",
+      "corpus_version": "phase4.6-sentiment-templated-v2",
+      "n_evaluated": 660
+    },
+    {
+      "name": "extractive_qa",
+      "module": "src/phase4/qa_task.py",
+      "model_id": "distilbert-base-cased-distilled-squad",
+      "model_revision": "564e9b582944a57a3e586bbb98fd6f0a4118db7f",
+      "oracle": "normalized exact match against a gold answer that is a verbatim substring of the context by construction",
+      "uncertainty_mechanism": "softmax_span_confidence_qa",
+      "corpus": "data/real_model_tasks/qa_eval.json",
+      "corpus_version": "phase4.6-qa-templated-v2",
+      "n_evaluated": 400
+    }
+  ],
+  "corpus_generation": {
+    "generator": "data/real_model_tasks/generate_corpora.py",
+    "deterministic": true,
+    "seed": 4600,
+    "download_free": true,
+    "rationale": "avoids a second download-permission round-trip beyond the approved model-weight download; correctness guaranteed by template construction, asserted at generation time"
+  },
+  "metrics_harness": {
+    "module": "src/phase4/uncertainty_eval.py",
+    "version": "phase4.6-uncertainty-eval-v1",
+    "metrics": ["accuracy", "error_rate", "auroc_error_detection", "auprc_error_detection", "brier_score", "ece", "risk_coverage_curve"]
+  },
+  "integrity_notes": [
+    "corpus hard-tier fixed and regenerated before any evaluation run against these exact numbers; no post-hoc cherry-picking",
+    "no test-set tuning: metrics harness thresholds/bins fixed in code before this run",
+    "arithmetic agent module untouched (byte-identical to Phase 4.5b HEAD 8086e71)"
+  ],
+  "out_of_scope_for_this_run": [
+    "retry/abstain/review policy wiring for new task families (Priority 2)",
+    "prediction re-evaluation (Priority 3)",
+    "independent environments (Priority 4)",
+    "full integrated loop (Priority 5)"
+  ]
+}

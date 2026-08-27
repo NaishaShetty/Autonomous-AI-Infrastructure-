@@ -1,0 +1,67 @@
+{
+  "test_seeds": [
+    60000,
+    60300
+  ],
+  "note": "generic-vs-calibrated policy = Phase 4.7; real-vs-shuffled labels = Phase 4.8; dev-vs-held-out environment = Phase 4.9. This report covers the remaining ablations plus one consolidated full-loop pass.",
+  "full_loop_reference": {
+    "label": "full-loop",
+    "n_episodes": 300,
+    "n_wrong_initially": 9,
+    "initial_accuracy": 0.97,
+    "final_accuracy": 1.0,
+    "final_error_rate": 0.0,
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 9,
+    "retry_recovery_rate": 1.0,
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 9,
+    "unsafe_action_count": 0
+  },
+  "ablation_memory_off": {
+    "label": "memory-off",
+    "n_episodes": 300,
+    "n_wrong_initially": 9,
+    "initial_accuracy": 0.97,
+    "final_accuracy": 1.0,
+    "final_error_rate": 0.0,
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 9,
+    "retry_recovery_rate": 1.0,
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 9,
+    "unsafe_action_count": 0
+  },
+  "ablation_retry_off": {
+    "label": "retry-off",
+    "n_episodes": 300,
+    "n_wrong_initially": 9,
+    "initial_accuracy": 0.97,
+    "final_accuracy": 0.97,
+    "final_error_rate": 0.030000000000000027,
+    "retry_rate_among_wrong": 0.0,
+    "n_retried": 0,
+    "retry_recovery_rate": null,
+    "review_rate": 0.03,
+    "abstention_rate": 0.0,
+    "memory_records_written": 0,
+    "unsafe_action_count": 0
+  },
+  "ablation_predictor_off": {
+    "label": "predictor-off",
+    "n_episodes": 300,
+    "n_wrong_initially": 9,
+    "initial_accuracy": 0.97,
+    "final_accuracy": 1.0,
+    "final_error_rate": 0.0,
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 9,
+    "retry_recovery_rate": 1.0,
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 9,
+    "unsafe_action_count": 0
+  }
+}

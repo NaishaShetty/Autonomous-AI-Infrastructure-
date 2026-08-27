@@ -1,0 +1,4402 @@
+[
+  {
+    "example_id": "qa-0000",
+    "question": "Who founded Moonrise Telecom?",
+    "gold_answers": [
+      "Priya Anand"
+    ],
+    "predicted_answer": "Priya Anand",
+    "is_correct": true,
+    "span_confidence": 0.9799206535563414,
+    "entropy": 0.013444538469154442
+  },
+  {
+    "example_id": "qa-0001",
+    "question": "Where is Silverbrook Finance headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.9886224120944433,
+    "entropy": 0.009951461453953144
+  },
+  {
+    "example_id": "qa-0002",
+    "question": "When was Wrenfield Publishing founded?",
+    "gold_answers": [
+      "1994"
+    ],
+    "predicted_answer": "1994",
+    "is_correct": true,
+    "span_confidence": 0.9905151940848498,
+    "entropy": 0.007577042357168208
+  },
+  {
+    "example_id": "qa-0003",
+    "question": "When was Grayling Instruments founded?",
+    "gold_answers": [
+      "1999"
+    ],
+    "predicted_answer": "1999",
+    "is_correct": true,
+    "span_confidence": 0.985891093473036,
+    "entropy": 0.010260268283737209
+  },
+  {
+    "example_id": "qa-0004",
+    "question": "What does Ravenmoor Security specialize in?",
+    "gold_answers": [
+      "renewable energy"
+    ],
+    "predicted_answer": "renewable energy",
+    "is_correct": true,
+    "span_confidence": 0.9635299200218519,
+    "entropy": 0.02269808642204961
+  },
+  {
+    "example_id": "qa-0005",
+    "question": "Where is Ravenmoor Security headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.9796110094775194,
+    "entropy": 0.015473915873158203
+  },
+  {
+    "example_id": "qa-0006",
+    "question": "What does Talonreach Aerospace specialize in?",
+    "gold_answers": [
+      "maritime shipping"
+    ],
+    "predicted_answer": "maritime shipping",
+    "is_correct": true,
+    "span_confidence": 0.9694900057790505,
+    "entropy": 0.021799574660403317
+  },
+  {
+    "example_id": "qa-0007",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": false,
+    "span_confidence": 0.148290558124323,
+    "entropy": 0.3473290540664885
+  },
+  {
+    "example_id": "qa-0008",
+    "question": "Who founded Brightwater Utilities?",
+    "gold_answers": [
+      "Owen Bramwell"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": true,
+    "span_confidence": 0.9974352650694804,
+    "entropy": 0.002487012828599466
+  },
+  {
+    "example_id": "qa-0009",
+    "question": "Where is Cedarline Foods headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9904714961986265,
+    "entropy": 0.007957590437945031
+  },
+  {
+    "example_id": "qa-0010",
+    "question": "When was Quillstone Media founded?",
+    "gold_answers": [
+      "1996"
+    ],
+    "predicted_answer": "1996",
+    "is_correct": true,
+    "span_confidence": 0.9886571539812827,
+    "entropy": 0.008584394167241017
+  },
+  {
+    "example_id": "qa-0011",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1987"
+    ],
+    "predicted_answer": "2014",
+    "is_correct": false,
+    "span_confidence": 0.35176563741447353,
+    "entropy": 0.2416641838027193
+  },
+  {
+    "example_id": "qa-0012",
+    "question": "When was Fernbridge Automotive founded?",
+    "gold_answers": [
+      "2002"
+    ],
+    "predicted_answer": "2002",
+    "is_correct": true,
+    "span_confidence": 0.9863572451151015,
+    "entropy": 0.009937864471130826
+  },
+  {
+    "example_id": "qa-0013",
+    "question": "Where is Quillstone Media headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Dunwich Bay",
+    "is_correct": true,
+    "span_confidence": 0.9875839961303363,
+    "entropy": 0.010616518720904449
+  },
+  {
+    "example_id": "qa-0014",
+    "question": "Who founded Goldmarsh Agriculture?",
+    "gold_answers": [
+      "Elif Kaya"
+    ],
+    "predicted_answer": "Elif Kaya",
+    "is_correct": true,
+    "span_confidence": 0.9980411804939493,
+    "entropy": 0.002108111922586485
+  },
+  {
+    "example_id": "qa-0015",
+    "question": "Where is Stagbrook Airlines headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Dunwich Bay",
+    "is_correct": true,
+    "span_confidence": 0.9950965435106731,
+    "entropy": 0.004848810848999798
+  },
+  {
+    "example_id": "qa-0016",
+    "question": "Where is Harborlight Energy headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9977509101111082,
+    "entropy": 0.002515728326193399
+  },
+  {
+    "example_id": "qa-0017",
+    "question": "When was Harborlight Energy founded?",
+    "gold_answers": [
+      "1976"
+    ],
+    "predicted_answer": "1976",
+    "is_correct": true,
+    "span_confidence": 0.9907383553832929,
+    "entropy": 0.007520884262270718
+  },
+  {
+    "example_id": "qa-0018",
+    "question": "What does Cinderfield Steel specialize in?",
+    "gold_answers": [
+      "interactive entertainment"
+    ],
+    "predicted_answer": "interactive entertainment",
+    "is_correct": true,
+    "span_confidence": 0.9605674192473472,
+    "entropy": 0.026909587090887137
+  },
+  {
+    "example_id": "qa-0019",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": false,
+    "span_confidence": 0.9495735124624005,
+    "entropy": 0.033791973199787745
+  },
+  {
+    "example_id": "qa-0020",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1997"
+    ],
+    "predicted_answer": "1997",
+    "is_correct": true,
+    "span_confidence": 0.6227330201921184,
+    "entropy": 0.1608071888782433
+  },
+  {
+    "example_id": "qa-0021",
+    "question": "Who founded Whitmarsh Insurance?",
+    "gold_answers": [
+      "Elif Kaya"
+    ],
+    "predicted_answer": "Elif Kaya",
+    "is_correct": true,
+    "span_confidence": 0.973744553553761,
+    "entropy": 0.015941419056185277
+  },
+  {
+    "example_id": "qa-0022",
+    "question": "Who founded Oakfern Pharmaceuticals?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.9818051617124475,
+    "entropy": 0.011346552224489069
+  },
+  {
+    "example_id": "qa-0023",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1978"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": true,
+    "span_confidence": 0.3273520162160821,
+    "entropy": 0.25665348136027133
+  },
+  {
+    "example_id": "qa-0024",
+    "question": "Where is Nightshade Cosmetics headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.9981044708768394,
+    "entropy": 0.00221866891377949
+  },
+  {
+    "example_id": "qa-0025",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": false,
+    "span_confidence": 0.9390698221732237,
+    "entropy": 0.038786147693374275
+  },
+  {
+    "example_id": "qa-0026",
+    "question": "What does Silverbrook Finance specialize in?",
+    "gold_answers": [
+      "industrial robotics"
+    ],
+    "predicted_answer": "industrial robotics",
+    "is_correct": true,
+    "span_confidence": 0.9424385391400136,
+    "entropy": 0.0374921799313417
+  },
+  {
+    "example_id": "qa-0027",
+    "question": "Where is Waverly Cinemas headquartered?",
+    "gold_answers": [
+      "Copperhill"
+    ],
+    "predicted_answer": "Copperhill",
+    "is_correct": true,
+    "span_confidence": 0.9906636707764207,
+    "entropy": 0.007925799240921919
+  },
+  {
+    "example_id": "qa-0028",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": false,
+    "span_confidence": 0.39684005688202717,
+    "entropy": 0.2401140495135466
+  },
+  {
+    "example_id": "qa-0029",
+    "question": "What does Copperfield Textiles specialize in?",
+    "gold_answers": [
+      "biotechnology research"
+    ],
+    "predicted_answer": "biotechnology research",
+    "is_correct": true,
+    "span_confidence": 0.9358347563418121,
+    "entropy": 0.038235982469266606
+  },
+  {
+    "example_id": "qa-0030",
+    "question": "Where is Northgate Robotics headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.99093316358557,
+    "entropy": 0.0075562122478808865
+  },
+  {
+    "example_id": "qa-0031",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "2015"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": true,
+    "span_confidence": 0.14468439109066633,
+    "entropy": 0.29222363278087804
+  },
+  {
+    "example_id": "qa-0032",
+    "question": "When was Redcliff Mining founded?",
+    "gold_answers": [
+      "1989"
+    ],
+    "predicted_answer": "1989",
+    "is_correct": true,
+    "span_confidence": 0.9875857549814668,
+    "entropy": 0.00959811992844084
+  },
+  {
+    "example_id": "qa-0033",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1974"
+    ],
+    "predicted_answer": "1974",
+    "is_correct": true,
+    "span_confidence": 0.7161660787983735,
+    "entropy": 0.11586962684038869
+  },
+  {
+    "example_id": "qa-0034",
+    "question": "Who founded Stagbrook Airlines?",
+    "gold_answers": [
+      "Astrid Solberg"
+    ],
+    "predicted_answer": "Astrid Solberg",
+    "is_correct": true,
+    "span_confidence": 0.9810260787931568,
+    "entropy": 0.012839844294369709
+  },
+  {
+    "example_id": "qa-0035",
+    "question": "What does Voxel Interactive specialize in?",
+    "gold_answers": [
+      "organic food distribution"
+    ],
+    "predicted_answer": "organic food distribution",
+    "is_correct": true,
+    "span_confidence": 0.8821701552558352,
+    "entropy": 0.06442854751232016
+  },
+  {
+    "example_id": "qa-0036",
+    "question": "Where is Ravenmoor Security headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": true,
+    "span_confidence": 0.997928437604287,
+    "entropy": 0.0024221339310261355
+  },
+  {
+    "example_id": "qa-0037",
+    "question": "Who founded Grayling Instruments?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": true,
+    "span_confidence": 0.9827101840548949,
+    "entropy": 0.012010775992089053
+  },
+  {
+    "example_id": "qa-0038",
+    "question": "What does Oakfern Pharmaceuticals specialize in?",
+    "gold_answers": [
+      "consumer data analytics"
+    ],
+    "predicted_answer": "consumer data analytics",
+    "is_correct": true,
+    "span_confidence": 0.9630201937290508,
+    "entropy": 0.024124718361532592
+  },
+  {
+    "example_id": "qa-0039",
+    "question": "Who founded Stagbrook Airlines?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Marcus Hale",
+    "is_correct": true,
+    "span_confidence": 0.9987393373849827,
+    "entropy": 0.0014613249636552307
+  },
+  {
+    "example_id": "qa-0040",
+    "question": "Who founded Fernbridge Automotive?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.977406498722857,
+    "entropy": 0.013854961518163334
+  },
+  {
+    "example_id": "qa-0041",
+    "question": "When was Whitmarsh Insurance founded?",
+    "gold_answers": [
+      "1990"
+    ],
+    "predicted_answer": "1990",
+    "is_correct": true,
+    "span_confidence": 0.9872838234838781,
+    "entropy": 0.009417080916768598
+  },
+  {
+    "example_id": "qa-0042",
+    "question": "When was Cedarline Foods founded?",
+    "gold_answers": [
+      "2016"
+    ],
+    "predicted_answer": "2016",
+    "is_correct": true,
+    "span_confidence": 0.98312551383761,
+    "entropy": 0.012570925041955916
+  },
+  {
+    "example_id": "qa-0043",
+    "question": "Who founded Foxglove Studios?",
+    "gold_answers": [
+      "Kwame Boateng"
+    ],
+    "predicted_answer": "Kwame Boateng",
+    "is_correct": true,
+    "span_confidence": 0.9824075177365899,
+    "entropy": 0.011891095054600365
+  },
+  {
+    "example_id": "qa-0044",
+    "question": "Where is Stagbrook Airlines headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.9921695673420103,
+    "entropy": 0.00690059153439357
+  },
+  {
+    "example_id": "qa-0045",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": false,
+    "span_confidence": 0.6789394793738701,
+    "entropy": 0.1190039676552502
+  },
+  {
+    "example_id": "qa-0046",
+    "question": "Where is Fernbridge Automotive headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.9981021546940525,
+    "entropy": 0.0022010239222146834
+  },
+  {
+    "example_id": "qa-0047",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Amara Chukwu",
+    "is_correct": false,
+    "span_confidence": 0.2394916841130268,
+    "entropy": 0.21193269179875932
+  },
+  {
+    "example_id": "qa-0048",
+    "question": "Who founded Ravenmoor Security?",
+    "gold_answers": [
+      "Diego Salazar"
+    ],
+    "predicted_answer": "Diego Salazar",
+    "is_correct": true,
+    "span_confidence": 0.9817496860065908,
+    "entropy": 0.012622800185785397
+  },
+  {
+    "example_id": "qa-0049",
+    "question": "Where is Kestrelbank Capital headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": true,
+    "span_confidence": 0.9964606176873332,
+    "entropy": 0.0037919629049891048
+  },
+  {
+    "example_id": "qa-0050",
+    "question": "When was Nightshade Cosmetics founded?",
+    "gold_answers": [
+      "1969"
+    ],
+    "predicted_answer": "1969",
+    "is_correct": true,
+    "span_confidence": 0.9903306634686082,
+    "entropy": 0.007276111738727048
+  },
+  {
+    "example_id": "qa-0051",
+    "question": "Who founded Marrow Biotech?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Marcus Hale",
+    "is_correct": true,
+    "span_confidence": 0.9984680277243427,
+    "entropy": 0.001759645263393313
+  },
+  {
+    "example_id": "qa-0052",
+    "question": "Who founded Stonebridge Consulting?",
+    "gold_answers": [
+      "Dana Whitfield"
+    ],
+    "predicted_answer": "Dana Whitfield",
+    "is_correct": true,
+    "span_confidence": 0.9774620192062429,
+    "entropy": 0.014039648289712013
+  },
+  {
+    "example_id": "qa-0053",
+    "question": "What does Sparrowhill Retail specialize in?",
+    "gold_answers": [
+      "consumer data analytics"
+    ],
+    "predicted_answer": "consumer data analytics",
+    "is_correct": true,
+    "span_confidence": 0.9585244946258165,
+    "entropy": 0.026711786497815176
+  },
+  {
+    "example_id": "qa-0054",
+    "question": "Where is Thistledown Ventures headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": true,
+    "span_confidence": 0.9897331139686756,
+    "entropy": 0.008555688813945382
+  },
+  {
+    "example_id": "qa-0055",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1989"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": false,
+    "span_confidence": 0.4048755452611488,
+    "entropy": 0.23383066612327774
+  },
+  {
+    "example_id": "qa-0056",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Wrenchester"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": false,
+    "span_confidence": 0.41233424236033045,
+    "entropy": 0.29488031879387605
+  },
+  {
+    "example_id": "qa-0057",
+    "question": "Where is Ironvale Manufacturing headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.9842137510625548,
+    "entropy": 0.012910330608055777
+  },
+  {
+    "example_id": "qa-0058",
+    "question": "Who founded Sparrowhill Retail?",
+    "gold_answers": [
+      "Yara Haddad"
+    ],
+    "predicted_answer": "Yara Haddad",
+    "is_correct": true,
+    "span_confidence": 0.9972129757571224,
+    "entropy": 0.002787555365770899
+  },
+  {
+    "example_id": "qa-0059",
+    "question": "When was Millpond Electronics founded?",
+    "gold_answers": [
+      "1992"
+    ],
+    "predicted_answer": "1992",
+    "is_correct": true,
+    "span_confidence": 0.9890258536999852,
+    "entropy": 0.008580771934229311
+  },
+  {
+    "example_id": "qa-0060",
+    "question": "When was Waverly Cinemas founded?",
+    "gold_answers": [
+      "1994"
+    ],
+    "predicted_answer": "1994",
+    "is_correct": true,
+    "span_confidence": 0.9912026352757266,
+    "entropy": 0.007041840511188222
+  },
+  {
+    "example_id": "qa-0061",
+    "question": "Who founded Oakfern Pharmaceuticals?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Marcus Hale",
+    "is_correct": true,
+    "span_confidence": 0.9982692902749406,
+    "entropy": 0.0019127387131861319
+  },
+  {
+    "example_id": "qa-0062",
+    "question": "Who founded Duskwater Shipping?",
+    "gold_answers": [
+      "Hugo Lindqvist"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": true,
+    "span_confidence": 0.9687249012571222,
+    "entropy": 0.018235914118426375
+  },
+  {
+    "example_id": "qa-0063",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Copperhill"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": false,
+    "span_confidence": 0.33986141071478215,
+    "entropy": 0.26312286634359183
+  },
+  {
+    "example_id": "qa-0064",
+    "question": "What does Marrow Biotech specialize in?",
+    "gold_answers": [
+      "industrial robotics"
+    ],
+    "predicted_answer": "industrial robotics",
+    "is_correct": true,
+    "span_confidence": 0.9423666392238346,
+    "entropy": 0.03710508294119928
+  },
+  {
+    "example_id": "qa-0065",
+    "question": "What does Ironvale Manufacturing specialize in?",
+    "gold_answers": [
+      "interactive entertainment"
+    ],
+    "predicted_answer": "interactive entertainment",
+    "is_correct": true,
+    "span_confidence": 0.9595749225992769,
+    "entropy": 0.02714879389197633
+  },
+  {
+    "example_id": "qa-0066",
+    "question": "When was Willowmere Data founded?",
+    "gold_answers": [
+      "1970"
+    ],
+    "predicted_answer": "1970",
+    "is_correct": true,
+    "span_confidence": 0.9902196315903709,
+    "entropy": 0.0074795976861574765
+  },
+  {
+    "example_id": "qa-0067",
+    "question": "When was Nightshade Cosmetics founded?",
+    "gold_answers": [
+      "1999"
+    ],
+    "predicted_answer": "1999",
+    "is_correct": true,
+    "span_confidence": 0.9883180889823677,
+    "entropy": 0.008695766039068709
+  },
+  {
+    "example_id": "qa-0068",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Copperhill"
+    ],
+    "predicted_answer": "Copperhill",
+    "is_correct": true,
+    "span_confidence": 0.21606010235586837,
+    "entropy": 0.29591137149967206
+  },
+  {
+    "example_id": "qa-0069",
+    "question": "When was Thistledown Ventures founded?",
+    "gold_answers": [
+      "1978"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": true,
+    "span_confidence": 0.9887902389615135,
+    "entropy": 0.00891578164237805
+  },
+  {
+    "example_id": "qa-0070",
+    "question": "Where is Bluefen Analytics headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.99865320414618,
+    "entropy": 0.0016336579826013173
+  },
+  {
+    "example_id": "qa-0071",
+    "question": "When was Fernbridge Automotive founded?",
+    "gold_answers": [
+      "1995"
+    ],
+    "predicted_answer": "1995",
+    "is_correct": true,
+    "span_confidence": 0.9878863627139047,
+    "entropy": 0.0091008260604493
+  },
+  {
+    "example_id": "qa-0072",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": false,
+    "span_confidence": 0.812761823678045,
+    "entropy": 0.1051492106029267
+  },
+  {
+    "example_id": "qa-0073",
+    "question": "Who founded Foxglove Studios?",
+    "gold_answers": [
+      "Diego Salazar"
+    ],
+    "predicted_answer": "Diego Salazar",
+    "is_correct": true,
+    "span_confidence": 0.9977460836164802,
+    "entropy": 0.0023816242339493397
+  },
+  {
+    "example_id": "qa-0074",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Owen Bramwell"
+    ],
+    "predicted_answer": "Dana Whitfield",
+    "is_correct": false,
+    "span_confidence": 0.6989436479514808,
+    "entropy": 0.13096009474900705
+  },
+  {
+    "example_id": "qa-0075",
+    "question": "Where is Oakfern Pharmaceuticals headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.9986833907276171,
+    "entropy": 0.0015256590329443833
+  },
+  {
+    "example_id": "qa-0076",
+    "question": "Where is Pinegrove Software headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.9953409096248436,
+    "entropy": 0.0047135302874845506
+  },
+  {
+    "example_id": "qa-0077",
+    "question": "Who founded Hollowmere Games?",
+    "gold_answers": [
+      "Hugo Lindqvist"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": true,
+    "span_confidence": 0.9731570281245538,
+    "entropy": 0.016494063470707192
+  },
+  {
+    "example_id": "qa-0078",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Priya Anand",
+    "is_correct": false,
+    "span_confidence": 0.2574116352448712,
+    "entropy": 0.25762969447016026
+  },
+  {
+    "example_id": "qa-0079",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Copperhill"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": false,
+    "span_confidence": 0.5763710158455027,
+    "entropy": 0.20645508246644628
+  },
+  {
+    "example_id": "qa-0080",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Sanjay Rao"
+    ],
+    "predicted_answer": "Astrid Solberg",
+    "is_correct": false,
+    "span_confidence": 0.5938341085981449,
+    "entropy": 0.1356410376294827
+  },
+  {
+    "example_id": "qa-0081",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.272255601213935,
+    "entropy": 0.32376066496583655
+  },
+  {
+    "example_id": "qa-0082",
+    "question": "Where is Amberfield Logistics headquartered?",
+    "gold_answers": [
+      "Fenbridge"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": true,
+    "span_confidence": 0.9973799441408175,
+    "entropy": 0.0028868727798942776
+  },
+  {
+    "example_id": "qa-0083",
+    "question": "What does Thistledown Ventures specialize in?",
+    "gold_answers": [
+      "precision manufacturing"
+    ],
+    "predicted_answer": "precision manufacturing",
+    "is_correct": true,
+    "span_confidence": 0.9457233750217284,
+    "entropy": 0.03556373784246737
+  },
+  {
+    "example_id": "qa-0084",
+    "question": "Where is Cinderfield Steel headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.9982907392053662,
+    "entropy": 0.0020260625480406063
+  },
+  {
+    "example_id": "qa-0085",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Owen Bramwell"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": true,
+    "span_confidence": 0.9433902240206535,
+    "entropy": 0.03662998850697613
+  },
+  {
+    "example_id": "qa-0086",
+    "question": "What does Cedarline Foods specialize in?",
+    "gold_answers": [
+      "renewable energy"
+    ],
+    "predicted_answer": "renewable energy",
+    "is_correct": true,
+    "span_confidence": 0.955532032243994,
+    "entropy": 0.026959022260622613
+  },
+  {
+    "example_id": "qa-0087",
+    "question": "Where is Brightwater Utilities headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": true,
+    "span_confidence": 0.9971830203664709,
+    "entropy": 0.002996303086758117
+  },
+  {
+    "example_id": "qa-0088",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.09145188278578686,
+    "entropy": 0.3447109776452488
+  },
+  {
+    "example_id": "qa-0089",
+    "question": "What does Ashcombe Materials specialize in?",
+    "gold_answers": [
+      "interactive entertainment"
+    ],
+    "predicted_answer": "interactive entertainment",
+    "is_correct": true,
+    "span_confidence": 0.968246923903763,
+    "entropy": 0.02171311361402352
+  },
+  {
+    "example_id": "qa-0090",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1993"
+    ],
+    "predicted_answer": "1975",
+    "is_correct": false,
+    "span_confidence": 0.273353198861642,
+    "entropy": 0.26922969315188006
+  },
+  {
+    "example_id": "qa-0091",
+    "question": "Who founded Northgate Robotics?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9755878025596374,
+    "entropy": 0.015119027608015697
+  },
+  {
+    "example_id": "qa-0092",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1982"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": false,
+    "span_confidence": 0.09568341746644116,
+    "entropy": 0.3081777361640885
+  },
+  {
+    "example_id": "qa-0093",
+    "question": "Where is Hollowmere Games headquartered?",
+    "gold_answers": [
+      "Fenbridge"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": true,
+    "span_confidence": 0.9907002080601046,
+    "entropy": 0.008057404287417106
+  },
+  {
+    "example_id": "qa-0094",
+    "question": "Where is Talonreach Aerospace headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.9978940202848889,
+    "entropy": 0.002493696207724902
+  },
+  {
+    "example_id": "qa-0095",
+    "question": "Where is Foxglove Studios headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Portmere",
+    "is_correct": true,
+    "span_confidence": 0.9923426732205343,
+    "entropy": 0.006661275367519339
+  },
+  {
+    "example_id": "qa-0096",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": false,
+    "span_confidence": 0.3173028291445412,
+    "entropy": 0.2910586926702119
+  },
+  {
+    "example_id": "qa-0097",
+    "question": "Where is Ashgrove Robotics headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Portmere",
+    "is_correct": true,
+    "span_confidence": 0.9984227295414989,
+    "entropy": 0.0018438362794570289
+  },
+  {
+    "example_id": "qa-0098",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1974"
+    ],
+    "predicted_answer": "1974",
+    "is_correct": true,
+    "span_confidence": 0.10734577561948733,
+    "entropy": 0.2953415998524144
+  },
+  {
+    "example_id": "qa-0099",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.08845141993603534,
+    "entropy": 0.41945808675760843
+  },
+  {
+    "example_id": "qa-0100",
+    "question": "When was Foxglove Studios founded?",
+    "gold_answers": [
+      "1987"
+    ],
+    "predicted_answer": "1987",
+    "is_correct": true,
+    "span_confidence": 0.9930489363430084,
+    "entropy": 0.005875204426444801
+  },
+  {
+    "example_id": "qa-0101",
+    "question": "Where is Willowmere Data headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.9901114655373071,
+    "entropy": 0.00819603894027923
+  },
+  {
+    "example_id": "qa-0102",
+    "question": "Who founded Ironvale Manufacturing?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.998637838786955,
+    "entropy": 0.0015783051407733237
+  },
+  {
+    "example_id": "qa-0103",
+    "question": "What does Duskwater Shipping specialize in?",
+    "gold_answers": [
+      "precision manufacturing"
+    ],
+    "predicted_answer": "precision manufacturing",
+    "is_correct": true,
+    "span_confidence": 0.9475913640568123,
+    "entropy": 0.03443944877966229
+  },
+  {
+    "example_id": "qa-0104",
+    "question": "When was Copperfield Textiles founded?",
+    "gold_answers": [
+      "1972"
+    ],
+    "predicted_answer": "1972",
+    "is_correct": true,
+    "span_confidence": 0.989707778592166,
+    "entropy": 0.007939219435156204
+  },
+  {
+    "example_id": "qa-0105",
+    "question": "When was Stonebridge Consulting founded?",
+    "gold_answers": [
+      "1967"
+    ],
+    "predicted_answer": "1967",
+    "is_correct": true,
+    "span_confidence": 0.993568776815632,
+    "entropy": 0.005481575322005867
+  },
+  {
+    "example_id": "qa-0106",
+    "question": "When was Goldmarsh Agriculture founded?",
+    "gold_answers": [
+      "2012"
+    ],
+    "predicted_answer": "2012",
+    "is_correct": true,
+    "span_confidence": 0.9834508013315144,
+    "entropy": 0.012032545471417206
+  },
+  {
+    "example_id": "qa-0107",
+    "question": "When was Brightwater Utilities founded?",
+    "gold_answers": [
+      "2010"
+    ],
+    "predicted_answer": "2010",
+    "is_correct": true,
+    "span_confidence": 0.9842657273318309,
+    "entropy": 0.01094062148283534
+  },
+  {
+    "example_id": "qa-0108",
+    "question": "When was Brightwater Utilities founded?",
+    "gold_answers": [
+      "1968"
+    ],
+    "predicted_answer": "1968",
+    "is_correct": true,
+    "span_confidence": 0.9916180854532683,
+    "entropy": 0.006842600420748013
+  },
+  {
+    "example_id": "qa-0109",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Sanjay Rao"
+    ],
+    "predicted_answer": "Sanjay Rao",
+    "is_correct": true,
+    "span_confidence": 0.48077451826246786,
+    "entropy": 0.18525479304083353
+  },
+  {
+    "example_id": "qa-0110",
+    "question": "When was Marrow Biotech founded?",
+    "gold_answers": [
+      "2015"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": true,
+    "span_confidence": 0.9889394633366742,
+    "entropy": 0.0084013939782384
+  },
+  {
+    "example_id": "qa-0111",
+    "question": "When was Stonebridge Consulting founded?",
+    "gold_answers": [
+      "1983"
+    ],
+    "predicted_answer": "1983",
+    "is_correct": true,
+    "span_confidence": 0.9914888286092527,
+    "entropy": 0.006802405233319889
+  },
+  {
+    "example_id": "qa-0112",
+    "question": "Who founded Goldmarsh Agriculture?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": true,
+    "span_confidence": 0.985059978341635,
+    "entropy": 0.010514021851208467
+  },
+  {
+    "example_id": "qa-0113",
+    "question": "Who founded Millpond Electronics?",
+    "gold_answers": [
+      "Dana Whitfield"
+    ],
+    "predicted_answer": "Dana Whitfield",
+    "is_correct": true,
+    "span_confidence": 0.9762542913039738,
+    "entropy": 0.014154870105366023
+  },
+  {
+    "example_id": "qa-0114",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "2005"
+    ],
+    "predicted_answer": "1970",
+    "is_correct": false,
+    "span_confidence": 0.1325762661455343,
+    "entropy": 0.29813320756511186
+  },
+  {
+    "example_id": "qa-0115",
+    "question": "Who founded Kestrelbank Capital?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9983184713237172,
+    "entropy": 0.0018560445801359595
+  },
+  {
+    "example_id": "qa-0116",
+    "question": "When was Foxglove Studios founded?",
+    "gold_answers": [
+      "1985"
+    ],
+    "predicted_answer": "1985",
+    "is_correct": true,
+    "span_confidence": 0.9908973645771759,
+    "entropy": 0.007174369306349755
+  },
+  {
+    "example_id": "qa-0117",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "1976"
+    ],
+    "predicted_answer": "1981",
+    "is_correct": false,
+    "span_confidence": 0.1893942747908346,
+    "entropy": 0.2707195348337683
+  },
+  {
+    "example_id": "qa-0118",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Diego Salazar"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": false,
+    "span_confidence": 0.564380210595516,
+    "entropy": 0.18280192357773695
+  },
+  {
+    "example_id": "qa-0119",
+    "question": "Who founded Thistledown Ventures?",
+    "gold_answers": [
+      "Kwame Boateng"
+    ],
+    "predicted_answer": "Kwame Boateng",
+    "is_correct": true,
+    "span_confidence": 0.9778656377955599,
+    "entropy": 0.014298887823085346
+  },
+  {
+    "example_id": "qa-0120",
+    "question": "When was Bluefen Analytics founded?",
+    "gold_answers": [
+      "2000"
+    ],
+    "predicted_answer": "2000",
+    "is_correct": true,
+    "span_confidence": 0.9791676017863082,
+    "entropy": 0.01404545984237038
+  },
+  {
+    "example_id": "qa-0121",
+    "question": "Who founded Cedarline Foods?",
+    "gold_answers": [
+      "Renata Silva"
+    ],
+    "predicted_answer": "Renata Silva",
+    "is_correct": true,
+    "span_confidence": 0.9985702945385455,
+    "entropy": 0.001641533177306345
+  },
+  {
+    "example_id": "qa-0122",
+    "question": "Where is Thistledown Ventures headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.9956394424439026,
+    "entropy": 0.004572972283766773
+  },
+  {
+    "example_id": "qa-0123",
+    "question": "Where is Elderwood Timber headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.9782990465422507,
+    "entropy": 0.017361225512218043
+  },
+  {
+    "example_id": "qa-0124",
+    "question": "When was Northgate Robotics founded?",
+    "gold_answers": [
+      "1994"
+    ],
+    "predicted_answer": "1994",
+    "is_correct": true,
+    "span_confidence": 0.9909754154589265,
+    "entropy": 0.007312758901448732
+  },
+  {
+    "example_id": "qa-0125",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Renata Silva"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": false,
+    "span_confidence": 0.15468438797214645,
+    "entropy": 0.2837455244334354
+  },
+  {
+    "example_id": "qa-0126",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1978"
+    ],
+    "predicted_answer": "1997",
+    "is_correct": false,
+    "span_confidence": 0.5710933713547917,
+    "entropy": 0.17143151985608968
+  },
+  {
+    "example_id": "qa-0127",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": false,
+    "span_confidence": 0.208554912535881,
+    "entropy": 0.3331571934418833
+  },
+  {
+    "example_id": "qa-0128",
+    "question": "When was Duskwater Shipping founded?",
+    "gold_answers": [
+      "2017"
+    ],
+    "predicted_answer": "2017",
+    "is_correct": true,
+    "span_confidence": 0.9833063410620824,
+    "entropy": 0.012722155621311378
+  },
+  {
+    "example_id": "qa-0129",
+    "question": "When was Moonrise Telecom founded?",
+    "gold_answers": [
+      "2016"
+    ],
+    "predicted_answer": "2016",
+    "is_correct": true,
+    "span_confidence": 0.9806796002565861,
+    "entropy": 0.013809000149981362
+  },
+  {
+    "example_id": "qa-0130",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1980"
+    ],
+    "predicted_answer": "1975",
+    "is_correct": false,
+    "span_confidence": 0.318637077386132,
+    "entropy": 0.24303253477213058
+  },
+  {
+    "example_id": "qa-0131",
+    "question": "Where is Millpond Electronics headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.9910896796996482,
+    "entropy": 0.007473617586740239
+  },
+  {
+    "example_id": "qa-0132",
+    "question": "When was Cedarline Foods founded?",
+    "gold_answers": [
+      "2003"
+    ],
+    "predicted_answer": "2003",
+    "is_correct": true,
+    "span_confidence": 0.9865568631882837,
+    "entropy": 0.00979596049712488
+  },
+  {
+    "example_id": "qa-0133",
+    "question": "What does Willowmere Data specialize in?",
+    "gold_answers": [
+      "industrial robotics"
+    ],
+    "predicted_answer": "industrial robotics",
+    "is_correct": true,
+    "span_confidence": 0.936309954348296,
+    "entropy": 0.0408571837453226
+  },
+  {
+    "example_id": "qa-0134",
+    "question": "When was Goldmarsh Agriculture founded?",
+    "gold_answers": [
+      "1976"
+    ],
+    "predicted_answer": "1976",
+    "is_correct": true,
+    "span_confidence": 0.9919019829829239,
+    "entropy": 0.006731333071786453
+  },
+  {
+    "example_id": "qa-0135",
+    "question": "What does Whitmarsh Insurance specialize in?",
+    "gold_answers": [
+      "industrial robotics"
+    ],
+    "predicted_answer": "industrial robotics",
+    "is_correct": true,
+    "span_confidence": 0.9344325730847913,
+    "entropy": 0.04145183223807347
+  },
+  {
+    "example_id": "qa-0136",
+    "question": "Who founded Thistledown Ventures?",
+    "gold_answers": [
+      "Yara Haddad"
+    ],
+    "predicted_answer": "Yara Haddad",
+    "is_correct": true,
+    "span_confidence": 0.9973361170029804,
+    "entropy": 0.002849815418380157
+  },
+  {
+    "example_id": "qa-0137",
+    "question": "When was Harborlight Energy founded?",
+    "gold_answers": [
+      "2003"
+    ],
+    "predicted_answer": "2003",
+    "is_correct": true,
+    "span_confidence": 0.986867760431096,
+    "entropy": 0.009647293757559142
+  },
+  {
+    "example_id": "qa-0138",
+    "question": "Where is Nightshade Cosmetics headquartered?",
+    "gold_answers": [
+      "Fenbridge"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": true,
+    "span_confidence": 0.9900730821139305,
+    "entropy": 0.008087471830274537
+  },
+  {
+    "example_id": "qa-0139",
+    "question": "Who founded Bluefen Analytics?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9805381832717757,
+    "entropy": 0.012608623428386307
+  },
+  {
+    "example_id": "qa-0140",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": true,
+    "span_confidence": 0.21847728186238413,
+    "entropy": 0.26270963752959253
+  },
+  {
+    "example_id": "qa-0141",
+    "question": "What does Foxglove Studios specialize in?",
+    "gold_answers": [
+      "advanced materials"
+    ],
+    "predicted_answer": "advanced materials",
+    "is_correct": true,
+    "span_confidence": 0.9433644240962344,
+    "entropy": 0.03596879608013201
+  },
+  {
+    "example_id": "qa-0142",
+    "question": "Who founded Redcliff Mining?",
+    "gold_answers": [
+      "Kwame Boateng"
+    ],
+    "predicted_answer": "Kwame Boateng",
+    "is_correct": true,
+    "span_confidence": 0.9977444529904886,
+    "entropy": 0.0024433231164660823
+  },
+  {
+    "example_id": "qa-0143",
+    "question": "Where is Copperfield Textiles headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.9912527372703686,
+    "entropy": 0.007361329388946897
+  },
+  {
+    "example_id": "qa-0144",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "1971"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": false,
+    "span_confidence": 0.39340164393651733,
+    "entropy": 0.23973055053481762
+  },
+  {
+    "example_id": "qa-0145",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.5227891736559798,
+    "entropy": 0.2237424273858096
+  },
+  {
+    "example_id": "qa-0146",
+    "question": "Who founded Fernbridge Automotive?",
+    "gold_answers": [
+      "Owen Bramwell"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": true,
+    "span_confidence": 0.9979000662190387,
+    "entropy": 0.0021361641783710374
+  },
+  {
+    "example_id": "qa-0147",
+    "question": "Where is Ashcombe Materials headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.988238242479369,
+    "entropy": 0.009927272301421833
+  },
+  {
+    "example_id": "qa-0148",
+    "question": "When was Sparrowhill Retail founded?",
+    "gold_answers": [
+      "2013"
+    ],
+    "predicted_answer": "2013",
+    "is_correct": true,
+    "span_confidence": 0.9830591435542999,
+    "entropy": 0.011566713238316954
+  },
+  {
+    "example_id": "qa-0149",
+    "question": "What does Ashgrove Robotics specialize in?",
+    "gold_answers": [
+      "interactive entertainment"
+    ],
+    "predicted_answer": "interactive entertainment",
+    "is_correct": true,
+    "span_confidence": 0.9692483076496217,
+    "entropy": 0.022013248344486126
+  },
+  {
+    "example_id": "qa-0150",
+    "question": "Where is Fernbridge Automotive headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.9881820092495666,
+    "entropy": 0.009120339030092621
+  },
+  {
+    "example_id": "qa-0151",
+    "question": "What does Bluefen Analytics specialize in?",
+    "gold_answers": [
+      "venture capital"
+    ],
+    "predicted_answer": "venture capital",
+    "is_correct": true,
+    "span_confidence": 0.976132532190519,
+    "entropy": 0.01615659826040111
+  },
+  {
+    "example_id": "qa-0152",
+    "question": "What does Kestrelbank Capital specialize in?",
+    "gold_answers": [
+      "precision manufacturing"
+    ],
+    "predicted_answer": "precision manufacturing",
+    "is_correct": true,
+    "span_confidence": 0.9430215431301825,
+    "entropy": 0.03667878351670986
+  },
+  {
+    "example_id": "qa-0153",
+    "question": "Who founded Elderwood Timber?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9770335648447386,
+    "entropy": 0.014393492790225379
+  },
+  {
+    "example_id": "qa-0154",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": true,
+    "span_confidence": 0.9616237908218572,
+    "entropy": 0.027222277039346106
+  },
+  {
+    "example_id": "qa-0155",
+    "question": "Where is Goldmarsh Agriculture headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Dunwich Bay",
+    "is_correct": true,
+    "span_confidence": 0.9942949303099198,
+    "entropy": 0.0056308924825813796
+  },
+  {
+    "example_id": "qa-0156",
+    "question": "Where is Harborlight Energy headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.9882668110335686,
+    "entropy": 0.009625583988556159
+  },
+  {
+    "example_id": "qa-0157",
+    "question": "Who founded Silverbrook Finance?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9842815521976505,
+    "entropy": 0.01092234237306214
+  },
+  {
+    "example_id": "qa-0158",
+    "question": "Where is Whitmarsh Insurance headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.997326394108029,
+    "entropy": 0.0029588692719711767
+  },
+  {
+    "example_id": "qa-0159",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Astrid Solberg"
+    ],
+    "predicted_answer": "Astrid Solberg",
+    "is_correct": true,
+    "span_confidence": 0.296857527479208,
+    "entropy": 0.23622909875198986
+  },
+  {
+    "example_id": "qa-0160",
+    "question": "What does Moonrise Telecom specialize in?",
+    "gold_answers": [
+      "investment management"
+    ],
+    "predicted_answer": "investment management",
+    "is_correct": true,
+    "span_confidence": 0.9761362166398442,
+    "entropy": 0.017465346667405825
+  },
+  {
+    "example_id": "qa-0161",
+    "question": "Who founded Larkspur Health?",
+    "gold_answers": [
+      "Fiona Lachlan"
+    ],
+    "predicted_answer": "Fiona Lachlan",
+    "is_correct": true,
+    "span_confidence": 0.998329915309796,
+    "entropy": 0.0018765317869813016
+  },
+  {
+    "example_id": "qa-0162",
+    "question": "Who founded Ashgrove Robotics?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Marcus Hale",
+    "is_correct": true,
+    "span_confidence": 0.998328902545822,
+    "entropy": 0.0017771749655443089
+  },
+  {
+    "example_id": "qa-0163",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1984"
+    ],
+    "predicted_answer": "1984",
+    "is_correct": true,
+    "span_confidence": 0.1222843752611169,
+    "entropy": 0.30237967544482003
+  },
+  {
+    "example_id": "qa-0164",
+    "question": "What does Nightshade Cosmetics specialize in?",
+    "gold_answers": [
+      "enterprise software"
+    ],
+    "predicted_answer": "enterprise software",
+    "is_correct": true,
+    "span_confidence": 0.9619967196940884,
+    "entropy": 0.02468929041484437
+  },
+  {
+    "example_id": "qa-0165",
+    "question": "What does Grayling Instruments specialize in?",
+    "gold_answers": [
+      "aerospace components"
+    ],
+    "predicted_answer": "aerospace components",
+    "is_correct": true,
+    "span_confidence": 0.9526712033580118,
+    "entropy": 0.03257889924969551
+  },
+  {
+    "example_id": "qa-0166",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "2011"
+    ],
+    "predicted_answer": "1976",
+    "is_correct": false,
+    "span_confidence": 0.1748003561160445,
+    "entropy": 0.26780144297292485
+  },
+  {
+    "example_id": "qa-0167",
+    "question": "What does Wrenfield Publishing specialize in?",
+    "gold_answers": [
+      "advanced materials"
+    ],
+    "predicted_answer": "advanced materials",
+    "is_correct": true,
+    "span_confidence": 0.9478169890283361,
+    "entropy": 0.03393165519526411
+  },
+  {
+    "example_id": "qa-0168",
+    "question": "When was Amberfield Logistics founded?",
+    "gold_answers": [
+      "1976"
+    ],
+    "predicted_answer": "1976",
+    "is_correct": true,
+    "span_confidence": 0.9905134320905375,
+    "entropy": 0.0077128442039879185
+  },
+  {
+    "example_id": "qa-0169",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Copperhill",
+    "is_correct": false,
+    "span_confidence": 0.24472950212448374,
+    "entropy": 0.29943065677384195
+  },
+  {
+    "example_id": "qa-0170",
+    "question": "Where is Waverly Cinemas headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9978469340614637,
+    "entropy": 0.0024454615464457007
+  },
+  {
+    "example_id": "qa-0171",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1989"
+    ],
+    "predicted_answer": "1974",
+    "is_correct": false,
+    "span_confidence": 0.20341863586347486,
+    "entropy": 0.27223853244567653
+  },
+  {
+    "example_id": "qa-0172",
+    "question": "When was Kestrelbank Capital founded?",
+    "gold_answers": [
+      "1992"
+    ],
+    "predicted_answer": "1992",
+    "is_correct": true,
+    "span_confidence": 0.9901881594625017,
+    "entropy": 0.007641022918179742
+  },
+  {
+    "example_id": "qa-0173",
+    "question": "Who founded Waverly Cinemas?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9795679059007867,
+    "entropy": 0.013084192880295399
+  },
+  {
+    "example_id": "qa-0174",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "2010"
+    ],
+    "predicted_answer": "1974",
+    "is_correct": false,
+    "span_confidence": 0.2180108350322385,
+    "entropy": 0.2703310969946696
+  },
+  {
+    "example_id": "qa-0175",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": false,
+    "span_confidence": 0.15244846208987983,
+    "entropy": 0.2792415951653049
+  },
+  {
+    "example_id": "qa-0176",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1995"
+    ],
+    "predicted_answer": "1990",
+    "is_correct": false,
+    "span_confidence": 0.20688442441714638,
+    "entropy": 0.2851167760550557
+  },
+  {
+    "example_id": "qa-0177",
+    "question": "Where is Duskwater Shipping headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.9963013374788119,
+    "entropy": 0.003940030677568295
+  },
+  {
+    "example_id": "qa-0178",
+    "question": "Where is Hollowmere Games headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.9978035379671866,
+    "entropy": 0.002537484882472604
+  },
+  {
+    "example_id": "qa-0179",
+    "question": "Where is Voxel Interactive headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.987453442036049,
+    "entropy": 0.009534346603669468
+  },
+  {
+    "example_id": "qa-0180",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1989"
+    ],
+    "predicted_answer": "2014",
+    "is_correct": false,
+    "span_confidence": 0.32941575212603524,
+    "entropy": 0.2487887712453576
+  },
+  {
+    "example_id": "qa-0181",
+    "question": "Who founded Ashcombe Materials?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9843255492157041,
+    "entropy": 0.010842244333835746
+  },
+  {
+    "example_id": "qa-0182",
+    "question": "Where is Quillstone Media headquartered?",
+    "gold_answers": [
+      "Copperhill"
+    ],
+    "predicted_answer": "Copperhill",
+    "is_correct": true,
+    "span_confidence": 0.9983349233360244,
+    "entropy": 0.0019438138605841905
+  },
+  {
+    "example_id": "qa-0183",
+    "question": "Where is Wrenfield Publishing headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Dunwich Bay",
+    "is_correct": true,
+    "span_confidence": 0.9860117867035676,
+    "entropy": 0.011895508119529
+  },
+  {
+    "example_id": "qa-0184",
+    "question": "Where is Moonrise Telecom headquartered?",
+    "gold_answers": [
+      "Silverpine"
+    ],
+    "predicted_answer": "Silverpine",
+    "is_correct": true,
+    "span_confidence": 0.9862015863033982,
+    "entropy": 0.010666552276656851
+  },
+  {
+    "example_id": "qa-0185",
+    "question": "What does Millpond Electronics specialize in?",
+    "gold_answers": [
+      "consumer data analytics"
+    ],
+    "predicted_answer": "consumer data analytics",
+    "is_correct": true,
+    "span_confidence": 0.9529304838035735,
+    "entropy": 0.029349421997215887
+  },
+  {
+    "example_id": "qa-0186",
+    "question": "Who founded Talonreach Aerospace?",
+    "gold_answers": [
+      "Priya Anand"
+    ],
+    "predicted_answer": "Priya Anand",
+    "is_correct": true,
+    "span_confidence": 0.9979957712127749,
+    "entropy": 0.0022014046870462043
+  },
+  {
+    "example_id": "qa-0187",
+    "question": "Where is Millpond Electronics headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.9898335951178865,
+    "entropy": 0.008311831993774206
+  },
+  {
+    "example_id": "qa-0188",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Fenbridge"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": true,
+    "span_confidence": 0.6639892121486639,
+    "entropy": 0.15639474045187673
+  },
+  {
+    "example_id": "qa-0189",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": false,
+    "span_confidence": 0.3090350744617645,
+    "entropy": 0.24551998167609757
+  },
+  {
+    "example_id": "qa-0190",
+    "question": "When was Silverbrook Finance founded?",
+    "gold_answers": [
+      "2015"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": true,
+    "span_confidence": 0.9872797880266404,
+    "entropy": 0.00950009238565925
+  },
+  {
+    "example_id": "qa-0191",
+    "question": "Where is Oakfern Pharmaceuticals headquartered?",
+    "gold_answers": [
+      "Oakhaven"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": true,
+    "span_confidence": 0.985169876805525,
+    "entropy": 0.011857557508892743
+  },
+  {
+    "example_id": "qa-0192",
+    "question": "When was Thistledown Ventures founded?",
+    "gold_answers": [
+      "1974"
+    ],
+    "predicted_answer": "1974",
+    "is_correct": true,
+    "span_confidence": 0.9893955870606845,
+    "entropy": 0.00843879943425261
+  },
+  {
+    "example_id": "qa-0193",
+    "question": "Who founded Pinegrove Software?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9854890243092385,
+    "entropy": 0.01028418369185502
+  },
+  {
+    "example_id": "qa-0194",
+    "question": "When was Ravenmoor Security founded?",
+    "gold_answers": [
+      "1983"
+    ],
+    "predicted_answer": "1983",
+    "is_correct": true,
+    "span_confidence": 0.9902115333347155,
+    "entropy": 0.007685673414293804
+  },
+  {
+    "example_id": "qa-0195",
+    "question": "Who founded Hollowmere Games?",
+    "gold_answers": [
+      "Amara Chukwu"
+    ],
+    "predicted_answer": "Amara Chukwu",
+    "is_correct": true,
+    "span_confidence": 0.9981568324423016,
+    "entropy": 0.002082336841185954
+  },
+  {
+    "example_id": "qa-0196",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Portmere",
+    "is_correct": true,
+    "span_confidence": 0.17460223135266606,
+    "entropy": 0.3894538157824968
+  },
+  {
+    "example_id": "qa-0197",
+    "question": "Where is Pinegrove Software headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.9794166130316384,
+    "entropy": 0.015792337108454187
+  },
+  {
+    "example_id": "qa-0198",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": false,
+    "span_confidence": 0.4269447848400887,
+    "entropy": 0.25326442899345697
+  },
+  {
+    "example_id": "qa-0199",
+    "question": "Where is Elderwood Timber headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": true,
+    "span_confidence": 0.9967433790990441,
+    "entropy": 0.0034163050705190226
+  },
+  {
+    "example_id": "qa-0200",
+    "question": "Where is Ironvale Manufacturing headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": true,
+    "span_confidence": 0.9972244412346214,
+    "entropy": 0.003020691130572011
+  },
+  {
+    "example_id": "qa-0201",
+    "question": "Where is Redcliff Mining headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": true,
+    "span_confidence": 0.9973789873734766,
+    "entropy": 0.0030050209779424806
+  },
+  {
+    "example_id": "qa-0202",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1970"
+    ],
+    "predicted_answer": "2006",
+    "is_correct": false,
+    "span_confidence": 0.22806802477983634,
+    "entropy": 0.2738545205296504
+  },
+  {
+    "example_id": "qa-0203",
+    "question": "Who founded Quillstone Media?",
+    "gold_answers": [
+      "Yara Haddad"
+    ],
+    "predicted_answer": "Yara Haddad",
+    "is_correct": true,
+    "span_confidence": 0.9783607808101635,
+    "entropy": 0.014008041246746825
+  },
+  {
+    "example_id": "qa-0204",
+    "question": "Who founded Stonebridge Consulting?",
+    "gold_answers": [
+      "Fiona Lachlan"
+    ],
+    "predicted_answer": "Fiona Lachlan",
+    "is_correct": true,
+    "span_confidence": 0.998610114899396,
+    "entropy": 0.0016321632888176884
+  },
+  {
+    "example_id": "qa-0205",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Yara Haddad"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": false,
+    "span_confidence": 0.33981280525096835,
+    "entropy": 0.1882031119761779
+  },
+  {
+    "example_id": "qa-0206",
+    "question": "Who founded Harborlight Energy?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9990256857159068,
+    "entropy": 0.0011876183153873793
+  },
+  {
+    "example_id": "qa-0207",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": false,
+    "span_confidence": 0.43788830052619687,
+    "entropy": 0.25430230883494886
+  },
+  {
+    "example_id": "qa-0208",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.8014478510610559,
+    "entropy": 0.1092869137074052
+  },
+  {
+    "example_id": "qa-0209",
+    "question": "Who founded Whitmarsh Insurance?",
+    "gold_answers": [
+      "Elif Kaya"
+    ],
+    "predicted_answer": "Elif Kaya",
+    "is_correct": true,
+    "span_confidence": 0.9975582138701284,
+    "entropy": 0.002524021611542913
+  },
+  {
+    "example_id": "qa-0210",
+    "question": "When was Waverly Cinemas founded?",
+    "gold_answers": [
+      "2017"
+    ],
+    "predicted_answer": "2017",
+    "is_correct": true,
+    "span_confidence": 0.9903960660838074,
+    "entropy": 0.007621215232337803
+  },
+  {
+    "example_id": "qa-0211",
+    "question": "Who founded Kestrelbank Capital?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": true,
+    "span_confidence": 0.9813662311403704,
+    "entropy": 0.012459407489466301
+  },
+  {
+    "example_id": "qa-0212",
+    "question": "What does Redcliff Mining specialize in?",
+    "gold_answers": [
+      "freight logistics"
+    ],
+    "predicted_answer": "freight logistics",
+    "is_correct": true,
+    "span_confidence": 0.9693956429071307,
+    "entropy": 0.02220575611214741
+  },
+  {
+    "example_id": "qa-0213",
+    "question": "Where is Voxel Interactive headquartered?",
+    "gold_answers": [
+      "Silverpine"
+    ],
+    "predicted_answer": "Silverpine",
+    "is_correct": true,
+    "span_confidence": 0.9877599107500856,
+    "entropy": 0.010124252583570519
+  },
+  {
+    "example_id": "qa-0214",
+    "question": "Where is Ashcombe Materials headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.9951687426775315,
+    "entropy": 0.004841001446717826
+  },
+  {
+    "example_id": "qa-0215",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": false,
+    "span_confidence": 0.45810212103971537,
+    "entropy": 0.24303217008064465
+  },
+  {
+    "example_id": "qa-0216",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": true,
+    "span_confidence": 0.3916760718699521,
+    "entropy": 0.2998825946879689
+  },
+  {
+    "example_id": "qa-0217",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Oakhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": false,
+    "span_confidence": 0.3381385074830483,
+    "entropy": 0.289574343733789
+  },
+  {
+    "example_id": "qa-0218",
+    "question": "Where is Copperfield Textiles headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Portmere",
+    "is_correct": true,
+    "span_confidence": 0.989916502871786,
+    "entropy": 0.008516086983992895
+  },
+  {
+    "example_id": "qa-0219",
+    "question": "When was Bluefen Analytics founded?",
+    "gold_answers": [
+      "1999"
+    ],
+    "predicted_answer": "1999",
+    "is_correct": true,
+    "span_confidence": 0.9912737382752113,
+    "entropy": 0.007048847222079443
+  },
+  {
+    "example_id": "qa-0220",
+    "question": "What does Fernbridge Automotive specialize in?",
+    "gold_answers": [
+      "public health services"
+    ],
+    "predicted_answer": "public health services",
+    "is_correct": true,
+    "span_confidence": 0.9414742128243141,
+    "entropy": 0.036952073359542745
+  },
+  {
+    "example_id": "qa-0221",
+    "question": "Who founded Quillstone Media?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": true,
+    "span_confidence": 0.9982847106442421,
+    "entropy": 0.0019169848389868052
+  },
+  {
+    "example_id": "qa-0222",
+    "question": "When was Oakfern Pharmaceuticals founded?",
+    "gold_answers": [
+      "1985"
+    ],
+    "predicted_answer": "1985",
+    "is_correct": true,
+    "span_confidence": 0.9928519518682606,
+    "entropy": 0.005929802512507569
+  },
+  {
+    "example_id": "qa-0223",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1973"
+    ],
+    "predicted_answer": "1973",
+    "is_correct": true,
+    "span_confidence": 0.4443974067256704,
+    "entropy": 0.21567462217218403
+  },
+  {
+    "example_id": "qa-0224",
+    "question": "When was Wrenfield Publishing founded?",
+    "gold_answers": [
+      "1964"
+    ],
+    "predicted_answer": "1964",
+    "is_correct": true,
+    "span_confidence": 0.9915166259476393,
+    "entropy": 0.006796144563956118
+  },
+  {
+    "example_id": "qa-0225",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "2015"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": true,
+    "span_confidence": 0.8128777505305962,
+    "entropy": 0.09760397733914453
+  },
+  {
+    "example_id": "qa-0226",
+    "question": "Where is Marrow Biotech headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.9822225279822661,
+    "entropy": 0.014184512028452095
+  },
+  {
+    "example_id": "qa-0227",
+    "question": "When was Kestrelbank Capital founded?",
+    "gold_answers": [
+      "2018"
+    ],
+    "predicted_answer": "2018",
+    "is_correct": true,
+    "span_confidence": 0.9806237921775534,
+    "entropy": 0.01360127233167795
+  },
+  {
+    "example_id": "qa-0228",
+    "question": "When was Sparrowhill Retail founded?",
+    "gold_answers": [
+      "1971"
+    ],
+    "predicted_answer": "1971",
+    "is_correct": true,
+    "span_confidence": 0.9906041846793805,
+    "entropy": 0.007303178370086721
+  },
+  {
+    "example_id": "qa-0229",
+    "question": "Who founded Willowmere Data?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": true,
+    "span_confidence": 0.9980302145283133,
+    "entropy": 0.00208933901232945
+  },
+  {
+    "example_id": "qa-0230",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": false,
+    "span_confidence": 0.08026052703371533,
+    "entropy": 0.3517404145152758
+  },
+  {
+    "example_id": "qa-0231",
+    "question": "Where is Grayling Instruments headquartered?",
+    "gold_answers": [
+      "Oakhaven"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": true,
+    "span_confidence": 0.9871487990808667,
+    "entropy": 0.009836110550383241
+  },
+  {
+    "example_id": "qa-0232",
+    "question": "When was Stagbrook Airlines founded?",
+    "gold_answers": [
+      "1982"
+    ],
+    "predicted_answer": "1982",
+    "is_correct": true,
+    "span_confidence": 0.9917676286610444,
+    "entropy": 0.006669487282435375
+  },
+  {
+    "example_id": "qa-0233",
+    "question": "When was Ashcombe Materials founded?",
+    "gold_answers": [
+      "1980"
+    ],
+    "predicted_answer": "1980",
+    "is_correct": true,
+    "span_confidence": 0.9875134295033661,
+    "entropy": 0.009444253153363547
+  },
+  {
+    "example_id": "qa-0234",
+    "question": "What does Amberfield Logistics specialize in?",
+    "gold_answers": [
+      "academic publishing"
+    ],
+    "predicted_answer": "academic publishing",
+    "is_correct": true,
+    "span_confidence": 0.9656131961433303,
+    "entropy": 0.022123962340174108
+  },
+  {
+    "example_id": "qa-0235",
+    "question": "When was Willowmere Data founded?",
+    "gold_answers": [
+      "1986"
+    ],
+    "predicted_answer": "1986",
+    "is_correct": true,
+    "span_confidence": 0.9926228262913241,
+    "entropy": 0.006322527869339547
+  },
+  {
+    "example_id": "qa-0236",
+    "question": "Who founded Marrow Biotech?",
+    "gold_answers": [
+      "Diego Salazar"
+    ],
+    "predicted_answer": "Diego Salazar",
+    "is_correct": true,
+    "span_confidence": 0.9768049925664606,
+    "entropy": 0.014899028821148652
+  },
+  {
+    "example_id": "qa-0237",
+    "question": "Where is Redcliff Mining headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9881929047037552,
+    "entropy": 0.009864746576672289
+  },
+  {
+    "example_id": "qa-0238",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "2010"
+    ],
+    "predicted_answer": "1987",
+    "is_correct": false,
+    "span_confidence": 0.10814250369667988,
+    "entropy": 0.3048803005086129
+  },
+  {
+    "example_id": "qa-0239",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Dana Whitfield"
+    ],
+    "predicted_answer": "Dana Whitfield",
+    "is_correct": true,
+    "span_confidence": 0.6066075203774872,
+    "entropy": 0.14755074841829535
+  },
+  {
+    "example_id": "qa-0240",
+    "question": "When was Voxel Interactive founded?",
+    "gold_answers": [
+      "1970"
+    ],
+    "predicted_answer": "1970",
+    "is_correct": true,
+    "span_confidence": 0.9902440329355358,
+    "entropy": 0.007786180042592969
+  },
+  {
+    "example_id": "qa-0241",
+    "question": "Who founded Brightwater Utilities?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.9775936895567057,
+    "entropy": 0.014118929394879038
+  },
+  {
+    "example_id": "qa-0242",
+    "question": "Who founded Duskwater Shipping?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.989541420727349,
+    "entropy": 0.008398525063461136
+  },
+  {
+    "example_id": "qa-0243",
+    "question": "When was Larkspur Health founded?",
+    "gold_answers": [
+      "2008"
+    ],
+    "predicted_answer": "2008",
+    "is_correct": true,
+    "span_confidence": 0.9772713406891356,
+    "entropy": 0.015603532753047666
+  },
+  {
+    "example_id": "qa-0244",
+    "question": "Who founded Wrenfield Publishing?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9988163718036347,
+    "entropy": 0.001392843829066992
+  },
+  {
+    "example_id": "qa-0245",
+    "question": "When was Silverbrook Finance founded?",
+    "gold_answers": [
+      "2004"
+    ],
+    "predicted_answer": "2004",
+    "is_correct": true,
+    "span_confidence": 0.9862284346604966,
+    "entropy": 0.010350419372540798
+  },
+  {
+    "example_id": "qa-0246",
+    "question": "Where is Talonreach Aerospace headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Portmere",
+    "is_correct": true,
+    "span_confidence": 0.9951138998206055,
+    "entropy": 0.004445651117500318
+  },
+  {
+    "example_id": "qa-0247",
+    "question": "When was Cinderfield Steel founded?",
+    "gold_answers": [
+      "2002"
+    ],
+    "predicted_answer": "2002",
+    "is_correct": true,
+    "span_confidence": 0.9897394503857981,
+    "entropy": 0.008273578952843781
+  },
+  {
+    "example_id": "qa-0248",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1981"
+    ],
+    "predicted_answer": "1981",
+    "is_correct": true,
+    "span_confidence": 0.13606432993072204,
+    "entropy": 0.2789020199113187
+  },
+  {
+    "example_id": "qa-0249",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Hugo Lindqvist"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": true,
+    "span_confidence": 0.6248422762818961,
+    "entropy": 0.1343911466604887
+  },
+  {
+    "example_id": "qa-0250",
+    "question": "Who founded Voxel Interactive?",
+    "gold_answers": [
+      "Kwame Boateng"
+    ],
+    "predicted_answer": "Kwame Boateng",
+    "is_correct": true,
+    "span_confidence": 0.9985964457608816,
+    "entropy": 0.0016410941924657736
+  },
+  {
+    "example_id": "qa-0251",
+    "question": "Where is Amberfield Logistics headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.9877479712649873,
+    "entropy": 0.010183375647488698
+  },
+  {
+    "example_id": "qa-0252",
+    "question": "Who founded Northgate Robotics?",
+    "gold_answers": [
+      "Renata Silva"
+    ],
+    "predicted_answer": "Renata Silva",
+    "is_correct": true,
+    "span_confidence": 0.998357904792627,
+    "entropy": 0.0018536316012907625
+  },
+  {
+    "example_id": "qa-0253",
+    "question": "When was Ironvale Manufacturing founded?",
+    "gold_answers": [
+      "1963"
+    ],
+    "predicted_answer": "1963",
+    "is_correct": true,
+    "span_confidence": 0.9930992149187432,
+    "entropy": 0.005971770150344299
+  },
+  {
+    "example_id": "qa-0254",
+    "question": "When was Pinegrove Software founded?",
+    "gold_answers": [
+      "2015"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": true,
+    "span_confidence": 0.9871565253900592,
+    "entropy": 0.009818643623027444
+  },
+  {
+    "example_id": "qa-0255",
+    "question": "Who founded Amberfield Logistics?",
+    "gold_answers": [
+      "Hugo Lindqvist"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": true,
+    "span_confidence": 0.9968620505969028,
+    "entropy": 0.0032084676090663863
+  },
+  {
+    "example_id": "qa-0256",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1994"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": false,
+    "span_confidence": 0.2641787235884152,
+    "entropy": 0.273057297070308
+  },
+  {
+    "example_id": "qa-0257",
+    "question": "When was Amberfield Logistics founded?",
+    "gold_answers": [
+      "2017"
+    ],
+    "predicted_answer": "2017",
+    "is_correct": true,
+    "span_confidence": 0.9852743013382224,
+    "entropy": 0.011177214853659743
+  },
+  {
+    "example_id": "qa-0258",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Sanjay Rao",
+    "is_correct": false,
+    "span_confidence": 0.41793462058915054,
+    "entropy": 0.21108690704110805
+  },
+  {
+    "example_id": "qa-0259",
+    "question": "Where is Sparrowhill Retail headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.9883298915895153,
+    "entropy": 0.009028954313627241
+  },
+  {
+    "example_id": "qa-0260",
+    "question": "Where is Willowmere Data headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": true,
+    "span_confidence": 0.9948237963310298,
+    "entropy": 0.00509548266964748
+  },
+  {
+    "example_id": "qa-0261",
+    "question": "When was Marrow Biotech founded?",
+    "gold_answers": [
+      "1981"
+    ],
+    "predicted_answer": "1981",
+    "is_correct": true,
+    "span_confidence": 0.9890777968755486,
+    "entropy": 0.008380412172758972
+  },
+  {
+    "example_id": "qa-0262",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Hugo Lindqvist"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": true,
+    "span_confidence": 0.28479005158285275,
+    "entropy": 0.21480753045339637
+  },
+  {
+    "example_id": "qa-0263",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.35941375735164627,
+    "entropy": 0.2857323305797558
+  },
+  {
+    "example_id": "qa-0264",
+    "question": "When was Stagbrook Airlines founded?",
+    "gold_answers": [
+      "1970"
+    ],
+    "predicted_answer": "1970",
+    "is_correct": true,
+    "span_confidence": 0.9899661188852917,
+    "entropy": 0.007873141352480038
+  },
+  {
+    "example_id": "qa-0265",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": true,
+    "span_confidence": 0.6826497435152703,
+    "entropy": 0.14048584232146208
+  },
+  {
+    "example_id": "qa-0266",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "2000"
+    ],
+    "predicted_answer": "1975",
+    "is_correct": false,
+    "span_confidence": 0.4227973162265215,
+    "entropy": 0.2174165061574665
+  },
+  {
+    "example_id": "qa-0267",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Sanjay Rao"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": false,
+    "span_confidence": 0.7560635275319001,
+    "entropy": 0.11684425681144914
+  },
+  {
+    "example_id": "qa-0268",
+    "question": "When was Moonrise Telecom founded?",
+    "gold_answers": [
+      "2002"
+    ],
+    "predicted_answer": "2002",
+    "is_correct": true,
+    "span_confidence": 0.9881867408709475,
+    "entropy": 0.008993157371262068
+  },
+  {
+    "example_id": "qa-0269",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Sanjay Rao"
+    ],
+    "predicted_answer": "Sanjay Rao",
+    "is_correct": true,
+    "span_confidence": 0.3218308464577433,
+    "entropy": 0.17415778218094352
+  },
+  {
+    "example_id": "qa-0270",
+    "question": "Where is Duskwater Shipping headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Dunwich Bay",
+    "is_correct": true,
+    "span_confidence": 0.9862018663457661,
+    "entropy": 0.011755147651969222
+  },
+  {
+    "example_id": "qa-0271",
+    "question": "When was Talonreach Aerospace founded?",
+    "gold_answers": [
+      "1975"
+    ],
+    "predicted_answer": "1975",
+    "is_correct": true,
+    "span_confidence": 0.9888393292651756,
+    "entropy": 0.00838440902686564
+  },
+  {
+    "example_id": "qa-0272",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": false,
+    "span_confidence": 0.9216703078244848,
+    "entropy": 0.044972260074633466
+  },
+  {
+    "example_id": "qa-0273",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.2899234012383545,
+    "entropy": 0.33924972129323605
+  },
+  {
+    "example_id": "qa-0274",
+    "question": "When was Larkspur Health founded?",
+    "gold_answers": [
+      "1990"
+    ],
+    "predicted_answer": "1990",
+    "is_correct": true,
+    "span_confidence": 0.9860161300957664,
+    "entropy": 0.010145947947856344
+  },
+  {
+    "example_id": "qa-0275",
+    "question": "What does Elderwood Timber specialize in?",
+    "gold_answers": [
+      "digital publishing"
+    ],
+    "predicted_answer": "digital publishing",
+    "is_correct": true,
+    "span_confidence": 0.9696585009481709,
+    "entropy": 0.021964916275219175
+  },
+  {
+    "example_id": "qa-0276",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Ashcroft"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": true,
+    "span_confidence": 0.2482057570208056,
+    "entropy": 0.3129502562988138
+  },
+  {
+    "example_id": "qa-0277",
+    "question": "Who founded Talonreach Aerospace?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9741976245915573,
+    "entropy": 0.015801577467608997
+  },
+  {
+    "example_id": "qa-0278",
+    "question": "What does Waverly Cinemas specialize in?",
+    "gold_answers": [
+      "organic food distribution"
+    ],
+    "predicted_answer": "organic food distribution",
+    "is_correct": true,
+    "span_confidence": 0.832196763904939,
+    "entropy": 0.07705952267784393
+  },
+  {
+    "example_id": "qa-0279",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Marcus Hale"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": false,
+    "span_confidence": 0.2839007392944808,
+    "entropy": 0.22064723340886008
+  },
+  {
+    "example_id": "qa-0280",
+    "question": "Where is Larkspur Health headquartered?",
+    "gold_answers": [
+      "Silverpine"
+    ],
+    "predicted_answer": "Silverpine",
+    "is_correct": true,
+    "span_confidence": 0.9979882273840843,
+    "entropy": 0.002359610792774423
+  },
+  {
+    "example_id": "qa-0281",
+    "question": "Who founded Ashgrove Robotics?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9783859313190817,
+    "entropy": 0.013699813200835395
+  },
+  {
+    "example_id": "qa-0282",
+    "question": "When was Ashgrove Robotics founded?",
+    "gold_answers": [
+      "1968"
+    ],
+    "predicted_answer": "1968",
+    "is_correct": true,
+    "span_confidence": 0.9926226352580159,
+    "entropy": 0.006285590990767424
+  },
+  {
+    "example_id": "qa-0283",
+    "question": "When was Northgate Robotics founded?",
+    "gold_answers": [
+      "1983"
+    ],
+    "predicted_answer": "1983",
+    "is_correct": true,
+    "span_confidence": 0.9891474959583846,
+    "entropy": 0.008577554562912006
+  },
+  {
+    "example_id": "qa-0284",
+    "question": "Who founded Amberfield Logistics?",
+    "gold_answers": [
+      "Astrid Solberg"
+    ],
+    "predicted_answer": "Astrid Solberg",
+    "is_correct": true,
+    "span_confidence": 0.9863484667376419,
+    "entropy": 0.010231808664929913
+  },
+  {
+    "example_id": "qa-0285",
+    "question": "What does Stagbrook Airlines specialize in?",
+    "gold_answers": [
+      "organic food distribution"
+    ],
+    "predicted_answer": "organic food distribution",
+    "is_correct": true,
+    "span_confidence": 0.8273031037656153,
+    "entropy": 0.0851575716963408
+  },
+  {
+    "example_id": "qa-0286",
+    "question": "Who founded Nightshade Cosmetics?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9792171828788554,
+    "entropy": 0.013164539145897566
+  },
+  {
+    "example_id": "qa-0287",
+    "question": "Where is Northgate Robotics headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.9980792527170479,
+    "entropy": 0.00226419627405408
+  },
+  {
+    "example_id": "qa-0288",
+    "question": "Where is Kestrelbank Capital headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.988578335696289,
+    "entropy": 0.009276280632770983
+  },
+  {
+    "example_id": "qa-0289",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": false,
+    "span_confidence": 0.28478981570314765,
+    "entropy": 0.30342354970298835
+  },
+  {
+    "example_id": "qa-0290",
+    "question": "When was Redcliff Mining founded?",
+    "gold_answers": [
+      "1993"
+    ],
+    "predicted_answer": "1993",
+    "is_correct": true,
+    "span_confidence": 0.9891567564483061,
+    "entropy": 0.008378935483795424
+  },
+  {
+    "example_id": "qa-0291",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": false,
+    "span_confidence": 0.6718676387729339,
+    "entropy": 0.15797389877015616
+  },
+  {
+    "example_id": "qa-0292",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": true,
+    "span_confidence": 0.9346899680858982,
+    "entropy": 0.04162530297288576
+  },
+  {
+    "example_id": "qa-0293",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.297997110148815,
+    "entropy": 0.2906208478686606
+  },
+  {
+    "example_id": "qa-0294",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1975"
+    ],
+    "predicted_answer": "1975",
+    "is_correct": true,
+    "span_confidence": 0.3485131871169358,
+    "entropy": 0.23222116888263178
+  },
+  {
+    "example_id": "qa-0295",
+    "question": "Where is Goldmarsh Agriculture headquartered?",
+    "gold_answers": [
+      "Kestrel Falls"
+    ],
+    "predicted_answer": "Kestrel Falls",
+    "is_correct": true,
+    "span_confidence": 0.990951452855171,
+    "entropy": 0.007832209749849219
+  },
+  {
+    "example_id": "qa-0296",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "2006"
+    ],
+    "predicted_answer": "2006",
+    "is_correct": true,
+    "span_confidence": 0.32261177819920306,
+    "entropy": 0.25511083236963383
+  },
+  {
+    "example_id": "qa-0297",
+    "question": "Where is Moonrise Telecom headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.9975572299302762,
+    "entropy": 0.002816822741883395
+  },
+  {
+    "example_id": "qa-0298",
+    "question": "What does Larkspur Health specialize in?",
+    "gold_answers": [
+      "investment management"
+    ],
+    "predicted_answer": "investment management",
+    "is_correct": true,
+    "span_confidence": 0.9807032680277707,
+    "entropy": 0.014821510302771158
+  },
+  {
+    "example_id": "qa-0299",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1979"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": false,
+    "span_confidence": 0.2091596783413081,
+    "entropy": 0.2637237446694292
+  },
+  {
+    "example_id": "qa-0300",
+    "question": "Who founded Nightshade Cosmetics?",
+    "gold_answers": [
+      "Owen Bramwell"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": true,
+    "span_confidence": 0.9977786222425209,
+    "entropy": 0.0022205386470880314
+  },
+  {
+    "example_id": "qa-0301",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "2015"
+    ],
+    "predicted_answer": "1974",
+    "is_correct": false,
+    "span_confidence": 0.17059383756965651,
+    "entropy": 0.28575559064344824
+  },
+  {
+    "example_id": "qa-0302",
+    "question": "Who founded Millpond Electronics?",
+    "gold_answers": [
+      "Dana Whitfield"
+    ],
+    "predicted_answer": "Dana Whitfield",
+    "is_correct": true,
+    "span_confidence": 0.9986527328776447,
+    "entropy": 0.0015603855311961917
+  },
+  {
+    "example_id": "qa-0303",
+    "question": "Who founded Silverbrook Finance?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.9982629211328486,
+    "entropy": 0.001965632752534715
+  },
+  {
+    "example_id": "qa-0304",
+    "question": "Who founded Wrenfield Publishing?",
+    "gold_answers": [
+      "Fiona Lachlan"
+    ],
+    "predicted_answer": "Fiona Lachlan",
+    "is_correct": true,
+    "span_confidence": 0.9813518854287935,
+    "entropy": 0.01237199753649917
+  },
+  {
+    "example_id": "qa-0305",
+    "question": "Where is Stonebridge Consulting headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Bellhaven",
+    "is_correct": true,
+    "span_confidence": 0.9980142232906886,
+    "entropy": 0.002344799805194299
+  },
+  {
+    "example_id": "qa-0306",
+    "question": "What does Brightwater Utilities specialize in?",
+    "gold_answers": [
+      "interactive entertainment"
+    ],
+    "predicted_answer": "interactive entertainment",
+    "is_correct": true,
+    "span_confidence": 0.9671887713321858,
+    "entropy": 0.02315241258556975
+  },
+  {
+    "example_id": "qa-0307",
+    "question": "Where is Cedarline Foods headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9975849017764205,
+    "entropy": 0.00276831928984447
+  },
+  {
+    "example_id": "qa-0308",
+    "question": "Where is Grayling Instruments headquartered?",
+    "gold_answers": [
+      "Wrenchester"
+    ],
+    "predicted_answer": "Wrenchester",
+    "is_correct": true,
+    "span_confidence": 0.9961964989570724,
+    "entropy": 0.004026998015006664
+  },
+  {
+    "example_id": "qa-0309",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "2014"
+    ],
+    "predicted_answer": "2014",
+    "is_correct": true,
+    "span_confidence": 0.27889757758166667,
+    "entropy": 0.25999534443557787
+  },
+  {
+    "example_id": "qa-0310",
+    "question": "When was Quillstone Media founded?",
+    "gold_answers": [
+      "2001"
+    ],
+    "predicted_answer": "2001",
+    "is_correct": true,
+    "span_confidence": 0.9880654237654696,
+    "entropy": 0.009267533878759605
+  },
+  {
+    "example_id": "qa-0311",
+    "question": "Who founded Elderwood Timber?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9987060672868822,
+    "entropy": 0.0014988242485844106
+  },
+  {
+    "example_id": "qa-0312",
+    "question": "When was Ashcombe Materials founded?",
+    "gold_answers": [
+      "1970"
+    ],
+    "predicted_answer": "1970",
+    "is_correct": true,
+    "span_confidence": 0.9885170050186645,
+    "entropy": 0.009023339489073643
+  },
+  {
+    "example_id": "qa-0313",
+    "question": "When was Voxel Interactive founded?",
+    "gold_answers": [
+      "1966"
+    ],
+    "predicted_answer": "1966",
+    "is_correct": true,
+    "span_confidence": 0.9935954814852721,
+    "entropy": 0.005448021636421162
+  },
+  {
+    "example_id": "qa-0314",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1990"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": false,
+    "span_confidence": 0.24785480556048434,
+    "entropy": 0.25177823647229913
+  },
+  {
+    "example_id": "qa-0315",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.36240660434224026,
+    "entropy": 0.18884152114734482
+  },
+  {
+    "example_id": "qa-0316",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": true,
+    "span_confidence": 0.33372363926208237,
+    "entropy": 0.2592132170637505
+  },
+  {
+    "example_id": "qa-0317",
+    "question": "When was Whitmarsh Insurance founded?",
+    "gold_answers": [
+      "1997"
+    ],
+    "predicted_answer": "1997",
+    "is_correct": true,
+    "span_confidence": 0.9908643342225574,
+    "entropy": 0.007279173301410352
+  },
+  {
+    "example_id": "qa-0318",
+    "question": "Who founded Copperfield Textiles?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": true,
+    "span_confidence": 0.9978631368376334,
+    "entropy": 0.002315305160045496
+  },
+  {
+    "example_id": "qa-0319",
+    "question": "Where is Ashgrove Robotics headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.9896984472494523,
+    "entropy": 0.008620929761978247
+  },
+  {
+    "example_id": "qa-0320",
+    "question": "When was Ironvale Manufacturing founded?",
+    "gold_answers": [
+      "1993"
+    ],
+    "predicted_answer": "1993",
+    "is_correct": true,
+    "span_confidence": 0.9881886256915173,
+    "entropy": 0.009134596418421462
+  },
+  {
+    "example_id": "qa-0321",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": true,
+    "span_confidence": 0.8760039966285049,
+    "entropy": 0.06940242770890688
+  },
+  {
+    "example_id": "qa-0322",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.0930505103831818,
+    "entropy": 0.3413810225633659
+  },
+  {
+    "example_id": "qa-0323",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": false,
+    "span_confidence": 0.27894760146207,
+    "entropy": 0.261001787410848
+  },
+  {
+    "example_id": "qa-0324",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Oakhaven"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": true,
+    "span_confidence": 0.72251029887153,
+    "entropy": 0.13537240297890324
+  },
+  {
+    "example_id": "qa-0325",
+    "question": "In what year was the first company mentioned founded?",
+    "gold_answers": [
+      "1993"
+    ],
+    "predicted_answer": "1993",
+    "is_correct": true,
+    "span_confidence": 0.26337210412084033,
+    "entropy": 0.27364457084023774
+  },
+  {
+    "example_id": "qa-0326",
+    "question": "Who founded Voxel Interactive?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": true,
+    "span_confidence": 0.9775906715591418,
+    "entropy": 0.013869770242335166
+  },
+  {
+    "example_id": "qa-0327",
+    "question": "Who founded Harborlight Energy?",
+    "gold_answers": [
+      "Diego Salazar"
+    ],
+    "predicted_answer": "Diego Salazar",
+    "is_correct": true,
+    "span_confidence": 0.9797946506538437,
+    "entropy": 0.013173331286686067
+  },
+  {
+    "example_id": "qa-0328",
+    "question": "Who founded Ashcombe Materials?",
+    "gold_answers": [
+      "Priya Anand"
+    ],
+    "predicted_answer": "Priya Anand",
+    "is_correct": true,
+    "span_confidence": 0.9978162641946966,
+    "entropy": 0.002370062523433753
+  },
+  {
+    "example_id": "qa-0329",
+    "question": "Who founded the third company mentioned?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Sanjay Rao",
+    "is_correct": false,
+    "span_confidence": 0.3002696563780134,
+    "entropy": 0.17439356857808044
+  },
+  {
+    "example_id": "qa-0330",
+    "question": "Where is Stonebridge Consulting headquartered?",
+    "gold_answers": [
+      "Greymoor"
+    ],
+    "predicted_answer": "Greymoor",
+    "is_correct": true,
+    "span_confidence": 0.9874877097245971,
+    "entropy": 0.009919627421952897
+  },
+  {
+    "example_id": "qa-0331",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Dana Whitfield"
+    ],
+    "predicted_answer": "Dana Whitfield",
+    "is_correct": true,
+    "span_confidence": 0.6896469206361289,
+    "entropy": 0.12856694434371826
+  },
+  {
+    "example_id": "qa-0332",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Priya Anand"
+    ],
+    "predicted_answer": "Priya Anand",
+    "is_correct": true,
+    "span_confidence": 0.29499977707241243,
+    "entropy": 0.2470690808723065
+  },
+  {
+    "example_id": "qa-0333",
+    "question": "Who founded Cinderfield Steel?",
+    "gold_answers": [
+      "Yara Haddad"
+    ],
+    "predicted_answer": "Yara Haddad",
+    "is_correct": true,
+    "span_confidence": 0.9755670874693756,
+    "entropy": 0.01575990844258422
+  },
+  {
+    "example_id": "qa-0334",
+    "question": "Who founded Grayling Instruments?",
+    "gold_answers": [
+      "Priya Anand"
+    ],
+    "predicted_answer": "Priya Anand",
+    "is_correct": true,
+    "span_confidence": 0.9981726945400027,
+    "entropy": 0.0020332568594579725
+  },
+  {
+    "example_id": "qa-0335",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "1978"
+    ],
+    "predicted_answer": "1984",
+    "is_correct": false,
+    "span_confidence": 0.1556066323128098,
+    "entropy": 0.29808470553728683
+  },
+  {
+    "example_id": "qa-0336",
+    "question": "Who founded Waverly Cinemas?",
+    "gold_answers": [
+      "Diego Salazar"
+    ],
+    "predicted_answer": "Diego Salazar",
+    "is_correct": true,
+    "span_confidence": 0.9980654441972661,
+    "entropy": 0.0020841961544214222
+  },
+  {
+    "example_id": "qa-0337",
+    "question": "When was Ashgrove Robotics founded?",
+    "gold_answers": [
+      "2003"
+    ],
+    "predicted_answer": "2003",
+    "is_correct": true,
+    "span_confidence": 0.9891066522242937,
+    "entropy": 0.008201509464454835
+  },
+  {
+    "example_id": "qa-0338",
+    "question": "Who founded Larkspur Health?",
+    "gold_answers": [
+      "Renata Silva"
+    ],
+    "predicted_answer": "Renata Silva",
+    "is_correct": true,
+    "span_confidence": 0.9848312319674335,
+    "entropy": 0.010585869077735502
+  },
+  {
+    "example_id": "qa-0339",
+    "question": "Where is Brightwater Utilities headquartered?",
+    "gold_answers": [
+      "Larkspur City"
+    ],
+    "predicted_answer": "Larkspur City",
+    "is_correct": true,
+    "span_confidence": 0.990119851801559,
+    "entropy": 0.008333902151628853
+  },
+  {
+    "example_id": "qa-0340",
+    "question": "When was Ravenmoor Security founded?",
+    "gold_answers": [
+      "1979"
+    ],
+    "predicted_answer": "1979",
+    "is_correct": true,
+    "span_confidence": 0.9908573027141472,
+    "entropy": 0.007445522840687913
+  },
+  {
+    "example_id": "qa-0341",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Ashcroft",
+    "is_correct": false,
+    "span_confidence": 0.22807597521521927,
+    "entropy": 0.3254368543541213
+  },
+  {
+    "example_id": "qa-0342",
+    "question": "Where is Wrenfield Publishing headquartered?",
+    "gold_answers": [
+      "Thornfield"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": true,
+    "span_confidence": 0.9955831287442116,
+    "entropy": 0.004777604255804094
+  },
+  {
+    "example_id": "qa-0343",
+    "question": "When was Oakfern Pharmaceuticals founded?",
+    "gold_answers": [
+      "1965"
+    ],
+    "predicted_answer": "1965",
+    "is_correct": true,
+    "span_confidence": 0.994903651325437,
+    "entropy": 0.004376888263212868
+  },
+  {
+    "example_id": "qa-0344",
+    "question": "What does Stonebridge Consulting specialize in?",
+    "gold_answers": [
+      "advanced materials"
+    ],
+    "predicted_answer": "advanced materials",
+    "is_correct": true,
+    "span_confidence": 0.9502588832544205,
+    "entropy": 0.03297112442092767
+  },
+  {
+    "example_id": "qa-0345",
+    "question": "When was Elderwood Timber founded?",
+    "gold_answers": [
+      "1965"
+    ],
+    "predicted_answer": "1965",
+    "is_correct": true,
+    "span_confidence": 0.9945380958656891,
+    "entropy": 0.004752188592292064
+  },
+  {
+    "example_id": "qa-0346",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Colm Fitzgerald"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": true,
+    "span_confidence": 0.8700734835345969,
+    "entropy": 0.06630344639679474
+  },
+  {
+    "example_id": "qa-0347",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Owen Bramwell"
+    ],
+    "predicted_answer": "Colm Fitzgerald",
+    "is_correct": false,
+    "span_confidence": 0.6824072343068792,
+    "entropy": 0.12268167626420837
+  },
+  {
+    "example_id": "qa-0348",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "1975"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": false,
+    "span_confidence": 0.2052465791280449,
+    "entropy": 0.28586402053555354
+  },
+  {
+    "example_id": "qa-0349",
+    "question": "Who founded Cinderfield Steel?",
+    "gold_answers": [
+      "Yara Haddad"
+    ],
+    "predicted_answer": "Yara Haddad",
+    "is_correct": true,
+    "span_confidence": 0.9971467872817996,
+    "entropy": 0.00300821087344442
+  },
+  {
+    "example_id": "qa-0350",
+    "question": "Who founded Redcliff Mining?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": true,
+    "span_confidence": 0.985647599459071,
+    "entropy": 0.010637519020304033
+  },
+  {
+    "example_id": "qa-0351",
+    "question": "Who founded the first company mentioned?",
+    "gold_answers": [
+      "Hugo Lindqvist"
+    ],
+    "predicted_answer": "Hugo Lindqvist",
+    "is_correct": true,
+    "span_confidence": 0.8187643145485559,
+    "entropy": 0.08683411720974127
+  },
+  {
+    "example_id": "qa-0352",
+    "question": "What does Goldmarsh Agriculture specialize in?",
+    "gold_answers": [
+      "renewable energy"
+    ],
+    "predicted_answer": "renewable energy",
+    "is_correct": true,
+    "span_confidence": 0.9536206716002198,
+    "entropy": 0.027244673357434475
+  },
+  {
+    "example_id": "qa-0353",
+    "question": "Where is Whitmarsh Insurance headquartered?",
+    "gold_answers": [
+      "Dunwich Bay"
+    ],
+    "predicted_answer": "Dunwich Bay",
+    "is_correct": true,
+    "span_confidence": 0.9870771128715354,
+    "entropy": 0.01060220198889715
+  },
+  {
+    "example_id": "qa-0354",
+    "question": "Who founded Moonrise Telecom?",
+    "gold_answers": [
+      "Kwame Boateng"
+    ],
+    "predicted_answer": "Kwame Boateng",
+    "is_correct": true,
+    "span_confidence": 0.9981823906178988,
+    "entropy": 0.002019615726996757
+  },
+  {
+    "example_id": "qa-0355",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Owen Bramwell",
+    "is_correct": false,
+    "span_confidence": 0.8119786059402188,
+    "entropy": 0.09505366026962501
+  },
+  {
+    "example_id": "qa-0356",
+    "question": "Who founded Bluefen Analytics?",
+    "gold_answers": [
+      "Fiona Lachlan"
+    ],
+    "predicted_answer": "Fiona Lachlan",
+    "is_correct": true,
+    "span_confidence": 0.9986723781321949,
+    "entropy": 0.0015503870455928896
+  },
+  {
+    "example_id": "qa-0357",
+    "question": "When was Elderwood Timber founded?",
+    "gold_answers": [
+      "1967"
+    ],
+    "predicted_answer": "1967",
+    "is_correct": true,
+    "span_confidence": 0.9937402592976738,
+    "entropy": 0.005476431147108994
+  },
+  {
+    "example_id": "qa-0358",
+    "question": "Who founded Willowmere Data?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Ibrahim Osei",
+    "is_correct": true,
+    "span_confidence": 0.9758191299528107,
+    "entropy": 0.01499578224179443
+  },
+  {
+    "example_id": "qa-0359",
+    "question": "When was Copperfield Textiles founded?",
+    "gold_answers": [
+      "1973"
+    ],
+    "predicted_answer": "1973",
+    "is_correct": true,
+    "span_confidence": 0.9910098632628852,
+    "entropy": 0.007312925861366725
+  },
+  {
+    "example_id": "qa-0360",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Riverstone",
+    "is_correct": true,
+    "span_confidence": 0.49092663208535114,
+    "entropy": 0.22599281615962993
+  },
+  {
+    "example_id": "qa-0361",
+    "question": "When was Grayling Instruments founded?",
+    "gold_answers": [
+      "2016"
+    ],
+    "predicted_answer": "2016",
+    "is_correct": true,
+    "span_confidence": 0.984610578608045,
+    "entropy": 0.011621808048842138
+  },
+  {
+    "example_id": "qa-0362",
+    "question": "When was Talonreach Aerospace founded?",
+    "gold_answers": [
+      "1992"
+    ],
+    "predicted_answer": "1992",
+    "is_correct": true,
+    "span_confidence": 0.9887287047400832,
+    "entropy": 0.008812945975929439
+  },
+  {
+    "example_id": "qa-0363",
+    "question": "When was Cinderfield Steel founded?",
+    "gold_answers": [
+      "1999"
+    ],
+    "predicted_answer": "1999",
+    "is_correct": true,
+    "span_confidence": 0.9890931443538662,
+    "entropy": 0.008613387923032225
+  },
+  {
+    "example_id": "qa-0364",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Silverpine"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": false,
+    "span_confidence": 0.6713772346206355,
+    "entropy": 0.1527616837501594
+  },
+  {
+    "example_id": "qa-0365",
+    "question": "When was Pinegrove Software founded?",
+    "gold_answers": [
+      "2007"
+    ],
+    "predicted_answer": "2007",
+    "is_correct": true,
+    "span_confidence": 0.9799602105799998,
+    "entropy": 0.013704003527588942
+  },
+  {
+    "example_id": "qa-0366",
+    "question": "Who founded Ironvale Manufacturing?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": true,
+    "span_confidence": 0.9836611745925872,
+    "entropy": 0.011353904474577077
+  },
+  {
+    "example_id": "qa-0367",
+    "question": "When was Millpond Electronics founded?",
+    "gold_answers": [
+      "2009"
+    ],
+    "predicted_answer": "2009",
+    "is_correct": true,
+    "span_confidence": 0.9812753770943061,
+    "entropy": 0.012641335320068491
+  },
+  {
+    "example_id": "qa-0368",
+    "question": "What does Pinegrove Software specialize in?",
+    "gold_answers": [
+      "venture capital"
+    ],
+    "predicted_answer": "venture capital",
+    "is_correct": true,
+    "span_confidence": 0.9716563014312527,
+    "entropy": 0.01879469053405731
+  },
+  {
+    "example_id": "qa-0369",
+    "question": "In what year was the fourth company mentioned founded?",
+    "gold_answers": [
+      "1969"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": false,
+    "span_confidence": 0.20511341660778726,
+    "entropy": 0.2853772839892089
+  },
+  {
+    "example_id": "qa-0370",
+    "question": "Where is the fourth company mentioned headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.27824996096548205,
+    "entropy": 0.31142071616289907
+  },
+  {
+    "example_id": "qa-0371",
+    "question": "Who founded Cedarline Foods?",
+    "gold_answers": [
+      "Tomas Reyes"
+    ],
+    "predicted_answer": "Tomas Reyes",
+    "is_correct": true,
+    "span_confidence": 0.9823459939602941,
+    "entropy": 0.012108841541608868
+  },
+  {
+    "example_id": "qa-0372",
+    "question": "Where is Larkspur Health headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9908193317879466,
+    "entropy": 0.007696846585371044
+  },
+  {
+    "example_id": "qa-0373",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Lena Kowalski"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": true,
+    "span_confidence": 0.2634339904906682,
+    "entropy": 0.19956228741607318
+  },
+  {
+    "example_id": "qa-0374",
+    "question": "What does Quillstone Media specialize in?",
+    "gold_answers": [
+      "public health services"
+    ],
+    "predicted_answer": "public health services",
+    "is_correct": true,
+    "span_confidence": 0.94276370474023,
+    "entropy": 0.035518894290867506
+  },
+  {
+    "example_id": "qa-0375",
+    "question": "Where is Bluefen Analytics headquartered?",
+    "gold_answers": [
+      "Fenbridge"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": true,
+    "span_confidence": 0.9939904011456662,
+    "entropy": 0.005536978873726282
+  },
+  {
+    "example_id": "qa-0376",
+    "question": "Who founded the second company mentioned?",
+    "gold_answers": [
+      "Ibrahim Osei"
+    ],
+    "predicted_answer": "Lena Kowalski",
+    "is_correct": false,
+    "span_confidence": 0.7546104801383073,
+    "entropy": 0.11836332145707709
+  },
+  {
+    "example_id": "qa-0377",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Wrenchester"
+    ],
+    "predicted_answer": "Copperhill",
+    "is_correct": false,
+    "span_confidence": 0.22693282022271077,
+    "entropy": 0.2912018450134858
+  },
+  {
+    "example_id": "qa-0378",
+    "question": "Where is the second company mentioned headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Thornfield",
+    "is_correct": false,
+    "span_confidence": 0.7085333510390512,
+    "entropy": 0.14714732531187363
+  },
+  {
+    "example_id": "qa-0379",
+    "question": "When was Duskwater Shipping founded?",
+    "gold_answers": [
+      "1970"
+    ],
+    "predicted_answer": "1970",
+    "is_correct": true,
+    "span_confidence": 0.9867684249781377,
+    "entropy": 0.010055561557821285
+  },
+  {
+    "example_id": "qa-0380",
+    "question": "Who founded Pinegrove Software?",
+    "gold_answers": [
+      "Amara Chukwu"
+    ],
+    "predicted_answer": "Amara Chukwu",
+    "is_correct": true,
+    "span_confidence": 0.9981655880224309,
+    "entropy": 0.002130316915818964
+  },
+  {
+    "example_id": "qa-0381",
+    "question": "Where is Cinderfield Steel headquartered?",
+    "gold_answers": [
+      "Portmere"
+    ],
+    "predicted_answer": "Portmere",
+    "is_correct": true,
+    "span_confidence": 0.9867954751227899,
+    "entropy": 0.010387029874304324
+  },
+  {
+    "example_id": "qa-0382",
+    "question": "Where is Sparrowhill Retail headquartered?",
+    "gold_answers": [
+      "Ironholt"
+    ],
+    "predicted_answer": "Ironholt",
+    "is_correct": true,
+    "span_confidence": 0.991113897991994,
+    "entropy": 0.0071723121463907625
+  },
+  {
+    "example_id": "qa-0383",
+    "question": "Where is Foxglove Studios headquartered?",
+    "gold_answers": [
+      "Silverpine"
+    ],
+    "predicted_answer": "Silverpine",
+    "is_correct": true,
+    "span_confidence": 0.9981820507152861,
+    "entropy": 0.0021499262755881065
+  },
+  {
+    "example_id": "qa-0384",
+    "question": "In what year was the second company mentioned founded?",
+    "gold_answers": [
+      "1990"
+    ],
+    "predicted_answer": "2015",
+    "is_correct": false,
+    "span_confidence": 0.14684235465639262,
+    "entropy": 0.29332278301305725
+  },
+  {
+    "example_id": "qa-0385",
+    "question": "Who founded Copperfield Textiles?",
+    "gold_answers": [
+      "Fiona Lachlan"
+    ],
+    "predicted_answer": "Fiona Lachlan",
+    "is_correct": true,
+    "span_confidence": 0.9779512867159781,
+    "entropy": 0.01356324361456977
+  },
+  {
+    "example_id": "qa-0386",
+    "question": "When was Hollowmere Games founded?",
+    "gold_answers": [
+      "1978"
+    ],
+    "predicted_answer": "1978",
+    "is_correct": true,
+    "span_confidence": 0.9917408652481754,
+    "entropy": 0.006864895173755358
+  },
+  {
+    "example_id": "qa-0387",
+    "question": "Who founded the fourth company mentioned?",
+    "gold_answers": [
+      "Amara Chukwu"
+    ],
+    "predicted_answer": "Astrid Solberg",
+    "is_correct": false,
+    "span_confidence": 0.21139966448220804,
+    "entropy": 0.22112762296265642
+  },
+  {
+    "example_id": "qa-0388",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "1978"
+    ],
+    "predicted_answer": "2006",
+    "is_correct": false,
+    "span_confidence": 0.3452323139285909,
+    "entropy": 0.24966461614941407
+  },
+  {
+    "example_id": "qa-0389",
+    "question": "What does Harborlight Energy specialize in?",
+    "gold_answers": [
+      "consumer data analytics"
+    ],
+    "predicted_answer": "consumer data analytics",
+    "is_correct": true,
+    "span_confidence": 0.9464448615865919,
+    "entropy": 0.032141640803679886
+  },
+  {
+    "example_id": "qa-0390",
+    "question": "Who founded Ravenmoor Security?",
+    "gold_answers": [
+      "Naomi Tan"
+    ],
+    "predicted_answer": "Naomi Tan",
+    "is_correct": true,
+    "span_confidence": 0.9989088843072125,
+    "entropy": 0.001297627246026788
+  },
+  {
+    "example_id": "qa-0391",
+    "question": "Where is Silverbrook Finance headquartered?",
+    "gold_answers": [
+      "Millbrook"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": true,
+    "span_confidence": 0.9965160289815032,
+    "entropy": 0.0038400868414803263
+  },
+  {
+    "example_id": "qa-0392",
+    "question": "What does Hollowmere Games specialize in?",
+    "gold_answers": [
+      "scientific instruments"
+    ],
+    "predicted_answer": "scientific instruments",
+    "is_correct": true,
+    "span_confidence": 0.9731808579705614,
+    "entropy": 0.018856074425924255
+  },
+  {
+    "example_id": "qa-0393",
+    "question": "What does Northgate Robotics specialize in?",
+    "gold_answers": [
+      "precision manufacturing"
+    ],
+    "predicted_answer": "precision manufacturing",
+    "is_correct": true,
+    "span_confidence": 0.9691644621489104,
+    "entropy": 0.021852869133304188
+  },
+  {
+    "example_id": "qa-0394",
+    "question": "Where is the third company mentioned headquartered?",
+    "gold_answers": [
+      "Bellhaven"
+    ],
+    "predicted_answer": "Millbrook",
+    "is_correct": false,
+    "span_confidence": 0.34450523901687546,
+    "entropy": 0.2963876504294315
+  },
+  {
+    "example_id": "qa-0395",
+    "question": "When was Hollowmere Games founded?",
+    "gold_answers": [
+      "2010"
+    ],
+    "predicted_answer": "2010",
+    "is_correct": true,
+    "span_confidence": 0.9843291171623427,
+    "entropy": 0.011607678122908848
+  },
+  {
+    "example_id": "qa-0396",
+    "question": "Where is Marrow Biotech headquartered?",
+    "gold_answers": [
+      "Oakhaven"
+    ],
+    "predicted_answer": "Oakhaven",
+    "is_correct": true,
+    "span_confidence": 0.9973315886417922,
+    "entropy": 0.003002155142597682
+  },
+  {
+    "example_id": "qa-0397",
+    "question": "Where is the first company mentioned headquartered?",
+    "gold_answers": [
+      "Riverstone"
+    ],
+    "predicted_answer": "Fenbridge",
+    "is_correct": false,
+    "span_confidence": 0.2602784089026944,
+    "entropy": 0.2475672938733128
+  },
+  {
+    "example_id": "qa-0398",
+    "question": "In what year was the third company mentioned founded?",
+    "gold_answers": [
+      "2012"
+    ],
+    "predicted_answer": "1997",
+    "is_correct": false,
+    "span_confidence": 0.6469290025279406,
+    "entropy": 0.15144175248555913
+  },
+  {
+    "example_id": "qa-0399",
+    "question": "Who founded Sparrowhill Retail?",
+    "gold_answers": [
+      "Piotr Nowak"
+    ],
+    "predicted_answer": "Piotr Nowak",
+    "is_correct": true,
+    "span_confidence": 0.9838632808751484,
+    "entropy": 0.011003076281406001
+  }
+]

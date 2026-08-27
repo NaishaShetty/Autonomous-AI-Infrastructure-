@@ -1,0 +1,21 @@
+{
+  "_meta": {"benchmark_version": "phase5.3-benchmark-v1.0.0", "purpose": "Per-task eligibility reasoning, extracted for quick audit without re-reading the full task catalog's prose fields."},
+  "eligibility": [
+    {"task_id": "UNC-ARITH", "eligibility_status": "EVALUABLE", "reason": "2000 records with objective ground truth (agent_output.is_correct) and a retained confidence signal; exceeds minimum_sample_requirement of 500."},
+    {"task_id": "UNC-SENT", "eligibility_status": "EVALUABLE", "reason": "660 records, exceeds minimum of 300; discrimination ceiling is low (AUROC 0.659) but the task IS evaluable — a near-chance result is still a valid, reportable evaluation, distinct from NOT_EVALUABLE."},
+    {"task_id": "UNC-QA", "eligibility_status": "EVALUABLE", "reason": "400 records, exceeds minimum of 300."},
+    {"task_id": "ABST-ARITH", "eligibility_status": "LIMITED", "reason": "Can simulate a post-hoc policy over agreement_rate and score against is_correct, but 0 real ABSTAIN/RETRY decisions exist in ingested sources — cannot evaluate a REALIZED abstention policy's actual downstream effect."},
+    {"task_id": "ABST-SENT", "eligibility_status": "LIMITED", "reason": "Same structural limitation as ABST-ARITH, compounded by the family's own near-chance discrimination ceiling bounding any achievable improvement."},
+    {"task_id": "ABST-QA", "eligibility_status": "LIMITED", "reason": "Same structural limitation as ABST-ARITH; n=400 near the minimum threshold."},
+    {"task_id": "PRED-RESOURCE-UNAVAILABLE", "eligibility_status": "NOT_EVALUABLE", "reason": "0 resource_unavailable-labeled per-episode records exist in the canonical dataset; the STRONG_EVIDENCE verdict is aggregate-only."},
+    {"task_id": "PRED-OOM", "eligibility_status": "NOT_EVALUABLE", "reason": "Only 10 PROCESS_OOM per-episode records, far below the 300-sample minimum; the AUROC 0.780 verdict and its false-alarm-rate context are aggregate-only."},
+    {"task_id": "PRED-CPU", "eligibility_status": "NOT_EVALUABLE", "reason": "Only 1 PROCESS_TIMEOUT_CPU per-episode record."},
+    {"task_id": "PRED-FLAKY", "eligibility_status": "NOT_EVALUABLE", "reason": "13 GENERIC_FAIL + 11 NETWORK_FAILURE per-episode records, below minimum and without a dedicated 'flaky' label."},
+    {"task_id": "DIAG-EVAL", "eligibility_status": "LIMITED", "reason": "46 controlled_runtime records support a coarse evaluation, but per-failure-class n is small (several classes <30, one n=1) and no independent causal ground truth exists beyond failure_class matching."},
+    {"task_id": "REC-EVAL", "eligibility_status": "LIMITED", "reason": "34 NOT_RECOVERED + 1 UNKNOWN validation_status records exist, but the historical per-action (RECONFIGURE vs RETRY, n=40 each) comparison is not re-derivable at that scale from this dataset alone."},
+    {"task_id": "MEM-EVAL", "eligibility_status": "NOT_EVALUABLE", "reason": "3,104 distinct workloads across 3,106 episodes means essentially no repeated-workload_id structure exists; no memory-write timestamps exist at all."},
+    {"task_id": "GEN-RANKING-CONTRACT", "eligibility_status": "NOT_EVALUABLE", "reason": "Exactly 1 represented environment (UNSPECIFIED_PRE_4_9) across all 3,106 records; no per-episode environment_id exists to construct a dev/held-out/robustness comparison."},
+    {"task_id": "GEN-OPERATING-POINT-CONTRACT", "eligibility_status": "NOT_EVALUABLE", "reason": "Same as GEN-RANKING-CONTRACT."},
+    {"task_id": "E2E-EVAL", "eligibility_status": "LIMITED", "reason": "Only the 46 controlled_runtime records exercise the full 8-stage loop; agent_task records (3,060) do not exercise diagnosis/recovery/memory at all."}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "differing_files_sample": [],
+  "file_sha256_identical": true,
+  "n_files_compared": 7,
+  "n_files_differing": 0,
+  "n_records_a": 3106,
+  "n_records_b": 3106,
+  "overall_byte_identical": true,
+  "record_contents_identical": true,
+  "record_ids_identical": true,
+  "run_a": "C:\\Users\\naish\\AppData\\Local\\Temp\\claude\\C--Autonomous-AI-infrastructure\\29c4db9c-1b64-4f51-8ada-678dab1bec01\\scratchpad\\phase5_regen\\run_a",
+  "run_b": "C:\\Users\\naish\\AppData\\Local\\Temp\\claude\\C--Autonomous-AI-infrastructure\\29c4db9c-1b64-4f51-8ada-678dab1bec01\\scratchpad\\phase5_regen\\run_b",
+  "split_assignments_identical": true
+}

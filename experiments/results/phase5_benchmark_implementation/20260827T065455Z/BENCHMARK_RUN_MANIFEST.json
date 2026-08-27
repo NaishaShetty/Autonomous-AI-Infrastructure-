@@ -1,0 +1,29 @@
+{
+  "benchmark_version": "phase5.3-benchmark-v1.0.0",
+  "bootstrap_seed": 20260826,
+  "code_commit": "8086e7185d0917e8431749db0f0c47ba18088eb5",
+  "config_hash": "d8d349a545a1910bfada66de5628cf3ebb52c50f9a15465dd34840ab8de5e08b",
+  "dataset_dir": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83",
+  "dataset_version": "phase5.2-dataset-v1.0.0",
+  "dependency_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scipy": "1.17.1",
+    "sklearn": "1.9.0"
+  },
+  "determinism_check": {
+    "ablation_results_identical": true,
+    "capability_matrix_identical": true,
+    "split_assignments_identical": true,
+    "task_results_identical": true
+  },
+  "generated_at_utc": "20260827T065512Z",
+  "git_status": {
+    "clean": false,
+    "n_changed_or_untracked": 91
+  },
+  "implementation_version": "phase5.4-implementation-v1.0.0",
+  "n_records_evaluated": 3106,
+  "platform": "Windows-10-AMD64",
+  "python_version": "3.11.3 (tags/v3.11.3:f3909b8, Apr  4 2023, 23:49:59) [MSC v.1934 64 bit (AMD64)]"
+}

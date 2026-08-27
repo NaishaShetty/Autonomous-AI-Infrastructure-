@@ -1,0 +1,26 @@
+{
+  "n_files": 20,
+  "run_dir": "experiments\\results\\phase5_6_external_release\\20260827T055356Z\\release\\dataset",
+  "sha256": {
+    "CITATION.cff": "e2ee8994e447aee4b4923fd24cdab96ae2a8868dfb5a4a21d419f86b77e13779",
+    "DATASET_CARD.md": "090a94ced1d386c01515fecbb94881ab5eb69cb13b811d5133313ddc3aaec78c",
+    "DATASET_README.md": "fc89ec0ec07fd7df23d958725fb2b304204cff41533a54a5f0aef95dd3cb3465",
+    "LICENSE": "140eafec33e6e029fb93a56695bd6eec01048e88d003385ffb2ebb6778fa2bac",
+    "README.md": "36f08c63464042620356b02c3a41b2804332c548070f856abdacb9e2cb41752f",
+    "data/all_records.jsonl": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83",
+    "data/dataset_metadata.json": "e84bcad8539f94f499002182522db43bf93b9d4d1943a0a987e005e4dfab6e7b",
+    "data/dataset_statistics.json": "487ab59d56219176812b38a44cbd6d9b3868f48058033da022bb6af53ea77384",
+    "data/leakage_audit.json": "c16608573ce5c4f557332023dd6fc2ec7e67d7d812414b2a204959a3c885e109",
+    "data/lineage.json": "78701dc5abb5c6c813fa14f8c09b3000f0678ac93e7e2f870794b4f5ebe8c384",
+    "data/provenance_audit.json": "dccaa1ea4b2d12fd5fcd9e3800859a6e439b4d0303b2807a91c0159775fe6694",
+    "data/publication_boundary_audit.json": "305c9dd969feb1be5d1aec28f5c8dcb3995d77fff7ff356f19b080dd7c19d4b9",
+    "data/record_id_audit.json": "5a498a4e25e2104663756cec2e2818b53b67238162ddfd9ddd92755f142e532c",
+    "data/split_assignment_manifest.json": "f2597fea99c42f1c44a5aa622b9cfdef57f69711f3db57538804fe36428cd703",
+    "data/split_audit.json": "4cd964806ebdb1000569c52d4f3d6e4f227ac32a3dd75602b9e7240de4bf18bd",
+    "docs/PHASE5_1_LEAKAGE_POLICY.md": "597662caea5db3877187b504a642839653e1798af7f5077dcbbe96671675d5aa",
+    "docs/PHASE5_1_PROVENANCE_CONTRACT.md": "716181bbdf13ef03de01796ad0bb4eb4f3163f0cc264960b36eaa99607704302",
+    "docs/PHASE5_1_PUBLICATION_BOUNDARY.md": "462fe26a9306ff67d30b6f590d7ea823b86307cc9494f6a526fc6a67c5653628",
+    "docs/PHASE5_1_SCHEMA.json": "724675dd52dba3e0210d267af4f54c5991bd0bb9cb06f3d8c534d95c0a0f709a",
+    "docs/PHASE5_1_SPLIT_POLICY.md": "cee17979da2dc816b21d6d38fc83dd9aab4815c99c50b3af8f49c0892907e18f"
+  }
+}

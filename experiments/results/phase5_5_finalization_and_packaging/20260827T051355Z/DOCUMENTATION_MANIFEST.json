@@ -1,0 +1,263 @@
+{
+  "_meta": {
+    "method": "Classifies every repo-level documentation artifact by release-package relevance, per Phase 5.5 Gate B step B4. Does not change repo retention status (see DOCUMENT_CLEANUP_MANIFEST.md, which already governs that)."
+  },
+  "documents": [
+    {
+      "path": "docs/MASTER_RECORD_CONTENT.md",
+      "classification": "required-for-reproducibility / public-metadata (referenced by release, not copied)"
+    },
+    {
+      "path": "docs/Autonomous_AI_Infrastructure_Comprehensive_Record.docx",
+      "classification": "required-for-reproducibility / public-metadata (referenced by release, not copied)"
+    },
+    {
+      "path": "FINAL_PHASE4_CLOSURE_REPORT.md",
+      "classification": "internal-engineering-note (repo-only)"
+    },
+    {
+      "path": "FINAL_SYSTEM_AUDIT.md",
+      "classification": "internal-engineering-note (repo-only)"
+    },
+    {
+      "path": "FINAL_WEAKNESS_REGISTER.md",
+      "classification": "internal-engineering-note (repo-only)"
+    },
+    {
+      "path": "DOCUMENT_CLEANUP_MANIFEST.md",
+      "classification": "internal-engineering-note (repo-only)"
+    },
+    {
+      "path": "docs/archive/ALIBABA_CLOSED_LOOP_INTEGRATION_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/ALIBABA_GPU2020_ACQUISITION_RELIABILITY_RUNTIME_V2_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/ARCHITECTURAL_RECOVERY_IMPLEMENTATION_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/ARCHITECTURE_MAP_BASELINE.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/DATA_SETUP.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/FAILURE_MEMORY_LIFECYCLE_RECONCILIATION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/GENERALIZATION_EXPERIMENT_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/LEARNING_INFLUENCE_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/MASTER_IMPLEMENTATION_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE1_AUDIT_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE2_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_1_EVALUATION_PROTOCOL.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_2C_CANDIDATE_ABLATION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_2_REPRESENTATION_EXPERIMENTS.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_3_GENERALIZATION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_4_COMPARISON.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_5_ATTACK_GENERALIZATION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_6_DIAGNOSIS_ABSTENTION_RECOVERY.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_BASELINE_AUDIT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_FREEZE.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_3_1_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_3_2_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_3_3_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_3_4_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_3_5_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_3_6_DECISION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_AIOPS_NEGATIVE_WINDOW_PROTOCOL.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_AIOPS_PREPARATION_COMPLETE.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_AIOPS_PROTOCOL.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_ALIBABA_SENSOR_LEAKAGE_GATE.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_CLEANING_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_COMPARISON.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_FEASIBILITY_AUDIT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE3_REAL_DATA_PROTOCOL.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_0_EPISODIC_DATA.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_1_ACTIVE_FAILURE_EXPERIENCE.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_1_FAILURE_MEMORY.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_2_ACTIVE_FAILURE_PATTERNS.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_2_ACTIVE_PLAN.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_2_FAILURE_PATTERNS.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_3_AMENDMENT_1_ORACLE_RELATIVE.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_3_RECOVERY_LEARNING.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_4_AMENDMENT_1_ORACLE_RELATIVE_AND_ABSTENTION_CREDIT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_4_PROTOCOL.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_5B_RECOGNITION_AND_AGENT_EVALUATION_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_5_AUDIT_AND_PLAN.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_5_GAP_FIXES_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/PHASE4_PLAN.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/POST_PUSH_RECONCILIATION_SUMMARY.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/RELIABILITY_MODEL_INTEGRATION_AUDIT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/RUNTIME_RELIABILITY_OBSERVABILITY_ARCHITECTURE_AUDIT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/RUNTIME_RELIABILITY_OBSERVABILITY_IMPLEMENTATION_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/SCHEMA.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/V1_CONTROL_RECONCILIATION_REPORT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/V1_FINAL_EVALUATION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/V1_RELEASE_AUDIT.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/V1_REPRODUCIBILITY_BOUNDARY_FINAL_READINESS.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    },
+    {
+      "path": "docs/archive/VERSIONED_MODULE_CLASSIFICATION.md",
+      "classification": "historical-evidence / not-in-release (kept in repo per DOCUMENT_CLEANUP_MANIFEST.md)"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "Autonomous AI Infrastructure — Phase 5.2 Canonical Dataset"
+version: "phase5.2-dataset-v1.0.0"
+date-released: "2026-08-26"
+type: dataset
+license-note: >
+  Generated entirely by this project's own agent-task and
+  controlled-runtime evaluation code. No third-party dataset content is
+  included. Released under the parent "Autonomous AI Infrastructure"
+  project's license terms.
+notes: >
+  This dataset represents a single environment and contains no realized
+  ABSTAIN/RETRY-decision episodes. See DATASET_CARD.md before using it for
+  any generalization or abstention-policy claim.

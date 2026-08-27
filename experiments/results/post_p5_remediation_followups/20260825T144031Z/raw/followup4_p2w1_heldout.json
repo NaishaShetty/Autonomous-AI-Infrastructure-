@@ -1,0 +1,59 @@
+{
+  "n_episodes": 600,
+  "heldout_seed_range": [
+    80000,
+    80600
+  ],
+  "prior_report_seed_range_for_comparison": [
+    60000,
+    60300
+  ],
+  "generic": {
+    "label": "p2w1-generic",
+    "n_episodes": 600,
+    "n_wrong_initially": 18,
+    "initial_accuracy": 0.97,
+    "initial_error_rate": 0.03,
+    "final_accuracy": 0.97,
+    "final_accuracy_wilson_ci95": [
+      0.9530788824105051,
+      0.980940900260977
+    ],
+    "final_error_rate": 0.030000000000000027,
+    "retry_rate_among_wrong": 0.0,
+    "n_retried": 0,
+    "pct_wrong_corrected_by_retry": 0.0,
+    "retry_recovery_rate": null,
+    "retry_recovery_rate_wilson_ci95": null,
+    "unnecessary_retry_rate": 0.0,
+    "review_rate": 0.03,
+    "abstention_rate": 0.0033333333333333335,
+    "unsafe_action_count": 0
+  },
+  "calibrated": {
+    "label": "p2w1-calibrated",
+    "n_episodes": 600,
+    "n_wrong_initially": 20,
+    "initial_accuracy": 0.9666666666666667,
+    "initial_error_rate": 0.03333333333333333,
+    "final_accuracy": 0.9983333333333333,
+    "final_accuracy_wilson_ci95": [
+      0.9906202004134312,
+      0.9997057393694524
+    ],
+    "final_error_rate": 0.0016666666666667052,
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 20,
+    "pct_wrong_corrected_by_retry": 0.95,
+    "retry_recovery_rate": 0.95,
+    "retry_recovery_rate_wilson_ci95": [
+      0.7638641064874331,
+      0.9911187805671267
+    ],
+    "unnecessary_retry_rate": 0.0,
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "unsafe_action_count": 0
+  },
+  "calibrated_improvement_survives": true
+}

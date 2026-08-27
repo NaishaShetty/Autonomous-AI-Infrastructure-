@@ -1,0 +1,10 @@
+{
+  "collision_free_full_digest": true,
+  "collision_free_short_id": true,
+  "duplicate_full_digests": {},
+  "duplicate_short_ids": {},
+  "record_id_hex_length": 24,
+  "total_records": 3106,
+  "unique_full_digests": 3106,
+  "unique_record_ids": 3106
+}

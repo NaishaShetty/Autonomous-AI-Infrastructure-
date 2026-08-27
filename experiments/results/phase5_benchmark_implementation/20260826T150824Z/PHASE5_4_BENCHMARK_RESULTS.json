@@ -1,0 +1,3105 @@
+{
+  "ablation_results": {
+    "ABL-CALIBRATED-VS-GENERIC-POLICY": {
+      "ablation_id": "ABL-CALIBRATED-VS-GENERIC-POLICY",
+      "causal_vs_correlational_status": "CAUSAL where families have genuinely different discrimination ceilings -- a single pooled threshold necessarily mis-serves at least one family.",
+      "per_family": {
+        "UNC-ARITH": {
+          "calibrated_selective_risk": 0.0,
+          "calibrated_threshold": 0.8,
+          "generic_selective_risk": 0.0,
+          "generic_threshold": 0.9997465404740069
+        },
+        "UNC-QA": {
+          "calibrated_selective_risk": 0.03125,
+          "calibrated_threshold": 0.9433644240962344,
+          "generic_selective_risk": null,
+          "generic_threshold": 0.9997465404740069
+        },
+        "UNC-SENT": {
+          "calibrated_selective_risk": 0.3125,
+          "calibrated_threshold": 0.9997465404740069,
+          "generic_selective_risk": 0.3125,
+          "generic_threshold": 0.9997465404740069
+        }
+      },
+      "status": "COMPLETED"
+    },
+    "ABL-MEMORY-ON-OFF": {
+      "ablation_id": "ABL-MEMORY-ON-OFF",
+      "aggregate_reference_evidence": {
+        "finding": "Step 6 repeated-incident: memory ON retry->retry->reconfigure->recovered vs memory OFF retry x6",
+        "grade": "A",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Step 6 experiment; canonical dataset lacks repeated-workload_id structure"
+      },
+      "extra_status": null,
+      "reason": "Not re-derivable at record level from the current canonical dataset (no repeated-workload structure / no re-executed retry-off or predictor-off run).",
+      "status": "AGGREGATE_REFERENCE_EVIDENCE"
+    },
+    "ABL-PREDICTOR-ON-OFF": {
+      "ablation_id": "ABL-PREDICTOR-ON-OFF",
+      "aggregate_reference_evidence": {
+        "finding": "little ON/OFF difference in one sample because retry alone was already highly effective",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "no documented 2x2 retry x predictor design in frozen evidence",
+        "status": "CONFOUNDED / NOT_IDENTIFIABLE"
+      },
+      "extra_status": "CONFOUNDED/NOT_IDENTIFIABLE",
+      "reason": "Not re-derivable at record level from the current canonical dataset (no repeated-workload structure / no re-executed retry-off or predictor-off run).",
+      "status": "AGGREGATE_REFERENCE_EVIDENCE"
+    },
+    "ABL-RETRY-ON-OFF": {
+      "ablation_id": "ABL-RETRY-ON-OFF",
+      "aggregate_reference_evidence": {
+        "finding": "disabling retry removed the whole observed improvement (causally confirmed in frozen evidence)",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate historical ablation; not re-derivable from current per-episode records"
+      },
+      "extra_status": null,
+      "reason": "Not re-derivable at record level from the current canonical dataset (no repeated-workload structure / no re-executed retry-off or predictor-off run).",
+      "status": "AGGREGATE_REFERENCE_EVIDENCE"
+    },
+    "ABL-UNCERTAINTY-MECHANISM": {
+      "ablation_id": "ABL-UNCERTAINTY-MECHANISM",
+      "causal_vs_correlational_status": "CAUSAL for arithmetic and QA (removing the signal flattens the risk-coverage curve to base rate); CORRELATIONAL-ONLY-AT-CEILING for sentiment (AUROC ~0.66, barely above chance) -- disclosed per spec, not hidden.",
+      "per_family": {
+        "UNC-ARITH": {
+          "OFF_selective_risk_AURC": 0.029560570332231983,
+          "ON_selective_risk_AURC": 0.001698309101898724,
+          "delta": -0.02786226123033326,
+          "family": "arithmetic_self_consistency",
+          "n": 310
+        },
+        "UNC-QA": {
+          "OFF_selective_risk_AURC": 0.28110666081486696,
+          "ON_selective_risk_AURC": 0.03897791205910143,
+          "delta": -0.24212874875576554,
+          "family": "extractive_qa_span_logit",
+          "n": 49
+        },
+        "UNC-SENT": {
+          "OFF_selective_risk_AURC": 0.11810169768417102,
+          "ON_selective_risk_AURC": 0.15422893797469672,
+          "delta": 0.036127240290525706,
+          "family": "sentiment_softmax_margin",
+          "n": 113
+        }
+      },
+      "status": "COMPLETED"
+    }
+  },
+  "benchmark_version": "phase5.3-benchmark-v1.0.0",
+  "capability_matrix": [
+    {
+      "evidence": "n=310; simulated policy only, no realized abstain/retry episodes",
+      "limitations": [
+        "SIMULATED_POLICY_EVALUATION: no realized ABSTAIN-decision or RETRY-triggered episodes exist in the ingested raw sources (dataset by_decision_type has no ABSTAIN/RETRY key) -- this is a post-hoc policy simulation over agent_output.is_correct, never an evaluation of a real, executed abstention policy.",
+        "RETRY is nominally legitimate for arithmetic per design principle, but no realized RETRY-triggered re-sampling event exists in the retained per-record evidence (only the final agreement_rate after all samples were already drawn is recorded); any RETRY-specific claim beyond ANSWER/ABSTAIN simulation is NOT_EVALUABLE from current records."
+      ],
+      "primary_metric": 0.0,
+      "status": "PARTIALLY_VALIDATED",
+      "task_id": "ABST-ARITH",
+      "track": "abstention"
+    },
+    {
+      "evidence": "n=49; simulated policy only, no realized abstain/retry episodes",
+      "limitations": [
+        "SIMULATED_POLICY_EVALUATION: no realized ABSTAIN-decision or RETRY-triggered episodes exist in the ingested raw sources (dataset by_decision_type has no ABSTAIN/RETRY key) -- this is a post-hoc policy simulation over agent_output.is_correct, never an evaluation of a real, executed abstention policy.",
+        "RETRY is not a legitimate decision for this family per design principle."
+      ],
+      "primary_metric": 0.03125,
+      "status": "PARTIALLY_VALIDATED",
+      "task_id": "ABST-QA",
+      "track": "abstention"
+    },
+    {
+      "evidence": "n=113; simulated policy only, no realized abstain/retry episodes",
+      "limitations": [
+        "SIMULATED_POLICY_EVALUATION: no realized ABSTAIN-decision or RETRY-triggered episodes exist in the ingested raw sources (dataset by_decision_type has no ABSTAIN/RETRY key) -- this is a post-hoc policy simulation over agent_output.is_correct, never an evaluation of a real, executed abstention policy.",
+        "RETRY is not a legitimate decision for this family per design principle."
+      ],
+      "primary_metric": 0.3125,
+      "status": "PARTIALLY_VALIDATED",
+      "task_id": "ABST-SENT",
+      "track": "abstention"
+    },
+    {
+      "evidence": "n=35",
+      "limitations": [
+        "causal_status=CAUSAL_GROUND_TRUTH_UNAVAILABLE for all records in this dataset (no independently-verified root cause distinct from failure_class exists); only failure-class match, UNKNOWN handling, and temporal integrity are scored.",
+        "failure_class=NETWORK_FAILURE: n=11 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY."
+      ],
+      "primary_metric": null,
+      "status": "PARTIALLY_VALIDATED",
+      "task_id": "DIAG-EVAL",
+      "track": "diagnosis"
+    },
+    {
+      "evidence": "n=46",
+      "limitations": [
+        "Full end-to-end coverage limited to n=46 controlled_runtime records; agent_task records (3,060) do not exercise diagnosis/recovery/memory stages and are excluded from this task.",
+        "Component metrics (diagnosis, recovery) are reported jointly below specifically so a strong or weak end-to-end number cannot mask a disqualified/underpowered component result."
+      ],
+      "primary_metric": null,
+      "status": "PARTIALLY_VALIDATED",
+      "task_id": "E2E-EVAL",
+      "track": "end_to_end"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "Same as GEN-RANKING-CONTRACT: single-environment dataset. NOT_EVALUABLE today; CONTRACT for future data."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "GEN-OPERATING-POINT-CONTRACT",
+      "track": "generalization"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "CRITICAL, STATED PLAINLY: the current Phase 5.2 canonical dataset has only ONE represented environment (identity.environment_id == 'UNSPECIFIED_PRE_4_9' for all 3,106 records, dataset_statistics.json 'environments': 1, split_audit.json environment_axis_check status DISCLOSED_LIMITATION_NOT_APPLICABLE). A full environment-generalization benchmark task is NOT_EVALUABLE from this dataset as it stands. This task_id exists as a CONTRACT for future/derived environment-aware evaluation: it specifies exactly what a future dataset extension would need (a genuine per-episode Phase-4.9 EnvironmentId field distinguishing baseline_cpu / memory_constrained / dependency_network_constrained, joined back to individual records) without inventing that evidence now. Phase 4's own environment-generalization evidence (the 0.989/0.983/0.935 OOM numbers) is NOT lost \u2014 it is preserved as aggregate PUBLIC_METADATA in docs/MASTER_RECORD_CONTENT.md and the post_p5_remediation aggregate artifacts; it is simply not present as per-episode canonical dataset records."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "GEN-RANKING-CONTRACT",
+      "track": "generalization"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "The canonical Phase 5.2 dataset (3,106 records, 3,104 distinct workload_ids across 3,106 workloads/runs) has essentially no repeated workload_id structure \u2014 dataset_statistics.json shows workloads=3104 for episodes=3106, i.e. at most 2 records share a workload_id anywhere in the dataset, and none of those are documented as the deliberate repeated-incident design. The only evidence source that actually exercises repeated-incident structure is the Step 6 experiment, which produced aggregate results without per-episode identity retained in this construction (PHASE5_1_SPLIT_POLICY.md \u00a76 explicitly disclosed this gap for the related Phase 4.10 run; the same gap applies here). This task is NOT_EVALUABLE from the current canonical dataset at any real scale; it is a CONTRACT for a future dataset extension that ingests the Step 6 experiment's per-episode identity, which does not currently exist as ingestable per-record evidence."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "MEM-EVAL",
+      "track": "memory"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "Dataset has exactly 1 PROCESS_TIMEOUT_CPU per-episode record (dataset_statistics.json by_failure_class) \u2014 far below any usable sample size. NOT_EVALUABLE at scale from the current dataset; the NOT_VALIDATED verdict remains valid PUBLIC_METADATA from aggregate Phase 4 evidence only."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-CPU",
+      "track": "failure_prediction"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "Dataset has 13 GENERIC_FAIL and 11 NETWORK_FAILURE per-episode records (dataset_statistics.json), below the 300-sample minimum and without a dedicated 'flaky' label distinct from these two Phase-5.2 failure classes. NOT_EVALUABLE at scale from current dataset."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-FLAKY",
+      "track": "failure_prediction"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "Dataset has 10 PROCESS_OOM per-episode records (dataset_statistics.json), insufficient (below the 300-sample minimum) and lacking the per-episode observability-sample-count field needed to reconstruct the \u22652-sample subset distinction. The AUROC 0.780 verdict is aggregate-only evidence (post_p5_remediation_followups), not re-derivable from the current 10 per-episode records. Task is NOT_EVALUABLE at scale from the current canonical dataset; usable only as a documented aggregate finding (PUBLIC_METADATA)."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-OOM",
+      "track": "failure_prediction"
+    },
+    {
+      "evidence": "n=0",
+      "limitations": [
+        "This dataset (Phase 5.2, 3,106 records) has only 10 PROCESS_OOM and 0 resource_unavailable-labeled per-episode records with retained identity (dataset_statistics.json by_failure_class has no resource_unavailable key at all) \u2014 the STRONG_EVIDENCE verdict lives entirely in aggregate Phase 4 evaluation artifacts with no per-episode join key (PHASE5_2_DATASET_CONSTRUCTION_REPORT.md \u00a71, sources 'inspected but NOT ingested'). This task is therefore NOT_EVALUABLE as a record-level benchmark task from the current canonical dataset; the grade-A finding remains valid PUBLIC_METADATA (a documented aggregate result), not a re-runnable per-episode benchmark task today."
+      ],
+      "primary_metric": null,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-RESOURCE-UNAVAILABLE",
+      "track": "failure_prediction"
+    },
+    {
+      "evidence": "n=35",
+      "limitations": [
+        "recovery.executor_self_report is retained only for discrepancy analysis (MET-VALIDATION-CORRECTNESS) and never substitutes for validation.validation_status as a label.",
+        "0% overall recovery_success_rate on this dataset (0 of 35 controlled_runtime failure episodes reach validation_status=RECOVERED; all are NOT_RECOVERED/UNKNOWN) is a genuine, valid negative result for this canonical dataset slice, not a benchmark defect."
+      ],
+      "primary_metric": null,
+      "status": "PARTIALLY_VALIDATED",
+      "task_id": "REC-EVAL",
+      "track": "recovery"
+    },
+    {
+      "evidence": "n=310",
+      "limitations": [
+        "Temperature scaling (T=0.2739) fit on calibration_validation (n=309); raw ECE=0.1967741935483872, calibrated ECE=0.08271192437813482, raw AUROC=0.9552098066949551, calibrated AUROC=0.9552098066949551 -- calibration is a monotonic rescaling and cannot change AUROC in principle; any numeric difference here reflects the finite-sample temperature fit, not a discrimination change.",
+        "n_test=310 < minimum_sample_requirement=500: DESCRIPTIVE_ONLY."
+      ],
+      "primary_metric": null,
+      "status": "UNDERPOWERED",
+      "task_id": "UNC-ARITH",
+      "track": "uncertainty"
+    },
+    {
+      "evidence": "n=49",
+      "limitations": [
+        "Temperature scaling (T=0.9704) fit on calibration_validation (n=68); raw ECE=0.07543071613782164, calibrated ECE=0.07746974260115684, raw AUROC=0.9384615384615385, calibrated AUROC=0.9384615384615385 -- calibration is a monotonic rescaling and cannot change AUROC in principle; any numeric difference here reflects the finite-sample temperature fit, not a discrimination change.",
+        "n_test=49 < minimum_sample_requirement=300: DESCRIPTIVE_ONLY."
+      ],
+      "primary_metric": null,
+      "status": "UNDERPOWERED",
+      "task_id": "UNC-QA",
+      "track": "uncertainty"
+    },
+    {
+      "evidence": "n=113",
+      "limitations": [
+        "Temperature scaling (T=2.3136) fit on calibration_validation (n=94); raw ECE=0.12235910048036358, calibrated ECE=0.08443492936851578, raw AUROC=0.4386724386724387, calibrated AUROC=0.4386724386724387 -- calibration is a monotonic rescaling and cannot change AUROC in principle; any numeric difference here reflects the finite-sample temperature fit, not a discrimination change.",
+        "DISCLOSED, EXPECTED result for this family: AUROC ~0.66 (near-chance discrimination ceiling). Never reported as 'uncertainty mechanism validated' for sentiment."
+      ],
+      "primary_metric": null,
+      "status": "UNDERPOWERED",
+      "task_id": "UNC-SENT",
+      "track": "uncertainty"
+    }
+  ],
+  "dataset_audit": {
+    "all_records_sha256": "4f6994447cf28cb7f78948727e177e21cb6688ada85557613723151b66064b83",
+    "environments": [
+      "UNSPECIFIED_PRE_4_9"
+    ],
+    "n_environments": 1,
+    "n_episodes": 3106,
+    "n_records": 3106,
+    "n_unique_record_ids": 3106,
+    "n_workloads": 3104,
+    "ok": true,
+    "split_counts": {
+      "calibration_validation": 482,
+      "test": 482,
+      "train": 2142
+    },
+    "status": "PASSED",
+    "violations": []
+  },
+  "dataset_version": "phase5.2-dataset-v1.0.0",
+  "determinism_check": {
+    "ablation_results_identical": true,
+    "capability_matrix_identical": true,
+    "split_assignments_identical": true,
+    "task_results_identical": true
+  },
+  "generated_at_utc": "20260826T150836Z",
+  "implementation_version": "phase5.4-implementation-v1.0.0",
+  "leakage_scan": {
+    "environment_roles": [
+      "UNSPECIFIED"
+    ],
+    "n_records_scanned": 3106,
+    "n_test": 482,
+    "rules_checked": [
+      "L8",
+      "L10"
+    ],
+    "status": "PASSED"
+  },
+  "registry_task_count": 16,
+  "reproducibility": {
+    "baseline_version": "phase5.3-baselines-v1.0.0",
+    "benchmark_version": "phase5.3-benchmark-v1.0.0",
+    "bootstrap_seed": 20260826,
+    "code_commit": "8086e7185d0917e8431749db0f0c47ba18088eb5",
+    "config_hash": "d8d349a545a1910bfada66de5628cf3ebb52c50f9a15465dd34840ab8de5e08b",
+    "dataset_version": "phase5.2-dataset-v1.0.0",
+    "dependency_versions": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0"
+    },
+    "git_status": {
+      "clean": false,
+      "n_changed_or_untracked": 82
+    },
+    "implementation_version": "phase5.4-implementation-v1.0.0",
+    "metric_version": "phase5.3-metrics-v1.0.0",
+    "no_filesystem_order_dependence": true,
+    "no_python_hash_used": true,
+    "platform": "Windows-10-AMD64",
+    "protocol_version": "phase5.3-protocol-v1.0.0",
+    "python_version": "3.11.3 (tags/v3.11.3:f3909b8, Apr  4 2023, 23:49:59) [MSC v.1934 64 bit (AMD64)]",
+    "schema_version": "phase5.1-schema-v1.0.0"
+  },
+  "result_buckets": {
+    "AGGREGATE_REFERENCE": [
+      "PRED-RESOURCE-UNAVAILABLE",
+      "PRED-OOM",
+      "PRED-CPU",
+      "PRED-FLAKY",
+      "MEM-EVAL",
+      "GEN-RANKING-CONTRACT",
+      "GEN-OPERATING-POINT-CONTRACT"
+    ],
+    "DESCRIPTIVE": [],
+    "LIMITED": [
+      "ABST-ARITH",
+      "ABST-SENT",
+      "ABST-QA",
+      "DIAG-EVAL",
+      "REC-EVAL",
+      "E2E-EVAL"
+    ],
+    "NEGATIVE": [],
+    "NOT_EVALUABLE": [
+      "PRED-RESOURCE-UNAVAILABLE",
+      "PRED-OOM",
+      "PRED-CPU",
+      "PRED-FLAKY",
+      "MEM-EVAL",
+      "GEN-RANKING-CONTRACT",
+      "GEN-OPERATING-POINT-CONTRACT"
+    ],
+    "UNDERPOWERED": [
+      "UNC-ARITH",
+      "UNC-SENT",
+      "UNC-QA"
+    ],
+    "VALIDATED": []
+  },
+  "task_results": {
+    "ABST-ARITH": {
+      "baseline_results": {
+        "BASE-ALWAYS-ABSTAIN": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.012240569765129924,
+            "ci_low": 0.0,
+            "k": 310,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.012240569765129924,
+            "ci_low": 0.0,
+            "k": 0,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "n_resolved": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-SELECTIVE-RISK": {
+            "n": 310,
+            "n_answered": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.989019943654517,
+            "ci_low": 0.9541309961826493,
+            "k": 303,
+            "method": "wilson",
+            "n": 310,
+            "n_abstain": 310,
+            "point": 0.9774193548387097,
+            "status": "DEFINED",
+            "value": 0.9774193548387097
+          },
+          "flag": "ALWAYS_ABSTAIN_NOT_SUCCESSFUL",
+          "note": "Trivially zero selective risk at coverage=0 -- explicitly NOT a success per design principle."
+        },
+        "BASE-ALWAYS-ANSWER": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 1.0,
+            "ci_low": 0.98775943023487,
+            "k": 0,
+            "method": "wilson",
+            "n": 310,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 1.0,
+            "ci_low": 0.98775943023487,
+            "k": 310,
+            "method": "wilson",
+            "n": 310,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.989019943654517,
+            "ci_low": 0.9541309961826493,
+            "k": 303,
+            "method": "wilson",
+            "n": 310,
+            "n_resolved": 310,
+            "point": 0.9774193548387097,
+            "status": "DEFINED",
+            "value": 0.9774193548387097
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.045869003817350665,
+            "ci_low": 0.010980056345483064,
+            "k": 7,
+            "method": "wilson",
+            "n": 310,
+            "n_answered": 310,
+            "point": 0.02258064516129032,
+            "status": "DEFINED",
+            "value": 0.02258064516129032
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "n": 310,
+            "n_abstain": 0,
+            "status": "UNDEFINED_ZERO_DENOMINATOR",
+            "value": null
+          }
+        },
+        "BASE-CALIBRATED-MECHANISM-AWARE": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.7604179838187684,
+            "ci_low": 0.6601763542167247,
+            "k": 89,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.7129032258064516,
+            "status": "DEFINED",
+            "value": 0.2870967741935484
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.7604179838187684,
+            "ci_low": 0.6601763542167247,
+            "k": 221,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.7129032258064516,
+            "status": "DEFINED",
+            "value": 0.7129032258064516
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 1.0,
+            "ci_low": 0.9829141938146678,
+            "k": 221,
+            "method": "wilson",
+            "n": 221,
+            "n_resolved": 221,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.01708580618533225,
+            "ci_low": 1.734723475976807e-18,
+            "k": 0,
+            "method": "wilson",
+            "n": 221,
+            "n_answered": 221,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.961380669068242,
+            "ci_low": 0.846446856523734,
+            "k": 82,
+            "method": "wilson",
+            "n": 89,
+            "n_abstain": 89,
+            "point": 0.9213483146067416,
+            "status": "DEFINED",
+            "value": 0.9213483146067416
+          }
+        },
+        "BASE-GENERIC-POLICY": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.32975376043217575,
+            "ci_low": 0.2305339770761724,
+            "k": 224,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.27741935483870966,
+            "status": "DEFINED",
+            "value": 0.7225806451612904
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.32975376043217575,
+            "ci_low": 0.2305339770761724,
+            "k": 86,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.27741935483870966,
+            "status": "DEFINED",
+            "value": 0.27741935483870966
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 1.0,
+            "ci_low": 0.9572402984808819,
+            "k": 86,
+            "method": "wilson",
+            "n": 86,
+            "n_resolved": 86,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.042759701519118086,
+            "ci_low": 0.0,
+            "k": 0,
+            "method": "wilson",
+            "n": 86,
+            "n_answered": 86,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.9847818346738547,
+            "ci_low": 0.9369111309654315,
+            "k": 217,
+            "method": "wilson",
+            "n": 224,
+            "n_abstain": 224,
+            "point": 0.96875,
+            "status": "DEFINED",
+            "value": 0.96875
+          }
+        },
+        "CTRL-RANDOM-POLICY": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.6028569057361712,
+            "ci_low": 0.49273271654462253,
+            "k": 140,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.5483870967741935,
+            "status": "DEFINED",
+            "value": 0.4516129032258065
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.6028569057361712,
+            "ci_low": 0.49273271654462253,
+            "k": 170,
+            "method": "wilson",
+            "n": 310,
+            "point": 0.5483870967741935,
+            "status": "DEFINED",
+            "value": 0.5483870967741935
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.9837260734956578,
+            "ci_low": 0.9251472916827576,
+            "k": 164,
+            "method": "wilson",
+            "n": 170,
+            "n_resolved": 170,
+            "point": 0.9647058823529412,
+            "status": "DEFINED",
+            "value": 0.9647058823529412
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.0748527083172425,
+            "ci_low": 0.016273926504342204,
+            "k": 6,
+            "method": "wilson",
+            "n": 170,
+            "n_answered": 170,
+            "point": 0.03529411764705882,
+            "status": "DEFINED",
+            "value": 0.03529411764705882
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.9987380280358878,
+            "ci_low": 0.9606506328243919,
+            "k": 139,
+            "method": "wilson",
+            "n": 140,
+            "n_abstain": 140,
+            "point": 0.9928571428571429,
+            "status": "DEFINED",
+            "value": 0.9928571428571429
+          }
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "SIMULATED_POLICY_EVALUATION: no realized ABSTAIN-decision or RETRY-triggered episodes exist in the ingested raw sources (dataset by_decision_type has no ABSTAIN/RETRY key) -- this is a post-hoc policy simulation over agent_output.is_correct, never an evaluation of a real, executed abstention policy.",
+        "RETRY is nominally legitimate for arithmetic per design principle, but no realized RETRY-triggered re-sampling event exists in the retained per-record evidence (only the final agreement_rate after all samples were already drawn is recorded); any RETRY-specific claim beyond ANSWER/ABSTAIN simulation is NOT_EVALUABLE from current records.",
+        "n_test=310 < minimum_sample_requirement=500: UNDERPOWERED/DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-ABSTENTION-RATE": {
+          "ci_high": 0.7604179838187684,
+          "ci_low": 0.6601763542167247,
+          "k": 89,
+          "method": "wilson",
+          "n": 310,
+          "point": 0.7129032258064516,
+          "status": "DEFINED",
+          "value": 0.2870967741935484
+        },
+        "MET-COVERAGE": {
+          "ci_high": 0.7604179838187684,
+          "ci_low": 0.6601763542167247,
+          "k": 221,
+          "method": "wilson",
+          "n": 310,
+          "point": 0.7129032258064516,
+          "status": "DEFINED",
+          "value": 0.7129032258064516
+        },
+        "MET-FINAL-CORRECTNESS": {
+          "ci_high": 1.0,
+          "ci_low": 0.9829141938146678,
+          "k": 221,
+          "method": "wilson",
+          "n": 221,
+          "n_resolved": 221,
+          "point": 1.0,
+          "status": "DEFINED",
+          "value": 1.0
+        },
+        "MET-SELECTIVE-RISK": {
+          "ci_high": 0.01708580618533225,
+          "ci_low": 1.734723475976807e-18,
+          "k": 0,
+          "method": "wilson",
+          "n": 221,
+          "n_answered": 221,
+          "point": 0.0,
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "MET-UNNECESSARY-ABSTENTION": {
+          "ci_high": 0.961380669068242,
+          "ci_low": 0.846446856523734,
+          "k": 82,
+          "method": "wilson",
+          "n": 89,
+          "n_abstain": 89,
+          "point": 0.9213483146067416,
+          "status": "DEFINED",
+          "value": 0.9213483146067416
+        },
+        "policy_evaluated": "BASE-CALIBRATED-MECHANISM-AWARE"
+      },
+      "provenance": {
+        "calibrated_threshold_fit_on": "calibration_validation",
+        "calibrated_threshold_value": 0.8,
+        "n_calibration_validation": 309,
+        "n_test": 310,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": "arithmetic_self_consistency",
+          "track_filter": "agent_task"
+        }
+      },
+      "sample_count": 310,
+      "split": "test",
+      "status": "SIMULATED_POLICY_EVALUATION",
+      "task_id": "ABST-ARITH",
+      "track": "abstention"
+    },
+    "ABST-QA": {
+      "baseline_results": {
+        "BASE-ALWAYS-ABSTAIN": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.07270029673590504,
+            "ci_low": 0.0,
+            "k": 49,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.07270029673590504,
+            "ci_low": 0.0,
+            "k": 0,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "n_resolved": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-SELECTIVE-RISK": {
+            "n": 49,
+            "n_answered": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.885182729571862,
+            "ci_low": 0.6636272988905616,
+            "k": 39,
+            "method": "wilson",
+            "n": 49,
+            "n_abstain": 49,
+            "point": 0.7959183673469388,
+            "status": "DEFINED",
+            "value": 0.7959183673469388
+          },
+          "flag": "ALWAYS_ABSTAIN_NOT_SUCCESSFUL",
+          "note": "Trivially zero selective risk at coverage=0 -- explicitly NOT a success per design principle."
+        },
+        "BASE-ALWAYS-ANSWER": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.9999999999999999,
+            "ci_low": 0.9272997032640949,
+            "k": 0,
+            "method": "wilson",
+            "n": 49,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.9999999999999999,
+            "ci_low": 0.9272997032640949,
+            "k": 49,
+            "method": "wilson",
+            "n": 49,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.885182729571862,
+            "ci_low": 0.6636272988905616,
+            "k": 39,
+            "method": "wilson",
+            "n": 49,
+            "n_resolved": 49,
+            "point": 0.7959183673469388,
+            "status": "DEFINED",
+            "value": 0.7959183673469388
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.33637270110943834,
+            "ci_low": 0.11481727042813811,
+            "k": 10,
+            "method": "wilson",
+            "n": 49,
+            "n_answered": 49,
+            "point": 0.20408163265306123,
+            "status": "DEFINED",
+            "value": 0.20408163265306123
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "n": 49,
+            "n_abstain": 0,
+            "status": "UNDEFINED_ZERO_DENOMINATOR",
+            "value": null
+          }
+        },
+        "BASE-CALIBRATED-MECHANISM-AWARE": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.7707579039068555,
+            "ci_low": 0.5131093521943979,
+            "k": 17,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.6530612244897959,
+            "status": "DEFINED",
+            "value": 0.34693877551020413
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.7707579039068555,
+            "ci_low": 0.5131093521943979,
+            "k": 32,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.6530612244897959,
+            "status": "DEFINED",
+            "value": 0.6530612244897959
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.9944622826374491,
+            "ci_low": 0.8425539219962727,
+            "k": 31,
+            "method": "wilson",
+            "n": 32,
+            "n_resolved": 32,
+            "point": 0.96875,
+            "status": "DEFINED",
+            "value": 0.96875
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.15744607800372734,
+            "ci_low": 0.005537717362550945,
+            "k": 1,
+            "method": "wilson",
+            "n": 32,
+            "n_answered": 32,
+            "point": 0.03125,
+            "status": "DEFINED",
+            "value": 0.03125
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.6903710268845051,
+            "ci_low": 0.26164801196088106,
+            "k": 8,
+            "method": "wilson",
+            "n": 17,
+            "n_abstain": 17,
+            "point": 0.47058823529411764,
+            "status": "DEFINED",
+            "value": 0.47058823529411764
+          }
+        },
+        "BASE-GENERIC-POLICY": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.07270029673590504,
+            "ci_low": 0.0,
+            "k": 49,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.07270029673590504,
+            "ci_low": 0.0,
+            "k": 0,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "n_resolved": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-SELECTIVE-RISK": {
+            "n": 49,
+            "n_answered": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.885182729571862,
+            "ci_low": 0.6636272988905616,
+            "k": 39,
+            "method": "wilson",
+            "n": 49,
+            "n_abstain": 49,
+            "point": 0.7959183673469388,
+            "status": "DEFINED",
+            "value": 0.7959183673469388
+          }
+        },
+        "CTRL-RANDOM-POLICY": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.6814737507036366,
+            "ci_low": 0.41314866799678107,
+            "k": 22,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.5510204081632653,
+            "status": "DEFINED",
+            "value": 0.44897959183673475
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.6814737507036366,
+            "ci_low": 0.41314866799678107,
+            "k": 27,
+            "method": "wilson",
+            "n": 49,
+            "point": 0.5510204081632653,
+            "status": "DEFINED",
+            "value": 0.5510204081632653
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.9408416814035512,
+            "ci_low": 0.6752093665317052,
+            "k": 23,
+            "method": "wilson",
+            "n": 27,
+            "n_resolved": 27,
+            "point": 0.8518518518518519,
+            "status": "DEFINED",
+            "value": 0.8518518518518519
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.32479063346829484,
+            "ci_low": 0.059158318596448906,
+            "k": 4,
+            "method": "wilson",
+            "n": 27,
+            "n_answered": 27,
+            "point": 0.14814814814814814,
+            "status": "DEFINED",
+            "value": 0.14814814814814814
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.8684941798418556,
+            "ci_low": 0.5184787630099802,
+            "k": 16,
+            "method": "wilson",
+            "n": 22,
+            "n_abstain": 22,
+            "point": 0.7272727272727273,
+            "status": "DEFINED",
+            "value": 0.7272727272727273
+          }
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "SIMULATED_POLICY_EVALUATION: no realized ABSTAIN-decision or RETRY-triggered episodes exist in the ingested raw sources (dataset by_decision_type has no ABSTAIN/RETRY key) -- this is a post-hoc policy simulation over agent_output.is_correct, never an evaluation of a real, executed abstention policy.",
+        "RETRY is not a legitimate decision for this family per design principle.",
+        "n_test=49 < minimum_sample_requirement=300: UNDERPOWERED/DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-ABSTENTION-RATE": {
+          "ci_high": 0.7707579039068555,
+          "ci_low": 0.5131093521943979,
+          "k": 17,
+          "method": "wilson",
+          "n": 49,
+          "point": 0.6530612244897959,
+          "status": "DEFINED",
+          "value": 0.34693877551020413
+        },
+        "MET-COVERAGE": {
+          "ci_high": 0.7707579039068555,
+          "ci_low": 0.5131093521943979,
+          "k": 32,
+          "method": "wilson",
+          "n": 49,
+          "point": 0.6530612244897959,
+          "status": "DEFINED",
+          "value": 0.6530612244897959
+        },
+        "MET-FINAL-CORRECTNESS": {
+          "ci_high": 0.9944622826374491,
+          "ci_low": 0.8425539219962727,
+          "k": 31,
+          "method": "wilson",
+          "n": 32,
+          "n_resolved": 32,
+          "point": 0.96875,
+          "status": "DEFINED",
+          "value": 0.96875
+        },
+        "MET-SELECTIVE-RISK": {
+          "ci_high": 0.15744607800372734,
+          "ci_low": 0.005537717362550945,
+          "k": 1,
+          "method": "wilson",
+          "n": 32,
+          "n_answered": 32,
+          "point": 0.03125,
+          "status": "DEFINED",
+          "value": 0.03125
+        },
+        "MET-UNNECESSARY-ABSTENTION": {
+          "ci_high": 0.6903710268845051,
+          "ci_low": 0.26164801196088106,
+          "k": 8,
+          "method": "wilson",
+          "n": 17,
+          "n_abstain": 17,
+          "point": 0.47058823529411764,
+          "status": "DEFINED",
+          "value": 0.47058823529411764
+        },
+        "policy_evaluated": "BASE-CALIBRATED-MECHANISM-AWARE"
+      },
+      "provenance": {
+        "calibrated_threshold_fit_on": "calibration_validation",
+        "calibrated_threshold_value": 0.9433644240962344,
+        "n_calibration_validation": 68,
+        "n_test": 49,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": "extractive_qa_span_logit",
+          "track_filter": "agent_task"
+        }
+      },
+      "sample_count": 49,
+      "split": "test",
+      "status": "SIMULATED_POLICY_EVALUATION",
+      "task_id": "ABST-QA",
+      "track": "abstention"
+    },
+    "ABST-SENT": {
+      "baseline_results": {
+        "BASE-ALWAYS-ABSTAIN": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.03287870073672391,
+            "ci_low": 0.0,
+            "k": 113,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.03287870073672391,
+            "ci_low": 0.0,
+            "k": 0,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "n_resolved": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-SELECTIVE-RISK": {
+            "n": 113,
+            "n_answered": 0,
+            "status": "UNDEFINED_ZERO_COVERAGE",
+            "value": null
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.9247460904145407,
+            "ci_low": 0.8027345329250918,
+            "k": 99,
+            "method": "wilson",
+            "n": 113,
+            "n_abstain": 113,
+            "point": 0.8761061946902655,
+            "status": "DEFINED",
+            "value": 0.8761061946902655
+          },
+          "flag": "ALWAYS_ABSTAIN_NOT_SUCCESSFUL",
+          "note": "Trivially zero selective risk at coverage=0 -- explicitly NOT a success per design principle."
+        },
+        "BASE-ALWAYS-ANSWER": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 1.0,
+            "ci_low": 0.9671212992632762,
+            "k": 0,
+            "method": "wilson",
+            "n": 113,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 0.0
+          },
+          "MET-COVERAGE": {
+            "ci_high": 1.0,
+            "ci_low": 0.9671212992632762,
+            "k": 113,
+            "method": "wilson",
+            "n": 113,
+            "point": 1.0,
+            "status": "DEFINED",
+            "value": 1.0
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.9247460904145407,
+            "ci_low": 0.8027345329250918,
+            "k": 99,
+            "method": "wilson",
+            "n": 113,
+            "n_resolved": 113,
+            "point": 0.8761061946902655,
+            "status": "DEFINED",
+            "value": 0.8761061946902655
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.19726546707490825,
+            "ci_low": 0.07525390958545933,
+            "k": 14,
+            "method": "wilson",
+            "n": 113,
+            "n_answered": 113,
+            "point": 0.12389380530973451,
+            "status": "DEFINED",
+            "value": 0.12389380530973451
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "n": 113,
+            "n_abstain": 0,
+            "status": "UNDEFINED_ZERO_DENOMINATOR",
+            "value": null
+          }
+        },
+        "BASE-CALIBRATED-MECHANISM-AWARE": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.2176814866430995,
+            "ci_low": 0.08907227229207428,
+            "k": 97,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.1415929203539823,
+            "status": "DEFINED",
+            "value": 0.8584070796460177
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.2176814866430995,
+            "ci_low": 0.08907227229207428,
+            "k": 16,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.1415929203539823,
+            "status": "DEFINED",
+            "value": 0.1415929203539823
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.8583556494803894,
+            "ci_low": 0.4440393186673406,
+            "k": 11,
+            "method": "wilson",
+            "n": 16,
+            "n_resolved": 16,
+            "point": 0.6875,
+            "status": "DEFINED",
+            "value": 0.6875
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.5559606813326594,
+            "ci_low": 0.14164435051961052,
+            "k": 5,
+            "method": "wilson",
+            "n": 16,
+            "n_answered": 16,
+            "point": 0.3125,
+            "status": "DEFINED",
+            "value": 0.3125
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.9504173433565841,
+            "ci_low": 0.8329895046109212,
+            "k": 88,
+            "method": "wilson",
+            "n": 97,
+            "n_abstain": 97,
+            "point": 0.9072164948453608,
+            "status": "DEFINED",
+            "value": 0.9072164948453608
+          }
+        },
+        "BASE-GENERIC-POLICY": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.2176814866430995,
+            "ci_low": 0.08907227229207428,
+            "k": 97,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.1415929203539823,
+            "status": "DEFINED",
+            "value": 0.8584070796460177
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.2176814866430995,
+            "ci_low": 0.08907227229207428,
+            "k": 16,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.1415929203539823,
+            "status": "DEFINED",
+            "value": 0.1415929203539823
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.8583556494803894,
+            "ci_low": 0.4440393186673406,
+            "k": 11,
+            "method": "wilson",
+            "n": 16,
+            "n_resolved": 16,
+            "point": 0.6875,
+            "status": "DEFINED",
+            "value": 0.6875
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.5559606813326594,
+            "ci_low": 0.14164435051961052,
+            "k": 5,
+            "method": "wilson",
+            "n": 16,
+            "n_answered": 16,
+            "point": 0.3125,
+            "status": "DEFINED",
+            "value": 0.3125
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.9504173433565841,
+            "ci_low": 0.8329895046109212,
+            "k": 88,
+            "method": "wilson",
+            "n": 97,
+            "n_abstain": 97,
+            "point": 0.9072164948453608,
+            "status": "DEFINED",
+            "value": 0.9072164948453608
+          }
+        },
+        "CTRL-RANDOM-POLICY": {
+          "MET-ABSTENTION-RATE": {
+            "ci_high": 0.6457111861881296,
+            "ci_low": 0.46555055620499053,
+            "k": 50,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.5575221238938053,
+            "status": "DEFINED",
+            "value": 0.4424778761061947
+          },
+          "MET-COVERAGE": {
+            "ci_high": 0.6457111861881296,
+            "ci_low": 0.46555055620499053,
+            "k": 63,
+            "method": "wilson",
+            "n": 113,
+            "point": 0.5575221238938053,
+            "status": "DEFINED",
+            "value": 0.5575221238938053
+          },
+          "MET-FINAL-CORRECTNESS": {
+            "ci_high": 0.9229813859202495,
+            "ci_low": 0.7502520495450894,
+            "k": 54,
+            "method": "wilson",
+            "n": 63,
+            "n_resolved": 63,
+            "point": 0.8571428571428571,
+            "status": "DEFINED",
+            "value": 0.8571428571428571
+          },
+          "MET-SELECTIVE-RISK": {
+            "ci_high": 0.24974795045491055,
+            "ci_low": 0.07701861407975047,
+            "k": 9,
+            "method": "wilson",
+            "n": 63,
+            "n_answered": 63,
+            "point": 0.14285714285714285,
+            "status": "DEFINED",
+            "value": 0.14285714285714285
+          },
+          "MET-UNNECESSARY-ABSTENTION": {
+            "ci_high": 0.956524876008429,
+            "ci_low": 0.7863950966521162,
+            "k": 45,
+            "method": "wilson",
+            "n": 50,
+            "n_abstain": 50,
+            "point": 0.9,
+            "status": "DEFINED",
+            "value": 0.9
+          }
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "SIMULATED_POLICY_EVALUATION: no realized ABSTAIN-decision or RETRY-triggered episodes exist in the ingested raw sources (dataset by_decision_type has no ABSTAIN/RETRY key) -- this is a post-hoc policy simulation over agent_output.is_correct, never an evaluation of a real, executed abstention policy.",
+        "RETRY is not a legitimate decision for this family per design principle.",
+        "n_test=113 < minimum_sample_requirement=300: UNDERPOWERED/DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-ABSTENTION-RATE": {
+          "ci_high": 0.2176814866430995,
+          "ci_low": 0.08907227229207428,
+          "k": 97,
+          "method": "wilson",
+          "n": 113,
+          "point": 0.1415929203539823,
+          "status": "DEFINED",
+          "value": 0.8584070796460177
+        },
+        "MET-COVERAGE": {
+          "ci_high": 0.2176814866430995,
+          "ci_low": 0.08907227229207428,
+          "k": 16,
+          "method": "wilson",
+          "n": 113,
+          "point": 0.1415929203539823,
+          "status": "DEFINED",
+          "value": 0.1415929203539823
+        },
+        "MET-FINAL-CORRECTNESS": {
+          "ci_high": 0.8583556494803894,
+          "ci_low": 0.4440393186673406,
+          "k": 11,
+          "method": "wilson",
+          "n": 16,
+          "n_resolved": 16,
+          "point": 0.6875,
+          "status": "DEFINED",
+          "value": 0.6875
+        },
+        "MET-SELECTIVE-RISK": {
+          "ci_high": 0.5559606813326594,
+          "ci_low": 0.14164435051961052,
+          "k": 5,
+          "method": "wilson",
+          "n": 16,
+          "n_answered": 16,
+          "point": 0.3125,
+          "status": "DEFINED",
+          "value": 0.3125
+        },
+        "MET-UNNECESSARY-ABSTENTION": {
+          "ci_high": 0.9504173433565841,
+          "ci_low": 0.8329895046109212,
+          "k": 88,
+          "method": "wilson",
+          "n": 97,
+          "n_abstain": 97,
+          "point": 0.9072164948453608,
+          "status": "DEFINED",
+          "value": 0.9072164948453608
+        },
+        "policy_evaluated": "BASE-CALIBRATED-MECHANISM-AWARE"
+      },
+      "provenance": {
+        "calibrated_threshold_fit_on": "calibration_validation",
+        "calibrated_threshold_value": 0.9997465404740069,
+        "n_calibration_validation": 94,
+        "n_test": 113,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": "sentiment_softmax_margin",
+          "track_filter": "agent_task"
+        }
+      },
+      "sample_count": 113,
+      "split": "test",
+      "status": "SIMULATED_POLICY_EVALUATION",
+      "task_id": "ABST-SENT",
+      "track": "abstention"
+    },
+    "DIAG-EVAL": {
+      "baseline_results": {
+        "BASE-GENERIC-POLICY": {
+          "ci_high": 0.5366335951197893,
+          "ci_low": 0.23165607368891059,
+          "k": 13,
+          "method": "wilson",
+          "n": 35,
+          "point": 0.37142857142857144,
+          "status": "DEFINED",
+          "value": 0.37142857142857144
+        },
+        "BASE-RANDOM": {
+          "method": "uniform_random_over_observed_classes",
+          "status": "DEFINED",
+          "value": 0.25
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "causal_status=CAUSAL_GROUND_TRUTH_UNAVAILABLE for all records in this dataset (no independently-verified root cause distinct from failure_class exists); only failure-class match, UNKNOWN handling, and temporal integrity are scored.",
+        "failure_class=NETWORK_FAILURE: n=11 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY.",
+        "failure_class=GENERIC_FAIL: n=13 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY.",
+        "failure_class=PROCESS_OOM: n=10 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY.",
+        "failure_class=PROCESS_TIMEOUT_CPU: n=1 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-CONTRADICTION-HANDLING": {
+          "reason": "No contradiction-labeled cases identifiable from current schema fields.",
+          "status": "LIMITED",
+          "value": null
+        },
+        "MET-EVIDENCE-CORRECTNESS": {
+          "reason": "All diagnosis records derive from current-run-only fields per dataset construction; no cross-run evidence field is present to violate.",
+          "status": "DEFINED",
+          "value": 1.0
+        },
+        "MET-FAILURE-CLASS-ACCURACY": {
+          "ci_high": 1.0,
+          "ci_low": 0.9010957324106112,
+          "k": 35,
+          "method": "wilson",
+          "n": 35,
+          "point": 1.0,
+          "status": "DEFINED",
+          "value": 1.0
+        },
+        "MET-FALSE-CAUSAL-ATTRIBUTION-RATE": {
+          "ci_high": 1.0,
+          "ci_low": 0.9010957324106112,
+          "k": 35,
+          "method": "wilson",
+          "n": 35,
+          "point": 1.0,
+          "status": "DEFINED",
+          "value": 1.0
+        },
+        "MET-TEMPORAL-INTEGRITY": {
+          "ci_high": 1.0,
+          "ci_low": 0.9010957324106112,
+          "k": 35,
+          "method": "wilson",
+          "n": 35,
+          "point": 1.0,
+          "status": "DEFINED",
+          "value": 1.0
+        },
+        "MET-UNKNOWN-HANDLING": {
+          "ci_high": 0.09890426758938868,
+          "ci_low": 0.0,
+          "k": 0,
+          "method": "wilson",
+          "n": 35,
+          "point": 0.0,
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "MET-UNSUPPORTED-CAUSE-RATE": {
+          "reason": "No independent re-inspection evidence available to assess whether cited evidence supports the stated cause.",
+          "status": "LIMITED",
+          "value": null
+        },
+        "causal_status": "CAUSAL_GROUND_TRUTH_UNAVAILABLE",
+        "per_failure_class": {
+          "GENERIC_FAIL": {
+            "match_rate": 1.0,
+            "n": 13,
+            "status": "UNDERPOWERED"
+          },
+          "NETWORK_FAILURE": {
+            "match_rate": 1.0,
+            "n": 11,
+            "status": "UNDERPOWERED"
+          },
+          "PROCESS_OOM": {
+            "match_rate": 1.0,
+            "n": 10,
+            "status": "UNDERPOWERED"
+          },
+          "PROCESS_TIMEOUT_CPU": {
+            "match_rate": 1.0,
+            "n": 1,
+            "status": "UNDERPOWERED"
+          }
+        }
+      },
+      "provenance": {
+        "n": 35,
+        "source_record_selector": {
+          "additional_predicate": "diagnosis field present",
+          "failure_class_filter": "not NONE",
+          "task_family_filter": null,
+          "track_filter": "controlled_runtime"
+        }
+      },
+      "sample_count": 35,
+      "split": "all_matching (controlled_runtime, failure_class != NONE)",
+      "status": "COMPLETED",
+      "task_id": "DIAG-EVAL",
+      "track": "diagnosis"
+    },
+    "E2E-EVAL": {
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "Full end-to-end coverage limited to n=46 controlled_runtime records; agent_task records (3,060) do not exercise diagnosis/recovery/memory stages and are excluded from this task.",
+        "Component metrics (diagnosis, recovery) are reported jointly below specifically so a strong or weak end-to-end number cannot mask a disqualified/underpowered component result."
+      ],
+      "metrics": {
+        "MET-END-TO-END-RECOVERY-RATE": {
+          "ci_high": 0.07707617732978073,
+          "ci_low": 0.0,
+          "k": 0,
+          "method": "wilson",
+          "n": 46,
+          "point": 0.0,
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "MET-END-TO-END-UNSAFE-ACTION-RATE": {
+          "ci_high": 0.07707617732978073,
+          "ci_low": 0.0,
+          "k": 0,
+          "method": "wilson",
+          "n": 46,
+          "point": 0.0,
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "MET-REPRODUCIBILITY-INDICATOR": {
+          "status": "SEE_DETERMINISM_TEST",
+          "value": null
+        },
+        "complete_chain_count": 35,
+        "component_metrics": {
+          "diagnosis": {
+            "MET-FAILURE-CLASS-ACCURACY": {
+              "ci_high": 1.0,
+              "ci_low": 0.9010957324106112,
+              "k": 35,
+              "method": "wilson",
+              "n": 35,
+              "point": 1.0,
+              "status": "DEFINED",
+              "value": 1.0
+            },
+            "status": "COMPLETED"
+          },
+          "recovery": {
+            "MET-RECOVERY-SUCCESS-RATE": {
+              "ci_high": 0.09890426758938868,
+              "ci_low": 0.0,
+              "k": 0,
+              "method": "wilson",
+              "n": 35,
+              "point": 0.0,
+              "status": "DEFINED",
+              "value": 0.0
+            },
+            "status": "COMPLETED"
+          }
+        },
+        "masking_failure_check": "no masking pattern detected"
+      },
+      "provenance": {
+        "n": 46,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": null,
+          "track_filter": "controlled_runtime"
+        }
+      },
+      "sample_count": 46,
+      "split": "all_matching (controlled_runtime)",
+      "status": "LIMITED",
+      "task_id": "E2E-EVAL",
+      "track": "end_to_end"
+    },
+    "GEN-OPERATING-POINT-CONTRACT": {
+      "aggregate_reference_evidence": {
+        "finding": "ranking transfers; the fixed operating point does not",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Phase 4 OOM environment generalization; not per-episode canonical records"
+      },
+      "available_evidence": [
+        "1 distinct environment_id value(s) in canonical dataset: ['UNSPECIFIED_PRE_4_9']"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "Same as GEN-RANKING-CONTRACT: single-environment dataset. NOT_EVALUABLE today; CONTRACT for future data."
+      ],
+      "metrics": null,
+      "reason": "Same as GEN-RANKING-CONTRACT: single-environment dataset. NOT_EVALUABLE today; CONTRACT for future data.",
+      "required_evidence": [
+        "pre-failure telemetry, same threshold fit only on development"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "GEN-OPERATING-POINT-CONTRACT",
+      "track": "generalization"
+    },
+    "GEN-RANKING-CONTRACT": {
+      "aggregate_reference_evidence": {
+        "oom_auroc_development": 0.989,
+        "oom_auroc_held_out": 0.983,
+        "oom_auroc_robustness": 0.935,
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Phase 4.9/post-P5 environment results; not per-episode canonical records"
+      },
+      "available_evidence": [
+        "1 distinct environment_id value(s) in canonical dataset: ['UNSPECIFIED_PRE_4_9']"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "CRITICAL, STATED PLAINLY: the current Phase 5.2 canonical dataset has only ONE represented environment (identity.environment_id == 'UNSPECIFIED_PRE_4_9' for all 3,106 records, dataset_statistics.json 'environments': 1, split_audit.json environment_axis_check status DISCLOSED_LIMITATION_NOT_APPLICABLE). A full environment-generalization benchmark task is NOT_EVALUABLE from this dataset as it stands. This task_id exists as a CONTRACT for future/derived environment-aware evaluation: it specifies exactly what a future dataset extension would need (a genuine per-episode Phase-4.9 EnvironmentId field distinguishing baseline_cpu / memory_constrained / dependency_network_constrained, joined back to individual records) without inventing that evidence now. Phase 4's own environment-generalization evidence (the 0.989/0.983/0.935 OOM numbers) is NOT lost \u2014 it is preserved as aggregate PUBLIC_METADATA in docs/MASTER_RECORD_CONTENT.md and the post_p5_remediation aggregate artifacts; it is simply not present as per-episode canonical dataset records."
+      ],
+      "metrics": null,
+      "reason": "CRITICAL, STATED PLAINLY: the current Phase 5.2 canonical dataset has only ONE represented environment (identity.environment_id == 'UNSPECIFIED_PRE_4_9' for all 3,106 records, dataset_statistics.json 'environments': 1, split_audit.json environment_axis_check status DISCLOSED_LIMITATION_NOT_APPLICABLE). A full environment-generalization benchmark task is NOT_EVALUABLE from this dataset as it stands. This task_id exists as a CONTRACT for future/derived environment-aware evaluation: it specifies exactly what a future dataset extension would need (a genuine per-episode Phase-4.9 EnvironmentId field distinguishing baseline_cpu / memory_constrained / dependency_network_constrained, joined back to individual records) without inventing that evidence now. Phase 4's own environment-generalization evidence (the 0.989/0.983/0.935 OOM numbers) is NOT lost \u2014 it is preserved as aggregate PUBLIC_METADATA in docs/MASTER_RECORD_CONTENT.md and the post_p5_remediation aggregate artifacts; it is simply not present as per-episode canonical dataset records.",
+      "required_evidence": [
+        "pre-failure telemetry within the environment being evaluated, zero-shot for held_out/robustness"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "GEN-RANKING-CONTRACT",
+      "track": "generalization"
+    },
+    "MEM-EVAL": {
+      "aggregate_reference_evidence": {
+        "finding": "Step 6 repeated-incident: memory ON retry->retry->reconfigure->recovered vs memory OFF retry x6",
+        "grade": "A",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Step 6 experiment; canonical dataset lacks repeated-workload_id structure"
+      },
+      "available_evidence": [
+        "1 workload_ids appear more than once across 3106 records"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "The canonical Phase 5.2 dataset (3,106 records, 3,104 distinct workload_ids across 3,106 workloads/runs) has essentially no repeated workload_id structure \u2014 dataset_statistics.json shows workloads=3104 for episodes=3106, i.e. at most 2 records share a workload_id anywhere in the dataset, and none of those are documented as the deliberate repeated-incident design. The only evidence source that actually exercises repeated-incident structure is the Step 6 experiment, which produced aggregate results without per-episode identity retained in this construction (PHASE5_1_SPLIT_POLICY.md \u00a76 explicitly disclosed this gap for the related Phase 4.10 run; the same gap applies here). This task is NOT_EVALUABLE from the current canonical dataset at any real scale; it is a CONTRACT for a future dataset extension that ingests the Step 6 experiment's per-episode identity, which does not currently exist as ingestable per-record evidence."
+      ],
+      "metrics": null,
+      "reason": "The canonical Phase 5.2 dataset (3,106 records, 3,104 distinct workload_ids across 3,106 workloads/runs) has essentially no repeated workload_id structure \u2014 dataset_statistics.json shows workloads=3104 for episodes=3106, i.e. at most 2 records share a workload_id anywhere in the dataset, and none of those are documented as the deliberate repeated-incident design. The only evidence source that actually exercises repeated-incident structure is the Step 6 experiment, which produced aggregate results without per-episode identity retained in this construction (PHASE5_1_SPLIT_POLICY.md \u00a76 explicitly disclosed this gap for the related Phase 4.10 run; the same gap applies here). This task is NOT_EVALUABLE from the current canonical dataset at any real scale; it is a CONTRACT for a future dataset extension that ingests the Step 6 experiment's per-episode identity, which does not currently exist as ingestable per-record evidence.",
+      "repeated_workload_id_count": 1,
+      "required_evidence": [
+        "memory reads respecting at_or_before boundary, source_run_id != exclude_run_id"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "MEM-EVAL",
+      "track": "memory"
+    },
+    "PRED-CPU": {
+      "aggregate_reference_evidence": {
+        "false_alarm_rate": 1.0,
+        "grade": "D",
+        "pattern": "always_fires",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Phase 4; dataset has n=1 PROCESS_TIMEOUT_CPU",
+        "status_of_this_field": "AGGREGATE_REFERENCE_EVIDENCE",
+        "verdict": "NOT_VALIDATED"
+      },
+      "available_evidence": [
+        "1 matching per-episode records (below minimum_sample_requirement)"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "Dataset has exactly 1 PROCESS_TIMEOUT_CPU per-episode record (dataset_statistics.json by_failure_class) \u2014 far below any usable sample size. NOT_EVALUABLE at scale from the current dataset; the NOT_VALIDATED verdict remains valid PUBLIC_METADATA from aggregate Phase 4 evidence only."
+      ],
+      "metrics": null,
+      "reason": "Dataset has exactly 1 PROCESS_TIMEOUT_CPU per-episode record (dataset_statistics.json by_failure_class) \u2014 far below any usable sample size. NOT_EVALUABLE at scale from the current dataset; the NOT_VALIDATED verdict remains valid PUBLIC_METADATA from aggregate Phase 4 evidence only.",
+      "required_evidence": [
+        "pre-failure CPU telemetry"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-CPU",
+      "track": "failure_prediction"
+    },
+    "PRED-FLAKY": {
+      "aggregate_reference_evidence": {
+        "grade": "D",
+        "pattern": "near_chance_and_or_always_fires",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Phase 4; no dedicated flaky label; GENERIC_FAIL n=13, NETWORK_FAILURE n=11",
+        "status_of_this_field": "AGGREGATE_REFERENCE_EVIDENCE",
+        "verdict": "NOT_VALIDATED"
+      },
+      "available_evidence": [
+        "24 matching per-episode records (below minimum_sample_requirement)"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "Dataset has 13 GENERIC_FAIL and 11 NETWORK_FAILURE per-episode records (dataset_statistics.json), below the 300-sample minimum and without a dedicated 'flaky' label distinct from these two Phase-5.2 failure classes. NOT_EVALUABLE at scale from current dataset."
+      ],
+      "metrics": null,
+      "reason": "Dataset has 13 GENERIC_FAIL and 11 NETWORK_FAILURE per-episode records (dataset_statistics.json), below the 300-sample minimum and without a dedicated 'flaky' label distinct from these two Phase-5.2 failure classes. NOT_EVALUABLE at scale from current dataset.",
+      "required_evidence": [
+        "pre-failure telemetry"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-FLAKY",
+      "track": "failure_prediction"
+    },
+    "PRED-OOM": {
+      "aggregate_reference_evidence": {
+        "auroc_aggregate": 0.78,
+        "auroc_aggregate_ci_halfwidth": 0.096,
+        "false_alarm_rate_operating_point": 1.0,
+        "grade": "C\u2192D, final",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate post_p5_remediation_followups; 10 PROCESS_OOM records cannot reconstruct this",
+        "shuffled_auroc_aggregate": 0.625,
+        "specificity_operating_point": 0.179,
+        "status_of_this_field": "AGGREGATE_REFERENCE_EVIDENCE",
+        "verdict": "RANKING_SIGNAL_BUT_OPERATIONALLY_INVALID"
+      },
+      "available_evidence": [
+        "10 matching per-episode records (below minimum_sample_requirement)"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "Dataset has 10 PROCESS_OOM per-episode records (dataset_statistics.json), insufficient (below the 300-sample minimum) and lacking the per-episode observability-sample-count field needed to reconstruct the \u22652-sample subset distinction. The AUROC 0.780 verdict is aggregate-only evidence (post_p5_remediation_followups), not re-derivable from the current 10 per-episode records. Task is NOT_EVALUABLE at scale from the current canonical dataset; usable only as a documented aggregate finding (PUBLIC_METADATA)."
+      ],
+      "metrics": null,
+      "reason": "Dataset has 10 PROCESS_OOM per-episode records (dataset_statistics.json), insufficient (below the 300-sample minimum) and lacking the per-episode observability-sample-count field needed to reconstruct the \u22652-sample subset distinction. The AUROC 0.780 verdict is aggregate-only evidence (post_p5_remediation_followups), not re-derivable from the current 10 per-episode records. Task is NOT_EVALUABLE at scale from the current canonical dataset; usable only as a documented aggregate finding (PUBLIC_METADATA).",
+      "required_evidence": [
+        "pre-failure telemetry available at or before failure_detected_time, restricted to the \u22652-observability-sample subset where defined"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-OOM",
+      "track": "failure_prediction"
+    },
+    "PRED-RESOURCE-UNAVAILABLE": {
+      "aggregate_reference_evidence": {
+        "grade": "A",
+        "record_level_status": "NOT_EVALUABLE",
+        "scope": "aggregate Phase 4 pre-flight mechanism; no per-episode join key in Phase 5.2",
+        "status_of_this_field": "AGGREGATE_REFERENCE_EVIDENCE",
+        "verdict": "STRONG_EVIDENCE"
+      },
+      "available_evidence": [
+        "0 matching per-episode records (below minimum_sample_requirement)"
+      ],
+      "baseline_results": null,
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_coverage_status": "UNSUPPORTED_CONTRACT_ONLY",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "eligibility_status": "NOT_EVALUABLE",
+      "limitations": [
+        "This dataset (Phase 5.2, 3,106 records) has only 10 PROCESS_OOM and 0 resource_unavailable-labeled per-episode records with retained identity (dataset_statistics.json by_failure_class has no resource_unavailable key at all) \u2014 the STRONG_EVIDENCE verdict lives entirely in aggregate Phase 4 evaluation artifacts with no per-episode join key (PHASE5_2_DATASET_CONSTRUCTION_REPORT.md \u00a71, sources 'inspected but NOT ingested'). This task is therefore NOT_EVALUABLE as a record-level benchmark task from the current canonical dataset; the grade-A finding remains valid PUBLIC_METADATA (a documented aggregate result), not a re-runnable per-episode benchmark task today."
+      ],
+      "metrics": null,
+      "reason": "This dataset (Phase 5.2, 3,106 records) has only 10 PROCESS_OOM and 0 resource_unavailable-labeled per-episode records with retained identity (dataset_statistics.json by_failure_class has no resource_unavailable key at all) \u2014 the STRONG_EVIDENCE verdict lives entirely in aggregate Phase 4 evaluation artifacts with no per-episode join key (PHASE5_2_DATASET_CONSTRUCTION_REPORT.md \u00a71, sources 'inspected but NOT ingested'). This task is therefore NOT_EVALUABLE as a record-level benchmark task from the current canonical dataset; the grade-A finding remains valid PUBLIC_METADATA (a documented aggregate result), not a re-runnable per-episode benchmark task today.",
+      "required_evidence": [
+        "pre-flight resource-availability check output, strictly before failure_detected_time"
+      ],
+      "sample_count": 0,
+      "status": "NOT_EVALUABLE",
+      "task_id": "PRED-RESOURCE-UNAVAILABLE",
+      "track": "failure_prediction"
+    },
+    "REC-EVAL": {
+      "baseline_results": {
+        "BASE-GENERIC-POLICY": {
+          "note": "best-single-action-in-hindsight rate, naive non-adaptive baseline",
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "BASE-RANDOM": {
+          "status": "DEFINED",
+          "value": 0.3333333333333333
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "recovery.executor_self_report is retained only for discrepancy analysis (MET-VALIDATION-CORRECTNESS) and never substitutes for validation.validation_status as a label.",
+        "0% overall recovery_success_rate on this dataset (0 of 35 controlled_runtime failure episodes reach validation_status=RECOVERED; all are NOT_RECOVERED/UNKNOWN) is a genuine, valid negative result for this canonical dataset slice, not a benchmark defect.",
+        "action_type=RETRY: n=13 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY.",
+        "action_type=RESTART: n=12 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY.",
+        "action_type=RECONFIGURE: n=10 < 30: UNDERPOWERED/DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-ACTION-SELECTION-ACCURACY": {
+          "reason": "No independently-known best-action-per-failure-class efficacy ground truth is present in this dataset slice (n=46); the historical RECONFIGURE-vs-RETRY n=40-per-action comparison is aggregate/historical evidence, not re-derivable at that scale here.",
+          "status": "LIMITED",
+          "value": null
+        },
+        "MET-RECOVERY-SUCCESS-RATE": {
+          "ci_high": 0.09890426758938868,
+          "ci_low": 0.0,
+          "k": 0,
+          "method": "wilson",
+          "n": 35,
+          "point": 0.0,
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "MET-UNNECESSARY-RECOVERY-RATE": {
+          "reason": "All 35 non-NONE failure_class records in this dataset have failure_detected=true (real subprocess exit semantics); no false-alarm-triggered recovery is identifiable.",
+          "status": "LIMITED",
+          "value": null
+        },
+        "MET-UNSAFE-ACTION-RATE": {
+          "ci_high": 0.09890426758938868,
+          "ci_low": 0.0,
+          "k": 0,
+          "method": "wilson",
+          "n": 35,
+          "point": 0.0,
+          "status": "DEFINED",
+          "value": 0.0
+        },
+        "MET-VALIDATION-CORRECTNESS": {
+          "ci_high": 0.9949386386341466,
+          "ci_low": 0.8546659090672868,
+          "k": 34,
+          "method": "wilson",
+          "n": 35,
+          "point": 0.9714285714285714,
+          "status": "DEFINED",
+          "value": 0.9714285714285714
+        },
+        "per_action_type": {
+          "RECONFIGURE": {
+            "n": 10,
+            "recovery_success_rate": 0.0,
+            "status": "UNDERPOWERED"
+          },
+          "RESTART": {
+            "n": 12,
+            "recovery_success_rate": 0.0,
+            "status": "UNDERPOWERED"
+          },
+          "RETRY": {
+            "n": 13,
+            "recovery_success_rate": 0.0,
+            "status": "UNDERPOWERED"
+          }
+        }
+      },
+      "provenance": {
+        "n": 35,
+        "source_record_selector": {
+          "additional_predicate": "recovery field present",
+          "failure_class_filter": "not NONE",
+          "task_family_filter": null,
+          "track_filter": "controlled_runtime"
+        }
+      },
+      "sample_count": 35,
+      "split": "all_matching (controlled_runtime, recovery field present)",
+      "status": "COMPLETED",
+      "task_id": "REC-EVAL",
+      "track": "recovery"
+    },
+    "UNC-ARITH": {
+      "baseline_results": {
+        "BASE-RANDOM": {
+          "n": 310,
+          "n_negative": 7,
+          "n_positive": 303,
+          "status": "DEFINED",
+          "value": 0.5917020273455917
+        },
+        "BASE-RAW-CONFIDENCE": {
+          "ci": {
+            "bootstrap_mean": 0.9543439634097254,
+            "bootstrap_std": 0.021949387825442545,
+            "ci_high": 0.9858629420084866,
+            "ci_low": 0.9055268428924256,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 1,
+            "n_resamples": 1000,
+            "point_estimate": 0.9552098066949551,
+            "seed": 20260826
+          },
+          "n": 310,
+          "n_negative": 7,
+          "n_positive": 303,
+          "status": "DEFINED",
+          "value": 0.9552098066949551
+        },
+        "CTRL-FEATURE-PERMUTATION": {
+          "n": 310,
+          "n_negative": 7,
+          "n_positive": 303,
+          "status": "DEFINED",
+          "value": 0.44884488448844884
+        },
+        "CTRL-SHUFFLED-LABEL": {
+          "n": 310,
+          "n_negative": 7,
+          "n_positive": 303,
+          "status": "DEFINED",
+          "value": 0.3859028760018859
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "Temperature scaling (T=0.2739) fit on calibration_validation (n=309); raw ECE=0.1967741935483872, calibrated ECE=0.08271192437813482, raw AUROC=0.9552098066949551, calibrated AUROC=0.9552098066949551 -- calibration is a monotonic rescaling and cannot change AUROC in principle; any numeric difference here reflects the finite-sample temperature fit, not a discrimination change.",
+        "n_test=310 < minimum_sample_requirement=500: DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-AUPRC": {
+          "ci": {
+            "bootstrap_mean": 0.9980984470605224,
+            "bootstrap_std": 0.0010474393620018,
+            "ci_high": 0.9996181522462357,
+            "ci_low": 0.9957337298713842,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 1,
+            "n_resamples": 1000,
+            "point_estimate": 0.9981079511984058,
+            "seed": 20260827
+          },
+          "n": 310,
+          "n_negative": 7,
+          "n_positive": 303,
+          "positive_base_rate": 0.9774193548387097,
+          "status": "DEFINED",
+          "value": 0.9981079511984058
+        },
+        "MET-AUROC": {
+          "ci": {
+            "bootstrap_mean": 0.9543439634097254,
+            "bootstrap_std": 0.021949387825442545,
+            "ci_high": 0.9858629420084866,
+            "ci_low": 0.9055268428924256,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 1,
+            "n_resamples": 1000,
+            "point_estimate": 0.9552098066949551,
+            "seed": 20260826
+          },
+          "n": 310,
+          "n_negative": 7,
+          "n_positive": 303,
+          "status": "DEFINED",
+          "value": 0.9552098066949551
+        },
+        "MET-BRIER": {
+          "ci": {
+            "bootstrap_mean": 0.075084,
+            "bootstrap_std": 0.005331353669767131,
+            "ci_high": 0.08606774193548386,
+            "ci_low": 0.06490322580645161,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.0752258064516129,
+            "seed": 20260828
+          },
+          "n": 310,
+          "status": "DEFINED",
+          "value": 0.0752258064516129
+        },
+        "MET-ECE": {
+          "binning": "equal_width_[0,1]",
+          "bins": [
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.1,
+              "lo": 0.0,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.2,
+              "lo": 0.1,
+              "mean_predicted": null
+            },
+            {
+              "count": 1,
+              "empirical_rate": 0.0,
+              "hi": 0.30000000000000004,
+              "lo": 0.2,
+              "mean_predicted": 0.2
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.4,
+              "lo": 0.30000000000000004,
+              "mean_predicted": null
+            },
+            {
+              "count": 23,
+              "empirical_rate": 0.782608695652174,
+              "hi": 0.5,
+              "lo": 0.4,
+              "mean_predicted": 0.40000000000000013
+            },
+            {
+              "count": 65,
+              "empirical_rate": 0.9846153846153847,
+              "hi": 0.6000000000000001,
+              "lo": 0.5,
+              "mean_predicted": 0.6
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.7000000000000001,
+              "lo": 0.6000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.8,
+              "lo": 0.7000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 135,
+              "empirical_rate": 1.0,
+              "hi": 0.9,
+              "lo": 0.8,
+              "mean_predicted": 0.7999999999999998
+            },
+            {
+              "count": 86,
+              "empirical_rate": 1.0,
+              "hi": 1.0,
+              "lo": 0.9,
+              "mean_predicted": 1.0
+            }
+          ],
+          "ci": {
+            "bootstrap_mean": 0.19686580645161292,
+            "bootstrap_std": 0.010971442089906277,
+            "ci_high": 0.2180806451612904,
+            "ci_low": 0.17609677419354833,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.1967741935483872,
+            "seed": 20260829
+          },
+          "n": 310,
+          "n_bins": 10,
+          "status": "DEFINED",
+          "value": 0.1967741935483872
+        },
+        "MET-RISK-COVERAGE": {
+          "curve": [
+            {
+              "coverage": 0.05,
+              "n": 16,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.1,
+              "n": 31,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.15,
+              "n": 46,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.2,
+              "n": 62,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.25,
+              "n": 78,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.3,
+              "n": 93,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.35,
+              "n": 108,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.4,
+              "n": 124,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.45,
+              "n": 140,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.5,
+              "n": 155,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.55,
+              "n": 170,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.6,
+              "n": 186,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.65,
+              "n": 202,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.7,
+              "n": 217,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.75,
+              "n": 232,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.8,
+              "n": 248,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.85,
+              "n": 264,
+              "selective_risk": 0.0037878787878787845
+            },
+            {
+              "coverage": 0.9,
+              "n": 279,
+              "selective_risk": 0.0035842293906810374
+            },
+            {
+              "coverage": 0.95,
+              "n": 294,
+              "selective_risk": 0.013605442176870763
+            },
+            {
+              "coverage": 1.0,
+              "n": 310,
+              "selective_risk": 0.022580645161290325
+            }
+          ],
+          "direction": "lower_is_better",
+          "n": 310,
+          "status": "DEFINED",
+          "summary": "AURC",
+          "value": 0.001698309101898724
+        },
+        "calibrated_ECE_from_calibration_validation_fit": {
+          "binning": "equal_width_[0,1]",
+          "bins": [
+            {
+              "count": 1,
+              "empirical_rate": 0.0,
+              "hi": 0.1,
+              "lo": 0.0,
+              "mean_predicted": 0.006293765008300761
+            },
+            {
+              "count": 23,
+              "empirical_rate": 0.782608695652174,
+              "hi": 0.2,
+              "lo": 0.1,
+              "mean_predicted": 0.18535105990697226
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.30000000000000004,
+              "lo": 0.2,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.4,
+              "lo": 0.30000000000000004,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.5,
+              "lo": 0.4,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.6000000000000001,
+              "lo": 0.5,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.7000000000000001,
+              "lo": 0.6000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.8,
+              "lo": 0.7000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 65,
+              "empirical_rate": 0.9846153846153847,
+              "hi": 0.9,
+              "lo": 0.8,
+              "mean_predicted": 0.8146489400930276
+            },
+            {
+              "count": 221,
+              "empirical_rate": 1.0,
+              "hi": 1.0,
+              "lo": 0.9,
+              "mean_predicted": 0.9961553924157437
+            }
+          ],
+          "n": 310,
+          "n_bins": 10,
+          "status": "DEFINED",
+          "value": 0.08271192437813482
+        }
+      },
+      "provenance": {
+        "n_calibration_validation": 309,
+        "n_test": 310,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": "arithmetic_self_consistency",
+          "track_filter": "agent_task"
+        }
+      },
+      "sample_count": 310,
+      "split": "test",
+      "status": "UNDERPOWERED",
+      "task_id": "UNC-ARITH",
+      "track": "uncertainty"
+    },
+    "UNC-QA": {
+      "baseline_results": {
+        "BASE-RANDOM": {
+          "n": 49,
+          "n_negative": 10,
+          "n_positive": 39,
+          "status": "DEFINED",
+          "value": 0.39743589743589747
+        },
+        "BASE-RAW-CONFIDENCE": {
+          "ci": {
+            "bootstrap_mean": 0.9375814989757105,
+            "bootstrap_std": 0.03481860108874239,
+            "ci_high": 0.9916812015503875,
+            "ci_low": 0.8603257103257105,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.9384615384615385,
+            "seed": 20260826
+          },
+          "n": 49,
+          "n_negative": 10,
+          "n_positive": 39,
+          "status": "DEFINED",
+          "value": 0.9384615384615385
+        },
+        "CTRL-FEATURE-PERMUTATION": {
+          "n": 49,
+          "n_negative": 10,
+          "n_positive": 39,
+          "status": "DEFINED",
+          "value": 0.5384615384615385
+        },
+        "CTRL-SHUFFLED-LABEL": {
+          "n": 49,
+          "n_negative": 10,
+          "n_positive": 39,
+          "status": "DEFINED",
+          "value": 0.441025641025641
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "Temperature scaling (T=0.9704) fit on calibration_validation (n=68); raw ECE=0.07543071613782164, calibrated ECE=0.07746974260115684, raw AUROC=0.9384615384615385, calibrated AUROC=0.9384615384615385 -- calibration is a monotonic rescaling and cannot change AUROC in principle; any numeric difference here reflects the finite-sample temperature fit, not a discrimination change.",
+        "n_test=49 < minimum_sample_requirement=300: DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-AUPRC": {
+          "ci": {
+            "bootstrap_mean": 0.985395863289674,
+            "bootstrap_std": 0.00924656117078443,
+            "ci_high": 0.9985596224780968,
+            "ci_low": 0.9623793819829242,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.9853393295372145,
+            "seed": 20260827
+          },
+          "n": 49,
+          "n_negative": 10,
+          "n_positive": 39,
+          "positive_base_rate": 0.7959183673469388,
+          "status": "DEFINED",
+          "value": 0.9853393295372145
+        },
+        "MET-AUROC": {
+          "ci": {
+            "bootstrap_mean": 0.9375814989757105,
+            "bootstrap_std": 0.03481860108874239,
+            "ci_high": 0.9916812015503875,
+            "ci_low": 0.8603257103257105,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.9384615384615385,
+            "seed": 20260826
+          },
+          "n": 49,
+          "n_negative": 10,
+          "n_positive": 39,
+          "status": "DEFINED",
+          "value": 0.9384615384615385
+        },
+        "MET-BRIER": {
+          "ci": {
+            "bootstrap_mean": 0.08397155239355884,
+            "bootstrap_std": 0.0294456519119209,
+            "ci_high": 0.14671809110040904,
+            "ci_low": 0.03361051116672241,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.08474296418510428,
+            "seed": 20260828
+          },
+          "n": 49,
+          "status": "DEFINED",
+          "value": 0.08474296418510428
+        },
+        "MET-ECE": {
+          "binning": "equal_width_[0,1]",
+          "bins": [
+            {
+              "count": 1,
+              "empirical_rate": 0.0,
+              "hi": 0.1,
+              "lo": 0.0,
+              "mean_predicted": 0.09568341746644116
+            },
+            {
+              "count": 3,
+              "empirical_rate": 0.3333333333333333,
+              "hi": 0.2,
+              "lo": 0.1,
+              "mean_predicted": 0.13153547657905604
+            },
+            {
+              "count": 3,
+              "empirical_rate": 0.3333333333333333,
+              "hi": 0.30000000000000004,
+              "lo": 0.2,
+              "mean_predicted": 0.23907668742886182
+            },
+            {
+              "count": 1,
+              "empirical_rate": 0.0,
+              "hi": 0.4,
+              "lo": 0.30000000000000004,
+              "mean_predicted": 0.3381385074830483
+            },
+            {
+              "count": 2,
+              "empirical_rate": 0.5,
+              "hi": 0.5,
+              "lo": 0.4,
+              "mean_predicted": 0.4568619741559363
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.6000000000000001,
+              "lo": 0.5,
+              "mean_predicted": null
+            },
+            {
+              "count": 1,
+              "empirical_rate": 1.0,
+              "hi": 0.7000000000000001,
+              "lo": 0.6000000000000001,
+              "mean_predicted": 0.6826497435152703
+            },
+            {
+              "count": 2,
+              "empirical_rate": 0.0,
+              "hi": 0.8,
+              "lo": 0.7000000000000001,
+              "mean_predicted": 0.7322984392854757
+            },
+            {
+              "count": 1,
+              "empirical_rate": 1.0,
+              "hi": 0.9,
+              "lo": 0.8,
+              "mean_predicted": 0.8014478510610559
+            },
+            {
+              "count": 35,
+              "empirical_rate": 0.9714285714285714,
+              "hi": 1.0,
+              "lo": 0.9,
+              "mean_predicted": 0.9802098377755649
+            }
+          ],
+          "ci": {
+            "bootstrap_mean": 0.10715327336742411,
+            "bootstrap_std": 0.033078663166424896,
+            "ci_high": 0.17738349059474517,
+            "ci_low": 0.050478324286078076,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.07543071613782164,
+            "seed": 20260829
+          },
+          "n": 49,
+          "n_bins": 10,
+          "status": "DEFINED",
+          "value": 0.07543071613782164
+        },
+        "MET-RISK-COVERAGE": {
+          "curve": [
+            {
+              "coverage": 0.05,
+              "n": 2,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.1,
+              "n": 5,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.15,
+              "n": 7,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.2,
+              "n": 10,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.25,
+              "n": 12,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.3,
+              "n": 15,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.35,
+              "n": 17,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.4,
+              "n": 20,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.45,
+              "n": 22,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.5,
+              "n": 24,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.55,
+              "n": 27,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.6,
+              "n": 29,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.65,
+              "n": 32,
+              "selective_risk": 0.03125
+            },
+            {
+              "coverage": 0.7,
+              "n": 34,
+              "selective_risk": 0.02941176470588236
+            },
+            {
+              "coverage": 0.75,
+              "n": 37,
+              "selective_risk": 0.05405405405405406
+            },
+            {
+              "coverage": 0.8,
+              "n": 39,
+              "selective_risk": 0.07692307692307687
+            },
+            {
+              "coverage": 0.85,
+              "n": 42,
+              "selective_risk": 0.11904761904761907
+            },
+            {
+              "coverage": 0.9,
+              "n": 44,
+              "selective_risk": 0.13636363636363635
+            },
+            {
+              "coverage": 0.95,
+              "n": 47,
+              "selective_risk": 0.19148936170212771
+            },
+            {
+              "coverage": 1.0,
+              "n": 49,
+              "selective_risk": 0.20408163265306123
+            }
+          ],
+          "direction": "lower_is_better",
+          "n": 49,
+          "status": "DEFINED",
+          "summary": "AURC",
+          "value": 0.03897791205910143
+        },
+        "calibrated_ECE_from_calibration_validation_fit": {
+          "binning": "equal_width_[0,1]",
+          "bins": [
+            {
+              "count": 1,
+              "empirical_rate": 0.0,
+              "hi": 0.1,
+              "lo": 0.0,
+              "mean_predicted": 0.08990764144894439
+            },
+            {
+              "count": 3,
+              "empirical_rate": 0.3333333333333333,
+              "hi": 0.2,
+              "lo": 0.1,
+              "mean_predicted": 0.125144839913831
+            },
+            {
+              "count": 3,
+              "empirical_rate": 0.3333333333333333,
+              "hi": 0.30000000000000004,
+              "lo": 0.2,
+              "mean_predicted": 0.23276653006204864
+            },
+            {
+              "count": 1,
+              "empirical_rate": 0.0,
+              "hi": 0.4,
+              "lo": 0.30000000000000004,
+              "mean_predicted": 0.3335614395713333
+            },
+            {
+              "count": 2,
+              "empirical_rate": 0.5,
+              "hi": 0.5,
+              "lo": 0.4,
+              "mean_predicted": 0.45556365824193235
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.6000000000000001,
+              "lo": 0.5,
+              "mean_predicted": null
+            },
+            {
+              "count": 1,
+              "empirical_rate": 1.0,
+              "hi": 0.7000000000000001,
+              "lo": 0.6000000000000001,
+              "mean_predicted": 0.6876980921372579
+            },
+            {
+              "count": 2,
+              "empirical_rate": 0.0,
+              "hi": 0.8,
+              "lo": 0.7000000000000001,
+              "mean_predicted": 0.7382439389457855
+            },
+            {
+              "count": 1,
+              "empirical_rate": 1.0,
+              "hi": 0.9,
+              "lo": 0.8,
+              "mean_predicted": 0.8081451157565691
+            },
+            {
+              "count": 35,
+              "empirical_rate": 0.9714285714285714,
+              "hi": 1.0,
+              "lo": 0.9,
+              "mean_predicted": 0.9821932875100048
+            }
+          ],
+          "n": 49,
+          "n_bins": 10,
+          "status": "DEFINED",
+          "value": 0.07746974260115684
+        }
+      },
+      "provenance": {
+        "n_calibration_validation": 68,
+        "n_test": 49,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": "extractive_qa_span_logit",
+          "track_filter": "agent_task"
+        }
+      },
+      "sample_count": 49,
+      "split": "test",
+      "status": "UNDERPOWERED",
+      "task_id": "UNC-QA",
+      "track": "uncertainty"
+    },
+    "UNC-SENT": {
+      "baseline_results": {
+        "BASE-RANDOM": {
+          "n": 113,
+          "n_negative": 14,
+          "n_positive": 99,
+          "status": "DEFINED",
+          "value": 0.5844155844155844
+        },
+        "BASE-RAW-CONFIDENCE": {
+          "ci": {
+            "bootstrap_mean": 0.436555014623788,
+            "bootstrap_std": 0.10724221171870706,
+            "ci_high": 0.6428571428571427,
+            "ci_low": 0.21648545090292662,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.4386724386724387,
+            "seed": 20260826
+          },
+          "n": 113,
+          "n_negative": 14,
+          "n_positive": 99,
+          "status": "DEFINED",
+          "value": 0.4386724386724387
+        },
+        "CTRL-FEATURE-PERMUTATION": {
+          "n": 113,
+          "n_negative": 14,
+          "n_positive": 99,
+          "status": "DEFINED",
+          "value": 0.42207792207792205
+        },
+        "CTRL-SHUFFLED-LABEL": {
+          "n": 113,
+          "n_negative": 14,
+          "n_positive": 99,
+          "status": "DEFINED",
+          "value": 0.5238095238095238
+        }
+      },
+      "benchmark_version": "phase5.3-benchmark-v1.0.0",
+      "dataset_version": "phase5.2-dataset-v1.0.0",
+      "limitations": [
+        "Temperature scaling (T=2.3136) fit on calibration_validation (n=94); raw ECE=0.12235910048036358, calibrated ECE=0.08443492936851578, raw AUROC=0.4386724386724387, calibrated AUROC=0.4386724386724387 -- calibration is a monotonic rescaling and cannot change AUROC in principle; any numeric difference here reflects the finite-sample temperature fit, not a discrimination change.",
+        "DISCLOSED, EXPECTED result for this family: AUROC ~0.66 (near-chance discrimination ceiling). Never reported as 'uncertainty mechanism validated' for sentiment.",
+        "n_test=113 < minimum_sample_requirement=300: DESCRIPTIVE_ONLY."
+      ],
+      "metrics": {
+        "MET-AUPRC": {
+          "ci": {
+            "bootstrap_mean": 0.8578742606990486,
+            "bootstrap_std": 0.042410888942935744,
+            "ci_high": 0.9386523711617966,
+            "ci_low": 0.7714318715115448,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.8554196348272579,
+            "seed": 20260827
+          },
+          "n": 113,
+          "n_negative": 14,
+          "n_positive": 99,
+          "positive_base_rate": 0.8761061946902655,
+          "status": "DEFINED",
+          "value": 0.8554196348272579
+        },
+        "MET-AUROC": {
+          "ci": {
+            "bootstrap_mean": 0.436555014623788,
+            "bootstrap_std": 0.10724221171870706,
+            "ci_high": 0.6428571428571427,
+            "ci_low": 0.21648545090292662,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.4386724386724387,
+            "seed": 20260826
+          },
+          "n": 113,
+          "n_negative": 14,
+          "n_positive": 99,
+          "status": "DEFINED",
+          "value": 0.4386724386724387
+        },
+        "MET-BRIER": {
+          "ci": {
+            "bootstrap_mean": 0.12292820738211926,
+            "bootstrap_std": 0.029309678626064057,
+            "ci_high": 0.18438315122509027,
+            "ci_low": 0.0700931566457195,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.1231552641678043,
+            "seed": 20260828
+          },
+          "n": 113,
+          "status": "DEFINED",
+          "value": 0.1231552641678043
+        },
+        "MET-ECE": {
+          "binning": "equal_width_[0,1]",
+          "bins": [
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.1,
+              "lo": 0.0,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.2,
+              "lo": 0.1,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.30000000000000004,
+              "lo": 0.2,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.4,
+              "lo": 0.30000000000000004,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.5,
+              "lo": 0.4,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.6000000000000001,
+              "lo": 0.5,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.7000000000000001,
+              "lo": 0.6000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.8,
+              "lo": 0.7000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.9,
+              "lo": 0.8,
+              "mean_predicted": null
+            },
+            {
+              "count": 113,
+              "empirical_rate": 0.8761061946902655,
+              "hi": 1.0,
+              "lo": 0.9,
+              "mean_predicted": 0.9984652951706291
+            }
+          ],
+          "ci": {
+            "bootstrap_mean": 0.1219374027795159,
+            "bootstrap_std": 0.030146364044191295,
+            "ci_high": 0.1845596213026671,
+            "ci_low": 0.06931725503638794,
+            "confidence_level": 0.95,
+            "method": "nonparametric_percentile_bootstrap",
+            "n_degenerate_resamples": 0,
+            "n_resamples": 1000,
+            "point_estimate": 0.12235910048036358,
+            "seed": 20260829
+          },
+          "n": 113,
+          "n_bins": 10,
+          "status": "DEFINED",
+          "value": 0.12235910048036358
+        },
+        "MET-RISK-COVERAGE": {
+          "curve": [
+            {
+              "coverage": 0.05,
+              "n": 6,
+              "selective_risk": 0.0
+            },
+            {
+              "coverage": 0.1,
+              "n": 11,
+              "selective_risk": 0.09090909090909094
+            },
+            {
+              "coverage": 0.15,
+              "n": 17,
+              "selective_risk": 0.2941176470588235
+            },
+            {
+              "coverage": 0.2,
+              "n": 23,
+              "selective_risk": 0.26086956521739135
+            },
+            {
+              "coverage": 0.25,
+              "n": 28,
+              "selective_risk": 0.25
+            },
+            {
+              "coverage": 0.3,
+              "n": 34,
+              "selective_risk": 0.23529411764705888
+            },
+            {
+              "coverage": 0.35,
+              "n": 40,
+              "selective_risk": 0.19999999999999996
+            },
+            {
+              "coverage": 0.4,
+              "n": 45,
+              "selective_risk": 0.1777777777777778
+            },
+            {
+              "coverage": 0.45,
+              "n": 51,
+              "selective_risk": 0.1568627450980392
+            },
+            {
+              "coverage": 0.5,
+              "n": 56,
+              "selective_risk": 0.1428571428571429
+            },
+            {
+              "coverage": 0.55,
+              "n": 62,
+              "selective_risk": 0.12903225806451613
+            },
+            {
+              "coverage": 0.6,
+              "n": 68,
+              "selective_risk": 0.11764705882352944
+            },
+            {
+              "coverage": 0.65,
+              "n": 73,
+              "selective_risk": 0.1095890410958904
+            },
+            {
+              "coverage": 0.7,
+              "n": 79,
+              "selective_risk": 0.12658227848101267
+            },
+            {
+              "coverage": 0.75,
+              "n": 85,
+              "selective_risk": 0.12941176470588234
+            },
+            {
+              "coverage": 0.8,
+              "n": 90,
+              "selective_risk": 0.12222222222222223
+            },
+            {
+              "coverage": 0.85,
+              "n": 96,
+              "selective_risk": 0.11458333333333337
+            },
+            {
+              "coverage": 0.9,
+              "n": 102,
+              "selective_risk": 0.10784313725490191
+            },
+            {
+              "coverage": 0.95,
+              "n": 107,
+              "selective_risk": 0.10280373831775702
+            },
+            {
+              "coverage": 1.0,
+              "n": 113,
+              "selective_risk": 0.12389380530973448
+            }
+          ],
+          "direction": "lower_is_better",
+          "n": 113,
+          "status": "DEFINED",
+          "summary": "AURC",
+          "value": 0.15422893797469672
+        },
+        "calibrated_ECE_from_calibration_validation_fit": {
+          "binning": "equal_width_[0,1]",
+          "bins": [
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.1,
+              "lo": 0.0,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.2,
+              "lo": 0.1,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.30000000000000004,
+              "lo": 0.2,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.4,
+              "lo": 0.30000000000000004,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.5,
+              "lo": 0.4,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.6000000000000001,
+              "lo": 0.5,
+              "mean_predicted": null
+            },
+            {
+              "count": 0,
+              "empirical_rate": null,
+              "hi": 0.7000000000000001,
+              "lo": 0.6000000000000001,
+              "mean_predicted": null
+            },
+            {
+              "count": 1,
+              "empirical_rate": 1.0,
+              "hi": 0.8,
+              "lo": 0.7000000000000001,
+              "mean_predicted": 0.7804163817449365
+            },
+            {
+              "count": 2,
+              "empirical_rate": 0.0,
+              "hi": 0.9,
+              "lo": 0.8,
+              "mean_predicted": 0.8523554185922452
+            },
+            {
+              "count": 110,
+              "empirical_rate": 0.8909090909090909,
+              "hi": 1.0,
+              "lo": 0.9,
+              "mean_predicted": 0.9601532051200248
+            }
+          ],
+          "n": 113,
+          "n_bins": 10,
+          "status": "DEFINED",
+          "value": 0.08443492936851578
+        }
+      },
+      "provenance": {
+        "n_calibration_validation": 94,
+        "n_test": 113,
+        "source_record_selector": {
+          "additional_predicate": null,
+          "failure_class_filter": null,
+          "task_family_filter": "sentiment_softmax_margin",
+          "track_filter": "agent_task"
+        }
+      },
+      "sample_count": 113,
+      "split": "test",
+      "status": "UNDERPOWERED",
+      "task_id": "UNC-SENT",
+      "track": "uncertainty"
+    }
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "families": {
+    "cpu": {
+      "elapsed_only": {
+        "aggregate_metrics": {
+          "prevalence_baseline_brier": {
+            "mean": 0.24993768497093424,
+            "n": 3,
+            "std": 0.003458795119154236
+          },
+          "real_auprc": {
+            "mean": 0.6027762080256699,
+            "n": 3,
+            "std": 0.010587927473315857
+          },
+          "real_auroc": {
+            "mean": 0.5367543080387939,
+            "n": 3,
+            "std": 0.019391856938520045
+          },
+          "real_brier": {
+            "mean": 0.24899054052444977,
+            "n": 3,
+            "std": 0.0011018341170838523
+          },
+          "real_detection_before_failure_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_ece": {
+            "mean": 0.06111050232110327,
+            "n": 3,
+            "std": 0.01371258151327942
+          },
+          "real_false_alarm_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_false_positive_rate": {
+            "mean": 0.8212097611630322,
+            "n": 3,
+            "std": 0.24697845652831102
+          },
+          "real_lead_time_seconds_mean": {
+            "mean": 0.12788465497076024,
+            "n": 3,
+            "std": 0.03747093708280889
+          },
+          "real_precision": {
+            "mean": 0.5672667672009736,
+            "n": 3,
+            "std": 0.013573050439894258
+          },
+          "real_recall": {
+            "mean": 0.8325690822993467,
+            "n": 3,
+            "std": 0.2325364005699834
+          },
+          "real_specificity": {
+            "mean": 0.17879023883696782,
+            "n": 3,
+            "std": 0.24697845652831102
+          },
+          "real_useful_lead_time_seconds_mean": {
+            "mean": 0.12788465497076024,
+            "n": 3,
+            "std": 0.03747093708280889
+          },
+          "shuffled_auroc": {
+            "mean": 0.4967017554862413,
+            "n": 3,
+            "std": 0.04142517179278846
+          }
+        },
+        "n_replicates_evaluated": 3,
+        "verdict": "NO DEMONSTRATED PREDICTIVE SIGNAL under this observability regime"
+      },
+      "full_v3": {
+        "aggregate_metrics": {
+          "prevalence_baseline_brier": {
+            "mean": 0.24993768497093424,
+            "n": 3,
+            "std": 0.003458795119154236
+          },
+          "real_auprc": {
+            "mean": 0.6092559555964557,
+            "n": 3,
+            "std": 0.01773386961014564
+          },
+          "real_auroc": {
+            "mean": 0.5489478063560521,
+            "n": 3,
+            "std": 0.03190103721957927
+          },
+          "real_brier": {
+            "mean": 0.247812934357136,
+            "n": 3,
+            "std": 0.002748330278259256
+          },
+          "real_detection_before_failure_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_ece": {
+            "mean": 0.0623283132906939,
+            "n": 3,
+            "std": 0.017457582115294808
+          },
+          "real_false_alarm_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_false_positive_rate": {
+            "mean": 0.7800166989419326,
+            "n": 3,
+            "std": 0.30043375226716096
+          },
+          "real_lead_time_seconds_mean": {
+            "mean": 0.12344330409356727,
+            "n": 3,
+            "std": 0.04375095236935856
+          },
+          "real_precision": {
+            "mean": 0.5742808268505513,
+            "n": 3,
+            "std": 0.01737281076284024
+          },
+          "real_recall": {
+            "mean": 0.8014745549361626,
+            "n": 3,
+            "std": 0.27650863458790925
+          },
+          "real_specificity": {
+            "mean": 0.2199833010580674,
+            "n": 3,
+            "std": 0.30043375226716096
+          },
+          "real_useful_lead_time_seconds_mean": {
+            "mean": 0.12344330409356727,
+            "n": 3,
+            "std": 0.04375095236935856
+          },
+          "shuffled_auroc": {
+            "mean": 0.48042672913431933,
+            "n": 3,
+            "std": 0.06657774166865346
+          }
+        },
+        "n_replicates_evaluated": 3,
+        "verdict": "SIGNAL: real AUROC exceeds shuffled control by more than one pooled std"
+      }
+    },
+    "flaky": {
+      "full_v3": {
+        "aggregate_metrics": {
+          "prevalence_baseline_brier": {
+            "mean": 0.25468271747131543,
+            "n": 3,
+            "std": 0.004999825450809519
+          },
+          "real_auprc": {
+            "mean": 0.49425203833516285,
+            "n": 3,
+            "std": 0.07663749162505024
+          },
+          "real_auroc": {
+            "mean": 0.516279383883106,
+            "n": 3,
+            "std": 0.019704512729308444
+          },
+          "real_brier": {
+            "mean": 0.24902519377006507,
+            "n": 3,
+            "std": 0.000500885434002506
+          },
+          "real_detection_before_failure_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_ece": {
+            "mean": 0.05568667547458809,
+            "n": 3,
+            "std": 0.02299517379510158
+          },
+          "real_false_alarm_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_false_positive_rate": {
+            "mean": 0.9192088433234905,
+            "n": 3,
+            "std": 0.04626783901824023
+          },
+          "real_lead_time_seconds_mean": {
+            "mean": 0.07156141906318082,
+            "n": 3,
+            "std": 0.0009560114777362218
+          },
+          "real_precision": {
+            "mean": 0.4930759973808246,
+            "n": 3,
+            "std": 0.06344785217795261
+          },
+          "real_recall": {
+            "mean": 0.9403505873883574,
+            "n": 3,
+            "std": 0.03915138456077727
+          },
+          "real_specificity": {
+            "mean": 0.08079115667650952,
+            "n": 3,
+            "std": 0.046267839018240255
+          },
+          "real_useful_lead_time_seconds_mean": {
+            "mean": 0.07156141906318082,
+            "n": 3,
+            "std": 0.0009560114777362218
+          },
+          "shuffled_auroc": {
+            "mean": 0.47578424661200425,
+            "n": 3,
+            "std": 0.03233231377655574
+          }
+        },
+        "n_replicates_evaluated": 3,
+        "verdict": "SIGNAL: real AUROC exceeds shuffled control by more than one pooled std"
+      }
+    },
+    "oom": {
+      "full_v3": {
+        "aggregate_metrics": {
+          "prevalence_baseline_brier": {
+            "mean": 0.25661100093462047,
+            "n": 3,
+            "std": 0.0042064499151598525
+          },
+          "real_auprc": {
+            "mean": 0.5787438240059409,
+            "n": 3,
+            "std": 0.05575116785875206
+          },
+          "real_auroc": {
+            "mean": 0.5194066512310959,
+            "n": 3,
+            "std": 0.03267989528361782
+          },
+          "real_brier": {
+            "mean": 0.24922749001242878,
+            "n": 3,
+            "std": 0.0027075162335290976
+          },
+          "real_detection_before_failure_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_ece": {
+            "mean": 0.08296705600495795,
+            "n": 3,
+            "std": 0.010146298465185884
+          },
+          "real_false_alarm_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_false_positive_rate": {
+            "mean": 0.9359975848145213,
+            "n": 3,
+            "std": 0.06357293651891338
+          },
+          "real_lead_time_seconds_mean": {
+            "mean": 0.08000108269628922,
+            "n": 3,
+            "std": 0.0024852678403975074
+          },
+          "real_precision": {
+            "mean": 0.4973832162457755,
+            "n": 3,
+            "std": 0.03852987561810663
+          },
+          "real_recall": {
+            "mean": 0.9190057254573384,
+            "n": 3,
+            "std": 0.06247843752554111
+          },
+          "real_specificity": {
+            "mean": 0.0640024151854787,
+            "n": 3,
+            "std": 0.06357293651891335
+          },
+          "real_useful_lead_time_seconds_mean": {
+            "mean": 0.08000108269628922,
+            "n": 3,
+            "std": 0.0024852678403975074
+          },
+          "shuffled_auroc": {
+            "mean": 0.44349931661377057,
+            "n": 3,
+            "std": 0.05600353840602317
+          }
+        },
+        "n_replicates_evaluated": 3,
+        "verdict": "SIGNAL: real AUROC exceeds shuffled control by more than one pooled std"
+      },
+      "split_insufficient_observability_lt2_samples": {
+        "aggregate_metrics": {
+          "n_test_rows_last_replicate": 124,
+          "real_auroc": {
+            "mean": 0.44120520978737093,
+            "n": 3,
+            "std": 0.015417512235879647
+          },
+          "shuffled_auroc": {
+            "mean": 0.4967125576540538,
+            "n": 3,
+            "std": 0.0791647823089545
+          }
+        }
+      },
+      "split_sufficient_observability_ge2_samples": {
+        "aggregate_metrics": {
+          "n_test_rows_last_replicate": 327,
+          "real_auroc": {
+            "mean": 0.5361931154272034,
+            "n": 3,
+            "std": 0.04143994892214367
+          },
+          "shuffled_auroc": {
+            "mean": 0.4224541583003861,
+            "n": 3,
+            "std": 0.06850762862123842
+          }
+        }
+      }
+    },
+    "resource_unavailable": {
+      "full_v3": {
+        "aggregate_metrics": {
+          "prevalence_baseline_brier": {
+            "mean": 0.24963418358246958,
+            "n": 3,
+            "std": 0.001095481457136782
+          },
+          "real_auprc": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 5.233641528945917e-17
+          },
+          "real_auroc": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_brier": {
+            "mean": 0.0013677414514213422,
+            "n": 3,
+            "std": 0.0018364503792586088
+          },
+          "real_detection_before_failure_rate": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_ece": {
+            "mean": 0.0141371527549403,
+            "n": 3,
+            "std": 0.008234680324862634
+          },
+          "real_false_alarm_rate": {
+            "mean": 0.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_false_positive_rate": {
+            "mean": 0.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_lead_time_seconds_mean": {
+            "mean": 0.08405018521505377,
+            "n": 3,
+            "std": 0.0038878993098944905
+          },
+          "real_precision": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_recall": {
+            "mean": 0.9915834902294552,
+            "n": 3,
+            "std": 0.006205699005738047
+          },
+          "real_specificity": {
+            "mean": 1.0,
+            "n": 3,
+            "std": 0.0
+          },
+          "real_useful_lead_time_seconds_mean": {
+            "mean": 0.08405018521505377,
+            "n": 3,
+            "std": 0.0038878993098944905
+          },
+          "shuffled_auroc": {
+            "mean": 0.7452779579164371,
+            "n": 3,
+            "std": 0.29789899717972235
+          }
+        },
+        "n_replicates_evaluated": 3,
+        "verdict": "NO DEMONSTRATED PREDICTIVE SIGNAL under this observability regime"
+      }
+    }
+  },
+  "n_replicates": 3,
+  "protocol_version": "phase4.post_p5.step3-v1"
+}

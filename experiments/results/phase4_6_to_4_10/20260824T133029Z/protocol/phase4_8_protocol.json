@@ -1,0 +1,35 @@
+{
+  "priority": "phase4.8-priority3-valid-prediction-evaluation",
+  "objective": "Determine whether there is genuine, replicated, negative-control-surviving pre-failure predictive signal per failure class, without leakage, and exploit it if so -- without reusing the previously-flagged 0.857 mixing-artifact number.",
+  "modules": ["src/phase4/prediction_eval_v2.py", "src/phase4/prediction_features_v2.py"],
+  "eval_version": "phase4.8-prediction-eval-v2",
+  "mode_classification_fixed_before_evaluation": {
+    "bimodal": {"cpu": "PROCESS_TIMEOUT", "oom": "PROCESS_OOM", "resource_unavailable": "RESOURCE_UNAVAILABLE", "flaky": "INTERMITTENT_TRANSIENT"},
+    "deterministic": {"fail": "NONZERO_EXIT", "network": "NETWORK_ERROR", "gpu": "GPU_DEVICE_UNAVAILABLE", "corruption": "DATA_CHECKSUM_MISMATCH"}
+  },
+  "replication_protocol": {
+    "n_replicates": 3,
+    "train_seeds_per_replicate": 500,
+    "validation_seeds_per_replicate": 150,
+    "test_seeds_per_replicate": 150,
+    "seed_offsets": [0, 100000, 200000],
+    "total_seeds_used": 2400,
+    "all_seeds_mutually_disjoint": true
+  },
+  "negative_control": {
+    "method": "run-level label permutation on train+validation, evaluated against real test labels",
+    "not_a_per_checkpoint_shuffle": "avoids creating internally-inconsistent within-run labels"
+  },
+  "feature_improvement_attempt": {
+    "status": "frozen, single attempt, evaluated once",
+    "feature_added": "rss_growth_rate",
+    "rationale_written_before_running": true,
+    "result": "no improvement for any family"
+  },
+  "integrity_notes": [
+    "single-split cpu AUROC (~0.51) discrepancy vs prior report's 0.636 was sanity-checked against the EXISTING unmodified prediction_training.train_and_persist_scope_router on the identical seed range, reproducing ~0.51 -- confirms real seed-range sensitivity, not a new-code bug",
+    "deterministic modes never scored; AUROC/AUPRC reported as null with an explicit NOT_PREDICTABLE_SINGLE_CLASS status, never coerced to a number",
+    "feature improvement attempted only after the baseline methodology's headline finding was already established; not iterated after seeing results",
+    "src/phase4/prediction.py, prediction_training.py, and all persisted artifacts under experiments/results/ from prior phases are untouched"
+  ]
+}

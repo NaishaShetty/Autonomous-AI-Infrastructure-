@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this project, please cite it as below."
+title: "Autonomous AI Infrastructure — Unified Reliability + Failure Memory"
+version: "phase6-v1.0.0"
+date-released: "2026-08-27"
+type: software
+authors:
+  - name: "Naisha Shetty"
+repository-code: "https://github.com/NaishaShetty/Autonomous-AI-Infrastructure-"
+license: MIT
+identifiers:
+  - type: other
+    value: "dataset=https://huggingface.co/datasets/naishashetty/autonomous-ai-infrastructure-dataset"
+  - type: other
+    value: "benchmark=https://huggingface.co/datasets/naishashetty/autonomous-ai-infrastructure-benchmark"
+license-note: >
+  Repository code is MIT licensed (see LICENSE). The paired dataset
+  release is separately licensed under CC BY 4.0 — see the dataset
+  package's own CITATION.cff and LICENSE for dataset-specific citation.
+notes: >
+  This project reports a per-task capability matrix for its benchmark
+  (16 tasks / 8 tracks: 0 VALIDATED / 6 PARTIALLY_VALIDATED / 3
+  UNDERPOWERED / 0 NOT_VALIDATED / 7 NOT_EVALUABLE), not a single overall
+  score, and documents multiple honest negative/underpowered findings
+  alongside its positive results. See README.md and
+  docs/MASTER_RECORD_CONTENT.md before citing any specific capability
+  claim.

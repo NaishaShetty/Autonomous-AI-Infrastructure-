@@ -1,0 +1,95 @@
+{
+  "lineage_id": "phase5.1-field-lineage-v1",
+  "schema_version": "phase5.1-schema-v1.0.0",
+  "note": "Every field defined in PHASE5_1_SCHEMA.json is listed here with its source. 'availability' is one of: AVAILABLE, NOT_CURRENTLY_AVAILABLE, PARTIALLY_AVAILABLE. Fields with no field-lineage entry are considered unspecified and must not be added to the schema without adding a corresponding entry here first (per PHASE5_1_PROVENANCE_CONTRACT.md rule 'no unexplained derived values').",
+  "fields": [
+    {"field": "identity.dataset_version", "source": "generation-time constant, this specification", "availability": "AVAILABLE", "derivation": "assigned at dataset build time"},
+    {"field": "identity.schema_version", "source": "PHASE5_1_SCHEMA.json._versioning_policy.current_version", "availability": "AVAILABLE"},
+    {"field": "identity.source_artifact_version", "source": "src/phase4/controlled_runtime.py::RUNTIME_VERSION, memory.py::MEMORY_CONTRACT_VERSION, environments.py::ENVIRONMENTS_VERSION (whichever module produced the record)", "availability": "AVAILABLE"},
+    {"field": "identity.record_id", "source": "generated at build time, deterministic hash of (run_id, episode_id, sub_object_type, sub_object_id)", "availability": "AVAILABLE"},
+    {"field": "identity.track", "source": "src/phase4/pipeline.py -- which entry point produced the episode: run_workload() vs run_agent_task()", "availability": "AVAILABLE"},
+    {"field": "identity.environment_id", "source": "src/phase4/environments.py::EnvironmentProfile.environment_id, or RuntimeConfig.environment_id for pre-4.9 evidence", "availability": "PARTIALLY_AVAILABLE", "note": "pre-Phase-4.9 evidence has no explicit EnvironmentProfile; tagged UNSPECIFIED_PRE_4_9"},
+    {"field": "identity.environment_role", "source": "src/phase4/environments.py::EnvironmentProfile.role", "availability": "PARTIALLY_AVAILABLE", "note": "same caveat as environment_id"},
+    {"field": "identity.workload_id", "source": "src/phase4/controlled_runtime.py::ControlledRuntime.run(workload_id=...), or environments.py::generate_corpus_rows_for_environment's workload_id construction", "availability": "AVAILABLE"},
+    {"field": "identity.run_id", "source": "src/phase4/controlled_runtime.py::RunResult.run_id", "availability": "AVAILABLE"},
+    {"field": "identity.episode_id", "source": "src/phase4/architecture.py::WorkloadStateMachine instance identity, assigned per RECEIVED->COMPLETED walk", "availability": "AVAILABLE"},
+    {"field": "identity.seed", "source": "src/phase4/prediction_training.py::CorpusRow.seed / agent_task.py::TaskInstance.seed", "availability": "AVAILABLE"},
+    {"field": "identity.group_key", "source": "derived: equals identity.workload_id, per PHASE5_1_SPLIT_POLICY.md sec 2", "availability": "AVAILABLE", "derivation": "deterministic_derivation, split_grouping_v1"},
+
+    {"field": "provenance.*", "source": "src/data_foundation/foundation.py::Provenance, propagated by every phase4 module that emits a CanonicalEvent", "availability": "AVAILABLE"},
+
+    {"field": "temporal.observation_time", "source": "CanonicalEvent.timestamp for telemetry_observed events", "availability": "AVAILABLE"},
+    {"field": "temporal.decision_time", "source": "DecisionTimeSnapshot.decision_time", "availability": "AVAILABLE"},
+    {"field": "temporal.failure_time", "source": "CanonicalEvent.timestamp for failure_detected event", "availability": "PARTIALLY_AVAILABLE", "note": "null for success episodes"},
+    {"field": "temporal.recovery_start_time", "source": "CanonicalEvent.timestamp for recovery_started event", "availability": "PARTIALLY_AVAILABLE"},
+    {"field": "temporal.validation_time", "source": "CanonicalEvent.timestamp for validation_completed event", "availability": "PARTIALLY_AVAILABLE"},
+    {"field": "temporal.learning_write_time", "source": "MemoryRecord.recorded_at", "availability": "PARTIALLY_AVAILABLE", "note": "only present when LearningManager wrote a record for this episode"},
+    {"field": "temporal.availability_of_this_record", "source": "src/data_foundation/foundation.py::classify_availability()", "availability": "AVAILABLE"},
+    {"field": "temporal.phase_of_episode", "source": "derived from AutonomyState at time of record creation", "availability": "AVAILABLE", "derivation": "deterministic_derivation, state-to-phase mapping v1"},
+
+    {"field": "workload.workload_type", "source": "ControlledRuntime.run(workload_type=...) argument", "availability": "AVAILABLE"},
+    {"field": "workload.scenario_mode", "source": "environments.py scenario_fn output 'mode' key", "availability": "AVAILABLE"},
+    {"field": "workload.scenario_parameters", "source": "environments.py scenario_fn output params dict", "availability": "AVAILABLE"},
+    {"field": "workload.runtime_config", "source": "src/phase4/controlled_runtime.py::RuntimeConfig fields active for the run", "availability": "AVAILABLE"},
+
+    {"field": "observations[].sample_index", "source": "controlled_runtime.py telemetry_observed event payload 'sample_index'", "availability": "AVAILABLE"},
+    {"field": "observations[].process_rss_bytes", "source": "controlled_runtime.py telemetry_observed event payload 'process_rss_bytes'", "availability": "PARTIALLY_AVAILABLE", "note": "None on Windows before post_p5_remediation Step 2 fix; must not be coerced to 0 -- see leakage/provenance notes"},
+    {"field": "observations[].process_cpu_percent", "source": "controlled_runtime.py telemetry_observed event payload 'process_cpu_percent'", "availability": "AVAILABLE", "note": "added by post-P5 Step 2"},
+    {"field": "observations[].process_age_seconds", "source": "controlled_runtime.py telemetry_observed event payload", "availability": "AVAILABLE", "note": "added by post-P5 Step 2"},
+    {"field": "observations[].rss_ratio_env_normalized", "source": "post_p5_remediation Step 4 feature-engineering function (environment-aware OOM feature)", "availability": "PARTIALLY_AVAILABLE", "note": "only computed for OOM-family episodes after Step 4"},
+    {"field": "observations[].resource_preflight_probe", "source": "controlled_runtime.py resource_preflight_probe telemetry event (post-P5 Step 3)", "availability": "PARTIALLY_AVAILABLE", "note": "only present for resource_unavailable-family episodes after Step 3"},
+    {"field": "observations[].gpu_probe_state", "source": "src/phase4/gpu_probe.py 5-state classification", "availability": "AVAILABLE"},
+    {"field": "observations[].checkpoint_time / checkpoint_index", "source": "src/phase4/prediction.py::rolling_checkpoints()", "availability": "AVAILABLE"},
+    {"field": "observations[].time_to_failure_seconds", "source": "derived: (failure_ts - checkpoint_time) when failure_ts known and checkpoint precedes it", "availability": "PARTIALLY_AVAILABLE", "derivation": "deterministic_derivation, environments.py::generate_corpus_rows_for_environment ttf computation"},
+
+    {"field": "agent_output.arithmetic.*", "source": "src/phase4/agent_task.py::TaskInstance, SelfConsistencyResult", "availability": "AVAILABLE"},
+    {"field": "agent_output.sentiment.*", "source": "src/phase4/classification_task.py + real distilbert-base-uncased-finetuned-sst-2-english inference", "availability": "AVAILABLE"},
+    {"field": "agent_output.qa.*", "source": "src/phase4/qa_task.py + real distilbert-base-cased-distilled-squad inference", "availability": "AVAILABLE"},
+
+    {"field": "failure.failure_class", "source": "src/phase4/diagnosis.py failure-class elif chain / CanonicalEvent failure_classified payload", "availability": "AVAILABLE"},
+    {"field": "failure.failure_detected", "source": "derived: presence of a failure_detected event in the run", "availability": "AVAILABLE", "derivation": "deterministic_derivation, environments.py label computation"},
+    {"field": "failure.ground_truth_source", "source": "controlled_runtime.py mode-specific detection mechanism", "availability": "AVAILABLE"},
+
+    {"field": "prediction.score", "source": "src/phase4/prediction.py::Prediction.score / TrainedRiskPredictor output", "availability": "PARTIALLY_AVAILABLE", "note": "absent for episodes that never reached PREDICTED state"},
+    {"field": "prediction.predictability_status", "source": "src/phase4/prediction_eval_v2.py final per-family verdicts, post_p5_remediation Step 3 + follow-ups 1/5", "availability": "AVAILABLE", "note": "attached at family level, not independently re-derived per episode"},
+    {"field": "prediction.auroc_family_level / false_alarm_rate_family_level", "source": "prediction_eval_v2.py evaluation reports", "availability": "AVAILABLE", "note": "family-level context field, not a per-episode measurement"},
+
+    {"field": "decision.action / safety_status / rationale", "source": "src/decision/policy.py::DecisionPolicy.decide() via src/phase4/decision.py wrapper", "availability": "AVAILABLE"},
+    {"field": "decision.policy_profile", "source": "src/phase4/agent_calibration.py::AgentDecisionCalibrationProfile vs. generic profile selection logic", "availability": "AVAILABLE"},
+
+    {"field": "diagnosis.suspected_cause / alternative_causes / confidence / causal_status", "source": "src/phase4/diagnosis.py::DiagnosisEngine.diagnose()", "availability": "AVAILABLE"},
+    {"field": "diagnosis.memory_informed", "source": "derived: whether diagnosis consumed a non-empty memory retrieval", "availability": "AVAILABLE", "derivation": "deterministic_derivation, diagnosis.py memory-branch flag"},
+
+    {"field": "recovery.action_type / reversible / authorization_required", "source": "src/phase4/architecture.py::RecoveryAction / src/phase4/recovery.py::RuleBasedRecoveryPlanner, AdaptiveRecoveryPlanner", "availability": "AVAILABLE"},
+    {"field": "recovery.authorized", "source": "src/phase4/architecture.py::SafetyGate.authorize() / RecoverySafetyGate.authorize()", "availability": "AVAILABLE"},
+    {"field": "recovery.executed", "source": "src/phase4/recovery.py execution result presence", "availability": "AVAILABLE"},
+    {"field": "recovery.executor_self_report", "source": "src/phase4/recovery.py executor's own reported result, pre-validation", "availability": "AVAILABLE", "note": "never eligible as ground truth, see leakage rule 8"},
+    {"field": "recovery.recovery_success_rate_family_level", "source": "family-level aggregate from frozen evaluation reports (e.g. RECONFIGURE-to-free-port 100% vs RETRY 0%, n=40 each)", "availability": "AVAILABLE"},
+
+    {"field": "safety.safety_gate_evaluated / unsafe_authorization / circuit_breaker_triggered", "source": "src/phase4/architecture.py::SafetyGate, src/phase4/guardrails.py::RecoveryCircuitBreaker", "availability": "AVAILABLE"},
+
+    {"field": "validation.validation_status", "source": "src/phase4/recovery.py::SignalRecoveryValidator via MonitoringEngine independent re-derivation", "availability": "AVAILABLE"},
+
+    {"field": "memory_interaction.memory_id_written / memory_version_at_write", "source": "src/phase4/memory.py::FailureMemoryStore.add()", "availability": "PARTIALLY_AVAILABLE", "note": "only present for episodes with a completed validation outcome"},
+    {"field": "memory_interaction.memory_matches_read", "source": "src/phase4/memory.py::FailureMemoryStore.retrieve()", "availability": "AVAILABLE"},
+    {"field": "memory_interaction.scope_key", "source": "derived: (workload_id, environment_id, failure_class) tuple per memory.py contract", "availability": "AVAILABLE", "derivation": "deterministic_derivation, identity trivial join"},
+
+    {"field": "generalization.fit_environment_id", "source": "src/phase4/environments.py::BASELINE_CPU.environment_id (fixed, the only fit environment)", "availability": "AVAILABLE"},
+    {"field": "generalization.eval_environment_role", "source": "src/phase4/environments.py::EnvironmentProfile.role of the evaluated record", "availability": "AVAILABLE"},
+    {"field": "generalization.zero_shot", "source": "derived: true iff eval_environment_role != development", "availability": "AVAILABLE", "derivation": "deterministic_derivation, environment-role check"},
+    {"field": "generalization.degradation_from_dev", "source": "computed once at family/feature level in Phase 4.9/post-P5 Step 4/follow-up 3 reports (e.g. OOM AUROC 0.989->0.983->0.935)", "availability": "PARTIALLY_AVAILABLE", "note": "single-class test populations (follow-up 3, resource_unavailable) made this NOT_CURRENTLY_AVAILABLE for some family/environment pairs -- disclosed, not silently omitted"},
+
+    {"field": "labels.*", "source": "aggregated from the above per PHASE5_1_PROVENANCE_CONTRACT.md sec 3 table", "availability": "AVAILABLE"},
+
+    {"field": "split_assignment", "source": "PHASE5_1_SPLIT_POLICY.md generation-time assignment logic (not yet implemented)", "availability": "NOT_CURRENTLY_AVAILABLE", "note": "this is a DESIGN specification; no dataset has been generated, so no record has an actual split_assignment value yet -- the field and its assignment RULE exist; its POPULATED VALUE does not"},
+
+    {"field": "capability_grade_context", "source": "docs/MASTER_RECORD_CONTENT.md sec 22 and sec 32 grade tables; FINAL_WEAKNESS_REGISTER.md", "availability": "AVAILABLE", "note": "attached at benchmark-view/family level, not per-record"}
+  ],
+  "fields_explicitly_not_currently_available": [
+    {"field": "human/engineering annotation content", "reason": "no human-annotation pipeline exists anywhere in the frozen Phase 4 evidence; the LabelType enum value is reserved for a future phase, not populated by any current source"},
+    {"field": "diagnosis ground-truth match label (independent of failure_class)", "reason": "no dedicated diagnosis-accuracy ground-truth annotation exists beyond failure_class matching; grade B ('not a fresh evaluation focus') per master record sec 22"},
+    {"field": "threshold-recalibration-per-environment operating point (OOM)", "reason": "explicitly recommended, not yet attempted, per master record sec 31 and sec 38"},
+    {"field": "resource_unavailable follow-up 3 held-out/robustness AUROC degradation", "reason": "could not be computed -- single-class test populations at the inherited fixed seed range; disclosed as a genuine data limitation in the frozen evidence itself"},
+    {"field": "large-scale (>300 episode) repeated-workload_id memory effect", "reason": "Phase 4.10's own test design used unique workload_id per episode; run_continuous() exists as the mechanism but was not exercised at this scale"}
+  ]
+}

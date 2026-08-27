@@ -17,7 +17,7 @@ from src.phase4.pipeline import AutonomyPipeline
 
 @pytest.fixture()
 def runtime_and_store():
-    tmp = tempfile.TemporaryDirectory()
+    tmp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
     store = PersistentEventStore(pathlib.Path(tmp.name) / "events.sqlite")
     config = RuntimeConfig(timeout_seconds=0.3, telemetry_interval_seconds=0.01)
     runtime = ControlledRuntime(store, config)
@@ -60,8 +60,15 @@ def test_oom_is_diagnosed_and_reconfigure_reduces_the_resource_footprint(runtime
 
 
 def test_gpu_device_failure_escalates_immediately_with_no_fabricated_fix(runtime_and_store):
+    # force_gpu_state deterministically exercises the escalation path
+    # regardless of the host's real hardware (see src/phase4/gpu_probe.py --
+    # this repo used to assume "no real GPU in the sandbox," which is false
+    # on real-GPU dev machines and made this test flaky/environment-
+    # dependent; it is pipeline plumbing under test here, not a P3/P4
+    # research evaluation, so a labeled deterministic override is
+    # appropriate and never used by any evaluation code path).
     pipeline = AutonomyPipeline(runtime_and_store)
-    result = pipeline.run_workload("gpu", {"mode": "gpu"}, workload_id="w-gpu")
+    result = pipeline.run_workload("gpu", {"mode": "gpu", "force_gpu_state": "GPU_UNAVAILABLE"}, workload_id="w-gpu")
     assert result.diagnosis.primary_hypothesis.name == "GPU_DEVICE_UNAVAILABLE"
     assert result.action.action_type == "escalate_to_human"
     assert result.execution.executed is False
@@ -106,12 +113,13 @@ def test_recovery_circuit_breaker_bounds_real_executions_on_an_unrecoverable_wor
 
 
 def test_circuit_breaker_only_counts_real_executions_not_escalations_or_abstentions(runtime_and_store):
+    # See force_gpu_state note on test_gpu_device_failure_escalates_immediately_with_no_fabricated_fix above.
     breaker = RecoveryCircuitBreaker(max_attempts=2)
     check = breaker.check("w-gpu-breaker", runtime_and_store.config.environment_id)
     assert check.allowed and check.attempts_used == 0
     pipeline = AutonomyPipeline(runtime_and_store, recovery_budget=breaker)
     for _ in range(5):
-        result = pipeline.run_workload("gpu", {"mode": "gpu"}, workload_id="w-gpu-breaker")
+        result = pipeline.run_workload("gpu", {"mode": "gpu", "force_gpu_state": "GPU_UNAVAILABLE"}, workload_id="w-gpu-breaker")
         assert result.action.action_type == "escalate_to_human"  # never executed -> never consumes budget
     assert breaker.check("w-gpu-breaker", runtime_and_store.config.environment_id).attempts_used == 0
 
@@ -130,7 +138,7 @@ def test_memory_does_not_leak_across_two_environments_sharing_a_workload_id():
     "it is tested".
     """
     shared_memory = FailureMemoryStore()
-    tmp_a = tempfile.TemporaryDirectory(); tmp_b = tempfile.TemporaryDirectory()
+    tmp_a = tempfile.TemporaryDirectory(ignore_cleanup_errors=True); tmp_b = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
     store_a = PersistentEventStore(pathlib.Path(tmp_a.name) / "a.sqlite")
     store_b = PersistentEventStore(pathlib.Path(tmp_b.name) / "b.sqlite")
     runtime_a = ControlledRuntime(store_a, RuntimeConfig(timeout_seconds=0.3, telemetry_interval_seconds=0.01, environment_id="environment-A"))

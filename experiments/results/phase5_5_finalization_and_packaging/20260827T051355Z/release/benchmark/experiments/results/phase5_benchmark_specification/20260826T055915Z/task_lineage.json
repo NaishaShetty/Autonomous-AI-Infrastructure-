@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "benchmark_version": "phase5.3-benchmark-v1.0.0",
+    "purpose": "Traces every benchmark task back to the exact source_record_selector over the Phase 5.2 canonical dataset, and further back to the original Phase 4 frozen evidence file each selector ultimately draws on. No task's evidentiary chain is left implicit."
+  },
+  "lineage": [
+    {"task_id": "UNC-ARITH", "dataset_selector": {"track": "agent_task", "task_family": "arithmetic_self_consistency"}, "record_count": 2000, "ultimate_source": "experiments/results/phase4_6_to_4_10/20260824T133029Z/raw/episodes/arithmetic_episodes.json"},
+    {"task_id": "UNC-SENT", "dataset_selector": {"track": "agent_task", "task_family": "sentiment_softmax_margin"}, "record_count": 660, "ultimate_source": "experiments/results/phase4_6_to_4_10/20260824T133029Z/raw/predictions/classification_predictions.json"},
+    {"task_id": "UNC-QA", "dataset_selector": {"track": "agent_task", "task_family": "extractive_qa_span_logit"}, "record_count": 400, "ultimate_source": "experiments/results/phase4_6_to_4_10/20260824T133029Z/raw/predictions/qa_predictions.json"},
+    {"task_id": "ABST-ARITH", "dataset_selector": {"track": "agent_task", "task_family": "arithmetic_self_consistency"}, "record_count": 2000, "ultimate_source": "same as UNC-ARITH"},
+    {"task_id": "ABST-SENT", "dataset_selector": {"track": "agent_task", "task_family": "sentiment_softmax_margin"}, "record_count": 660, "ultimate_source": "same as UNC-SENT"},
+    {"task_id": "ABST-QA", "dataset_selector": {"track": "agent_task", "task_family": "extractive_qa_span_logit"}, "record_count": 400, "ultimate_source": "same as UNC-QA"},
+    {"task_id": "PRED-RESOURCE-UNAVAILABLE", "dataset_selector": {"track": "controlled_runtime", "failure_class": "RESOURCE_UNAVAILABLE"}, "record_count": 0, "ultimate_source": "AGGREGATE ONLY: experiments/results/post_p5_remediation*/raw/*.json (no per-episode join key ingested)"},
+    {"task_id": "PRED-OOM", "dataset_selector": {"track": "controlled_runtime", "failure_class": "PROCESS_OOM"}, "record_count": 10, "ultimate_source": "experiments/results/phase4_4_autonomy_pipeline/results.json + phase4_5_autonomy_pipeline_at_scale/continuous_mode_metrics.jsonl (per-episode, n=10); AGGREGATE headline verdict from post_p5_remediation_followups/ (not per-episode-joinable)"},
+    {"task_id": "PRED-CPU", "dataset_selector": {"track": "controlled_runtime", "failure_class": "PROCESS_TIMEOUT_CPU"}, "record_count": 1, "ultimate_source": "same two per-episode sources as PRED-OOM (n=1); AGGREGATE headline verdict from post_p5_remediation*/"},
+    {"task_id": "PRED-FLAKY", "dataset_selector": {"track": "controlled_runtime", "failure_class": "GENERIC_FAIL,NETWORK_FAILURE"}, "record_count": 24, "ultimate_source": "same two per-episode sources (n=13+11); AGGREGATE headline verdict from post_p5_remediation*/"},
+    {"task_id": "DIAG-EVAL", "dataset_selector": {"track": "controlled_runtime", "failure_class": "not NONE"}, "record_count": 46, "ultimate_source": "phase4_4_autonomy_pipeline/results.json + phase4_5_autonomy_pipeline_at_scale/continuous_mode_metrics.jsonl"},
+    {"task_id": "REC-EVAL", "dataset_selector": {"track": "controlled_runtime", "recovery_present": true}, "record_count": 46, "ultimate_source": "same two per-episode sources; historical n=40-per-action comparison is aggregate/historical, not in this dataset"},
+    {"task_id": "MEM-EVAL", "dataset_selector": {"track": "controlled_runtime", "repeated_workload_id": true}, "record_count": 0, "ultimate_source": "NOT PRESENT at scale in this dataset; the Step 6 repeated-incident experiment (docs/MASTER_RECORD_CONTENT.md) is the only real evidence source and is aggregate-only"},
+    {"task_id": "GEN-RANKING-CONTRACT", "dataset_selector": {"environment_id": "not UNSPECIFIED_PRE_4_9"}, "record_count": 0, "ultimate_source": "NOT PRESENT in this dataset; aggregate evidence lives in post_p5_remediation/20260825T064402Z/raw/p4_step4_results.json"},
+    {"task_id": "GEN-OPERATING-POINT-CONTRACT", "dataset_selector": {"environment_id": "not UNSPECIFIED_PRE_4_9"}, "record_count": 0, "ultimate_source": "same as GEN-RANKING-CONTRACT"},
+    {"task_id": "E2E-EVAL", "dataset_selector": {"track": "controlled_runtime"}, "record_count": 46, "ultimate_source": "phase4_4_autonomy_pipeline/results.json + phase4_5_autonomy_pipeline_at_scale/continuous_mode_metrics.jsonl"}
+  ]
+}

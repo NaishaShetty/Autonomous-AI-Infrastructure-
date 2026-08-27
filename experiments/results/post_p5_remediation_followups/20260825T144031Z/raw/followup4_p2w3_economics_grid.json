@@ -1,0 +1,575 @@
+{
+  "protocol_file": "protocol/FOLLOWUP4_P2W3_ECONOMICS_GRID_PROTOCOL.md",
+  "grid_seed_range": [
+    90000,
+    90040
+  ],
+  "n_configurations": 18,
+  "configurations": [
+    {
+      "label": "p2w3-config0",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.0,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 0.5,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config1",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.0,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 1.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config2",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.0,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 2.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config3",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.0,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 0.5,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config4",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.0,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 1.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config5",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.0,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 2.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config6",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.01,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 0.5,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config7",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.01,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 1.0,
+        "is_project_baseline": true
+      }
+    },
+    {
+      "label": "p2w3-config8",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.01,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 2.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config9",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.01,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 0.5,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config10",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.01,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 1.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config11",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.01,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 2.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config12",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.05,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 0.5,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config13",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.05,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 1.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config14",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.05,
+        "benefit_correct": 1.0,
+        "cost_wrong_answer": 2.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config15",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.05,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 0.5,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config16",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.05,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 1.0,
+        "is_project_baseline": false
+      }
+    },
+    {
+      "label": "p2w3-config17",
+      "n_episodes": 40,
+      "n_wrong_initially": 3,
+      "initial_accuracy": 0.925,
+      "initial_error_rate": 0.075,
+      "final_accuracy": 1.0,
+      "final_accuracy_wilson_ci95": [
+        0.9123754607496077,
+        1.0
+      ],
+      "final_error_rate": 0.0,
+      "retry_rate_among_wrong": 1.0,
+      "n_retried": 3,
+      "pct_wrong_corrected_by_retry": 1.0,
+      "retry_recovery_rate": 1.0,
+      "retry_recovery_rate_wilson_ci95": [
+        0.4384939195509822,
+        1.0
+      ],
+      "unnecessary_retry_rate": 0.0,
+      "review_rate": 0.0,
+      "abstention_rate": 0.0,
+      "unsafe_action_count": 0,
+      "grid_config": {
+        "cost_retry_per_extra_sample": 0.05,
+        "benefit_correct": 2.0,
+        "cost_wrong_answer": 2.0,
+        "is_project_baseline": false
+      }
+    }
+  ],
+  "summary": {
+    "final_error_rate_min": 0.0,
+    "final_error_rate_max": 0.0,
+    "final_error_rate_range": 0.0,
+    "unsafe_action_count_max": 0,
+    "any_config_worse_than_never_retry": null
+  }
+}

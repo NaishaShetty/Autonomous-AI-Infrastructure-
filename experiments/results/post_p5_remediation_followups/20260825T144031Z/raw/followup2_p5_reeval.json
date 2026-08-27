@@ -1,0 +1,231 @@
+{
+  "calibration_version": "phase4.7-agent-decision-calibration-v1",
+  "base_n_samples": 5,
+  "split_seeds": {
+    "train": [
+      0,
+      2000
+    ],
+    "calibration": [
+      10000,
+      12000
+    ],
+    "original_test_not_reused": [
+      60000,
+      60300
+    ],
+    "fresh_test": [
+      70000,
+      70300
+    ]
+  },
+  "generic_policy": {
+    "label": "generic-fresh",
+    "n_episodes": 300,
+    "n_wrong_initially": 13,
+    "initial_accuracy": 0.9566666666666667,
+    "initial_error_rate": 0.043333333333333335,
+    "final_accuracy": 0.9566666666666667,
+    "final_error_rate": 0.043333333333333335,
+    "final_accuracy_wilson_ci95": [
+      0.927281870871939,
+      0.9745037963967957
+    ],
+    "retry_rate_among_wrong": 0.0,
+    "n_retried": 0,
+    "retry_recovery_rate": null,
+    "retry_recovery_rate_wilson_ci95": null,
+    "retry_recovery_failure_count": 0,
+    "decision_distribution": {
+      "ANSWER": 0,
+      "RETRY": 0,
+      "REVIEW": 13,
+      "ABSTAIN": 3
+    },
+    "review_rate": 0.043333333333333335,
+    "abstention_rate": 0.01,
+    "memory_records_written": 0,
+    "unsafe_action_count": 0,
+    "safety_violations": 0,
+    "wall_clock_seconds": 67.37196700001368
+  },
+  "calibrated_policy": {
+    "label": "calibrated-fresh",
+    "n_episodes": 300,
+    "n_wrong_initially": 16,
+    "initial_accuracy": 0.9466666666666667,
+    "initial_error_rate": 0.05333333333333334,
+    "final_accuracy": 0.9966666666666667,
+    "final_error_rate": 0.0033333333333332993,
+    "final_accuracy_wilson_ci95": [
+      0.9813628354450568,
+      0.9994113574238593
+    ],
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 16,
+    "retry_recovery_rate": 0.9375,
+    "retry_recovery_rate_wilson_ci95": [
+      0.7167073163197013,
+      0.9888809426916687
+    ],
+    "retry_recovery_failure_count": 1,
+    "decision_distribution": {
+      "ANSWER": 1,
+      "RETRY": 15,
+      "REVIEW": 0,
+      "ABSTAIN": 0
+    },
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 16,
+    "unsafe_action_count": 0,
+    "safety_violations": 0,
+    "wall_clock_seconds": 70.15716219999013
+  },
+  "calibrated_policy_rerun_for_determinism_check": {
+    "label": "calibrated-fresh-rerun",
+    "n_episodes": 300,
+    "n_wrong_initially": 16,
+    "initial_accuracy": 0.9466666666666667,
+    "initial_error_rate": 0.05333333333333334,
+    "final_accuracy": 0.9966666666666667,
+    "final_error_rate": 0.0033333333333332993,
+    "final_accuracy_wilson_ci95": [
+      0.9813628354450568,
+      0.9994113574238593
+    ],
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 16,
+    "retry_recovery_rate": 0.9375,
+    "retry_recovery_rate_wilson_ci95": [
+      0.7167073163197013,
+      0.9888809426916687
+    ],
+    "retry_recovery_failure_count": 1,
+    "decision_distribution": {
+      "ANSWER": 1,
+      "RETRY": 15,
+      "REVIEW": 0,
+      "ABSTAIN": 0
+    },
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 16,
+    "unsafe_action_count": 0,
+    "safety_violations": 0,
+    "wall_clock_seconds": 101.3753132999991
+  },
+  "determinism_check": {
+    "identical_to_first_run": true,
+    "run1_decision_distribution": {
+      "ANSWER": 1,
+      "RETRY": 15,
+      "REVIEW": 0,
+      "ABSTAIN": 0
+    },
+    "run2_decision_distribution": {
+      "ANSWER": 1,
+      "RETRY": 15,
+      "REVIEW": 0,
+      "ABSTAIN": 0
+    },
+    "run1_final_accuracy": 0.9966666666666667,
+    "run2_final_accuracy": 0.9966666666666667
+  },
+  "ablation_memory_off": {
+    "label": "memory-off-fresh",
+    "n_episodes": 300,
+    "n_wrong_initially": 16,
+    "initial_accuracy": 0.9466666666666667,
+    "initial_error_rate": 0.05333333333333334,
+    "final_accuracy": 0.9966666666666667,
+    "final_error_rate": 0.0033333333333332993,
+    "final_accuracy_wilson_ci95": [
+      0.9813628354450568,
+      0.9994113574238593
+    ],
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 16,
+    "retry_recovery_rate": 0.9375,
+    "retry_recovery_rate_wilson_ci95": [
+      0.7167073163197013,
+      0.9888809426916687
+    ],
+    "retry_recovery_failure_count": 1,
+    "decision_distribution": {
+      "ANSWER": 1,
+      "RETRY": 15,
+      "REVIEW": 0,
+      "ABSTAIN": 0
+    },
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 16,
+    "unsafe_action_count": 0,
+    "safety_violations": 0,
+    "wall_clock_seconds": 79.81858570000622
+  },
+  "ablation_retry_off": {
+    "label": "retry-off-fresh",
+    "n_episodes": 300,
+    "n_wrong_initially": 16,
+    "initial_accuracy": 0.9466666666666667,
+    "initial_error_rate": 0.05333333333333334,
+    "final_accuracy": 0.9466666666666667,
+    "final_error_rate": 0.053333333333333344,
+    "final_accuracy_wilson_ci95": [
+      0.9151301612527314,
+      0.966908374615958
+    ],
+    "retry_rate_among_wrong": 0.0,
+    "n_retried": 0,
+    "retry_recovery_rate": null,
+    "retry_recovery_rate_wilson_ci95": null,
+    "retry_recovery_failure_count": 0,
+    "decision_distribution": {
+      "ANSWER": 0,
+      "RETRY": 0,
+      "REVIEW": 16,
+      "ABSTAIN": 0
+    },
+    "review_rate": 0.05333333333333334,
+    "abstention_rate": 0.0,
+    "memory_records_written": 0,
+    "unsafe_action_count": 0,
+    "safety_violations": 0,
+    "wall_clock_seconds": 97.21100750000915
+  },
+  "ablation_predictor_off": {
+    "label": "predictor-off-fresh",
+    "n_episodes": 300,
+    "n_wrong_initially": 16,
+    "initial_accuracy": 0.9466666666666667,
+    "initial_error_rate": 0.05333333333333334,
+    "final_accuracy": 0.9966666666666667,
+    "final_error_rate": 0.0033333333333332993,
+    "final_accuracy_wilson_ci95": [
+      0.9813628354450568,
+      0.9994113574238593
+    ],
+    "retry_rate_among_wrong": 1.0,
+    "n_retried": 16,
+    "retry_recovery_rate": 0.9375,
+    "retry_recovery_rate_wilson_ci95": [
+      0.7167073163197013,
+      0.9888809426916687
+    ],
+    "retry_recovery_failure_count": 1,
+    "decision_distribution": {
+      "ANSWER": 16,
+      "RETRY": 0,
+      "REVIEW": 0,
+      "ABSTAIN": 0
+    },
+    "review_rate": 0.0,
+    "abstention_rate": 0.0,
+    "memory_records_written": 16,
+    "unsafe_action_count": 0,
+    "safety_violations": 0,
+    "wall_clock_seconds": 102.89515379999648
+  }
+}

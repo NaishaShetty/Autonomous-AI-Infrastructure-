@@ -102,7 +102,25 @@ def scenario_for_seed(seed: int) -> tuple[str, dict]:
         # timeout_seconds is fixed at 0.15s for every corpus run (see
         # generate_corpus); durations below/above that boundary produce both
         # labels from the same family.
-        duration = rng.choice([0.05, 0.08, 0.30, 0.45])
+        #
+        # Post-P5 remediation, discovered while investigating a full-suite
+        # ValueError ("predictable-scope training corpus has only one class
+        # present"): the "fast" choices used to be 0.05/0.08s, leaving only
+        # ~70-100ms of margin against the 0.15s timeout. Measured directly
+        # on this platform, a bare `python -c pass` subprocess spawn alone
+        # costs ~40-50ms, and this project's own subprocess entrypoint
+        # (imports + argv parsing, duration_seconds=0.0) costs ~65-75ms --
+        # i.e. subprocess-startup overhead ALONE was consuming nearly the
+        # entire safety margin the "fast" choice depended on, before the
+        # busy-loop had run at all. Under any realistic system load (this
+        # was reproduced 100% deterministically, not just under a loaded
+        # full-suite run), every "fast" cpu-timeout run would overshoot
+        # 0.15s and get killed as a false TIMEOUT -- a real, systematic
+        # mislabeling defect, not sampling noise. Lowered to 0.01/0.02s so
+        # duration_seconds + realistic subprocess overhead stays well clear
+        # of 0.15s; the "slow" choices (0.30/0.45s) already had a large
+        # enough margin above the timeout and are unchanged.
+        duration = rng.choice([0.01, 0.02, 0.30, 0.45])
         return "timeout_via_cpu", {"mode": "cpu", "duration_seconds": duration}
     if family == "nonzero_exit":
         return "fail", {"mode": "fail"}
@@ -166,6 +184,27 @@ def generate_corpus(seeds: SplitSeeds, timeout_seconds: float = 0.15) -> dict[st
         "validation": generate_corpus_rows(list(seeds.validation), "validation", timeout_seconds),
         "test": generate_corpus_rows(list(seeds.test), "test", timeout_seconds),
     }
+
+
+# Post-P5 remediation (P1-W4): even with the cpu-family subprocess-timing
+# margin fix (see the ADDENDUM_CPU_TIMING_DEFECT report), a small, fixed
+# train seed range can still occasionally land on a single-class
+# predictable-scope population by real, honest chance -- some 'cpu'-family
+# seeds still land close to the timing boundary by construction (that is
+# the whole point of the family), and a small population has a
+# non-negligible chance of an unlucky draw regardless of how much margin
+# exists. Rather than keep narrowing that margin indefinitely, this widens
+# the train range automatically and deterministically -- exactly what the
+# prior hard failure's own error message already told the caller to do by
+# hand. Bounded (never loops forever) and fully deterministic (each retry
+# appends a fixed, disjoint, reproducible seed block; two calls with the
+# same starting seeds always retry identically).
+_MAX_SCOPE_WIDEN_ATTEMPTS = 4
+
+
+def _widened_train_seeds(train_seeds: range, attempt: int) -> range:
+    width = max(1, train_seeds.stop - train_seeds.start)
+    return range(train_seeds.start, train_seeds.stop + width * attempt)
 
 
 def _xy(rows: list[CorpusRow]):
@@ -278,8 +317,14 @@ def train_and_persist(seeds: SplitSeeds, output_dir: str | Path, timeout_seconds
 
     corpus = generate_corpus(seeds, timeout_seconds=timeout_seconds)
     train_rows, val_rows, test_rows = corpus["train"], corpus["validation"], corpus["test"]
-    if len(set(r.label for r in train_rows)) < 2:
-        raise ValueError("training corpus has only one class present; cannot fit a classifier")
+    for attempt in range(1, _MAX_SCOPE_WIDEN_ATTEMPTS + 1):
+        if len(set(r.label for r in train_rows)) >= 2:
+            break
+        if attempt == _MAX_SCOPE_WIDEN_ATTEMPTS:
+            raise ValueError("training corpus has only one class present; cannot fit a classifier")
+        seeds = SplitSeeds(train=_widened_train_seeds(seeds.train, attempt), validation=seeds.validation, test=seeds.test)
+        corpus = generate_corpus(seeds, timeout_seconds=timeout_seconds)
+        train_rows, val_rows, test_rows = corpus["train"], corpus["validation"], corpus["test"]
 
     model = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", max_iter=2000))
     x_train, y_train = _xy(train_rows)
@@ -408,7 +453,7 @@ def evaluate_by_scope(model, threshold: float, test_rows: list[CorpusRow], fallb
     return {
         "threshold": threshold,
         # NOT comparable to the original gap-1 single blended model's
-        # AUC (~0.515, reported in docs/PHASE4_5_GAP_FIXES_REPORT.md):
+        # AUC (~0.515, reported in docs/archive/PHASE4_5_GAP_FIXES_REPORT.md):
         # that model never saw `mode` at all. This number is the
         # ROUTER's own combined-output AUC across every test row --
         # predictable-scope rows get the real trained model's score,
@@ -452,11 +497,18 @@ def train_and_persist_scope_router(seeds: SplitSeeds, output_dir: str | Path, ti
 
     corpus = generate_corpus(seeds, timeout_seconds=timeout_seconds)
     train_rows, val_rows, test_rows = corpus["train"], corpus["validation"], corpus["test"]
-
     predictable_train = restrict_to_predictable_scope(train_rows)
     predictable_val = restrict_to_predictable_scope(val_rows)
-    if len(set(r.label for r in predictable_train)) < 2:
-        raise ValueError("predictable-scope training corpus has only one class present; widen the seed range")
+    for attempt in range(1, _MAX_SCOPE_WIDEN_ATTEMPTS + 1):
+        if len(set(r.label for r in predictable_train)) >= 2:
+            break
+        if attempt == _MAX_SCOPE_WIDEN_ATTEMPTS:
+            raise ValueError("predictable-scope training corpus has only one class present; widen the seed range")
+        seeds = SplitSeeds(train=_widened_train_seeds(seeds.train, attempt), validation=seeds.validation, test=seeds.test)
+        corpus = generate_corpus(seeds, timeout_seconds=timeout_seconds)
+        train_rows, val_rows, test_rows = corpus["train"], corpus["validation"], corpus["test"]
+        predictable_train = restrict_to_predictable_scope(train_rows)
+        predictable_val = restrict_to_predictable_scope(val_rows)
 
     model = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", max_iter=2000))
     x_train, y_train = _xy(predictable_train)
